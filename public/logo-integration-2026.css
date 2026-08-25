@@ -1,9 +1,24 @@
 /* Nova identidade PreçoCerto — aplicação consistente de marca */
 .ref-brand{position:relative!important;display:inline-flex!important;align-items:center!important;gap:10px!important;min-height:44px!important;padding-left:48px!important}
 .ref-brand>img{display:none!important}
-.ref-brand::before{content:"";position:absolute;left:0;top:50%;width:40px;height:40px;transform:translateY(-50%);background:url('/logo-preco-certo-simbolo.svg?v=14') center/contain no-repeat;filter:drop-shadow(0 5px 10px rgba(0,0,0,.18))}
+.ref-brand::before{content:"";position:absolute;left:0;top:50%;width:40px;height:40px;transform:translateY(-50%);background:url('/logo-preco-certo-simbolo.svg?v=15') center/contain no-repeat;filter:drop-shadow(0 5px 10px rgba(0,0,0,.18))}
 .ref-brand>span{font-family:"Inter Variable",Inter,sans-serif!important;font-size:.68rem!important;font-weight:800!important;letter-spacing:.12em!important;color:inherit!important}
-.nx-brand img,.mh26-logo img{content:url('/logo-preco-certo.svg?v=14')!important;filter:none!important;object-fit:contain!important}
-.nx-footer img{content:url('/logo-preco-certo.svg?v=14')!important;filter:none!important;object-fit:contain!important}
-.pc-boot-loading__brand img{content:url('/app-icon.svg?v=14')!important;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18))!important}
+
+html[data-theme="light"] .nx-brand img,
+html[data-theme="light"] .mh26-logo img,
+html[data-theme="light"] .nx-footer img{
+  content:url('/logo-preco-certo-light.svg?v=15')!important;
+  filter:drop-shadow(0 2px 7px rgba(11,22,40,.10))!important;
+  object-fit:contain!important;
+}
+
+html[data-theme="dark"] .nx-brand img,
+html[data-theme="dark"] .mh26-logo img,
+html[data-theme="dark"] .nx-footer img{
+  content:url('/logo-preco-certo.svg?v=15')!important;
+  filter:none!important;
+  object-fit:contain!important;
+}
+
+.pc-boot-loading__brand img{content:url('/app-icon.svg?v=15')!important;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18))!important}
 @media(max-width:767px){.mh26-logo img{height:46px!important;max-width:176px!important}.ref-brand{padding-left:42px!important}.ref-brand::before{width:36px;height:36px}}
