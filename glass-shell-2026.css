@@ -1,0 +1,150 @@
+/* Preço Certo — glass shell 2026
+   Header/footer translucidos para o conteúdo continuar visualmente por baixo. */
+
+:root{
+  --pc-glass-blur:18px;
+  --pc-glass-sat:132%;
+}
+
+/* Desktop header: sticky glass, sem mascarar as cores da marca. */
+.nx-home .nx-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:100!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  border-bottom:1px solid transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(var(--pc-glass-blur)) saturate(var(--pc-glass-sat))!important;
+  -webkit-backdrop-filter:blur(var(--pc-glass-blur)) saturate(var(--pc-glass-sat))!important;
+}
+.nx-home .nx-header::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:rgba(245,239,233,.76)!important;
+  border-bottom:1px solid rgba(88,63,48,.12)!important;
+  box-shadow:0 8px 24px rgba(49,38,31,.07)!important;
+}
+.nx-home .nx-header::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:1px!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent)!important;
+}
+
+/* Footer: mesma linguagem de vidro, deixando o canvas da página aparecer através dele. */
+.nx-home .nx-footer{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:transparent!important;
+  border-top:1px solid transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(16px) saturate(126%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(126%)!important;
+}
+.nx-home .nx-footer::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:rgba(245,239,233,.72)!important;
+  border-top:1px solid rgba(88,63,48,.12)!important;
+  box-shadow:0 -8px 24px rgba(49,38,31,.055)!important;
+}
+.nx-home .nx-footer::after{
+  content:""!important;
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  height:1px!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent)!important;
+}
+
+/* Light mode: contraste preservado dentro do vidro. */
+html:not([data-theme="dark"]) .nx-home .nx-header nav a{color:#424852!important}
+html:not([data-theme="dark"]) .nx-home .nx-header nav a:hover,
+html:not([data-theme="dark"]) .nx-home .nx-header nav a.is-active{color:#17191f!important}
+html:not([data-theme="dark"]) .nx-home .nx-brand>span{color:#555e6b!important}
+html:not([data-theme="dark"]) .nx-home .nx-footer,
+html:not([data-theme="dark"]) .nx-home .nx-footer a,
+html:not([data-theme="dark"]) .nx-home .nx-footer strong{color:#252a31!important}
+html:not([data-theme="dark"]) .nx-home .nx-footer p,
+html:not([data-theme="dark"]) .nx-home .nx-footer small,
+html:not([data-theme="dark"]) .nx-home .nx-footer span{color:#5b6470!important}
+html:not([data-theme="dark"]) .nx-home .nx-footer__note::after{color:#4d5662!important}
+
+/* Dark mode glass. */
+html[data-theme="dark"] .nx-home .nx-header::before{
+  background:rgba(24,25,29,.74)!important;
+  border-bottom-color:rgba(255,255,255,.09)!important;
+  box-shadow:0 8px 26px rgba(0,0,0,.18)!important;
+}
+html[data-theme="dark"] .nx-home .nx-header::after{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent)!important;
+}
+html[data-theme="dark"] .nx-home .nx-footer::before{
+  background:rgba(21,22,26,.76)!important;
+  border-top-color:rgba(255,255,255,.09)!important;
+  box-shadow:0 -8px 26px rgba(0,0,0,.16)!important;
+}
+html[data-theme="dark"] .nx-home .nx-footer::after{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)!important;
+}
+html[data-theme="dark"] .nx-home .nx-footer,
+html[data-theme="dark"] .nx-home .nx-footer a,
+html[data-theme="dark"] .nx-home .nx-footer strong{color:#f4f1ed!important}
+html[data-theme="dark"] .nx-home .nx-footer p,
+html[data-theme="dark"] .nx-home .nx-footer small,
+html[data-theme="dark"] .nx-home .nx-footer span{color:#c5c8cf!important}
+
+/* Mobile header/footer: mesma sensação de página passando sob vidro. */
+@media(max-width:767px){
+  .mh26-header{
+    position:sticky!important;
+    top:0!important;
+    z-index:900!important;
+    isolation:isolate!important;
+    background:rgba(245,239,233,.76)!important;
+    border-bottom:1px solid rgba(88,63,48,.12)!important;
+    box-shadow:0 7px 20px rgba(49,38,31,.065)!important;
+    backdrop-filter:blur(17px) saturate(130%)!important;
+    -webkit-backdrop-filter:blur(17px) saturate(130%)!important;
+  }
+  .mh26-footer{
+    position:relative!important;
+    isolation:isolate!important;
+    overflow:hidden!important;
+    background:rgba(245,239,233,.72)!important;
+    border-top:1px solid rgba(88,63,48,.12)!important;
+    box-shadow:0 -7px 20px rgba(49,38,31,.05)!important;
+    backdrop-filter:blur(15px) saturate(124%)!important;
+    -webkit-backdrop-filter:blur(15px) saturate(124%)!important;
+  }
+  html[data-theme="dark"] .mh26-header{
+    background:rgba(24,25,29,.75)!important;
+    border-bottom-color:rgba(255,255,255,.09)!important;
+    box-shadow:0 7px 22px rgba(0,0,0,.17)!important;
+  }
+  html[data-theme="dark"] .mh26-footer{
+    background:rgba(21,22,26,.77)!important;
+    border-top-color:rgba(255,255,255,.09)!important;
+    box-shadow:0 -7px 22px rgba(0,0,0,.15)!important;
+  }
+}
+
+@media(prefers-reduced-transparency:reduce){
+  .nx-home .nx-header::before,.nx-home .nx-footer::before{background:#f1ebe5!important}
+  html[data-theme="dark"] .nx-home .nx-header::before,
+  html[data-theme="dark"] .nx-home .nx-footer::before{background:#1b1c20!important}
+}
