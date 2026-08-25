@@ -15,7 +15,7 @@
   html{min-height:100%;background:var(--pc-canvas,#f7f7f5);scroll-padding-top:calc(var(--pc-shell-header) + env(safe-area-inset-top))}
   body.pc-app-shell{min-height:100svh;overflow-x:clip;background:var(--pc-canvas,#f7f7f5)!important;overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
   body.pc-app-shell #root{min-height:100svh;overflow-x:clip}
-  body.pc-app-shell :is(.mh26-page,.msearch26-page,.ref-page,.ref-auth,.search26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page,.kelly-page,.sanduba-page){
+  body.pc-app-shell :is(.nx-home,.mh26-page,.msearch26-page,.ref-page,.ref-auth,.search26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page,.kelly-page,.sanduba-page){
     width:100%;max-width:var(--pc-shell-max);min-height:100svh;margin-inline:auto;overflow-x:clip;padding-bottom:max(calc(var(--pc-shell-dock) + 14px),calc(var(--pc-shell-dock) + env(safe-area-inset-bottom)))!important;isolation:isolate;
   }
   body.pc-app-shell :is(.mh26-header,.ref-header,.msearch26-header){z-index:var(--pc-shell-z-header)!important;padding-top:env(safe-area-inset-top);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
