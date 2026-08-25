@@ -1,0 +1,122 @@
+/* PreçoCerto — controles superiores alinhados à identidade carvão/terracota/âmbar */
+:root{
+  --pc-control-charcoal:#202126;
+  --pc-control-charcoal-2:#292a30;
+  --pc-control-clay:#b86f48;
+  --pc-control-clay-deep:#955436;
+  --pc-control-sand:#dfaa82;
+  --pc-control-amber:#f6b82f;
+  --pc-control-amber-strong:#e5a317;
+  --pc-control-cream:#f4efe8;
+  --pc-control-paper:#fffdf9;
+}
+
+/* PLAYER — elimina azul/verde legado e passa a usar a paleta oficial. */
+.pc-radio{
+  border-color:rgba(246,184,47,.25)!important;
+  background:linear-gradient(145deg,rgba(255,253,249,.98),rgba(244,239,232,.96))!important;
+  color:#202126!important;
+  box-shadow:0 8px 22px rgba(17,16,14,.15)!important;
+}
+.pc-radio__control{
+  background:linear-gradient(145deg,#ffd05c 0%,#f6b82f 48%,#e5a317 100%)!important;
+  color:#202126!important;
+  box-shadow:0 7px 16px rgba(229,163,23,.24)!important;
+}
+.pc-radio__copy small{color:#8b684f!important}
+.pc-radio__copy small i{background:#e86d36!important;box-shadow:0 0 0 3px rgba(232,109,54,.14)!important}
+.pc-radio__signal i{background:#c7a06e!important}
+.pc-radio__volume{color:#7f6b5c!important}
+.pc-radio__volume input{accent-color:#f6b82f!important}
+.pc-radio:hover{border-color:rgba(246,184,47,.56)!important;box-shadow:0 10px 26px rgba(17,16,14,.19)!important}
+.pc-radio:focus-within{outline:3px solid rgba(246,184,47,.30)!important;outline-offset:2px!important}
+.pc-radio.is-playing{
+  border-color:rgba(246,184,47,.50)!important;
+  background:linear-gradient(145deg,#fff9eb,#f7ead3)!important;
+  box-shadow:0 7px 20px rgba(149,84,54,.13)!important;
+}
+.pc-radio.is-playing .pc-radio__control{background:linear-gradient(145deg,#f6b82f,#e58b24)!important;color:#202126!important;box-shadow:none!important}
+.pc-radio.is-playing .pc-radio__copy small{color:#955436!important}
+.pc-radio.is-playing .pc-radio__signal i{background:#f6b82f!important}
+.pc-radio__track{border-color:rgba(32,33,38,.10)!important;background:#fffdf9!important;color:#202126!important;box-shadow:0 12px 30px rgba(24,19,16,.18)!important}
+.pc-radio__track small{color:#955436!important}
+.pc-radio.has-error{border-color:rgba(184,111,72,.55)!important;background:#fff4ed!important}
+.pc-radio.has-error .pc-radio__control{background:#b86f48!important;color:#fff!important}
+.pc-radio.has-error .pc-radio__copy small,.pc-radio.has-error .pc-radio__copy strong{color:#8d4e31!important}
+
+html[data-theme="dark"] .pc-radio{
+  border-color:rgba(246,184,47,.22)!important;
+  background:linear-gradient(145deg,#2b2b30,#232429)!important;
+  color:#f7f3ed!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.24)!important;
+}
+html[data-theme="dark"] .pc-radio__copy small,html[data-theme="dark"] .pc-radio__volume{color:#d6b190!important}
+html[data-theme="dark"] .pc-radio__signal i{background:#8d7258!important}
+html[data-theme="dark"] .pc-radio.is-playing{border-color:rgba(246,184,47,.45)!important;background:linear-gradient(145deg,#332c22,#29251f)!important}
+html[data-theme="dark"] .pc-radio.is-playing .pc-radio__copy small{color:#f1c66c!important}
+html[data-theme="dark"] .pc-radio__track{border-color:rgba(246,184,47,.16)!important;background:#25262b!important;color:#f7f3ed!important}
+html[data-theme="dark"] .pc-radio__track small{color:#f2bd55!important}
+
+/* HEADER DESKTOP — todos os controles compartilham o mesmo acabamento. */
+.nx-header__actions{gap:10px!important}
+.nx-theme,.nx-menu{
+  border:1px solid rgba(246,184,47,.18)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035))!important;
+  color:#f4efe8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 6px 16px rgba(0,0,0,.10)!important;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease!important;
+}
+.nx-theme:hover,.nx-menu:hover{border-color:rgba(246,184,47,.48)!important;background:rgba(246,184,47,.12)!important;color:#f6b82f!important;transform:translateY(-1px)!important}
+.nx-theme:focus-visible,.nx-menu:focus-visible,.nx-login:focus-visible{outline:3px solid rgba(246,184,47,.36)!important;outline-offset:2px!important}
+.nx-login{
+  border:1px solid rgba(255,218,121,.38)!important;
+  background:linear-gradient(145deg,#ffd05c 0%,#f6b82f 54%,#e5a317 100%)!important;
+  color:#202126!important;
+  box-shadow:0 8px 18px rgba(229,163,23,.18)!important;
+}
+.nx-login:hover{background:linear-gradient(145deg,#ffda79,#ffc341)!important;box-shadow:0 10px 22px rgba(229,163,23,.24)!important;transform:translateY(-1px)!important}
+.nx-header nav a:hover{color:#f8dfad!important}
+.nx-header nav a.is-active{color:#fff!important}
+.nx-header nav a.is-active::after{background:linear-gradient(90deg,#dfaa82,#f6b82f)!important}
+
+/* MOBILE — mesma família visual, sem azul ou verde. */
+.mh26-theme,.mh26-head-actions>a,.mh26-menu{
+  border-color:rgba(246,184,47,.20)!important;
+  background:rgba(255,255,255,.06)!important;
+  color:#f4efe8!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.mh26-theme:hover,.mh26-head-actions>a:hover,.mh26-menu:hover{border-color:rgba(246,184,47,.42)!important;background:rgba(246,184,47,.12)!important;color:#f6b82f!important}
+
+/* BARRA SUPERIOR DE CAMPANHA — classes antigas preservadas, cores remapeadas. */
+.pc-festival-bar,
+.pc-festival-bar.theme-emerald,
+.pc-festival-bar.theme-slate{
+  background:linear-gradient(102deg,#202126 0%,#292a30 48%,#955436 100%)!important;
+  color:#fffdf9!important;
+  box-shadow:0 5px 18px rgba(24,18,15,.18)!important;
+}
+.pc-festival-bar.theme-amber{background:linear-gradient(102deg,#6f432e 0%,#955436 46%,#b86f48 100%)!important}
+.pc-festival-bar__art{color:#fffdf9!important}
+.pc-festival-bar__art span i{background:rgba(246,184,47,.15)!important;color:#f6b82f!important;box-shadow:inset 0 0 0 1px rgba(246,184,47,.16)!important}
+.pc-festival-bar__art span em{border-color:rgba(246,184,47,.38)!important;background:rgba(246,184,47,.10)!important;color:#fff3d3!important}
+.pc-festival-bar__close{
+  border-color:rgba(246,184,47,.28)!important;
+  background:#fff9ee!important;
+  color:#292a30!important;
+  box-shadow:0 5px 16px rgba(25,18,13,.24)!important;
+}
+.pc-festival-bar__close:hover{border-color:#f6b82f!important;background:#f6b82f!important;color:#202126!important}
+.pc-festival-bar::after{background:linear-gradient(90deg,transparent,rgba(246,184,47,.46),transparent)!important}
+
+@media(max-width:640px){
+  .pc-festival-bar,.pc-festival-bar.theme-emerald,.pc-festival-bar.theme-slate{background:linear-gradient(102deg,#202126,#3a302a 58%,#955436)!important}
+  .pc-festival-bar.theme-amber{background:linear-gradient(102deg,#6f432e,#955436 58%,#b86f48)!important}
+}
+
+html[data-theme="dark"] .pc-festival-bar,
+html[data-theme="dark"] .pc-festival-bar.theme-emerald,
+html[data-theme="dark"] .pc-festival-bar.theme-amber,
+html[data-theme="dark"] .pc-festival-bar.theme-slate{background:linear-gradient(102deg,#17181c,#232429 58%,#6f432e)!important}
+html[data-theme="dark"] .pc-festival-bar__close{background:#292a30!important;border-color:rgba(246,184,47,.25)!important;color:#f4efe8!important}
+html[data-theme="dark"] .pc-festival-bar__close:hover{background:#f6b82f!important;color:#202126!important}
