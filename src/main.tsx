@@ -63,6 +63,13 @@ homepageLayoutPolish.href = "/homepage-layout-polish-2026.css?v=20260825-1";
 homepageLayoutPolish.dataset.precocertoHomepageLayout = "homepage-layout-polish-2026";
 document.head.appendChild(homepageLayoutPolish);
 
+// Contraste final do modo claro: ícones, logos, dock, busca e controles.
+const lightIconContrastTheme = document.createElement("link");
+lightIconContrastTheme.rel = "stylesheet";
+lightIconContrastTheme.href = "/light-icon-contrast-2026.css?v=20260825-1";
+lightIconContrastTheme.dataset.precocertoLightIcons = "light-icon-contrast-2026";
+document.head.appendChild(lightIconContrastTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
