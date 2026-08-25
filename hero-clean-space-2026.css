@@ -1,7 +1,7 @@
 /* PreçoCerto — hero clean space override
-   Right side uses one continuous clay tone, with no gradient/effect residue. */
+   Remove estruturas decorativas grandes e mantém apenas conteúdo real. */
 
-/* Desktop hero: preserve the visual split, but make the brown area perfectly uniform. */
+/* Desktop hero: área marrom contínua, sem camadas residuais. */
 .nx-home .nx-hero::before{
   background:#ad6540!important;
   background-image:none!important;
@@ -11,6 +11,8 @@
   mix-blend-mode:normal!important;
 }
 .nx-home .nx-hero::after{
+  content:none!important;
+  display:none!important;
   background:none!important;
   background-image:none!important;
   opacity:0!important;
@@ -18,28 +20,26 @@
   box-shadow:none!important;
 }
 .nx-home::before{
+  content:none!important;
+  display:none!important;
   background:none!important;
   background-image:none!important;
   opacity:0!important;
   filter:none!important;
 }
 
-/* Remove the large hero frame while keeping the small floating cards. */
-.nx-home .nx-hero__visual{
-  background:transparent!important;
-  background-image:none!important;
-  border:0!important;
-  border-radius:0!important;
-  outline:0!important;
-  box-shadow:none!important;
-  filter:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-  mix-blend-mode:normal!important;
-  overflow:visible!important;
-  clip-path:none!important;
+/* O antigo photo-panel era o quadrado grande: remove o elemento do layout visual. */
+.nx-home .nx-hero__photo,
+.nx-home .nx-hero__photo *{
+  display:none!important;
 }
-.nx-home .nx-hero__photo{
+
+/* A coluna visual passa a servir apenas de âncora para os cards pequenos. */
+.nx-home .nx-hero__visual{
+  position:relative!important;
+  min-width:0!important;
+  width:100%!important;
+  max-width:none!important;
   background:transparent!important;
   background-image:none!important;
   border:0!important;
@@ -54,23 +54,32 @@
   clip-path:none!important;
 }
 .nx-home .nx-hero__visual::before,
-.nx-home .nx-hero__visual::after,
-.nx-home .nx-hero__photo::before,
-.nx-home .nx-hero__photo::after{
+.nx-home .nx-hero__visual::after{
   content:none!important;
   display:none!important;
-  background:none!important;
-  background-image:none!important;
-  opacity:0!important;
+}
+
+/* Remove os painéis decorativos gigantes que criavam caixas/recuos desalinhados.
+   Cards reais de categorias, ofertas e ações continuam intactos. */
+.nx-home main>section:not(.nx-hero)::before{
+  content:none!important;
+  display:none!important;
   border:0!important;
+  background:none!important;
   box-shadow:none!important;
-  filter:none!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
 
-/* Mobile: same uniform clay finish, without overlays. */
+/* Garante alinhamento limpo das duas colunas do hero. */
+.nx-home .nx-hero__grid{
+  align-items:center!important;
+}
+
+/* Mobile: mesma limpeza, sem overlays ou painéis grandes artificiais. */
 .mh26-page::before{
+  content:none!important;
+  display:none!important;
   background:none!important;
   background-image:none!important;
   opacity:0!important;
@@ -83,9 +92,18 @@
   box-shadow:none!important;
 }
 .mh26-page .mh26-hero::after{
+  content:none!important;
+  display:none!important;
   background:none!important;
   background-image:none!important;
   opacity:0!important;
-  filter:none!important;
+}
+.mh26-page main>section:not(.mh26-hero)::before{
+  content:none!important;
+  display:none!important;
+  border:0!important;
+  background:none!important;
   box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
 }
