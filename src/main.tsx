@@ -21,7 +21,7 @@ import "./styles/MobileDarkPolish2026.css";
 // redesign independent from the legacy theme bundles and easy to iterate.
 const campaignTheme = document.createElement("link");
 campaignTheme.rel = "stylesheet";
-campaignTheme.href = "/campaign-theme.css?v=20260825";
+campaignTheme.href = "/campaign-theme.css?v=20260825-2";
 campaignTheme.dataset.precocertoTheme = "campaign-2026";
 document.head.appendChild(campaignTheme);
 
