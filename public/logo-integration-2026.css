@@ -4,6 +4,20 @@
 .ref-brand::before{content:"";position:absolute;left:0;top:50%;width:40px;height:40px;transform:translateY(-50%);background:url('/logo-preco-certo-simbolo.svg?v=15') center/contain no-repeat;filter:drop-shadow(0 5px 10px rgba(0,0,0,.18))}
 .ref-brand>span{font-family:"Inter Variable",Inter,sans-serif!important;font-size:.68rem!important;font-weight:800!important;letter-spacing:.12em!important;color:inherit!important}
 
+/* Header: reserva altura real para a assinatura completa da marca, inclusive slogan. */
+.nx-header__inner{min-height:76px!important}
+.nx-brand{min-height:58px!important;align-items:center!important;overflow:visible!important}
+.nx-brand img{
+  width:148px!important;
+  height:auto!important;
+  max-width:148px!important;
+  max-height:none!important;
+  display:block!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  overflow:visible!important;
+}
+
 html[data-theme="light"] .nx-brand img,
 html[data-theme="light"] .mh26-logo img,
 html[data-theme="light"] .nx-footer img{
@@ -21,4 +35,21 @@ html[data-theme="dark"] .nx-footer img{
 }
 
 .pc-boot-loading__brand img{content:url('/app-icon.svg?v=15')!important;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18))!important}
-@media(max-width:767px){.mh26-logo img{height:46px!important;max-width:176px!important}.ref-brand{padding-left:42px!important}.ref-brand::before{width:36px;height:36px}}
+
+@media(max-width:980px){
+  .nx-header__inner{min-height:72px!important}
+  .nx-brand{min-height:54px!important}
+  .nx-brand img{width:138px!important;max-width:138px!important}
+}
+
+@media(max-width:767px){
+  .mh26-header-row{min-height:70px!important;overflow:visible!important}
+  .mh26-logo{display:flex!important;align-items:center!important;min-height:54px!important;overflow:visible!important}
+  .mh26-logo img{width:142px!important;height:auto!important;max-width:142px!important;max-height:none!important;object-fit:contain!important;overflow:visible!important}
+  .ref-brand{padding-left:42px!important}
+  .ref-brand::before{width:36px;height:36px}
+}
+
+@media(max-width:390px){
+  .mh26-logo img{width:132px!important;max-width:132px!important}
+}
