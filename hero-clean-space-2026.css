@@ -1,0 +1,20 @@
+/* PreçoCerto — hero clean space override */
+html:not([data-theme="dark"]) .nx-home .nx-hero::before{
+  background:#ead9ce!important;
+  opacity:1!important;
+}
+html:not([data-theme="dark"]) .nx-home .nx-hero::after{
+  background:none!important;
+}
+html:not([data-theme="dark"]) .nx-home::before{
+  background:none!important;
+}
+html:not([data-theme="dark"]) .mh26-page::before{
+  background:none!important;
+}
+html:not([data-theme="dark"]) .mh26-page .mh26-hero::before{
+  background:#ead9ce!important;
+}
+html:not([data-theme="dark"]) .mh26-page .mh26-hero::after{
+  background:none!important;
+}
