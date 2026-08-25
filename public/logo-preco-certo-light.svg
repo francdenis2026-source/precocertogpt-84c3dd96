@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="360" viewBox="0 0 1180 360" role="img" aria-labelledby="title desc">
+<title id="title">Preço Certo</title><desc id="desc">Logomarca Preço Certo com preenchimento profissional de alto contraste para o modo claro.</desc>
+<defs>
+  <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFF7E6"/><stop offset=".52" stop-color="#FFE4B8"/><stop offset="1" stop-color="#F6C77F"/></linearGradient>
+  <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FF8A00"/><stop offset=".52" stop-color="#FF5A00"/><stop offset="1" stop-color="#E93F00"/></linearGradient>
+  <linearGradient id="yellow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFE56B"/><stop offset=".5" stop-color="#FFC928"/><stop offset="1" stop-color="#F2A400"/></linearGradient>
+  <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263A58"/><stop offset=".48" stop-color="#172A45"/><stop offset="1" stop-color="#0B1628"/></linearGradient>
+  <linearGradient id="pcP" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#314B6F"/><stop offset=".52" stop-color="#203756"/><stop offset="1" stop-color="#12223A"/></linearGradient>
+  <linearGradient id="pcC" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FF9D2E"/><stop offset=".5" stop-color="#FF6A00"/><stop offset="1" stop-color="#E94A00"/></linearGradient>
+  <linearGradient id="precoText" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#314B6F"/><stop offset=".52" stop-color="#1F3553"/><stop offset="1" stop-color="#13233B"/></linearGradient>
+  <linearGradient id="certoText" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFC92F"/><stop offset=".52" stop-color="#FFAA00"/><stop offset="1" stop-color="#F27A00"/></linearGradient>
+  <pattern id="mesh" width="18" height="16" patternUnits="userSpaceOnUse"><path d="M4 1h10l4 7-4 7H4L0 8Z" fill="none" stroke="#5F6B7D" stroke-width="1.4"/></pattern>
+  <filter id="shadow" x="-20%" y="-20%" width="145%" height="155%"><feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#0B1628" flood-opacity=".20"/></filter>
+</defs>
+<g filter="url(#shadow)" transform="translate(14 8)">
+  <g transform="translate(8 2)">
+    <path d="M70 44h150c53 0 90 25 108 69l-57 19c-11-22-30-33-58-33H126v92H70Z" fill="url(#pcP)" stroke="#0B1628" stroke-width="5"/>
+    <path d="M70 187h56v126H70Z" fill="url(#pcP)" stroke="#0B1628" stroke-width="5"/>
+    <path d="M236 113c48 0 88 17 120 49l-40 40c-22-21-47-31-78-31-49 0-84 31-84 75 0 43 35 74 84 74 32 0 59-10 81-32l39 40c-32 32-73 49-122 49-81 0-140-54-140-131 0-79 59-133 140-133Z" fill="url(#pcC)" stroke="#0B1628" stroke-width="5"/>
+    <g transform="translate(36 133)">
+      <path d="M6 50h40M0 79h58M17 108h44" stroke="url(#yellow)" stroke-width="14" stroke-linecap="round"/>
+      <path d="M71 28h26c10 0 18 6 21 16l7 25h140c12 0 20 12 15 23l-23 58c-4 10-14 17-25 17H129c-13 0-23-9-26-21L75 28Z" fill="url(#navy)" stroke="url(#cream)" stroke-width="11" stroke-linejoin="round"/>
+      <path d="M126 80h132v74H126Z" fill="url(#mesh)" opacity=".96"/>
+      <path d="M123 171h111" stroke="url(#cream)" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="126" cy="202" r="23" fill="url(#navy)" stroke="url(#cream)" stroke-width="8"/><circle cx="126" cy="202" r="9" fill="url(#yellow)"/>
+      <circle cx="226" cy="202" r="23" fill="url(#navy)" stroke="url(#cream)" stroke-width="8"/><circle cx="226" cy="202" r="9" fill="url(#yellow)"/>
+      <path d="M268 78c10 0 18 7 19 17" fill="none" stroke="url(#yellow)" stroke-width="9" stroke-linecap="round"/>
+      <g transform="translate(267 83) rotate(11)"><path d="M15 0h60c8 0 14 4 18 11l27 45c4 7 3 16-3 22l-37 36c-7 6-17 6-24 0L6 65C2 61 0 56 0 50V15C0 7 7 0 15 0Z" fill="url(#orange)" stroke="url(#yellow)" stroke-width="7"/><circle cx="22" cy="21" r="9" fill="url(#cream)"/><text x="30" y="77" fill="#FFF7E6" font-family="Arial,sans-serif" font-size="45" font-weight="900">%</text></g>
+    </g>
+  </g>
+  <g transform="translate(395 73)" font-family="Outfit,Inter,Arial,sans-serif" font-weight="900" letter-spacing="-5">
+    <text x="0" y="98" fill="url(#precoText)" stroke="#0B1628" stroke-width="2.5" paint-order="stroke" font-size="116">Preço</text>
+    <text x="0" y="226" fill="url(#certoText)" stroke="#8F4B00" stroke-width="2.5" paint-order="stroke" font-size="116">Certo</text>
+    <g transform="translate(5 255)"><rect x="0" y="0" width="575" height="34" rx="17" fill="#13233B" opacity=".97"/><text x="287" y="23" text-anchor="middle" fill="#FFF7E6" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="800" letter-spacing="3">O MELHOR PREÇO, PERTO DE VOCÊ.</text></g>
+  </g>
+</g>
+</svg>
