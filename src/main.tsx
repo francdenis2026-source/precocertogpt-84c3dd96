@@ -91,12 +91,19 @@ topbarControlsTheme.href = "/topbar-controls-2026.css?v=20260825-1";
 topbarControlsTheme.dataset.precocertoTopbarControls = "warm-controls-2026";
 document.head.appendChild(topbarControlsTheme);
 
-// App shell mobile: estrutura visual de aplicativo nativo com safe-area, superfícies e dock flutuante.
+// App shell mobile: claro branco, escuro em uma única superfície carvão e detalhes da marca.
 const mobileAppShellTheme = document.createElement("link");
 mobileAppShellTheme.rel = "stylesheet";
-mobileAppShellTheme.href = "/mobile-app-shell-2026.css?v=20260825-1";
+mobileAppShellTheme.href = "/mobile-app-shell-2026.css?v=20260825-2";
 mobileAppShellTheme.dataset.precocertoMobileShell = "mobile-app-shell-2026";
 document.head.appendChild(mobileAppShellTheme);
+
+// Interação de apontamento refinada: sem elevação, zoom ou saltos de hover.
+const pointerInteractionTheme = document.createElement("link");
+pointerInteractionTheme.rel = "stylesheet";
+pointerInteractionTheme.href = "/interaction-hover-2026.css?v=20260825-2";
+pointerInteractionTheme.dataset.precocertoPointerInteraction = "pointer-refined-2026";
+document.head.appendChild(pointerInteractionTheme);
 
 initializeSiteTheme();
 
