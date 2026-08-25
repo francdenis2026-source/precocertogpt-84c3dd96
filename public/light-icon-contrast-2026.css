@@ -7,6 +7,42 @@ html:not([data-theme="dark"]){
   --pc-icon-surface:#f4f6f8;
   --pc-icon-surface-hover:#e9edf2;
   --pc-icon-border:#d9dfe6;
+  --pc-light-header:#ece4dc;
+  --pc-light-header-border:#d9cec4;
+  --pc-light-header-control:#f7f2ed;
+}
+
+/* Header claro: superfície quente para a logo amarela/creme manter contraste real. */
+html:not([data-theme="dark"]) .nx-header{
+  background:rgba(236,228,220,.97)!important;
+  border-bottom:1px solid var(--pc-light-header-border)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.55),0 7px 22px rgba(57,43,34,.08)!important;
+  backdrop-filter:blur(18px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
+}
+html:not([data-theme="dark"]) .mh26-header{
+  background:rgba(236,228,220,.98)!important;
+  border-bottom:1px solid var(--pc-light-header-border)!important;
+  box-shadow:0 3px 16px rgba(57,43,34,.075)!important;
+  backdrop-filter:blur(18px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(118%)!important;
+}
+html:not([data-theme="dark"]) .nx-header nav a{
+  color:#4e443d!important;
+}
+html:not([data-theme="dark"]) .nx-header nav a:hover,
+html:not([data-theme="dark"]) .nx-header nav a.is-active{
+  color:#17191f!important;
+}
+html:not([data-theme="dark"]) .nx-header nav a.is-active::after{
+  background:#9a4f2b!important;
+}
+html:not([data-theme="dark"]) .nx-brand>span{
+  color:#594d44!important;
+  border-left-color:#cfc1b5!important;
+}
+html:not([data-theme="dark"]) .nx-brand>span svg{
+  color:#8f4828!important;
 }
 
 /* Logos e imagens de marca: nunca dessaturar, inverter ou lavar cores. */
@@ -17,18 +53,22 @@ html:not([data-theme="dark"]) img[src*="brand"]{
   opacity:1!important;
   mix-blend-mode:normal!important;
 }
+html:not([data-theme="dark"]) :is(.nx-brand,.mh26-logo) img{
+  isolation:isolate!important;
+  image-rendering:auto!important;
+}
 
 /* Controles principais de navegação. */
 html:not([data-theme="dark"]) :is(.nx-theme,.nx-menu,.mh26-theme,.mh26-head-actions>a){
-  color:var(--pc-icon)!important;
-  background:var(--pc-icon-surface)!important;
-  border-color:var(--pc-icon-border)!important;
-  box-shadow:0 1px 2px rgba(16,24,40,.04)!important;
+  color:#302b27!important;
+  background:var(--pc-light-header-control)!important;
+  border-color:#d4c7bc!important;
+  box-shadow:0 1px 2px rgba(57,43,34,.05)!important;
 }
 html:not([data-theme="dark"]) :is(.nx-theme,.nx-menu,.mh26-theme,.mh26-head-actions>a):hover{
   color:#15181d!important;
-  background:var(--pc-icon-surface-hover)!important;
-  border-color:#cbd3dc!important;
+  background:#fffaf6!important;
+  border-color:#c8b8aa!important;
 }
 html:not([data-theme="dark"]) :is(.nx-theme,.nx-menu,.mh26-theme,.mh26-head-actions>a) svg{
   color:currentColor!important;
