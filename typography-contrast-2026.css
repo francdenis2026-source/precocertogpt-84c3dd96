@@ -1,0 +1,327 @@
+/* PreçoCerto — typography + contrast accessibility pass 2026
+   Final override loaded after visual themes. Keeps brand styling while making
+   headings, body copy, labels, prices, placeholders and secondary text readable. */
+
+:root{
+  --pc-type-display:"Outfit Variable",Outfit,"Arial Narrow",Arial,sans-serif;
+  --pc-type-body:"Inter Variable",Inter,"Manrope Variable",Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+html,body,#root,
+.nx-home,.mh26-page,.ref-page,.pro-basket-page,.smart-basket-page,.msearch26-page,.pharmacy-directory-page{
+  font-family:var(--pc-type-body)!important;
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Consistent display typography without sacrificing readability. */
+.nx-home h1,.nx-home h2,.nx-home h3,
+.mh26-page h1,.mh26-page h2,.mh26-page h3,
+.ref-page h1,.ref-page h2,.ref-page h3,
+.pro-basket-page h1,.pro-basket-page h2,.pro-basket-page h3,
+.smart-basket-page h1,.smart-basket-page h2,.smart-basket-page h3,
+.msearch26-page h1,.msearch26-page h2,.msearch26-page h3,
+.pharmacy-directory-page h1,.pharmacy-directory-page h2,.pharmacy-directory-page h3{
+  font-family:var(--pc-type-display)!important;
+  font-weight:850!important;
+  font-optical-sizing:auto;
+}
+
+.nx-home p,.nx-home li,.nx-home label,.nx-home input,.nx-home button,.nx-home a,
+.mh26-page p,.mh26-page li,.mh26-page label,.mh26-page input,.mh26-page button,.mh26-page a,
+.ref-page p,.ref-page li,.ref-page label,.ref-page input,.ref-page button,.ref-page a,
+.pro-basket-page p,.pro-basket-page li,.pro-basket-page label,.pro-basket-page input,.pro-basket-page button,.pro-basket-page a,
+.smart-basket-page p,.smart-basket-page li,.smart-basket-page label,.smart-basket-page input,.smart-basket-page button,.smart-basket-page a,
+.msearch26-page p,.msearch26-page li,.msearch26-page label,.msearch26-page input,.msearch26-page button,.msearch26-page a,
+.pharmacy-directory-page p,.pharmacy-directory-page li,.pharmacy-directory-page label,.pharmacy-directory-page input,.pharmacy-directory-page button,.pharmacy-directory-page a{
+  font-family:var(--pc-type-body)!important;
+}
+
+/* ---------------- LIGHT ---------------- */
+html:not([data-theme="dark"]){
+  --pc-text-strong:#151820;
+  --pc-text-body:#343a46;
+  --pc-text-muted:#566172;
+  --pc-text-subtle:#697586;
+  --pc-text-accent:#7b4328;
+  --pc-placeholder:#778293;
+}
+
+html:not([data-theme="dark"]) .nx-home,
+html:not([data-theme="dark"]) .mh26-page,
+html:not([data-theme="dark"]) .ref-page,
+html:not([data-theme="dark"]) .pro-basket-page,
+html:not([data-theme="dark"]) .smart-basket-page,
+html:not([data-theme="dark"]) .msearch26-page,
+html:not([data-theme="dark"]) .pharmacy-directory-page{
+  color:var(--pc-text-body)!important;
+}
+
+html:not([data-theme="dark"]) .nx-home h1,
+html:not([data-theme="dark"]) .nx-home h2,
+html:not([data-theme="dark"]) .nx-home h3,
+html:not([data-theme="dark"]) .nx-home h4,
+html:not([data-theme="dark"]) .mh26-page h1,
+html:not([data-theme="dark"]) .mh26-page h2,
+html:not([data-theme="dark"]) .mh26-page h3,
+html:not([data-theme="dark"]) .mh26-page h4,
+html:not([data-theme="dark"]) .ref-page h1,
+html:not([data-theme="dark"]) .ref-page h2,
+html:not([data-theme="dark"]) .ref-page h3,
+html:not([data-theme="dark"]) .pro-basket-page h1,
+html:not([data-theme="dark"]) .pro-basket-page h2,
+html:not([data-theme="dark"]) .smart-basket-page h1,
+html:not([data-theme="dark"]) .smart-basket-page h2,
+html:not([data-theme="dark"]) .msearch26-page h1,
+html:not([data-theme="dark"]) .msearch26-page h2,
+html:not([data-theme="dark"]) .pharmacy-directory-page h1,
+html:not([data-theme="dark"]) .pharmacy-directory-page h2{
+  color:var(--pc-text-strong)!important;
+}
+
+html:not([data-theme="dark"]) .nx-home p,
+html:not([data-theme="dark"]) .nx-home li,
+html:not([data-theme="dark"]) .mh26-page p,
+html:not([data-theme="dark"]) .mh26-page li,
+html:not([data-theme="dark"]) .ref-page p,
+html:not([data-theme="dark"]) .pro-basket-page p,
+html:not([data-theme="dark"]) .smart-basket-page p,
+html:not([data-theme="dark"]) .msearch26-page p,
+html:not([data-theme="dark"]) .pharmacy-directory-page p{
+  color:var(--pc-text-body)!important;
+}
+
+html:not([data-theme="dark"]) .nx-section-title span,
+html:not([data-theme="dark"]) .nx-section-title>a,
+html:not([data-theme="dark"]) .nx-catalog-status,
+html:not([data-theme="dark"]) .nx-category-strip small,
+html:not([data-theme="dark"]) .nx-offer-card__copy small,
+html:not([data-theme="dark"]) .nx-offer-card__copy span,
+html:not([data-theme="dark"]) .mh26-page small,
+html:not([data-theme="dark"]) .ref-page small,
+html:not([data-theme="dark"]) .pro-basket-page small,
+html:not([data-theme="dark"]) .smart-basket-page small,
+html:not([data-theme="dark"]) .msearch26-page small,
+html:not([data-theme="dark"]) .pharmacy-directory-page small{
+  color:var(--pc-text-muted)!important;
+  opacity:1!important;
+}
+
+html:not([data-theme="dark"]) .nx-category-strip strong,
+html:not([data-theme="dark"]) .nx-offer-card__copy strong,
+html:not([data-theme="dark"]) .nx-offer-card__copy>b,
+html:not([data-theme="dark"]) .mh26-page strong,
+html:not([data-theme="dark"]) .ref-page strong,
+html:not([data-theme="dark"]) .pro-basket-page strong,
+html:not([data-theme="dark"]) .smart-basket-page strong,
+html:not([data-theme="dark"]) .msearch26-page strong,
+html:not([data-theme="dark"]) .pharmacy-directory-page strong{
+  color:var(--pc-text-strong)!important;
+  font-weight:750!important;
+}
+
+html:not([data-theme="dark"]) .nx-offer-card__copy>b,
+html:not([data-theme="dark"]) .nx-offer-card__copy em,
+html:not([data-theme="dark"]) .nx-live-results>button>b,
+html:not([data-theme="dark"]) .mh26-search-overlay header small,
+html:not([data-theme="dark"]) .mh26-search-list b{
+  color:var(--pc-text-accent)!important;
+  opacity:1!important;
+}
+
+html:not([data-theme="dark"]) .nx-header nav a{
+  color:#3f4857!important;
+  font-weight:700!important;
+}
+html:not([data-theme="dark"]) .nx-header nav a:hover,
+html:not([data-theme="dark"]) .nx-header nav a.is-active{color:#11141a!important}
+html:not([data-theme="dark"]) .nx-brand>span{color:#505b6b!important}
+
+html:not([data-theme="dark"]) .nx-hero__copy>p,
+html:not([data-theme="dark"]) .nx-hero__facts small,
+html:not([data-theme="dark"]) .nx-catalog-status{
+  color:#4e5969!important;
+  opacity:1!important;
+}
+
+html:not([data-theme="dark"]) input,
+html:not([data-theme="dark"]) textarea,
+html:not([data-theme="dark"]) select{
+  color:#1f2530!important;
+  caret-color:#1f2530!important;
+}
+html:not([data-theme="dark"]) input::placeholder,
+html:not([data-theme="dark"]) textarea::placeholder{
+  color:var(--pc-placeholder)!important;
+  opacity:1!important;
+}
+
+/* ---------------- DARK ---------------- */
+html[data-theme="dark"]{
+  --pc-text-strong-dark:#fffaf4;
+  --pc-text-body-dark:#e9e2da;
+  --pc-text-muted-dark:#c7bdb2;
+  --pc-text-subtle-dark:#b9aea3;
+  --pc-text-accent-dark:#f4c66b;
+  --pc-placeholder-dark:#bdb4aa;
+}
+
+html[data-theme="dark"] .nx-home,
+html[data-theme="dark"] .mh26-page,
+html[data-theme="dark"] .ref-page,
+html[data-theme="dark"] .pro-basket-page,
+html[data-theme="dark"] .smart-basket-page,
+html[data-theme="dark"] .msearch26-page,
+html[data-theme="dark"] .pharmacy-directory-page{
+  color:var(--pc-text-body-dark)!important;
+}
+
+html[data-theme="dark"] .nx-home h1,
+html[data-theme="dark"] .nx-home h2,
+html[data-theme="dark"] .nx-home h3,
+html[data-theme="dark"] .nx-home h4,
+html[data-theme="dark"] .mh26-page h1,
+html[data-theme="dark"] .mh26-page h2,
+html[data-theme="dark"] .mh26-page h3,
+html[data-theme="dark"] .mh26-page h4,
+html[data-theme="dark"] .ref-page h1,
+html[data-theme="dark"] .ref-page h2,
+html[data-theme="dark"] .ref-page h3,
+html[data-theme="dark"] .pro-basket-page h1,
+html[data-theme="dark"] .pro-basket-page h2,
+html[data-theme="dark"] .smart-basket-page h1,
+html[data-theme="dark"] .smart-basket-page h2,
+html[data-theme="dark"] .msearch26-page h1,
+html[data-theme="dark"] .msearch26-page h2,
+html[data-theme="dark"] .pharmacy-directory-page h1,
+html[data-theme="dark"] .pharmacy-directory-page h2{
+  color:var(--pc-text-strong-dark)!important;
+}
+
+html[data-theme="dark"] .nx-home p,
+html[data-theme="dark"] .nx-home li,
+html[data-theme="dark"] .mh26-page p,
+html[data-theme="dark"] .mh26-page li,
+html[data-theme="dark"] .ref-page p,
+html[data-theme="dark"] .pro-basket-page p,
+html[data-theme="dark"] .smart-basket-page p,
+html[data-theme="dark"] .msearch26-page p,
+html[data-theme="dark"] .pharmacy-directory-page p{
+  color:var(--pc-text-body-dark)!important;
+}
+
+html[data-theme="dark"] .nx-section-title span,
+html[data-theme="dark"] .nx-section-title>a,
+html[data-theme="dark"] .nx-catalog-status,
+html[data-theme="dark"] .nx-category-strip small,
+html[data-theme="dark"] .nx-offer-card__copy small,
+html[data-theme="dark"] .nx-offer-card__copy span,
+html[data-theme="dark"] .mh26-page small,
+html[data-theme="dark"] .ref-page small,
+html[data-theme="dark"] .pro-basket-page small,
+html[data-theme="dark"] .smart-basket-page small,
+html[data-theme="dark"] .msearch26-page small,
+html[data-theme="dark"] .pharmacy-directory-page small{
+  color:var(--pc-text-muted-dark)!important;
+  opacity:1!important;
+}
+
+html[data-theme="dark"] .nx-category-strip strong,
+html[data-theme="dark"] .nx-offer-card__copy strong,
+html[data-theme="dark"] .mh26-page strong,
+html[data-theme="dark"] .ref-page strong,
+html[data-theme="dark"] .pro-basket-page strong,
+html[data-theme="dark"] .smart-basket-page strong,
+html[data-theme="dark"] .msearch26-page strong,
+html[data-theme="dark"] .pharmacy-directory-page strong{
+  color:var(--pc-text-strong-dark)!important;
+  font-weight:750!important;
+}
+
+html[data-theme="dark"] .nx-offer-card__copy>b,
+html[data-theme="dark"] .nx-offer-card__copy em,
+html[data-theme="dark"] .nx-live-results>button>b,
+html[data-theme="dark"] .mh26-search-overlay header small,
+html[data-theme="dark"] .mh26-search-list b{
+  color:var(--pc-text-accent-dark)!important;
+  opacity:1!important;
+}
+
+html[data-theme="dark"] .nx-header nav a{
+  color:#ded6ce!important;
+  font-weight:700!important;
+}
+html[data-theme="dark"] .nx-header nav a:hover,
+html[data-theme="dark"] .nx-header nav a.is-active{color:#ffffff!important}
+html[data-theme="dark"] .nx-brand>span{color:#d0c7be!important}
+
+html[data-theme="dark"] .nx-hero__copy>p{
+  color:#eee7df!important;
+  opacity:1!important;
+}
+html[data-theme="dark"] .nx-hero__facts small,
+html[data-theme="dark"] .nx-catalog-status{
+  color:#cfc5ba!important;
+  opacity:1!important;
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select{
+  color:#f7f2ec!important;
+  caret-color:#f7f2ec!important;
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder{
+  color:var(--pc-placeholder-dark)!important;
+  opacity:1!important;
+}
+
+/* Search surfaces stay light in both themes: force dark text inside them. */
+html[data-theme="dark"] .nx-live-search,
+html[data-theme="dark"] .nx-live-results,
+html[data-theme="dark"] .mh26-search,
+html[data-theme="dark"] .mh26-search-field,
+html[data-theme="dark"] .mh26-search-overlay{
+  color:#20242b!important;
+}
+html[data-theme="dark"] .nx-live-search input,
+html[data-theme="dark"] .nx-live-results input,
+html[data-theme="dark"] .mh26-search input,
+html[data-theme="dark"] .mh26-search-field input,
+html[data-theme="dark"] .mh26-search-overlay input{
+  color:#20242b!important;
+  caret-color:#20242b!important;
+}
+html[data-theme="dark"] .nx-live-search input::placeholder,
+html[data-theme="dark"] .mh26-search input::placeholder,
+html[data-theme="dark"] .mh26-search-field input::placeholder{
+  color:#667085!important;
+  opacity:1!important;
+}
+html[data-theme="dark"] .nx-live-results button,
+html[data-theme="dark"] .nx-live-results a,
+html[data-theme="dark"] .mh26-search-overlay button,
+html[data-theme="dark"] .mh26-search-overlay a{
+  color:#2f3540!important;
+}
+html[data-theme="dark"] .nx-live-results>button>b,
+html[data-theme="dark"] .mh26-search-overlay header small,
+html[data-theme="dark"] .mh26-search-list b{color:#7b4328!important}
+
+/* Disabled text must remain distinguishable without looking active. */
+.nx-home :disabled,.mh26-page :disabled,.ref-page :disabled,
+.pro-basket-page :disabled,.smart-basket-page :disabled,.msearch26-page :disabled,
+.pharmacy-directory-page :disabled{opacity:.62!important}
+
+/* Avoid ultra-thin copy in compact UI. */
+.nx-home small,.mh26-page small,.ref-page small,.pro-basket-page small,
+.smart-basket-page small,.msearch26-page small,.pharmacy-directory-page small{
+  font-weight:520!important;
+  line-height:1.4;
+}
+.nx-home label,.mh26-page label,.ref-page label,.pro-basket-page label,
+.smart-basket-page label,.msearch26-page label,.pharmacy-directory-page label{
+  font-weight:650!important;
+}
