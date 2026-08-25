@@ -22,9 +22,11 @@ import { resolveCutoutImage, resolveProductImage } from "../data/productImageRes
 import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredRotation";
 import { FestivalAcaiBar } from "../components/FestivalAcaiBar";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
+import { AppDock } from "../reference/ReferenceExperience";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import { suggestProducts } from "../lib/productSearch";
 import "./HomeNew2026.css";
+import "./HomeUxProMax2026.css";
 
 const initialCatalog = buildCatalog();
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -185,7 +187,7 @@ export function HomeNew2026() {
           </Link>
 
           <nav className={menuOpen ? "is-open" : ""} id="nx-navigation" aria-label="Navegação principal">
-            <Link to="/" className="is-active" onClick={() => setMenuOpen(false)}>Início</Link>
+            <Link to="/" className="is-active" aria-current="page" onClick={() => setMenuOpen(false)}>Início</Link>
             <Link to="/buscar" onClick={() => setMenuOpen(false)}>Ofertas</Link>
             <Link to="/estabelecimentos" onClick={() => setMenuOpen(false)}>Lojas</Link>
             <Link to="/explorar" onClick={() => setMenuOpen(false)}>Categorias</Link>
@@ -212,7 +214,7 @@ export function HomeNew2026() {
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
               onClick={() => setMenuOpen(value => !value)}
             >
-              {menuOpen ? <X /> : <Menu />}
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -409,6 +411,7 @@ export function HomeNew2026() {
           </div>
         </div>
       </footer>
+      <AppDock current="home" />
     </div>
   );
 }
