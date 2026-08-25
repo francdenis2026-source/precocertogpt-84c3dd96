@@ -24,17 +24,34 @@
   filter:none!important;
 }
 
-/* Remove every decorative layer from the right visual area. */
-.nx-home .nx-hero__visual,
-.nx-home .nx-hero__photo{
+/* Remove the large hero frame while keeping the small floating cards. */
+.nx-home .nx-hero__visual{
   background:transparent!important;
   background-image:none!important;
-  border-color:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
   box-shadow:none!important;
   filter:none!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
   mix-blend-mode:normal!important;
+  overflow:visible!important;
+  clip-path:none!important;
+}
+.nx-home .nx-hero__photo{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  mix-blend-mode:normal!important;
+  overflow:visible!important;
+  clip-path:none!important;
 }
 .nx-home .nx-hero__visual::before,
 .nx-home .nx-hero__visual::after,
@@ -45,8 +62,9 @@
   background:none!important;
   background-image:none!important;
   opacity:0!important;
-  filter:none!important;
+  border:0!important;
   box-shadow:none!important;
+  filter:none!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
