@@ -31,14 +31,14 @@ document.head.appendChild(lightProfessionalTheme);
 // Remove halos e brilhos circulares do hero em ambos os temas.
 const heroNoHaloTheme = document.createElement("link");
 heroNoHaloTheme.rel = "stylesheet";
-heroNoHaloTheme.href = "/hero-no-halo.css?v=20260825-1";
+heroNoHaloTheme.href = "/hero-no-halo.css?v=20260825-2";
 heroNoHaloTheme.dataset.precocertoHeroPolish = "hero-no-halo-2026";
 document.head.appendChild(heroNoHaloTheme);
 
 // Override final: área direita do hero totalmente limpa, sem efeitos decorativos.
 const heroCleanSpaceTheme = document.createElement("link");
 heroCleanSpaceTheme.rel = "stylesheet";
-heroCleanSpaceTheme.href = "/hero-clean-space-2026.css?v=20260825-1";
+heroCleanSpaceTheme.href = "/hero-clean-space-2026.css?v=20260825-2";
 heroCleanSpaceTheme.dataset.precocertoHeroCleanSpace = "hero-clean-space-2026";
 document.head.appendChild(heroCleanSpaceTheme);
 
