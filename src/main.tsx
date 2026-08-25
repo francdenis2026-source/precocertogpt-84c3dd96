@@ -16,6 +16,15 @@ import "./reference/LogoBrandImpeccable2026.css";
 import "./components/TrueHomepageTasteFinal2026.css";
 import "./styles/MobileDarkPolish2026.css";
 
+// Final visual layer: original campaign system adapted from the references
+// supplied for this rebuild. Keeping it as a public stylesheet makes the
+// redesign independent from the legacy theme bundles and easy to iterate.
+const campaignTheme = document.createElement("link");
+campaignTheme.rel = "stylesheet";
+campaignTheme.href = "/campaign-theme.css?v=20260825";
+campaignTheme.dataset.precocertoTheme = "campaign-2026";
+document.head.appendChild(campaignTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
