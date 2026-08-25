@@ -15,7 +15,25 @@
 .nx-home .nx-live-results__empty{min-height:76px;line-height:1.5}
 .nx-home .nx-live-results>a{min-height:44px}
 
+/* Taste: fotografia real, hierarquia editorial e uma única ação dominante. */
+.nx-home--taste .nx-hero__photo{
+  background-image:linear-gradient(180deg,rgba(31,32,36,.04),rgba(31,32,36,.22)),url("/home-hero-compare-2026.webp");
+  background-position:center;
+  background-size:cover;
+}
+.nx-home--taste .nx-hero__photo::before,.nx-home--taste .nx-hero__photo::after{display:none}
+.nx-home--taste .nx-catalog-status{display:inline-flex;align-items:center;min-height:32px;margin-top:12px;padding:0 2px;color:rgba(255,255,255,.68)}
+.nx-home--taste .nx-section-title h2,.nx-home--taste .nx-basket-panel h2{text-transform:none;letter-spacing:-.035em}
+.nx-home--taste .nx-offer-grid{grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-flow:dense}
+.nx-home--taste .nx-offer-card{grid-column:span 2}
+.nx-home--taste .nx-offer-card:first-child{grid-column:span 4}
+.nx-home--taste .nx-offer-card__image img{transition:transform 420ms cubic-bezier(.16,1,.3,1)}
+.nx-home--taste .nx-offer-card:hover .nx-offer-card__image img{transform:scale(1.045)}
+.nx-home--taste :is(.nx-category-strip a,.nx-offer-card,.nx-store-links a,.nx-basket-panel a,.nx-live-search__submit):active{transform:scale(.98)}
+
 @media(max-width:1100px){
+  .nx-home--taste .nx-offer-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .nx-home--taste .nx-offer-card,.nx-home--taste .nx-offer-card:first-child{grid-column:auto}
   .nx-home .nx-header nav.is-open{position:absolute;top:calc(100% + 8px);right:20px;width:min(320px,calc(100vw - 32px));display:grid;gap:4px;padding:8px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(27,28,32,.98);box-shadow:0 22px 55px rgba(0,0,0,.32);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
   .nx-home .nx-header nav.is-open a{min-height:48px;display:flex;align-items:center;padding:0 14px;border-radius:11px;color:rgba(255,255,255,.82)}
   .nx-home .nx-header nav.is-open a.is-active{background:rgba(246,184,47,.12);color:#ffd776}
@@ -56,6 +74,9 @@
   .nx-home .nx-hero__facts strong{font-size:.84rem}
   .nx-home .nx-hero__facts small{font-size:.68rem;line-height:1.35}
   .nx-home .nx-catalog-status{font-size:.72rem;line-height:1.4}
+
+  .nx-home--taste .nx-hero::before{width:100%;opacity:.2;background-image:url("/home-market-continuum-2026.webp");background-position:center 38%;background-size:cover}
+  .nx-home--taste .nx-hero::after{background:linear-gradient(180deg,rgba(32,33,38,.92),rgba(32,33,38,.98))}
 
   .nx-home .nx-category-strip{gap:8px;padding-bottom:18px}
   .nx-home .nx-category-strip a{min-height:88px;grid-template-columns:40px minmax(0,1fr);gap:9px;padding:11px}

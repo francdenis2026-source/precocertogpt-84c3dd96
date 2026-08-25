@@ -177,13 +177,13 @@ export function HomeNew2026() {
   };
 
   return (
-    <div className="nx-home nx-home--impeccable">
+    <div className="nx-home nx-home--taste">
       <header className="nx-header">
         <FestivalAcaiBar />
         <div className="nx-shell nx-header__inner">
           <Link className="nx-brand" to="/" aria-label="Preço Certo, página inicial">
             <img src="/logo-preco-certo.svg?v=11" alt="Preço Certo" width="171" height="36" />
-            <span><MapPin aria-hidden="true" />Feijó · AC</span>
+            <span><MapPin aria-hidden="true" />Feijó, AC</span>
           </Link>
 
           <nav className={menuOpen ? "is-open" : ""} id="nx-navigation" aria-label="Navegação principal">
@@ -230,9 +230,9 @@ export function HomeNew2026() {
           <div className="nx-hero__backdrop" aria-hidden="true" />
           <div className="nx-shell nx-hero__grid">
             <div className="nx-hero__copy">
-              <span className="nx-hero__kicker"><CheckCircle2 /> Economia local, simples e rápida</span>
+              <span className="nx-hero__kicker"><CheckCircle2 /> Preços do comércio local</span>
               <h1>Compare preços e <em>economize</em> em Feijó</h1>
-              <p>Encontre as melhores ofertas do comércio local, compare valores em segundos e escolha onde sua compra vale mais.</p>
+              <p>Compare ofertas do comércio local e descubra onde sua compra custa menos.</p>
 
               <form className={`nx-live-search${searchOpen ? " is-open" : ""}`} role="search" onSubmit={submitSearch} onFocus={() => setFocused(true)}>
                 <div className="nx-live-search__field">
@@ -261,7 +261,7 @@ export function HomeNew2026() {
                   )}
                 </div>
 
-                <span className="nx-live-search__location"><MapPin /> Feijó · AC</span>
+                <span className="nx-live-search__location"><MapPin /> Feijó, AC</span>
                 <button className="nx-live-search__submit" type="submit">Buscar ofertas</button>
 
                 {searchOpen && (
@@ -293,20 +293,9 @@ export function HomeNew2026() {
                 )}
               </form>
 
-              <div className="nx-hero__ctas">
-                <Link className="is-primary" to="/buscar"><Search /> Explorar ofertas</Link>
-                <Link className="is-secondary" to="/estabelecimentos"><Store /> Explorar lojas</Link>
-              </div>
-
-              <div className="nx-hero__facts">
-                <span><strong>{products.length || "—"}</strong><small>produtos com preço</small></span>
-                <span><strong>Feijó</strong><small>comércio local</small></span>
-                <span><strong>{loading ? "Atualizando…" : "Online"}</strong><small>base de preços</small></span>
-              </div>
-
               <div className={`nx-catalog-status${catalogError ? " has-warning" : ""}`} role="status">
-                Atualizado em {lastPriceUpdate}
-                {catalogError && <span> · exibindo base local</span>}
+                {loading ? "Atualizando preços" : `${products.length} produtos, atualizados em ${lastPriceUpdate}`}
+                {catalogError && <span> - exibindo base local</span>}
               </div>
             </div>
 
@@ -342,7 +331,7 @@ export function HomeNew2026() {
 
         <section className="nx-offers nx-shell" aria-labelledby="nx-offers-title">
           <div className="nx-section-title">
-            <div><span>Economize agora</span><h2 id="nx-offers-title">Ofertas em destaque</h2></div>
+            <div><h2 id="nx-offers-title">Ofertas em destaque</h2></div>
             <Link to="/buscar">Ver todas <ArrowRight /></Link>
           </div>
 
@@ -365,7 +354,7 @@ export function HomeNew2026() {
         <section className="nx-bottom-grid nx-shell">
           <div className="nx-store-panel">
             <div className="nx-section-title">
-              <div><span>Comércio de Feijó</span><h2>Lojas em destaque</h2></div>
+              <div><h2>Lojas em destaque</h2></div>
               <Link to="/estabelecimentos">Ver todas <ArrowRight /></Link>
             </div>
             <div className="nx-store-links">
@@ -377,7 +366,6 @@ export function HomeNew2026() {
 
           <div className="nx-basket-panel">
             <div>
-              <span>Cesta inteligente</span>
               <h2>Compare a compra inteira.</h2>
               <p>Monte sua lista e descubra onde o total fica mais barato antes de sair de casa.</p>
               <Link to="/cesta-inteligente">Abrir cesta inteligente <ArrowRight /></Link>
@@ -406,7 +394,7 @@ export function HomeNew2026() {
             <Link to="/cesta-inteligente">Cesta inteligente</Link>
           </nav>
           <div className="nx-footer__note">
-            <span>Feijó · Acre</span>
+            <span>Feijó, Acre</span>
             <small>Preço Certo © 2026</small>
           </div>
         </div>
