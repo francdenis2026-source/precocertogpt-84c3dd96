@@ -19,25 +19,17 @@ import { HomeNew2026 } from "./pages/HomeNew2026";
 import { MobileHome2026 } from "./pages/MobileHome2026";
 import { KellyBurgueriaPage } from "./pages/KellyBurgueriaPage";
 import { PontoDoSandubaPage } from "./pages/PontoDoSandubaPage";
-import "./reference/FooterSignatureRefinement.css";
+
+// Somente CSS técnico/funcional permanece global aqui.
+// O sistema visual público antigo foi removido; a identidade ativa vem do
+// campaign-theme.css carregado em main.tsx.
 import "./reference/FavoritesAndSectorStability.css";
 import "./reference/ExploreViewportFit.css";
 import "./reference/AdminCatalogWorkspaceEnhancements.css";
 import "./reference/AdminPerformance.css";
 import "./reference/MobileSearchStability.css";
-import "./reference/MobileExperienceOverhaul2026.css";
-import "./reference/UnifiedDesignSystem2026.css";
-import "./reference/PublicReform2026.css";
-import "./reference/HomeDesignPropagation2026.css";
 import "./reference/DesktopLiveSearch2026.css";
-import "./reference/MobileBundle2026.css";
 import "./reference/LiveSearchOverlayStackFix2026.css";
-import "./reference/ImpeccableSearchResults2026.css";
-import "./reference/ImpeccablePageSuite2026.css";
-import "./reference/AppDockProfessional2026.css";
-import "./reference/ProductVisualContrast2026.css";
-import "./reference/HomeRebrand2026.css";
-import "./reference/BrandHotfix2026.css";
 
 const SearchDiscovery2026 = lazy(() => import("./reference/SearchDiscovery2026").then(module => ({ default: module.SearchDiscovery2026 })));
 const MobileSearchDiscovery2026 = lazy(() => import("./reference/MobileSearchDiscovery2026").then(module => ({ default: module.MobileSearchDiscovery2026 })));
