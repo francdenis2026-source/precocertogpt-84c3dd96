@@ -119,6 +119,13 @@ professionalHomeImageryTheme.href = "/professional-home-imagery-2026.css?v=20260
 professionalHomeImageryTheme.dataset.precocertoProfessionalImagery = "professional-home-imagery-2026";
 document.head.appendChild(professionalHomeImageryTheme);
 
+// Consolida todas as rotas públicas em uma única experiência de aplicativo.
+const professionalAppShellTheme = document.createElement("link");
+professionalAppShellTheme.rel = "stylesheet";
+professionalAppShellTheme.href = "/app-shell-professional-2026.css?v=20260825-1";
+professionalAppShellTheme.dataset.precocertoAppShell = "professional-app-shell-2026";
+document.head.appendChild(professionalAppShellTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");

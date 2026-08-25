@@ -397,13 +397,20 @@ export function PublicFooter() {
   </footer>;
 }
 
-export function AppDock({ current }: { current: "home" | "search" | "explore" | "basket" | "stores" | "profile" }) {
+export function AppDock({ current }: { current?: "home" | "search" | "explore" | "basket" | "stores" | "profile" }) {
+  const { pathname } = useLocation();
+  const { count } = useBasket();
+  const active = current ?? (pathname === "/" ? "home"
+    : pathname.startsWith("/buscar") || pathname.startsWith("/produto/") ? "search"
+    : pathname.startsWith("/cesta") ? "basket"
+    : pathname.startsWith("/minha-conta") || pathname.startsWith("/favoritos") || pathname.startsWith("/login") || pathname.startsWith("/cadastro") ? "profile"
+    : "explore");
   return <nav className="ref-dock" aria-label="Navegação principal do aplicativo">
-    <Link className={current === "home" ? "is-active" : ""} to="/" aria-current={current === "home" ? "page" : undefined}><LayoutDashboard aria-hidden="true" /><span>Início</span></Link>
-    <Link className={current === "search" ? "is-active" : ""} to="/buscar" aria-current={current === "search" ? "page" : undefined}><Search aria-hidden="true" /><span>Buscar</span></Link>
-    <Link className={current === "explore" ? "is-active" : ""} to="/explorar" aria-current={current === "explore" ? "page" : undefined}><SlidersHorizontal aria-hidden="true" /><span>Explorar</span></Link>
-    <Link className={current === "stores" ? "is-active" : ""} to="/estabelecimentos" aria-current={current === "stores" ? "page" : undefined} aria-label="Estabelecimentos perto de mim"><MapPin aria-hidden="true" /><span>Perto</span></Link>
-    <Link className={current === "profile" ? "is-active" : ""} to="/minha-conta" aria-current={current === "profile" ? "page" : undefined}><UserRound aria-hidden="true" /><span>Conta</span></Link>
+    <Link className={active === "home" ? "is-active" : ""} to="/" aria-current={active === "home" ? "page" : undefined}><LayoutDashboard aria-hidden="true" /><span>Início</span></Link>
+    <Link className={active === "search" ? "is-active" : ""} to="/buscar" aria-current={active === "search" ? "page" : undefined}><Search aria-hidden="true" /><span>Buscar</span></Link>
+    <Link className={active === "explore" || active === "stores" ? "is-active" : ""} to="/explorar" aria-current={active === "explore" || active === "stores" ? "page" : undefined}><SlidersHorizontal aria-hidden="true" /><span>Explorar</span></Link>
+    <Link className={active === "basket" ? "is-active" : ""} to="/cesta-basica" aria-current={active === "basket" ? "page" : undefined}><ShoppingBasket aria-hidden="true" />{count > 0 && <b className="ref-dock__badge" aria-label={`${count} itens na cesta`}>{count > 99 ? "99+" : count}</b>}<span>Cesta</span></Link>
+    <Link className={active === "profile" ? "is-active" : ""} to="/minha-conta" aria-current={active === "profile" ? "page" : undefined}><UserRound aria-hidden="true" /><span>Conta</span></Link>
   </nav>;
 }
 
