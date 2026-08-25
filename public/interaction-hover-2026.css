@@ -1,61 +1,60 @@
-/* PreçoCerto — microinterações profissionais para mouse/teclado */
+/* PreçoCerto — interação de apontamento refinada, sem elevação/zoom */
 @media (hover:hover) and (pointer:fine){
   .nx-home :is(a,button,.pc-radio,.nx-category-strip a,.nx-offer-card,.nx-hero__deal,.nx-store-card,.mh26-page a,.mh26-page button,.ref-page a,.ref-page button){
-    transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s ease,border-color .18s ease,background-color .18s ease,color .18s ease,opacity .18s ease,filter .18s ease;
+    transition:color .16s ease,border-color .16s ease,background-color .16s ease,box-shadow .16s ease,opacity .16s ease;
   }
 
-  /* Navegação principal */
-  .nx-header nav a{position:relative;isolation:isolate}
-  .nx-header nav a::before{content:"";position:absolute;left:-10px;right:-10px;top:14px;bottom:14px;border-radius:10px;background:rgba(246,184,47,.10);opacity:0;transform:scale(.92);transition:opacity .18s ease,transform .18s ease;z-index:-1}
-  .nx-header nav a:hover{color:#fff!important;transform:translateY(-1px)}
-  .nx-header nav a:hover::before{opacity:1;transform:scale(1)}
-  .nx-header nav a:hover::after{background:#ffc84e!important;box-shadow:0 0 0 3px rgba(246,184,47,.10)}
+  /* Navegação: indicador linear e contraste, sem mover o elemento. */
+  .nx-header nav a{position:relative}
+  .nx-header nav a::before{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;border-radius:99px;background:linear-gradient(90deg,#dfaa82,#f6b82f);opacity:0;transition:opacity .16s ease}
+  .nx-header nav a:hover{color:#fff!important}
+  .nx-header nav a:hover::before{opacity:1}
 
-  /* Marca */
-  .nx-brand:hover img,.mh26-logo:hover img{transform:translateY(-1px) scale(1.012);filter:drop-shadow(0 4px 10px rgba(0,0,0,.14))!important}
-  .nx-brand:hover>span{color:#fff!important}
+  /* Controles: resposta por contorno interno e cor, sem translate/scale. */
+  .nx-theme:hover,.nx-menu:hover,.mh26-theme:hover,.mh26-head-actions>a:hover,
+  .pc-radio:hover,.nx-login:hover{
+    transform:none!important;
+    border-color:rgba(246,184,47,.5)!important;
+    box-shadow:inset 0 0 0 1px rgba(246,184,47,.18)!important;
+  }
+  .nx-theme:hover,.nx-menu:hover,.mh26-theme:hover,.mh26-head-actions>a:hover{color:#ffd56d!important}
+  .nx-theme:hover svg,.nx-menu:hover svg,.mh26-theme:hover svg{transform:none!important}
 
-  /* Botões da barra superior */
-  .nx-theme:hover,.nx-menu:hover,.mh26-theme:hover,.mh26-head-actions>a:hover{transform:translateY(-2px);border-color:rgba(246,184,47,.48)!important;background:rgba(246,184,47,.12)!important;color:#ffd56d!important;box-shadow:0 8px 18px rgba(0,0,0,.18)}
-  .nx-theme:hover svg,.nx-menu:hover svg,.mh26-theme:hover svg{transform:rotate(-5deg) scale(1.05)}
-  .nx-login:hover{transform:translateY(-2px) scale(1.01)!important;box-shadow:0 10px 22px rgba(246,184,47,.22)!important;filter:saturate(1.06)}
+  /* Botões e CTAs: apenas mudança de superfície/contraste. */
+  .nx-live-search__submit:hover,.mh26-search button:hover,.mh26-search-field button:hover,
+  .nx-hero__ctas .is-primary:hover,.nx-hero__ctas .is-secondary:hover{
+    transform:none!important;
+    filter:none!important;
+    box-shadow:inset 0 0 0 1px rgba(32,33,38,.12),0 0 0 3px rgba(246,184,47,.10)!important;
+  }
 
-  /* Player */
-  .pc-radio:hover{transform:translateY(-2px);border-color:rgba(246,184,47,.46)!important;box-shadow:0 10px 24px rgba(0,0,0,.15)!important}
-  .pc-radio__play:hover .pc-radio__control{transform:scale(1.06);box-shadow:0 8px 18px rgba(246,184,47,.24)!important}
-  .pc-radio__play:hover .pc-radio__copy strong{color:#fff3cb}
-  html:not([data-theme="dark"]) .pc-radio__play:hover .pc-radio__copy strong{color:#2a2318}
-
-  /* Busca e CTAs */
-  .nx-live-search__submit:hover,.mh26-search button:hover,.mh26-search-field button:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(246,184,47,.24);filter:saturate(1.08) brightness(1.025)}
-  .nx-live-search__clear:hover{background:#e7dfd4!important;color:#2d2925!important;transform:scale(1.04)}
-  .nx-hero__ctas .is-primary:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(246,184,47,.22)!important;filter:saturate(1.06)}
-  .nx-hero__ctas .is-secondary:hover{transform:translateY(-2px);border-color:rgba(246,184,47,.40)!important;background:rgba(246,184,47,.10)!important}
-
-  /* Cards e menus de conteúdo */
-  .nx-category-strip a:hover{transform:translateY(-4px)!important;border-color:rgba(246,184,47,.64)!important;box-shadow:0 16px 36px rgba(35,29,25,.13)!important}
-  .nx-category-strip a:hover i{transform:scale(1.06);background:#ffe9ad!important;color:#6f4a09!important}
-  .nx-category-strip a:hover>svg{transform:translateX(3px);color:#9b6710!important}
-  .nx-offer-card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 46px rgba(35,29,25,.15)!important}
-  .nx-offer-card:hover .nx-offer-card__image img{transform:scale(1.035)}
-  .nx-offer-card:hover em svg,.nx-section-title>a:hover svg,.nx-hero__deal>a:hover svg{transform:translateX(3px)}
-  .nx-section-title>a:hover{color:#ffc84e!important}
-  .nx-hero__deal>a:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(246,184,47,.20)}
-
-  /* Resultados de busca */
-  .nx-live-results>button:hover{transform:translateX(2px);box-shadow:inset 3px 0 0 #f6b82f}
-  .nx-live-results>a:hover{transform:translateY(-1px);background:#ffe4a0!important}
-
-  /* Rodapé e links secundários */
-  .nx-footer a:hover,.ref-page a:hover,.mh26-page a:hover{color:#f6b82f}
-  .nx-footer a:hover svg,.ref-page a:hover svg,.mh26-page a:hover svg{transform:translateX(2px)}
+  /* Cards e opções: borda de seleção sutil, sem elevar ou ampliar. */
+  .nx-category-strip a:hover,.nx-offer-card:hover,.nx-hero__deal>a:hover,
+  .nx-live-results>button:hover,.nx-live-results>a:hover,
+  .ref-page a:hover,.mh26-page a:hover{
+    transform:none!important;
+    border-color:rgba(246,184,47,.52)!important;
+    box-shadow:inset 3px 0 0 #f6b82f!important;
+  }
+  .nx-offer-card:hover .nx-offer-card__image img,
+  .nx-category-strip a:hover i,
+  .nx-category-strip a:hover>svg,
+  .nx-offer-card:hover em svg,.nx-section-title>a:hover svg,.nx-hero__deal>a:hover svg,
+  .nx-footer a:hover svg,.ref-page a:hover svg,.mh26-page a:hover svg{
+    transform:none!important;
+  }
+  .nx-section-title>a:hover,.nx-footer a:hover,.ref-page a:hover,.mh26-page a:hover{color:#f6b82f!important}
 }
 
-/* Feedback de clique sem exagero */
-.nx-home :is(a,button):active,.mh26-page :is(a,button):active,.ref-page :is(a,button):active{transform:translateY(0) scale(.985)!important}
-
-/* Foco visível e coerente com a marca */
-.nx-home :is(a,button,input):focus-visible,.mh26-page :is(a,button,input):focus-visible,.ref-page :is(a,button,input):focus-visible,.pc-radio:focus-within{outline:3px solid rgba(246,184,47,.42)!important;outline-offset:3px!important}
+/* Clique e teclado: feedback claro, sem animação de escala. */
+.nx-home :is(a,button):active,.mh26-page :is(a,button):active,.ref-page :is(a,button):active{
+  transform:none!important;
+  opacity:.78!important;
+}
+.nx-home :is(a,button,input):focus-visible,.mh26-page :is(a,button,input):focus-visible,.ref-page :is(a,button,input):focus-visible,.pc-radio:focus-within{
+  outline:2px solid #f6b82f!important;
+  outline-offset:3px!important;
+}
 
 @media (prefers-reduced-motion:reduce){
   .nx-home *,.mh26-page *,.ref-page *,.pc-radio *{transition:none!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
