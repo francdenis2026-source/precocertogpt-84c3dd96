@@ -70,6 +70,13 @@ lightIconContrastTheme.href = "/light-icon-contrast-2026.css?v=20260825-1";
 lightIconContrastTheme.dataset.precocertoLightIcons = "light-icon-contrast-2026";
 document.head.appendChild(lightIconContrastTheme);
 
+// Assinatura do desenvolvedor no footer desktop.
+const footerDeveloperSignatureTheme = document.createElement("link");
+footerDeveloperSignatureTheme.rel = "stylesheet";
+footerDeveloperSignatureTheme.href = "/footer-developer-signature-2026.css?v=20260825-1";
+footerDeveloperSignatureTheme.dataset.precocertoFooterSignature = "developer-signature-2026";
+document.head.appendChild(footerDeveloperSignatureTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
