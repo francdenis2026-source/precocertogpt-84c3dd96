@@ -49,6 +49,13 @@ logoIntegrationTheme.href = "/logo-integration-2026.css?v=20260825-1";
 logoIntegrationTheme.dataset.precocertoLogo = "studio-brand-2026";
 document.head.appendChild(logoIntegrationTheme);
 
+// Camada final de tipografia: pesos consistentes e contraste legível no claro/escuro.
+const typographyContrastTheme = document.createElement("link");
+typographyContrastTheme.rel = "stylesheet";
+typographyContrastTheme.href = "/typography-contrast-2026.css?v=20260825-1";
+typographyContrastTheme.dataset.precocertoTypography = "accessible-type-2026";
+document.head.appendChild(typographyContrastTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
