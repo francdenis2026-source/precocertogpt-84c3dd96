@@ -1,0 +1,25 @@
+/* Assinatura do desenvolvedor — footer da homepage */
+.nx-home .nx-footer__note::after{
+  content:"Desenvolvido por Franc D’nis";
+  display:block;
+  margin-top:6px;
+  font-family:"Inter Variable",Inter,system-ui,sans-serif;
+  font-size:.72rem;
+  font-weight:750;
+  letter-spacing:.01em;
+  line-height:1.35;
+  color:rgba(255,255,255,.72);
+  white-space:nowrap;
+}
+
+html:not([data-theme="dark"]) .nx-home .nx-footer__note::after{
+  color:#5b6472;
+}
+
+html[data-theme="dark"] .nx-home .nx-footer__note::after{
+  color:#d8dbe1;
+}
+
+@media(max-width:767px){
+  .nx-home .nx-footer__note::after{display:none!important}
+}
