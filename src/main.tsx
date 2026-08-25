@@ -84,6 +84,13 @@ glassShellTheme.href = "/glass-shell-2026.css?v=20260825-1";
 glassShellTheme.dataset.precocertoGlassShell = "glass-shell-2026";
 document.head.appendChild(glassShellTheme);
 
+// Player, botões e barra superior usam a paleta quente da identidade atual.
+const topbarControlsTheme = document.createElement("link");
+topbarControlsTheme.rel = "stylesheet";
+topbarControlsTheme.href = "/topbar-controls-2026.css?v=20260825-1";
+topbarControlsTheme.dataset.precocertoTopbarControls = "warm-controls-2026";
+document.head.appendChild(topbarControlsTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
