@@ -1,0 +1,138 @@
+/* PreçoCerto — contraste profissional de ícones e marcas no modo claro */
+html:not([data-theme="dark"]){
+  --pc-icon:#303743;
+  --pc-icon-muted:#5f6877;
+  --pc-icon-accent:#96522f;
+  --pc-icon-accent-strong:#7c4023;
+  --pc-icon-surface:#f4f6f8;
+  --pc-icon-surface-hover:#e9edf2;
+  --pc-icon-border:#d9dfe6;
+}
+
+/* Logos e imagens de marca: nunca dessaturar, inverter ou lavar cores. */
+html:not([data-theme="dark"]) :is(.nx-brand,.mh26-logo,.nx-footer,.ref-brand) img,
+html:not([data-theme="dark"]) img[src*="logo"],
+html:not([data-theme="dark"]) img[src*="brand"]{
+  filter:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+}
+
+/* Controles principais de navegação. */
+html:not([data-theme="dark"]) :is(.nx-theme,.nx-menu,.mh26-theme,.mh26-head-actions>a){
+  color:var(--pc-icon)!important;
+  background:var(--pc-icon-surface)!important;
+  border-color:var(--pc-icon-border)!important;
+  box-shadow:0 1px 2px rgba(16,24,40,.04)!important;
+}
+html:not([data-theme="dark"]) :is(.nx-theme,.nx-menu,.mh26-theme,.mh26-head-actions>a):hover{
+  color:#15181d!important;
+  background:var(--pc-icon-surface-hover)!important;
+  border-color:#cbd3dc!important;
+}
+html:not([data-theme="dark"]) :is(.nx-theme,.nx-menu,.mh26-theme,.mh26-head-actions>a) svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+
+/* Ícones de marca/ação recebem o acento quente, não cinza lavado. */
+html:not([data-theme="dark"]) :is(.nx-brand,.nx-hero__kicker,.nx-live-search__location,.nx-section-title,.mh26-search-label,.mh26-section>header) svg{
+  color:var(--pc-icon-accent)!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+
+/* Cards de categoria: ícone com superfície e contraste definidos. */
+html:not([data-theme="dark"]) .nx-category-strip i{
+  color:var(--pc-icon-accent-strong)!important;
+  background:#f7ede7!important;
+  border:1px solid #e8d2c4!important;
+}
+html:not([data-theme="dark"]) .nx-category-strip i svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+html:not([data-theme="dark"]) .nx-category-strip>a>svg{
+  color:#667085!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+
+/* Busca e ações internas. */
+html:not([data-theme="dark"]) .nx-live-search__field>svg,
+html:not([data-theme="dark"]) .mh26-search-field>svg{
+  color:#667085!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+html:not([data-theme="dark"]) :is(.nx-live-search__clear,.mh26-search-clear){
+  color:#3f4652!important;
+  background:#eef1f4!important;
+  border:1px solid #dde2e8!important;
+}
+html:not([data-theme="dark"]) :is(.nx-live-search__clear,.mh26-search-clear) svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+
+/* Links e ações secundárias: contraste visível sem parecer alerta. */
+html:not([data-theme="dark"]) :is(.nx-section-title>a,.mh26-section>header>a){
+  color:#824525!important;
+}
+html:not([data-theme="dark"]) :is(.nx-section-title>a,.mh26-section>header>a) svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+
+/* Ícones dentro dos cards mobile. */
+html:not([data-theme="dark"]) .mh26-page :is(.mh26-product,.mh26-local,[class*="card"],[class*="tile"]) svg{
+  opacity:1!important;
+}
+html:not([data-theme="dark"]) .mh26-product>i,
+html:not([data-theme="dark"]) .mh26-image-fallback{
+  color:#5a6371!important;
+}
+html:not([data-theme="dark"]) .mh26-product>i{
+  background:#f5f6f8!important;
+  border:1px solid #e1e5ea!important;
+}
+
+/* Dock e navegação inferior: ícones nunca esmaecidos. */
+html:not([data-theme="dark"]) .mh26-page .ref-dock{
+  background:rgba(255,255,255,.97)!important;
+  border-top-color:#dde2e8!important;
+  box-shadow:0 -5px 20px rgba(16,24,40,.07)!important;
+}
+html:not([data-theme="dark"]) .mh26-page .ref-dock a{
+  color:#596273!important;
+  opacity:1!important;
+}
+html:not([data-theme="dark"]) .mh26-page .ref-dock a svg{
+  color:currentColor!important;
+  stroke:currentColor!important;
+  opacity:1!important;
+}
+html:not([data-theme="dark"]) .mh26-page .ref-dock a.is-active{
+  color:var(--pc-icon-accent-strong)!important;
+}
+
+/* Elementos SVG genéricos que ficavam claros demais em superfícies brancas. */
+html:not([data-theme="dark"]) .nx-home button:not(.nx-login):not(.nx-live-search__submit) svg,
+html:not([data-theme="dark"]) .nx-home a:not(.nx-brand):not(.nx-login) svg,
+html:not([data-theme="dark"]) .mh26-page button:not(.mh26-search-submit) svg{
+  opacity:1!important;
+}
+
+/* Estados desabilitados continuam distinguíveis sem sumir. */
+html:not([data-theme="dark"]) :is(button,a)[aria-disabled="true"] svg,
+html:not([data-theme="dark"]) :is(button,a):disabled svg{
+  opacity:.48!important;
+}
+
+@media (prefers-contrast:more){
+  html:not([data-theme="dark"]){--pc-icon:#17191f;--pc-icon-muted:#3f4652;--pc-icon-border:#c6ced8}
+}
