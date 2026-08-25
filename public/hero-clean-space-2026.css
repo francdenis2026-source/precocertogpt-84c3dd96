@@ -18,3 +18,21 @@ html:not([data-theme="dark"]) .mh26-page .mh26-hero::before{
 html:not([data-theme="dark"]) .mh26-page .mh26-hero::after{
   background:none!important;
 }
+
+/* Right hero panel: no halo, spotlight, watermark, blur or decorative surface. */
+.nx-home .nx-hero__photo::before,
+.nx-home .nx-hero__photo::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  opacity:0!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.nx-home .nx-hero__photo{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+}
