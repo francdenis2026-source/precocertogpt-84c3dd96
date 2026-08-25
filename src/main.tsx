@@ -122,7 +122,7 @@ document.head.appendChild(professionalHomeImageryTheme);
 // Consolida todas as rotas públicas em uma única experiência de aplicativo.
 const professionalAppShellTheme = document.createElement("link");
 professionalAppShellTheme.rel = "stylesheet";
-professionalAppShellTheme.href = "/app-shell-professional-2026.css?v=20260825-5";
+professionalAppShellTheme.href = "/app-shell-professional-2026.css?v=20260825-6";
 professionalAppShellTheme.dataset.precocertoAppShell = "professional-app-shell-2026";
 document.head.appendChild(professionalAppShellTheme);
 

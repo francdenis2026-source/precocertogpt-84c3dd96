@@ -230,7 +230,6 @@ export function HomeNew2026() {
           <div className="nx-hero__backdrop" aria-hidden="true" />
           <div className="nx-shell nx-hero__grid">
             <div className="nx-hero__copy">
-              <span className="nx-hero__kicker"><CheckCircle2 /> Preços do comércio local</span>
               <h1>Compare preços e <em>economize</em> em Feijó</h1>
               <p>Compare ofertas do comércio local e descubra onde sua compra custa menos.</p>
 
@@ -335,8 +334,13 @@ export function HomeNew2026() {
             <Link to="/buscar">Ver todas <ArrowRight /></Link>
           </div>
 
-          <div className="nx-offer-grid">
-            {featured.map((product, index) => (
+          <div className="nx-offer-grid" aria-busy={loading && !featured.length}>
+            {loading && !featured.length ? Array.from({ length: 5 }, (_, index) => (
+              <article className="nx-offer-card nx-offer-card--skeleton" key={`offer-skeleton-${index}`} aria-hidden="true">
+                <div className="nx-offer-card__image" />
+                <div className="nx-offer-card__copy"><i /><i /><i /></div>
+              </article>
+            )) : featured.length ? featured.map((product, index) => (
               <Link className="nx-offer-card" key={product.id} to={`/produto/${product.slug || product.id}`}>
                 <div className="nx-offer-card__image"><ProductImage product={product} eager={index === 0} /></div>
                 <div className="nx-offer-card__copy">
@@ -347,7 +351,13 @@ export function HomeNew2026() {
                   <em>Comparar preço <ArrowRight /></em>
                 </div>
               </Link>
-            ))}
+            )) : (
+              <div className="nx-offers-empty" role="status">
+                <PackageSearch aria-hidden="true" />
+                <div><strong>As ofertas estão sendo atualizadas</strong><span>Tente novamente em instantes ou pesquise um produto específico.</span></div>
+                <Link to="/buscar">Pesquisar produtos <ArrowRight aria-hidden="true" /></Link>
+              </div>
+            )}
           </div>
         </section>
 
