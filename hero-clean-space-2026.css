@@ -1,38 +1,73 @@
-/* PreçoCerto — hero clean space override */
-html:not([data-theme="dark"]) .nx-home .nx-hero::before{
-  background:#ead9ce!important;
+/* PreçoCerto — hero clean space override
+   Right side uses one continuous clay tone, with no gradient/effect residue. */
+
+/* Desktop hero: preserve the visual split, but make the brown area perfectly uniform. */
+.nx-home .nx-hero::before{
+  background:#ad6540!important;
+  background-image:none!important;
   opacity:1!important;
+  filter:none!important;
+  box-shadow:none!important;
+  mix-blend-mode:normal!important;
 }
-html:not([data-theme="dark"]) .nx-home .nx-hero::after{
+.nx-home .nx-hero::after{
   background:none!important;
+  background-image:none!important;
+  opacity:0!important;
+  filter:none!important;
+  box-shadow:none!important;
 }
-html:not([data-theme="dark"]) .nx-home::before{
+.nx-home::before{
   background:none!important;
-}
-html:not([data-theme="dark"]) .mh26-page::before{
-  background:none!important;
-}
-html:not([data-theme="dark"]) .mh26-page .mh26-hero::before{
-  background:#ead9ce!important;
-}
-html:not([data-theme="dark"]) .mh26-page .mh26-hero::after{
-  background:none!important;
+  background-image:none!important;
+  opacity:0!important;
+  filter:none!important;
 }
 
-/* Right hero panel: no halo, spotlight, watermark, blur or decorative surface. */
+/* Remove every decorative layer from the right visual area. */
+.nx-home .nx-hero__visual,
+.nx-home .nx-hero__photo{
+  background:transparent!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  mix-blend-mode:normal!important;
+}
+.nx-home .nx-hero__visual::before,
+.nx-home .nx-hero__visual::after,
 .nx-home .nx-hero__photo::before,
 .nx-home .nx-hero__photo::after{
   content:none!important;
   display:none!important;
   background:none!important;
+  background-image:none!important;
   opacity:0!important;
   filter:none!important;
   box-shadow:none!important;
-}
-.nx-home .nx-hero__photo{
-  background:transparent!important;
-  border-color:transparent!important;
-  box-shadow:none!important;
-  filter:none!important;
   backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* Mobile: same uniform clay finish, without overlays. */
+.mh26-page::before{
+  background:none!important;
+  background-image:none!important;
+  opacity:0!important;
+}
+.mh26-page .mh26-hero::before{
+  background:#ad6540!important;
+  background-image:none!important;
+  opacity:1!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+.mh26-page .mh26-hero::after{
+  background:none!important;
+  background-image:none!important;
+  opacity:0!important;
+  filter:none!important;
+  box-shadow:none!important;
 }
