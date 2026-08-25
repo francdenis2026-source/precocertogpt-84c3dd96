@@ -52,38 +52,10 @@ function socialCard({ eyebrow, title, subtitle, footer, bgA, bgB, accent, motif 
 }
 
 const socialCards = [
-  {
-    file: "preco-certo.png",
-    eyebrow: "MARKETPLACE LOCAL",
-    title: "PreçoCerto",
-    subtitle: "Compare, escolha e compre perto de você.",
-    footer: "PreçoCerto · Feijó, Acre",
-    bgA: "#071d2b", bgB: "#12382d", accent: "#35cf75", motif: "search",
-  },
-  {
-    file: "estabelecimentos.png",
-    eyebrow: "COMÉRCIO LOCAL",
-    title: "Estabelecimentos",
-    subtitle: "Explore vitrines, catálogos e opções de compra.",
-    footer: "PreçoCerto · Marketplace Local",
-    bgA: "#091e2a", bgB: "#174536", accent: "#55c98a", motif: "stores",
-  },
-  {
-    file: "dorinha-barroso.png",
-    eyebrow: "LIVROS & AUTORA",
-    title: "Dorinha Barroso",
-    subtitle: "Obras, história e compra direta com a autora.",
-    footer: "Espaço da autora · Feijó, Acre",
-    bgA: "#1a1028", bgB: "#4a2944", accent: "#e4c58b", motif: "books",
-  },
-  {
-    file: "fremix-producoes.png",
-    eyebrow: "CULTURA & MÚSICA LOCAL",
-    title: "FreMix Produções",
-    subtitle: "Produção, lançamentos e conteúdo audiovisual.",
-    footer: "Cultura & Criadores · PreçoCerto",
-    bgA: "#120c1b", bgB: "#3f174d", accent: "#ef5a9a", motif: "music",
-  },
+  { file: "preco-certo.png", eyebrow: "MARKETPLACE LOCAL", title: "PreçoCerto", subtitle: "Compare, escolha e compre perto de você.", footer: "PreçoCerto · Feijó, Acre", bgA: "#071d2b", bgB: "#12382d", accent: "#35cf75", motif: "search" },
+  { file: "estabelecimentos.png", eyebrow: "COMÉRCIO LOCAL", title: "Estabelecimentos", subtitle: "Explore vitrines, catálogos e opções de compra.", footer: "PreçoCerto · Marketplace Local", bgA: "#091e2a", bgB: "#174536", accent: "#55c98a", motif: "stores" },
+  { file: "dorinha-barroso.png", eyebrow: "LIVROS & AUTORA", title: "Dorinha Barroso", subtitle: "Obras, história e compra direta com a autora.", footer: "Espaço da autora · Feijó, Acre", bgA: "#1a1028", bgB: "#4a2944", accent: "#e4c58b", motif: "books" },
+  { file: "fremix-producoes.png", eyebrow: "CULTURA & MÚSICA LOCAL", title: "FreMix Produções", subtitle: "Produção, lançamentos e conteúdo audiovisual.", footer: "Cultura & Criadores · PreçoCerto", bgA: "#120c1b", bgB: "#3f174d", accent: "#ef5a9a", motif: "music" },
 ];
 
 for (const card of socialCards) {
@@ -92,57 +64,6 @@ for (const card of socialCards) {
     .resize(1200, 630)
     .toFile(`dist/social/${card.file}`);
 }
-
-// Cartão editorial exclusivo da autora: combina a identidade visual da página
-// com a fotografia real de Dorinha, mantendo texto legível nos previews sociais.
-const dorinhaPortraitMask = Buffer.from(
-  '<svg width="342" height="472" xmlns="http://www.w3.org/2000/svg"><rect width="342" height="472" rx="24" fill="#fff"/></svg>'
-);
-const dorinhaPortrait = await sharp("public/dorinha-author-portrait-v2.webp")
-  .resize(342, 472, { fit: "cover", position: "top" })
-  .composite([{ input: dorinhaPortraitMask, blend: "dest-in" }])
-  .png()
-  .toBuffer();
-
-const dorinhaSocialOverlay = Buffer.from(`
-  <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#160a1d" stop-opacity=".98"/>
-        <stop offset=".57" stop-color="#24102b" stop-opacity=".92"/>
-        <stop offset=".78" stop-color="#24102b" stop-opacity=".32"/>
-        <stop offset="1" stop-color="#24102b" stop-opacity=".10"/>
-      </linearGradient>
-      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
-        <stop stop-color="#f5dfad"/><stop offset="1" stop-color="#c99f53"/>
-      </linearGradient>
-      <filter id="shadow"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#100713" flood-opacity=".55"/></filter>
-    </defs>
-    <rect width="1200" height="630" fill="url(#shade)"/>
-    <rect x="806" y="76" width="358" height="488" rx="30" fill="#2d1734" fill-opacity=".5" stroke="#f0d28f" stroke-opacity=".55" stroke-width="2" filter="url(#shadow)"/>
-    <rect x="58" y="48" width="180" height="46" rx="14" fill="#fff" fill-opacity=".09" stroke="#fff" stroke-opacity=".13"/>
-    <text x="80" y="79" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700">PreçoCerto</text>
-    <rect x="58" y="137" width="58" height="5" rx="2.5" fill="url(#gold)"/>
-    <text x="58" y="181" fill="#f0d28f" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3">ESCRITORA ACREANA</text>
-    <text x="58" y="278" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="72" font-weight="700" letter-spacing="-2">Dorinha Barroso</text>
-    <text x="58" y="339" fill="#fff3dc" font-family="Georgia,'Times New Roman',serif" font-size="29">Histórias que nascem no Acre</text>
-    <text x="58" y="379" fill="#fff3dc" font-family="Georgia,'Times New Roman',serif" font-size="29">e encontram leitores em todo o Brasil.</text>
-    <text x="58" y="448" fill="#ddd2df" font-family="Arial,Helvetica,sans-serif" font-size="21">Conheça suas obras, sua trajetória e compre</text>
-    <text x="58" y="480" fill="#ddd2df" font-family="Arial,Helvetica,sans-serif" font-size="21">exemplares diretamente com a autora.</text>
-    <line x1="58" y1="537" x2="748" y2="537" stroke="#f0d28f" stroke-opacity=".35"/>
-    <text x="58" y="575" fill="#cfc2d2" font-family="Arial,Helvetica,sans-serif" font-size="18">Literatura · Educação · Feijó, Acre</text>
-  </svg>
-`);
-
-await sharp("public/dorinha-hero-editorial-v3.png")
-  .resize(1200, 630, { fit: "cover", position: "center" })
-  .modulate({ brightness: 0.72, saturation: 0.86 })
-  .composite([
-    { input: dorinhaPortrait, left: 814, top: 84 },
-    { input: dorinhaSocialOverlay, left: 0, top: 0 },
-  ])
-  .png({ compressionLevel: 9, adaptiveFiltering: true })
-  .toFile("dist/social/dorinha-barroso.png");
 
 const routeMeta = {
   "/": {
@@ -229,13 +150,10 @@ function withMeta(html, requestUrl, meta) {
 const app = {
   async fetch(request, env) {
     if (!env?.ASSETS?.fetch) return new Response("PreçoCerto", { status: 200 });
-
     const response = await env.ASSETS.fetch(request);
     if (request.method !== "GET") return response;
-
     const acceptsHtml = request.headers.get("accept")?.includes("text/html");
     if (!acceptsHtml) return response;
-
     const url = new URL(request.url);
     const meta = metaFor(url.pathname);
 
