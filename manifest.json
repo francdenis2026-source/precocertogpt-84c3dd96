@@ -3,10 +3,19 @@
   "short_name": "PreçoCerto",
   "description": "Economia real em Feijó — Compare preços e compre online.",
   "start_url": "/",
+  "id": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#F4EFE8",
   "theme_color": "#202126",
-  "orientation": "portrait",
+  "orientation": "any",
+  "categories": ["shopping", "utilities", "lifestyle"],
+  "shortcuts": [
+    {"name":"Buscar preços","short_name":"Buscar","url":"/buscar","icons":[{"src":"/app-icon.svg?v=13","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"Minha cesta","short_name":"Cesta","url":"/cesta-basica","icons":[{"src":"/app-icon.svg?v=13","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"Explorar locais","short_name":"Explorar","url":"/explorar","icons":[{"src":"/app-icon.svg?v=13","sizes":"any","type":"image/svg+xml"}]}
+  ],
   "icons": [
     {
       "src": "/app-icon.svg?v=13",
