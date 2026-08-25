@@ -6,49 +6,31 @@ import "@fontsource-variable/manrope";
 import "./styles/AppReset.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
-import "./reference/DesignSystem2.css";
-import "./reference/DesignSystem2Experience.css";
-import "./reference/GlobalMineralDark2026.css";
-import "./reference/HomepageVisualRefinement2026.css";
-import "./styles/NoDecorativeImagery2026.css";
-import "./styles/PriceColorNormalization2026.css";
-import "./reference/LogoBrandImpeccable2026.css";
-import "./components/TrueHomepageTasteFinal2026.css";
-import "./styles/MobileDarkPolish2026.css";
 
-// Final visual layer: original campaign system adapted from the references
-// supplied for this rebuild. Keeping it as a public stylesheet makes the
-// redesign independent from the legacy theme bundles and easy to iterate.
+// Único sistema visual global ativo do PreçoCerto.
+// Os antigos bundles de design foram removidos do runtime para evitar
+// sobreposição de paleta, tipografia, sombras, dark mode e componentes.
 const campaignTheme = document.createElement("link");
 campaignTheme.rel = "stylesheet";
-campaignTheme.href = "/campaign-theme.css?v=20260825-2";
+campaignTheme.href = "/campaign-theme.css?v=20260825-3";
 campaignTheme.dataset.precocertoTheme = "campaign-2026";
 document.head.appendChild(campaignTheme);
 
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
-// A tela de boot precisa sair completamente do fluxo de pintura depois do
-// primeiro render. Mantida apenas com opacity/visibility, o navegador continua
-// animando a barra de progresso e compondo a imagem de fundo com blur, o que
-// consome CPU/GPU e memória durante toda a sessão.
 let bootRemovalTimer = 0;
 const retireBoot = () => {
   window.clearTimeout(bootRemovalTimer);
   bootRemovalTimer = window.setTimeout(() => boot?.classList.add("is-removed"), 400);
 };
 
-// A aplicação sempre monta, mesmo quando navigator.onLine começa como false.
-// O catálogo possui base local e estados próprios; bloquear todo o React por
-// um sinal instável do navegador transformava uma oscilação de rede em uma
-// tela genérica e impedia inclusive o conteúdo que já estava disponível.
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
   </StrictMode>,
 );
 
-// Oculta a tela de inicialização somente depois que o React assumiu a página.
 window.requestAnimationFrame(() => {
   window.requestAnimationFrame(() => {
     boot?.classList.add("is-done");
@@ -65,7 +47,6 @@ const startNotifications = () => {
     });
 };
 
-// Notificações não fazem parte do caminho crítico da primeira pintura.
 window.setTimeout(startNotifications, 1_500);
 window.addEventListener("online", startNotifications, { once: true });
 
@@ -79,8 +60,6 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
         await Promise.all(keys.filter(key => key.startsWith("precocerto-")).map(key => caches.delete(key)));
       }
 
-      // Um controlador desregistrado permanece ligado à aba atual até uma
-      // navegação. Esta recarga única entrega os assets diretamente da rede.
       if (!navigator.serviceWorker.controller) return;
       const reloadKey = "pc:legacy-worker-removed";
       try {
