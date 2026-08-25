@@ -38,7 +38,7 @@ document.head.appendChild(heroNoHaloTheme);
 // Override final: área direita do hero totalmente limpa, sem efeitos decorativos.
 const heroCleanSpaceTheme = document.createElement("link");
 heroCleanSpaceTheme.rel = "stylesheet";
-heroCleanSpaceTheme.href = "/hero-clean-space-2026.css?v=20260825-2";
+heroCleanSpaceTheme.href = "/hero-clean-space-2026.css?v=20260825-3";
 heroCleanSpaceTheme.dataset.precocertoHeroCleanSpace = "hero-clean-space-2026";
 document.head.appendChild(heroCleanSpaceTheme);
 
