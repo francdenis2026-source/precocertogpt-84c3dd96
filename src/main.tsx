@@ -91,6 +91,13 @@ topbarControlsTheme.href = "/topbar-controls-2026.css?v=20260825-1";
 topbarControlsTheme.dataset.precocertoTopbarControls = "warm-controls-2026";
 document.head.appendChild(topbarControlsTheme);
 
+// App shell mobile: estrutura visual de aplicativo nativo com safe-area, superfícies e dock flutuante.
+const mobileAppShellTheme = document.createElement("link");
+mobileAppShellTheme.rel = "stylesheet";
+mobileAppShellTheme.href = "/mobile-app-shell-2026.css?v=20260825-1";
+mobileAppShellTheme.dataset.precocertoMobileShell = "mobile-app-shell-2026";
+document.head.appendChild(mobileAppShellTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
@@ -139,7 +146,7 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
       const reloadKey = "pc:legacy-worker-removed";
       try {
         if (sessionStorage.getItem(reloadKey)) return;
-        sessionStorage.setItem(reloadKey, "1");
+        sessionStorage.setItem(reloadKey,"1");
         window.location.reload();
       } catch {
         // Sem armazenamento de sessão, evita-se qualquer risco de loop.
