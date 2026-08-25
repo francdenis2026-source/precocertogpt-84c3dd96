@@ -21,13 +21,19 @@ homepageTheme.href = "/homepage-total-theme.css?v=20260825-1";
 homepageTheme.dataset.precocertoHomepageTheme = "campaign-full-home-2026";
 document.head.appendChild(homepageTheme);
 
-// Camada final exclusiva do modo claro: canvas neutro, superfícies brancas,
-// contraste acessível e hierarquia visual consistente em desktop e mobile.
-const professionalLightTheme = document.createElement("link");
-professionalLightTheme.rel = "stylesheet";
-professionalLightTheme.href = "/light-professional-2026.css?v=20260825-1";
-professionalLightTheme.dataset.precocertoLightTheme = "professional-light-2026";
-document.head.appendChild(professionalLightTheme);
+// Acabamento profissional do modo claro.
+const lightProfessionalTheme = document.createElement("link");
+lightProfessionalTheme.rel = "stylesheet";
+lightProfessionalTheme.href = "/light-professional-2026.css?v=20260825-1";
+lightProfessionalTheme.dataset.precocertoLightTheme = "professional-light-2026";
+document.head.appendChild(lightProfessionalTheme);
+
+// Remove halos e brilhos circulares do hero em ambos os temas.
+const heroNoHaloTheme = document.createElement("link");
+heroNoHaloTheme.rel = "stylesheet";
+heroNoHaloTheme.href = "/hero-no-halo.css?v=20260825-1";
+heroNoHaloTheme.dataset.precocertoHeroPolish = "hero-no-halo-2026";
+document.head.appendChild(heroNoHaloTheme);
 
 initializeSiteTheme();
 
