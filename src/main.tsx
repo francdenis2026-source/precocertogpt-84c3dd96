@@ -56,6 +56,13 @@ typographyContrastTheme.href = "/typography-contrast-2026.css?v=20260825-1";
 typographyContrastTheme.dataset.precocertoTypography = "accessible-type-2026";
 document.head.appendChild(typographyContrastTheme);
 
+// Revisão estrutural final da homepage: grid, espaçamento, recortes, cards e responsividade.
+const homepageLayoutPolish = document.createElement("link");
+homepageLayoutPolish.rel = "stylesheet";
+homepageLayoutPolish.href = "/homepage-layout-polish-2026.css?v=20260825-1";
+homepageLayoutPolish.dataset.precocertoHomepageLayout = "homepage-layout-polish-2026";
+document.head.appendChild(homepageLayoutPolish);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
