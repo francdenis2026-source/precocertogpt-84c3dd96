@@ -8,13 +8,18 @@ import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
 
 // Único sistema visual global ativo do PreçoCerto.
-// Os antigos bundles de design foram removidos do runtime para evitar
-// sobreposição de paleta, tipografia, sombras, dark mode e componentes.
 const campaignTheme = document.createElement("link");
 campaignTheme.rel = "stylesheet";
-campaignTheme.href = "/campaign-theme.css?v=20260825-3";
+campaignTheme.href = "/campaign-theme.css?v=20260825-4";
 campaignTheme.dataset.precocertoTheme = "campaign-2026";
 document.head.appendChild(campaignTheme);
+
+// Continuação da mesma identidade visual por toda a homepage.
+const homepageTheme = document.createElement("link");
+homepageTheme.rel = "stylesheet";
+homepageTheme.href = "/homepage-total-theme.css?v=20260825-1";
+homepageTheme.dataset.precocertoHomepageTheme = "campaign-full-home-2026";
+document.head.appendChild(homepageTheme);
 
 initializeSiteTheme();
 
