@@ -112,6 +112,13 @@ persistentSearchTheme.href = "/persistent-search-2026.css?v=20260825-1";
 persistentSearchTheme.dataset.precocertoPersistentSearch = "persistent-search-2026";
 document.head.appendChild(persistentSearchTheme);
 
+// Camada editorial final: hero e fundo profissionais no web e no mobile.
+const professionalHomeImageryTheme = document.createElement("link");
+professionalHomeImageryTheme.rel = "stylesheet";
+professionalHomeImageryTheme.href = "/professional-home-imagery-2026.css?v=20260825-1";
+professionalHomeImageryTheme.dataset.precocertoProfessionalImagery = "professional-home-imagery-2026";
+document.head.appendChild(professionalHomeImageryTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
