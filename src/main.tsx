@@ -105,6 +105,13 @@ pointerInteractionTheme.href = "/interaction-hover-2026.css?v=20260825-2";
 pointerInteractionTheme.dataset.precocertoPointerInteraction = "pointer-refined-2026";
 document.head.appendChild(pointerInteractionTheme);
 
+// Busca prioritária: permanece visível acima da homepage e elimina o azul residual.
+const persistentSearchTheme = document.createElement("link");
+persistentSearchTheme.rel = "stylesheet";
+persistentSearchTheme.href = "/persistent-search-2026.css?v=20260825-1";
+persistentSearchTheme.dataset.precocertoPersistentSearch = "persistent-search-2026";
+document.head.appendChild(persistentSearchTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
