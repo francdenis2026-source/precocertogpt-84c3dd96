@@ -77,6 +77,13 @@ footerDeveloperSignatureTheme.href = "/footer-developer-signature-2026.css?v=202
 footerDeveloperSignatureTheme.dataset.precocertoFooterSignature = "developer-signature-2026";
 document.head.appendChild(footerDeveloperSignatureTheme);
 
+// Glass shell: a página continua visualmente sob header e footer.
+const glassShellTheme = document.createElement("link");
+glassShellTheme.rel = "stylesheet";
+glassShellTheme.href = "/glass-shell-2026.css?v=20260825-1";
+glassShellTheme.dataset.precocertoGlassShell = "glass-shell-2026";
+document.head.appendChild(glassShellTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
