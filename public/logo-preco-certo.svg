@@ -1,33 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="360" viewBox="0 0 1180 360" role="img" aria-labelledby="title desc">
-<title id="title">Preço Certo</title><desc id="desc">Logomarca Preço Certo vibrante, com monograma PC, carrinho e etiqueta de desconto, sem fundo.</desc>
-<defs>
-  <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFF7E6"/><stop offset=".52" stop-color="#FFE4B8"/><stop offset="1" stop-color="#F6C77F"/></linearGradient>
-  <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FF7A00"/><stop offset=".52" stop-color="#FF4D00"/><stop offset="1" stop-color="#E83500"/></linearGradient>
-  <linearGradient id="yellow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFE14A"/><stop offset=".5" stop-color="#FFC400"/><stop offset="1" stop-color="#F59E00"/></linearGradient>
-  <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#18253A"/><stop offset=".5" stop-color="#0C1628"/><stop offset="1" stop-color="#050A12"/></linearGradient>
-  <pattern id="mesh" width="18" height="16" patternUnits="userSpaceOnUse"><path d="M4 1h10l4 7-4 7H4L0 8Z" fill="none" stroke="#5F6B7D" stroke-width="1.4"/></pattern>
-  <filter id="shadow" x="-20%" y="-20%" width="145%" height="155%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#02060C" flood-opacity=".38"/></filter>
-</defs>
-<g filter="url(#shadow)" transform="translate(14 8)">
-  <g transform="translate(8 2)">
-    <path d="M70 44h150c53 0 90 25 108 69l-57 19c-11-22-30-33-58-33H126v92H70Z" fill="url(#cream)" stroke="#071426" stroke-width="5"/>
-    <path d="M70 187h56v126H70Z" fill="url(#cream)" stroke="#071426" stroke-width="5"/>
-    <path d="M236 113c48 0 88 17 120 49l-40 40c-22-21-47-31-78-31-49 0-84 31-84 75 0 43 35 74 84 74 32 0 59-10 81-32l39 40c-32 32-73 49-122 49-81 0-140-54-140-131 0-79 59-133 140-133Z" fill="url(#orange)" stroke="#071426" stroke-width="5"/>
-    <g transform="translate(36 133)">
-      <path d="M6 50h40M0 79h58M17 108h44" stroke="url(#yellow)" stroke-width="14" stroke-linecap="round"/>
-      <path d="M71 28h26c10 0 18 6 21 16l7 25h140c12 0 20 12 15 23l-23 58c-4 10-14 17-25 17H129c-13 0-23-9-26-21L75 28Z" fill="url(#navy)" stroke="url(#cream)" stroke-width="11" stroke-linejoin="round"/>
-      <path d="M126 80h132v74H126Z" fill="url(#mesh)" opacity=".96"/>
-      <path d="M123 171h111" stroke="url(#cream)" stroke-width="9" stroke-linecap="round"/>
-      <circle cx="126" cy="202" r="23" fill="url(#navy)" stroke="url(#cream)" stroke-width="8"/><circle cx="126" cy="202" r="9" fill="url(#yellow)"/>
-      <circle cx="226" cy="202" r="23" fill="url(#navy)" stroke="url(#cream)" stroke-width="8"/><circle cx="226" cy="202" r="9" fill="url(#yellow)"/>
-      <path d="M268 78c10 0 18 7 19 17" fill="none" stroke="url(#yellow)" stroke-width="9" stroke-linecap="round"/>
-      <g transform="translate(267 83) rotate(11)"><path d="M15 0h60c8 0 14 4 18 11l27 45c4 7 3 16-3 22l-37 36c-7 6-17 6-24 0L6 65C2 61 0 56 0 50V15C0 7 7 0 15 0Z" fill="url(#orange)" stroke="url(#yellow)" stroke-width="7"/><circle cx="22" cy="21" r="9" fill="url(#cream)"/><text x="30" y="77" fill="#FFF7E6" font-family="Arial,sans-serif" font-size="45" font-weight="900">%</text></g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" role="img" aria-labelledby="title desc">
+  <title id="title">Preço Certo</title>
+  <desc id="desc">Logomarca Preço Certo com carrinho de compras e tipografia limpa.</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1D4ED8"/><stop offset="1" stop-color="#0F2F75"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FACC15"/><stop offset="1" stop-color="#E59A05"/></linearGradient>
+  </defs>
+  <g transform="translate(14 33)">
+    <rect width="154" height="154" rx="36" fill="#F8FAFC"/>
+    <path d="M31 39h18c7 0 12 4 14 11l7 24h62c8 0 13 8 10 15l-14 37c-2 6-8 10-15 10H75c-8 0-14-5-16-12L43 64" fill="none" stroke="url(#blue)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M73 86h53M83 106h36" stroke="#60A5FA" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="78" cy="142" r="10" fill="url(#gold)"/><circle cx="119" cy="142" r="10" fill="url(#gold)"/>
+    <path d="M123 31l21 10v24c0 15-9 27-21 32-12-5-21-17-21-32V41Z" fill="url(#gold)"/>
+    <path d="m113 63 7 7 13-15" fill="none" stroke="#713F12" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
-  <g transform="translate(395 73)" font-family="Outfit,Inter,Arial,sans-serif" font-weight="900" letter-spacing="-5">
-    <text x="0" y="98" fill="url(#cream)" stroke="#071426" stroke-width="3" paint-order="stroke" font-size="116">Preço</text>
-    <text x="0" y="226" fill="url(#yellow)" stroke="#071426" stroke-width="3" paint-order="stroke" font-size="116">Certo</text>
-    <g transform="translate(5 255)"><rect x="0" y="0" width="575" height="34" rx="17" fill="#071426" opacity=".96"/><text x="287" y="23" text-anchor="middle" fill="#FFF7E6" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="800" letter-spacing="3">O MELHOR PREÇO, PERTO DE VOCÊ.</text></g>
+  <g transform="translate(194 62)" font-family="Outfit,Inter,Arial,sans-serif">
+    <text x="0" y="60" fill="#102A56" font-size="67" font-weight="760" letter-spacing="-3">Preço</text>
+    <text x="202" y="60" fill="#1D4ED8" font-size="67" font-weight="760" letter-spacing="-3">Certo</text>
+    <text x="3" y="94" fill="#64748B" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="2.3">O MELHOR PREÇO PERTO DE VOCÊ</text>
+    <path d="M3 111h399" stroke="#E2E8F0" stroke-width="3" stroke-linecap="round"/>
   </g>
-</g>
 </svg>
