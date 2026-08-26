@@ -49,6 +49,30 @@
 
 @media(min-width:768px){body.pc-app-shell{min-height:100dvh}}
 
+/* Dark mode — background-image leve, elegante e sem asset externo.
+   Centro #2A2B32, bordas #1C1D22, com iluminação radial discreta. */
+html[data-theme="dark"]{
+  --pc-dark-bg-center:#2A2B32;
+  --pc-dark-bg-edge:#1C1D22;
+  --pc-dark-background-image:
+    radial-gradient(ellipse 110% 82% at 50% 18%,rgba(42,43,50,.98) 0%,rgba(38,39,45,.97) 42%,rgba(28,29,34,1) 100%);
+  background-color:var(--pc-dark-bg-edge)!important;
+  background-image:var(--pc-dark-background-image)!important;
+  background-attachment:fixed!important;
+}
+html[data-theme="dark"] body.pc-app-shell,
+html[data-theme="dark"] body.pc-app-shell #root{
+  background-color:var(--pc-dark-bg-edge)!important;
+  background-image:var(--pc-dark-background-image)!important;
+  background-attachment:fixed!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+html[data-theme="dark"] body.pc-app-shell :is(.nx-home,.mh26-page,.msearch26-page,.ref-page,.ref-auth,.search26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page,.kelly-page,.sanduba-page){
+  background-color:transparent!important;
+  background-image:none!important;
+}
+
 @media(prefers-reduced-motion:reduce){
   body.pc-app-shell *,body.pc-app-shell *::before,body.pc-app-shell *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
