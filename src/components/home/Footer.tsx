@@ -1,2 +1,18 @@
 import { Link } from "react-router-dom";
-export function Footer() { return <footer className="pc26-footer"><div className="pc26-shell pc26-footer__row"><div className="pc26-footer__brand"><img src="/logo-preco-certo-light.svg?v=20260825-cart" alt="Preço Certo" width="184" height="56"/><p>Compare preços e valorize o comércio de Feijó.</p></div><nav aria-label="Links úteis"><Link to="/estabelecimentos">Lojas</Link><Link to="/cesta-inteligente">Minha lista</Link><Link to="/lojista">Seja parceiro</Link><Link to="/contato">Fale conosco</Link></nav></div><div className="pc26-footer__bottom"><div className="pc26-shell">Preço Certo © 2026 <span>Feijó, Acre</span></div></div></footer>; }
+
+export function Footer() {
+  return <footer className="pc26-footer">
+    <div className="pc26-shell pc26-footer__row">
+      <div className="pc26-footer__brand">
+        <p>Compare preços e valorize o comércio de Feijó.</p>
+      </div>
+      <nav aria-label="Links úteis">
+        <Link to="/estabelecimentos">Lojas</Link>
+        <Link to="/cesta-inteligente">Minha lista</Link>
+        <Link to="/lojista">Seja parceiro</Link>
+        <Link to="/contato">Fale conosco</Link>
+      </nav>
+    </div>
+    <div className="pc26-footer__bottom"><div className="pc26-shell">Preço Certo © 2026 <span>Feijó, Acre</span></div></div>
+  </footer>;
+}
