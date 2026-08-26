@@ -85,6 +85,12 @@ headerRedesignTheme.href = "/header-redesign-2026.css?v=20260826-3";
 headerRedesignTheme.dataset.precocertoHeader = "header-redesign-2026";
 document.head.appendChild(headerRedesignTheme);
 
+const searchRefinementTheme = document.createElement("link");
+searchRefinementTheme.rel = "stylesheet";
+searchRefinementTheme.href = "/search-refinement-2026.css?v=20260826-1";
+searchRefinementTheme.dataset.precocertoSearch = "live-search-refinement-2026";
+document.head.appendChild(searchRefinementTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
