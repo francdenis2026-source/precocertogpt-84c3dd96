@@ -12,6 +12,7 @@ import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeNew2026.css";
 import "./HomeUxProMax2026.css";
 import "../reference/ImpeccableFinal2026.css";
+import "../reference/DesignTasteFrontendSystem2026.css";
 
 const initialCatalog = buildCatalog();
 
