@@ -21,7 +21,7 @@
 html[data-theme="light"] .nx-brand img,
 html[data-theme="light"] .mh26-logo img,
 html[data-theme="light"] .nx-footer img{
-  content:url('/logo-preco-certo-light.svg?v=15')!important;
+  content:url('/logo-preco-certo-light.svg?v=20260825-refined')!important;
   filter:drop-shadow(0 2px 7px rgba(11,22,40,.10))!important;
   object-fit:contain!important;
 }
@@ -29,20 +29,12 @@ html[data-theme="light"] .nx-footer img{
 html[data-theme="dark"] .nx-brand img,
 html[data-theme="dark"] .mh26-logo img,
 html[data-theme="dark"] .nx-footer img{
-  content:url('/logo-preco-certo.svg?v=15')!important;
+  content:url('/logo-preco-certo.svg?v=20260825-refined')!important;
   filter:none!important;
   object-fit:contain!important;
 }
 
 .pc-boot-loading__brand img{content:url('/app-icon.svg?v=15')!important;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18))!important}
-
-/* Assinatura unificada: o mesmo lockup é usado no site, áreas autenticadas e painéis. */
-:is(img[src*="logo-preco-certo.svg"],img[src*="logo-preco-certo-inversa.svg"],img[src*="logo-preco-certo-light.svg"],img[src*="logo-preco-certo-lockup.svg"],img[src*="logo-preco-certo-oficial-2026.svg"]){
-  content:url('/logo-preco-certo-refined.png?v=1')!important;
-  object-fit:contain!important;
-  object-position:left center!important;
-  filter:drop-shadow(0 2px 7px rgba(11,22,40,.12))!important;
-}
 
 @media(max-width:980px){
   .nx-header__inner{min-height:72px!important}
