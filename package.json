@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "vite",
@@ -22,8 +22,8 @@
     "video:studio": "remotion studio src/remotion/index.ts --no-open",
     "video:render": "remotion render src/remotion/index.ts PrecoCertoOfertasVertical out/precocerto-ofertas-vertical.mp4",
     "video:still": "remotion still src/remotion/index.ts PrecoCertoOfertasVertical out/precocerto-ofertas-preview.png --frame=180",
-    "predev": "node scripts/generate-sitemap.ts",
-    "prebuild": "node scripts/generate-sitemap.ts"
+    "predev": "node scripts/generate-sitemap.mjs",
+    "prebuild": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
