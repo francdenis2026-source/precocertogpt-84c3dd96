@@ -14,7 +14,7 @@
       })(window.location);
     </script>
     <script>
-      /* Aplica o tema salvo antes da primeira pintura para impedir flash de tema legado. */
+      /* Define o tema final antes da primeira pintura. */
       (function () {
         var keys = ["theme", "precocerto-theme", "precocerto:theme"];
         var theme = null;
@@ -27,6 +27,7 @@
         if (!theme) theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme;
+        document.documentElement.classList.add("pc-prepaint");
       })();
     </script>
     <title>PreçoCerto | Compare preços e compre em Feijó (AC)</title>
@@ -91,6 +92,8 @@
       html,body,#root{min-height:100%;margin:0}
       html[data-theme="light"],html[data-theme="light"] body,html[data-theme="light"] #root{background:#F6F7F9;color:#17181C}
       html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] #root{background:#121214;color:#FFFFFF}
+      html.pc-prepaint #root{visibility:hidden!important}
+      html.pc-styles-ready #root{visibility:visible!important}
     </style>
   </head>
   <body>
