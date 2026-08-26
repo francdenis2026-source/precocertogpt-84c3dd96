@@ -79,10 +79,9 @@ impeccableHomeTheme.href = "/impeccable-home-2026.css?v=20260826-1";
 impeccableHomeTheme.dataset.precocertoImpeccable = "homepage-polish-2026";
 document.head.appendChild(impeccableHomeTheme);
 
-// Reconstrução final do header: busca live, rádio, atalhos e responsividade.
 const headerRedesignTheme = document.createElement("link");
 headerRedesignTheme.rel = "stylesheet";
-headerRedesignTheme.href = "/header-redesign-2026.css?v=20260826-2";
+headerRedesignTheme.href = "/header-redesign-2026.css?v=20260826-3";
 headerRedesignTheme.dataset.precocertoHeader = "header-redesign-2026";
 document.head.appendChild(headerRedesignTheme);
 
