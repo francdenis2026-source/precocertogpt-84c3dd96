@@ -45,7 +45,7 @@ document.head.appendChild(heroCleanSpaceTheme);
 // Integração final da nova logomarca em site, app, painéis e favicon/símbolo.
 const logoIntegrationTheme = document.createElement("link");
 logoIntegrationTheme.rel = "stylesheet";
-logoIntegrationTheme.href = "/logo-integration-2026.css?v=20260825-3";
+logoIntegrationTheme.href = "/logo-integration-2026.css?v=20260825-4";
 logoIntegrationTheme.dataset.precocertoLogo = "studio-brand-2026";
 document.head.appendChild(logoIntegrationTheme);
 
