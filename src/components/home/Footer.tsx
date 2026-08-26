@@ -1,18 +1,27 @@
+import { ArrowUpRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Footer() {
-  return <footer className="pc26-footer">
-    <div className="pc26-shell pc26-footer__row">
-      <div className="pc26-footer__brand">
-        <p>Compare preços e valorize o comércio de Feijó.</p>
+  return <footer className="pc26-footer pc26-footer--studio">
+    <div className="pc26-shell pc26-footer-studio">
+      <div className="pc26-footer-studio__intro">
+        <span className="pc26-footer-studio__eyebrow"><MapPin aria-hidden="true" /> Feijó, Acre</span>
+        <strong>Compare melhor. Compre perto.</strong>
+        <p>Preços locais, estabelecimentos e ferramentas para decidir sua compra com mais clareza.</p>
       </div>
-      <nav aria-label="Links úteis">
-        <Link to="/estabelecimentos">Lojas</Link>
-        <Link to="/cesta-inteligente">Minha lista</Link>
-        <Link to="/lojista">Seja parceiro</Link>
+
+      <nav className="pc26-footer-studio__nav" aria-label="Links úteis">
+        <Link to="/estabelecimentos">Estabelecimentos</Link>
+        <Link to="/lojista">Seja parceiro <ArrowUpRight aria-hidden="true" /></Link>
         <Link to="/contato">Fale conosco</Link>
       </nav>
     </div>
-    <div className="pc26-footer__bottom"><div className="pc26-shell">Preço Certo © 2026 <span>Feijó, Acre</span></div></div>
+
+    <div className="pc26-footer-studio__meta">
+      <div className="pc26-shell pc26-footer-studio__meta-row">
+        <span>Preço Certo © 2026</span>
+        <span className="pc26-footer-studio__developer">Desenvolvido por <strong>Franc D’nis</strong></span>
+      </div>
+    </div>
   </footer>;
 }
