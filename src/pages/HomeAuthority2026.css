@@ -3,98 +3,16 @@ html.nx-home-active,
 html.nx-home-active body,
 html.nx-home-active #root,
 html.nx-home-active .pc26-home,
-html.nx-home-active .pc26-home main {
-  background:#0b0d0f !important;
-  background-image:none !important;
-}
-
-html.nx-home-active .pc26-home {
-  min-height:100dvh;
-  color:#fff;
-  isolation:isolate;
-}
-
-/* Kill legacy visual overlays that previously covered the new hero. */
+html.nx-home-active .pc26-home main { background:#0b0d0f !important; background-image:none !important; }
+html.nx-home-active .pc26-home { min-height:100dvh; color:#fff; isolation:isolate; }
 html.nx-home-active .pc26-model-hero::before,
 html.nx-home-active .pc26-model-hero::after,
 html.nx-home-active .pc26-model-hero__image::before,
-html.nx-home-active .pc26-model-hero__image::after {
-  content:none !important;
-  display:none !important;
-  background:none !important;
-  background-image:none !important;
-  opacity:0 !important;
-}
-
-html.nx-home-active .pc26-model-hero {
-  position:relative !important;
-  overflow:hidden !important;
-  min-height:530px !important;
-  padding:0 !important;
-  border:0 !important;
-  background:#0b0d0f !important;
-  background-image:none !important;
-  isolation:isolate !important;
-}
-
-html.nx-home-active .pc26-model-hero__image {
-  display:block !important;
-  position:absolute !important;
-  inset:0 !important;
-  z-index:0 !important;
-  visibility:visible !important;
-  opacity:1 !important;
-  background-color:transparent !important;
-  background-image:url('/precocerto-hero-model.jpg?v=20260826-authority') !important;
-  background-repeat:no-repeat !important;
-  background-size:cover !important;
-  background-position:center center !important;
-  background-blend-mode:normal !important;
-  mix-blend-mode:normal !important;
-  filter:none !important;
-  transform:none !important;
-  mask:none !important;
-  -webkit-mask:none !important;
-}
-
-html.nx-home-active .pc26-model-hero__inner {
-  position:relative !important;
-  z-index:2 !important;
-  min-height:530px !important;
-}
-
-html.nx-home-active .pc26-model-hero__copy {
-  position:relative !important;
-  z-index:3 !important;
-}
-
-/* Old generic hero artwork is no longer part of the active homepage. */
-html.nx-home-active .pc26-hero__art,
-html.nx-home-active .pc26-proof {
-  display:none !important;
-}
-
-@media (max-width:767px) {
-  html.nx-home-active .pc26-model-hero {
-    min-height:620px !important;
-  }
-  html.nx-home-active .pc26-model-hero__image {
-    background-size:cover !important;
-    background-position:66% center !important;
-  }
-  html.nx-home-active .pc26-model-hero__inner {
-    min-height:620px !important;
-    align-items:flex-end !important;
-    padding-top:230px !important;
-  }
-}
-
-@media (max-width:420px) {
-  html.nx-home-active .pc26-model-hero,
-  html.nx-home-active .pc26-model-hero__inner {
-    min-height:590px !important;
-  }
-  html.nx-home-active .pc26-model-hero__image {
-    background-position:68% center !important;
-  }
-}
+html.nx-home-active .pc26-model-hero__image::after { content:none !important; display:none !important; background:none !important; background-image:none !important; opacity:0 !important; }
+html.nx-home-active .pc26-model-hero { position:relative !important; overflow:hidden !important; min-height:530px !important; padding:0 !important; border:0 !important; background:#0b0d0f !important; background-image:none !important; isolation:isolate !important; }
+html.nx-home-active .pc26-model-hero__image { display:block !important; position:absolute !important; inset:0 !important; z-index:0 !important; visibility:visible !important; opacity:1 !important; background-color:transparent !important; background-image:url('/precocerto-hero-profissional.jpg?v=20260826-new') !important; background-repeat:no-repeat !important; background-size:cover !important; background-position:center center !important; background-blend-mode:normal !important; mix-blend-mode:normal !important; filter:none !important; transform:none !important; mask:none !important; -webkit-mask:none !important; }
+html.nx-home-active .pc26-model-hero__inner { position:relative !important; z-index:2 !important; min-height:530px !important; }
+html.nx-home-active .pc26-model-hero__copy { position:relative !important; z-index:3 !important; }
+html.nx-home-active .pc26-hero__art, html.nx-home-active .pc26-proof { display:none !important; }
+@media (max-width:767px) { html.nx-home-active .pc26-model-hero { min-height:620px !important; } html.nx-home-active .pc26-model-hero__image { background-size:cover !important; background-position:68% center !important; } html.nx-home-active .pc26-model-hero__inner { min-height:620px !important; align-items:flex-end !important; padding-top:230px !important; } }
+@media (max-width:420px) { html.nx-home-active .pc26-model-hero, html.nx-home-active .pc26-model-hero__inner { min-height:590px !important; } html.nx-home-active .pc26-model-hero__image { background-position:70% center !important; } }
