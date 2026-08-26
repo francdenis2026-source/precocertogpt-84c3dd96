@@ -1,19 +1,20 @@
 :root {
   font-family: "Inter Variable", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #2d3d48;
-  background: #ebf0f3;
+  color: #17181C;
+  background: #F6F7F9;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 html { min-width: 320px; min-height: 100%; scroll-behavior: smooth; }
-body { min-width: 320px; min-height: 100%; margin: 0; background: #ebf0f3; }
+body { min-width: 320px; min-height: 100%; margin: 0; background: #F6F7F9; color:#17181C; }
+html[data-theme="dark"], html[data-theme="dark"] body, html[data-theme="dark"] #root { background:#121214 !important; color:#FFFFFF; }
+html[data-theme="light"], html[data-theme="light"] body, html[data-theme="light"] #root { background:#F6F7F9 !important; color:#17181C; }
 button, input, select, textarea { font: inherit; }
 img, svg { display: block; max-width: 100%; }
-#root { min-height: 100vh; min-height: 100dvh; }
+#root { min-height: 100vh; min-height: 100dvh; background:inherit; }
 
-/* Oculta o badge de atribuição injetado pela hospedagem Lovable. */
 #lovable-badge,
 [data-lovable-badge],
 .lovable-badge,
@@ -29,10 +30,8 @@ a[href*="lovable.app"][target="_blank"]:has(img[src*="lovable"]) {
   left: -9999px !important;
 }
 
-
 * { box-sizing: border-box; }
-
-::selection { background: #397dac; color: #1e3c51; }
+::selection { background: rgba(255,184,0,.28); color: inherit; }
 
 .pc-skip-link {
   position: fixed;
@@ -42,13 +41,9 @@ a[href*="lovable.app"][target="_blank"]:has(img[src*="lovable"]) {
   translate: 0 -160%;
   padding: 10px 14px;
   border-radius: 6px;
-  background: #1e3c51;
+  background: #202024;
   color: #fff;
   font-weight: 800;
 }
-
 .pc-skip-link:focus { translate: 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
