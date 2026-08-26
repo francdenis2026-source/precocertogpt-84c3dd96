@@ -1,0 +1,31 @@
+/* Preço Certo — Footer Studio 2026
+   Direção: Taste + Impeccable. Compacto, útil e sem repetir a navegação principal. */
+.pc26-footer--studio{border-top:1px solid var(--border)!important;background:color-mix(in srgb,var(--surface) 92%,var(--canvas))!important;color:var(--ink)!important}
+.pc26-footer-studio{min-height:132px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:42px;padding-block:28px}
+.pc26-footer-studio__intro{display:grid;gap:5px;max-width:520px}
+.pc26-footer-studio__eyebrow{display:inline-flex;align-items:center;gap:6px;width:max-content;color:var(--primary);font-size:.68rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+.pc26-footer-studio__eyebrow svg{width:14px;height:14px}
+.pc26-footer-studio__intro>strong{font-family:"Outfit Variable",Outfit,sans-serif;font-size:clamp(1.08rem,1.8vw,1.4rem);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.pc26-footer-studio__intro p{max-width:54ch;margin:0;color:var(--muted);font-size:.78rem;line-height:1.55}
+.pc26-footer-studio__nav{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.pc26-footer-studio__nav a{min-height:38px;display:inline-flex;align-items:center;gap:5px;padding:0 11px;border-radius:9px;color:var(--muted);font-size:.72rem;font-weight:740;text-decoration:none;transition:transform 160ms cubic-bezier(.2,.8,.2,1),background-color 160ms ease,color 160ms ease}
+.pc26-footer-studio__nav a svg{width:13px;height:13px;transition:transform 160ms ease}
+.pc26-footer-studio__meta{border-top:1px solid color-mix(in srgb,var(--border) 78%,transparent);background:color-mix(in srgb,var(--canvas) 72%,var(--surface))}
+.pc26-footer-studio__meta-row{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:var(--muted);font-size:.66rem}
+.pc26-footer-studio__developer{display:inline-flex;align-items:center;gap:4px}
+.pc26-footer-studio__developer strong{color:var(--ink);font-weight:800}
+html[data-theme="dark"] .pc26-footer--studio{background:#18181b!important}
+html[data-theme="dark"] .pc26-footer-studio__meta{background:#121214!important}
+html[data-theme="dark"] .pc26-footer-studio__developer strong{color:#fff}
+@media(hover:hover) and (pointer:fine){
+  .pc26-footer-studio__nav a:hover{transform:translateY(-1px);background:var(--surface-2);color:var(--ink)}
+  .pc26-footer-studio__nav a:hover svg{transform:translate(1px,-1px)}
+}
+.pc26-footer-studio__nav a:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px}
+@media(max-width:767px){
+  .pc26-footer-studio{min-height:0;display:grid;grid-template-columns:1fr;gap:18px;padding-block:23px}
+  .pc26-footer-studio__nav{justify-content:flex-start;gap:3px}
+  .pc26-footer-studio__nav a{padding-inline:9px}
+  .pc26-footer-studio__meta-row{min-height:48px;display:grid;justify-items:start;align-content:center;gap:2px;padding-block:7px}
+}
+@media(prefers-reduced-motion:reduce){.pc26-footer-studio *{transition:none!important}}
