@@ -11,7 +11,6 @@ import { HeroSection } from "../components/home/HeroSection";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeNew2026.css";
-import "./HomeVisuals2026.css";
 import "./HomeModel2026.css";
 
 const initialCatalog = buildCatalog();
