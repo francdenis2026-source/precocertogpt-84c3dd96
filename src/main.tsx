@@ -105,25 +105,11 @@ document.head.appendChild(unifiedHeaderTheme);
 
 initializeSiteTheme();
 
-const boot = document.getElementById("pc-boot-screen");
-let bootRemovalTimer = 0;
-const retireBoot = () => {
-  window.clearTimeout(bootRemovalTimer);
-  bootRemovalTimer = window.setTimeout(() => boot?.classList.add("is-removed"), 400);
-};
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
   </StrictMode>,
 );
-
-window.requestAnimationFrame(() => {
-  window.requestAnimationFrame(() => {
-    boot?.classList.add("is-done");
-    retireBoot();
-  });
-});
 
 const startNotifications = () => {
   if (!navigator.onLine) return;
