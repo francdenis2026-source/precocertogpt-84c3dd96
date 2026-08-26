@@ -105,6 +105,27 @@ document.head.appendChild(unifiedHeaderTheme);
 
 initializeSiteTheme();
 
+const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-footer-signature],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header]'));
+
+const revealApp = () => {
+  document.documentElement.classList.remove("pc-prepaint");
+  document.documentElement.classList.add("pc-styles-ready");
+};
+
+const styleReadyPromises = visualStyleLinks.map(link => {
+  if (link.sheet) return Promise.resolve();
+  return new Promise<void>(resolve => {
+    const finish = () => resolve();
+    link.addEventListener("load", finish, { once: true });
+    link.addEventListener("error", finish, { once: true });
+  });
+});
+
+void Promise.all(styleReadyPromises).then(() => {
+  requestAnimationFrame(() => requestAnimationFrame(revealApp));
+});
+window.setTimeout(revealApp, 2200);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
