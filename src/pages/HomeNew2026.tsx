@@ -12,7 +12,6 @@ import { ProductGrid } from "../components/home/ProductGrid";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeNew2026.css";
 import "./HomeModel2026.css";
-import "./HomeAuthority2026.css";
 
 const initialCatalog = buildCatalog();
 
