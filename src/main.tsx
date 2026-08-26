@@ -97,6 +97,12 @@ searchRelocationTheme.href = "/search-relocation-2026.css?v=20260826-1";
 searchRelocationTheme.dataset.precocertoSearchRelocation = "hero-search-2026";
 document.head.appendChild(searchRelocationTheme);
 
+const unifiedHeaderTheme = document.createElement("link");
+unifiedHeaderTheme.rel = "stylesheet";
+unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-1";
+unifiedHeaderTheme.dataset.precocertoUnifiedHeader = "unified-header-2026";
+document.head.appendChild(unifiedHeaderTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
