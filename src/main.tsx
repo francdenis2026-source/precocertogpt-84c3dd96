@@ -37,12 +37,6 @@ lightIconContrastTheme.href = "/light-icon-contrast-2026.css?v=20260825-2";
 lightIconContrastTheme.dataset.precocertoLightIcons = "light-icon-contrast-2026";
 document.head.appendChild(lightIconContrastTheme);
 
-const footerDeveloperSignatureTheme = document.createElement("link");
-footerDeveloperSignatureTheme.rel = "stylesheet";
-footerDeveloperSignatureTheme.href = "/footer-developer-signature-2026.css?v=20260825-1";
-footerDeveloperSignatureTheme.dataset.precocertoFooterSignature = "developer-signature-2026";
-document.head.appendChild(footerDeveloperSignatureTheme);
-
 const glassShellTheme = document.createElement("link");
 glassShellTheme.rel = "stylesheet";
 glassShellTheme.href = "/glass-shell-2026.css?v=20260825-1";
@@ -99,13 +93,19 @@ document.head.appendChild(searchRelocationTheme);
 
 const unifiedHeaderTheme = document.createElement("link");
 unifiedHeaderTheme.rel = "stylesheet";
-unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-3";
+unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-4";
 unifiedHeaderTheme.dataset.precocertoUnifiedHeader = "studio-header-2026";
 document.head.appendChild(unifiedHeaderTheme);
 
+const footerStudioTheme = document.createElement("link");
+footerStudioTheme.rel = "stylesheet";
+footerStudioTheme.href = "/footer-studio-2026.css?v=20260826-1";
+footerStudioTheme.dataset.precocertoFooterStudio = "studio-footer-2026";
+document.head.appendChild(footerStudioTheme);
+
 initializeSiteTheme();
 
-const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-footer-signature],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header]'));
+const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header],link[rel="stylesheet"][data-precocerto-footer-studio]'));
 
 const revealApp = () => {
   document.documentElement.classList.remove("pc-prepaint");
