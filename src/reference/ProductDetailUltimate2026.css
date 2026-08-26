@@ -29,3 +29,11 @@ html[data-theme="dark"] .pdx-image-stage{background:linear-gradient(145deg,#f8f9
    nem parecer um alerta negativo, só uma referência de quanto essa opção
    custa a mais. */
 .pdx-offer-list em.is-costlier{background:var(--pc-surface-2);color:var(--pc-muted);border:1px solid var(--pc-border)}
+
+/* Design audit: offers need an unambiguous winning state and every action
+   keeps the same keyboard, pressed and disabled feedback. */
+.pdx-offer-list>a{border-radius:12px;transition:background .16s ease,border-color .16s ease,transform .16s ease}.pdx-offer-list>a.is-best{border-left:4px solid var(--pc-green-strong);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--pc-green-strong) 18%,transparent)}
+.pdx-offer-list>a.is-best .pdx-offer-price strong,.pdx-chart-row.is-best>b,.pdx-list-card>footer strong{color:var(--pc-green-strong);font-variant-numeric:tabular-nums}.pdx-offer-price{min-width:88px}.pdx-offer-price strong{font-variant-numeric:tabular-nums}
+.pdx-actions .pdx-primary-action,.pdx-mobile-bar button,.pdx-list-card>a{background:var(--pc-navy);color:#fff}.pdx-actions .pdx-primary-action:hover,.pdx-mobile-bar button:hover,.pdx-list-card>a:hover{background:var(--pc-navy-2)}
+.pdx-page :is(a,button):focus-visible{outline:3px solid var(--pc-gold);outline-offset:3px}.pdx-page button:disabled{cursor:not-allowed;opacity:.5}.pdx-page :is(a,button){touch-action:manipulation}.pdx-page :is(a,button):active{transform:translateY(1px)}
+@media(max-width:760px){.pdx-offer-list>a.is-best{margin-inline:-4px;padding-inline:8px}.pdx-offer-price{min-width:76px}.pdx-price-block{padding:16px}.pdx-price-block>div:first-child>strong{font-size:2.25rem}}
