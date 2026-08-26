@@ -1,0 +1,5 @@
+import { ArrowRight, PackageSearch } from "lucide-react";
+import { Link } from "react-router-dom";
+import type { Product } from "../../data/catalog";
+import { ProductCard } from "./ProductCard";
+export function ProductGrid({ products, loading }: { products: Product[]; loading: boolean }) { return <section className="pc-products nx-shell" aria-labelledby="offers-title"><div className="pc-section-heading"><div><h2 id="offers-title">Ofertas em destaque</h2><p>Os menores preços encontrados no comércio local.</p></div><Link to="/buscar">Ver todas <ArrowRight /></Link></div><div className="pc-grid" aria-busy={loading}>{loading && !products.length ? Array.from({ length: 8 }, (_, index) => <div className="pc-skeleton" key={index} />) : products.length ? products.map(product => <ProductCard key={product.id} product={product} />) : <div className="pc-empty"><PackageSearch /><strong>As ofertas estão sendo atualizadas.</strong><Link className="pc-button" to="/buscar">Pesquisar produtos</Link></div>}</div></section>; }
