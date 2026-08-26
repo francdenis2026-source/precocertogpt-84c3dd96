@@ -84,6 +84,13 @@ professionalAppShellTheme.href = "/app-shell-professional-2026.css?v=20260826-2"
 professionalAppShellTheme.dataset.precocertoAppShell = "professional-app-shell-2026";
 document.head.appendChild(professionalAppShellTheme);
 
+// Impeccable: acabamento final da homepage em web e mobile.
+const impeccableHomeTheme = document.createElement("link");
+impeccableHomeTheme.rel = "stylesheet";
+impeccableHomeTheme.href = "/impeccable-home-2026.css?v=20260826-1";
+impeccableHomeTheme.dataset.precocertoImpeccable = "homepage-polish-2026";
+document.head.appendChild(impeccableHomeTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
