@@ -1,4 +1,4 @@
-import { ArrowRight, LoaderCircle, MapPin, PackageSearch, Search, X } from "lucide-react";
+import { ArrowRight, LoaderCircle, PackageSearch, Search, X } from "lucide-react";
 import { FormEvent, KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../data/catalog";
@@ -37,6 +37,19 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
     return () => document.removeEventListener("pointerdown", close);
   }, []);
 
+  useEffect(() => {
+    if (!compact) return;
+    const focusSearch = (event: globalThis.KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        inputRef.current?.focus();
+        setOpen(true);
+      }
+    };
+    window.addEventListener("keydown", focusSearch);
+    return () => window.removeEventListener("keydown", focusSearch);
+  }, [compact]);
+
   const searchAll = () => {
     const value = normalizedQuery;
     setOpen(false);
@@ -69,7 +82,7 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
 
   return <div ref={rootRef} className={`pc26-live-search${compact ? " pc26-live-search--compact" : ""}`}>
     <form className={compact ? "pc26-search" : "pc26-hero-search"} role="search" onSubmit={submit}>
-      <Search aria-hidden="true" />
+      <Search className="pc26-live-search__icon" aria-hidden="true" />
       <label className="sr-only" htmlFor={id}>Produto para comparar</label>
       <input
         ref={inputRef}
@@ -80,16 +93,16 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
         onChange={event => { setQuery(event.target.value); setActiveIndex(-1); setOpen(true); }}
         onFocus={() => setOpen(true)}
         onKeyDown={handleKeyDown}
-        placeholder={compact ? "Arroz, café, leite…" : "O que você precisa comprar?"}
+        placeholder={compact ? "Busque produto, marca ou categoria" : "O que você precisa comprar?"}
         autoComplete="off"
         aria-autocomplete="list"
         aria-expanded={showPanel}
         aria-controls={listId}
         aria-activedescendant={activeIndex >= 0 ? `${listId}-${activeIndex}` : undefined}
       />
+      {!query && compact ? <span className="pc26-search__shortcut" aria-hidden="true">Ctrl K</span> : null}
       {query && <button className="pc26-live-search__clear" type="button" onClick={() => { setQuery(""); setActiveIndex(-1); setOpen(false); inputRef.current?.focus(); }} aria-label="Limpar busca"><X aria-hidden="true" /></button>}
-      {compact && <span className="pc26-search__city"><MapPin aria-hidden="true" />Feijó, AC</span>}
-      <button className="pc26-live-search__submit" type="submit">{compact ? "Comparar" : "Buscar preço"}<ArrowRight aria-hidden="true" /></button>
+      <button className="pc26-live-search__submit" type="submit">{compact ? "Buscar" : "Buscar preço"}<ArrowRight aria-hidden="true" /></button>
     </form>
     {showPanel && <div id={listId} className="pc26-live-results" role="listbox" aria-label="Sugestões de produtos">
       <div className="pc26-live-results__head"><span>Resultados ao vivo</span><small>{loading ? "Atualizando catálogo…" : `${suggestions.length} ${suggestions.length === 1 ? "produto" : "produtos"}`}</small></div>
