@@ -20,6 +20,8 @@ html.nx-home-active{scroll-behavior:smooth}html.nx-home-active,html.nx-home-acti
 /* Assinatura da nova marca: ícone do carrinho + etiqueta, sem a marca anterior. */
 .pc-logo{display:flex!important;align-items:center!important;min-width:174px!important}.pc-logo img{width:166px!important;height:52px!important;object-fit:contain!important;object-position:left center!important}.pc-footer__logo img{width:180px!important;height:62px!important;object-fit:contain!important;object-position:left center!important}
 
+.nx-home .pc-hero{min-height:0}.nx-home .pc-hero h1{max-width:14ch}.nx-home .pc-hero p{max-width:58ch}.nx-home :is(.pc-product,.pc-category,.pc-button):hover{transform:none}.nx-home :is(.pc-product,.pc-category,.pc-button):active{transform:translateY(1px)}.nx-home .pc-grid{gap:clamp(10px,1.5vw,18px)}.nx-home .pc-product{box-shadow:0 1px 2px rgba(11,36,56,.06)}.nx-home .pc-product:hover{box-shadow:0 12px 30px rgba(11,36,56,.09)}
+
 /* Refinamento UX: mais conteúdo útil por viewport, sem respiros artificiais. */
 .pc-hero{padding:42px 0 30px}.pc-hero__grid{gap:34px}.pc-hero h1{font-size:clamp(2.35rem,4.3vw,4rem)}.pc-hero p{margin:13px 0 18px}.pc-hero__stats{margin-top:20px}.pc-hero__card{padding:20px}.pc-categories{padding:20px 0 4px}.pc-section-heading{margin-bottom:11px}.pc-products{padding-top:24px}.pc-footer__grid{padding:32px 0}.pc-footer p{margin-top:8px}
 @media(max-width:700px){.pc-hero{padding:30px 0 24px}.pc-hero h1{font-size:clamp(2.2rem,11vw,3.25rem)}.pc-hero__stats{margin-top:17px}.pc-categories{padding-top:16px}.pc-products{padding-top:19px;padding-bottom:48px}.pc-footer__grid{padding-top:26px}}
