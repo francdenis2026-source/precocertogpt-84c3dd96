@@ -22,6 +22,9 @@ html.nx-home-active{scroll-behavior:smooth}html.nx-home-active,html.nx-home-acti
 
 .nx-home .pc-hero{min-height:0}.nx-home .pc-hero h1{max-width:14ch}.nx-home .pc-hero p{max-width:58ch}.nx-home :is(.pc-product,.pc-category,.pc-button):hover{transform:none}.nx-home :is(.pc-product,.pc-category,.pc-button):active{transform:translateY(1px)}.nx-home .pc-grid{gap:clamp(10px,1.5vw,18px)}.nx-home .pc-product{box-shadow:0 1px 2px rgba(11,36,56,.06)}.nx-home .pc-product:hover{box-shadow:0 12px 30px rgba(11,36,56,.09)}
 
+/* Impeccable pass: contraste verificável, estados previsíveis e acabamento coeso. */
+.nx-home .pc-search{border-color:#cbd5e1}.nx-home .pc-search:focus-within{border-color:#ca8a04;box-shadow:0 0 0 4px rgba(202,138,4,.14),0 9px 22px rgba(15,23,42,.08)}.nx-home .pc-store-badge{background:#eff6ff;color:#1e40af}.nx-home .pc-compare{background:#102a56;color:#fff}.nx-home .pc-product:hover .pc-compare{background:#0b6b3c}.nx-home :is(.pc-logo,.pc-category,.pc-product,.pc-button,.pc-icon-button,.pc-compare):focus-visible{outline:3px solid #f59e0b;outline-offset:3px}.nx-home .pc-footer{border-top-color:#dbe3ee}.nx-home .pc-footer nav a:hover{color:#0b6b3c}.nx-home .pc-hero__stats strong{font-variant-numeric:tabular-nums}
+
 /* Refinamento UX: mais conteúdo útil por viewport, sem respiros artificiais. */
 .pc-hero{padding:42px 0 30px}.pc-hero__grid{gap:34px}.pc-hero h1{font-size:clamp(2.35rem,4.3vw,4rem)}.pc-hero p{margin:13px 0 18px}.pc-hero__stats{margin-top:20px}.pc-hero__card{padding:20px}.pc-categories{padding:20px 0 4px}.pc-section-heading{margin-bottom:11px}.pc-products{padding-top:24px}.pc-footer__grid{padding:32px 0}.pc-footer p{margin-top:8px}
 @media(max-width:700px){.pc-hero{padding:30px 0 24px}.pc-hero h1{font-size:clamp(2.2rem,11vw,3.25rem)}.pc-hero__stats{margin-top:17px}.pc-categories{padding-top:16px}.pc-products{padding-top:19px;padding-bottom:48px}.pc-footer__grid{padding-top:26px}}
