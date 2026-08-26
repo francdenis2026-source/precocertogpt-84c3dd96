@@ -342,8 +342,7 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
           <ArrowLeft aria-hidden="true" />
           <span>Voltar</span>
         </button>
-        {(barTitle || logo) && <div className="ref-header__context">
-          {logo && <img className="ref-header__context-logo" src={logo} alt="" aria-hidden="true" />}
+        {barTitle && <div className="ref-header__context">
           {barTitle && <strong className="ref-header__context-title">{barTitle}</strong>}
         </div>}
       </div>
@@ -353,7 +352,6 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
   }
   return <header className="ref-header">
     <div className="ref-shell ref-header__inner">
-      <Brand />
       <nav className="ref-nav" aria-label="Navegação principal">
         <Link {...activeProps("home")} to="/">Início</Link>
         <Link {...activeProps("sectors")} to="/explorar">Onde comprar</Link>

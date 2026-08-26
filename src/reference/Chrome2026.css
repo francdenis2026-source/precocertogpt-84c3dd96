@@ -20,7 +20,7 @@
 .ref-header__inner{
   min-height:var(--pc-header-height);
   display:grid;
-  grid-template-columns:auto auto 1fr auto;
+  grid-template-columns:auto 1fr auto;
   align-items:center;
   gap:clamp(16px,2.4vw,36px);
 }
@@ -90,7 +90,7 @@ html[data-theme="dark"] .ref-brand img.ref-brand__dark{display:block}
   .ref-header__utility{gap:8px}
 }
 @media(max-width:680px){
-  .ref-header__inner{grid-template-columns:auto 1fr auto;min-height:60px}
+  .ref-header__inner{grid-template-columns:1fr auto;min-height:60px}
   .ref-header__utility{display:none}
   .ref-signin{display:none}
   .ref-menu{display:inline-grid}
