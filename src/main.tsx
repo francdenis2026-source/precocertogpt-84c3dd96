@@ -91,6 +91,12 @@ searchRefinementTheme.href = "/search-refinement-2026.css?v=20260826-1";
 searchRefinementTheme.dataset.precocertoSearch = "live-search-refinement-2026";
 document.head.appendChild(searchRefinementTheme);
 
+const searchRelocationTheme = document.createElement("link");
+searchRelocationTheme.rel = "stylesheet";
+searchRelocationTheme.href = "/search-relocation-2026.css?v=20260826-1";
+searchRelocationTheme.dataset.precocertoSearchRelocation = "hero-search-2026";
+document.head.appendChild(searchRelocationTheme);
+
 initializeSiteTheme();
 
 const boot = document.getElementById("pc-boot-screen");
