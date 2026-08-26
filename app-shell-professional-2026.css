@@ -49,6 +49,34 @@
 
 @media(min-width:768px){body.pc-app-shell{min-height:100dvh}}
 
+/* Dark mode — fundo grafite inspirado na referência enviada.
+   Áreas iluminadas #333333 / #2A2A2A, profundidade em carvão quase preto. */
+html[data-theme="dark"]{
+  --pc-dark-bg-light:#333333;
+  --pc-dark-bg-mid:#2A2A2A;
+  --pc-dark-bg-deep:#17191e;
+  --pc-dark-bg-edge:#0d1016;
+  --pc-dark-background-image:
+    radial-gradient(ellipse 72% 54% at 50% 7%,rgba(51,51,51,.94) 0%,rgba(42,42,42,.86) 34%,rgba(23,25,30,.68) 68%,transparent 100%),
+    radial-gradient(ellipse 58% 48% at 82% 35%,rgba(51,51,51,.28) 0%,rgba(42,42,42,.16) 42%,transparent 78%),
+    linear-gradient(145deg,#17191e 0%,#11141a 52%,#0d1016 100%);
+  background-color:var(--pc-dark-bg-edge)!important;
+  background-image:var(--pc-dark-background-image)!important;
+  background-attachment:fixed!important;
+}
+html[data-theme="dark"] body.pc-app-shell,
+html[data-theme="dark"] body.pc-app-shell #root{
+  background-color:var(--pc-dark-bg-edge)!important;
+  background-image:var(--pc-dark-background-image)!important;
+  background-attachment:fixed!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+}
+html[data-theme="dark"] body.pc-app-shell :is(.nx-home,.mh26-page,.msearch26-page,.ref-page,.ref-auth,.search26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page,.kelly-page,.sanduba-page){
+  background-color:transparent!important;
+  background-image:none!important;
+}
+
 @media(prefers-reduced-motion:reduce){
   body.pc-app-shell *,body.pc-app-shell *::before,body.pc-app-shell *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
 }
