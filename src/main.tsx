@@ -99,7 +99,7 @@ document.head.appendChild(searchRelocationTheme);
 
 const unifiedHeaderTheme = document.createElement("link");
 unifiedHeaderTheme.rel = "stylesheet";
-unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-1";
+unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-2";
 unifiedHeaderTheme.dataset.precocertoUnifiedHeader = "unified-header-2026";
 document.head.appendChild(unifiedHeaderTheme);
 
