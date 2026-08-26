@@ -14,33 +14,12 @@ campaignTheme.href = "/campaign-theme.css?v=20260825-4";
 campaignTheme.dataset.precocertoTheme = "campaign-2026";
 document.head.appendChild(campaignTheme);
 
-// Continuação da mesma identidade visual por toda a homepage.
-const homepageTheme = document.createElement("link");
-homepageTheme.rel = "stylesheet";
-homepageTheme.href = "/homepage-total-theme.css?v=20260825-1";
-homepageTheme.dataset.precocertoHomepageTheme = "campaign-full-home-2026";
-document.head.appendChild(homepageTheme);
-
 // Acabamento profissional do modo claro.
 const lightProfessionalTheme = document.createElement("link");
 lightProfessionalTheme.rel = "stylesheet";
 lightProfessionalTheme.href = "/light-professional-2026.css?v=20260825-1";
 lightProfessionalTheme.dataset.precocertoLightTheme = "professional-light-2026";
 document.head.appendChild(lightProfessionalTheme);
-
-// Remove halos e brilhos circulares do hero em ambos os temas.
-const heroNoHaloTheme = document.createElement("link");
-heroNoHaloTheme.rel = "stylesheet";
-heroNoHaloTheme.href = "/hero-no-halo.css?v=20260825-2";
-heroNoHaloTheme.dataset.precocertoHeroPolish = "hero-no-halo-2026";
-document.head.appendChild(heroNoHaloTheme);
-
-// Override final: área direita do hero totalmente limpa, sem efeitos decorativos.
-const heroCleanSpaceTheme = document.createElement("link");
-heroCleanSpaceTheme.rel = "stylesheet";
-heroCleanSpaceTheme.href = "/hero-clean-space-2026.css?v=20260825-5";
-heroCleanSpaceTheme.dataset.precocertoHeroCleanSpace = "hero-clean-space-2026";
-document.head.appendChild(heroCleanSpaceTheme);
 
 // Integração final da nova logomarca em site, app, painéis e favicon/símbolo.
 const logoIntegrationTheme = document.createElement("link");
@@ -55,13 +34,6 @@ typographyContrastTheme.rel = "stylesheet";
 typographyContrastTheme.href = "/typography-contrast-2026.css?v=20260825-1";
 typographyContrastTheme.dataset.precocertoTypography = "accessible-type-2026";
 document.head.appendChild(typographyContrastTheme);
-
-// Revisão estrutural final da homepage: grid, espaçamento, recortes, cards e responsividade.
-const homepageLayoutPolish = document.createElement("link");
-homepageLayoutPolish.rel = "stylesheet";
-homepageLayoutPolish.href = "/homepage-layout-polish-2026.css?v=20260825-1";
-homepageLayoutPolish.dataset.precocertoHomepageLayout = "homepage-layout-polish-2026";
-document.head.appendChild(homepageLayoutPolish);
 
 // Contraste final do modo claro: ícones, logos, dock, busca e controles.
 const lightIconContrastTheme = document.createElement("link");
@@ -104,20 +76,6 @@ pointerInteractionTheme.rel = "stylesheet";
 pointerInteractionTheme.href = "/interaction-hover-2026.css?v=20260825-2";
 pointerInteractionTheme.dataset.precocertoPointerInteraction = "pointer-refined-2026";
 document.head.appendChild(pointerInteractionTheme);
-
-// Busca prioritária: permanece visível acima da homepage e elimina o azul residual.
-const persistentSearchTheme = document.createElement("link");
-persistentSearchTheme.rel = "stylesheet";
-persistentSearchTheme.href = "/persistent-search-2026.css?v=20260825-1";
-persistentSearchTheme.dataset.precocertoPersistentSearch = "persistent-search-2026";
-document.head.appendChild(persistentSearchTheme);
-
-// Camada editorial final: hero e fundo profissionais no web e no mobile.
-const professionalHomeImageryTheme = document.createElement("link");
-professionalHomeImageryTheme.rel = "stylesheet";
-professionalHomeImageryTheme.href = "/professional-home-imagery-2026.css?v=20260825-1";
-professionalHomeImageryTheme.dataset.precocertoProfessionalImagery = "professional-home-imagery-2026";
-document.head.appendChild(professionalHomeImageryTheme);
 
 // Consolida todas as rotas públicas em uma única experiência de aplicativo.
 const professionalAppShellTheme = document.createElement("link");

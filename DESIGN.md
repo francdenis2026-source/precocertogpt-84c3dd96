@@ -46,6 +46,15 @@ avatar, CTAs, categorias e dock sem criar outra paleta local.
 Typography uses Manrope Variable as the canonical display/body family. Inter and Outfit remain
 loaded for older page-specific rules while those surfaces migrate to the shared tokens.
 
+### Home comercial (`pc26`)
+
+A página inicial usa uma variação mais funcional do sistema: superfícies minerais, azul-petróleo
+como tinta principal, verde apenas para economia confirmada e amarelo como marcador pontual de
+preço. Os componentes são isolados pelo namespace `.pc26-*`, usam Manrope, raios contidos,
+sombras discretas e densidade de catálogo. O comprovante no hero funciona como evidência local,
+não como decoração. Movimento fica restrito a feedback de controles (140–180 ms), com hover
+apenas em dispositivos compatíveis e desativação completa via `prefers-reduced-motion`.
+
 ## Primitives (Fase 1)
 
 `DesignSystem2.css` also defines reusable primitive classes so new pages mostly need JSX, not
