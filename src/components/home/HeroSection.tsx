@@ -12,8 +12,8 @@ export function HeroSection({ products, loading, productCount, storeCount, price
     setter?.call(input,value);
     input.dispatchEvent(new Event("input",{bubbles:true}));
   };
+
   return <section className="pc26-hero pc26-model-hero">
-    <div className="pc26-model-hero__image" aria-hidden="true" />
     <div className="pc26-shell pc26-model-hero__inner">
       <div className="pc26-model-hero__copy">
         <span className="pc26-eyebrow"><BadgeCheck aria-hidden="true" />Feijó, Acre</span>
@@ -23,6 +23,9 @@ export function HeroSection({ products, loading, productCount, storeCount, price
         <div className="pc26-popular-searches"><span>Buscas populares:</span>{popular.map(item=><button type="button" key={item} onClick={()=>search(item)}>{item}</button>)}</div>
         <div className="pc26-hero__stats" aria-label="Cobertura do Preço Certo"><span><strong>{productCount || "—"}</strong><small>produtos</small></span><span><strong>{priceCount || "—"}</strong><small>preços</small></span><span><strong>{storeCount || "—"}</strong><small>lojas</small></span></div>
       </div>
+      <figure className="pc26-model-hero__media" aria-label="Comparação de preços no comércio local">
+        <img src="/precocerto-hero-profissional.jpg?v=20260826-clean" alt="Pessoa pesquisando preços para economizar nas compras" width="1536" height="1024" fetchPriority="high" decoding="async" />
+      </figure>
     </div>
   </section>;
 }
