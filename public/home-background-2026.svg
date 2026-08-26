@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#121214"/>
+      <stop offset=".52" stop-color="#18181B"/>
+      <stop offset="1" stop-color="#202024"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1270 150) rotate(145) scale(620 420)">
+      <stop stop-color="#FFB800" stop-opacity=".17"/>
+      <stop offset="1" stop-color="#FFB800" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(220 780) rotate(-28) scale(720 460)">
+      <stop stop-color="#FFFFFF" stop-opacity=".055"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="180" y1="820" x2="1420" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB800" stop-opacity="0"/>
+      <stop offset=".48" stop-color="#FFB800" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#FFB800" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="36"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glow1)"/>
+  <rect width="1600" height="1000" fill="url(#glow2)"/>
+  <path d="M0 792C214 721 351 765 520 699C741 612 861 445 1060 429C1244 415 1341 529 1600 422V1000H0V792Z" fill="#FFFFFF" fill-opacity=".018"/>
+  <path d="M0 854C258 781 410 823 603 755C806 684 917 544 1112 530C1280 518 1400 596 1600 526" stroke="url(#line)" stroke-width="2"/>
+  <g opacity=".17">
+    <circle cx="1210" cy="250" r="3" fill="#FFB800"/><circle cx="1262" cy="302" r="2" fill="#FFB800"/><circle cx="1328" cy="218" r="2.5" fill="#FFB800"/><circle cx="1386" cy="338" r="2" fill="#FFB800"/>
+  </g>
+  <g opacity=".07" stroke="#FFFFFF">
+    <path d="M104 156H382M104 212H314M1222 682H1492M1290 738H1492"/>
+  </g>
+  <g filter="url(#blur)" opacity=".16"><ellipse cx="1050" cy="890" rx="340" ry="78" fill="#FFB800"/></g>
+</svg>
