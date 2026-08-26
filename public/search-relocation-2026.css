@@ -1,0 +1,68 @@
+/* Busca principal reposicionada no hero. O header volta a ser exclusivamente navegação e ações. */
+@media(min-width:768px){
+  .pc26-header__primary{
+    grid-template-columns:minmax(172px,210px) 1fr!important;
+    min-height:60px!important;
+    padding-top:8px!important;
+    padding-bottom:8px!important;
+  }
+  .pc26-actions{grid-column:2!important;justify-self:end!important}
+  .pc26-header__search{display:none!important}
+
+  .pc26-hero__search-wrap{
+    position:relative;
+    width:min(100%,680px);
+    margin-top:20px;
+    z-index:20;
+  }
+  .pc26-hero__search-label{
+    display:block;
+    margin:0 0 8px 2px;
+    color:var(--muted);
+    font-size:.72rem;
+    font-weight:750;
+    letter-spacing:.01em;
+  }
+  .pc26-hero__search-wrap .pc26-live-search{position:relative;width:100%;z-index:25}
+  .pc26-hero__search-wrap .pc26-hero-search{
+    width:100%!important;
+    min-height:56px!important;
+    display:grid!important;
+    grid-template-columns:22px minmax(0,1fr) auto auto!important;
+    align-items:center!important;
+    gap:10px!important;
+    padding:6px 6px 6px 16px!important;
+    overflow:visible!important;
+    border:1px solid var(--border)!important;
+    border-radius:16px!important;
+    background:var(--surface)!important;
+    box-shadow:0 14px 38px rgba(16,24,40,.09)!important;
+  }
+  html[data-theme="dark"] .pc26-hero__search-wrap .pc26-hero-search{box-shadow:0 18px 44px rgba(0,0,0,.24)!important}
+  .pc26-hero__search-wrap .pc26-hero-search input{height:44px!important;font-size:.95rem!important}
+  .pc26-hero__search-wrap .pc26-live-search__submit{height:44px!important;min-height:44px!important;padding-inline:16px!important;border-radius:11px!important}
+  .pc26-hero__search-wrap .pc26-live-results{
+    position:absolute!important;
+    top:calc(100% + 8px)!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    max-height:min(500px,calc(100vh - 190px))!important;
+    overflow:auto!important;
+    border:1px solid var(--border)!important;
+    border-radius:16px!important;
+    background:var(--surface)!important;
+    box-shadow:0 24px 64px rgba(15,23,42,.16)!important;
+    z-index:80!important;
+  }
+  html[data-theme="dark"] .pc26-hero__search-wrap .pc26-live-results{box-shadow:0 24px 64px rgba(0,0,0,.42)!important}
+}
+
+@media(min-width:768px) and (max-width:980px){
+  .pc26-header__primary{grid-template-columns:44px 1fr!important}
+  .pc26-hero__search-wrap{width:100%}
+}
+
+@media(max-width:767px){
+  .pc26-hero__search-wrap{display:none!important}
+}
