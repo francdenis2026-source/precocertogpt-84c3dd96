@@ -1,4 +1,4 @@
-import { Heart, Menu, Moon, ShoppingBasket, Sun, UserRound, X } from "lucide-react";
+import { Heart, Menu, Moon, Search, ShoppingBasket, Sun, UserRound, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HeaderRadioPlayer } from "../PersistentRadio";
@@ -13,21 +13,23 @@ const navItems = [
 
 export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const focusSearch = () => document.getElementById("price-search")?.focus();
 
-  return <header className="pc26-header">
-    <div className="pc26-shell pc26-header__row pc26-header__primary">
-      <div className="pc26-header__radio" aria-label="Rádio ao vivo"><HeaderRadioPlayer /></div>
+  return <header className="pc26-header pc26-header--studio">
+    <div className="pc26-shell pc26-header-studio">
+      <div className="pc26-header-studio__radio" aria-label="Rádio ao vivo"><HeaderRadioPlayer /></div>
 
-      <nav id="pc26-navigation" className={`pc26-header-nav${menuOpen ? " is-open" : ""}`} aria-label="Navegação principal">
+      <nav id="pc26-navigation" className={`pc26-header-studio__nav${menuOpen ? " is-open" : ""}`} aria-label="Navegação principal">
         {navItems.map(item => <Link key={item.to} to={item.to} aria-current={item.current ? "page" : undefined} onClick={() => setMenuOpen(false)}>{item.label}</Link>)}
       </nav>
 
-      <div className="pc26-actions" aria-label="Ações rápidas">
-        <Link className="pc26-header-action" to="/favoritos" aria-label="Favoritos" title="Favoritos"><Heart aria-hidden="true" /></Link>
-        <Link className="pc26-header-action" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta"><ShoppingBasket aria-hidden="true" /></Link>
-        <button className="pc26-header-action" type="button" onClick={onToggleTheme} aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"} title={theme === "dark" ? "Modo claro" : "Modo escuro"}>{theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}</button>
-        <Link className="pc26-login" to="/login"><UserRound aria-hidden="true" /><span>Entrar</span></Link>
-        <button className="pc26-header-action pc26-menu" type="button" onClick={() => setMenuOpen(value => !value)} aria-expanded={menuOpen} aria-controls="pc26-navigation" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+      <div className="pc26-header-studio__tools" aria-label="Ferramentas">
+        <button className="pc26-header-studio__tool pc26-header-studio__search" type="button" onClick={focusSearch} aria-label="Pesquisar produtos" title="Pesquisar produtos"><Search aria-hidden="true" /></button>
+        <Link className="pc26-header-studio__tool" to="/favoritos" aria-label="Favoritos" title="Favoritos"><Heart aria-hidden="true" /></Link>
+        <Link className="pc26-header-studio__tool" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta"><ShoppingBasket aria-hidden="true" /></Link>
+        <button className="pc26-header-studio__tool" type="button" onClick={onToggleTheme} aria-label={theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"} title={theme === "dark" ? "Modo claro" : "Modo escuro"}>{theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}</button>
+        <Link className="pc26-header-studio__login" to="/login"><UserRound aria-hidden="true" /><span>Entrar</span></Link>
+        <button className="pc26-header-studio__tool pc26-header-studio__menu" type="button" onClick={() => setMenuOpen(value => !value)} aria-expanded={menuOpen} aria-controls="pc26-navigation" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
       </div>
     </div>
   </header>;
