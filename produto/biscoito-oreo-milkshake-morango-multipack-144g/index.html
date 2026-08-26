@@ -4,14 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <script>
-      // O site é publicado no GitHub Pages, que não sabe nada sobre as rotas
-      // internas do React (/estabelecimento/..., /produto/...). Quando alguém
-      // dá F5 numa dessas páginas, o navegador pede esse caminho direto ao
-      // servidor; sem essa rota existir como arquivo, o GitHub Pages serve o
-      // 404.html, que devolve o usuário para cá com o caminho original
-      // guardado em "?/...". Este trecho decodifica isso e restaura a URL
-      // certa ANTES do React montar, para a página recarregada continuar
-      // exatamente onde estava, em vez de "reiniciar" na Home.
       (function (l) {
         if (l.search[1] === "/") {
           var decoded = l.search.slice(1).split("&").map(function (segment) {
@@ -21,13 +13,30 @@
         }
       })(window.location);
     </script>
+    <script>
+      /* Define o tema final antes da primeira pintura. */
+      (function () {
+        var keys = ["theme", "precocerto-theme", "precocerto:theme"];
+        var theme = null;
+        try {
+          for (var i = 0; i < keys.length; i++) {
+            var value = localStorage.getItem(keys[i]);
+            if (value === "light" || value === "dark") { theme = value; break; }
+          }
+        } catch (e) {}
+        if (!theme) theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.documentElement.classList.add("pc-prepaint");
+      })();
+    </script>
     <title>Biscoito Oreo Milkshake Morango Multipack 144g | PreçoCerto</title>
     <meta name="description" content="Biscoito Oreo Milkshake Morango Multipack 144g — Oreo · un · biscoitos. Compare preços e disponibilidade no comércio local de Feijó (AC)." />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <link rel="canonical" href="https://www.precocerto.live/produto/biscoito-oreo-milkshake-morango-multipack-144g" />
 
-    <meta name="theme-color" content="#17633F" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#202428" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/logo-preco-certo-simbolo.svg?v=11" type="image/svg+xml" sizes="any" />
     <link rel="icon" href="/logo-preco-certo-nova.png?v=1" type="image/png" sizes="any" />
     <link rel="shortcut icon" href="/favicon.ico?v=11" />
@@ -80,39 +89,19 @@
     </script>
     <style>
       #seo-prerender{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-      #pc-boot-screen{position:fixed;inset:0;z-index:1000;background:#f4f7f6;color:#102a33;display:grid;place-items:center;font-family:"Manrope Variable",Manrope,Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;transition:opacity .18s ease,visibility .18s ease}
-      #pc-boot-screen.is-done{opacity:0;visibility:hidden;pointer-events:none}
-      /* Encerra a animação e a pintura da tela de boot: mantê-la viva custava
-         CPU/GPU continuamente (animação infinita + imagem de fundo + blur). */
-      #pc-boot-screen.is-done .pc-boot-progress i{animation:none!important}
-      #pc-boot-screen.is-removed{display:none!important}
-      .pc-boot-loading{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 42%,#fff 0 18%,#f4f7f6 58%,#e8efed 100%)}
-      .pc-boot-loading__brand{position:relative;z-index:1;isolation:isolate;display:grid;justify-items:center;gap:20px;padding:24px;text-align:center}
-      .pc-boot-loading__brand::before{position:absolute;z-index:-1;width:176px;height:176px;border:1px solid rgba(20,125,179,.12);border-radius:50%;background:rgba(255,255,255,.58);box-shadow:0 24px 70px rgba(16,42,51,.08);content:""}
-      .pc-boot-loading__brand img{width:88px;height:88px;display:block;filter:drop-shadow(0 12px 22px rgba(20,125,179,.14))}
-      .pc-boot-loading__brand span{color:#49636b;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
-      .pc-boot-progress{display:flex;align-items:center;gap:6px;height:8px}.pc-boot-progress i{width:6px;height:6px;border-radius:999px;background:#147db3;animation:pcBoot 1s ease-in-out infinite}.pc-boot-progress i:nth-child(2){animation-delay:.14s}.pc-boot-progress i:nth-child(3){animation-delay:.28s}
-      @keyframes pcBoot{0%,60%,100%{opacity:.28;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
-      html[data-theme="dark"] #pc-boot-screen{background:#071c25;color:#eef7f6}html[data-theme="dark"] .pc-boot-loading{background:radial-gradient(circle at 50% 42%,#15343a 0 16%,#0c252d 55%,#071b23 100%)}html[data-theme="dark"] .pc-boot-loading__brand::before{border-color:rgba(126,190,216,.14);background:rgba(12,42,51,.5);box-shadow:0 24px 70px rgba(0,0,0,.2)}html[data-theme="dark"] .pc-boot-loading__brand span{color:#b8cbcf}
-      @media(max-width:700px){.pc-boot-loading__brand{transform:translateY(-3vh)}.pc-boot-loading__brand::before{width:160px;height:160px}.pc-boot-loading__brand img{width:80px;height:80px}}
-      @media(prefers-reduced-motion:reduce){.pc-boot-progress i{animation:none;opacity:.72;transform:none}}
+      html,body,#root{min-height:100%;margin:0}
+      html[data-theme="light"],html[data-theme="light"] body,html[data-theme="light"] #root{background:#F6F7F9;color:#17181C}
+      html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] #root{background:#121214;color:#FFFFFF}
+      html.pc-prepaint #root{visibility:hidden!important}
+      html.pc-styles-ready #root{visibility:visible!important}
     </style>
     <script type="module" crossorigin src="/assets/react-vendor-D-E4eI9_.js"></script>
     <script type="module" crossorigin src="/assets/supabase-vendor-BnGCNdwk.js"></script>
-    <script type="module" crossorigin src="/assets/icons-vendor-CsMrKVwx.js"></script>
-    <script type="module" crossorigin src="/assets/main-BOGskksp.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-DJFYcbhB.css">
+    <script type="module" crossorigin src="/assets/icons-vendor-M97_zyZr.js"></script>
+    <script type="module" crossorigin src="/assets/main-BjrcN6dN.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-CFZW5RWD.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Biscoito Oreo Milkshake Morango Multipack 144g","brand":{"@type":"Brand","name":"Oreo"},"category":"biscoitos","url":"https://www.precocerto.live/produto/biscoito-oreo-milkshake-morango-multipack-144g","description":"Biscoito Oreo Milkshake Morango Multipack 144g — Oreo · un · biscoitos. Compare preços e disponibilidade no comércio local de Feijó (AC)."}</script></head>
   <body>
-    <div id="pc-boot-screen" role="status" aria-live="polite">
-      <section class="pc-boot-loading" aria-label="Carregando o PreçoCerto">
-        <div class="pc-boot-loading__brand">
-          <img src="/app-icon.svg?v=12" alt="PreçoCerto" width="88" height="88" />
-          <span>PreçoCerto</span>
-          <span class="pc-boot-progress" aria-hidden="true"><i></i><i></i><i></i></span>
-        </div>
-      </section>
-    </div>
     <div id="root"><main id="seo-prerender" data-seo-prerender="true"><article><h1>Biscoito Oreo Milkshake Morango Multipack 144g</h1><p>Biscoito Oreo Milkshake Morango Multipack 144g — Oreo · un · biscoitos. Compare preços e disponibilidade no comércio local de Feijó (AC).</p><nav aria-label="Navegação principal"><a href="/">Início</a> <a href="/buscar">Buscar</a> <a href="/explorar">Explorar</a> <a href="/estabelecimentos">Perto de mim</a> <a href="/minha-conta">Conta</a></nav></article></main></div>
   </body>
 </html>

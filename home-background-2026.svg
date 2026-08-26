@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="90" y1="0" x2="1510" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#121214"/><stop offset=".52" stop-color="#171719"/><stop offset="1" stop-color="#202024"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1270 160) rotate(145) scale(610 430)">
+      <stop stop-color="#FFB800" stop-opacity=".17"/><stop offset="1" stop-color="#FFB800" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="soft" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity=".075"/><stop offset="1" stop-color="#fff" stop-opacity=".015"/></linearGradient>
+    <filter id="blur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="30"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/><rect width="1600" height="1000" fill="url(#glow)"/>
+
+  <!-- comparison cards -->
+  <g opacity=".20" transform="translate(1130 215) rotate(5)">
+    <rect width="250" height="116" rx="22" fill="url(#soft)" stroke="#fff" stroke-opacity=".14"/>
+    <circle cx="48" cy="58" r="26" fill="#FFB800" fill-opacity=".14"/>
+    <path d="M36 58l9 9 17-20" stroke="#FFB800" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="90" y="34" width="112" height="12" rx="6" fill="#fff" fill-opacity=".55"/><rect x="90" y="60" width="76" height="9" rx="4.5" fill="#A1A1AA" fill-opacity=".46"/><rect x="178" y="58" width="44" height="14" rx="7" fill="#FFB800" fill-opacity=".55"/>
+  </g>
+  <g opacity=".13" transform="translate(1210 365) rotate(-4)">
+    <rect width="250" height="116" rx="22" fill="url(#soft)" stroke="#fff" stroke-opacity=".12"/>
+    <path d="M31 42h48l-7 42H42l-11-42Z" stroke="#FFB800" stroke-width="5" stroke-linejoin="round"/><circle cx="48" cy="94" r="5" fill="#FFB800"/><circle cx="68" cy="94" r="5" fill="#FFB800"/>
+    <rect x="100" y="34" width="103" height="12" rx="6" fill="#fff" fill-opacity=".48"/><rect x="100" y="61" width="66" height="9" rx="4.5" fill="#A1A1AA" fill-opacity=".4"/><rect x="176" y="58" width="50" height="14" rx="7" fill="#FFB800" fill-opacity=".48"/>
+  </g>
+
+  <!-- grocery silhouettes -->
+  <g opacity=".11" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M220 720h104l-12 78h-76l-16-78Z"/><path d="M204 688h30l7 32"/><circle cx="252" cy="824" r="9" fill="#fff" stroke="none"/><circle cx="298" cy="824" r="9" fill="#fff" stroke="none"/>
+    <path d="M410 759c15-37 25-57 48-65 25 16 37 36 44 65"/><path d="M447 694c-2-22 9-37 30-42"/>
+    <rect x="570" y="694" width="62" height="104" rx="17"/><path d="M586 694v-23h30v23"/>
+    <path d="M744 789c16-58 56-94 102-94s86 36 102 94H744Z"/><path d="M846 695v-30"/>
+  </g>
+
+  <!-- price tags -->
+  <g opacity=".17" transform="translate(320 240) rotate(-8)"><path d="M0 38 38 0h78l38 38-77 78L0 38Z" fill="#FFB800" fill-opacity=".10" stroke="#FFB800"/><circle cx="98" cy="23" r="7" fill="#FFB800"/></g>
+  <g opacity=".11" transform="translate(590 170) rotate(10)"><path d="M0 30 30 0h62l30 30-61 61L0 30Z" fill="#fff" fill-opacity=".05" stroke="#fff"/><circle cx="77" cy="18" r="5" fill="#fff"/></g>
+
+  <!-- subtle route/comparison line -->
+  <path d="M60 855C260 786 428 828 630 757C848 681 946 542 1145 531C1324 521 1438 600 1580 548" stroke="#FFB800" stroke-opacity=".14" stroke-width="2"/>
+  <g filter="url(#blur)" opacity=".16"><ellipse cx="1080" cy="900" rx="330" ry="72" fill="#FFB800"/></g>
+</svg>
