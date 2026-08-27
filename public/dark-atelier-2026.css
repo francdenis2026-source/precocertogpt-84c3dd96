@@ -449,3 +449,16 @@ html[data-theme="dark"] :is([class*="best-price"], [class*="menor-preco"], [clas
 html[data-theme="dark"] :is(.pc26-product__price, .ref-result-price, [class*="price-value"]) {
   color: var(--pcd-save) !important;
 }
+
+/* Rótulos institucionais da página de estabelecimentos (verde não semântico). */
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero > div > span,
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero small {
+  color: var(--pcd-brand) !important;
+}
+
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero [class*="badge"],
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero [class*="count"] {
+  background: var(--pcd-brand-soft) !important;
+  color: var(--pcd-brand-strong) !important;
+  border-color: color-mix(in srgb, var(--pcd-brand) 28%, transparent) !important;
+}
