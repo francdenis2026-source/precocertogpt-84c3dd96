@@ -30,7 +30,6 @@ html[data-theme="dark"] {
   --pcd-well: #202C3C;
 
   /* Bordas e divisores */
-  --pcd-border: #2A3span;
   --pcd-border: #2A3646;
   --pcd-border-strong: #3A4A5E;
   --pcd-border-interactive: #4A6284;
