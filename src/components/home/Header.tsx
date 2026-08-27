@@ -18,6 +18,10 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
 
   return <header className="pc26-header pc26-header--studio">
     <div className="pc26-shell pc26-header-studio">
+      <Link className="pc26-header-studio__mobile-brand" to="/" aria-label="Preço Certo — página inicial">
+        <img src="/logo-preco-certo-simbolo.svg" alt="" width="38" height="38" />
+        <span><strong>Preço Certo</strong><small>Feijó, Acre</small></span>
+      </Link>
       <div className="pc26-header-studio__radio" aria-label="Rádio ao vivo"><HeaderRadioPlayer /></div>
 
       <nav id="pc26-navigation" className={`pc26-header-studio__nav${menuOpen ? " is-open" : ""}`} aria-label="Navegação principal">
