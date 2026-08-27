@@ -23,10 +23,10 @@ export function HeroSection({ products, loading, productCount, storeCount, price
       </div>
       <figure className="pc26-model-hero__media">
         <img
-          src="/hero-supermercado-comparacao-2026.webp"
-          alt="Consumidora usando o aplicativo no celular para comparar preços dentro de um supermercado"
-          width="1672"
-          height="941"
+          src="/hero-comparador-precos-profissional-2026.webp"
+          alt="Cliente comparando no celular o preço de um produto dentro de um supermercado"
+          width="1536"
+          height="1024"
           fetchPriority="high"
           decoding="async"
         />

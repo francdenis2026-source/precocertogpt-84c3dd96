@@ -129,7 +129,7 @@ document.head.appendChild(homepageMasterTheme);
 // isolada para que o refinamento não altere as demais páginas do aplicativo.
 const homepageImpeccableTheme = document.createElement("link");
 homepageImpeccableTheme.rel = "stylesheet";
-homepageImpeccableTheme.href = "/homepage-impeccable-2026.css?v=20260827-9";
+homepageImpeccableTheme.href = "/homepage-impeccable-2026.css?v=20260827-10";
 homepageImpeccableTheme.dataset.precocertoHomepageImpeccable = "homepage-impeccable-2026";
 document.head.appendChild(homepageImpeccableTheme);
 
