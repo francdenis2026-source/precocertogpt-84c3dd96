@@ -429,3 +429,23 @@ html[data-theme="dark"] :is(.pc26-model-hero__media, .pc26-local-spotlight img, 
     backdrop-filter: none !important;
   }
 }
+
+/* --- Disciplina de cor: verde apenas para economia/menor preço ----------- */
+html[data-theme="dark"] :is(
+  [class*="eyebrow"], [class*="verified"], [class*="topline"], [class*="__kicker"],
+  .ref-directory__eyebrow, .sector-eyebrow
+):not([class*="price"]):not([class*="saving"]):not([class*="economy"]) {
+  color: var(--pcd-brand) !important;
+}
+
+html[data-theme="dark"] :is([class*="verified"], [class*="cadastros"], .status.ok):is([class*="chip"], [class*="badge"], [class*="pill"]) {
+  background: var(--pcd-brand-soft) !important;
+  color: var(--pcd-brand-strong) !important;
+  border-color: color-mix(in srgb, var(--pcd-brand) 28%, transparent) !important;
+}
+
+/* Preço/economia mantém a leitura semântica verde. */
+html[data-theme="dark"] :is([class*="best-price"], [class*="menor-preco"], [class*="saving"], [class*="economy"]) strong,
+html[data-theme="dark"] :is(.pc26-product__price, .ref-result-price, [class*="price-value"]) {
+  color: var(--pcd-save) !important;
+}
