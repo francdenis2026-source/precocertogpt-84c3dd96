@@ -136,7 +136,7 @@ document.head.appendChild(homepageImpeccableTheme);
 // Revisão Taste: autoridade final de escala, cor e interação da homepage.
 const homepageTasteTheme = document.createElement("link");
 homepageTasteTheme.rel = "stylesheet";
-homepageTasteTheme.href = "/homepage-taste-2026.css?v=20260827-2";
+homepageTasteTheme.href = "/homepage-taste-2026.css?v=20260827-3";
 homepageTasteTheme.dataset.precocertoHomepageTaste = "homepage-taste-2026";
 document.head.appendChild(homepageTasteTheme);
 
