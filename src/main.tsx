@@ -147,9 +147,16 @@ darkAtelierTheme.href = "/dark-atelier-2026.css?v=20260827-1";
 darkAtelierTheme.dataset.precocertoDarkAtelier = "dark-atelier-2026";
 document.head.appendChild(darkAtelierTheme);
 
+// Redesign Geral Graphite 2026: autoridade final de cor, superfície e ritmo.
+const graphiteRedesign = document.createElement("link");
+graphiteRedesign.rel = "stylesheet";
+graphiteRedesign.href = "/redesign-graphite-2026.css?v=20260827-1";
+graphiteRedesign.dataset.precocertoGraphite = "redesign-graphite-2026";
+document.head.appendChild(graphiteRedesign);
+
 initializeSiteTheme();
 
-const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header],link[rel="stylesheet"][data-precocerto-footer-studio],link[rel="stylesheet"][data-precocerto-hero-market],link[rel="stylesheet"][data-precocerto-impeccable-final],link[rel="stylesheet"][data-precocerto-homepage-master],link[rel="stylesheet"][data-precocerto-homepage-impeccable],link[rel="stylesheet"][data-precocerto-homepage-taste],link[rel="stylesheet"][data-precocerto-dark-atelier]'));
+const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header],link[rel="stylesheet"][data-precocerto-footer-studio],link[rel="stylesheet"][data-precocerto-hero-market],link[rel="stylesheet"][data-precocerto-impeccable-final],link[rel="stylesheet"][data-precocerto-homepage-master],link[rel="stylesheet"][data-precocerto-homepage-impeccable],link[rel="stylesheet"][data-precocerto-homepage-taste],link[rel="stylesheet"][data-precocerto-dark-atelier],link[rel="stylesheet"][data-precocerto-graphite]'));
 
 const revealApp = () => {
   document.documentElement.classList.remove("pc-prepaint");
