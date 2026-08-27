@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Footer() {
@@ -11,9 +11,9 @@ export function Footer() {
       </div>
 
       <nav className="pc26-footer-studio__nav" aria-label="Links úteis">
-        <Link to="/estabelecimentos">Estabelecimentos</Link>
-        <Link to="/lojista">Seja parceiro <ArrowUpRight aria-hidden="true" /></Link>
-        <Link to="/contato">Fale conosco</Link>
+        <Link to="/estabelecimentos">Estabelecimentos <ArrowRight aria-hidden="true" /></Link>
+        <Link to="/lojista">Seja parceiro <ArrowRight aria-hidden="true" /></Link>
+        <Link to="/contato">Fale conosco <ArrowRight aria-hidden="true" /></Link>
       </nav>
     </div>
 
