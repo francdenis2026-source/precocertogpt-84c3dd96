@@ -127,21 +127,23 @@ html body :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--gx-accent) !important;
   outline-offset: 2px !important;
   border-radius: var(--gx-radius-xs);
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* =========================================================================
+}
+/* =========================================================================
    HOMEPAGE (pc26-*) — desktop e mobile compartilham os mesmos componentes
    ========================================================================= */
 
 .pc26-home {
   background: var(--gx-canvas) !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-shell {
+}
+.pc26-shell {
   width: min(100% - 2.5rem, var(--gx-shell)) !important;
   margin-inline: auto !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Header: compacto,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) silencioso,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) com hierarquia clara ------------------ */
+}
+/* --- Header: compacto,
+silencioso,com hierarquia clara ------------------ */
 .pc26-header,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header--studio {
+.pc26-header--studio {
   position: sticky !important;
   top: 0 !important;
   z-index: 60 !important;
@@ -150,35 +152,42 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   -webkit-backdrop-filter: saturate(140%) blur(14px) !important;
   border-bottom: 1px solid var(--gx-border) !important;
   box-shadow: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio {
+}
+.pc26-header-studio {
   display: grid !important;
   grid-template-columns: auto 1fr auto !important;
   align-items: center !important;
   gap: 1.25rem !important;
   min-height: 62px !important;
   padding-block: .4rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__mobile-brand {
+}
+.pc26-header-studio__mobile-brand {
   display: inline-flex !important;
   align-items: center !important;
   gap: .6rem !important;
   text-decoration: none !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__mobile-brand img {
+}
+.pc26-header-studio__mobile-brand img {
   width: 30px !important;
   height: 30px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__mobile-brand strong {
+}
+.pc26-header-studio__mobile-brand strong {
   display: block !important;
   font-size: .95rem !important;
   letter-spacing: -.015em !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__mobile-brand small {
+}
+.pc26-header-studio__mobile-brand small {
   display: block !important;
   font-size: .68rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav {
+}
+.pc26-header-studio__nav {
   display: flex !important;
   justify-content: center !important;
   gap: .25rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav a {
+}
+.pc26-header-studio__nav a {
   padding: .5rem .8rem !important;
   border-radius: 999px !important;
   font-size: .875rem !important;
@@ -186,17 +195,21 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   color: var(--gx-muted) !important;
   text-decoration: none !important;
   transition: background-color .18s var(--gx-ease), color .18s var(--gx-ease) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav a:hover {
+}
+.pc26-header-studio__nav a:hover {
   background: var(--gx-well) !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav a[aria-current="page"] {
+}
+.pc26-header-studio__nav a[aria-current="page"] {
   background: var(--gx-accent-soft) !important;
   color: var(--gx-accent-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__tools {
+}
+.pc26-header-studio__tools {
   display: flex !important;
   align-items: center !important;
   gap: .3rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__tool {
+}
+.pc26-header-studio__tool {
   display: inline-grid !important;
   place-items: center !important;
   width: 38px !important;
@@ -206,14 +219,17 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   background: transparent !important;
   color: var(--gx-muted) !important;
   transition: background-color .18s var(--gx-ease), color .18s var(--gx-ease), border-color .18s var(--gx-ease) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__tool:hover {
+}
+.pc26-header-studio__tool:hover {
   background: var(--gx-well) !important;
   border-color: var(--gx-border) !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__tool svg {
+}
+.pc26-header-studio__tool svg {
   width: 19px !important;
   height: 19px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__login {
+}
+.pc26-header-studio__login {
   display: inline-flex !important;
   align-items: center !important;
   gap: .45rem !important;
@@ -226,27 +242,31 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   font-size: .85rem !important;
   font-weight: 600 !important;
   text-decoration: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__login:hover {
+}
+.pc26-header-studio__login:hover {
   background: var(--gx-accent) !important;
   color: #fff !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__radio {
+}
+.pc26-header-studio__radio {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Hero: composição enxuta,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) busca protagonista ------------------------- */
+}
+/* --- Hero: composição enxuta,busca protagonista ------------------------- */
 .pc26-hero,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero {
+.pc26-model-hero {
   background: var(--gx-section) !important;
   background-image: none !important;
   border-bottom: 1px solid var(--gx-border) !important;
   padding-block: clamp(2rem, 4.5vw, 3.5rem) !important;
   min-height: 0 !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__inner {
+}
+.pc26-model-hero__inner {
   display: grid !important;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr) !important;
   align-items: center !important;
   gap: clamp(1.5rem, 4vw, 3.25rem) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__copy > h1,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero h1 {
+}
+.pc26-model-hero__copy > h1,
+.pc26-hero h1 {
   font-size: clamp(2rem, 3.6vw, 3.15rem) !important;
   line-height: 1.04 !important;
   letter-spacing: -.035em !important;
@@ -254,23 +274,27 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   max-width: 16ch !important;
   text-wrap: balance !important;
   margin: 0 0 .7rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__copy > p,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero p {
+}
+.pc26-model-hero__copy > p,
+.pc26-hero p {
   font-size: 1.02rem !important;
   line-height: 1.55 !important;
   color: var(--gx-muted) !important;
   max-width: 52ch !important;
   margin: 0 0 1.35rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero__search-wrap {
+}
+.pc26-hero__search-wrap {
   margin-bottom: .85rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-popular-searches {
+}
+.pc26-popular-searches {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
   gap: .4rem !important;
   font-size: .8rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-popular-searches button {
+}
+.pc26-popular-searches button {
   padding: .32rem .7rem !important;
   border-radius: 999px !important;
   border: 1px solid var(--gx-border) !important;
@@ -278,43 +302,51 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   color: var(--gx-ink-soft) !important;
   font-size: .8rem !important;
   transition: border-color .18s var(--gx-ease), background-color .18s var(--gx-ease) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-popular-searches button:hover {
+}
+.pc26-popular-searches button:hover {
   border-color: var(--gx-border-strong) !important;
   background: var(--gx-well) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero__stats {
+}
+.pc26-hero__stats {
   display: flex !important;
   gap: 2rem !important;
   flex-wrap: wrap !important;
   margin-top: 1.5rem !important;
   padding-top: 1.2rem !important;
   border-top: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero__stats strong {
+}
+.pc26-hero__stats strong {
   display: block !important;
   font-size: 1.4rem !important;
   letter-spacing: -.02em !important;
   color: var(--gx-ink) !important;
   font-variant-numeric: tabular-nums !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero__stats small {
+}
+.pc26-hero__stats small {
   font-size: .74rem !important;
   letter-spacing: .06em !important;
   text-transform: uppercase !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__media {
+}
+.pc26-model-hero__media {
   margin: 0 !important;
   border-radius: var(--gx-radius-lg) !important;
   overflow: hidden !important;
   border: 1px solid var(--gx-border) !important;
   background: var(--gx-surface) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__media img {
+}
+.pc26-model-hero__media img {
   display: block !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Busca ao vivo ------------------------------------------------------- */
+}
+/* --- Busca ao vivo ------------------------------------------------------- */
 .pc26-live-search {
   position: relative !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search {
+}
+.pc26-hero-search,
+.pc26-search {
   display: grid !important;
   grid-template-columns: auto minmax(0, 1fr) auto auto !important;
   align-items: center !important;
@@ -326,26 +358,31 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border: 1px solid var(--gx-border-strong) !important;
   box-shadow: var(--gx-shadow) !important;
   transition: border-color .18s var(--gx-ease), box-shadow .18s var(--gx-ease) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search:focus-within,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search:focus-within {
+}
+.pc26-hero-search:focus-within,
+.pc26-search:focus-within {
   border-color: var(--gx-accent) !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--gx-accent) 20%, transparent) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__icon {
+}
+.pc26-live-search__icon {
   width: 19px !important;
   height: 19px !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search input,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search input {
+}
+.pc26-hero-search input,
+.pc26-search input {
   border: 0 !important;
   background: transparent !important;
   outline: none !important;
   font-size: 1rem !important;
   color: var(--gx-ink) !important;
   min-width: 0 !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search input::placeholder,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search input::placeholder {
+}
+.pc26-hero-search input::placeholder,
+.pc26-search input::placeholder {
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__submit {
+}
+.pc26-live-search__submit {
   display: inline-flex !important;
   align-items: center !important;
   gap: .45rem !important;
@@ -358,9 +395,11 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   font-weight: 600 !important;
   font-size: .9rem !important;
   white-space: nowrap !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__submit:hover {
+}
+.pc26-live-search__submit:hover {
   background: var(--gx-accent-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__clear {
+}
+.pc26-live-search__clear {
   display: inline-grid !important;
   place-items: center !important;
   width: 34px !important;
@@ -369,14 +408,16 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border: 0 !important;
   background: var(--gx-well) !important;
   color: var(--gx-muted) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search__shortcut {
+}
+.pc26-search__shortcut {
   font-size: .68rem !important;
   letter-spacing: .06em !important;
   color: var(--gx-subtle) !important;
   border: 1px solid var(--gx-border) !important;
   border-radius: 6px !important;
   padding: .12rem .35rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results {
+}
+.pc26-live-results {
   position: absolute !important;
   z-index: 70 !important;
   inset-inline: 0 !important;
@@ -388,7 +429,8 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   overflow: hidden !important;
   max-height: min(66vh, 520px) !important;
   overflow-y: auto !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__head {
+}
+.pc26-live-results__head {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
@@ -398,7 +440,8 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   letter-spacing: .06em !important;
   text-transform: uppercase !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__list > button {
+}
+.pc26-live-results__list > button {
   display: grid !important;
   grid-template-columns: 52px minmax(0, 1fr) auto !important;
   align-items: center !important;
@@ -409,10 +452,12 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   background: transparent !important;
   border: 0 !important;
   border-bottom: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__list > button:hover,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__list > button.is-active {
+}
+.pc26-live-results__list > button:hover,
+.pc26-live-results__list > button.is-active {
   background: var(--gx-well) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__thumb {
+}
+.pc26-live-results__thumb {
   display: grid !important;
   place-items: center !important;
   width: 52px !important;
@@ -420,31 +465,38 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border-radius: 10px !important;
   background: var(--gx-surface) !important;
   border: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__thumb img {
+}
+.pc26-live-results__thumb img {
   max-width: 44px !important;
   max-height: 44px !important;
   object-fit: contain !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__copy strong {
+}
+.pc26-live-results__copy strong {
   display: block !important;
   font-size: .92rem !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__copy small,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__copy em {
+}
+.pc26-live-results__copy small,
+.pc26-live-results__copy em {
   display: block !important;
   font-size: .76rem !important;
   font-style: normal !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__price {
+}
+.pc26-live-results__price {
   text-align: right !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__price small {
+}
+.pc26-live-results__price small {
   display: block !important;
   font-size: .68rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__price strong {
+}
+.pc26-live-results__price strong {
   font-size: 1rem !important;
   color: var(--gx-save) !important;
   font-variant-numeric: tabular-nums !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__all {
+}
+.pc26-live-results__all {
   width: 100% !important;
   padding: .8rem !important;
   background: var(--gx-surface) !important;
@@ -452,37 +504,44 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   color: var(--gx-accent-ink) !important;
   font-weight: 600 !important;
   font-size: .86rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results__state {
+}
+.pc26-live-results__state {
   display: flex !important;
   align-items: center !important;
   gap: .7rem !important;
   padding: 1.1rem .9rem !important;
   color: var(--gx-muted) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Seções e títulos ---------------------------------------------------- */
+}
+/* --- Seções e títulos ---------------------------------------------------- */
 .pc26-home main > section {
   padding-block: var(--gx-space-section) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-section-heading h2 {
+}
+.pc26-section-heading h2 {
   font-size: clamp(1.35rem, 2.2vw, 1.85rem) !important;
   letter-spacing: -.025em !important;
   color: var(--gx-ink) !important;
   margin: 0 0 .3rem !important;
   text-wrap: balance !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-section-heading p {
+}
+.pc26-section-heading p {
   color: var(--gx-muted) !important;
   margin: 0 !important;
   font-size: .95rem !important;
   max-width: 62ch !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-section-heading {
+}
+.pc26-section-heading {
   display: flex !important;
   align-items: flex-end !important;
   justify-content: space-between !important;
   gap: 1rem !important;
   margin-bottom: 1.25rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-section-heading--center {
+}
+.pc26-section-heading--center {
   flex-direction: column !important;
   align-items: center !important;
   text-align: center !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-section-heading a {
+}
+.pc26-section-heading a {
   color: var(--gx-accent-ink) !important;
   font-weight: 600 !important;
   font-size: .88rem !important;
@@ -491,13 +550,15 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   gap: .35rem !important;
   text-decoration: none !important;
   white-space: nowrap !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Benefícios ---------------------------------------------------------- */
+}
+/* --- Benefícios ---------------------------------------------------------- */
 .pc26-benefits {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
   gap: .75rem !important;
   padding-block: clamp(1.5rem, 3vw, 2.25rem) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits article {
+}
+.pc26-benefits article {
   display: flex !important;
   gap: .7rem !important;
   align-items: flex-start !important;
@@ -506,7 +567,8 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border: 1px solid var(--gx-border) !important;
   border-radius: var(--gx-radius-sm) !important;
   box-shadow: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits i {
+}
+.pc26-benefits i {
   display: grid !important;
   place-items: center !important;
   width: 34px !important;
@@ -515,25 +577,30 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border-radius: 9px !important;
   background: var(--gx-accent-soft) !important;
   color: var(--gx-accent-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits i svg {
+}
+.pc26-benefits i svg {
   width: 17px !important;
   height: 17px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits strong {
+}
+.pc26-benefits strong {
   display: block !important;
   font-size: .9rem !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits span {
+}
+.pc26-benefits span {
   font-size: .8rem !important;
   color: var(--gx-muted) !important;
   line-height: 1.4 !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Categorias ---------------------------------------------------------- */
+}
+/* --- Categorias ---------------------------------------------------------- */
 .pc26-category-row,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-grid {
+.pc26-category-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
   gap: .65rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-card {
+}
+.pc26-category,
+.pc26-category-card {
   display: flex !important;
   align-items: center !important;
   gap: .55rem !important;
@@ -548,18 +615,22 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   text-decoration: none !important;
   box-shadow: none !important;
   transition: border-color .18s var(--gx-ease), background-color .18s var(--gx-ease) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category:hover,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-card:hover {
+}
+.pc26-category:hover,
+.pc26-category-card:hover {
   border-color: var(--gx-border-strong) !important;
   background: var(--gx-well) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category svg {
+}
+.pc26-category svg {
   color: var(--gx-accent) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Grade de produtos --------------------------------------------------- */
+}
+/* --- Grade de produtos --------------------------------------------------- */
 .pc26-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)) !important;
   gap: .85rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product {
+}
+.pc26-product {
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
@@ -570,29 +641,35 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   text-decoration: none !important;
   color: inherit !important;
   transition: border-color .18s var(--gx-ease), box-shadow .18s var(--gx-ease), transform .14s var(--gx-ease) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product:hover {
+}
+.pc26-product:hover {
   border-color: var(--gx-border-strong) !important;
   box-shadow: var(--gx-shadow-lift) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product:active {
+}
+.pc26-product:active {
   transform: scale(.995) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product__image {
+}
+.pc26-product__image {
   display: grid !important;
   place-items: center !important;
   aspect-ratio: 4 / 3 !important;
   padding: .9rem !important;
   background: var(--gx-well) !important;
   border-bottom: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product__image img {
+}
+.pc26-product__image img {
   max-width: 100% !important;
   max-height: 100% !important;
   object-fit: contain !important;
   mix-blend-mode: normal !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product__body {
+}
+.pc26-product__body {
   display: flex !important;
   flex-direction: column !important;
   gap: .3rem !important;
   padding: .8rem .9rem 1rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-store-badge {
+}
+.pc26-store-badge {
   font-size: .68rem !important;
   letter-spacing: .04em !important;
   text-transform: uppercase !important;
@@ -600,7 +677,8 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product h3 {
+}
+.pc26-product h3 {
   font-size: .95rem !important;
   line-height: 1.3 !important;
   margin: 0 !important;
@@ -609,23 +687,28 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   -webkit-line-clamp: 2 !important;
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product__meta {
+}
+.pc26-product__meta {
   font-size: .78rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-prices {
+}
+.pc26-prices {
   display: flex !important;
   align-items: baseline !important;
   gap: .5rem !important;
   margin-top: .25rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-prices del {
+}
+.pc26-prices del {
   font-size: .8rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-prices strong {
+}
+.pc26-prices strong {
   font-size: 1.3rem !important;
   letter-spacing: -.03em !important;
   font-variant-numeric: tabular-nums !important;
   color: var(--gx-save) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-compare {
+}
+.pc26-compare {
   margin-top: .35rem !important;
   font-size: .8rem !important;
   font-weight: 600 !important;
@@ -633,12 +716,14 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   display: inline-flex !important;
   align-items: center !important;
   gap: .3rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-skeleton {
+}
+.pc26-skeleton {
   height: 300px !important;
   border-radius: var(--gx-radius) !important;
   background: var(--gx-well) !important;
   border: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-empty {
+}
+.pc26-empty {
   grid-column: 1 / -1 !important;
   display: grid !important;
   justify-items: center !important;
@@ -649,7 +734,8 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border-radius: var(--gx-radius) !important;
   background: var(--gx-surface) !important;
   color: var(--gx-muted) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Comércio local ------------------------------------------------------ */
+}
+/* --- Comércio local ------------------------------------------------------ */
 .pc26-local-spotlight {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(0, .8fr) !important;
@@ -660,60 +746,74 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   border: 1px solid var(--gx-border) !important;
   border-radius: var(--gx-radius-lg) !important;
   box-shadow: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight__copy h2 {
+}
+.pc26-local-spotlight__copy h2 {
   color: var(--gx-ink) !important;
   letter-spacing: -.025em !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight__copy p {
+}
+.pc26-local-spotlight__copy p {
   color: var(--gx-muted) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight__image {
+}
+.pc26-local-spotlight__image {
   border-radius: var(--gx-radius) !important;
   overflow: hidden !important;
   border: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight__image img {
+}
+.pc26-local-spotlight__image img {
   display: block !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Rodapé -------------------------------------------------------------- */
+}
+/* --- Rodapé -------------------------------------------------------------- */
 .pc26-footer,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer--studio {
+.pc26-footer--studio {
   background: var(--gx-section) !important;
   background-image: none !important;
   border-top: 1px solid var(--gx-border) !important;
   color: var(--gx-muted) !important;
   padding-block: 1.75rem .75rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio {
+}
+.pc26-footer-studio {
   display: grid !important;
   gap: 1.25rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__brand strong,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio h3 {
+}
+.pc26-footer-studio__brand strong,
+.pc26-footer-studio h3 {
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__intro,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__location,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__developer {
+}
+.pc26-footer-studio__intro,
+.pc26-footer-studio__location,
+.pc26-footer-studio__developer {
   font-size: .85rem !important;
   color: var(--gx-muted) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__nav {
+}
+.pc26-footer-studio__nav {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: .35rem 1.1rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__nav a {
+}
+.pc26-footer-studio__nav a {
   color: var(--gx-muted) !important;
   font-size: .86rem !important;
   text-decoration: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__nav a:hover {
+}
+.pc26-footer-studio__nav a:hover {
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__meta,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__meta-row {
+}
+.pc26-footer-studio__meta,
+.pc26-footer-studio__meta-row {
   border-top: 1px solid var(--gx-border) !important;
   padding-top: .75rem !important;
   margin-top: .25rem !important;
   font-size: .78rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__trust {
+}
+.pc26-footer-studio__trust {
   font-size: .78rem !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Dock inferior (mobile) --------------------------------------------- */
+}
+/* --- Dock inferior (mobile) --------------------------------------------- */
 .pc26-bottom-nav {
   display: none !important;
 }
@@ -722,47 +822,55 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
    RESPONSIVO
    ========================================================================= */
 
-@media (max-width: 1180px) {html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-shell {
+@media (max-width: 1180px) {.pc26-shell {
   width: min(100% - 2rem, var(--gx-shell)) !important;
 }
 }
 
-@media (max-width: 1024px) {html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__inner {
+@media (max-width: 1024px) {.pc26-model-hero__inner {
   grid-template-columns: minmax(0, 1fr) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__media {
+}
+.pc26-model-hero__media {
   max-height: 260px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight {
+}
+.pc26-local-spotlight {
   grid-template-columns: minmax(0, 1fr) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav a {
+}
+.pc26-header-studio__nav a {
   padding: .45rem .6rem !important;
 }
 }
 
-@media (max-width: 860px) {html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio {
+@media (max-width: 860px) {.pc26-header-studio {
   grid-template-columns: auto auto !important;
   justify-content: space-between !important;
   gap: .5rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav {
+}
+.pc26-header-studio__nav {
   grid-column: 1 / -1 !important;
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav.is-open {
+}
+.pc26-header-studio__nav.is-open {
   display: grid !important;
   grid-auto-flow: row !important;
   justify-content: stretch !important;
   gap: .15rem !important;
   padding: .5rem 0 .75rem !important;
   border-top: 1px solid var(--gx-border) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__nav.is-open a {
+}
+.pc26-header-studio__nav.is-open a {
   padding: .7rem .8rem !important;
   border-radius: 10px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__login span {
+}
+.pc26-header-studio__login span {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__login {
+}
+.pc26-header-studio__login {
   padding: 0 .7rem !important;
 }
 }
 
-@media (min-width: 861px) {html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__menu {
+@media (min-width: 861px) {.pc26-header-studio__menu {
   display: none !important;
 }
 }
@@ -770,73 +878,95 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
 @media (max-width: 767px) {
   :root { --gx-space-section: 1.75rem; }
 
-  html, body { overflow-x: hidden; }html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-home {
+  html, body { overflow-x: hidden; }
+.pc26-home {
   overflow-x: hidden !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-shell {
+}
+.pc26-shell {
   width: min(100% - 1.5rem, var(--gx-shell)) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio {
+}
+.pc26-header-studio {
   min-height: 56px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__mobile-brand small {
+}
+.pc26-header-studio__mobile-brand small {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__tool {
+}
+.pc26-header-studio__tool {
   width: 36px !important;
   height: 36px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__search {
+}
+.pc26-header-studio__search {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero {
+}
+.pc26-hero,
+.pc26-model-hero {
   padding-block: 1.4rem 1.6rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__copy > h1,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero h1 {
+}
+.pc26-model-hero__copy > h1,
+.pc26-hero h1 {
   font-size: clamp(1.85rem, 8.4vw, 2.4rem) !important;
   max-width: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__copy > p,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero p {
+}
+.pc26-model-hero__copy > p,
+.pc26-hero p {
   font-size: .95rem !important;
   margin-bottom: 1rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero__media {
+}
+.pc26-model-hero__media {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search {
+}
+.pc26-hero-search,
+.pc26-search {
   grid-template-columns: auto minmax(0, 1fr) auto !important;
   min-height: 52px !important;
   padding: .3rem .3rem .3rem .75rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__submit {
+}
+.pc26-live-search__submit {
   min-height: 42px !important;
   padding: 0 .8rem !important;
   font-size: .84rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__submit svg {
+}
+.pc26-live-search__submit svg {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-results {
+}
+.pc26-live-results {
   position: fixed !important;
   inset-inline: .75rem !important;
   top: auto !important;
   max-height: 62vh !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero__stats {
+}
+.pc26-hero__stats {
   gap: 1.25rem !important;
   margin-top: 1.1rem !important;
   padding-top: .9rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero__stats strong {
+}
+.pc26-hero__stats strong {
   font-size: 1.15rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits {
+}
+.pc26-benefits {
   grid-template-columns: minmax(0, 1fr) !important;
   gap: .5rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-benefits article {
+}
+.pc26-benefits article {
   padding: .7rem .8rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-row,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-grid {
+}
+.pc26-category-row,
+.pc26-category-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* Cards de produto em lista: preço e loja em primeiro plano no toque. */
+}
+/* Cards de produto em lista: preço e loja em primeiro plano no toque. */
   .pc26-grid {
   grid-template-columns: minmax(0, 1fr) !important;
   gap: .5rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product {
+}
+.pc26-product {
   display: grid !important;
   grid-template-columns: 92px minmax(0, 1fr) !important;
   align-items: center !important;
   min-height: 104px !important;
   border-radius: var(--gx-radius-sm) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product__image {
+}
+.pc26-product__image {
   aspect-ratio: 1 !important;
   width: 92px !important;
   height: 92px !important;
@@ -844,31 +974,41 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   margin: .5rem 0 .5rem .5rem !important;
   border: 1px solid var(--gx-border) !important;
   border-radius: 10px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product__body {
+}
+.pc26-product__body {
   padding: .55rem .8rem .55rem .7rem !important;
   gap: .15rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-product h3 {
+}
+.pc26-product h3 {
   font-size: .9rem !important;
   -webkit-line-clamp: 2 !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-prices strong {
+}
+.pc26-prices strong {
   font-size: 1.18rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-compare {
+}
+.pc26-compare {
   font-size: .74rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-skeleton {
+}
+.pc26-skeleton {
   height: 104px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight {
+}
+.pc26-local-spotlight {
   padding: 1.1rem !important;
   border-radius: var(--gx-radius) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight__image {
+}
+.pc26-local-spotlight__image {
   display: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-section-heading {
+}
+.pc26-section-heading {
   flex-direction: column !important;
   align-items: flex-start !important;
   gap: .4rem !important;
   margin-bottom: .9rem !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer {
+}
+.pc26-footer {
   padding-bottom: calc(78px + env(safe-area-inset-bottom)) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-bottom-nav {
+}
+.pc26-bottom-nav {
   display: grid !important;
   position: fixed !important;
   z-index: 80 !important;
@@ -885,7 +1025,8 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   box-shadow: var(--gx-shadow-lift) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-bottom-nav a {
+}
+.pc26-bottom-nav a {
   display: grid !important;
   place-items: center !important;
   gap: 2px !important;
@@ -895,23 +1036,26 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   font-weight: 600 !important;
   text-decoration: none !important;
   color: var(--gx-subtle) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-bottom-nav a svg {
+}
+.pc26-bottom-nav a svg {
   width: 19px !important;
   height: 19px !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-bottom-nav a.is-active {
+}
+.pc26-bottom-nav a.is-active {
   background: var(--gx-accent-soft) !important;
   color: var(--gx-accent-ink) !important;
 }
 }
 
-@media (prefers-reduced-motion: reduce) {html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-home * {
+@media (prefers-reduced-motion: reduce) {.pc26-home * {
   transition: none !important;
   animation: none !important;
 }
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* =========================================================================
+}
+/* =========================================================================
    Neutralização de camadas legadas conflitantes (azul-marinho,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) quase-preto,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) gradientes ambientais e tokens antigos). Especificidade elevada de forma
+quase-preto,
+gradientes ambientais e tokens antigos). Especificidade elevada de forma
    intencional para vencer folhas históricas com !important.
    ========================================================================= */
 
@@ -929,7 +1073,8 @@ html:not([data-theme="dark"]) body.pc-app-shell .pc26-home {
   background-color: var(--gx-canvas) !important;
   background-image: none !important;
   color: var(--gx-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* Tokens legados apontam para a nova escala grafite/off-white. */
+}
+/* Tokens legados apontam para a nova escala grafite/off-white. */
 html[data-theme="dark"] body.pc-app-shell,
 html[data-theme="dark"] body.pc-app-shell .pc26-home,
 html[data-theme="dark"] .pc26-home,
@@ -958,52 +1103,56 @@ html:not([data-theme="dark"]) body.pc-app-shell .pc26-home {
   --border: var(--gx-border) !important;
   --primary: var(--gx-accent) !important;
   --primary-strong: var(--gx-accent-ink) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* Hero/seções/cards da homepage nunca voltam a receber gradiente ou cor forte. */
+}
+/* Hero/seções/cards da homepage nunca voltam a receber gradiente ou cor forte. */
 html body.pc-app-shell :is(.pc26-hero,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header--studio,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer--studio,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__meta) {
+.pc26-model-hero,
+.pc26-header,
+.pc26-header--studio,
+.pc26-footer,
+.pc26-footer--studio,
+.pc26-footer-studio__meta) {
   background-image: none !important;
 }html[data-theme="dark"] body.pc-app-shell :is(.pc26-hero,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-model-hero) {
+.pc26-model-hero) {
   background-color: var(--gx-section) !important;
 }html[data-theme="dark"] body.pc-app-shell :is(.pc26-footer,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer--studio,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-footer-studio__meta) {
+.pc26-footer--studio,
+.pc26-footer-studio__meta) {
   background-color: var(--gx-section) !important;
 }html[data-theme="dark"] body.pc-app-shell .pc26-product,
 html[data-theme="dark"] body.pc-app-shell .pc26-benefits article,
 html[data-theme="dark"] body.pc-app-shell :is(.pc26-category,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-card) {
+.pc26-category-card) {
   background-color: var(--gx-card) !important;
   border-color: var(--gx-border) !important;
 }html[data-theme="dark"] body.pc-app-shell .pc26-product__image {
   background-color: var(--gx-well) !important;
 }html[data-theme="dark"] body.pc-app-shell :is(.pc26-search,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search) {
+.pc26-hero-search) {
   background-color: var(--gx-surface) !important;
   border-color: var(--gx-border-strong) !important;
 }html[data-theme="dark"] body.pc-app-shell :is(.pc26-search button,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search button,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-button,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-live-search__submit) {
+.pc26-hero-search button,
+.pc26-button,
+.pc26-live-search__submit) {
   background-color: var(--gx-accent) !important;
   color: #10181A !important;
 }html[data-theme="dark"] body.pc-app-shell .pc26-live-results {
   background-color: var(--gx-elevated) !important;
 }html[data-theme="dark"] body.pc-app-shell .pc26-bottom-nav {
   background-color: var(--gx-elevated) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) /* --- Ajustes finais de composição --------------------------------------- */
+}
+/* --- Ajustes finais de composição --------------------------------------- */
 .pc26-header-studio__mobile-brand {
   white-space: nowrap !important;
   flex: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-header-studio__mobile-brand span {
+}
+.pc26-header-studio__mobile-brand span {
   min-width: 0 !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search label.sr-only,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search label.sr-only {
+}
+.pc26-hero-search label.sr-only,
+.pc26-search label.sr-only {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -1011,10 +1160,12 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
   white-space: nowrap !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-hero-search,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-search {
+}
+.pc26-hero-search,
+.pc26-search {
   flex-wrap: nowrap !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-more {
+}
+.pc26-category-more {
   display: inline-flex !important;
   align-items: center !important;
   gap: .45rem !important;
@@ -1027,10 +1178,12 @@ html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .
   font-weight: 600 !important;
   font-size: .88rem !important;
   text-decoration: none !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-category-more:hover {
+}
+.pc26-category-more:hover {
   background: var(--gx-well) !important;
-}html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight__copy a,
-html:is([data-theme],:root) body:is(.pc-app-shell,body):is(.pc-app-shell,body) .pc26-local-spotlight a {
+}
+.pc26-local-spotlight__copy a,
+.pc26-local-spotlight a {
   display: inline-flex !important;
   align-items: center !important;
   gap: .45rem !important;
