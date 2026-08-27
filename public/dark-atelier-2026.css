@@ -1,0 +1,464 @@
+/* ===========================================================================
+   PreçoCerto — Dark Atelier 2026
+   Camada final e única autoridade do modo escuro em todo o produto.
+
+   Diagnóstico que motivou esta camada:
+   - o `body` ficava em cinza-neutro quase preto (#121214/#121317) enquanto as
+     seções usavam azul-ardósia (#1d2330): duas famílias de cor concorrentes;
+   - todas as superfícies tinham praticamente o mesmo valor, sem hierarquia,
+     então cards, hero e seções "achatavam" e pareciam um site sem direção;
+   - bordas quase invisíveis + sombras pesadas simulavam elevação em vez de
+     usar contraste de superfície;
+   - a busca ao vivo era forçada para fundo claro (#faf7f2) dentro do escuro.
+
+   Solução: base petróleo-marinho profunda com iluminação ambiental discreta,
+   três camadas de superfície, bordas legíveis e acentos de marca controlados.
+   ========================================================================= */
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Base e atmosfera */
+  --pcd-canvas: #101823;
+  --pcd-canvas-deep: #0C121B;
+  --pcd-canvas-raise: #131C28;
+
+  /* Camadas de superfície (elevação por contraste, não por sombra) */
+  --pcd-surface: #17212F;
+  --pcd-surface-2: #1D2938;
+  --pcd-surface-3: #243244;
+  --pcd-well: #202C3C;
+
+  /* Bordas e divisores */
+  --pcd-border: #2A3646;
+  --pcd-border-strong: #3A4A5E;
+  --pcd-border-interactive: #4A6284;
+
+  /* Texto */
+  --pcd-ink: #EFF4FA;
+  --pcd-ink-soft: #D6DFEA;
+  --pcd-muted: #A7B4C6;
+  --pcd-subtle: #8E9CB0;
+
+  /* Marca */
+  --pcd-brand: #7FB0FF;
+  --pcd-brand-strong: #AECBFF;
+  --pcd-brand-soft: #1C2C45;
+  --pcd-accent: #E8B75C;
+  --pcd-accent-soft: #33291A;
+  --pcd-save: #4FC79A;
+  --pcd-alert: #F0977F;
+
+  /* Elevação */
+  --pcd-shadow-soft: 0 1px 0 rgba(255, 255, 255, .03), 0 10px 24px rgba(4, 8, 14, .28);
+  --pcd-shadow-lift: 0 1px 0 rgba(255, 255, 255, .04), 0 18px 40px rgba(4, 8, 14, .34);
+}
+
+/* --- Pontes para os sistemas de tokens já existentes no projeto ---------- */
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html[data-theme="dark"] .pc26-home,
+html[data-theme="dark"] .nx-home,
+html[data-theme="dark"] .mh26-page,
+html[data-theme="dark"] .pcx-home,
+html[data-theme="dark"] .ref-page,
+html[data-theme="dark"] .ref-admin,
+html[data-theme="dark"] .search26-page,
+html[data-theme="dark"] .msearch26-page,
+html[data-theme="dark"] .sector-page,
+html[data-theme="dark"] .sector-hub,
+html[data-theme="dark"] .store-pro-page,
+html[data-theme="dark"] .storefront,
+html[data-theme="dark"] .basket-page,
+html[data-theme="dark"] .pro-basket-page,
+html[data-theme="dark"] .smart-basket-page,
+html[data-theme="dark"] .merchant-page,
+html[data-theme="dark"] .culture-profile-page {
+  --pc-canvas: var(--pcd-canvas);
+  --pc-surface: var(--pcd-surface);
+  --pc-surface-2: var(--pcd-surface-2);
+  --pc-surface-3: var(--pcd-surface-3);
+  --pc-image-well: var(--pcd-well);
+  --pc-ink: var(--pcd-ink);
+  --pc-muted: var(--pcd-muted);
+  --pc-subtle: var(--pcd-subtle);
+  --pc-border: var(--pcd-border);
+  --pc-border-strong: var(--pcd-border-strong);
+  --pc-border-interactive: var(--pcd-border-interactive);
+  --pc-navy: var(--pcd-canvas-raise);
+  --pc-footer: var(--pcd-canvas-deep);
+  --pc-primary: var(--pcd-brand);
+  --pc-primary-strong: var(--pcd-brand-strong);
+  --pc-primary-soft: var(--pcd-brand-soft);
+  --pc-accent: var(--pcd-accent);
+  --pc-accent-soft: var(--pcd-accent-soft);
+  --pc-shadow-sm: var(--pcd-shadow-soft);
+  --pc-shadow-lg: var(--pcd-shadow-lift);
+
+  /* tokens "taste" da homepage */
+  --taste-canvas: var(--pcd-canvas);
+  --taste-surface: var(--pcd-surface);
+  --taste-ink: var(--pcd-ink);
+  --taste-muted: var(--pcd-muted);
+  --taste-line: var(--pcd-border);
+  --taste-brand: var(--pcd-brand);
+  --taste-brand-strong: var(--pcd-brand-strong);
+  --taste-brand-soft: var(--pcd-brand-soft);
+
+  /* tokens genéricos legados */
+  --bg: var(--pcd-canvas);
+  --surface: var(--pcd-surface);
+  --surface-2: var(--pcd-surface-2);
+  --border: var(--pcd-border);
+  --text-main: var(--pcd-ink);
+  --muted: var(--pcd-muted);
+  --nx-canvas: var(--pcd-canvas);
+  --nx-surface: var(--pcd-surface);
+  --nx-ink: var(--pcd-ink);
+  --nx-muted: var(--pcd-muted);
+  --pcx-bg: var(--pcd-canvas);
+  --pcx-paper: var(--pcd-surface);
+  --pcx-deep: var(--pcd-canvas-raise);
+  --pcx-deep-2: var(--pcd-surface-2);
+  --pcx-ink: var(--pcd-ink);
+  --pcx-muted: var(--pcd-muted);
+  --pcx-line: var(--pcd-border);
+}
+
+/* Camada semântica shadcn/HSL usada por várias páginas internas. */
+html[data-theme="dark"] {
+  --background: 214 38% 10%;
+  --foreground: 210 40% 97%;
+  --card: 214 33% 14%;
+  --card-foreground: 210 40% 97%;
+  --popover: 214 33% 14%;
+  --popover-foreground: 210 40% 97%;
+  --primary: 217 100% 75%;
+  --primary-foreground: 214 45% 12%;
+  --secondary: 214 30% 18%;
+  --secondary-foreground: 210 40% 97%;
+  --muted: 214 30% 18%;
+  --muted-foreground: 214 20% 72%;
+  --accent: 38 76% 64%;
+  --accent-foreground: 214 45% 12%;
+  --success: 162 54% 55%;
+  --border: 214 24% 22%;
+  --input: 214 24% 28%;
+  --ring: 217 100% 75%;
+}
+
+/* --- Fundo base: profundidade por iluminação ambiental, sem textura ruidosa */
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background-color: var(--pcd-canvas) !important;
+  color: var(--pcd-ink) !important;
+}
+
+/* Iluminação ambiental discreta: aplicada no próprio body para não depender de
+   pseudo-elementos que ficariam atrás de superfícies opacas do #root. */
+html[data-theme="dark"] body {
+  background-image:
+    radial-gradient(120% 58% at 50% -10%, rgba(89, 140, 214, .18), transparent 62%),
+    radial-gradient(70% 40% at 94% 6%, rgba(232, 183, 92, .06), transparent 72%),
+    radial-gradient(96% 52% at 4% 92%, rgba(60, 104, 160, .10), transparent 74%),
+    linear-gradient(180deg, rgba(12, 18, 27, 0) 30%, rgba(10, 15, 23, .6) 100%) !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+html[data-theme="dark"] #root {
+  position: relative;
+  background: transparent !important;
+  color: var(--pcd-ink);
+}
+
+/* As páginas ficam transparentes para que a atmosfera do fundo apareça. */
+html[data-theme="dark"] :is(
+  .pc26-home, .nx-home, .mh26-page, .pcx-home, .ref-page, .search26-page,
+  .msearch26-page, .sector-page, .sector-hub, .store-pro-page, .storefront,
+  .basket-page, .pro-basket-page, .smart-basket-page, .merchant-page,
+  .culture-profile-page, .ref-admin
+) {
+  background: transparent !important;
+  color: var(--pcd-ink) !important;
+}
+
+html[data-theme="dark"] :is(.pc26-home, .nx-home, .mh26-page, .pcx-home, .ref-page) main,
+html[data-theme="dark"] :is(.pc26-home, .nx-home, .mh26-page, .pcx-home, .ref-page) main > section {
+  background-color: transparent !important;
+}
+
+/* --- Header: vidro escuro estável, borda legível, sem sombra pesada ------ */
+html[data-theme="dark"] :is(.pc26-header, .pc26-header--studio, .ref-header, .nx-header, .mh26-header, .pcx-header) {
+  background: color-mix(in srgb, var(--pcd-canvas-deep) 88%, transparent) !important;
+  border-bottom: 1px solid var(--pcd-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: saturate(120%) blur(14px);
+}
+
+html[data-theme="dark"] :is(.pc26-header-studio__nav, .pc26-header-studio__tool, .pcx-theme, .pcx-menu, .mh26-theme) {
+  background: var(--pcd-surface-2) !important;
+  border-color: var(--pcd-border-strong) !important;
+  color: var(--pcd-ink-soft) !important;
+}
+
+html[data-theme="dark"] .pc26-header-studio__nav a {
+  color: var(--pcd-muted) !important;
+}
+
+html[data-theme="dark"] .pc26-header-studio__nav a[aria-current="page"] {
+  background: var(--pcd-brand-soft) !important;
+  color: var(--pcd-brand-strong) !important;
+}
+
+/* --- Hero: superfície levemente elevada e contínua com o fundo ----------- */
+html[data-theme="dark"] :is(.pc26-model-hero, .pc26-hero, .nx-hero, .mh26-hero, .pcx-hero, .ref-hero) {
+  background:
+    linear-gradient(180deg, rgba(24, 35, 50, .92) 0%, rgba(16, 24, 35, .82) 62%, rgba(16, 24, 35, 0) 100%) !important;
+  border-color: var(--pcd-border) !important;
+  box-shadow: none !important;
+}
+
+/* --- Superfícies: três camadas com borda sutil, elevação por contraste --- */
+html[data-theme="dark"] :is(
+  .pc26-benefits, .pc26-category-card, .pc26-local-spotlight, .pc26-product,
+  .pc26-hero-search, .pc26-live-results,
+  .ref-card, .ref-store-card, .ref-live-card, .ref-price-board, .ref-results-table,
+  .ref-store-list, .ref-directory-search, .ref-update,
+  .store-pro-card, .store-pro-summary, .store-pro-hero, .sf-card,
+  .basket-card, .merchant-card, .admin-card, .culture-profile-note,
+  .sector-nav--compact > a, .sector-highlights > div, .sector-how,
+  .nx-offer-card, .nx-category-strip a
+) {
+  background: var(--pcd-surface) !important;
+  color: var(--pcd-ink) !important;
+  border: 1px solid var(--pcd-border) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(
+  .pc26-product__image, .pc26-live-results__head, .ref-price-image, .ref-results-table__head,
+  .store-pro-image, .nx-offer-card__image, .price-row, .price-table-head, .visual-product-image
+) {
+  background: var(--pcd-well) !important;
+  border-color: var(--pcd-border) !important;
+}
+
+/* Modais, popovers, dropdowns e overlays compartilham a mesma linguagem. */
+html[data-theme="dark"] :is(
+  [role="dialog"], .pc-modal, [class*="modal__panel"], [class*="-modal"] > [class*="panel"],
+  [class*="dropdown"], [class*="popover"], [class*="sheet"], [class*="overlay-panel"]
+) {
+  background: var(--pcd-surface-2) !important;
+  color: var(--pcd-ink) !important;
+  border-color: var(--pcd-border-strong) !important;
+  box-shadow: var(--pcd-shadow-lift) !important;
+}
+
+html[data-theme="dark"] :is([class*="backdrop"], [class*="scrim"]) {
+  background: rgba(7, 11, 17, .68) !important;
+  backdrop-filter: blur(3px);
+}
+
+/* --- Busca e campos: nunca fundo claro dentro do escuro ----------------- */
+html[data-theme="dark"] :is(
+  .nx-live-search, .nx-live-results, .mh26-search-overlay, .pc26-hero-search,
+  .pc26-live-results, input, select, textarea, [class*="search"] input
+) {
+  background-color: var(--pcd-surface-2) !important;
+  color: var(--pcd-ink) !important;
+  border-color: var(--pcd-border-strong) !important;
+}
+
+html[data-theme="dark"] :is(input, textarea)::placeholder {
+  color: var(--pcd-subtle) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] :is(.nx-live-results, .mh26-search-overlay, .pc26-live-results) :is(strong, b, h3, h4) {
+  color: var(--pcd-ink) !important;
+}
+
+html[data-theme="dark"] :is(.pc26-live-results__list button, .nx-live-results button, .mh26-search-overlay button) {
+  background: transparent !important;
+  border-color: var(--pcd-border) !important;
+  color: var(--pcd-ink) !important;
+}
+
+html[data-theme="dark"] :is(.pc26-live-results__list button, .nx-live-results button):is(:hover, :focus-visible, .is-active) {
+  background: var(--pcd-brand-soft) !important;
+}
+
+/* --- Texto de apoio, ícones e divisores -------------------------------- */
+html[data-theme="dark"] :is(small, .muted, [class*="subtitle"], [class*="description"], [class*="__meta"], figcaption) {
+  color: var(--pcd-muted) !important;
+}
+
+html[data-theme="dark"] hr,
+html[data-theme="dark"] :is([class*="divider"], [class*="separator"]) {
+  border-color: var(--pcd-border) !important;
+  background-color: var(--pcd-border) !important;
+}
+
+html[data-theme="dark"] :is(.pc26-benefits article, .pc26-category-card) i,
+html[data-theme="dark"] :is([class*="icon-badge"], [class*="__icon"]) {
+  background: var(--pcd-brand-soft) !important;
+  color: var(--pcd-brand-strong) !important;
+  border-color: color-mix(in srgb, var(--pcd-brand) 24%, transparent) !important;
+}
+
+html[data-theme="dark"] svg {
+  color: inherit;
+}
+
+/* --- Estados interativos ------------------------------------------------ */
+@media (hover: hover) and (pointer: fine) {
+  html[data-theme="dark"] :is(
+    .pc26-category-card, .pc26-product, a.ref-card, a.ref-store-card, .nx-offer-card,
+    .store-pro-card, .sf-card, .basket-card, .merchant-card
+  ):hover {
+    background: var(--pcd-surface-2) !important;
+    border-color: var(--pcd-border-interactive) !important;
+    box-shadow: var(--pcd-shadow-soft) !important;
+  }
+}
+
+html[data-theme="dark"] :is(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+  outline: 2px solid var(--pcd-brand-strong) !important;
+  outline-offset: 2px !important;
+}
+
+html[data-theme="dark"] :is(a, button, [role="button"]):active {
+  border-color: var(--pcd-border-interactive) !important;
+}
+
+/* --- Ações: azul vivo para primária, âmbar como assinatura -------------- */
+html[data-theme="dark"] :is(.pc26-header-studio__login, .pc26-local-spotlight a, .pc-btn--primary, .button--primary) {
+  background: var(--pcd-brand-strong) !important;
+  color: #0E1725 !important;
+  border-color: var(--pcd-brand-strong) !important;
+}
+
+html[data-theme="dark"] :is(.pc-btn--gold, .button--gold, [class*="--accent"]) {
+  background: var(--pcd-accent) !important;
+  color: #241a08 !important;
+  border-color: var(--pcd-accent) !important;
+}
+
+html[data-theme="dark"] :is(.pc-btn--ghost, .button--ghost, [class*="--outline"]) {
+  background: transparent !important;
+  color: var(--pcd-ink) !important;
+  border-color: var(--pcd-border-strong) !important;
+}
+
+/* Verde reservado a economia/menor preço. */
+html[data-theme="dark"] :is(
+  [class*="saving"], [class*="economy"], .is-best, .pc26-best, [class*="best-price"], .status.ok
+) {
+  color: var(--pcd-save) !important;
+}
+
+html[data-theme="dark"] :is(.pc26-store-badge, [class*="badge"], [class*="chip"], [class*="pill"]) {
+  border-color: var(--pcd-border-strong) !important;
+}
+
+/* --- Rodapé: base mais profunda, fechando a composição ----------------- */
+html[data-theme="dark"] :is(footer, .pc26-footer--studio, .site-footer, [class*="footer"]) {
+  background: var(--pcd-canvas-deep) !important;
+  color: var(--pcd-ink-soft) !important;
+  border-top: 1px solid var(--pcd-border) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(footer a, .pc26-footer-studio__nav a, .pc26-footer-studio__meta) {
+  color: var(--pcd-muted) !important;
+}
+
+html[data-theme="dark"] :is(footer a:hover, .pc26-footer-studio__nav a:hover) {
+  color: var(--pcd-ink) !important;
+}
+
+/* --- Dock/app shell mobile: mesma linguagem do site ------------------- */
+@media (max-width: 767px) {
+  html[data-theme="dark"] :is(.pc26-bottom-nav, .app-dock, [class*="bottom-nav"], [class*="appdock"]) {
+    background: color-mix(in srgb, var(--pcd-canvas-deep) 92%, transparent) !important;
+    border-color: var(--pcd-border-strong) !important;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, .03) !important;
+    backdrop-filter: blur(16px) saturate(120%);
+  }
+
+  html[data-theme="dark"] :is(.pc26-bottom-nav a, [class*="bottom-nav"] a) {
+    color: var(--pcd-muted) !important;
+  }
+
+  html[data-theme="dark"] :is(.pc26-bottom-nav a.is-active, [class*="bottom-nav"] a[aria-current="page"]) {
+    background: var(--pcd-brand-soft) !important;
+    color: var(--pcd-brand-strong) !important;
+  }
+
+  /* mantém a atmosfera sem custo de repaint em telas pequenas */
+  html[data-theme="dark"] body {
+    background-image:
+      radial-gradient(140% 42% at 50% -6%, rgba(89, 140, 214, .17), transparent 64%),
+      linear-gradient(180deg, rgba(12, 18, 27, 0) 42%, rgba(10, 15, 23, .55) 100%) !important;
+    background-attachment: scroll !important;
+  }
+}
+
+/* --- Imagens: integração sem “recorte branco” -------------------------- */
+html[data-theme="dark"] :is(.pc26-product__image, .visual-product-image, [class*="__image"]) img {
+  filter: saturate(.98) contrast(1.02);
+}
+
+html[data-theme="dark"] :is(.pc26-model-hero__media, .pc26-local-spotlight img, .nx-hero img) {
+  border-color: var(--pcd-border-strong) !important;
+}
+
+@media (prefers-contrast: more) {
+  html[data-theme="dark"] {
+    --pcd-border: #45566C;
+    --pcd-border-strong: #5A6E88;
+    --pcd-muted: #C3CEDC;
+    --pcd-subtle: #AFBCCB;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme="dark"] :is(.pc26-header, .pc26-header--studio, .ref-header, .pc26-bottom-nav) {
+    background: var(--pcd-canvas-deep) !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* --- Disciplina de cor: verde apenas para economia/menor preço ----------- */
+html[data-theme="dark"] :is(
+  [class*="eyebrow"], [class*="verified"], [class*="topline"], [class*="__kicker"],
+  .ref-directory__eyebrow, .sector-eyebrow
+):not([class*="price"]):not([class*="saving"]):not([class*="economy"]) {
+  color: var(--pcd-brand) !important;
+}
+
+html[data-theme="dark"] :is([class*="verified"], [class*="cadastros"], .status.ok):is([class*="chip"], [class*="badge"], [class*="pill"]) {
+  background: var(--pcd-brand-soft) !important;
+  color: var(--pcd-brand-strong) !important;
+  border-color: color-mix(in srgb, var(--pcd-brand) 28%, transparent) !important;
+}
+
+/* Preço/economia mantém a leitura semântica verde. */
+html[data-theme="dark"] :is([class*="best-price"], [class*="menor-preco"], [class*="saving"], [class*="economy"]) strong,
+html[data-theme="dark"] :is(.pc26-product__price, .ref-result-price, [class*="price-value"]) {
+  color: var(--pcd-save) !important;
+}
+
+/* Rótulos institucionais da página de estabelecimentos (verde não semântico). */
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero > div > span,
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero small {
+  color: var(--pcd-brand) !important;
+}
+
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero [class*="badge"],
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero [class*="count"] {
+  background: var(--pcd-brand-soft) !important;
+  color: var(--pcd-brand-strong) !important;
+  border-color: color-mix(in srgb, var(--pcd-brand) 28%, transparent) !important;
+}
