@@ -82,8 +82,8 @@ export function MobileHome2026(){
    <section className="mh26-section"><header><div><small><TrendingDown aria-hidden="true"/>DESTAQUES AGORA</small><h2>Preços para comparar</h2></div><Link to="/buscar">Ver todos</Link></header><div className="mh26-products">{loading?Array.from({length:4},(_,index)=><div className="mh26-product is-loading" key={index}/>):featured.map(product=><Link to={`/produto/${product.slug||product.id}`} className="mh26-product" key={product.id}><i><ProductImage product={product}/></i><span><small>{product.category}</small><strong>{product.name}</strong><em>{product.establishment||"Comércio local"}</em></span><b>{brl.format(product.minPrice)}<small>menor preço</small></b></Link>)}</div></section>
    <section className="mh26-local"><div><small>COMÉRCIO LOCAL</small><h2>Encontre estabelecimentos perto de você.</h2><p>Explore lojas, mercados e serviços e compare antes de sair de casa.</p><Link to="/estabelecimentos">Explorar estabelecimentos <ArrowRight aria-hidden="true"/></Link></div></section>
   </main>
-  <footer className="mh26-footer"><div className="mh26-footer-note"><button type="button" onClick={()=>setFooterPanel("terms")}>Termos</button><button type="button" onClick={()=>setFooterPanel("privacy")}>Privacidade</button><button type="button" onClick={()=>setFooterPanel("about")}>Sobre</button></div></footer>
-  <AppDock active="home"/>
-  <FooterInfoDialogs panel={footerPanel} onClose={()=>setFooterPanel(null)}/>
+  <footer className="mh26-footer"><div className="mh26-footer-note"><button type="button" onClick={()=>setFooterPanel("contato")}>Contato</button><button type="button" onClick={()=>setFooterPanel("desenvolvedor")}>Desenvolvedor</button></div></footer>
+  <AppDock current="home"/>
+  <FooterInfoDialogs open={footerPanel} onClose={()=>setFooterPanel(null)}/>
  </div>;
 }
