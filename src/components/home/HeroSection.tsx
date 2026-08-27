@@ -15,6 +15,7 @@ export function HeroSection({ products, loading, productCount, storeCount, price
   return <section className="pc26-hero pc26-model-hero">
     <div className="pc26-shell pc26-model-hero__inner">
       <div className="pc26-model-hero__copy">
+        <span className="pc26-model-hero__eyebrow">Comparador local de Feijó</span>
         <h1>Descubra onde está <em>mais barato!</em></h1>
         <p>Compare preços nos estabelecimentos de Feijó e escolha onde comprar antes de sair de casa.</p>
         <div className="pc26-hero__search-wrap"><LiveProductSearch id="price-search" products={products} loading={loading} /></div>
