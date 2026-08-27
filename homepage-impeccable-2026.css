@@ -16,6 +16,38 @@
 .pc26-home .pc26-benefits{box-shadow:none!important}
 .pc26-home .pc26-category-card,.pc26-home .pc26-product{border-radius:16px!important}
 
+/* Contraste do chrome: controles precisam continuar identificáveis em ambos os temas. */
+.pc26-home .pc26-header-studio__tools{gap:5px!important;padding:4px!important}
+.pc26-home .pc26-header-studio__tool{
+  border:1px solid var(--pc-border)!important;
+  background:var(--pc-surface-2)!important;
+  color:var(--pc-ink)!important;
+}
+.pc26-home .pc26-header-studio__tool svg{stroke-width:2.2!important}
+.pc26-home .pc26-header-studio__login{
+  border:1px solid var(--pc-ink)!important;
+  background:var(--pc-ink)!important;
+  color:var(--pc-surface)!important;
+}
+html[data-theme="dark"] .pc26-home .pc26-header-studio__tool{
+  border-color:#4a5058!important;
+  background:#2a2e34!important;
+  color:#f7f7f4!important;
+}
+html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
+  border-color:#ffc62e!important;
+  background:#ffc62e!important;
+  color:#171a1d!important;
+}
+.pc26-home .pc26-footer-studio__intro p{color:#d2d6d9!important}
+.pc26-home .pc26-footer-studio__nav a{
+  border:1px solid #4b5157!important;
+  background:#22262a!important;
+  color:#f7f7f4!important;
+}
+.pc26-home .pc26-footer-studio__meta-row{color:#cbd0d3!important}
+.pc26-home .pc26-footer-studio__developer strong{color:#fff!important}
+
 @media(min-width:768px){
   .pc26-home .pc26-model-hero__inner{grid-template-columns:minmax(0,1.06fr) minmax(390px,.94fr)!important}
   .pc26-home .pc26-model-hero__copy{max-width:650px!important}
@@ -27,10 +59,12 @@
 }
 
 @media(hover:hover) and (pointer:fine){
-  .pc26-home .pc26-header-studio__tool:hover{background:var(--pc-surface-2)!important;color:var(--pc-ink)!important}
+  .pc26-home .pc26-header-studio__tool:hover{border-color:var(--pc-brand-strong)!important;background:var(--pc-surface)!important;color:var(--pc-ink)!important}
+  html[data-theme="dark"] .pc26-home .pc26-header-studio__tool:hover{border-color:#ffc62e!important;background:#343941!important;color:#fff!important}
   .pc26-home .pc26-header-studio__login:hover{box-shadow:0 7px 18px rgba(17,20,22,.18)!important;transform:translateY(-1px)!important}
   .pc26-home .pc26-live-search__submit:hover,.pc26-home .pc26-compare:hover,.pc26-home .pc26-category-more a:hover{filter:brightness(.96)}
   .pc26-home .pc26-category-card:hover,.pc26-home .pc26-product:hover{transform:translateY(-3px)!important}
+  .pc26-home .pc26-footer-studio__nav a:hover{border-color:#ffc62e!important;background:#30353a!important;color:#fff!important}
 }
 
 @media(max-width:767px){
