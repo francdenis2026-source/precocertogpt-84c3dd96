@@ -663,3 +663,84 @@ html body :where(a, button, input, select, textarea, [tabindex]):focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .pc26-home * { transition: none !important; animation: none !important; }
 }
+
+/* =========================================================================
+   Neutralização de camadas legadas conflitantes (azul-marinho, quase-preto,
+   gradientes ambientais e tokens antigos). Especificidade elevada de forma
+   intencional para vencer folhas históricas com !important.
+   ========================================================================= */
+
+html[data-theme="dark"] body.pc-app-shell,
+html[data-theme="dark"] body.pc-app-shell #root,
+html[data-theme="dark"] body.pc-app-shell .pc26-home,
+html[data-theme="dark"] body.pc-app-shell .nx-home,
+html[data-theme="dark"] body.pc-app-shell .mh26-page {
+  background-color: var(--gx-canvas) !important;
+  background-image: none !important;
+  color: var(--gx-ink) !important;
+}
+
+html:not([data-theme="dark"]) body.pc-app-shell,
+html:not([data-theme="dark"]) body.pc-app-shell #root,
+html:not([data-theme="dark"]) body.pc-app-shell .pc26-home {
+  background-color: var(--gx-canvas) !important;
+  background-image: none !important;
+  color: var(--gx-ink) !important;
+}
+
+/* Tokens legados apontam para a nova escala grafite/off-white. */
+html[data-theme="dark"] body.pc-app-shell,
+html[data-theme="dark"] body.pc-app-shell .pc26-home,
+html[data-theme="dark"] .pc26-home,
+html[data-theme="dark"] .nx-home {
+  --bg-primary: var(--gx-canvas) !important;
+  --bg-secondary: var(--gx-section) !important;
+  --canvas: var(--gx-canvas) !important;
+  --surface: var(--gx-surface) !important;
+  --surface-2: var(--gx-card) !important;
+  --ink: var(--gx-ink) !important;
+  --muted: var(--gx-muted) !important;
+  --border: var(--gx-border) !important;
+  --primary: var(--gx-accent) !important;
+  --primary-strong: var(--gx-accent-ink) !important;
+  --marker: var(--gx-amber) !important;
+  --marker-soft: color-mix(in srgb, var(--gx-amber) 16%, transparent) !important;
+  --nx-canvas: var(--gx-canvas) !important;
+  --pc-cream: var(--gx-canvas) !important;
+}
+
+html:not([data-theme="dark"]) .pc26-home,
+html:not([data-theme="dark"]) body.pc-app-shell .pc26-home {
+  --canvas: var(--gx-canvas) !important;
+  --surface: var(--gx-surface) !important;
+  --surface-2: var(--gx-section) !important;
+  --ink: var(--gx-ink) !important;
+  --muted: var(--gx-muted) !important;
+  --border: var(--gx-border) !important;
+  --primary: var(--gx-accent) !important;
+  --primary-strong: var(--gx-accent-ink) !important;
+}
+
+/* Hero/seções/cards da homepage nunca voltam a receber gradiente ou cor forte. */
+html body.pc-app-shell :is(.pc26-hero, .pc26-model-hero, .pc26-header, .pc26-header--studio, .pc26-footer, .pc26-footer--studio, .pc26-footer-studio__meta) {
+  background-image: none !important;
+}
+html[data-theme="dark"] body.pc-app-shell :is(.pc26-hero, .pc26-model-hero) { background-color: var(--gx-section) !important; }
+html[data-theme="dark"] body.pc-app-shell :is(.pc26-footer, .pc26-footer--studio, .pc26-footer-studio__meta) { background-color: var(--gx-section) !important; }
+html[data-theme="dark"] body.pc-app-shell .pc26-product,
+html[data-theme="dark"] body.pc-app-shell .pc26-benefits article,
+html[data-theme="dark"] body.pc-app-shell :is(.pc26-category, .pc26-category-card) {
+  background-color: var(--gx-card) !important;
+  border-color: var(--gx-border) !important;
+}
+html[data-theme="dark"] body.pc-app-shell .pc26-product__image { background-color: var(--gx-well) !important; }
+html[data-theme="dark"] body.pc-app-shell :is(.pc26-search, .pc26-hero-search) {
+  background-color: var(--gx-surface) !important;
+  border-color: var(--gx-border-strong) !important;
+}
+html[data-theme="dark"] body.pc-app-shell :is(.pc26-search button, .pc26-hero-search button, .pc26-button, .pc26-live-search__submit) {
+  background-color: var(--gx-accent) !important;
+  color: #10181A !important;
+}
+html[data-theme="dark"] body.pc-app-shell .pc26-live-results { background-color: var(--gx-elevated) !important; }
+html[data-theme="dark"] body.pc-app-shell .pc26-bottom-nav { background-color: var(--gx-elevated) !important; }
