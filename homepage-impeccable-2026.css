@@ -5,8 +5,14 @@
   --pc-ring:color-mix(in srgb,var(--pc-brand) 72%,#171a1d);
   --pc-muted:#4d565b;
   --pc-brand-strong:#765500;
+  --pc-icon-blue:#1d4ed8;
+  --pc-icon-green:#047857;
+  --pc-icon-orange:#a44908;
+  --pc-icon-violet:#6d28d9;
+  --pc-icon-rose:#be123c;
+  --pc-icon-cyan:#0e7490;
 }
-html[data-theme="dark"] .pc26-home{--pc-muted:#c4cbd0;--pc-brand-strong:#ffd45d}
+html[data-theme="dark"] .pc26-home{--pc-muted:#c4cbd0;--pc-brand-strong:#ffd45d;--pc-icon-blue:#7db2ff;--pc-icon-green:#5ee0aa;--pc-icon-orange:#ffb36b;--pc-icon-violet:#b79aff;--pc-icon-rose:#ff8eaa;--pc-icon-cyan:#67d4e7}
 .pc26-home :is(a,button){
   -webkit-tap-highlight-color:transparent;
   transition:color 160ms ease,background-color 160ms ease,border-color 160ms ease,box-shadow 180ms var(--pc-ease-out),transform 160ms var(--pc-ease-out),opacity 160ms ease!important;
@@ -76,6 +82,18 @@ html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
 }
 .pc26-home .pc26-footer-studio__meta-row{min-height:48px!important;color:#465158!important;font-size:11px!important}
 .pc26-home .pc26-footer-studio__developer strong{color:#171a1d!important}
+html:not([data-theme="dark"]) .pc26-home .pc26-footer-studio__meta-row,
+html:not([data-theme="dark"]) .pc26-home .pc26-footer-studio__meta-row>span,
+html:not([data-theme="dark"]) .pc26-home .pc26-footer-studio__developer{
+  color:#394349!important;
+  opacity:1!important;
+  -webkit-text-fill-color:#394349!important;
+}
+html:not([data-theme="dark"]) .pc26-home .pc26-footer-studio__developer strong{
+  color:#171a1d!important;
+  opacity:1!important;
+  -webkit-text-fill-color:#171a1d!important;
+}
 html[data-theme="dark"] .pc26-home .pc26-footer--studio{border-color:#3d4349!important;background:#1d2125!important;color:#f7f7f4!important}
 html[data-theme="dark"] .pc26-home .pc26-footer-studio__eyebrow{color:#ffc62e!important}
 html[data-theme="dark"] .pc26-home .pc26-footer-studio__intro>strong{color:#fff!important}
@@ -85,6 +103,30 @@ html[data-theme="dark"] .pc26-home .pc26-footer-studio__nav a svg{color:#ffc62e!
 html[data-theme="dark"] .pc26-home .pc26-footer-studio__meta{border-color:#343a40!important;background:#171a1d!important}
 html[data-theme="dark"] .pc26-home .pc26-footer-studio__meta-row{color:#cbd0d3!important}
 html[data-theme="dark"] .pc26-home .pc26-footer-studio__developer strong{color:#fff!important}
+
+/* UI UX Pro Max: cor semântica com uma única família de ícones Lucide. */
+.pc26-home :is(.pc26-benefits i,.pc26-category-card i){transition:color 180ms ease,background-color 180ms ease,transform 180ms var(--pc-ease-out)!important}
+.pc26-home .pc26-benefits article:nth-child(6n+1) i,.pc26-home .pc26-category-card:nth-child(6n+1) i{background:color-mix(in srgb,var(--pc-icon-blue) 12%,var(--pc-surface))!important;color:var(--pc-icon-blue)!important}
+.pc26-home .pc26-benefits article:nth-child(6n+2) i,.pc26-home .pc26-category-card:nth-child(6n+2) i{background:color-mix(in srgb,var(--pc-icon-green) 12%,var(--pc-surface))!important;color:var(--pc-icon-green)!important}
+.pc26-home .pc26-benefits article:nth-child(6n+3) i,.pc26-home .pc26-category-card:nth-child(6n+3) i{background:color-mix(in srgb,var(--pc-icon-orange) 13%,var(--pc-surface))!important;color:var(--pc-icon-orange)!important}
+.pc26-home .pc26-benefits article:nth-child(6n+4) i,.pc26-home .pc26-category-card:nth-child(6n+4) i{background:color-mix(in srgb,var(--pc-icon-violet) 12%,var(--pc-surface))!important;color:var(--pc-icon-violet)!important}
+.pc26-home .pc26-benefits article:nth-child(6n+5) i,.pc26-home .pc26-category-card:nth-child(6n+5) i{background:color-mix(in srgb,var(--pc-icon-rose) 12%,var(--pc-surface))!important;color:var(--pc-icon-rose)!important}
+.pc26-home .pc26-category-card:nth-child(6n) i{background:color-mix(in srgb,var(--pc-icon-cyan) 12%,var(--pc-surface))!important;color:var(--pc-icon-cyan)!important}
+.pc26-home .pc26-header-studio__search{color:var(--pc-icon-blue)!important}
+.pc26-home .pc26-header-studio__tools>.pc26-header-studio__tool:nth-child(2){color:var(--pc-icon-rose)!important}
+.pc26-home .pc26-header-studio__basket{color:var(--pc-icon-green)!important}
+.pc26-home .pc26-header-studio__menu{color:var(--pc-icon-orange)!important}
+.pc26-home .pc26-header-studio__tools>button:nth-of-type(2){color:var(--pc-icon-violet)!important}
+.pc26-home .pc26-model-hero .pc26-search>svg{color:var(--pc-icon-blue)!important}
+.pc26-home .pc26-footer-studio__eyebrow svg{color:var(--pc-icon-rose)!important}
+.pc26-home .pc26-footer-studio__nav a:nth-child(1) svg{color:var(--pc-icon-blue)!important}
+.pc26-home .pc26-footer-studio__nav a:nth-child(2) svg{color:var(--pc-icon-green)!important}
+.pc26-home .pc26-footer-studio__nav a:nth-child(3) svg{color:var(--pc-icon-violet)!important}
+.pc26-home .pc26-bottom-nav a:nth-child(1) svg{color:var(--pc-icon-blue)!important}
+.pc26-home .pc26-bottom-nav a:nth-child(2) svg{color:var(--pc-icon-cyan)!important}
+.pc26-home .pc26-bottom-nav a:nth-child(3) svg{color:var(--pc-icon-green)!important}
+.pc26-home .pc26-bottom-nav a:nth-child(4) svg{color:var(--pc-icon-orange)!important}
+.pc26-home .pc26-bottom-nav a:nth-child(5) svg{color:var(--pc-icon-violet)!important}
 
 /* Ofertas: leitura direta, preço dominante e ação secundária. */
 .pc26-home .pc26-products__heading{padding-bottom:2px}
@@ -176,6 +218,7 @@ html[data-theme="dark"] .pc26-home .pc26-local-spotlight a{background:#ffc62e;co
   .pc26-home .pc26-header-studio__login:hover{box-shadow:0 7px 18px rgba(17,20,22,.18)!important;transform:translateY(-1px)!important}
   .pc26-home .pc26-live-search__submit:hover,.pc26-home .pc26-compare:hover,.pc26-home .pc26-category-more a:hover{filter:brightness(.96)}
   .pc26-home .pc26-category-card:hover,.pc26-home .pc26-product:hover{transform:translateY(-3px)!important}
+  .pc26-home .pc26-category-card:hover i{transform:translateY(-2px) scale(1.04)!important}
   .pc26-home .pc26-footer-studio__nav a:hover{border-top-color:#765500!important;background:transparent!important;color:#765500!important;transform:translateY(-1px)!important}
   html[data-theme="dark"] .pc26-home .pc26-footer-studio__nav a:hover{border-top-color:#ffc62e!important;background:transparent!important;color:#fff!important}
   .pc26-home .pc26-local-spotlight:hover .pc26-local-spotlight__image img{transform:scale(1.025)!important}
