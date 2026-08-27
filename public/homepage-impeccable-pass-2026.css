@@ -1,0 +1,109 @@
+/* Preço Certo — Impeccable pass 2026.6
+   Refinamento final: consistência, estados, acessibilidade e escala responsiva. */
+.pc26-home{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.pc26-home :is(a,button,input){-webkit-tap-highlight-color:transparent}
+.pc26-home :is(a,button,input):focus-visible{outline:3px solid color-mix(in srgb,var(--taste-brand) 32%,transparent)!important;outline-offset:3px!important}
+.pc26-home :is(button,a){touch-action:manipulation}
+
+/* Desktop: marca, rádio, navegação e ações em uma hierarquia única. */
+@media(min-width:1081px){
+  .pc26-home .pc26-header-studio{grid-template-columns:156px 170px minmax(320px,1fr) auto!important;gap:12px!important}
+  .pc26-home .pc26-header-studio__mobile-brand{display:flex!important;align-items:center!important;gap:9px!important;color:var(--taste-ink)!important;text-decoration:none!important}
+  .pc26-home .pc26-header-studio__mobile-brand img{width:38px!important;height:38px!important;flex:0 0 38px!important}
+  .pc26-home .pc26-header-studio__mobile-brand>span{display:grid!important;gap:2px!important}
+  .pc26-home .pc26-header-studio__mobile-brand strong{font-family:"Outfit Variable",Outfit,sans-serif!important;font-size:.92rem!important;font-weight:850!important;line-height:1!important;letter-spacing:-.025em!important}
+  .pc26-home .pc26-header-studio__mobile-brand small{color:var(--taste-muted)!important;font-size:.54rem!important;font-weight:760!important;letter-spacing:.07em!important;text-transform:uppercase!important}
+  .pc26-home .pc26-header-studio__radio .pc-radio{width:100%!important;max-width:170px!important}
+}
+
+/* Barra de pesquisa e resultados: clareza em todos os estados. */
+.pc26-home .pc26-hero-search:focus-within{border-color:color-mix(in srgb,var(--taste-brand) 62%,#fff)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--taste-brand) 11%,transparent),0 18px 40px rgba(23,45,31,.13)!important}
+.pc26-home .pc26-live-search__submit{transition:transform 160ms ease,background-color 160ms ease,box-shadow 160ms ease!important}
+.pc26-home .pc26-live-results__copy{min-width:0!important}
+.pc26-home .pc26-live-results__copy strong{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;color:var(--taste-ink)!important;font-size:.76rem!important}
+.pc26-home .pc26-live-results__copy small,.pc26-home .pc26-live-results__copy em{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;color:var(--taste-muted)!important;font-size:.62rem!important}
+.pc26-home .pc26-live-results__all{min-height:46px!important;color:var(--taste-brand-strong)!important;font-weight:820!important}
+
+/* Ícones: seis famílias sem efeito arco-íris excessivo. */
+.pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(1) i{background:#e8f3ff!important;color:#1769a7!important}
+.pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(2) i{background:#e9f7ef!important;color:#087a54!important}
+.pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(3) i{background:#fff1df!important;color:#a35408!important}
+.pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(4) i{background:#f0ebff!important;color:#6544a9!important}
+.pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(5) i{background:#ffecef!important;color:#a63d56!important}
+.pc26-home .pc26-category-card:nth-child(6) i{background:#e6f6f5!important;color:#087a78!important}
+.pc26-home :is(.pc26-benefits i,.pc26-category-card i) svg{stroke-width:1.85!important}
+
+/* Cards: borda nítida, profundidade discreta e conteúdo estável. */
+.pc26-home :is(.pc26-category-card,.pc26-product){isolation:isolate;transition:transform 190ms cubic-bezier(.2,.8,.2,1),border-color 190ms ease,box-shadow 190ms ease!important}
+.pc26-home .pc26-category-card:after{content:"";position:absolute;inset:auto 14px 0;height:2px;border-radius:2px 2px 0 0;background:var(--taste-brand);opacity:0;transform:scaleX(.35);transition:opacity 180ms ease,transform 180ms ease}
+.pc26-home .pc26-product__image{position:relative!important}
+.pc26-home .pc26-product__image:after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(255,255,255,.22),transparent 52%);pointer-events:none}
+.pc26-home .pc26-product h3{display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;overflow:hidden!important}
+.pc26-home .pc26-store-badge{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.pc26-home .pc26-compare svg{transition:transform 170ms ease!important}
+.pc26-home .pc26-skeleton{border-radius:20px!important;background:linear-gradient(100deg,#edf1ec 30%,#fafbf9 46%,#edf1ec 62%)!important;background-size:230% 100%!important;animation:pc26-impeccable-shimmer 1.45s ease infinite!important}
+@keyframes pc26-impeccable-shimmer{to{background-position-x:-130%}}
+
+/* Hero: enquadramento e detalhes que preservam leitura. */
+.pc26-home .pc26-model-hero__media{position:relative!important}
+.pc26-home .pc26-model-hero__media:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);pointer-events:none}
+.pc26-home .pc26-model-hero h1 em{position:relative;display:inline-block}
+.pc26-home .pc26-model-hero h1 em:after{content:"";position:absolute;right:2%;bottom:-.05em;left:2%;height:.08em;border-radius:999px;background:var(--taste-accent);opacity:.9;transform:rotate(-1deg)}
+
+/* Blocos inferiores e footer alinhados ao mesmo sistema. */
+.pc26-home .pc26-local-spotlight__image{position:relative!important}
+.pc26-home .pc26-local-spotlight__image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 65%,rgba(10,21,14,.08));pointer-events:none}
+.pc26-home .pc26-footer--studio{border-top:1px solid var(--taste-line)!important}
+.pc26-home .pc26-footer-studio__nav a{transition:transform 170ms ease,border-color 170ms ease,box-shadow 170ms ease!important}
+
+@media(hover:hover) and (pointer:fine){
+  .pc26-home .pc26-live-search__submit:hover{background:var(--taste-brand-strong)!important;box-shadow:0 8px 20px rgba(5,99,65,.2)!important;transform:translateY(-1px)!important}
+  .pc26-home :is(.pc26-category-card,.pc26-product):hover{transform:translateY(-4px)!important;border-color:color-mix(in srgb,var(--taste-brand) 35%,var(--taste-line))!important;box-shadow:0 18px 38px rgba(26,43,32,.11)!important}
+  .pc26-home .pc26-category-card:hover:after{opacity:1;transform:scaleX(1)}
+  .pc26-home .pc26-product:hover .pc26-compare svg{transform:translateX(3px)}
+  .pc26-home .pc26-popular-searches button:hover{border-color:#b9c9bd!important;background:#fff!important;color:var(--taste-brand-strong)!important}
+}
+
+/* Dark: superfícies distintas e ícones sem luminosidade agressiva. */
+html[data-theme="dark"] .pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(1) i{background:#19344a!important;color:#8ecbfa!important}
+html[data-theme="dark"] .pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(2) i{background:#173a2b!important;color:#80d8ad!important}
+html[data-theme="dark"] .pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(3) i{background:#44311d!important;color:#ffc37e!important}
+html[data-theme="dark"] .pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(4) i{background:#342b4a!important;color:#c3adff!important}
+html[data-theme="dark"] .pc26-home :is(.pc26-benefits article,.pc26-category-card):nth-child(5) i{background:#452a31!important;color:#ffadbe!important}
+html[data-theme="dark"] .pc26-home .pc26-category-card:nth-child(6) i{background:#173b39!important;color:#8ddbd6!important}
+html[data-theme="dark"] .pc26-home .pc26-live-results__list button:is(:hover,.is-active){background:#29342d!important}
+html[data-theme="dark"] .pc26-home .pc26-skeleton{background:linear-gradient(100deg,#232c26 30%,#303a33 46%,#232c26 62%)!important;background-size:230% 100%!important}
+
+/* Tablet: evita compressão do header e mantém cards proporcionais. */
+@media(min-width:768px) and (max-width:1080px){
+  .pc26-home .pc26-header-studio__mobile-brand{display:none!important}
+  .pc26-home .pc26-category-card{min-height:128px!important}
+  .pc26-home .pc26-product{min-height:340px!important}
+}
+
+/* Mobile: leitura maior, conteúdo mais compacto e navegação estável. */
+@media(max-width:767px){
+  .pc26-home .pc26-header-studio__mobile-brand{display:flex!important}
+  .pc26-home .pc26-model-hero h1 em:after{height:.07em}
+  .pc26-home .pc26-hero__stats span{min-width:68px!important}
+  .pc26-home .pc26-hero__stats strong{font-size:1.08rem!important}
+  .pc26-home .pc26-benefits article{gap:8px!important}
+  .pc26-home .pc26-category-more{margin-top:15px!important}
+  .pc26-home .pc26-products__heading>a{min-height:38px!important;padding:0 4px!important}
+  .pc26-home .pc26-product__image:before{font-size:.55rem!important}
+  .pc26-home .pc26-store-badge{font-size:.55rem!important}
+  .pc26-home .pc26-compare{font-size:.62rem!important}
+  .pc26-home .pc26-bottom-nav a{position:relative!important}
+  .pc26-home .pc26-bottom-nav a.is-active:after{content:"";position:absolute;top:4px;left:50%;width:16px;height:2px;border-radius:99px;background:#755900;transform:translateX(-50%)}
+  .pc26-home .pc26-footer-studio__nav a{min-width:0!important}
+  .pc26-home .pc26-footer-studio__nav a strong{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+}
+
+@media(max-width:390px){
+  .pc26-home .pc26-model-hero p{font-size:.87rem!important}
+  .pc26-home .pc26-live-results__price small{display:none!important}
+  .pc26-home .pc26-live-results__price strong{font-size:.72rem!important}
+  .pc26-home .pc26-bottom-nav a{font-size:.57rem!important}
+}
+
+@media(prefers-reduced-motion:reduce){.pc26-home .pc26-skeleton{animation:none!important}.pc26-home .pc26-model-hero h1 em:after{transform:none}}
