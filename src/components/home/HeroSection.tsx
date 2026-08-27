@@ -21,6 +21,16 @@ export function HeroSection({ products, loading, productCount, storeCount, price
         <div className="pc26-popular-searches"><span>Buscas populares:</span>{popular.map(item=><button type="button" key={item} onClick={()=>search(item)}>{item}</button>)}</div>
         <div className="pc26-hero__stats" aria-label="Cobertura do Preço Certo"><span><strong>{productCount || "—"}</strong><small>produtos</small></span><span><strong>{priceCount || "—"}</strong><small>preços</small></span><span><strong>{storeCount || "—"}</strong><small>lojas</small></span></div>
       </div>
+      <figure className="pc26-model-hero__media">
+        <img
+          src="/home-hero-compare-2026.webp"
+          alt="Consumidora comparando produtos em um mercado local de Feijó"
+          width="1823"
+          height="863"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </figure>
     </div>
   </section>;
 }

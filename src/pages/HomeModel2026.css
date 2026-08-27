@@ -9,6 +9,10 @@
 @media(max-width:420px){.pc26-model-hero__media{aspect-ratio:4/3}.pc26-benefits{grid-template-columns:1fr}.pc26-benefits article:nth-child(even){border-left:0}.pc26-benefits article:last-child{grid-column:auto}.pc26-category-grid{gap:10px!important}.pc26-category-card{min-height:116px!important;padding:12px 8px!important}}
 @media(prefers-reduced-motion:reduce){.pc26-popular-searches button,.pc26-category-card{transition:none!important}}
 
-/* Hero editorial sem mídia: mantém conteúdo compacto e elimina a coluna vazia. */
-.pc26-model-hero__inner{display:block!important}
-.pc26-model-hero__copy{width:min(100%,820px)!important}
+/* Hero fotográfica: enquadramento estável no desktop e no mobile. */
+.pc26-model-hero__inner{display:grid!important}
+.pc26-model-hero__copy{width:auto!important}
+.pc26-model-hero__media{border-color:rgba(255,255,255,.1)}
+.pc26-model-hero__media img{object-position:69% 50%}
+.pc26-model-hero__media:after{inset:0;height:auto;background:linear-gradient(90deg,rgba(11,13,15,.12),transparent 34%),linear-gradient(180deg,transparent 70%,rgba(11,13,15,.3))}
+@media(max-width:767px){.pc26-model-hero__media img{object-position:70% 50%}}
