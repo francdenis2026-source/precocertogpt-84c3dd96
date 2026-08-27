@@ -13,12 +13,6 @@ campaignTheme.href = "/campaign-theme.css?v=20260825-4";
 campaignTheme.dataset.precocertoTheme = "campaign-2026";
 document.head.appendChild(campaignTheme);
 
-const lightProfessionalTheme = document.createElement("link");
-lightProfessionalTheme.rel = "stylesheet";
-lightProfessionalTheme.href = "/light-professional-2026.css?v=20260825-1";
-lightProfessionalTheme.dataset.precocertoLightTheme = "professional-light-2026";
-document.head.appendChild(lightProfessionalTheme);
-
 const logoIntegrationTheme = document.createElement("link");
 logoIntegrationTheme.rel = "stylesheet";
 logoIntegrationTheme.href = "/logo-integration-2026.css?v=20260825-4";
@@ -31,114 +25,17 @@ typographyContrastTheme.href = "/typography-contrast-2026.css?v=20260825-1";
 typographyContrastTheme.dataset.precocertoTypography = "accessible-type-2026";
 document.head.appendChild(typographyContrastTheme);
 
-const lightIconContrastTheme = document.createElement("link");
-lightIconContrastTheme.rel = "stylesheet";
-lightIconContrastTheme.href = "/light-icon-contrast-2026.css?v=20260825-2";
-lightIconContrastTheme.dataset.precocertoLightIcons = "light-icon-contrast-2026";
-document.head.appendChild(lightIconContrastTheme);
-
-const glassShellTheme = document.createElement("link");
-glassShellTheme.rel = "stylesheet";
-glassShellTheme.href = "/glass-shell-2026.css?v=20260825-1";
-glassShellTheme.dataset.precocertoGlassShell = "glass-shell-2026";
-document.head.appendChild(glassShellTheme);
-
-const topbarControlsTheme = document.createElement("link");
-topbarControlsTheme.rel = "stylesheet";
-topbarControlsTheme.href = "/topbar-controls-2026.css?v=20260825-1";
-topbarControlsTheme.dataset.precocertoTopbarControls = "warm-controls-2026";
-document.head.appendChild(topbarControlsTheme);
-
-const mobileAppShellTheme = document.createElement("link");
-mobileAppShellTheme.rel = "stylesheet";
-mobileAppShellTheme.href = "/mobile-app-shell-2026.css?v=20260825-2";
-mobileAppShellTheme.dataset.precocertoMobileShell = "mobile-app-shell-2026";
-document.head.appendChild(mobileAppShellTheme);
-
 const pointerInteractionTheme = document.createElement("link");
 pointerInteractionTheme.rel = "stylesheet";
 pointerInteractionTheme.href = "/interaction-hover-2026.css?v=20260825-2";
 pointerInteractionTheme.dataset.precocertoPointerInteraction = "pointer-refined-2026";
 document.head.appendChild(pointerInteractionTheme);
 
-const professionalAppShellTheme = document.createElement("link");
-professionalAppShellTheme.rel = "stylesheet";
-professionalAppShellTheme.href = "/app-shell-professional-2026.css?v=20260826-2";
-professionalAppShellTheme.dataset.precocertoAppShell = "professional-app-shell-2026";
-document.head.appendChild(professionalAppShellTheme);
-
-const impeccableHomeTheme = document.createElement("link");
-impeccableHomeTheme.rel = "stylesheet";
-impeccableHomeTheme.href = "/impeccable-home-2026.css?v=20260826-1";
-impeccableHomeTheme.dataset.precocertoImpeccable = "homepage-polish-2026";
-document.head.appendChild(impeccableHomeTheme);
-
-const headerRedesignTheme = document.createElement("link");
-headerRedesignTheme.rel = "stylesheet";
-headerRedesignTheme.href = "/header-redesign-2026.css?v=20260826-3";
-headerRedesignTheme.dataset.precocertoHeader = "header-redesign-2026";
-document.head.appendChild(headerRedesignTheme);
-
 const searchRefinementTheme = document.createElement("link");
 searchRefinementTheme.rel = "stylesheet";
 searchRefinementTheme.href = "/search-refinement-2026.css?v=20260826-1";
 searchRefinementTheme.dataset.precocertoSearch = "live-search-refinement-2026";
 document.head.appendChild(searchRefinementTheme);
-
-const searchRelocationTheme = document.createElement("link");
-searchRelocationTheme.rel = "stylesheet";
-searchRelocationTheme.href = "/search-relocation-2026.css?v=20260826-1";
-searchRelocationTheme.dataset.precocertoSearchRelocation = "hero-search-2026";
-document.head.appendChild(searchRelocationTheme);
-
-const unifiedHeaderTheme = document.createElement("link");
-unifiedHeaderTheme.rel = "stylesheet";
-unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-4";
-unifiedHeaderTheme.dataset.precocertoUnifiedHeader = "studio-header-2026";
-document.head.appendChild(unifiedHeaderTheme);
-
-const footerStudioTheme = document.createElement("link");
-footerStudioTheme.rel = "stylesheet";
-footerStudioTheme.href = "/footer-studio-2026.css?v=20260826-1";
-footerStudioTheme.dataset.precocertoFooterStudio = "studio-footer-2026";
-document.head.appendChild(footerStudioTheme);
-
-const heroMarketTheme = document.createElement("link");
-heroMarketTheme.rel = "stylesheet";
-heroMarketTheme.href = "/hero-market-2026.css?v=20260826-1";
-heroMarketTheme.dataset.precocertoHeroMarket = "local-market-hero-2026";
-document.head.appendChild(heroMarketTheme);
-
-// A camada Impeccable precisa ser a autoridade final da homepage. Folhas de
-// compatibilidade carregadas acima não podem reintroduzir o visual legado.
-const impeccableFinalTheme = document.createElement("link");
-impeccableFinalTheme.rel = "stylesheet";
-impeccableFinalTheme.href = "/impeccable-home-2026.css?v=20260827-1";
-impeccableFinalTheme.dataset.precocertoImpeccableFinal = "homepage-impeccable-final-2026";
-document.head.appendChild(impeccableFinalTheme);
-
-// Sistema visual consolidado da homepage. Carregado por último para impedir
-// que camadas históricas voltem a sobrescrever o layout responsivo atual.
-const homepageMasterTheme = document.createElement("link");
-homepageMasterTheme.rel = "stylesheet";
-homepageMasterTheme.href = "/homepage-master-2026.css?v=20260827-1";
-homepageMasterTheme.dataset.precocertoHomepageMaster = "homepage-master-2026";
-document.head.appendChild(homepageMasterTheme);
-
-// Acabamento final da homepage ativa em desktop e mobile. Esta camada fica
-// isolada para que o refinamento não altere as demais páginas do aplicativo.
-const homepageImpeccableTheme = document.createElement("link");
-homepageImpeccableTheme.rel = "stylesheet";
-homepageImpeccableTheme.href = "/homepage-impeccable-2026.css?v=20260827-14";
-homepageImpeccableTheme.dataset.precocertoHomepageImpeccable = "homepage-impeccable-2026";
-document.head.appendChild(homepageImpeccableTheme);
-
-// Revisão Taste: autoridade final de escala, cor e interação da homepage.
-const homepageTasteTheme = document.createElement("link");
-homepageTasteTheme.rel = "stylesheet";
-homepageTasteTheme.href = "/homepage-taste-2026.css?v=20260827-3";
-homepageTasteTheme.dataset.precocertoHomepageTaste = "homepage-taste-2026";
-document.head.appendChild(homepageTasteTheme);
 
 // Dark Atelier: autoridade final do modo escuro em todo o produto.
 const darkAtelierTheme = document.createElement("link");
@@ -150,7 +47,7 @@ document.head.appendChild(darkAtelierTheme);
 // Redesign Geral Graphite 2026: autoridade final de cor, superfície e ritmo.
 const graphiteRedesign = document.createElement("link");
 graphiteRedesign.rel = "stylesheet";
-graphiteRedesign.href = "/redesign-graphite-2026.css?v=20260827-4";
+graphiteRedesign.href = "/redesign-graphite-2026.css?v=20260827-5";
 graphiteRedesign.dataset.precocertoGraphite = "redesign-graphite-2026";
 document.head.appendChild(graphiteRedesign);
 
