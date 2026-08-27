@@ -125,9 +125,17 @@ homepageMasterTheme.href = "/homepage-master-2026.css?v=20260827-1";
 homepageMasterTheme.dataset.precocertoHomepageMaster = "homepage-master-2026";
 document.head.appendChild(homepageMasterTheme);
 
+// Acabamento final da homepage ativa em desktop e mobile. Esta camada fica
+// isolada para que o refinamento não altere as demais páginas do aplicativo.
+const homepageImpeccableTheme = document.createElement("link");
+homepageImpeccableTheme.rel = "stylesheet";
+homepageImpeccableTheme.href = "/homepage-impeccable-2026.css?v=20260827-1";
+homepageImpeccableTheme.dataset.precocertoHomepageImpeccable = "homepage-impeccable-2026";
+document.head.appendChild(homepageImpeccableTheme);
+
 initializeSiteTheme();
 
-const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header],link[rel="stylesheet"][data-precocerto-footer-studio],link[rel="stylesheet"][data-precocerto-hero-market],link[rel="stylesheet"][data-precocerto-impeccable-final],link[rel="stylesheet"][data-precocerto-homepage-master]'));
+const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header],link[rel="stylesheet"][data-precocerto-footer-studio],link[rel="stylesheet"][data-precocerto-hero-market],link[rel="stylesheet"][data-precocerto-impeccable-final],link[rel="stylesheet"][data-precocerto-homepage-master],link[rel="stylesheet"][data-precocerto-homepage-impeccable]'));
 
 const revealApp = () => {
   document.documentElement.classList.remove("pc-prepaint");
