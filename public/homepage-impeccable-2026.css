@@ -48,12 +48,71 @@ html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
 .pc26-home .pc26-footer-studio__meta-row{color:#cbd0d3!important}
 .pc26-home .pc26-footer-studio__developer strong{color:#fff!important}
 
+/* Faixa editorial local: uma imagem com função, sem transformar a home em galeria. */
+.pc26-home .pc26-local-spotlight{
+  min-height:252px;
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
+  overflow:hidden;
+  border-radius:16px;
+  background:#171a1d;
+  color:#f7f7f4;
+}
+.pc26-home .pc26-local-spotlight__image{min-height:252px;overflow:hidden}
+.pc26-home .pc26-local-spotlight__image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:38% 44%;
+  transition:transform 240ms var(--pc-ease-out)!important;
+}
+.pc26-home .pc26-local-spotlight__copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:12px;
+  padding:clamp(24px,3.3vw,42px);
+}
+.pc26-home .pc26-local-spotlight h2{
+  max-width:14ch;
+  margin:0;
+  color:#fff;
+  font-family:"Outfit Variable",Outfit,sans-serif;
+  font-size:clamp(1.75rem,2.7vw,2.55rem);
+  font-weight:820;
+  line-height:1;
+  letter-spacing:-.04em;
+  text-wrap:balance;
+}
+.pc26-home .pc26-local-spotlight p{max-width:42ch;margin:0;color:#d2d6d9;font-size:.86rem;line-height:1.55}
+.pc26-home .pc26-local-spotlight a{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:4px;
+  padding:0 15px;
+  border-radius:11px;
+  background:var(--pc-brand);
+  color:#171a1d;
+  font-size:.76rem;
+  font-weight:900;
+}
+.pc26-home .pc26-local-spotlight a svg{width:16px;height:16px}
+
 @media(min-width:768px){
   .pc26-home .pc26-model-hero__inner{grid-template-columns:minmax(0,1.06fr) minmax(390px,.94fr)!important}
   .pc26-home .pc26-model-hero__copy{max-width:650px!important}
-  .pc26-home .pc26-model-hero__media{aspect-ratio:1.42!important}
-  .pc26-home .pc26-benefits{margin-top:-18px!important}
-  .pc26-home .pc26-category-card{min-height:148px!important}
+  .pc26-home .pc26-model-hero{padding-block:clamp(24px,3vw,38px)!important}
+  .pc26-home .pc26-model-hero__inner{gap:clamp(24px,3vw,42px)!important}
+  .pc26-home .pc26-model-hero__media{aspect-ratio:4/3!important}
+  .pc26-home .pc26-model-hero__media img{object-position:82% 48%!important}
+  .pc26-home .pc26-benefits{margin-top:-14px!important}
+  .pc26-home .pc26-categories{padding-top:44px!important;padding-bottom:16px!important}
+  .pc26-home .pc26-category-card{min-height:132px!important}
+  .pc26-home .pc26-products{padding-top:24px!important;padding-bottom:52px!important}
   .pc26-home .pc26-product{min-height:334px!important}
   .pc26-home .pc26-product__image{height:156px!important}
 }
@@ -65,6 +124,7 @@ html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
   .pc26-home .pc26-live-search__submit:hover,.pc26-home .pc26-compare:hover,.pc26-home .pc26-category-more a:hover{filter:brightness(.96)}
   .pc26-home .pc26-category-card:hover,.pc26-home .pc26-product:hover{transform:translateY(-3px)!important}
   .pc26-home .pc26-footer-studio__nav a:hover{border-color:#ffc62e!important;background:#30353a!important;color:#fff!important}
+  .pc26-home .pc26-local-spotlight:hover .pc26-local-spotlight__image img{transform:scale(1.025)!important}
 }
 
 @media(max-width:767px){
@@ -78,10 +138,11 @@ html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
   .pc26-home .pc26-header-studio__login{display:none!important}
   .pc26-home .pc26-header-studio__tool{width:44px!important;height:44px!important;min-width:44px!important;border-radius:13px!important}
 
-  .pc26-home .pc26-model-hero{padding:22px 0 28px!important}
-  .pc26-home .pc26-model-hero__inner{gap:18px!important}
+  .pc26-home .pc26-model-hero{padding:18px 0 22px!important}
+  .pc26-home .pc26-model-hero__inner{gap:14px!important}
   .pc26-home .pc26-model-hero__copy{order:0!important}
-  .pc26-home .pc26-model-hero__media{order:1!important;aspect-ratio:16/8.6!important;border-radius:18px!important}
+  .pc26-home .pc26-model-hero__media{order:1!important;aspect-ratio:5/4!important;border-radius:16px!important}
+  .pc26-home .pc26-model-hero__media img{object-position:82% 46%!important}
   .pc26-home .pc26-model-hero h1{max-width:10.5ch!important;font-size:clamp(2.42rem,11.8vw,3.35rem)!important;line-height:.95!important}
   .pc26-home .pc26-model-hero p{max-width:37ch!important;margin:13px 0 17px!important;font-size:.94rem!important}
   .pc26-home .pc26-model-hero .pc26-search{min-height:58px!important;border-radius:15px!important}
@@ -90,13 +151,20 @@ html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
   .pc26-home .pc26-hero__stats{padding-top:2px!important}
   .pc26-home .pc26-hero__stats span{display:grid!important;gap:1px!important}
   .pc26-home .pc26-benefits{margin-top:0!important;border-radius:16px!important}
-  .pc26-home .pc26-benefits article{min-height:78px!important}
-  .pc26-home .pc26-categories{padding-top:38px!important}
+  .pc26-home .pc26-benefits article{min-height:66px!important;padding-block:7px!important}
+  .pc26-home .pc26-benefits span{line-height:1.28!important}
+  .pc26-home .pc26-categories{padding-top:30px!important;padding-bottom:12px!important}
   .pc26-home .pc26-category-card{min-height:124px!important}
-  .pc26-home .pc26-products{padding-top:24px!important}
+  .pc26-home .pc26-products{padding-top:20px!important}
   .pc26-home .pc26-products .pc26-section-heading>a{min-width:72px!important;justify-content:flex-end!important}
   .pc26-home .pc26-bottom-nav a{padding-top:3px!important;border-radius:12px!important}
   .pc26-home .pc26-bottom-nav a:active{background:var(--pc-surface-2)!important}
+  .pc26-home .pc26-local-spotlight{grid-template-columns:1fr;margin-top:4px!important}
+  .pc26-home .pc26-local-spotlight__image{min-height:0;aspect-ratio:16/9}
+  .pc26-home .pc26-local-spotlight__image img{object-position:36% 42%}
+  .pc26-home .pc26-local-spotlight__copy{gap:10px;padding:20px}
+  .pc26-home .pc26-local-spotlight h2{max-width:16ch;font-size:1.82rem}
+  .pc26-home .pc26-local-spotlight p{font-size:.8rem}
 }
 
 @media(max-width:480px){
