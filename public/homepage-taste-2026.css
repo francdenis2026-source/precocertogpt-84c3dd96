@@ -1,0 +1,205 @@
+/* Preço Certo — Taste pass 2026.5
+   Camada final e restrita à homepage. Consolida hierarquia, cor, ritmo e toque. */
+.pc26-home{
+  --taste-ink:#17201c;
+  --taste-muted:#647069;
+  --taste-line:#dce3dc;
+  --taste-surface:#fff;
+  --taste-canvas:#f5f7f3;
+  --taste-brand:#087a54;
+  --taste-brand-strong:#056341;
+  --taste-accent:#f2b705;
+  --taste-accent-soft:#fff3bd;
+  --taste-radius-sm:12px;
+  --taste-radius-md:18px;
+  --taste-radius-lg:26px;
+  color:var(--taste-ink);
+  background:var(--taste-canvas);
+}
+.pc26-home main{overflow:clip}
+.pc26-home .pc26-shell{width:min(1180px,calc(100% - 40px))!important}
+
+/* Barra superior: leve, legível e com controles da mesma família. */
+.pc26-home .pc26-header--studio{
+  border-bottom:1px solid rgba(23,32,28,.09)!important;
+  background:rgba(250,251,248,.92)!important;
+  box-shadow:0 8px 30px rgba(28,39,32,.055)!important;
+  backdrop-filter:blur(18px) saturate(1.25)!important;
+}
+.pc26-home .pc26-header-studio{min-height:72px!important;gap:18px!important}
+.pc26-home .pc26-header-studio__nav{gap:3px!important;padding:4px!important;border-radius:14px!important;background:rgba(231,236,230,.66)!important}
+.pc26-home .pc26-header-studio__nav a{min-height:38px!important;padding:0 14px!important;border-radius:10px!important;font-size:.75rem!important;font-weight:760!important;letter-spacing:.005em!important}
+.pc26-home .pc26-header-studio__nav a[aria-current="page"]{background:#fff!important;color:var(--taste-ink)!important;box-shadow:0 3px 12px rgba(28,38,31,.09)!important}
+.pc26-home .pc26-header-studio__tools{gap:6px!important}
+.pc26-home .pc26-header-studio__tool{width:40px!important;height:40px!important;border:1px solid var(--taste-line)!important;border-radius:12px!important;background:#fff!important;color:#4f5b55!important}
+.pc26-home .pc26-header-studio__tool svg{width:18px!important;height:18px!important;stroke-width:2!important}
+.pc26-home .pc26-header-studio__login{min-height:40px!important;padding:0 14px!important;border-radius:12px!important;background:var(--taste-ink)!important;color:#fff!important;font-size:.75rem!important;box-shadow:none!important}
+
+/* Hero editorial: texto e fotografia com pesos distintos. */
+.pc26-home .pc26-model-hero{padding-block:34px 42px!important;background:linear-gradient(180deg,#fbfcf9 0%,#f4f7f2 100%)!important}
+.pc26-home .pc26-model-hero__inner{grid-template-columns:minmax(0,1.02fr) minmax(420px,.98fr)!important;gap:clamp(32px,4.8vw,68px)!important;align-items:center!important}
+.pc26-home .pc26-model-hero__copy{max-width:650px!important}
+.pc26-home .pc26-model-hero h1{max-width:10.5ch!important;margin:0!important;color:var(--taste-ink)!important;font-size:clamp(3.25rem,5vw,5rem)!important;font-weight:790!important;line-height:.94!important;letter-spacing:-.058em!important}
+.pc26-home .pc26-model-hero h1 em{color:var(--taste-brand)!important;font-style:normal!important}
+.pc26-home .pc26-model-hero p{max-width:52ch!important;margin:20px 0 24px!important;color:var(--taste-muted)!important;font-size:1rem!important;line-height:1.62!important}
+.pc26-home .pc26-model-hero__media{aspect-ratio:1.08/1!important;overflow:hidden!important;border:1px solid rgba(29,43,34,.12)!important;border-radius:var(--taste-radius-lg)!important;background:#d9e3db!important;box-shadow:0 24px 58px rgba(24,40,30,.14)!important}
+.pc26-home .pc26-model-hero__media img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:76% 48%!important;filter:saturate(.92) contrast(1.02)!important}
+
+/* Busca: foco visual forte sem virar um bloco pesado. */
+.pc26-home .pc26-hero__search-wrap{position:relative!important;z-index:30!important}
+.pc26-home .pc26-model-hero .pc26-hero-search{min-height:64px!important;padding:6px 6px 6px 19px!important;border:1px solid #cfd8d0!important;border-radius:18px!important;background:#fff!important;box-shadow:0 12px 32px rgba(29,44,34,.1)!important}
+.pc26-home .pc26-live-search__icon{width:21px!important;height:21px!important;color:var(--taste-brand)!important;stroke-width:2.2!important}
+.pc26-home .pc26-hero-search input{font-size:.94rem!important;font-weight:600!important;color:var(--taste-ink)!important}
+.pc26-home .pc26-hero-search input::placeholder{color:#7b867f!important}
+.pc26-home .pc26-live-search__submit{min-height:50px!important;padding:0 18px!important;border-radius:13px!important;background:var(--taste-brand)!important;color:#fff!important;font-size:.76rem!important;font-weight:850!important;box-shadow:none!important}
+.pc26-home .pc26-live-search__clear{width:36px!important;height:36px!important;border-radius:10px!important;color:#68746d!important}
+.pc26-home .pc26-live-results{overflow:hidden!important;margin-top:10px!important;border:1px solid var(--taste-line)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 24px 60px rgba(20,33,25,.18)!important}
+.pc26-home .pc26-live-results__head{padding:12px 15px!important;background:#f6f8f5!important}
+.pc26-home .pc26-live-results__list button{min-height:72px!important;padding:10px 14px!important;border-top:1px solid #edf0ec!important}
+.pc26-home .pc26-live-results__list button:is(:hover,.is-active){background:#eff7f2!important}
+.pc26-home .pc26-live-results__thumb{width:48px!important;height:48px!important;border-radius:11px!important;background:#f5f7f3!important}
+.pc26-home .pc26-live-results__price strong{color:var(--taste-brand-strong)!important}
+.pc26-home .pc26-popular-searches{gap:7px!important;margin-top:13px!important}
+.pc26-home .pc26-popular-searches button{min-height:30px!important;padding:0 10px!important;border:1px solid #d9e0da!important;border-radius:999px!important;background:rgba(255,255,255,.72)!important;color:#59655e!important;font-size:.65rem!important;font-weight:750!important}
+.pc26-home .pc26-hero__stats{margin-top:20px!important;padding-top:18px!important;border-top:1px solid #dfe5df!important}
+.pc26-home .pc26-hero__stats strong{color:var(--taste-ink)!important;font-size:1.12rem!important}
+.pc26-home .pc26-hero__stats small{color:#748078!important;font-size:.65rem!important}
+
+/* Benefícios e categorias: ícones diferenciados, paleta contida. */
+.pc26-home .pc26-benefits{margin-top:-18px!important;padding:12px!important;border:1px solid var(--taste-line)!important;border-radius:20px!important;background:rgba(255,255,255,.94)!important;box-shadow:0 14px 36px rgba(31,45,35,.07)!important}
+.pc26-home .pc26-benefits article{min-height:76px!important;padding:10px 12px!important;border-radius:14px!important}
+.pc26-home .pc26-benefits article+article{border-left:1px solid #e7ebe7!important}
+.pc26-home .pc26-benefits i{width:38px!important;height:38px!important;border-radius:12px!important}
+.pc26-home .pc26-benefits i svg{width:19px!important;height:19px!important;stroke-width:1.9!important}
+.pc26-home .pc26-benefits strong{font-size:.69rem!important;color:var(--taste-ink)!important}
+.pc26-home .pc26-benefits span{font-size:.61rem!important;color:#738078!important;line-height:1.35!important}
+.pc26-home .pc26-categories{padding-block:54px 32px!important}
+.pc26-home .pc26-section-heading h2{color:var(--taste-ink)!important;font-size:clamp(2rem,3.2vw,3rem)!important;font-weight:780!important;line-height:1!important}
+.pc26-home .pc26-section-heading h2 em{color:var(--taste-brand)!important;font-style:normal!important}
+.pc26-home .pc26-section-heading p{margin-top:9px!important;color:var(--taste-muted)!important;font-size:.84rem!important}
+.pc26-home .pc26-category-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:10px!important}
+.pc26-home .pc26-category-card{min-height:142px!important;padding:18px 12px!important;border:1px solid var(--taste-line)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 7px 22px rgba(32,45,36,.04)!important}
+.pc26-home .pc26-category-card i{width:48px!important;height:48px!important;border-radius:15px!important}
+.pc26-home .pc26-category-card i svg{width:23px!important;height:23px!important;stroke-width:1.8!important}
+.pc26-home .pc26-category-card strong{font-size:.79rem!important;color:var(--taste-ink)!important}
+.pc26-home .pc26-category-card span{font-size:.63rem!important;color:#738078!important}
+.pc26-home .pc26-category-more a{color:var(--taste-brand-strong)!important;font-size:.72rem!important;font-weight:800!important}
+
+/* Comércio e produtos: cards com informação, não decoração excessiva. */
+.pc26-home .pc26-local-spotlight{margin-block:20px 34px!important;border:1px solid var(--taste-line)!important;border-radius:24px!important;background:#fff!important;color:var(--taste-ink)!important;box-shadow:0 14px 38px rgba(31,44,35,.07)!important}
+.pc26-home .pc26-local-spotlight__image{min-height:276px!important}
+.pc26-home .pc26-local-spotlight__copy{padding:clamp(24px,4vw,50px)!important}
+.pc26-home .pc26-local-spotlight h2{color:var(--taste-ink)!important;font-size:clamp(2rem,3vw,3rem)!important;line-height:1.02!important}
+.pc26-home .pc26-local-spotlight p{color:var(--taste-muted)!important;font-size:.88rem!important}
+.pc26-home .pc26-local-spotlight a{min-height:44px!important;border-radius:12px!important;background:var(--taste-ink)!important;color:#fff!important}
+.pc26-home .pc26-products{padding-block:28px 58px!important}
+.pc26-home .pc26-products__heading{margin-bottom:20px!important}
+.pc26-home .pc26-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
+.pc26-home .pc26-product{min-height:354px!important;overflow:hidden!important;border:1px solid var(--taste-line)!important;border-radius:20px!important;background:#fff!important;box-shadow:0 8px 25px rgba(30,43,34,.055)!important}
+.pc26-home .pc26-product__image{height:166px!important;background:linear-gradient(145deg,#fafbf8,#f0f4ef)!important}
+.pc26-home .pc26-product__image img{max-width:132px!important;max-height:132px!important;filter:drop-shadow(0 10px 12px rgba(24,35,28,.12))!important}
+.pc26-home .pc26-product__body{padding:14px 15px 16px!important}
+.pc26-home .pc26-store-badge{width:max-content!important;max-width:100%!important;padding:5px 7px!important;border-radius:7px!important;background:#eaf6ef!important;color:#096947!important;font-size:.57rem!important;font-weight:820!important}
+.pc26-home .pc26-product h3{margin:9px 0 4px!important;color:var(--taste-ink)!important;font-size:.87rem!important;line-height:1.28!important}
+.pc26-home .pc26-product__meta{color:#78827c!important;font-size:.65rem!important}
+.pc26-home .pc26-prices strong{color:var(--taste-brand-strong)!important;font-size:1.32rem!important}
+.pc26-home .pc26-compare{margin-top:auto!important;color:#3f4b44!important;font-size:.66rem!important;font-weight:800!important}
+
+/* Tema escuro sem preto absoluto e com contraste confortável. */
+html[data-theme="dark"] .pc26-home{--taste-ink:#f1f4f1;--taste-muted:#b4beb7;--taste-line:#39443d;--taste-surface:#202722;--taste-canvas:#181e1a;background:#181e1a;color:#f1f4f1}
+html[data-theme="dark"] .pc26-home .pc26-header--studio{background:rgba(25,31,27,.94)!important;border-color:#354039!important}
+html[data-theme="dark"] .pc26-home .pc26-header-studio__nav{background:#202722!important}
+html[data-theme="dark"] .pc26-home .pc26-header-studio__nav a[aria-current="page"],html[data-theme="dark"] .pc26-home .pc26-header-studio__tool{background:#2a332d!important;color:#f3f5f3!important;border-color:#3d4941!important}
+html[data-theme="dark"] .pc26-home .pc26-model-hero{background:linear-gradient(180deg,#1b221d,#171d19)!important}
+html[data-theme="dark"] .pc26-home :is(.pc26-hero-search,.pc26-live-results,.pc26-benefits,.pc26-category-card,.pc26-local-spotlight,.pc26-product){background:#202722!important;border-color:#39443d!important}
+html[data-theme="dark"] .pc26-home .pc26-live-results__head,html[data-theme="dark"] .pc26-home .pc26-product__image{background:#252e28!important}
+html[data-theme="dark"] .pc26-home .pc26-hero-search input{color:#f3f5f3!important}
+html[data-theme="dark"] .pc26-home .pc26-benefits article+article{border-color:#354039!important}
+html[data-theme="dark"] .pc26-home .pc26-store-badge{background:#173b2d!important;color:#83dfb4!important}
+html[data-theme="dark"] .pc26-home .pc26-compare{color:#d3dad5!important}
+
+@media(max-width:980px) and (min-width:768px){
+  .pc26-home .pc26-shell{width:min(100% - 32px,920px)!important}
+  .pc26-home .pc26-model-hero__inner{grid-template-columns:1fr 390px!important;gap:28px!important}
+  .pc26-home .pc26-model-hero h1{font-size:3.45rem!important}
+  .pc26-home .pc26-category-grid{grid-template-columns:repeat(3,1fr)!important}
+  .pc26-home .pc26-grid{grid-template-columns:repeat(3,1fr)!important}
+}
+
+/* Mobile: densidade própria de app, alvos de toque e leitura maiores. */
+@media(max-width:767px){
+  .pc26-home{padding-bottom:calc(76px + env(safe-area-inset-bottom))!important}
+  .pc26-home .pc26-shell{width:calc(100% - 28px)!important}
+  .pc26-home .pc26-header-studio{min-height:62px!important;grid-template-columns:minmax(104px,1fr) 40px auto!important;gap:6px!important;padding-block:7px!important}
+  .pc26-home .pc26-header-studio__mobile-brand{gap:8px!important}
+  .pc26-home .pc26-header-studio__mobile-brand img{width:34px!important;height:34px!important;flex-basis:34px!important}
+  .pc26-home .pc26-header-studio__mobile-brand strong{font-size:.93rem!important}
+  .pc26-home .pc26-header-studio__mobile-brand small{font-size:.55rem!important}
+  .pc26-home .pc26-header-studio__tools{grid-template-columns:repeat(3,40px)!important;gap:3px!important}
+  .pc26-home .pc26-header-studio__tool,.pc26-home .pc26-header-studio__radio,.pc26-home .pc26-header-studio__radio .pc-radio{width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important;border-radius:12px!important}
+  .pc26-home .pc26-header-studio__nav{top:calc(70px + env(safe-area-inset-top))!important}
+  .pc26-home .pc26-model-hero{padding:20px 0 24px!important}
+  .pc26-home .pc26-model-hero__inner{display:flex!important;flex-direction:column!important;gap:18px!important}
+  .pc26-home .pc26-model-hero__copy{width:100%!important}
+  .pc26-home .pc26-model-hero h1{max-width:11ch!important;font-size:clamp(2.55rem,12vw,3.35rem)!important;line-height:.94!important}
+  .pc26-home .pc26-model-hero p{margin:13px 0 17px!important;font-size:.91rem!important;line-height:1.5!important}
+  .pc26-home .pc26-model-hero .pc26-hero-search{min-height:58px!important;padding:5px 5px 5px 14px!important;border-radius:15px!important}
+  .pc26-home .pc26-hero-search input{min-width:0!important;font-size:.86rem!important}
+  .pc26-home .pc26-live-search__submit{min-width:48px!important;width:48px!important;min-height:48px!important;padding:0!important;font-size:0!important}
+  .pc26-home .pc26-live-search__submit svg{width:20px!important;height:20px!important}
+  .pc26-home .pc26-live-results{position:absolute!important;left:0!important;right:0!important;max-height:min(62vh,470px)!important;overflow:auto!important}
+  .pc26-home .pc26-live-results__list button{grid-template-columns:44px minmax(0,1fr) auto!important;min-height:68px!important;padding:9px 10px!important}
+  .pc26-home .pc26-live-results__thumb{width:44px!important;height:44px!important}
+  .pc26-home .pc26-popular-searches{overflow-x:auto!important;flex-wrap:nowrap!important;margin-inline:-14px!important;padding-inline:14px!important;scrollbar-width:none!important}
+  .pc26-home .pc26-popular-searches>span{display:none!important}
+  .pc26-home .pc26-popular-searches button{flex:0 0 auto!important;min-height:32px!important;font-size:.66rem!important}
+  .pc26-home .pc26-hero__stats{justify-content:space-between!important;margin-top:16px!important;padding-top:14px!important}
+  .pc26-home .pc26-model-hero__media{width:100%!important;aspect-ratio:16/10!important;border-radius:18px!important;box-shadow:0 16px 34px rgba(25,40,31,.13)!important}
+  .pc26-home .pc26-model-hero__media img{object-position:73% 46%!important}
+  .pc26-home .pc26-benefits{display:grid!important;grid-template-columns:1fr 1fr!important;gap:4px!important;margin-top:12px!important;padding:7px!important;border-radius:17px!important}
+  .pc26-home .pc26-benefits article{min-height:64px!important;padding:8px!important}
+  .pc26-home .pc26-benefits article+article{border-left:0!important}
+  .pc26-home .pc26-benefits article:last-child{grid-column:1/-1!important}
+  .pc26-home .pc26-benefits i{width:34px!important;height:34px!important;border-radius:10px!important}
+  .pc26-home .pc26-benefits strong{font-size:.67rem!important}
+  .pc26-home .pc26-benefits span{font-size:.59rem!important}
+  .pc26-home .pc26-categories{padding-block:38px 22px!important}
+  .pc26-home .pc26-section-heading h2{font-size:2rem!important}
+  .pc26-home .pc26-category-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;overflow:visible!important}
+  .pc26-home .pc26-category-card{min-width:0!important;min-height:112px!important;padding:13px 7px!important;border-radius:15px!important}
+  .pc26-home .pc26-category-card i{width:40px!important;height:40px!important;border-radius:12px!important}
+  .pc26-home .pc26-category-card i svg{width:20px!important;height:20px!important}
+  .pc26-home .pc26-category-card strong{font-size:.7rem!important}
+  .pc26-home .pc26-category-card span{font-size:.56rem!important;text-align:center!important}
+  .pc26-home .pc26-local-spotlight{margin-block:14px 25px!important;border-radius:18px!important}
+  .pc26-home .pc26-local-spotlight__image{aspect-ratio:16/9!important;min-height:0!important}
+  .pc26-home .pc26-local-spotlight__copy{padding:20px!important}
+  .pc26-home .pc26-local-spotlight h2{font-size:1.72rem!important}
+  .pc26-home .pc26-local-spotlight a{min-height:42px!important;width:100%!important;justify-content:center!important}
+  .pc26-home .pc26-products{padding-block:18px 30px!important}
+  .pc26-home .pc26-products__heading h2{font-size:1.75rem!important}
+  .pc26-home .pc26-grid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+  .pc26-home .pc26-grid>.pc26-product:nth-child(n+5){display:none!important}
+  .pc26-home .pc26-product{display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;min-height:154px!important;border-radius:17px!important}
+  .pc26-home .pc26-product__image{height:100%!important;min-height:154px!important}
+  .pc26-home .pc26-product__image img{max-width:88px!important;max-height:88px!important}
+  .pc26-home .pc26-product__body{padding:12px!important}
+  .pc26-home .pc26-product h3{font-size:.83rem!important}
+  .pc26-home .pc26-prices strong{font-size:1.22rem!important}
+  .pc26-home .pc26-bottom-nav{right:10px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;left:10px!important;min-height:66px!important;padding:6px!important;border:1px solid rgba(35,48,40,.13)!important;border-radius:20px!important;background:rgba(255,255,253,.96)!important;box-shadow:0 14px 36px rgba(22,34,27,.18)!important}
+  .pc26-home .pc26-bottom-nav a{min-height:52px!important;border-radius:14px!important;font-size:.61rem!important;font-weight:760!important}
+  .pc26-home .pc26-bottom-nav a svg{width:20px!important;height:20px!important;stroke-width:2!important}
+  .pc26-home .pc26-bottom-nav a.is-active{background:var(--taste-accent-soft)!important;color:#533e00!important;box-shadow:inset 0 0 0 1px #e5cd72!important}
+}
+
+@media(max-width:370px){
+  .pc26-home .pc26-shell{width:calc(100% - 22px)!important}
+  .pc26-home .pc26-header-studio__radio{display:none!important}
+  .pc26-home .pc26-header-studio{grid-template-columns:minmax(102px,1fr) auto!important}
+  .pc26-home .pc26-model-hero h1{font-size:2.35rem!important}
+  .pc26-home .pc26-category-card span{display:none!important}
+  .pc26-home .pc26-category-card{min-height:92px!important}
+  .pc26-home .pc26-product{grid-template-columns:98px minmax(0,1fr)!important}
+}
+
+@media(prefers-reduced-motion:reduce){.pc26-home *{scroll-behavior:auto!important;transition-duration:.001ms!important}}
