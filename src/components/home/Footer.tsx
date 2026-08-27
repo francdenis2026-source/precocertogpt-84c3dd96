@@ -6,7 +6,7 @@ export function Footer() {
     <div className="pc26-shell pc26-footer-studio">
       <div className="pc26-footer-studio__intro">
         <Link className="pc26-footer-studio__brand" to="/" aria-label="Preço Certo — página inicial">
-          <img src="/logo-preco-certo-simbolo.svg" alt="" width="48" height="48" />
+          <img src="/preco-certo-mark.svg" alt="" width="48" height="48" />
           <span><strong>Preço Certo</strong><small>Comparador local</small></span>
         </Link>
         <h2>Compare melhor. Compre perto.</h2>
