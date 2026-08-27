@@ -97,13 +97,19 @@ html[data-theme="dark"] {
 }
 
 /* --- Canvas global ------------------------------------------------------- */
-html,
+html:where([data-theme]),
+html:where(:not([data-theme])),
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html[data-theme="light"] body,
+html:not([data-theme="dark"]) body,
 html body {
-  background: var(--gx-canvas) !important;
+  background-color: var(--gx-canvas) !important;
   background-image: none !important;
-  color: var(--gx-ink);
+  color: var(--gx-ink) !important;
 }
 
+html[data-theme="dark"] #root,
 html #root {
   background: transparent !important;
 }
