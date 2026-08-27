@@ -5,7 +5,7 @@ export function Footer() {
   return <footer className="pc26-footer pc26-footer--studio">
     <div className="pc26-shell pc26-footer-studio">
       <div className="pc26-footer-studio__intro">
-        <Link className="pc26-footer-studio__brand" to="/" aria-label="Preço Certo — página inicial">
+        <Link className="pc26-footer-studio__brand" to="/" aria-label="Preço Certo - página inicial">
           <img src="/preco-certo-mark.svg" alt="" width="48" height="48" />
           <span><strong>Preço Certo</strong><small>Comparador local</small></span>
         </Link>

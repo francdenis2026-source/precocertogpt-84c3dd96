@@ -19,7 +19,7 @@ export function HeroSection({ products, loading, productCount, storeCount, price
         <p>Compare preços nos estabelecimentos de Feijó e escolha onde comprar antes de sair de casa.</p>
         <div className="pc26-hero__search-wrap"><LiveProductSearch id="price-search" products={products} loading={loading} /></div>
         <div className="pc26-popular-searches"><span>Buscas populares:</span>{popular.map(item=><button type="button" key={item} onClick={()=>search(item)}>{item}</button>)}</div>
-        <div className="pc26-hero__stats" aria-label="Cobertura do Preço Certo"><span><strong>{productCount || "—"}</strong><small>produtos</small></span><span><strong>{priceCount || "—"}</strong><small>preços</small></span><span><strong>{storeCount || "—"}</strong><small>lojas</small></span></div>
+        <div className="pc26-hero__stats" aria-label="Cobertura do Preço Certo"><span><strong>{productCount || "-"}</strong><small>produtos</small></span><span><strong>{priceCount || "-"}</strong><small>preços</small></span><span><strong>{storeCount || "-"}</strong><small>lojas</small></span></div>
       </div>
       <figure className="pc26-model-hero__media">
         <img
