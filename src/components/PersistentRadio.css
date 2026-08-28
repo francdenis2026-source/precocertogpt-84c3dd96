@@ -297,29 +297,51 @@ html[data-theme="light"] .pc-radio__track {
   color: #123b2d;
 }
 html[data-theme="dark"] .pc-radio {
-  --ra: #63b58f;
-  --ras: #22352d;
+  --ra: #d4ae62;
+  --ras: #272219;
   --rl: #ef7a66;
-  background: #20262a;
-  border-color: #3a4942;
-  color: #f1f5f2;
-  box-shadow: none;
+  background: linear-gradient(145deg, #1c1b19, #11110f);
+  border-color: #55472d;
+  color: #f7f2e8;
+  box-shadow:
+    0 6px 18px rgb(0 0 0/28%),
+    inset 0 1px 0 rgb(255 255 255/5%);
 }
 html[data-theme="dark"] .pc-radio.is-playing {
-  background: #22352d;
-  border-color: #4c8c70;
+  background: linear-gradient(135deg, #211d16, #0f0f0e 72%);
+  border-color: #b9914a;
+  box-shadow:
+    0 7px 22px rgb(0 0 0/38%),
+    0 0 0 1px rgb(212 174 98/8%);
 }
 html[data-theme="dark"] .pc-radio.is-playing .pc-radio__control {
-  background: #63b58f;
-  color: #10241b;
+  background: linear-gradient(145deg, #e0bd73, #b98e42);
+  color: #17140f;
+  box-shadow:
+    0 6px 14px rgb(0 0 0/34%),
+    inset 0 1px 0 rgb(255 255 255/32%);
 }
 html[data-theme="dark"] .pc-radio.is-playing .pc-radio__copy small {
-  color: #9dd5bb;
+  color: #d8bc83;
+}
+html[data-theme="dark"] .pc-radio__copy small {
+  color: #b9ad98;
+}
+html[data-theme="dark"] .pc-radio__copy strong {
+  color: #f7f2e8;
+}
+html[data-theme="dark"] .pc-radio__signal i {
+  background: #807158;
+}
+html[data-theme="dark"] .pc-radio.is-playing .pc-radio__signal i {
+  background: #d4ae62;
+  box-shadow: 0 0 5px rgb(212 174 98/26%);
 }
 html[data-theme="dark"] .pc-radio__track {
-  background: #20282c;
-  border-color: #405049;
-  color: #f1f5f2;
+  background: linear-gradient(145deg, #1d1b17, #10100f);
+  border-color: #685735;
+  color: #f7f2e8;
+  box-shadow: 0 16px 38px rgb(0 0 0/46%);
 }
 @media (max-width: 1120px) {
   .pc-radio {
