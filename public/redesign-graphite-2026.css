@@ -1196,3 +1196,46 @@ html[data-theme="dark"] body.pc-app-shell :is(.pc26-category,
   font-weight: 600 !important;
   text-decoration: none !important;
 }
+
+/* --- Limpeza de molduras e cápsulas herdadas ----------------------------- */
+html body .pc26-header-studio__nav,
+html body .pc26-header-studio__tools,
+html body .pc26-benefits,
+html body .pc26-categories,
+html body .pc26-category-row,
+html body .pc26-products,
+html body .pc26-hero__stats {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding-inline: 0 !important;
+}
+html body .pc26-hero__stats { border-top: 1px solid var(--gx-border) !important; }
+html body .pc26-header-studio__nav a::before,
+html body .pc26-header-studio__nav a::after { display: none !important; }
+html body .pc26-header-studio__nav a[aria-current="page"] {
+  background: var(--gx-accent-soft) !important;
+  color: var(--gx-accent-ink) !important;
+  box-shadow: none !important;
+}
+html body .pc26-category-more {
+  background: var(--gx-surface) !important;
+  border: 1px solid var(--gx-border-strong) !important;
+  color: var(--gx-ink) !important;
+  box-shadow: none !important;
+}
+html body .pc26-categories > div:has(.pc26-category-more) {
+  border: 0 !important;
+  background: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin-top: 1rem !important;
+}
+html body .pc26-category,
+html body .pc26-category-card { flex-direction: column !important; align-items: flex-start !important; }
+html body .pc26-category strong,
+html body .pc26-category-card strong { color: var(--gx-ink) !important; }
+html body .pc26-category small,
+html body .pc26-category-card small { color: var(--gx-muted) !important; }
