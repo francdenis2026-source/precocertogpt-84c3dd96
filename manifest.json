@@ -12,22 +12,16 @@
   "orientation": "any",
   "categories": ["shopping", "utilities", "lifestyle"],
   "shortcuts": [
-    {"name":"Buscar preços","short_name":"Buscar","url":"/buscar","icons":[{"src":"/favicon.png?v=14","sizes":"512x512","type":"image/png"}]},
-    {"name":"Minha cesta","short_name":"Cesta","url":"/cesta-basica","icons":[{"src":"/favicon.png?v=14","sizes":"512x512","type":"image/png"}]},
-    {"name":"Explorar locais","short_name":"Explorar","url":"/explorar","icons":[{"src":"/favicon.png?v=14","sizes":"512x512","type":"image/png"}]}
+    {"name":"Buscar preços","short_name":"Buscar","url":"/buscar","icons":[{"src":"/logo-preco-certo.svg?v=15","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"Minha cesta","short_name":"Cesta","url":"/cesta-basica","icons":[{"src":"/logo-preco-certo.svg?v=15","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"Explorar locais","short_name":"Explorar","url":"/explorar","icons":[{"src":"/logo-preco-certo.svg?v=15","sizes":"any","type":"image/svg+xml"}]}
   ],
   "icons": [
     {
-      "src": "/favicon.png?v=14",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "/logo-preco-certo.svg?v=15",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
-    },
-    {
-      "src": "/favicon.png?v=14",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ],
   "screenshots": [
