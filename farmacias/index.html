@@ -37,11 +37,12 @@
 
     <meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)" />
-    <!-- Uma única identidade visual: a mesma logomarca vetorial usada pelo site. SVG + sizes=any mantém definição máxima em qualquer densidade de tela. -->
-    <link rel="icon" href="/logo-preco-certo.svg?v=15" type="image/svg+xml" sizes="any" />
-    <link rel="shortcut icon" href="/logo-preco-certo.svg?v=15" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=14" sizes="1024x1024" />
-    <link rel="manifest" href="/manifest.json?v=15" />
+    <!-- Marca oficial compacta: etiqueta de preço do PreçoCerto. O SVG usa sizes=any e ocupa praticamente todo o canvas, mantendo máxima nitidez no endereço/aba. -->
+    <link rel="icon" href="/preco-certo-mark.svg?v=16" type="image/svg+xml" sizes="any" />
+    <link rel="alternate icon" href="/favicon.png?v=16" type="image/png" sizes="512x512" />
+    <link rel="shortcut icon" href="/favicon.ico?v=16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=16" sizes="1024x1024" />
+    <link rel="manifest" href="/manifest.json?v=16" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -50,13 +51,15 @@
     <meta property="og:description" content="Explore farmácias e produtos disponíveis no comércio local de Feijó (AC)." />
     <meta property="og:url" content="https://www.precocerto.live/farmacias" />
     <meta property="og:image" content="https://www.precocerto.live/og.png" />
-    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="PreçoCerto — compare preços no comércio local de Feijó" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Farmácias em Feijó | PreçoCerto" />
     <meta name="twitter:description" content="Explore farmácias e produtos disponíveis no comércio local de Feijó (AC)." />
     <meta name="twitter:image" content="https://www.precocerto.live/og.png" />
+    <meta name="twitter:image:alt" content="PreçoCerto — compare preços no comércio local de Feijó" />
 
     <script type="application/ld+json">
       {
@@ -67,7 +70,12 @@
             "@id": "https://www.precocerto.live/#organization",
             "name": "PreçoCerto",
             "url": "https://www.precocerto.live/",
-            "logo": "https://www.precocerto.live/logo-preco-certo.svg",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.precocerto.live/preco-certo-mark.svg?v=16",
+              "width": 128,
+              "height": 128
+            },
             "areaServed": { "@type": "City", "name": "Feijó", "addressRegion": "AC", "addressCountry": "BR" }
           },
           {
