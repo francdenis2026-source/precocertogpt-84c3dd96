@@ -14,6 +14,7 @@ import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeRecovery2026.css";
+import "./HomeHeroThemes2026.css";
 
 const initialCatalog = buildCatalog();
 
