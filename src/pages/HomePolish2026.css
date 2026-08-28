@@ -66,6 +66,38 @@ html[data-theme="dark"] .pc26-live-results{background:#171612!important;border-c
   .pc26-header-studio__nav a{min-height:34px!important;padding-inline:10px!important;font-size:.66rem!important}
   .pc26-header-studio__tool,.pc26-header-studio__login{min-height:34px!important;min-width:34px!important}
 
+  /* Impeccable radio status: one quiet capsule anchored outside layout flow. */
+  .pc-radio__track{
+    top:50%!important;
+    right:calc(100% + 8px)!important;
+    bottom:auto!important;
+    left:auto!important;
+    width:206px!important;
+    max-width:206px!important;
+    min-height:36px!important;
+    gap:7px!important;
+    padding:6px 8px!important;
+    border:1px solid var(--pc-border)!important;
+    border-radius:10px!important;
+    background:var(--pc-card)!important;
+    box-shadow:0 8px 20px rgba(12,35,31,.13)!important;
+    color:var(--pc-text)!important;
+    transform:translateY(-50%)!important;
+  }
+  .pc-radio:not(.show-track-notice) .pc-radio__track{transform:translateY(-50%)!important}
+  .pc-radio__track>svg{
+    width:12px!important;
+    height:12px!important;
+    padding:5px!important;
+    border-radius:7px!important;
+    background:color-mix(in srgb,var(--pc-accent) 10%,transparent)!important;
+    color:var(--pc-accent)!important;
+  }
+  .pc-radio__track>span{min-width:0;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:6px!important}
+  .pc-radio__track small{display:inline-flex;align-items:center;gap:4px;color:var(--pc-accent-strong)!important;font-size:7px!important;font-weight:850!important;letter-spacing:.08em!important;opacity:1!important;white-space:nowrap}
+  .pc-radio__track small::before{content:"";width:5px;height:5px;flex:0 0 5px;border-radius:50%;background:var(--pc-accent)}
+  .pc-radio__track strong{min-width:0;max-width:none!important;color:var(--pc-text)!important;font-size:9px!important;font-weight:720!important;letter-spacing:-.01em;opacity:1!important;text-overflow:ellipsis;white-space:nowrap}
+
   .pc26-model-hero{padding:10px 0 8px!important}
   .pc26-model-hero__inner{min-height:292px!important;padding:24px 30px!important;border-radius:14px!important}
   .pc26-model-hero__copy{width:min(610px,60%)!important}

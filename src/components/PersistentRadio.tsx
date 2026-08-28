@@ -367,8 +367,10 @@ export function HeaderRadioPlayer() {
         >
           <Radio />
           <span>
-            <small>TOCANDO AGORA</small>
-            <strong>{radio.nowPlaying || radio.station.name}</strong>
+            <small>NO AR</small>
+            <strong title={radio.nowPlaying || radio.station.name}>
+              {radio.nowPlaying || radio.station.name}
+            </strong>
           </span>
         </span>
       ) : null}
