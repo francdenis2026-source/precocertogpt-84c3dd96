@@ -10,6 +10,7 @@ import "./styles/AppReset.css";
 import "./reference/DesignSystem2.css";
 import "./reference/Chrome2026.css";
 import "./reference/InteractionPolish.css";
+import "./pages/InternalRefinement2026.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
 
