@@ -14,9 +14,7 @@ import { ProductGrid } from "../components/home/ProductGrid";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
-import "./HomeRecovery2026.css";
-import "./HomePolish2026.css";
-import "./HomeBands2026.css";
+import "./HomeWorldClass2026.css";
 
 const initialCatalog = buildCatalog();
 
