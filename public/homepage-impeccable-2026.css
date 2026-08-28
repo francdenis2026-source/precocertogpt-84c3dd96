@@ -18,7 +18,7 @@ html[data-theme="dark"] .pc26-home{--pc-muted:#c4cbd0;--pc-brand-strong:#ffd45d;
 html:not([data-theme="dark"]) .pc26-home .pc26-header--studio{
   border-bottom-color:#c9d2ca!important;
   background:rgba(255,255,252,.96)!important;
-  box-shadow:0 8px 24px rgba(30,52,39,.08),inset 0 3px #f4b900!important;
+  box-shadow:0 8px 24px rgba(36,38,34,.07)!important;
 }
 html:not([data-theme="dark"]) .pc26-home .pc26-header-studio__tools{border-color:#cbd4cc!important;background:#f3f6f1!important}
 .pc26-home :is(a,button){
@@ -70,7 +70,7 @@ html[data-theme="dark"] .pc26-home .pc26-header-studio__login{
   color:var(--pc-ink)!important;
 }
 .pc26-home .pc26-footer--studio{position:relative!important}
-.pc26-home .pc26-footer--studio:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--pc-icon-blue),var(--pc-icon-green),var(--pc-brand),var(--pc-icon-orange),var(--pc-icon-violet));pointer-events:none}
+.pc26-home .pc26-footer--studio:before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,var(--pc-icon-blue),var(--pc-icon-green),var(--pc-brand),var(--pc-icon-orange),var(--pc-icon-violet));pointer-events:none}
 .pc26-home .pc26-footer-studio{gap:clamp(30px,5vw,72px)!important;padding-block:34px!important}
 .pc26-home .pc26-footer-studio__eyebrow{color:#674c00!important;font-size:11px!important}
 .pc26-home .pc26-footer-studio__intro>strong{color:#171a1d!important;font-size:clamp(1.3rem,2vw,1.62rem)!important}
@@ -215,6 +215,46 @@ html[data-theme="dark"] .pc26-home .pc26-local-spotlight p{color:#d2d6d9}
 html[data-theme="dark"] .pc26-home .pc26-local-spotlight a{background:#ffc62e;color:#171a1d}
 
 @media(min-width:768px){
+  /* Impeccable desktop claro — marfim neutro, verde sálvia e tipografia editorial. */
+  html:not([data-theme="dark"]) .pc26-home{
+    --pc-bg:#f7f6f1;
+    --pc-surface:#fffefa;
+    --pc-surface-2:#f1f0eb;
+    --pc-muted:#596167;
+    --pc-border:#d9d9d2;
+    --pc-icon-green:#3f6f61;
+    letter-spacing:-.006em;
+  }
+  html:not([data-theme="dark"]) .pc26-home main{background:#f7f6f1!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-header--studio{border-bottom-color:#d7d7cf!important;background:rgba(255,254,250,.97)!important;box-shadow:0 7px 24px rgba(36,38,34,.065)!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-header-studio__tools{border-color:#d8d8d1!important;background:#f5f4ef!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-header-studio__tool{background:#fffefa!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-header-studio__nav a{font-size:.8rem!important;font-weight:680!important;letter-spacing:-.01em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-model-hero h1{font-weight:760!important;line-height:.96!important;letter-spacing:-.038em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-model-hero p{max-width:52ch!important;color:#525b61!important;font-size:1.02rem!important;font-weight:480!important;line-height:1.66!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-model-hero__media{background:#ecebe6!important;box-shadow:0 18px 46px rgba(40,42,38,.1)!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-benefits{border-color:#d9d9d2!important;background:#fffefa!important;box-shadow:0 14px 34px rgba(40,42,38,.07)!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-benefits strong{font-size:.78rem!important;font-weight:720!important;letter-spacing:-.012em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-benefits span{color:#5c656a!important;font-size:.69rem!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-section-heading h2,
+  html:not([data-theme="dark"]) .pc26-home .pc26-local-spotlight h2{font-weight:740!important;line-height:1.04!important;letter-spacing:-.032em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-section-heading p{color:#596167!important;font-size:.9rem!important;line-height:1.55!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-category-card{border-color:#dcdbd5!important;background:#fffefa!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-category-card strong{font-size:.89rem!important;font-weight:720!important;letter-spacing:-.012em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-category-card:nth-child(6n+2) i,
+  html:not([data-theme="dark"]) .pc26-home .pc26-benefits article:nth-child(6n+2) i{background:#e7efeb!important;color:#3f6f61!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-local-spotlight{border-color:#d8d8d1!important;background:#efeee9!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-local-spotlight p{color:#596167!important;font-size:.9rem!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-local-spotlight a{font-weight:780!important;letter-spacing:-.01em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-product{border-color:#dcdbd5!important;background:#fffefa!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-product__image{background:#f0efea!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-product h3{font-size:.92rem!important;font-weight:690!important;line-height:1.34!important;letter-spacing:-.012em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-prices strong{font-weight:760!important;letter-spacing:-.025em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-compare,
+  html:not([data-theme="dark"]) .pc26-home .pc26-live-search__submit{font-weight:800!important;letter-spacing:-.01em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-footer--studio{border-color:#d7d6cf!important;background:#f1f0eb!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-footer-studio__intro>strong{font-family:"Outfit Variable",Outfit,sans-serif!important;font-weight:740!important;letter-spacing:-.025em!important}
+  html:not([data-theme="dark"]) .pc26-home .pc26-footer-studio__nav a{font-size:.82rem!important;font-weight:700!important;letter-spacing:-.01em!important}
   .pc26-home .pc26-model-hero__inner{grid-template-columns:minmax(0,1.06fr) minmax(390px,.94fr)!important}
   .pc26-home .pc26-model-hero__copy{max-width:650px!important}
   .pc26-home .pc26-model-hero{padding-block:clamp(24px,3vw,38px)!important}
