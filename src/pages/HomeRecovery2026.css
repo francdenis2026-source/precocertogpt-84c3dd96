@@ -60,6 +60,7 @@ html[data-theme="dark"] .pc26-home{
 .pc26-header-studio__nav a{transition:background-color .16s ease,color .16s ease,transform .16s ease}
 .pc26-header-studio__nav a:hover{background:color-mix(in srgb,var(--pc-accent) 9%,transparent);color:var(--pc-accent-strong)}
 .pc26-header-studio__tool,.pc26-header-studio__login{transition:transform .14s ease,border-color .16s ease,background-color .16s ease,box-shadow .16s ease}
+.pc26-header-studio__tool,.pc26-header-studio__theme{cursor:pointer}
 .pc26-header-studio__tool:hover,.pc26-header-studio__login:hover{transform:translateY(-1px)}
 
 /* Hero: keep one intentional readability layer only. */
@@ -149,20 +150,21 @@ html[data-theme="dark"] .pc26-home{
 .pc26-header-studio__radio{min-width:0}
 .pc-radio__track{
   max-width:min(250px,calc(100vw - 24px))!important;
-  padding:8px 10px!important;
+  top:auto!important;
+  bottom:calc(100% + 6px)!important;
+  padding:6px 8px!important;
   opacity:0!important;
   visibility:hidden!important;
-  transform:translateY(-3px)!important;
-  transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s!important;
+  transform:none!important;
+  transition:none!important;
 }
-.pc-radio.show-track-notice .pc-radio__track,.pc-radio:hover .pc-radio__track,.pc-radio:focus-within .pc-radio__track{
-  opacity:.88!important;
+.pc-radio.show-track-notice .pc-radio__track{
+  opacity:.94!important;
   visibility:visible!important;
-  transform:translateY(0)!important;
-  transition-delay:0s!important;
+  transform:none!important;
 }
 .pc-radio__track small{opacity:.56!important}
-.pc-radio__track strong{max-width:190px!important;opacity:.72!important;font-size:10px!important}
+.pc-radio__track strong{max-width:180px!important;opacity:.82!important;font-size:9px!important}
 
 /* Tablet */
 @media(max-width:1030px){

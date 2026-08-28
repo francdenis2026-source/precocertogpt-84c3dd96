@@ -286,46 +286,6 @@ export function PersistentRadioProvider({ children }: { children: ReactNode }) {
 export function HeaderRadioPlayer() {
   const radio = useContext(RadioContext);
   const [showTrackNotice, setShowTrackNotice] = useState(false);
-  const previousTrackRef = useRef<string | null>(null);
-  const interactionTimeoutRef = useRef<number>();
-
-  const showTemporaryTrackNotice = () => {
-    if (!radio?.playing) return;
-    if (interactionTimeoutRef.current)
-      window.clearTimeout(interactionTimeoutRef.current);
-    setShowTrackNotice(true);
-    interactionTimeoutRef.current = window.setTimeout(
-      () => setShowTrackNotice(false),
-      3000,
-    );
-  };
-
-  useEffect(() => {
-    if (!radio?.playing) {
-      previousTrackRef.current = null;
-      const hideTimeout = window.setTimeout(() => setShowTrackNotice(false), 0);
-      return () => window.clearTimeout(hideTimeout);
-    }
-
-    const currentTrack = radio.nowPlaying || radio.station.name;
-    if (previousTrackRef.current === currentTrack) return;
-
-    previousTrackRef.current = currentTrack;
-    const showTimeout = window.setTimeout(() => setShowTrackNotice(true), 0);
-    const hideTimeout = window.setTimeout(() => setShowTrackNotice(false), 4500);
-    return () => {
-      window.clearTimeout(showTimeout);
-      window.clearTimeout(hideTimeout);
-    };
-  }, [radio?.nowPlaying, radio?.playing, radio?.station.name]);
-
-  useEffect(
-    () => () => {
-      if (interactionTimeoutRef.current)
-        window.clearTimeout(interactionTimeoutRef.current);
-    },
-    [],
-  );
 
   if (!radio) return null;
   const status = radio.failed
@@ -343,8 +303,10 @@ export function HeaderRadioPlayer() {
   return (
     <div
       className={`pc-radio${radio.playing ? " is-playing" : ""}${radio.loading ? " is-loading" : ""}${radio.failed ? " has-error" : ""}${radio.nowPlaying ? " has-track" : ""}${showTrackNotice ? " show-track-notice" : ""}`}
-      onMouseEnter={showTemporaryTrackNotice}
-      onFocusCapture={showTemporaryTrackNotice}
+      onMouseEnter={() => {
+        if (radio.playing) setShowTrackNotice(true);
+      }}
+      onMouseLeave={() => setShowTrackNotice(false)}
     >
       <button
         className="pc-radio__play"

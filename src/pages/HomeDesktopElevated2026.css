@@ -13,7 +13,7 @@
 .pc26-home .pc-radio:not(.show-track-notice) .pc-radio__track {
   opacity: 0 !important;
   visibility: hidden !important;
-  transform: translateY(-3px) !important;
+  transform: none !important;
 }
 
 @media (min-width: 1040px) {

@@ -194,15 +194,16 @@
 }
 .pc-radio__track {
   position: absolute;
-  top: calc(100% + 8px);
+  top: auto;
+  bottom: calc(100% + 6px);
   left: 0;
   z-index: 880;
   width: max-content;
   max-width: min(320px, calc(100vw - 24px));
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 10px 12px;
+  gap: 7px;
+  padding: 7px 9px;
   border: 1px solid var(--pc-border);
   border-radius: 12px;
   background: var(--pc-surface);
@@ -211,23 +212,19 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-4px) scale(0.98);
-  transition:
-    opacity 0.18s ease-out,
-    visibility 0s linear 0.18s,
-    transform 0.18s ease-out;
+  transform: none;
+  transition: none;
 }
 .pc-radio.show-track-notice .pc-radio__track {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
-  transition-delay: 0s;
+  transform: none;
 }
 .pc-radio__track > svg {
-  width: 18px;
-  height: 18px;
-  padding: 7px;
-  border-radius: 9px;
+  width: 14px;
+  height: 14px;
+  padding: 5px;
+  border-radius: 7px;
   background: var(--ras);
   color: var(--ra);
   box-sizing: content-box;
@@ -244,9 +241,9 @@
   letter-spacing: 0.11em;
 }
 .pc-radio__track strong {
-  max-width: 260px;
+  max-width: 210px;
   overflow: hidden;
-  font-size: 11px;
+  font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
