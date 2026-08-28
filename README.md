@@ -1,100 +1,100 @@
-# vinext-starter
+# Preço Certo
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Aplicação web do **Preço Certo**, plataforma local de comparação de preços e descoberta de estabelecimentos.
 
-## Prerequisites
+Este repositório é a fonte principal do projeto. A aplicação atual usa **Vite + React + TypeScript**, com Supabase para os recursos de dados e autenticação que dependem do backend.
 
-- Node.js `>=22.13.0`
+## Stack atual
 
-## Quick Start
+- React 19
+- TypeScript 5
+- Vite 6
+- React Router
+- Tailwind CSS
+- Supabase JS
+- Vitest
+- Playwright
+- GitHub Actions
+- GitHub Pages para o deploy configurado no repositório
+
+## Requisitos
+
+- Node.js 22 recomendado
+- npm
+
+O `package.json` aceita Node.js 20 ou superior, enquanto o CI usa Node.js 22 para manter um ambiente de build consistente.
+
+## Desenvolvimento local
 
 ```bash
 npm install
 npm run dev
+```
+
+## Validação
+
+```bash
+npm test
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+O build de produção também executa as rotinas de geração de sitemap e prerenderização SEO configuradas no projeto.
 
-## Included Shape
+## Scripts principais
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm run dev
+npm run build
+npm run preview
+npm run lint
+npm test
+npm run seo:audit
+npm run seo:audit:fast
+npm run seo:audit:full
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## Variáveis de ambiente
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+As integrações com Supabase usam variáveis Vite, incluindo:
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+```text
+VITE_SUPABASE_URL
+VITE_SUPABASE_ANON_KEY
+VITE_SUPABASE_PUBLISHABLE_KEY
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Não versione arquivos `.env` com credenciais.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+## Deploy
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+A branch canônica é `main`.
 
-## Useful Commands
+O workflow `.github/workflows/deploy.yml` executa testes, gera o build e publica o conteúdo de `dist/` no GitHub Pages quando há push na `main`.
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+O domínio configurado pelo workflow é:
 
-## Learn More
+```text
+www.precocerto.live
+```
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+## Integrações de desenvolvimento
+
+Ferramentas externas podem ser usadas para editar ou visualizar o projeto, mas os metadados locais dessas ferramentas não fazem parte da arquitetura da aplicação. Em especial, `.lovable/` é ignorado pelo Git para evitar que estados internos de edição ou sincronização controlem o código-fonte.
+
+Alterações válidas devem ser consolidadas no GitHub, preferencialmente na `main` ou via pull request.
+
+## Estrutura resumida
+
+```text
+src/                 aplicação React
+public/              arquivos públicos
+scripts/             automações de build/SEO
+supabase/            recursos relacionados ao Supabase
+.github/workflows/   CI/CD
+package.json         dependências e scripts
+vite.config.*        configuração do Vite
+```
+
+## Fonte de verdade
+
+Para evitar divergências entre editores externos, considere sempre o estado da branch `main` no GitHub como a versão canônica do Preço Certo.
