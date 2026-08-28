@@ -57,10 +57,10 @@ const imageKey = (product: Product) =>
 /**
  * Monta a vitrine do ciclo.
  *
- * Duas regras comandam a escolha. A primeira é a imagem: só entram produtos
- * que tenham uma foto resolvível, seja ela cadastrada ou um ativo local seguro.
+ * A escolha inclui todo produto com preço válido. Quando não houver foto, o
+ * card usa a ilustração genérica da marca em vez de excluir o item da vitrine.
  *
- * A segunda é a repartição entre estabelecimentos. Sortear produtos direto
+ * A repartição entre estabelecimentos evita que sortear produtos direto
  * favoreceria quem tem catálogo maior — uma loja com quarenta itens apareceria
  * muito mais que uma com cinco. Aqui a vitrine é montada em rodadas: cada
  * rodada percorre os estabelecimentos e tira um produto de cada, então todos
@@ -68,8 +68,8 @@ const imageKey = (product: Product) =>
  */
 export function buildFeatured(products: Product[], cycle: number, size = 6) {
   const comPreco = products.filter(product => product.minPrice > 0);
-  const comImagem = comPreco.filter(product => Boolean(resolveProductImage(product)));
-  const elegiveis = comImagem;
+  // A ordenação torna o resultado independente da ordem recebida da API.
+  const elegiveis = [...comPreco].sort((a, b) => productKey(a).localeCompare(productKey(b), "pt-BR"));
   if (!elegiveis.length) return [];
 
   const random = mulberry32(cycle * 2654435761);
@@ -84,7 +84,7 @@ export function buildFeatured(products: Product[], cycle: number, size = 6) {
 
   // Ordem das lojas e ordem interna de cada uma variam por ciclo, para que a
   // vitrine não comece sempre pelo mesmo estabelecimento.
-  const lojas = shuffle([...porLoja.keys()], random).map(key => shuffle(porLoja.get(key)!, random));
+  const lojas = shuffle([...porLoja.keys()].sort(), random).map(key => shuffle(porLoja.get(key)!, random));
 
   const escolhidos: Product[] = [];
   const produtosUsados = new Set<string>();
