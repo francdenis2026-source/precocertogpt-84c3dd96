@@ -1,0 +1,35 @@
+name: Install Taste Skill
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-taste-skill.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Leonxlnx taste-skill
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/taste-skill .agents/skills/taste-skill
+          git clone --depth 1 https://github.com/Leonxlnx/taste-skill.git /tmp/taste-skill
+          mkdir -p .agents/skills/taste-skill
+          cp -R /tmp/taste-skill/skills/taste-skill/. .agents/skills/taste-skill/
+          git add .agents/skills/taste-skill
+          if git diff --cached --quiet; then
+            echo 'taste-skill already up to date'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(skills): install Leonxlnx taste-skill'
+          git push origin HEAD:main
