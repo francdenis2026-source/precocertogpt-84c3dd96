@@ -1,0 +1,524 @@
+/* Preço Certo — desktop editorial marketplace pass.
+   Keeps the mobile layout intact while using wide screens with purpose. */
+
+.pc26-home .pc26-how {
+  display: none;
+}
+
+.pc26-home .pc26-discovery-layout {
+  display: contents;
+}
+
+/* The radio notice is timer-controlled; hover alone must never pin it open. */
+.pc26-home .pc-radio:not(.show-track-notice) .pc-radio__track {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-3px) !important;
+}
+
+@media (min-width: 1040px) {
+  .pc26-home {
+    --pc26-wide-shell: min(1440px, calc(100% - 48px));
+    --pc26-section-gap: clamp(34px, 3.5vw, 58px);
+    background:
+      radial-gradient(56rem 32rem at 108% 4%, color-mix(in srgb, var(--pc-accent) 10%, transparent), transparent 70%),
+      radial-gradient(40rem 28rem at -12% 40%, color-mix(in srgb, var(--pc-gold) 8%, transparent), transparent 72%),
+      linear-gradient(180deg, var(--pc-page) 0%, var(--pc-page-soft) 100%) !important;
+  }
+
+  .pc26-home .pc26-shell {
+    width: var(--pc26-wide-shell) !important;
+  }
+
+  /* Header becomes a precise application bar instead of a narrow island. */
+  .pc26-home .pc26-header-studio {
+    min-height: 68px !important;
+    grid-template-columns: minmax(220px, 1fr) auto minmax(420px, 1fr);
+    gap: 22px !important;
+  }
+
+  .pc26-home .pc26-header-studio__mobile-brand img {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .pc26-home .pc26-header-studio__mobile-brand strong {
+    font-size: 1rem;
+    letter-spacing: -.025em;
+  }
+
+  .pc26-home .pc26-header-studio__mobile-brand small {
+    font-size: .68rem;
+  }
+
+  .pc26-home .pc26-header-studio__nav a {
+    min-height: 42px;
+    padding-inline: 15px;
+    font-size: .78rem;
+  }
+
+  .pc26-home .pc26-header-studio__tools {
+    justify-self: end;
+    gap: 6px;
+  }
+
+  /* Hero: more visual authority, but text remains within readable measure. */
+  .pc26-home .pc26-model-hero {
+    padding: 22px 0 0 !important;
+  }
+
+  .pc26-home .pc26-model-hero__inner {
+    min-height: clamp(470px, 39vw, 570px) !important;
+    padding: clamp(44px, 5vw, 76px) !important;
+    border-radius: 26px !important;
+    background:
+      linear-gradient(90deg, rgba(4, 25, 26, .96) 0%, rgba(6, 33, 33, .86) 38%, rgba(7, 34, 34, .3) 65%, rgba(7, 34, 34, .04) 100%),
+      url('/hero-supermercado-comparando-precos-2026.webp') center 48% / cover no-repeat !important;
+    box-shadow: 0 28px 70px rgba(20, 47, 43, .16) !important;
+  }
+
+  .pc26-home .pc26-model-hero__copy {
+    width: min(720px, 58%) !important;
+  }
+
+  .pc26-home .pc26-model-hero__copy h1 {
+    max-width: 13ch;
+    margin-bottom: 16px;
+    font-family: "Geist Variable", Inter, sans-serif;
+    font-size: clamp(3.35rem, 5vw, 5.15rem) !important;
+    font-weight: 790;
+    line-height: .91 !important;
+    letter-spacing: -.064em !important;
+    text-wrap: balance;
+  }
+
+  .pc26-home .pc26-model-hero__copy > p {
+    max-width: 54ch;
+    margin-bottom: 20px;
+    font-size: clamp(1rem, 1.15vw, 1.12rem) !important;
+    line-height: 1.62 !important;
+  }
+
+  .pc26-home .pc26-hero__search-wrap {
+    max-width: 690px;
+  }
+
+  .pc26-home .pc26-hero-search {
+    min-height: 62px !important;
+    padding: 7px 8px 7px 17px !important;
+    border-radius: 16px !important;
+  }
+
+  .pc26-home .pc26-live-search__submit {
+    min-height: 46px !important;
+    padding-inline: 18px !important;
+    border-radius: 11px !important;
+  }
+
+  .pc26-home .pc26-popular-searches {
+    gap: 7px;
+    margin-top: 11px;
+  }
+
+  .pc26-home .pc26-popular-searches button {
+    min-height: 33px;
+    padding-inline: 12px;
+    cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+  }
+
+  .pc26-home .pc26-popular-searches button:hover {
+    border-color: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, .18);
+    transform: translateY(-1px);
+  }
+
+  .pc26-home .pc26-hero__trust {
+    gap: 18px;
+    margin-top: 14px;
+    font-size: .75rem;
+  }
+
+  .pc26-home .pc26-hero__stats {
+    gap: 0;
+    margin-top: 18px;
+  }
+
+  .pc26-home .pc26-hero__stats span {
+    min-width: 106px;
+  }
+
+  .pc26-home .pc26-hero__stats strong {
+    font-family: "Geist Mono", monospace;
+    font-size: 1.35rem;
+  }
+
+  /* The trust strip bridges hero and content instead of floating alone. */
+  .pc26-home .pc26-benefits {
+    position: relative;
+    z-index: 2;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0;
+    margin-top: -18px;
+    overflow: hidden;
+    border: 1px solid var(--pc-border);
+    border-radius: 18px;
+    background: var(--pc-card);
+    box-shadow: 0 18px 44px rgba(24, 54, 49, .11);
+  }
+
+  .pc26-home .pc26-benefits article {
+    min-height: 92px;
+    padding: 18px !important;
+    border: 0 !important;
+    border-radius: 0;
+    background: transparent !important;
+  }
+
+  .pc26-home .pc26-benefits article + article {
+    border-left: 1px solid var(--pc-border) !important;
+  }
+
+  .pc26-home .pc26-benefits article i {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    flex: 0 0 38px;
+    place-items: center;
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--pc-accent) 10%, transparent);
+  }
+
+  .pc26-home .pc26-benefits article i svg {
+    width: 18px;
+  }
+
+  .pc26-home .pc26-benefits article strong {
+    font-size: .78rem;
+  }
+
+  .pc26-home .pc26-benefits article span {
+    font-size: .68rem;
+    line-height: 1.45;
+  }
+
+  /* Categories and stores become one asymmetric, information-dense composition. */
+  .pc26-home .pc26-discovery-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(350px, .85fr);
+    gap: 22px;
+    padding-top: var(--pc26-section-gap);
+  }
+
+  .pc26-home .pc26-discovery-layout > .pc26-shell {
+    width: 100% !important;
+    margin: 0;
+  }
+
+  .pc26-home .pc26-discovery-layout .pc26-categories,
+  .pc26-home .pc26-discovery-layout .pc26-stores {
+    height: 100%;
+    padding: clamp(24px, 2.4vw, 34px) !important;
+    border: 1px solid var(--pc-border);
+    border-radius: 22px;
+    background: color-mix(in srgb, var(--pc-card) 94%, transparent);
+    box-shadow: 0 16px 40px rgba(23, 53, 48, .075);
+  }
+
+  .pc26-home .pc26-discovery-layout .pc26-section-heading {
+    min-height: 68px;
+    margin-bottom: 18px;
+  }
+
+  .pc26-home .pc26-category-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pc26-home .pc26-category-card {
+    min-height: 132px;
+    padding: 16px !important;
+    border-radius: 15px;
+  }
+
+  .pc26-home .pc26-category-card i {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .pc26-home .pc26-category-card i svg {
+    width: 20px;
+  }
+
+  .pc26-home .pc26-category-card strong {
+    font-size: .86rem;
+  }
+
+  .pc26-home .pc26-category-card span {
+    font-size: .7rem;
+  }
+
+  .pc26-home .pc26-category-more {
+    margin-top: 12px;
+  }
+
+  .pc26-home .pc26-store-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .pc26-home .pc26-store {
+    min-height: 82px;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 14px 16px !important;
+    border-radius: 14px;
+  }
+
+  .pc26-home .pc26-store::before {
+    width: 4px;
+  }
+
+  .pc26-home .pc26-store > i {
+    width: 42px;
+    height: 42px;
+  }
+
+  .pc26-home .pc26-store strong {
+    font-size: .84rem;
+  }
+
+  .pc26-home .pc26-store em {
+    grid-column: auto;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--pc-accent) 8%, transparent);
+    white-space: nowrap;
+  }
+
+  /* A clear explanatory pause between discovery and commercial content. */
+  .pc26-home .pc26-how {
+    display: block;
+    width: var(--pc26-wide-shell);
+    margin-inline: auto;
+    padding: var(--pc26-section-gap) 0 0;
+  }
+
+  .pc26-home .pc26-how > .pc26-shell {
+    width: 100% !important;
+    padding: clamp(28px, 3vw, 44px);
+    border: 1px solid var(--pc-border);
+    border-radius: 24px;
+    background: var(--pc-text);
+    color: var(--pc-card);
+    box-shadow: var(--pc-shadow);
+  }
+
+  .pc26-home .pc26-how__heading p {
+    color: color-mix(in srgb, var(--pc-card) 68%, transparent);
+  }
+
+  .pc26-home .pc26-how__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pc26-home .pc26-how__card {
+    position: relative;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .055);
+    transition: transform .2s ease, background-color .2s ease, border-color .2s ease;
+  }
+
+  .pc26-home .pc26-how__card > i {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--pc-gold) 22%, transparent);
+    color: var(--pc-gold);
+  }
+
+  .pc26-home .pc26-how__card > i svg {
+    width: 19px;
+  }
+
+  .pc26-home .pc26-how__step {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    color: rgba(255, 255, 255, .42);
+    font: 600 .72rem/1 "Geist Mono", monospace;
+  }
+
+  .pc26-home .pc26-how__card strong {
+    margin-top: auto;
+    font-size: .94rem;
+  }
+
+  .pc26-home .pc26-how__card p {
+    margin: 7px 0 0;
+    color: rgba(255, 255, 255, .65);
+    font-size: .75rem;
+    line-height: 1.55;
+  }
+
+  .pc26-home .pc26-local-spotlight {
+    min-height: 340px;
+    margin-top: var(--pc26-section-gap);
+    grid-template-columns: 1.18fr .82fr;
+    border-radius: 24px;
+  }
+
+  .pc26-home .pc26-local-spotlight__image {
+    height: 340px;
+  }
+
+  .pc26-home .pc26-local-spotlight__copy {
+    padding: clamp(34px, 4vw, 62px);
+  }
+
+  .pc26-home .pc26-local-spotlight__copy h2 {
+    max-width: 16ch;
+    font-family: "Geist Variable", Inter, sans-serif;
+    font-size: clamp(2rem, 3vw, 3.25rem);
+    letter-spacing: -.045em;
+  }
+
+  .pc26-home .pc26-local-spotlight__copy p {
+    max-width: 48ch;
+    margin: 14px 0 20px;
+    font-size: .9rem;
+  }
+
+  .pc26-home .pc26-local-spotlight__copy a {
+    min-height: 46px;
+    padding-inline: 18px;
+    border-radius: 11px;
+  }
+
+  .pc26-home .pc26-products {
+    padding-top: var(--pc26-section-gap) !important;
+    padding-bottom: clamp(46px, 5vw, 78px);
+  }
+
+  .pc26-home .pc26-products__heading {
+    margin-bottom: 18px;
+  }
+
+  .pc26-home .pc26-section-heading h2 {
+    font-family: "Geist Variable", Inter, sans-serif;
+    font-size: clamp(1.85rem, 2.6vw, 2.65rem);
+    letter-spacing: -.045em;
+  }
+
+  .pc26-home .pc26-section-heading p {
+    max-width: 64ch;
+    font-size: .86rem;
+  }
+
+  .pc26-home .pc26-grid {
+    gap: 14px;
+  }
+
+  .pc26-home .pc26-product {
+    min-height: 390px;
+    border-radius: 18px;
+  }
+
+  .pc26-home .pc26-product__image {
+    height: 186px;
+    min-height: 186px;
+  }
+
+  .pc26-home .pc26-product__image img {
+    width: 145px;
+    height: 145px;
+    max-width: 145px !important;
+    max-height: 145px !important;
+    transition: transform .28s cubic-bezier(.16, 1, .3, 1);
+  }
+
+  .pc26-home .pc26-product__body {
+    min-height: 202px;
+    padding: 16px;
+  }
+
+  .pc26-home .pc26-product h3 {
+    font-size: .94rem;
+  }
+
+  .pc26-home .pc26-prices strong {
+    font: 750 1.42rem/1 "Geist Mono", monospace;
+  }
+
+  .pc26-home .pc26-compare {
+    min-height: 44px;
+    border-radius: 11px;
+    font-size: .75rem;
+  }
+
+  .pc26-home .pc26-footer-studio {
+    min-height: 110px;
+  }
+
+  @media (hover: hover) {
+    .pc26-home .pc26-category-card:hover,
+    .pc26-home .pc26-store:hover,
+    .pc26-home .pc26-product:hover {
+      transform: translateY(-4px) !important;
+      box-shadow: 0 20px 42px rgba(19, 50, 44, .13) !important;
+    }
+
+    .pc26-home .pc26-product:hover .pc26-product__image img {
+      transform: scale(1.06) translateY(-3px);
+    }
+
+    .pc26-home .pc26-how__card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--pc-gold) 45%, transparent);
+      background: rgba(255, 255, 255, .085);
+    }
+  }
+}
+
+@media (min-width: 1040px) and (max-width: 1240px) {
+  .pc26-home .pc26-header-studio {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .pc26-home .pc26-header-studio__radio {
+    display: none;
+  }
+
+  .pc26-home .pc26-model-hero__copy {
+    width: min(700px, 68%) !important;
+  }
+
+  .pc26-home .pc26-discovery-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pc26-home .pc26-store-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc26-home .pc26-product__image img,
+  .pc26-home .pc26-how__card,
+  .pc26-home .pc26-popular-searches button {
+    transition: none !important;
+  }
+}
