@@ -38,21 +38,31 @@ function shuffle<T>(items: T[], random: () => number) {
 const storeKey = (product: Product) =>
   (product.establishment || "").trim().toLowerCase() || "sem-estabelecimento";
 
-const normalizeIdentity = (value: string) => value
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g, "")
-  .toLowerCase()
-  .replace(/[^a-z0-9]+/g, "")
-  .trim();
+const normalizeIdentity = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
 
-const productKey = (product: Product) => normalizeIdentity([
-  product.name,
-  product.brand,
-  product.size,
-].filter(Boolean).join(" ")) || String(product.id);
+const productKey = (product: Product) =>
+  normalizeIdentity(
+    [product.name, product.brand, product.size].filter(Boolean).join(" "),
+  ) || String(product.id);
 
 const imageKey = (product: Product) =>
-  resolveProductImage(product)?.split("?")[0].toLowerCase() || `sem-imagem:${productKey(product)}`;
+  resolveProductImage(product)?.split("?")[0].toLowerCase() ||
+  `sem-imagem:${productKey(product)}`;
+
+// A vitrine dá preferência às imagens aprovadas no banco. Arquivos locais
+// continuam como contingência e o placeholder entra somente por último.
+const imagePriority = (product: Product) => {
+  const resolved = resolveProductImage(product);
+  if (product.image_url && resolved === product.image_url) return 0;
+  if (resolved) return 1;
+  return 2;
+};
 
 /**
  * Monta a vitrine do ciclo.
@@ -67,9 +77,11 @@ const imageKey = (product: Product) =>
  * aparecem antes que qualquer um repita.
  */
 export function buildFeatured(products: Product[], cycle: number, size = 6) {
-  const comPreco = products.filter(product => product.minPrice > 0);
+  const comPreco = products.filter((product) => product.minPrice > 0);
   // A ordenação torna o resultado independente da ordem recebida da API.
-  const elegiveis = [...comPreco].sort((a, b) => productKey(a).localeCompare(productKey(b), "pt-BR"));
+  const elegiveis = [...comPreco].sort((a, b) =>
+    productKey(a).localeCompare(productKey(b), "pt-BR"),
+  );
   if (!elegiveis.length) return [];
 
   const random = mulberry32(cycle * 2654435761);
@@ -84,7 +96,9 @@ export function buildFeatured(products: Product[], cycle: number, size = 6) {
 
   // Ordem das lojas e ordem interna de cada uma variam por ciclo, para que a
   // vitrine não comece sempre pelo mesmo estabelecimento.
-  const lojas = shuffle([...porLoja.keys()].sort(), random).map(key => shuffle(porLoja.get(key)!, random));
+  const lojas = shuffle([...porLoja.keys()].sort(), random).map((key) =>
+    shuffle(porLoja.get(key)!, random),
+  );
 
   const escolhidos: Product[] = [];
   const produtosUsados = new Set<string>();
@@ -101,16 +115,20 @@ export function buildFeatured(products: Product[], cycle: number, size = 6) {
     if (!encontrou) break;
   }
 
+  // Preserva a ordem diversificada entre lojas dentro de cada faixa visual.
+  candidatos.sort((a, b) => imagePriority(a) - imagePriority(b));
+
   for (const produto of candidatos) {
-      if (escolhidos.length >= size) break;
-      const chaveProduto = productKey(produto);
-      const chaveImagem = imageKey(produto);
-      // O mesmo item pode existir em várias lojas e variantes podem apontar
-      // para o mesmo arquivo. A vitrine mostra cada identidade visual uma vez.
-      if (produtosUsados.has(chaveProduto) || imagensUsadas.has(chaveImagem)) continue;
-      escolhidos.push(produto);
-      produtosUsados.add(chaveProduto);
-      imagensUsadas.add(chaveImagem);
+    if (escolhidos.length >= size) break;
+    const chaveProduto = productKey(produto);
+    const chaveImagem = imageKey(produto);
+    // O mesmo item pode existir em várias lojas e variantes podem apontar
+    // para o mesmo arquivo. A vitrine mostra cada identidade visual uma vez.
+    if (produtosUsados.has(chaveProduto) || imagensUsadas.has(chaveImagem))
+      continue;
+    escolhidos.push(produto);
+    produtosUsados.add(chaveProduto);
+    imagensUsadas.add(chaveImagem);
   }
 
   return escolhidos;
