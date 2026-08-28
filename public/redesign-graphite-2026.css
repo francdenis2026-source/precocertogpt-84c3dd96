@@ -1285,3 +1285,17 @@ html body .pc26-home :is(.pc26-live-search__submit, .pc26-local-spotlight a) {
   border: 0 !important;
 }
 html[data-theme="dark"] body .pc26-home :is(.pc26-live-search__submit, .pc26-local-spotlight a) { color: #10181A !important; }
+
+html body .pc26-category-more { display: flex !important; justify-content: center !important; margin-top: 1.25rem !important; }
+html body .pc26-category-more a,
+html body .pc26-section-heading > a {
+  background: var(--gx-surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--gx-border-strong) !important;
+  border-radius: 12px !important;
+  padding: 0 1.15rem !important;
+  color: var(--gx-ink) !important;
+  font-weight: 700 !important;
+}
+html body .pc26-category-more a:hover,
+html body .pc26-section-heading > a:hover { border-color: var(--gx-accent) !important; color: var(--gx-accent-ink) !important; }
