@@ -12,21 +12,21 @@
   "orientation": "any",
   "categories": ["shopping", "utilities", "lifestyle"],
   "shortcuts": [
-    {"name":"Buscar preços","short_name":"Buscar","url":"/buscar","icons":[{"src":"/app-icon.svg?v=13","sizes":"any","type":"image/svg+xml"}]},
-    {"name":"Minha cesta","short_name":"Cesta","url":"/cesta-basica","icons":[{"src":"/app-icon.svg?v=13","sizes":"any","type":"image/svg+xml"}]},
-    {"name":"Explorar locais","short_name":"Explorar","url":"/explorar","icons":[{"src":"/app-icon.svg?v=13","sizes":"any","type":"image/svg+xml"}]}
+    {"name":"Buscar preços","short_name":"Buscar","url":"/buscar","icons":[{"src":"/favicon.png?v=14","sizes":"512x512","type":"image/png"}]},
+    {"name":"Minha cesta","short_name":"Cesta","url":"/cesta-basica","icons":[{"src":"/favicon.png?v=14","sizes":"512x512","type":"image/png"}]},
+    {"name":"Explorar locais","short_name":"Explorar","url":"/explorar","icons":[{"src":"/favicon.png?v=14","sizes":"512x512","type":"image/png"}]}
   ],
   "icons": [
     {
-      "src": "/app-icon.svg?v=13",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/favicon.png?v=14",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/app-icon.svg?v=13",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/favicon.png?v=14",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ],
