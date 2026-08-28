@@ -1,0 +1,317 @@
+/* Preço Certo — Refinamento 2026, etapa 2 (páginas internas públicas)
+   Continuação do sistema visual aplicado na homepage (HomeRefinement2026.css).
+   Camada exclusivamente de apresentação: nenhuma rota, dado, integração,
+   autenticação ou lógica é alterada aqui. O player/botão da rádio é
+   explicitamente preservado no fim do arquivo. */
+
+/* ---------- Tokens compartilhados com a homepage ---------- */
+.search26-page,
+.sector-hub,
+.pharmacy-directory-page,
+.ref-page,
+.ref-auth,
+.pdx-page,
+.pro-basket-page,
+.smart-basket-page,
+.store-pro-page {
+  --rx-font-display: "Geist Variable", Geist, "Manrope Variable", Manrope, system-ui, sans-serif;
+  --rx-font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", "JetBrains Mono", monospace;
+
+  --rx-section: clamp(1.75rem, 3.4vw, 3rem);
+  --rx-gap: clamp(.75rem, 1.4vw, 1.125rem);
+  --rx-radius-card: 14px;
+  --rx-radius-control: 10px;
+
+  --rx-brand: #0d6b43;
+  --rx-brand-strong: #084a2f;
+  --rx-brand-soft: #e0f0e7;
+  --rx-brand-line: #a8d5bd;
+  --rx-gradient-brand: linear-gradient(135deg, #0d6b43 0%, #0a5335 100%);
+
+  --rx-shadow-xs: 0 1px 2px rgb(16 45 59 / 5%);
+  --rx-shadow-sm: 0 1px 2px rgb(16 45 59 / 6%), 0 2px 6px rgb(16 45 59 / 5%);
+  --rx-shadow-md: 0 2px 6px rgb(16 45 59 / 7%), 0 10px 24px rgb(16 45 59 / 8%);
+  --rx-shadow-lg: 0 4px 10px rgb(16 45 59 / 8%), 0 18px 38px rgb(16 45 59 / 10%);
+
+  --rx-fast: 100ms;
+  --rx-base: 200ms;
+  --rx-sharp: cubic-bezier(.4, 0, .2, 1);
+  --rx-smooth: cubic-bezier(.22, .61, .36, 1);
+}
+
+html[data-theme="dark"] :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page, .store-pro-page) {
+  --rx-brand: #56d9a3;
+  --rx-brand-strong: #7ee9bb;
+  --rx-brand-soft: #0f3a23;
+  --rx-brand-line: #2a5a3f;
+  --rx-gradient-brand: linear-gradient(135deg, #0f3a23 0%, #0b2a19 100%);
+  --rx-shadow-xs: 0 1px 2px rgb(3 10 8 / 30%);
+  --rx-shadow-sm: 0 1px 2px rgb(3 10 8 / 32%), 0 2px 6px rgb(3 10 8 / 26%);
+  --rx-shadow-md: 0 2px 6px rgb(3 10 8 / 34%), 0 10px 24px rgb(3 10 8 / 30%);
+  --rx-shadow-lg: 0 4px 10px rgb(3 10 8 / 36%), 0 18px 38px rgb(3 10 8 / 34%);
+}
+
+/* ---------- Tipografia ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is(h1, h2, h3, h4) {
+  font-family: var(--rx-font-display) !important;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) h1 {
+  font-size: clamp(1.55rem, 3.1vw, 2.35rem);
+  line-height: 1.08;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) h2 {
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  line-height: 1.16;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) p {
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+/* Preços e números sempre em mono tabular: comparação vira leitura de coluna. */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(
+  .search26-result b, .search26-result strong, .ref-store-card em,
+  .pdx-price, .pdx-price-value, .pdx-offer b, .pdx-stat strong,
+  .pro-basket-total strong, .pro-basket-item b, .smart-basket-total strong,
+  .sector-hub__hero-stats strong, .ref-stores-hero div > b, footer > b
+) {
+  font-family: var(--rx-font-mono) !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+}
+
+/* Eyebrows sem ruído: caixa alta discreta, nunca gritada. */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is([class*="eyebrow"], [class*="kicker"], .ref-page-title span, .ref-stores-hero span) {
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  opacity: .82;
+}
+
+/* ---------- Densidade / compactação ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) > main {
+  padding-block: clamp(1rem, 2vw, 1.75rem) var(--rx-section);
+}
+:is(.sector-hub__hero, .ref-stores-hero, .pharmacy-directory__hero, .smart-basket-hero, .pdx-hero, .store-pro-hero) {
+  padding-block: clamp(1.1rem, 2.4vw, 2rem) !important;
+  min-height: 0 !important;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) section {
+  margin-block: 0;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) section + section {
+  margin-top: var(--rx-section);
+}
+/* Nada de vazio estrutural: grids apertam o gap em vez de esticar a página. */
+:is(.search26-results, .ref-product-grid, .ref-store-cards, .store-pro-grid, .sector-hub__sectors, .pharmacy-directory__grid, .pro-basket-items, .smart-basket-items) {
+  gap: var(--rx-gap) !important;
+}
+
+/* ---------- Cards menores, hierarquia mais firme ---------- */
+:is(.search26-result, .ref-store-card, .ref-product-grid > article, .store-pro-card, .sector-hub__sector, .pharmacy-directory__card, .pro-basket-item, .smart-basket-item, .pdx-offer) {
+  border-radius: var(--rx-radius-card);
+  box-shadow: var(--rx-shadow-xs);
+  transition:
+    border-color var(--rx-base) var(--rx-sharp),
+    box-shadow var(--rx-base) var(--rx-sharp),
+    transform var(--rx-fast) var(--rx-sharp);
+}
+:is(.search26-result, .ref-store-card, .ref-product-grid > article, .store-pro-card, .sector-hub__sector, .pharmacy-directory__card, .pdx-offer):hover {
+  border-color: var(--rx-brand-line);
+  box-shadow: var(--rx-shadow-md);
+  transform: translateY(-1px);
+}
+:is(.search26-result, .ref-store-card, .ref-product-grid > article, .store-pro-card, .pdx-offer):active {
+  transform: translateY(0);
+  box-shadow: var(--rx-shadow-sm);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(.ref-product-grid > article, .store-pro-card, .search26-result) :is(strong, b) {
+  letter-spacing: -.01em;
+}
+
+/* ---------- Ações: cursor, foco e microinteração ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is(button, [role="button"], a[href], label, summary, select) {
+  cursor: pointer;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is(button, a[href]):disabled,
+:is(.search26-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) button[disabled] {
+  cursor: not-allowed;
+  opacity: .55;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is(button, a[href], input, select, textarea):focus-visible {
+  outline: 2px solid var(--rx-brand);
+  outline-offset: 2px;
+  border-radius: var(--rx-radius-control);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(a[class*="cta"], button[class*="cta"], a[class*="primary"], button[class*="primary"], .ref-auth__submit) {
+  transition: transform var(--rx-fast) var(--rx-sharp), box-shadow var(--rx-base) var(--rx-sharp), background-color var(--rx-base) var(--rx-sharp);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(a[class*="cta"], button[class*="cta"]):hover {
+  box-shadow: var(--rx-shadow-md);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(a[class*="cta"], button[class*="cta"]):active {
+  transform: translateY(1px);
+}
+/* Chips/filtros: mesma linguagem da homepage. */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is([class*="chip"], [class*="pill"], .ref-sector-nav a, .ref-sector-nav button) {
+  border-radius: 999px;
+  transition: background-color var(--rx-base) var(--rx-sharp), border-color var(--rx-base) var(--rx-sharp), color var(--rx-base) var(--rx-sharp);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page) :is([class*="chip"], .ref-sector-nav a, .ref-sector-nav button):hover {
+  background: var(--rx-brand-soft);
+  border-color: var(--rx-brand-line);
+  color: var(--rx-brand-strong);
+}
+
+/* ---------- Campos de busca internos ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page) :is(.ref-stores-toolbar, .search26-field, .sector-hub__search) {
+  box-shadow: var(--rx-shadow-xs);
+  border-radius: var(--rx-radius-control);
+  transition: box-shadow var(--rx-base) var(--rx-sharp), border-color var(--rx-base) var(--rx-sharp);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page) :is(.ref-stores-toolbar, .search26-field, .sector-hub__search):focus-within {
+  border-color: var(--rx-brand);
+  box-shadow: var(--rx-shadow-sm);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) ::placeholder {
+  color: color-mix(in srgb, currentColor 58%, transparent);
+  opacity: 1;
+}
+
+/* ---------- Header interno compacto + Voltar discreto ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(.ref-header, .pc26-header--studio) {
+  box-shadow: var(--rx-shadow-xs);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) .ref-header__inner {
+  min-height: 56px;
+  gap: 12px;
+}
+@media (max-width: 767px) {
+  :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) .ref-header__inner {
+    min-height: 52px;
+  }
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is([class*="__back"], [class*="-back"], a[aria-label*="Voltar"], button[aria-label*="Voltar"]) {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .35rem .6rem;
+  border-radius: var(--rx-radius-control);
+  font-size: .82rem;
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid transparent;
+  opacity: .82;
+  transition: opacity var(--rx-base) var(--rx-sharp), background-color var(--rx-base) var(--rx-sharp), border-color var(--rx-base) var(--rx-sharp);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is([class*="__back"], a[aria-label*="Voltar"], button[aria-label*="Voltar"]):hover {
+  opacity: 1;
+  background: var(--rx-brand-soft);
+  border-color: var(--rx-brand-line);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) :is([class*="__back"], a[aria-label*="Voltar"]) svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---------- Modais compactos e centralizados ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) [role="dialog"] {
+  max-width: min(560px, calc(100vw - 2rem));
+  max-height: min(86svh, 760px);
+  margin-inline: auto;
+  border-radius: var(--rx-radius-card);
+  box-shadow: var(--rx-shadow-lg);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+:is(.search26-page, .sector-hub, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) [role="dialog"] :is(h2, h3) {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+}
+
+/* ---------- Rodapé consistente ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(.ref-footer, .pharmacy-footer) {
+  margin-top: var(--rx-section);
+  border-top: 1px solid var(--rx-brand-line);
+  box-shadow: none;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(.ref-footer a, .pharmacy-footer a) {
+  transition: color var(--rx-base) var(--rx-sharp), transform var(--rx-fast) var(--rx-sharp);
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(.ref-footer a, .pharmacy-footer a):hover {
+  color: var(--rx-brand);
+  transform: translateX(2px);
+}
+
+/* ---------- Integridade de layout ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) {
+  overflow-x: clip;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(img, iframe, video, svg:not([class*="icon"])) {
+  max-width: 100%;
+}
+/* Remove rolagens internas desnecessárias em blocos de conteúdo comum. */
+:is(.search26-results, .ref-product-grid, .ref-store-cards, .store-pro-grid, .pro-basket-items, .smart-basket-items) {
+  overflow: visible !important;
+  max-height: none !important;
+}
+/* Trilhas horizontais legítimas continuam roláveis, mas sem barra visível. */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page) :is(.ref-search-sectors, .ref-sector-nav, [class*="scroller"]) {
+  scrollbar-width: none;
+}
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page) :is(.ref-search-sectors, .ref-sector-nav, [class*="scroller"])::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- Mobile-first: alvos de toque e leitura rápida ---------- */
+@media (max-width: 767px) {
+  :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) {
+    --rx-section: 1.6rem;
+    --rx-gap: .625rem;
+  }
+  :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(button, a[class*="cta"], a[class*="action"], .ref-store-card__select, .ref-stores-more) {
+    min-height: 44px;
+  }
+  :is(.search26-results, .ref-product-grid, .ref-store-cards, .store-pro-grid, .pharmacy-directory__grid, .sector-hub__sectors) {
+    grid-template-columns: 1fr !important;
+  }
+  :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) [role="dialog"] {
+    max-width: calc(100vw - 1.5rem);
+    max-height: 88svh;
+  }
+  /* Espaço para o dock inferior sem criar área vazia no desktop. */
+  :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) > main {
+    padding-bottom: calc(var(--rx-section) + 4.5rem);
+  }
+}
+
+/* ---------- Contraste light/dark ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(small, em, [class*="muted"]) {
+  color: color-mix(in srgb, currentColor 72%, transparent);
+}
+html[data-theme="dark"] :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(small, em, [class*="muted"]) {
+  color: color-mix(in srgb, currentColor 80%, transparent);
+}
+html[data-theme="dark"] :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is(hr, [class*="divider"]) {
+  border-color: var(--rx-brand-line);
+  opacity: .7;
+}
+
+/* ---------- Preservação explícita da rádio ---------- */
+:is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .pdx-page, .pro-basket-page, .smart-basket-page) :is([class*="radio"], [class*="Radio"]) {
+  display: revert;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.search26-page, .sector-hub, .pharmacy-directory-page, .ref-page, .ref-auth, .pdx-page, .pro-basket-page, .smart-basket-page) * {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  :is(.search26-result, .ref-store-card, .ref-product-grid > article, .store-pro-card, .pdx-offer):hover {
+    transform: none;
+  }
+}
