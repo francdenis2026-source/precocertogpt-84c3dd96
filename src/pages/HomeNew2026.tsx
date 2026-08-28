@@ -8,6 +8,7 @@ import { BottomNav } from "../components/home/BottomNav";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroSection } from "../components/home/HeroSection";
+import { CommunityVisualBand, MarketVisualBand } from "../components/home/HomeBands";
 import { LocalCommerceSpotlight } from "../components/home/LocalCommerceSpotlight";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { StoreRail } from "../components/home/StoreRail";
@@ -40,5 +41,5 @@ export function HomeNew2026() {
 
   const products = useMemo(() => catalog.products.filter(product => product.minPrice > 0), [catalog.products]);
   const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 4), [products, cycle]);
-  return <div className="pc26-home"><Header theme={theme} onToggleTheme={toggleTheme}/><main id="conteudo-principal"><HeroSection products={products} loading={loading} productCount={products.length} storeCount={catalog.metrics.stores} priceCount={catalog.metrics.prices}/><BenefitsStrip/><CategoryBar/><StoreRail stores={catalog.stores}/><LocalCommerceSpotlight/><ProductGrid products={featured} loading={loading}/></main><Footer/><BottomNav/></div>;
+  return <div className="pc26-home"><Header theme={theme} onToggleTheme={toggleTheme}/><main id="conteudo-principal"><HeroSection products={products} loading={loading} productCount={products.length} storeCount={catalog.metrics.stores} priceCount={catalog.metrics.prices}/><BenefitsStrip/><CategoryBar/><StoreRail stores={catalog.stores}/><MarketVisualBand/><LocalCommerceSpotlight/><CommunityVisualBand/><ProductGrid products={featured} loading={loading}/></main><Footer/><BottomNav/></div>;
 }
