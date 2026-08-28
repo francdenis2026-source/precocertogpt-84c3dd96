@@ -3,159 +3,109 @@
 .pc26-home{
   --pc-bg:#f5f7f1;
   --pc-bg-soft:#edf3e9;
-  --pc-ink-green:rgba(18,92,72,.10);
   --pc-gold:rgba(187,145,55,.12);
-  --pc-line:rgba(25,103,79,.075);
   position:relative;
   isolation:isolate;
   min-height:100dvh;
   overflow-x:clip;
   background-color:var(--pc-bg)!important;
   background-image:
-    radial-gradient(72rem 42rem at 108% -8%,rgba(30,116,84,.13),transparent 62%),
-    radial-gradient(44rem 32rem at -10% 12%,rgba(212,184,111,.11),transparent 68%),
-    radial-gradient(30rem 18rem at 88% 56%,rgba(38,128,95,.055),transparent 70%),
-    linear-gradient(128deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.22) 44%,transparent 70%),
-    linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 62%,#f3f5ef 100%)!important;
+    radial-gradient(68rem 38rem at 108% -8%,rgba(30,116,84,.11),transparent 64%),
+    radial-gradient(40rem 28rem at -10% 14%,rgba(212,184,111,.08),transparent 70%),
+    linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 64%,#f3f5ef 100%)!important;
 }
 
-/* Comparison path: restrained lines and price nodes, kept away from content. */
-.pc26-home::before{
-  content:"";
-  position:absolute;
-  inset:4.5rem 0 auto auto;
-  width:min(38vw,34rem);
-  height:min(34vw,26rem);
-  pointer-events:none;
-  opacity:.72;
-  border-radius:2rem 0 0 2rem;
-  background:
-    linear-gradient(var(--pc-line),var(--pc-line)) 71% 24%/5.5rem 1px no-repeat,
-    linear-gradient(var(--pc-line),var(--pc-line)) 71% 43%/8.5rem 1px no-repeat,
-    linear-gradient(var(--pc-line),var(--pc-line)) 71% 62%/6.5rem 1px no-repeat,
-    radial-gradient(circle at 76% 24%,rgba(185,143,50,.34) 0 2px,transparent 3px),
-    radial-gradient(circle at 76% 43%,rgba(26,112,83,.27) 0 2px,transparent 3px),
-    radial-gradient(circle at 76% 62%,rgba(26,112,83,.22) 0 2px,transparent 3px),
-    linear-gradient(145deg,transparent 0 24%,rgba(255,255,255,.45) 24.2% 24.45%,transparent 24.7% 100%),
-    radial-gradient(ellipse at 100% 18%,rgba(31,119,88,.10),transparent 58%);
-  mask-image:linear-gradient(90deg,transparent 0%,#000 24%,#000 100%);
-}
+/* Remove the old top-right comparison path. It was crossing the hero and
+   reading visually as a diagonal light beam over the person in the photo. */
+.pc26-home::before{content:none!important;display:none!important}
 
-/* Product-comparison panel, drawn entirely in CSS:
-   product silhouette + comparison bars + barcode + price-tag accent. */
+/* Keep one restrained commerce/comparison motif below the hero only. */
 .pc26-home::after{
   content:"";
   position:absolute;
-  right:clamp(1rem,5vw,5.5rem);
-  top:clamp(22rem,42vh,34rem);
-  width:clamp(12.5rem,18vw,17rem);
-  aspect-ratio:1.34;
+  right:clamp(1rem,4vw,4rem);
+  top:clamp(34rem,56vh,44rem);
+  width:clamp(11rem,15vw,14rem);
+  aspect-ratio:1.38;
   pointer-events:none;
-  opacity:.42;
-  border:1px solid rgba(20,98,74,.10);
-  border-radius:16px;
-  box-shadow:
-    0 18px 50px rgba(22,74,57,.07),
-    -3.2rem 3.4rem 0 -2.55rem rgba(255,255,255,.42),
-    -3.2rem 3.4rem 0 -2.48rem rgba(28,108,82,.08);
+  opacity:.22;
+  border:1px solid rgba(20,98,74,.08);
+  border-radius:14px;
+  box-shadow:0 14px 36px rgba(22,74,57,.045);
   background:
-    /* price tag */
-    radial-gradient(circle at 86% 18%,rgba(193,149,54,.38) 0 3px,transparent 3.5px),
-    linear-gradient(135deg,transparent 0 46%,rgba(193,149,54,.17) 46.5% 53.5%,transparent 54%) 88% 17%/2.3rem 2.3rem no-repeat,
-    /* product bottle silhouette */
-    linear-gradient(rgba(28,110,83,.15),rgba(28,110,83,.15)) 18% 38%/1.25rem 3.1rem no-repeat,
-    linear-gradient(rgba(28,110,83,.18),rgba(28,110,83,.18)) 18% 24%/.62rem .95rem no-repeat,
-    radial-gradient(ellipse at 18% 62%,rgba(28,110,83,.18) 0 .72rem,transparent .76rem),
-    /* comparison bars */
-    linear-gradient(90deg,rgba(28,110,83,.18),rgba(28,110,83,.18)) 48% 36%/5.2rem .34rem no-repeat,
-    linear-gradient(90deg,rgba(193,149,54,.24),rgba(193,149,54,.24)) 48% 49%/3.8rem .34rem no-repeat,
-    linear-gradient(90deg,rgba(28,110,83,.12),rgba(28,110,83,.12)) 48% 62%/4.5rem .34rem no-repeat,
-    /* barcode */
-    repeating-linear-gradient(90deg,rgba(26,90,70,.18) 0 1px,transparent 1px 3px) 18% 82%/5.8rem 1.15rem no-repeat,
-    linear-gradient(155deg,rgba(255,255,255,.44),rgba(255,255,255,.08));
+    radial-gradient(circle at 84% 18%,rgba(193,149,54,.30) 0 2px,transparent 2.5px),
+    linear-gradient(rgba(28,110,83,.11),rgba(28,110,83,.11)) 18% 38%/1rem 2.7rem no-repeat,
+    linear-gradient(rgba(28,110,83,.13),rgba(28,110,83,.13)) 18% 24%/.5rem .75rem no-repeat,
+    radial-gradient(ellipse at 18% 62%,rgba(28,110,83,.12) 0 .58rem,transparent .62rem),
+    linear-gradient(90deg,rgba(28,110,83,.13),rgba(28,110,83,.13)) 48% 36%/4.4rem .28rem no-repeat,
+    linear-gradient(90deg,rgba(193,149,54,.18),rgba(193,149,54,.18)) 48% 49%/3.2rem .28rem no-repeat,
+    linear-gradient(90deg,rgba(28,110,83,.09),rgba(28,110,83,.09)) 48% 62%/3.8rem .28rem no-repeat,
+    repeating-linear-gradient(90deg,rgba(26,90,70,.13) 0 1px,transparent 1px 3px) 18% 82%/4.9rem .9rem no-repeat,
+    linear-gradient(155deg,rgba(255,255,255,.28),rgba(255,255,255,.04));
+}
+
+/* Hard cleanup for legacy hero overlays/pseudo-elements from older visual layers. */
+.pc26-model-hero::before,
+.pc26-model-hero::after,
+.pc26-model-hero__inner::before,
+.pc26-model-hero__inner::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+
+/* Keep only a smooth readable veil over the hero image; no diagonal rays. */
+.pc26-model-hero__inner{
+  background:
+    linear-gradient(90deg,rgba(5,29,30,.92) 0%,rgba(6,35,35,.78) 42%,rgba(6,35,35,.24) 70%,rgba(6,35,35,.06) 100%),
+    url('/hero-supermercado-comparando-precos-2026.webp') center 48%/cover no-repeat!important;
 }
 
 html[data-theme="dark"] .pc26-home{
   --pc-bg:#080808;
   --pc-bg-soft:#11110f;
-  --pc-ink-green:rgba(72,111,87,.055);
-  --pc-gold:rgba(211,166,67,.15);
-  --pc-line:rgba(224,190,113,.085);
   background-color:var(--pc-bg)!important;
   background-image:
-    radial-gradient(66rem 38rem at 108% -10%,rgba(210,165,68,.105),transparent 61%),
-    radial-gradient(40rem 30rem at -10% 14%,rgba(255,224,155,.035),transparent 68%),
-    radial-gradient(28rem 20rem at 88% 64%,rgba(84,117,92,.035),transparent 72%),
-    linear-gradient(132deg,rgba(25,24,20,.64) 0%,rgba(12,12,11,.18) 46%,transparent 72%),
-    linear-gradient(180deg,#090909 0%,#0d0d0c 48%,#11110f 72%,#080808 100%)!important;
-}
-
-html[data-theme="dark"] .pc26-home::before{
-  opacity:.78;
-  background:
-    linear-gradient(var(--pc-line),var(--pc-line)) 71% 24%/5.5rem 1px no-repeat,
-    linear-gradient(var(--pc-line),var(--pc-line)) 71% 43%/8.5rem 1px no-repeat,
-    linear-gradient(var(--pc-line),var(--pc-line)) 71% 62%/6.5rem 1px no-repeat,
-    radial-gradient(circle at 76% 24%,rgba(225,181,84,.52) 0 2px,transparent 3px),
-    radial-gradient(circle at 76% 43%,rgba(225,181,84,.24) 0 2px,transparent 3px),
-    radial-gradient(circle at 76% 62%,rgba(225,181,84,.18) 0 2px,transparent 3px),
-    linear-gradient(145deg,transparent 0 24%,rgba(225,181,84,.09) 24.2% 24.45%,transparent 24.7% 100%),
-    radial-gradient(ellipse at 100% 18%,rgba(208,164,68,.09),transparent 58%);
+    radial-gradient(62rem 34rem at 108% -10%,rgba(210,165,68,.085),transparent 64%),
+    radial-gradient(36rem 26rem at -8% 16%,rgba(255,224,155,.025),transparent 70%),
+    linear-gradient(180deg,#090909 0%,#0d0d0c 54%,#11110f 74%,#080808 100%)!important;
 }
 
 html[data-theme="dark"] .pc26-home::after{
-  opacity:.48;
-  border-color:rgba(224,186,102,.12);
-  box-shadow:
-    0 22px 60px rgba(0,0,0,.30),
-    -3.2rem 3.4rem 0 -2.55rem rgba(22,22,20,.74),
-    -3.2rem 3.4rem 0 -2.48rem rgba(225,181,84,.08);
+  opacity:.24;
+  border-color:rgba(224,186,102,.09);
+  box-shadow:0 16px 42px rgba(0,0,0,.22);
   background:
-    radial-gradient(circle at 86% 18%,rgba(225,181,84,.58) 0 3px,transparent 3.5px),
-    linear-gradient(135deg,transparent 0 46%,rgba(225,181,84,.24) 46.5% 53.5%,transparent 54%) 88% 17%/2.3rem 2.3rem no-repeat,
-    linear-gradient(rgba(225,181,84,.12),rgba(225,181,84,.12)) 18% 38%/1.25rem 3.1rem no-repeat,
-    linear-gradient(rgba(225,181,84,.16),rgba(225,181,84,.16)) 18% 24%/.62rem .95rem no-repeat,
-    radial-gradient(ellipse at 18% 62%,rgba(225,181,84,.16) 0 .72rem,transparent .76rem),
-    linear-gradient(90deg,rgba(225,181,84,.18),rgba(225,181,84,.18)) 48% 36%/5.2rem .34rem no-repeat,
-    linear-gradient(90deg,rgba(225,181,84,.34),rgba(225,181,84,.34)) 48% 49%/3.8rem .34rem no-repeat,
-    linear-gradient(90deg,rgba(132,145,124,.10),rgba(132,145,124,.10)) 48% 62%/4.5rem .34rem no-repeat,
-    repeating-linear-gradient(90deg,rgba(225,181,84,.18) 0 1px,transparent 1px 3px) 18% 82%/5.8rem 1.15rem no-repeat,
-    linear-gradient(155deg,rgba(31,30,26,.72),rgba(13,13,12,.38));
+    radial-gradient(circle at 84% 18%,rgba(225,181,84,.38) 0 2px,transparent 2.5px),
+    linear-gradient(rgba(225,181,84,.085),rgba(225,181,84,.085)) 18% 38%/1rem 2.7rem no-repeat,
+    linear-gradient(rgba(225,181,84,.11),rgba(225,181,84,.11)) 18% 24%/.5rem .75rem no-repeat,
+    radial-gradient(ellipse at 18% 62%,rgba(225,181,84,.10) 0 .58rem,transparent .62rem),
+    linear-gradient(90deg,rgba(225,181,84,.11),rgba(225,181,84,.11)) 48% 36%/4.4rem .28rem no-repeat,
+    linear-gradient(90deg,rgba(225,181,84,.20),rgba(225,181,84,.20)) 48% 49%/3.2rem .28rem no-repeat,
+    linear-gradient(90deg,rgba(132,145,124,.07),rgba(132,145,124,.07)) 48% 62%/3.8rem .28rem no-repeat,
+    repeating-linear-gradient(90deg,rgba(225,181,84,.11) 0 1px,transparent 1px 3px) 18% 82%/4.9rem .9rem no-repeat,
+    linear-gradient(155deg,rgba(27,26,23,.52),rgba(12,12,11,.26));
+}
+
+html[data-theme="dark"] .pc26-model-hero__inner{
+  background:
+    linear-gradient(90deg,rgba(7,7,7,.94) 0%,rgba(11,11,10,.80) 42%,rgba(11,11,10,.26) 70%,rgba(8,8,8,.06) 100%),
+    url('/hero-supermercado-comparando-precos-2026.webp') center 48%/cover no-repeat!important;
 }
 
 @media(max-width:760px){
   .pc26-home{
     background-image:
-      radial-gradient(36rem 28rem at 112% 0%,rgba(35,125,91,.12),transparent 60%),
-      radial-gradient(24rem 20rem at -18% 30%,rgba(208,178,104,.09),transparent 68%),
-      linear-gradient(155deg,rgba(255,255,255,.58),transparent 48%),
-      linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 70%,var(--pc-bg) 100%)!important;
+      radial-gradient(34rem 26rem at 112% 0%,rgba(35,125,91,.09),transparent 64%),
+      radial-gradient(22rem 18rem at -18% 30%,rgba(208,178,104,.065),transparent 70%),
+      linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 72%,var(--pc-bg) 100%)!important;
   }
-  .pc26-home::before{
-    top:5.25rem;
-    width:15rem;
-    height:18rem;
-    opacity:.38;
-    transform:translateX(34%);
-    mask-image:linear-gradient(90deg,transparent 0%,#000 42%,#000 100%);
-  }
-  .pc26-home::after{
-    top:28rem;
-    right:-4.8rem;
-    width:12.2rem;
-    opacity:.24;
-    transform:scale(.92);
-  }
+  .pc26-home::after{display:none!important}
   html[data-theme="dark"] .pc26-home{
     background-image:
-      radial-gradient(34rem 26rem at 112% -4%,rgba(211,166,67,.10),transparent 62%),
-      radial-gradient(22rem 18rem at -16% 34%,rgba(255,229,171,.025),transparent 68%),
-      linear-gradient(155deg,rgba(25,24,20,.42),transparent 48%),
-      linear-gradient(180deg,#080808 0%,#0f0f0d 68%,#080808 100%)!important;
+      radial-gradient(32rem 24rem at 112% -4%,rgba(211,166,67,.07),transparent 66%),
+      linear-gradient(180deg,#080808 0%,#0f0f0d 70%,#080808 100%)!important;
   }
-  html[data-theme="dark"] .pc26-home::after{opacity:.30}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .pc26-home::before,.pc26-home::after{transform:none}
 }
