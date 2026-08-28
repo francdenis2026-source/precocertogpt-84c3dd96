@@ -11,8 +11,10 @@ import "./reference/DesignSystem2.css";
 import "./reference/Chrome2026.css";
 import "./reference/InteractionPolish.css";
 import "./pages/InternalRefinement2026.css";
+import "./styles/ProductImageFallback.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
+import { initializeProductImageGuard } from "./lib/productImageGuard";
 
 /**
  * PreçoCerto visual bootstrap
@@ -26,6 +28,7 @@ import { initializeSiteTheme } from "./lib/siteTheme";
  * of truth.
  */
 initializeSiteTheme();
+initializeProductImageGuard();
 
 document.documentElement.classList.remove("pc-prepaint");
 document.documentElement.classList.add("pc-styles-ready");
