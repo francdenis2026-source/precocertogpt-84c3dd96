@@ -1299,3 +1299,32 @@ html body .pc26-section-heading > a {
 }
 html body .pc26-category-more a:hover,
 html body .pc26-section-heading > a:hover { border-color: var(--gx-accent) !important; color: var(--gx-accent-ink) !important; }
+
+/* --- Mobile: busca e grade de categorias sem transbordo ------------------- */
+@media (max-width: 767px) {
+  html body .pc26-home .pc26-category-grid,
+  html body .pc26-home .pc26-category-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: .625rem !important;
+    padding-inline: 0 !important;
+  }
+  html body .pc26-home .pc26-category-card { min-height: 0 !important; padding: .875rem !important; }
+  html body .pc26-home :is(.pc26-hero-search, .pc26-search, .pc26-live-search) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: .5rem !important;
+    padding: .5rem !important;
+  }
+  html body .pc26-home .pc26-live-search__submit {
+    position: static !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    justify-content: center !important;
+    inset: auto !important;
+    transform: none !important;
+  }
+  html body .pc26-home .pc26-live-search__field,
+  html body .pc26-home .pc26-live-search input { width: 100% !important; }
+  html body .pc26-home .pc26-benefits > div:first-child { border: 0 !important; background: none !important; padding: 0 !important; }
+}
