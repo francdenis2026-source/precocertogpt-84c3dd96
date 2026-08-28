@@ -1,0 +1,129 @@
+.product-photo[data-image-placeholder="true"] {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 25% 20%, color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 16%, transparent) 0 18%, transparent 19%),
+    linear-gradient(145deg, color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 8%, white), color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 3%, #f4f6f5));
+  border: 1px solid color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 18%, var(--border, #dbe2df));
+}
+
+.product-photo[data-image-placeholder="true"] > img,
+.product-photo[data-image-placeholder="true"] > .product-photo-overlay {
+  visibility: hidden !important;
+}
+
+.product-photo[data-image-placeholder="true"]::before {
+  content: "";
+  width: 42%;
+  aspect-ratio: 1;
+  border-radius: 28% 28% 34% 34%;
+  border: 2px solid color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 78%, #13251d);
+  background:
+    linear-gradient(to bottom, transparent 0 26%, color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 13%, transparent) 27% 30%, transparent 31%),
+    linear-gradient(145deg, color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 7%, white), color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 15%, white));
+  box-shadow:
+    inset 0 0 0 6px color-mix(in srgb, white 82%, transparent),
+    0 10px 24px color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 16%, transparent);
+  transform: translateY(-8%);
+}
+
+.product-photo[data-image-placeholder="true"]::after {
+  content: attr(data-image-category-label);
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 10%;
+  text-align: center;
+  font-size: clamp(.58rem, 1vw, .74rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--pc-fallback-accent, #0f7a4f) 78%, #13251d);
+}
+
+.product-photo[data-image-category="cleaning"] { --pc-fallback-accent: #1779ba; }
+.product-photo[data-image-category="meat"] { --pc-fallback-accent: #b84949; }
+.product-photo[data-image-category="drink"] { --pc-fallback-accent: #2879a8; }
+.product-photo[data-image-category="produce"] { --pc-fallback-accent: #3d8f4f; }
+.product-photo[data-image-category="bakery"] { --pc-fallback-accent: #a66a2d; }
+.product-photo[data-image-category="care"] { --pc-fallback-accent: #8c5ca8; }
+.product-photo[data-image-category="dairy"] { --pc-fallback-accent: #4f83b5; }
+.product-photo[data-image-category="snack"] { --pc-fallback-accent: #b67b24; }
+.product-photo[data-image-category="frozen"] { --pc-fallback-accent: #4b86a8; }
+.product-photo[data-image-category="pharmacy"] { --pc-fallback-accent: #2f8e67; }
+.product-photo[data-image-category="grocery"] { --pc-fallback-accent: #8a6b3f; }
+
+.product-photo[data-image-category="cleaning"]::before {
+  border-radius: 34% 34% 24% 24%;
+  clip-path: polygon(26% 0, 74% 0, 84% 18%, 84% 100%, 16% 100%, 16% 18%);
+}
+
+.product-photo[data-image-category="drink"]::before {
+  border-radius: 48% 48% 28% 28%;
+  clip-path: polygon(39% 0, 61% 0, 66% 18%, 79% 30%, 74% 100%, 26% 100%, 21% 30%, 34% 18%);
+}
+
+.product-photo[data-image-category="meat"]::before {
+  border-radius: 56% 44% 52% 48% / 42% 52% 48% 58%;
+  transform: rotate(-12deg) translateY(-8%);
+}
+
+.product-photo[data-image-category="produce"]::before {
+  border-radius: 48% 52% 50% 50%;
+  clip-path: polygon(50% 0, 61% 15%, 80% 18%, 94% 42%, 82% 77%, 50% 100%, 18% 77%, 6% 42%, 20% 18%, 39% 15%);
+}
+
+.product-photo[data-image-category="bakery"]::before {
+  border-radius: 48% 48% 38% 38%;
+  clip-path: ellipse(47% 36% at 50% 54%);
+}
+
+.product-photo[data-image-category="care"]::before {
+  border-radius: 24% 24% 18% 18%;
+  clip-path: polygon(38% 0, 62% 0, 65% 15%, 75% 20%, 79% 100%, 21% 100%, 25% 20%, 35% 15%);
+}
+
+.product-photo[data-image-category="dairy"]::before {
+  border-radius: 18% 18% 26% 26%;
+  clip-path: polygon(20% 8%, 78% 0, 88% 17%, 80% 100%, 20% 100%, 12% 17%);
+}
+
+.product-photo[data-image-category="snack"]::before {
+  border-radius: 18% 18% 28% 28%;
+  clip-path: polygon(18% 0, 82% 0, 94% 100%, 6% 100%);
+}
+
+.product-photo[data-image-category="frozen"]::before {
+  border-radius: 22%;
+  clip-path: polygon(50% 0, 61% 24%, 88% 13%, 76% 39%, 100% 50%, 76% 61%, 88% 87%, 61% 76%, 50% 100%, 39% 76%, 12% 87%, 24% 61%, 0 50%, 24% 39%, 12% 13%, 39% 24%);
+}
+
+.product-photo[data-image-category="pharmacy"]::before {
+  border-radius: 18%;
+  clip-path: polygon(36% 0, 64% 0, 64% 36%, 100% 36%, 100% 64%, 64% 64%, 64% 100%, 36% 100%, 36% 64%, 0 64%, 0 36%, 36% 36%);
+}
+
+html[data-theme="dark"] .product-photo[data-image-placeholder="true"] {
+  background:
+    radial-gradient(circle at 25% 20%, color-mix(in srgb, var(--pc-fallback-accent) 22%, transparent) 0 18%, transparent 19%),
+    linear-gradient(145deg, color-mix(in srgb, var(--pc-fallback-accent) 11%, #111914), #101512);
+  border-color: color-mix(in srgb, var(--pc-fallback-accent) 34%, #253229);
+}
+
+html[data-theme="dark"] .product-photo[data-image-placeholder="true"]::before {
+  background:
+    linear-gradient(to bottom, transparent 0 26%, color-mix(in srgb, var(--pc-fallback-accent) 22%, transparent) 27% 30%, transparent 31%),
+    linear-gradient(145deg, color-mix(in srgb, var(--pc-fallback-accent) 18%, #1a211d), #151b17);
+  box-shadow:
+    inset 0 0 0 5px color-mix(in srgb, #172019 76%, transparent),
+    0 10px 26px rgb(0 0 0 / 24%);
+}
+
+.featured-products .visual-product-card[hidden],
+.hero-insight__item[hidden] {
+  display: none !important;
+}
