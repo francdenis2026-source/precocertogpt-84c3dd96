@@ -1,29 +1,99 @@
-/* PreçoCerto — premium persistent homepage background.
-   This is the actual homepage/app surface, not a splash or loading screen. */
+/* PreçoCerto — lightweight crafted homepage surface.
+   No raster background: the visual world is built entirely with CSS layers. */
 .pc26-home{
-  background:
-    linear-gradient(180deg,rgba(244,241,233,.82),rgba(244,241,233,.94) 58%,#f4f1e9),
-    url('/home-background-premium-desktop.webp?v=1') center top/cover fixed no-repeat!important;
+  --pc-bg:#f5f7f1;
+  --pc-bg-soft:#edf3e9;
+  --pc-ink-green:rgba(18,92,72,.10);
+  --pc-gold:rgba(187,145,55,.12);
+  --pc-line:rgba(25,103,79,.075);
+  position:relative;
+  isolation:isolate;
+  min-height:100dvh;
+  overflow-x:clip;
+  background-color:var(--pc-bg)!important;
+  background-image:
+    radial-gradient(72rem 42rem at 108% -8%,rgba(30,116,84,.13),transparent 62%),
+    radial-gradient(44rem 32rem at -10% 12%,rgba(212,184,111,.11),transparent 68%),
+    radial-gradient(30rem 18rem at 88% 56%,rgba(38,128,95,.055),transparent 70%),
+    linear-gradient(128deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.22) 44%,transparent 70%),
+    linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 62%,#f3f5ef 100%)!important;
 }
-html[data-theme="dark"] .pc26-home{
+
+/* Quiet commerce geometry: intentionally peripheral so content remains dominant. */
+.pc26-home::before{
+  content:"";
+  position:absolute;
+  inset:4.5rem 0 auto auto;
+  width:min(38vw,34rem);
+  height:min(34vw,26rem);
+  pointer-events:none;
+  opacity:.72;
+  border-radius:2rem 0 0 2rem;
   background:
-    linear-gradient(180deg,rgba(5,20,22,.54),rgba(7,22,24,.84) 58%,#071618),
-    url('/home-background-premium-desktop.webp?v=1') center top/cover fixed no-repeat!important;
+    linear-gradient(var(--pc-line),var(--pc-line)) 71% 24%/5.5rem 1px no-repeat,
+    linear-gradient(var(--pc-line),var(--pc-line)) 71% 43%/8.5rem 1px no-repeat,
+    linear-gradient(var(--pc-line),var(--pc-line)) 71% 62%/6.5rem 1px no-repeat,
+    radial-gradient(circle at 76% 24%,rgba(185,143,50,.34) 0 2px,transparent 3px),
+    radial-gradient(circle at 76% 43%,rgba(26,112,83,.27) 0 2px,transparent 3px),
+    radial-gradient(circle at 76% 62%,rgba(26,112,83,.22) 0 2px,transparent 3px),
+    linear-gradient(145deg,transparent 0 24%,rgba(255,255,255,.45) 24.2% 24.45%,transparent 24.7% 100%),
+    radial-gradient(ellipse at 100% 18%,rgba(31,119,88,.10),transparent 58%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 24%,#000 100%);
+}
+
+html[data-theme="dark"] .pc26-home{
+  --pc-bg:#071719;
+  --pc-bg-soft:#0a2020;
+  --pc-ink-green:rgba(63,157,118,.12);
+  --pc-gold:rgba(211,166,67,.13);
+  --pc-line:rgba(137,196,168,.085);
+  background-color:var(--pc-bg)!important;
+  background-image:
+    radial-gradient(68rem 40rem at 108% -10%,rgba(37,126,91,.18),transparent 62%),
+    radial-gradient(38rem 28rem at -8% 18%,rgba(176,132,44,.075),transparent 68%),
+    radial-gradient(26rem 18rem at 86% 60%,rgba(40,132,98,.075),transparent 72%),
+    linear-gradient(132deg,rgba(13,39,38,.62) 0%,rgba(8,26,28,.14) 48%,transparent 72%),
+    linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 58%,#071719 100%)!important;
+}
+
+html[data-theme="dark"] .pc26-home::before{
+  opacity:.84;
+  background:
+    linear-gradient(var(--pc-line),var(--pc-line)) 71% 24%/5.5rem 1px no-repeat,
+    linear-gradient(var(--pc-line),var(--pc-line)) 71% 43%/8.5rem 1px no-repeat,
+    linear-gradient(var(--pc-line),var(--pc-line)) 71% 62%/6.5rem 1px no-repeat,
+    radial-gradient(circle at 76% 24%,rgba(221,175,72,.48) 0 2px,transparent 3px),
+    radial-gradient(circle at 76% 43%,rgba(105,183,146,.30) 0 2px,transparent 3px),
+    radial-gradient(circle at 76% 62%,rgba(105,183,146,.24) 0 2px,transparent 3px),
+    linear-gradient(145deg,transparent 0 24%,rgba(116,190,155,.12) 24.2% 24.45%,transparent 24.7% 100%),
+    radial-gradient(ellipse at 100% 18%,rgba(47,139,101,.16),transparent 58%);
 }
 
 @media(max-width:760px){
   .pc26-home{
-    background:
-      linear-gradient(180deg,rgba(244,241,233,.80),rgba(244,241,233,.94) 50%,#f4f1e9),
-      url('/home-background-premium-mobile.webp?v=1') center top/cover no-repeat!important;
+    background-image:
+      radial-gradient(36rem 28rem at 112% 0%,rgba(35,125,91,.12),transparent 60%),
+      radial-gradient(24rem 20rem at -18% 30%,rgba(208,178,104,.09),transparent 68%),
+      linear-gradient(155deg,rgba(255,255,255,.58),transparent 48%),
+      linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 70%,var(--pc-bg) 100%)!important;
+  }
+  .pc26-home::before{
+    top:5.25rem;
+    width:15rem;
+    height:18rem;
+    opacity:.48;
+    transform:translateX(30%);
+    mask-image:linear-gradient(90deg,transparent 0%,#000 38%,#000 100%);
   }
   html[data-theme="dark"] .pc26-home{
-    background:
-      linear-gradient(180deg,rgba(5,20,22,.50),rgba(7,22,24,.84) 52%,#071618),
-      url('/home-background-premium-mobile.webp?v=1') center top/cover no-repeat!important;
+    background-image:
+      radial-gradient(34rem 26rem at 112% -4%,rgba(37,130,94,.18),transparent 62%),
+      radial-gradient(22rem 18rem at -16% 34%,rgba(183,139,49,.06),transparent 68%),
+      linear-gradient(155deg,rgba(15,46,43,.40),transparent 48%),
+      linear-gradient(180deg,var(--pc-bg) 0%,var(--pc-bg-soft) 68%,var(--pc-bg) 100%)!important;
   }
 }
 
 @media(prefers-reduced-motion:reduce){
-  .pc26-home{background-attachment:scroll!important}
+  .pc26-home::before{transform:none}
 }
