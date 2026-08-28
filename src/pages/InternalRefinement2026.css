@@ -374,3 +374,41 @@ html[data-theme="dark"] :is(.search26-page, .sector-hub, .pharmacy-directory-pag
   .search26-page .search26-suggestions { grid-column: 1; }
   .search26-page .search26-suggestions button { min-height: 44px; }
 }
+
+/* ---------- Header "somente Voltar": discreto, legível e compacto ---------- */
+.ref-header--back-only .ref-header__inner { min-height: 56px; display: flex; align-items: center; gap: 12px; }
+.ref-header--back-only .ref-header__back-row { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.ref-header--back-only .ref-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 36px;
+  padding: 0 .7rem;
+  border: 1px solid var(--ref-line, rgb(0 0 0 / 10%));
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font-size: .84rem;
+  font-weight: 600;
+  transition: background-color 200ms cubic-bezier(.4, 0, .2, 1), border-color 200ms cubic-bezier(.4, 0, .2, 1);
+}
+.ref-header--back-only .ref-header__back svg { width: 15px; height: 15px; }
+.ref-header--back-only .ref-header__back:hover { background: #e0f0e7; border-color: #a8d5bd; color: #084a2f; }
+html[data-theme="dark"] .ref-header--back-only .ref-header__back:hover { background: #0f3a23; border-color: #2a5a3f; color: #7ee9bb; }
+.ref-header--back-only .ref-header__back:active { transform: translateY(1px); }
+.ref-header--back-only .ref-header__context { min-width: 0; }
+.ref-header--back-only .ref-header__context-title {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Geist Variable", Geist, system-ui, sans-serif;
+  font-size: .95rem;
+  letter-spacing: -.01em;
+}
+.ref-header--back-only .ref-header__actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+@media (max-width: 767px) {
+  .ref-header--back-only .ref-header__inner { min-height: 52px; }
+  .ref-header--back-only .ref-header__back { min-height: 40px; }
+  .ref-header--back-only .ref-header__context-title { font-size: .88rem; }
+}
