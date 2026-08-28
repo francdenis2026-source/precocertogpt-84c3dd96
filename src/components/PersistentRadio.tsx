@@ -287,6 +287,18 @@ export function HeaderRadioPlayer() {
   const radio = useContext(RadioContext);
   const [showTrackNotice, setShowTrackNotice] = useState(false);
   const previousTrackRef = useRef<string | null>(null);
+  const interactionTimeoutRef = useRef<number>();
+
+  const showTemporaryTrackNotice = () => {
+    if (!radio?.playing) return;
+    if (interactionTimeoutRef.current)
+      window.clearTimeout(interactionTimeoutRef.current);
+    setShowTrackNotice(true);
+    interactionTimeoutRef.current = window.setTimeout(
+      () => setShowTrackNotice(false),
+      3000,
+    );
+  };
 
   useEffect(() => {
     if (!radio?.playing) {
@@ -307,6 +319,14 @@ export function HeaderRadioPlayer() {
     };
   }, [radio?.nowPlaying, radio?.playing, radio?.station.name]);
 
+  useEffect(
+    () => () => {
+      if (interactionTimeoutRef.current)
+        window.clearTimeout(interactionTimeoutRef.current);
+    },
+    [],
+  );
+
   if (!radio) return null;
   const status = radio.failed
     ? "Sinal indisponível"
@@ -323,6 +343,8 @@ export function HeaderRadioPlayer() {
   return (
     <div
       className={`pc-radio${radio.playing ? " is-playing" : ""}${radio.loading ? " is-loading" : ""}${radio.failed ? " has-error" : ""}${radio.nowPlaying ? " has-track" : ""}${showTrackNotice ? " show-track-notice" : ""}`}
+      onMouseEnter={showTemporaryTrackNotice}
+      onFocusCapture={showTemporaryTrackNotice}
     >
       <button
         className="pc-radio__play"
