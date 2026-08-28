@@ -315,3 +315,62 @@ html[data-theme="dark"] :is(.search26-page, .sector-hub, .pharmacy-directory-pag
     transform: none;
   }
 }
+
+/* ---------- Busca: estado inicial sem área vazia ---------- */
+.search26-page { display: flex; flex-direction: column; }
+.search26-page .search26-main { flex: 1 1 auto; display: flex; flex-direction: column; }
+.search26-page .search26-start {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
+  gap: .5rem 1rem;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 2.6vw, 2rem);
+  border: 1px dashed var(--rx-brand-line);
+  border-radius: var(--rx-radius-card);
+  background: color-mix(in srgb, var(--rx-brand-soft) 45%, transparent);
+  text-align: left;
+}
+.search26-page .search26-start-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--rx-brand-soft);
+  color: var(--rx-brand);
+}
+.search26-page .search26-start-icon svg { width: 24px; height: 24px; }
+.search26-page .search26-start > div:not(.search26-start-icon):not(.search26-suggestions) { display: grid; gap: .3rem; }
+.search26-page .search26-start small { font-size: .68rem; font-weight: 600; letter-spacing: .08em; color: var(--rx-brand); }
+.search26-page .search26-start h2 { margin: 0; font-size: clamp(1.15rem, 2vw, 1.45rem); }
+.search26-page .search26-start p { margin: 0; font-size: .9rem; }
+.search26-page .search26-suggestions {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .35rem;
+}
+.search26-page .search26-suggestions button {
+  min-height: 36px;
+  padding: 0 .85rem;
+  border: 1px solid var(--rx-brand-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--rx-brand-soft) 70%, transparent);
+  color: var(--rx-brand-strong);
+  font-size: .84rem;
+  font-weight: 600;
+}
+.search26-page .search26-suggestions button:hover {
+  background: var(--rx-brand-soft);
+  border-color: var(--rx-brand);
+}
+@media (max-width: 620px) {
+  .search26-page .search26-start { grid-template-columns: 1fr; gap: .75rem; }
+  .search26-page .search26-suggestions { grid-column: 1; }
+  .search26-page .search26-suggestions button { min-height: 44px; }
+}
