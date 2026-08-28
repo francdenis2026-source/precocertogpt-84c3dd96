@@ -11,7 +11,6 @@ import { HeroSection } from "../components/home/HeroSection";
 import { LocalCommerceSpotlight } from "../components/home/LocalCommerceSpotlight";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { useSiteTheme } from "../hooks/useSiteTheme";
-import "./HomeNew2026.css";
 import "./HomeProfessional2026.css";
 
 const initialCatalog = buildCatalog();
