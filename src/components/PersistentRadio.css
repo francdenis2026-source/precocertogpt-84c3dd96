@@ -1,1 +1,451 @@
-.pc-radio{--ra:#237454;--ras:#edf6f1;--rl:#c94f3d;position:relative;height:42px;min-width:178px;display:flex;align-items:center;gap:7px;padding:3px 8px 3px 3px;border:1px solid color-mix(in srgb,var(--pc-border,#d8dce6) 86%,var(--ra));border-radius:13px;background:var(--pc-surface,#fff);box-shadow:0 4px 14px rgb(18 32 26/7%);color:var(--pc-ink,#17212b);font-family:"Manrope Variable",Manrope,system-ui,sans-serif;transition:background-color .22s,border-color .22s,box-shadow .22s,transform .14s}.pc-radio__play{min-width:0;min-height:36px;display:flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;color:inherit;cursor:pointer}.pc-radio__control{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;background:var(--ra);color:#fff;transition:transform .14s}.pc-radio__play:active .pc-radio__control{transform:scale(.9)}.pc-radio__control svg{width:14px;height:14px;stroke-width:2.5}.pc-radio__copy{min-width:76px;display:grid;gap:3px;text-align:left;line-height:1}.pc-radio__copy small{display:flex;align-items:center;gap:5px;color:var(--pc-muted,#66737a);font-size:7px;font-weight:850;letter-spacing:.11em}.pc-radio__copy small i{width:6px;height:6px;border-radius:50%;background:var(--rl)}.pc-radio__copy strong{max-width:108px;overflow:hidden;font-size:10px;font-weight:820;text-overflow:ellipsis;white-space:nowrap}.pc-radio__signal{height:18px;display:flex;align-items:center;gap:2px}.pc-radio__signal i{width:2px;height:5px;border-radius:2px;background:color-mix(in srgb,var(--pc-muted,#66737a) 60%,transparent);transform-origin:center bottom}.pc-radio__signal i:nth-child(2){height:10px}.pc-radio__signal i:nth-child(3){height:14px}.pc-radio__signal i:nth-child(4){height:9px}.pc-radio__signal i:nth-child(5){height:6px}.pc-radio__volume{width:34px;display:flex;align-items:center;gap:3px;color:var(--pc-muted,#66737a)}.pc-radio__volume svg{width:12px}.pc-radio__volume input{width:20px;margin:0;accent-color:var(--ra)}.pc-radio__announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.pc-radio:hover{border-color:color-mix(in srgb,var(--ra) 48%,var(--pc-border));box-shadow:0 8px 20px rgb(18 32 26/10%)}.pc-radio:focus-within{outline:3px solid color-mix(in srgb,var(--ra) 28%,transparent);outline-offset:2px}.pc-radio.has-error{--ra:#a94d48;border-color:#d7a5a1;background:#fff8f7}.pc-radio__loader{animation:rr-spin .8s linear infinite}.pc-radio.is-playing{border-color:color-mix(in srgb,var(--ra) 58%,var(--pc-border));background:var(--ras);box-shadow:0 7px 20px rgb(24 92 67/12%)}.pc-radio.is-playing .pc-radio__control{background:#1d6248}.pc-radio.is-playing .pc-radio__copy small{color:#1d6248}.pc-radio.is-playing .pc-radio__copy small i{animation:rr-pulse 1.5s ease-in-out infinite}.pc-radio.is-playing .pc-radio__signal i{background:var(--ra);animation:rr-wave .65s ease-in-out infinite alternate}.pc-radio.is-playing .pc-radio__signal i:nth-child(2){animation-delay:.1s}.pc-radio.is-playing .pc-radio__signal i:nth-child(3){animation-delay:.2s}.pc-radio.is-playing .pc-radio__signal i:nth-child(4){animation-delay:.3s}.pc-radio.is-playing .pc-radio__signal i:nth-child(5){animation-delay:.4s}.pc-radio.is-playing .pc-radio__volume{display:none}.pc-radio__track{position:absolute;top:calc(100% + 8px);left:0;z-index:880;width:max-content;max-width:min(320px,calc(100vw - 24px));display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface);box-shadow:0 14px 34px rgb(14 26 21/17%);color:var(--pc-ink);animation:rr-track .28s cubic-bezier(.16,1,.3,1) both}.pc-radio__track>svg{width:18px;height:18px;padding:7px;border-radius:9px;background:var(--ras);color:var(--ra);box-sizing:content-box}.pc-radio__track>span{min-width:0;display:grid;gap:3px}.pc-radio__track small{color:var(--ra);font-size:7px;font-weight:900;letter-spacing:.11em}.pc-radio__track strong{max-width:260px;overflow:hidden;font-size:11px;text-overflow:ellipsis;white-space:nowrap}html[data-theme="dark"] .pc-radio{--ra:#63b58f;--ras:#22352d;--rl:#ef7a66;background:#20262a;border-color:#3a4942;color:#f1f5f2;box-shadow:none}html[data-theme="dark"] .pc-radio.is-playing{background:#22352d;border-color:#4c8c70}html[data-theme="dark"] .pc-radio.is-playing .pc-radio__control{background:#63b58f;color:#10241b}html[data-theme="dark"] .pc-radio.is-playing .pc-radio__copy small{color:#9dd5bb}html[data-theme="dark"] .pc-radio__track{background:#20282c;border-color:#405049;color:#f1f5f2}@media(max-width:1120px){.pc-radio{min-width:142px}.pc-radio__volume{display:none}.pc-radio__copy strong{max-width:84px}}@media(max-width:720px){.pc-radio{width:132px!important;min-width:112px!important;max-width:38vw!important;height:44px!important;padding:4px 7px 4px 4px!important;overflow:visible!important}.pc-radio__play{min-width:0;flex:1}.pc-radio__copy{display:grid!important;min-width:0!important;flex:1}.pc-radio__copy small{display:flex!important;font-size:6.5px}.pc-radio__copy strong{max-width:68px;font-size:9.5px}.pc-radio__signal,.pc-radio__volume{display:none}.pc-radio.is-playing{width:150px!important;max-width:44vw!important}.pc-radio.is-playing .pc-radio__signal{display:flex!important;gap:1.5px}.pc-radio__track{position:fixed;left:12px;right:12px;top:auto;bottom:calc(12px + env(safe-area-inset-bottom));width:auto;max-width:none}.pc-radio__track strong{max-width:calc(100vw - 100px)}}@media(max-width:390px){.pc-radio{width:116px!important;min-width:104px!important}.pc-radio.is-playing{width:128px!important}.pc-radio__copy strong{max-width:58px}.pc-radio__signal i:nth-child(n+4){display:none}}@media(prefers-reduced-motion:reduce){.pc-radio__signal i,.pc-radio__loader,.pc-radio.is-playing .pc-radio__copy small i,.pc-radio__track{animation:none!important}}@keyframes rr-wave{from{transform:scaleY(.42);opacity:.55}to{transform:scaleY(1);opacity:1}}@keyframes rr-spin{to{transform:rotate(360deg)}}@keyframes rr-pulse{50%{opacity:.45;box-shadow:0 0 0 4px rgb(201 79 61/13%)}}@keyframes rr-track{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}
+.pc-radio {
+  --ra: #237454;
+  --ras: #edf6f1;
+  --rl: #c94f3d;
+  position: relative;
+  height: 42px;
+  min-width: 178px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 8px 3px 3px;
+  border: 1px solid color-mix(in srgb, var(--pc-border, #d8dce6) 86%, var(--ra));
+  border-radius: 13px;
+  background: var(--pc-surface, #fff);
+  box-shadow: 0 4px 14px rgb(18 32 26/7%);
+  color: var(--pc-ink, #17212b);
+  font-family: "Manrope Variable", Manrope, system-ui, sans-serif;
+  transition:
+    background-color 0.22s,
+    border-color 0.22s,
+    box-shadow 0.22s,
+    transform 0.14s;
+}
+.pc-radio__play {
+  min-width: 0;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.pc-radio__control {
+  position: relative;
+  isolation: isolate;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--ra);
+  color: #fff;
+  transition:
+    transform 0.14s,
+    box-shadow 0.22s,
+    background 0.22s;
+}
+.pc-radio__play:active .pc-radio__control {
+  transform: scale(0.9);
+}
+.pc-radio__control svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.5;
+}
+.pc-radio__copy {
+  min-width: 76px;
+  display: grid;
+  gap: 3px;
+  text-align: left;
+  line-height: 1;
+}
+.pc-radio__copy small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--pc-muted, #66737a);
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+}
+.pc-radio__copy small i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rl);
+}
+.pc-radio__copy strong {
+  max-width: 108px;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 820;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pc-radio__signal {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.pc-radio__signal i {
+  width: 2px;
+  height: 5px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--pc-muted, #66737a) 60%, transparent);
+  transform-origin: center bottom;
+}
+.pc-radio__signal i:nth-child(2) {
+  height: 10px;
+}
+.pc-radio__signal i:nth-child(3) {
+  height: 14px;
+}
+.pc-radio__signal i:nth-child(4) {
+  height: 9px;
+}
+.pc-radio__signal i:nth-child(5) {
+  height: 6px;
+}
+.pc-radio__volume {
+  width: 34px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--pc-muted, #66737a);
+}
+.pc-radio__volume svg {
+  width: 12px;
+}
+.pc-radio__volume input {
+  width: 20px;
+  margin: 0;
+  accent-color: var(--ra);
+}
+.pc-radio__announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.pc-radio:hover {
+  border-color: color-mix(in srgb, var(--ra) 48%, var(--pc-border));
+  box-shadow: 0 8px 20px rgb(18 32 26/10%);
+}
+.pc-radio:focus-within {
+  outline: 3px solid color-mix(in srgb, var(--ra) 28%, transparent);
+  outline-offset: 2px;
+}
+.pc-radio.has-error {
+  --ra: #a94d48;
+  border-color: #d7a5a1;
+  background: #fff8f7;
+}
+.pc-radio__loader {
+  animation: rr-spin 0.8s linear infinite;
+}
+.pc-radio.is-playing {
+  border-color: color-mix(in srgb, var(--ra) 58%, var(--pc-border));
+  background: var(--ras);
+  box-shadow: 0 7px 20px rgb(24 92 67/12%);
+}
+.pc-radio.is-playing .pc-radio__control {
+  background: #1d6248;
+}
+.pc-radio.is-playing .pc-radio__control::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -4px;
+  border: 1px solid color-mix(in srgb, var(--ra) 50%, transparent);
+  border-radius: 13px;
+  animation: rr-control-pulse 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.pc-radio.is-playing .pc-radio__copy small {
+  color: #1d6248;
+}
+.pc-radio.is-playing .pc-radio__copy small i {
+  animation: rr-pulse 1.5s ease-in-out infinite;
+}
+.pc-radio.is-playing .pc-radio__signal i {
+  background: var(--ra);
+  animation: rr-wave 0.65s ease-in-out infinite alternate;
+}
+.pc-radio.is-playing .pc-radio__signal i:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.pc-radio.is-playing .pc-radio__signal i:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.pc-radio.is-playing .pc-radio__signal i:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.pc-radio.is-playing .pc-radio__signal i:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.pc-radio.is-playing .pc-radio__volume {
+  display: none;
+}
+.pc-radio__track {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 880;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 24px));
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid var(--pc-border);
+  border-radius: 12px;
+  background: var(--pc-surface);
+  box-shadow: 0 14px 34px rgb(14 26 21/17%);
+  color: var(--pc-ink);
+  animation: rr-track 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.pc-radio__track > svg {
+  width: 18px;
+  height: 18px;
+  padding: 7px;
+  border-radius: 9px;
+  background: var(--ras);
+  color: var(--ra);
+  box-sizing: content-box;
+}
+.pc-radio__track > span {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+.pc-radio__track small {
+  color: var(--ra);
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+.pc-radio__track strong {
+  max-width: 260px;
+  overflow: hidden;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-theme="light"] .pc-radio {
+  --ra: #087a56;
+  --ras: #e5f5ed;
+  --rl: #e14f3d;
+  border-color: #b8d8ca;
+  background: linear-gradient(145deg, #fff 0%, #f1faf6 100%);
+  box-shadow:
+    0 5px 15px rgb(10 93 66/12%),
+    inset 0 1px 0 #fff;
+  color: #123b2d;
+}
+html[data-theme="light"] .pc-radio__control {
+  background: linear-gradient(145deg, #0d8b63, #056744);
+  box-shadow:
+    0 5px 11px rgb(6 105 72/25%),
+    inset 0 1px 0 rgb(255 255 255/24%);
+}
+html[data-theme="light"] .pc-radio__copy small {
+  color: #3f6d5d;
+}
+html[data-theme="light"] .pc-radio__copy strong {
+  color: #123b2d;
+}
+html[data-theme="light"] .pc-radio__signal i {
+  background: #7aae9a;
+}
+html[data-theme="light"] .pc-radio:hover {
+  border-color: #69a98f;
+  box-shadow: 0 8px 22px rgb(10 93 66/17%);
+}
+html[data-theme="light"] .pc-radio.is-playing {
+  border-color: #29936e;
+  background: linear-gradient(135deg, #d9f2e6 0%, #effaf5 55%, #dff3e9 100%);
+  box-shadow:
+    0 7px 20px rgb(8 122 86/20%),
+    inset 0 0 0 1px rgb(255 255 255/74%);
+}
+html[data-theme="light"] .pc-radio.is-playing .pc-radio__control {
+  background: linear-gradient(145deg, #086b4b, #034c35);
+  box-shadow:
+    0 0 0 3px rgb(8 122 86/12%),
+    0 6px 13px rgb(3 76 53/28%);
+}
+html[data-theme="light"] .pc-radio.is-playing .pc-radio__copy small {
+  color: #086545;
+}
+html[data-theme="light"] .pc-radio.is-playing .pc-radio__copy strong {
+  color: #0a4934;
+}
+html[data-theme="light"] .pc-radio.is-playing .pc-radio__signal i {
+  background: #087a56;
+  box-shadow: 0 0 5px rgb(8 122 86/24%);
+}
+html[data-theme="light"] .pc-radio__track {
+  border-color: #aad6c3;
+  background: linear-gradient(145deg, #fff, #edf9f3);
+  box-shadow: 0 16px 36px rgb(8 72 51/20%);
+  color: #123b2d;
+}
+html[data-theme="dark"] .pc-radio {
+  --ra: #63b58f;
+  --ras: #22352d;
+  --rl: #ef7a66;
+  background: #20262a;
+  border-color: #3a4942;
+  color: #f1f5f2;
+  box-shadow: none;
+}
+html[data-theme="dark"] .pc-radio.is-playing {
+  background: #22352d;
+  border-color: #4c8c70;
+}
+html[data-theme="dark"] .pc-radio.is-playing .pc-radio__control {
+  background: #63b58f;
+  color: #10241b;
+}
+html[data-theme="dark"] .pc-radio.is-playing .pc-radio__copy small {
+  color: #9dd5bb;
+}
+html[data-theme="dark"] .pc-radio__track {
+  background: #20282c;
+  border-color: #405049;
+  color: #f1f5f2;
+}
+@media (max-width: 1120px) {
+  .pc-radio {
+    min-width: 142px;
+  }
+  .pc-radio__volume {
+    display: none;
+  }
+  .pc-radio__copy strong {
+    max-width: 84px;
+  }
+}
+@media (max-width: 720px) {
+  .pc-radio {
+    width: 132px !important;
+    min-width: 112px !important;
+    max-width: 38vw !important;
+    height: 44px !important;
+    padding: 4px 7px 4px 4px !important;
+    overflow: visible !important;
+  }
+  .pc-radio__play {
+    min-width: 0;
+    flex: 1;
+  }
+  .pc-radio__copy {
+    display: grid !important;
+    min-width: 0 !important;
+    flex: 1;
+  }
+  .pc-radio__copy small {
+    display: flex !important;
+    font-size: 6.5px;
+  }
+  .pc-radio__copy strong {
+    max-width: 68px;
+    font-size: 9.5px;
+  }
+  .pc-radio__signal,
+  .pc-radio__volume {
+    display: none;
+  }
+  .pc-radio.is-playing {
+    width: 150px !important;
+    max-width: 44vw !important;
+  }
+  .pc-radio.is-playing .pc-radio__signal {
+    display: flex !important;
+    gap: 1.5px;
+  }
+  .pc-radio__track {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: auto;
+    max-width: none;
+  }
+  .pc-radio__track strong {
+    max-width: calc(100vw - 100px);
+  }
+}
+@media (max-width: 390px) {
+  .pc-radio {
+    width: 116px !important;
+    min-width: 104px !important;
+  }
+  .pc-radio.is-playing {
+    width: 128px !important;
+  }
+  .pc-radio__copy strong {
+    max-width: 58px;
+  }
+  .pc-radio__signal i:nth-child(n + 4) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-radio__signal i,
+  .pc-radio__loader,
+  .pc-radio.is-playing .pc-radio__copy small i,
+  .pc-radio.is-playing .pc-radio__control::before,
+  .pc-radio__track {
+    animation: none !important;
+  }
+}
+@keyframes rr-wave {
+  from {
+    transform: scaleY(0.42);
+    opacity: 0.55;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+@keyframes rr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rr-pulse {
+  50% {
+    opacity: 0.45;
+    box-shadow: 0 0 0 4px rgb(201 79 61/13%);
+  }
+}
+@keyframes rr-control-pulse {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.88);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+@keyframes rr-track {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
