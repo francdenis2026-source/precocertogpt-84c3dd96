@@ -12,6 +12,7 @@ import { LocalCommerceSpotlight } from "../components/home/LocalCommerceSpotligh
 import { ProductGrid } from "../components/home/ProductGrid";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeNew2026.css";
+import "./HomeProfessional2026.css";
 
 const initialCatalog = buildCatalog();
 
