@@ -5,10 +5,10 @@ export function LocalCommerceSpotlight() {
   return <section className="pc26-local-spotlight pc26-shell" aria-labelledby="local-commerce-title">
     <div className="pc26-local-spotlight__image">
       <img
-        src="/comerciante-local-feijo.webp"
-        alt="Comerciante local organizando hortaliças frescas no mercado"
-        width="1440"
-        height="960"
+        src="/comercio-local-comparando-precos-2026.webp"
+        alt="Cliente comparando o preço de um produto pelo celular com auxílio do comerciante local"
+        width="1619"
+        height="971"
         loading="lazy"
         decoding="async"
       />
