@@ -22,3 +22,14 @@
 }
 
 @media(prefers-reduced-motion:reduce){.mh26-page *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* A faixa atual é um aviso temporário sobreposto; nunca altera o header. */
+@media (max-width: 767px) {
+  .mh26-head-actions .pc-radio__track {
+    display: flex !important;
+    position: fixed !important;
+    inset: auto 12px calc(12px + env(safe-area-inset-bottom)) 12px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+}

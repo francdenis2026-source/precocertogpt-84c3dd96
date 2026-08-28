@@ -285,13 +285,35 @@ export function PersistentRadioProvider({ children }: { children: ReactNode }) {
 
 export function HeaderRadioPlayer() {
   const radio = useContext(RadioContext);
+  const [showTrackNotice, setShowTrackNotice] = useState(false);
+  const previousTrackRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (!radio?.playing) {
+      previousTrackRef.current = null;
+      const hideTimeout = window.setTimeout(() => setShowTrackNotice(false), 0);
+      return () => window.clearTimeout(hideTimeout);
+    }
+
+    const currentTrack = radio.nowPlaying || radio.station.name;
+    if (previousTrackRef.current === currentTrack) return;
+
+    previousTrackRef.current = currentTrack;
+    const showTimeout = window.setTimeout(() => setShowTrackNotice(true), 0);
+    const hideTimeout = window.setTimeout(() => setShowTrackNotice(false), 4500);
+    return () => {
+      window.clearTimeout(showTimeout);
+      window.clearTimeout(hideTimeout);
+    };
+  }, [radio?.nowPlaying, radio?.playing, radio?.station.name]);
+
   if (!radio) return null;
   const status = radio.failed
     ? "Sinal indisponível"
     : radio.loading
       ? "Conectando…"
       : radio.playing
-        ? radio.nowPlaying || "Tocando agora"
+        ? "Tocando agora"
         : radio.station.name;
   const label = radio.failed
     ? "Tentar conectar novamente"
@@ -300,7 +322,7 @@ export function HeaderRadioPlayer() {
       : `Ouvir ${radio.station.name}`;
   return (
     <div
-      className={`pc-radio${radio.playing ? " is-playing" : ""}${radio.loading ? " is-loading" : ""}${radio.failed ? " has-error" : ""}${radio.nowPlaying ? " has-track" : ""}`}
+      className={`pc-radio${radio.playing ? " is-playing" : ""}${radio.loading ? " is-loading" : ""}${radio.failed ? " has-error" : ""}${radio.nowPlaying ? " has-track" : ""}${showTrackNotice ? " show-track-notice" : ""}`}
     >
       <button
         className="pc-radio__play"
@@ -357,6 +379,7 @@ export function HeaderRadioPlayer() {
         <span
           className="pc-radio__track"
           key={radio.nowPlaying || radio.station.id}
+          aria-hidden="true"
         >
           <Radio />
           <span>

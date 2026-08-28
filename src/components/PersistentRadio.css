@@ -208,7 +208,21 @@
   background: var(--pc-surface);
   box-shadow: 0 14px 34px rgb(14 26 21/17%);
   color: var(--pc-ink);
-  animation: rr-track 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px) scale(0.98);
+  transition:
+    opacity 0.18s ease-out,
+    visibility 0s linear 0.18s,
+    transform 0.18s ease-out;
+}
+.pc-radio:hover .pc-radio__track,
+.pc-radio:focus-within .pc-radio__track {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
 }
 .pc-radio__track > svg {
   width: 18px;
@@ -400,6 +414,20 @@ html[data-theme="dark"] .pc-radio__track {
     bottom: calc(12px + env(safe-area-inset-bottom));
     width: auto;
     max-width: none;
+  }
+  .pc-radio:hover .pc-radio__track,
+  .pc-radio:focus-within .pc-radio__track {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px) scale(0.98);
+  }
+  .pc-radio.show-track-notice .pc-radio__track,
+  .pc-radio.show-track-notice:hover .pc-radio__track,
+  .pc-radio.show-track-notice:focus-within .pc-radio__track {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition-delay: 0s;
   }
   .pc-radio__track strong {
     max-width: calc(100vw - 100px);
