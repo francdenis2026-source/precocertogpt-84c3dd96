@@ -47,7 +47,7 @@ document.head.appendChild(darkAtelierTheme);
 // Redesign Geral Graphite 2026: autoridade final de cor, superfície e ritmo.
 const graphiteRedesign = document.createElement("link");
 graphiteRedesign.rel = "stylesheet";
-graphiteRedesign.href = "/redesign-graphite-2026.css?v=20260827-9";
+graphiteRedesign.href = "/redesign-graphite-2026.css?v=20260827-10";
 graphiteRedesign.dataset.precocertoGraphite = "redesign-graphite-2026";
 document.head.appendChild(graphiteRedesign);
 
