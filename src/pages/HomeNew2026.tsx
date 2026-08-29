@@ -17,9 +17,7 @@ import "./HomeWorldClass2026.css";
 import "./HomeReadability2026.css";
 import "./HomeSecondPass2026.css";
 import "./HomeSophisticatedRedesign2026.css";
-import "./HomeLightImpeccableFix2026.css";
-import "./HomeReferenceMatch2026.css";
-import "./HomeReferenceFooter2026.css";
+import "./HomeImpeccableRecovery2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -46,7 +44,7 @@ export function HomeNew2026() {
   const products = useMemo(() => catalog.products.filter(product => product.minPrice > 0), [catalog.products]);
   const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 5), [products, cycle]);
 
-  return <div className="pc26-home pc26-home--reference-match">
+  return <div className="pc26-home pc26-home--recovered">
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
       <HeroSection products={products} loading={loading} productCount={products.length} storeCount={catalog.metrics.stores} priceCount={catalog.metrics.prices}/>
