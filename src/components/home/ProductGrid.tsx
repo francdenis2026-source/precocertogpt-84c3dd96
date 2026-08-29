@@ -6,7 +6,7 @@ export function ProductGrid({ products, loading }: { products: Product[]; loadin
   return <section className="pc26-zone pc26-zone--products pc26-reference-offers" aria-labelledby="offers-title">
     <div className="pc26-products pc26-shell">
       <div className="pc26-section-heading pc26-products__heading">
-        <div className="pc26-reference-section-title"><Tags aria-hidden="true" /><span><h2 id="offers-title">Destaques de preço</h2><p>Quatro produtos para comparar rapidamente agora.</p></span></div>
+        <div className="pc26-reference-section-title"><Tags aria-hidden="true" /><span><h2 id="offers-title">Destaques de preço</h2><p>Preços selecionados para comparar com rapidez.</p></span></div>
         <Link to="/buscar">Ver catálogo <ArrowRight aria-hidden="true" /></Link>
       </div>
       <div className="pc26-grid pc26-grid--featured-four" aria-busy={loading} aria-live="polite">
