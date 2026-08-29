@@ -1,36 +1,29 @@
 // @vitest-environment jsdom
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
 import { SingleBrowserTabGate } from "../components/SingleBrowserTabGate";
 
 const LEASE_KEY = "precocerto:active-browser-tab:v1";
 
-describe("controle de aba única", () => {
+describe("renderização sem trava de aba", () => {
   beforeEach(() => {
     window.localStorage.clear();
     window.sessionStorage.clear();
-    vi.useFakeTimers();
-    vi.stubGlobal("BroadcastChannel", undefined);
   });
 
   afterEach(() => {
     cleanup();
-    vi.useRealTimers();
-    vi.unstubAllGlobals();
   });
 
-  it("libera a primeira aba do navegador", () => {
+  it("renderiza a aplicação normalmente", () => {
     render(<SingleBrowserTabGate><p>Aplicação ativa</p></SingleBrowserTabGate>);
-    act(() => vi.advanceTimersByTime(100));
     expect(screen.getByText("Aplicação ativa")).toBeTruthy();
   });
 
-  it("bloqueia uma aba adicional e permite transferir o controle", () => {
+  it("não bloqueia quando existe outra aba registrada", () => {
     window.localStorage.setItem(LEASE_KEY, JSON.stringify({ tabId: "outra-aba", expiresAt: Date.now() + 7000 }));
     render(<SingleBrowserTabGate><p>Aplicação ativa</p></SingleBrowserTabGate>);
-    act(() => vi.advanceTimersByTime(100));
-    expect(screen.getByRole("heading", { name: "Continue com segurança nesta aba." })).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: "Continuar nesta aba" }));
     expect(screen.getByText("Aplicação ativa")).toBeTruthy();
+    expect(screen.queryByText("Continue com segurança nesta aba.")).toBeNull();
   });
 });
