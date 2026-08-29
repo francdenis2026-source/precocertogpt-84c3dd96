@@ -5,10 +5,7 @@ const groups = [
   {
     label: "Explorar",
     links: [
-      { to: "/buscar", label: "Buscar preços" },
       { to: "/explorar", label: "Categorias" },
-      { to: "/estabelecimentos", label: "Lojas" },
-      { to: "/buscar", label: "Promoções" },
     ],
   },
   {
@@ -16,8 +13,6 @@ const groups = [
     links: [
       { to: "/explorar", label: "Como funciona" },
       { to: "/contato", label: "Fale conosco" },
-      { to: "/contato", label: "Privacidade" },
-      { to: "/contato", label: "Termos" },
     ],
   },
   {
@@ -61,7 +56,7 @@ export function Footer() {
 
     <div className="pc26-footer-premium__rail">
       <div className="pc26-shell pc26-footer-premium__rail-inner">
-        <span className="pc26-footer-premium__copyright">© 2026 Preço Certo · Feijó/AC</span>
+        <span className="pc26-footer-premium__copyright">© 2026 Preço Certo · Feijó/AC · <Link to="/contato">Privacidade</Link> · <Link to="/contato">Termos</Link></span>
         <span className="pc26-footer-premium__trust"><ShieldCheck aria-hidden="true" /> Informação local para escolhas mais conscientes</span>
         <span className="pc26-footer-premium__signature"><Sparkles aria-hidden="true" /> Desenvolvido por <strong>Franc Denis</strong></span>
       </div>
