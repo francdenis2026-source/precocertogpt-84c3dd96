@@ -13,10 +13,6 @@ import { ProductGrid } from "../components/home/ProductGrid";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
-import "./HomeWorldClass2026.css";
-import "./HomeReadability2026.css";
-import "./HomeSecondPass2026.css";
-import "./HomeSophisticatedRedesign2026.css";
 import "./HomeImpeccableRecovery2026.css";
 
 const initialCatalog = buildCatalog();
@@ -31,11 +27,16 @@ export function HomeNew2026() {
     document.documentElement.classList.add("nx-home-active");
     return () => document.documentElement.classList.remove("nx-home-active");
   }, []);
+
   useEffect(() => {
     let active = true;
-    fetchCatalog().then(value => { if (active) setCatalog(value); }).catch(() => undefined).finally(() => { if (active) setLoading(false); });
+    fetchCatalog()
+      .then(value => { if (active) setCatalog(value); })
+      .catch(() => undefined)
+      .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, []);
+
   useEffect(() => {
     const timer = window.setTimeout(() => setCycle(currentCycle()), msUntilNextCycle() + 250);
     return () => window.clearTimeout(timer);
