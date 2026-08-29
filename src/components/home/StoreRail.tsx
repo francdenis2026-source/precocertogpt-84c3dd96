@@ -10,8 +10,8 @@ export function StoreRail({ stores }: { stores: StoreRow[] }) {
   return <section className="pc26-zone pc26-zone--stores pc26-reference-stores" aria-labelledby="stores-title">
     <div className="pc26-stores pc26-shell">
       <div className="pc26-section-heading">
-        <div className="pc26-reference-section-title"><Store aria-hidden="true" /><span><h2 id="stores-title">Comércios de Feijó</h2><p>Escolha uma loja para ver produtos e preços disponíveis.</p></span></div>
-        <Link to="/estabelecimentos">Ver todos os estabelecimentos <ArrowRight aria-hidden="true" /></Link>
+        <div className="pc26-reference-section-title"><Store aria-hidden="true" /><span><h2 id="stores-title">Onde comparar</h2><p>Abra uma loja e confira os preços disponíveis.</p></span></div>
+        <Link to="/estabelecimentos">Ver estabelecimentos <ArrowRight aria-hidden="true" /></Link>
       </div>
       <div className="pc26-store-grid">
         {featured.map(store => <Link className="pc26-store" key={store.id} to={`/estabelecimento/${store.slug}`} style={{ "--store-accent": store.color } as CSSProperties}>
