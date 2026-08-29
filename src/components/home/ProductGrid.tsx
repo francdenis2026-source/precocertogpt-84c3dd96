@@ -7,9 +7,8 @@ export function ProductGrid({ products, loading }: { products: Product[]; loadin
     <div className="pc26-products pc26-shell">
       <div className="pc26-section-heading pc26-products__heading">
         <div>
-          <span className="pc26-section-kicker">Compare agora</span>
           <h2 id="offers-title">Preços que merecem atenção</h2>
-          <p>Os menores valores encontrados agora, organizados para comparar sem perder tempo.</p>
+          <p>Ofertas recentes do comércio local, com o menor preço em destaque.</p>
         </div>
         <Link to="/buscar">Ver todos <ArrowRight aria-hidden="true" /></Link>
       </div>

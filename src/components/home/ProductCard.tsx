@@ -18,10 +18,10 @@ export function ProductCard({ product }: { product: Product }) {
       {image ? <img src={image} alt={product.name} width="180" height="180" loading="lazy" decoding="async" /> : <img className="pc26-product__placeholder" src="/product-placeholder-preco-certo.svg" alt="" width="180" height="180" loading="lazy" decoding="async" />}
     </div>
     <div className="pc26-product__body">
-      <span className="pc26-store-badge">Menor preço em {product.establishment || "loja parceira"}</span>
+      <span className="pc26-store-badge">{product.establishment || "Loja parceira"}</span>
       <h3>{product.name}</h3>
       <span className="pc26-product__meta">{product.size || product.category || "Preço atualizado"}</span>
-      <div className="pc26-prices">{previous && <del>{brl.format(previous)}</del>}<strong>{brl.format(product.minPrice)}</strong></div>
+      <div className="pc26-prices"><span>Menor preço</span><div>{previous && <del>{brl.format(previous)}</del>}<strong>{brl.format(product.minPrice)}</strong></div></div>
       <span className="pc26-compare">Comparar em {product.storeCount || 1} {product.storeCount === 1 ? "loja" : "lojas"} <ArrowRight aria-hidden="true" /></span>
     </div>
   </Link>;

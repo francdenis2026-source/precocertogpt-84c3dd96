@@ -1,4 +1,4 @@
-import { ArrowUpRight, Building2, Handshake, Instagram, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Building2, Camera, Handshake, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const exploreLinks = [
@@ -25,7 +25,7 @@ export function Footer() {
         </Link>
         <p className="pc26-footer-studio__pitch">Preços e estabelecimentos de Feijó reunidos para você decidir com clareza antes de comprar.</p>
         <span className="pc26-footer-studio__location"><MapPin aria-hidden="true" /> Feijó, Acre</span>
-        <a className="pc26-footer-studio__social" href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram do Preço Certo"><Instagram aria-hidden="true" /></a>
+        <a className="pc26-footer-studio__social" href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram do Preço Certo"><Camera aria-hidden="true" /></a>
       </div>
 
       <div className="pc26-footer-studio__col">
