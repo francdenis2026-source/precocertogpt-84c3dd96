@@ -1,5 +1,5 @@
 import { Heart, Menu, Moon, Search, ShoppingBasket, Sun, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 
@@ -14,6 +14,20 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   const openSearch = () => {
     setMenuOpen(false);
     if (pathname === "/") {
@@ -32,11 +46,11 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
       </Link>
 
       <nav id="pc26-navigation" className={`pc26-header-studio__nav${menuOpen ? " is-open" : ""}`} aria-label="Navegação principal">
-        {navItems.map(item => <Link key={item.to} to={item.to} aria-current={isCurrent(item.to) ? "page" : undefined} onClick={() => setMenuOpen(false)}>{item.label}</Link>)}
+        {navItems.map(item => <Link key={item.to} to={item.to} aria-current={isCurrent(item.to) ? "page" : undefined}>{item.label}</Link>)}
       </nav>
 
-      <div className="pc26-header-studio__tools" aria-label="Ações rápidas">
-        <div className="pc26-header-studio__radio" aria-label="Rádio ao vivo"><HeaderRadioPlayer /></div>
+      <div className="pc26-header-studio__tools" role="group" aria-label="Ações rápidas">
+        <div className="pc26-header-studio__radio"><HeaderRadioPlayer /></div>
         <button className="pc26-header-studio__tool pc26-header-studio__search" type="button" onClick={openSearch} aria-label="Pesquisar produtos" title="Pesquisar produtos"><Search aria-hidden="true" /></button>
         <Link className="pc26-header-studio__tool pc26-header-studio__favorite" to="/favoritos" aria-label="Favoritos" title="Favoritos"><Heart aria-hidden="true" /></Link>
         <Link className="pc26-header-studio__tool pc26-header-studio__basket" to="/cesta-inteligente" aria-label="Abrir cesta inteligente" title="Cesta inteligente"><ShoppingBasket aria-hidden="true" /></Link>
