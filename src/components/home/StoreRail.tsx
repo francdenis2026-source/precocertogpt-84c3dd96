@@ -4,14 +4,14 @@ import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
 
 export function StoreRail({ stores }: { stores: StoreRow[] }) {
-  const featured = stores.filter(store => store.name && store.slug).slice(0, 4);
+  const featured = stores.filter(store => store.name && store.slug).slice(0, 5);
   if (!featured.length) return null;
 
-  return <section className="pc26-zone pc26-zone--stores" aria-labelledby="stores-title">
+  return <section className="pc26-zone pc26-zone--stores pc26-reference-stores" aria-labelledby="stores-title">
     <div className="pc26-stores pc26-shell">
       <div className="pc26-section-heading">
-        <div><span className="pc26-section-kicker">Comércio local</span><h2 id="stores-title">Estabelecimentos em destaque</h2><p>Consulte catálogo, localização e preços antes de sair de casa.</p></div>
-        <Link to="/estabelecimentos">Ver todos <ArrowRight aria-hidden="true" /></Link>
+        <div className="pc26-reference-section-title"><Store aria-hidden="true" /><span><h2 id="stores-title">Estabelecimentos perto de você</h2><p>Veja onde comprar em Feijó e compare antes de sair de casa.</p></span></div>
+        <Link to="/estabelecimentos">Ver todas as lojas <ArrowRight aria-hidden="true" /></Link>
       </div>
       <div className="pc26-store-grid">
         {featured.map(store => <Link className="pc26-store" key={store.id} to={`/estabelecimento/${store.slug}`} style={{ "--store-accent": store.color } as CSSProperties}>
