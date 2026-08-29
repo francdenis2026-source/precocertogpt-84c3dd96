@@ -1,4 +1,4 @@
-import { Heart, Menu, Moon, Search, ShoppingBasket, Sun, UserRound, X } from "lucide-react";
+import { Heart, Menu, Moon, Search, ShoppingBasket, Store, Sun, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HeaderRadioPlayer } from "../PersistentRadio";
@@ -47,6 +47,7 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
 
       <nav id="pc26-navigation" className={`pc26-header-studio__nav${menuOpen ? " is-open" : ""}`} aria-label="Navegação principal">
         {navItems.map(item => <Link key={item.to} to={item.to} aria-current={isCurrent(item.to) ? "page" : undefined}>{item.label}</Link>)}
+        <Link className="pc26-header-studio__merchant-nav" to="/lojista" aria-current={isCurrent("/lojista") ? "page" : undefined}><Store aria-hidden="true" /><span>Cadastre sua loja</span></Link>
       </nav>
 
       <div className="pc26-header-studio__tools" role="group" aria-label="Ações rápidas">
