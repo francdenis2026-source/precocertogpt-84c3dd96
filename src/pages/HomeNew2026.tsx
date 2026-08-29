@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredRotation";
-import { AppPromoStrip } from "../components/home/AppPromoStrip";
 import { BottomNav } from "../components/home/BottomNav";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
@@ -53,7 +52,6 @@ export function HomeNew2026() {
       <HomePopularRail/>
       <ProductGrid products={featured} loading={loading}/>
       <StoreRail stores={catalog.stores}/>
-      <AppPromoStrip/>
     </main>
     <Footer/>
     <BottomNav/>
