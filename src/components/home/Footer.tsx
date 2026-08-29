@@ -1,4 +1,4 @@
-import { Camera, Globe2, MapPin, MessageCircle, Play, ShieldCheck, Smartphone } from "lucide-react";
+import { Camera, Globe2, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navigation = [
@@ -42,11 +42,6 @@ export function Footer() {
       <div className="pc26-footer-studio__col"><strong>Navegação</strong>{navigation.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
       <div className="pc26-footer-studio__col"><strong>Ajuda</strong>{help.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
       <div className="pc26-footer-studio__col"><strong>Para comerciantes</strong>{merchants.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
-      <div className="pc26-footer-studio__col pc26-reference-footer__apps">
-        <strong>Baixe o app</strong>
-        <Link to="/"><Play aria-hidden="true" /><span>Disponível no<br/><b>Google Play</b></span></Link>
-        <Link to="/"><Smartphone aria-hidden="true" /><span>Instale como<br/><b>Aplicativo PWA</b></span></Link>
-      </div>
     </div>
 
     <div className="pc26-footer-studio__meta">
