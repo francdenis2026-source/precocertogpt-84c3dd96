@@ -28,6 +28,7 @@ function AccountBenefitsIllustration({ action }: { action: AuthActionPromptDetai
 
 export function AuthActionPrompt() {
   const [prompt, setPrompt] = useState<AuthActionPromptDetail | null>(null);
+  const dialogRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
 
@@ -44,7 +45,27 @@ export function AuthActionPrompt() {
     const previousOverflow = screen?.style.overflowY || "";
     if (screen) screen.style.overflowY = "hidden";
     window.requestAnimationFrame(() => closeRef.current?.focus());
-    const keyboard = (event: KeyboardEvent) => { if (event.key === "Escape") setPrompt(null); };
+
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setPrompt(null);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusables = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])') || []);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
     document.addEventListener("keydown", keyboard);
     return () => {
       document.removeEventListener("keydown", keyboard);
@@ -59,7 +80,7 @@ export function AuthActionPrompt() {
   const favorite = prompt.action === "favorite";
 
   return createPortal(<div className="pc-auth-prompt" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) setPrompt(null); }}>
-    <section className="pc-auth-prompt__card" role="dialog" aria-modal="true" aria-labelledby="pc-auth-prompt-title">
+    <section ref={dialogRef} className="pc-auth-prompt__card" role="dialog" aria-modal="true" aria-labelledby="pc-auth-prompt-title">
       <button ref={closeRef} className="pc-auth-prompt__close" type="button" onClick={() => setPrompt(null)} aria-label="Fechar convite"><X aria-hidden="true"/></button>
       <AccountBenefitsIllustration action={prompt.action}/>
       <div className="pc-auth-prompt__copy">
