@@ -4,10 +4,8 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/outfit";
 import "@fontsource-variable/manrope";
 import "./styles/AppReset.css";
-import "./styles/PwaRuntime.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
-import { initializePwaRuntime } from "./lib/pwaRuntime";
 
 const campaignTheme = document.createElement("link");
 campaignTheme.rel = "stylesheet";
@@ -135,37 +133,13 @@ homepageImpeccableTheme.href = "/homepage-impeccable-2026.css?v=20260828-14";
 homepageImpeccableTheme.dataset.precocertoHomepageImpeccable = "homepage-impeccable-2026";
 document.head.appendChild(homepageImpeccableTheme);
 
-// Terceira passagem do Master Prompt: acabamento das páginas internas.
-// É carregada por último e escopada às superfícies públicas para não tocar no admin.
-const internalThirdPassTheme = document.createElement("link");
-internalThirdPassTheme.rel = "stylesheet";
-internalThirdPassTheme.href = "/internal-third-pass-2026.css?v=20260828-1";
-internalThirdPassTheme.dataset.precocertoInternalThirdPass = "internal-third-pass-2026";
-document.head.appendChild(internalThirdPassTheme);
-
 initializeSiteTheme();
-initializePwaRuntime();
 
-const visualStyleLinks = Array.from(document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"][data-precocerto-theme],link[rel="stylesheet"][data-precocerto-light-theme],link[rel="stylesheet"][data-precocerto-logo],link[rel="stylesheet"][data-precocerto-typography],link[rel="stylesheet"][data-precocerto-light-icons],link[rel="stylesheet"][data-precocerto-glass-shell],link[rel="stylesheet"][data-precocerto-topbar-controls],link[rel="stylesheet"][data-precocerto-mobile-shell],link[rel="stylesheet"][data-precocerto-pointer-interaction],link[rel="stylesheet"][data-precocerto-app-shell],link[rel="stylesheet"][data-precocerto-impeccable],link[rel="stylesheet"][data-precocerto-header],link[rel="stylesheet"][data-precocerto-search],link[rel="stylesheet"][data-precocerto-search-relocation],link[rel="stylesheet"][data-precocerto-unified-header],link[rel="stylesheet"][data-precocerto-footer-studio],link[rel="stylesheet"][data-precocerto-hero-market],link[rel="stylesheet"][data-precocerto-impeccable-final],link[rel="stylesheet"][data-precocerto-homepage-master],link[rel="stylesheet"][data-precocerto-homepage-impeccable],link[rel="stylesheet"][data-precocerto-internal-third-pass]'));
-
-const revealApp = () => {
-  document.documentElement.classList.remove("pc-prepaint");
-  document.documentElement.classList.add("pc-styles-ready");
-};
-
-const styleReadyPromises = visualStyleLinks.map(link => {
-  if (link.sheet) return Promise.resolve();
-  return new Promise<void>(resolve => {
-    const finish = () => resolve();
-    link.addEventListener("load", finish, { once: true });
-    link.addEventListener("error", finish, { once: true });
-  });
-});
-
-void Promise.all(styleReadyPromises).then(() => {
-  requestAnimationFrame(() => requestAnimationFrame(revealApp));
-});
-window.setTimeout(revealApp, 2200);
+// A interface deve ficar disponível mesmo quando o proxy de preview demora
+// para responder a uma folha de estilo. As camadas visuais continuam carregando
+// em paralelo, mas nunca bloqueiam a montagem do React.
+document.documentElement.classList.remove("pc-prepaint");
+document.documentElement.classList.add("pc-styles-ready");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -182,3 +156,23 @@ const startNotifications = () => {
 
 window.setTimeout(startNotifications, 1_500);
 window.addEventListener("online", startNotifications, { once: true });
+
+if ("serviceWorker" in navigator && import.meta.env.PROD) {
+  window.addEventListener("load", () => {
+    void (async () => {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map(registration => registration.unregister()));
+      if ("caches" in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.filter(key => key.startsWith("precocerto-")).map(key => caches.delete(key)));
+      }
+      if (!navigator.serviceWorker.controller) return;
+      const reloadKey = "pc:legacy-worker-removed";
+      try {
+        if (sessionStorage.getItem(reloadKey)) return;
+        sessionStorage.setItem(reloadKey,"1");
+        window.location.reload();
+      } catch {}
+    })().catch(() => {});
+  }, { once: true });
+}
