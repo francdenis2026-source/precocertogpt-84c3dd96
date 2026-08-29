@@ -4,7 +4,6 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/outfit";
 import "@fontsource-variable/manrope";
 import "./styles/AppReset.css";
-import "./styles/TasteAuth2026.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
 
@@ -28,6 +27,7 @@ appendStyle("/mobile-app-shell-2026.css?v=20260825-2", "precocertoMobileShell", 
 appendStyle("/interaction-hover-2026.css?v=20260825-2", "precocertoPointerInteraction", "pointer-refined-2026");
 appendStyle("/app-shell-professional-2026.css?v=20260826-2", "precocertoAppShell", "professional-app-shell-2026");
 appendStyle("/search-refinement-2026.css?v=20260826-1", "precocertoSearch", "live-search-refinement-2026");
+appendStyle("/taste-auth-2026.css?v=20260829-1", "precocertoTasteAuth", "taste-auth-2026");
 
 initializeSiteTheme();
 document.documentElement.classList.remove("pc-prepaint");
