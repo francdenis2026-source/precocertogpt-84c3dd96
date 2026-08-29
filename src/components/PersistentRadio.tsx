@@ -287,6 +287,16 @@ export function HeaderRadioPlayer() {
   const radio = useContext(RadioContext);
   const [showTrackNotice, setShowTrackNotice] = useState(false);
 
+  useEffect(() => {
+    if (!radio?.playing) {
+      setShowTrackNotice(false);
+      return;
+    }
+    setShowTrackNotice(true);
+    const timer = window.setTimeout(() => setShowTrackNotice(false), 4500);
+    return () => window.clearTimeout(timer);
+  }, [radio?.playing, radio?.nowPlaying]);
+
   if (!radio) return null;
   const status = radio.failed
     ? "Sinal indisponível"
@@ -307,6 +317,12 @@ export function HeaderRadioPlayer() {
         if (radio.playing) setShowTrackNotice(true);
       }}
       onMouseLeave={() => setShowTrackNotice(false)}
+      onFocusCapture={() => {
+        if (radio.playing) setShowTrackNotice(true);
+      }}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setShowTrackNotice(false);
+      }}
     >
       <button
         className="pc-radio__play"
