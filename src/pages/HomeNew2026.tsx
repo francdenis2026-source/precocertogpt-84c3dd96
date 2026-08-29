@@ -2,14 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredRotation";
+import { AppPromoStrip } from "../components/home/AppPromoStrip";
 import { BenefitsStrip } from "../components/home/BenefitsStrip";
-import { CategoryBar } from "../components/home/CategoryBar";
 import { BottomNav } from "../components/home/BottomNav";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroSection } from "../components/home/HeroSection";
-import { CommunityVisualBand, MarketVisualBand } from "../components/home/HomeBands";
-import { LocalCommerceSpotlight } from "../components/home/LocalCommerceSpotlight";
+import { HomePopularRail } from "../components/home/HomePopularRail";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
@@ -19,6 +18,8 @@ import "./HomeReadability2026.css";
 import "./HomeSecondPass2026.css";
 import "./HomeSophisticatedRedesign2026.css";
 import "./HomeLightImpeccableFix2026.css";
+import "./HomeReferenceMatch2026.css";
+import "./HomeReferenceFooter2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -43,6 +44,19 @@ export function HomeNew2026() {
   }, [cycle]);
 
   const products = useMemo(() => catalog.products.filter(product => product.minPrice > 0), [catalog.products]);
-  const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 4), [products, cycle]);
-  return <div className="pc26-home"><Header theme={theme} onToggleTheme={toggleTheme}/><main id="conteudo-principal"><HeroSection products={products} loading={loading} productCount={products.length} storeCount={catalog.metrics.stores} priceCount={catalog.metrics.prices}/><BenefitsStrip/><CategoryBar/><StoreRail stores={catalog.stores}/><MarketVisualBand/><LocalCommerceSpotlight/><CommunityVisualBand/><ProductGrid products={featured} loading={loading}/></main><Footer/><BottomNav/></div>;
+  const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 5), [products, cycle]);
+
+  return <div className="pc26-home pc26-home--reference-match">
+    <Header theme={theme} onToggleTheme={toggleTheme}/>
+    <main id="conteudo-principal">
+      <HeroSection products={products} loading={loading} productCount={products.length} storeCount={catalog.metrics.stores} priceCount={catalog.metrics.prices}/>
+      <HomePopularRail/>
+      <ProductGrid products={featured} loading={loading}/>
+      <StoreRail stores={catalog.stores}/>
+      <AppPromoStrip/>
+      <BenefitsStrip/>
+    </main>
+    <Footer/>
+    <BottomNav/>
+  </div>;
 }

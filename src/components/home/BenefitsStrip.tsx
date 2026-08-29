@@ -1,9 +1,8 @@
-import { BadgePercent, ShieldCheck, Smartphone, Store, Tags } from "lucide-react";
+import { Clock3, PiggyBank, ShieldCheck, Store } from "lucide-react";
 const benefits=[
-  {icon:Tags,title:"Compare de verdade",text:"O mesmo produto em diferentes lojas"},
-  {icon:BadgePercent,title:"Preços locais",text:"Valores encontrados no comércio de Feijó"},
-  {icon:Store,title:"Escolha com clareza",text:"Veja loja, produto e menor preço"},
-  {icon:ShieldCheck,title:"Informação verificável",text:"Dados claros para decidir melhor"},
-  {icon:Smartphone,title:"Feito para o celular",text:"Pesquisa rápida onde você estiver"},
+  {icon:ShieldCheck,title:"Preços atualizados",text:"Diariamente nos melhores comércios de Feijó"},
+  {icon:Clock3,title:"Economize tempo",text:"Compare e encontre o menor preço rapidamente"},
+  {icon:Store,title:"Comércio local forte",text:"Valorize os estabelecimentos da nossa cidade"},
+  {icon:PiggyBank,title:"Compra inteligente",text:"Escolha melhor, economize sempre"},
 ];
-export function BenefitsStrip(){return <section className="pc26-zone pc26-zone--benefits" aria-label="Vantagens do Preço Certo"><div className="pc26-benefits pc26-shell">{benefits.map(({icon:Icon,title,text})=><article key={title}><i><Icon aria-hidden="true"/></i><div><strong>{title}</strong><span>{text}</span></div></article>)}</div></section>}
+export function BenefitsStrip(){return <section className="pc26-zone pc26-zone--benefits pc26-reference-benefits" aria-label="Vantagens do Preço Certo"><div className="pc26-benefits pc26-shell">{benefits.map(({icon:Icon,title,text})=><article key={title}><i><Icon aria-hidden="true"/></i><div><strong>{title}</strong><span>{text}</span></div></article>)}</div></section>}

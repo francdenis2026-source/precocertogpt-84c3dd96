@@ -1,0 +1,35 @@
+/* Footer continuation for the approved generated reference. */
+.pc26-home--reference-match .pc26-reference-footer{margin-top:18px!important;background:#fff!important;border-top:1px solid #e6e9e7!important}
+.pc26-reference-footer__grid{
+  display:grid;
+  grid-template-columns:1.2fr .72fr .92fr .92fr .9fr;
+  gap:30px;
+  padding-top:28px;
+  padding-bottom:22px;
+}
+.pc26-reference-footer__socials{display:flex;gap:8px;margin-top:4px}
+.pc26-reference-footer__socials a{width:32px;height:32px;display:grid;place-items:center;border:1px solid #dce3de;border-radius:50%;color:#138041;background:#fff}
+.pc26-reference-footer__socials svg{width:15px}
+.pc26-reference-footer__apps a{
+  width:max-content;
+  min-width:138px;
+  min-height:42px;
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  padding:7px 11px!important;
+  color:#fff!important;
+  background:#1d211f!important;
+  border-radius:8px!important;
+}
+.pc26-reference-footer__apps a svg{width:20px;color:#fff!important}
+.pc26-reference-footer__apps a span{line-height:1.08}
+.pc26-reference-footer__apps a b{font-weight:800}
+.pc26-home--reference-match .pc26-reference-footer .pc26-footer-studio__meta-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;flex-wrap:wrap!important}
+
+html[data-theme="dark"] .pc26-home--reference-match .pc26-reference-footer{background:#111815!important;border-color:#26332c!important}
+html[data-theme="dark"] .pc26-reference-footer__socials a{background:#151d19;border-color:#2a3931;color:#e2ba49}
+
+@media(max-width:1050px){.pc26-reference-footer__grid{grid-template-columns:1.2fr repeat(2,1fr);row-gap:24px}.pc26-reference-footer__apps{grid-column:auto}}
+@media(max-width:720px){.pc26-reference-footer__grid{grid-template-columns:1fr 1fr;gap:22px}.pc26-reference-footer__grid .pc26-footer-studio__intro{grid-column:1/-1}.pc26-reference-footer__apps{grid-column:1/-1;display:grid!important;grid-template-columns:1fr 1fr}.pc26-reference-footer__apps>strong{grid-column:1/-1}.pc26-reference-footer__apps a{width:100%}}
+@media(max-width:480px){.pc26-reference-footer__grid{grid-template-columns:1fr}.pc26-reference-footer__grid .pc26-footer-studio__intro,.pc26-reference-footer__apps{grid-column:auto}.pc26-reference-footer__apps{grid-template-columns:1fr}.pc26-reference-footer__apps>strong{grid-column:auto}.pc26-home--reference-match .pc26-reference-footer .pc26-footer-studio__meta-row{align-items:flex-start!important;flex-direction:column!important}}

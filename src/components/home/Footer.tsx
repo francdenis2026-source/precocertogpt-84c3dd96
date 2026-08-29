@@ -1,56 +1,59 @@
-import { ArrowUpRight, Building2, Camera, Handshake, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import { Camera, Globe2, MapPin, MessageCircle, Play, ShieldCheck, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const exploreLinks = [
-  { to: "/mercados", label: "Mercados" },
-  { to: "/padarias", label: "Padarias" },
-  { to: "/acougues", label: "Açougues" },
-  { to: "/farmacias", label: "Farmácias" },
+const navigation = [
+  { to: "/", label: "Início" },
+  { to: "/buscar", label: "Buscar" },
+  { to: "/explorar", label: "Categorias" },
+  { to: "/estabelecimentos", label: "Lojas" },
+  { to: "/buscar", label: "Promoções" },
 ];
-
-const companyLinks = [
-  { to: "/estabelecimentos", label: "Estabelecimentos" },
-  { to: "/lojista", label: "Seja parceiro" },
-  { to: "/favoritos", label: "Favoritos" },
-  { to: "/buscar", label: "Buscar preços" },
+const help = [
+  { to: "/explorar", label: "Como funciona" },
+  { to: "/contato", label: "Perguntas frequentes" },
+  { to: "/contato", label: "Fale conosco" },
+  { to: "/contato", label: "Política de privacidade" },
+  { to: "/contato", label: "Termos de uso" },
+];
+const merchants = [
+  { to: "/lojista", label: "Cadastre sua loja" },
+  { to: "/painel-lojista", label: "Painel do comerciante" },
+  { to: "/lojista", label: "Planos" },
+  { to: "/contato", label: "Suporte" },
 ];
 
 export function Footer() {
-  return <footer className="pc26-footer pc26-footer--studio">
-    <div className="pc26-shell pc26-footer-studio__grid">
+  return <footer className="pc26-footer pc26-footer--studio pc26-reference-footer">
+    <div className="pc26-shell pc26-reference-footer__grid">
       <div className="pc26-footer-studio__intro">
         <Link className="pc26-footer-studio__brand" to="/" aria-label="Preço Certo - página inicial">
           <img src="/preco-certo-mark.svg" alt="" width="44" height="44" />
           <span><strong>Preço Certo</strong><small>Comparador local</small></span>
         </Link>
-        <p className="pc26-footer-studio__pitch">Preços e estabelecimentos de Feijó reunidos para você decidir com clareza antes de comprar.</p>
+        <p className="pc26-footer-studio__pitch">O menor preço da cidade, na palma da sua mão.</p>
         <span className="pc26-footer-studio__location"><MapPin aria-hidden="true" /> Feijó, Acre</span>
-        <a className="pc26-footer-studio__social" href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram do Preço Certo"><Camera aria-hidden="true" /></a>
+        <div className="pc26-reference-footer__socials">
+          <a href="https://precocertogpt.lovable.app" target="_blank" rel="noreferrer" aria-label="Site Preço Certo"><Globe2 aria-hidden="true" /></a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><Camera aria-hidden="true" /></a>
+          <Link to="/contato" aria-label="Contato"><MessageCircle aria-hidden="true" /></Link>
+        </div>
       </div>
 
-      <div className="pc26-footer-studio__col">
-        <strong>Explorar</strong>
-        {exploreLinks.map(item => <Link key={item.to} to={item.to}>{item.label}</Link>)}
-      </div>
-
-      <div className="pc26-footer-studio__col">
-        <strong>Preço Certo</strong>
-        {companyLinks.map(item => <Link key={item.to} to={item.to}>{item.label}</Link>)}
-      </div>
-
-      <div className="pc26-footer-studio__col pc26-footer-studio__contact">
-        <strong>Contato</strong>
-        <Link to="/contato"><MessageCircle aria-hidden="true" /><span>Fale conosco</span></Link>
-        <Link to="/lojista"><Handshake aria-hidden="true" /><span>Cadastre seu negócio</span></Link>
-        <Link to="/estabelecimentos"><Building2 aria-hidden="true" /><span>Comércio local</span><ArrowUpRight aria-hidden="true" /></Link>
+      <div className="pc26-footer-studio__col"><strong>Navegação</strong>{navigation.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
+      <div className="pc26-footer-studio__col"><strong>Ajuda</strong>{help.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
+      <div className="pc26-footer-studio__col"><strong>Para comerciantes</strong>{merchants.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
+      <div className="pc26-footer-studio__col pc26-reference-footer__apps">
+        <strong>Baixe o app</strong>
+        <Link to="/"><Play aria-hidden="true" /><span>Disponível no<br/><b>Google Play</b></span></Link>
+        <Link to="/"><Smartphone aria-hidden="true" /><span>Instale como<br/><b>Aplicativo PWA</b></span></Link>
       </div>
     </div>
 
     <div className="pc26-footer-studio__meta">
       <div className="pc26-shell pc26-footer-studio__meta-row">
+        <span>© 2026 Preço Certo - Feijó/AC. Todos os direitos reservados.</span>
         <span className="pc26-footer-studio__trust"><ShieldCheck aria-hidden="true" /> Informação local para escolhas mais conscientes</span>
-        <span>© 2026 Preço Certo</span>
-        <span className="pc26-footer-studio__developer">Desenvolvido por <strong>Franc D'nis</strong></span>
+        <span className="pc26-footer-studio__developer">Feito com ♥ para Feijó</span>
       </div>
     </div>
   </footer>;
