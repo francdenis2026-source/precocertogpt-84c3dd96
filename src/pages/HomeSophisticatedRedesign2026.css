@@ -77,8 +77,8 @@ html[data-theme="dark"] .pc26-home{
 }
 html:not([data-theme="dark"]) .pc26-model-hero__inner{
   background:
-    linear-gradient(100deg,rgba(4,26,22,.94) 0%,rgba(5,42,34,.86) 32%,rgba(6,58,46,.52) 58%,rgba(8,64,50,.12) 82%,rgba(8,64,50,0) 100%),
-    linear-gradient(0deg,rgba(2,16,13,.30),rgba(2,16,13,0) 42%),
+    linear-gradient(100deg,rgba(2,22,18,.98) 0%,rgba(3,35,28,.94) 30%,rgba(4,48,38,.78) 48%,rgba(5,58,45,.46) 66%,rgba(8,64,50,.14) 83%,rgba(8,64,50,0) 100%),
+    linear-gradient(0deg,rgba(2,16,13,.42),rgba(2,16,13,.04) 52%),
     url('/hero-supermercado-comparando-precos-2026.webp') center 46%/cover no-repeat!important;
 }
 html[data-theme="dark"] .pc26-model-hero__inner{
@@ -87,13 +87,49 @@ html[data-theme="dark"] .pc26-model-hero__inner{
     linear-gradient(0deg,rgba(0,0,0,.30),rgba(0,0,0,0) 42%),
     url('/hero-supermercado-comparando-precos-2026.webp') center 46%/cover no-repeat!important;
 }
-.pc26-model-hero__copy{width:min(660px,58%)!important}
+.pc26-model-hero__copy{width:min(660px,58%)!important;position:relative;z-index:2}
 .pc26-model-hero__copy h1{
   font-weight:800!important;
   letter-spacing:-.045em!important;
   text-shadow:0 2px 18px rgba(0,0,0,.22);
 }
 .pc26-model-hero__copy>p{font-weight:500!important}
+
+/* Light-mode hero contrast is explicit so older theme layers cannot leak dark text
+   on top of the photography. Keep the photo visible and concentrate contrast only
+   behind the content column. */
+html:not([data-theme="dark"]) .pc26-model-hero__copy h1{
+  color:#fff!important;
+  text-shadow:0 2px 5px rgba(0,0,0,.54),0 12px 30px rgba(0,0,0,.28)!important;
+}
+html:not([data-theme="dark"]) .pc26-model-hero__copy h1 em{
+  color:#f6d77a!important;
+  font-style:normal!important;
+  text-shadow:0 2px 5px rgba(0,0,0,.52),0 0 24px rgba(246,215,122,.12)!important;
+}
+html:not([data-theme="dark"]) .pc26-model-hero__copy>p{
+  color:rgba(255,255,255,.94)!important;
+  text-shadow:0 1px 4px rgba(0,0,0,.52)!important;
+  max-width:55ch!important;
+}
+html:not([data-theme="dark"]) .pc26-popular-searches>span{
+  color:rgba(255,255,255,.82)!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.42)!important;
+}
+html:not([data-theme="dark"]) .pc26-popular-searches button{
+  color:#fff!important;
+  background:rgba(3,31,25,.46)!important;
+  border-color:rgba(255,255,255,.30)!important;
+  box-shadow:0 1px 2px rgba(0,0,0,.16)!important;
+  backdrop-filter:blur(8px) saturate(120%);
+}
+html:not([data-theme="dark"]) .pc26-popular-searches button:focus-visible{
+  outline:2px solid #fff!important;
+  outline-offset:2px!important;
+}
+html:not([data-theme="dark"]) .pc26-hero__trust{
+  color:var(--hi,var(--pc-text))!important;
+}
 
 .pc26-hero__search-wrap{max-width:600px!important}
 .pc26-hero-search{
@@ -211,7 +247,18 @@ html[data-theme="dark"] .pc26-model-hero__inner{
   .pc26-footer-studio__grid{grid-template-columns:1fr 1fr!important;row-gap:28px!important}
 }
 @media(max-width:760px){
-  .pc26-model-hero__inner{border-radius:var(--pc-sr-radius-md)!important;min-height:420px!important}
+  .pc26-model-hero__inner{
+    border-radius:var(--pc-sr-radius-md)!important;
+    min-height:420px!important;
+  }
+  html:not([data-theme="dark"]) .pc26-model-hero__inner{
+    background:
+      linear-gradient(180deg,rgba(2,24,19,.93) 0%,rgba(3,36,29,.82) 48%,rgba(4,43,34,.58) 72%,rgba(4,43,34,.34) 100%),
+      url('/hero-supermercado-comparando-precos-2026.webp') 64% 48%/cover no-repeat!important;
+  }
+  .pc26-model-hero__copy{width:100%!important}
+  html:not([data-theme="dark"]) .pc26-model-hero__copy h1{max-width:11ch}
+  html:not([data-theme="dark"]) .pc26-model-hero__copy>p{max-width:36ch!important}
   .pc26-hero__stats{display:none!important}
   .pc26-footer-studio__grid{grid-template-columns:1fr!important;gap:24px!important;padding-block:28px 20px!important}
   .pc26-footer-studio__intro{align-items:flex-start!important}
