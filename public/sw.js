@@ -38,7 +38,14 @@ async function networkFirst(request) {
     if (response.ok) await cache.put(request, response.clone());
     return response;
   } catch {
-    return (await cache.match(request)) || (await caches.match("/"));
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    const shell = await caches.match("/");
+    if (shell) return shell;
+    return new Response("PreçoCerto indisponível offline neste momento.", {
+      status: 503,
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+    });
   }
 }
 
@@ -51,7 +58,12 @@ async function staleWhileRevalidate(request) {
       return response;
     })
     .catch(() => undefined);
-  return cached || refresh || Response.error();
+  if (cached) {
+    void refresh;
+    return cached;
+  }
+  const response = await refresh;
+  return response || new Response("", { status: 503, statusText: "Offline" });
 }
 
 self.addEventListener("fetch", event => {
