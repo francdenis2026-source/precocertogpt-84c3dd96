@@ -13,7 +13,6 @@ import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeFooterCompact2026.css";
 import "./HomeDensityPolish2026.css";
-import "./HomeFeaturedCompact2026.css";
 
 const initialCatalog = buildCatalog();
 
