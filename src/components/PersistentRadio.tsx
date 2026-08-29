@@ -80,7 +80,7 @@ export function parseZenoMetadata(raw: string): string | null {
 
 export function PersistentRadioProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement>(null),
-    timeoutRef = useRef<number>(),
+    timeoutRef = useRef<number | undefined>(undefined),
     streamRef = useRef(0),
     wantsPlay = useRef(false),
     instanceRef = useRef(crypto.randomUUID());
