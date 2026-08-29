@@ -4,6 +4,7 @@ import "@fontsource-variable/inter";
 import "@fontsource-variable/outfit";
 import "@fontsource-variable/manrope";
 import "./styles/AppReset.css";
+import "./styles/TasteAuth2026.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
 
