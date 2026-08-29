@@ -27,7 +27,8 @@
         if (!theme) theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         document.documentElement.dataset.theme = theme;
         document.documentElement.style.colorScheme = theme;
-        document.documentElement.classList.add("pc-prepaint");
+        /* O conteúdo nunca deve ficar bloqueado aguardando folhas CSS externas. */
+        document.documentElement.classList.add("pc-styles-ready");
       })();
     </script>
     <title>PreçoCerto | Compare preços e compre em Feijó (AC)</title>
@@ -37,12 +38,11 @@
 
     <meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)" />
-    <!-- Marca oficial compacta: etiqueta de preço do PreçoCerto. O SVG usa sizes=any e ocupa praticamente todo o canvas, mantendo máxima nitidez no endereço/aba. -->
-    <link rel="icon" href="/preco-certo-mark.svg?v=16" type="image/svg+xml" sizes="any" />
-    <link rel="alternate icon" href="/favicon.png?v=16" type="image/png" sizes="512x512" />
-    <link rel="shortcut icon" href="/favicon.ico?v=16" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=16" sizes="1024x1024" />
-    <link rel="manifest" href="/manifest.json?v=16" />
+    <link rel="icon" href="/logo-preco-certo-simbolo.svg?v=11" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="/logo-preco-certo-nova.png?v=1" type="image/png" sizes="any" />
+    <link rel="shortcut icon" href="/favicon.ico?v=11" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=11" sizes="1024x1024" />
+    <link rel="manifest" href="/manifest.json" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -51,15 +51,13 @@
     <meta property="og:description" content="Compare preços, descubra estabelecimentos e encontre opções de compra no comércio local de Feijó, Acre." />
     <meta property="og:url" content="https://www.precocerto.live/" />
     <meta property="og:image" content="https://www.precocerto.live/og.png" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="PreçoCerto — compare preços no comércio local de Feijó" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="PreçoCerto | Compare preços e compre em Feijó (AC)" />
     <meta name="twitter:description" content="Compare preços, descubra estabelecimentos e encontre opções de compra no comércio local de Feijó, Acre." />
     <meta name="twitter:image" content="https://www.precocerto.live/og.png" />
-    <meta name="twitter:image:alt" content="PreçoCerto — compare preços no comércio local de Feijó" />
 
     <script type="application/ld+json">
       {
@@ -70,12 +68,7 @@
             "@id": "https://www.precocerto.live/#organization",
             "name": "PreçoCerto",
             "url": "https://www.precocerto.live/",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.precocerto.live/preco-certo-mark.svg?v=16",
-              "width": 128,
-              "height": 128
-            },
+            "logo": "https://www.precocerto.live/logo-preco-certo.svg",
             "areaServed": { "@type": "City", "name": "Feijó", "addressRegion": "AC", "addressCountry": "BR" }
           },
           {
@@ -100,14 +93,13 @@
       html,body,#root{min-height:100%;margin:0}
       html[data-theme="light"],html[data-theme="light"] body,html[data-theme="light"] #root{background:#F6F7F9;color:#17181C}
       html[data-theme="dark"],html[data-theme="dark"] body,html[data-theme="dark"] #root{background:#121214;color:#FFFFFF}
-      html.pc-prepaint #root{visibility:hidden!important}
-      html.pc-styles-ready #root{visibility:visible!important}
+      #root{visibility:visible!important}
     </style>
     <script type="module" crossorigin src="/assets/react-vendor-D-E4eI9_.js"></script>
     <script type="module" crossorigin src="/assets/supabase-vendor-BnGCNdwk.js"></script>
-    <script type="module" crossorigin src="/assets/icons-vendor-Bn3jTh18.js"></script>
-    <script type="module" crossorigin src="/assets/main-BI-MUUJ1.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-CXpWtz0i.css">
+    <script type="module" crossorigin src="/assets/icons-vendor-DvytiWUe.js"></script>
+    <script type="module" crossorigin src="/assets/main-gmdn24VB.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-zcavcBU_.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"PreçoCerto | Compare preços e compre em Feijó (AC)","url":"https://www.precocerto.live/","description":"Compare preços, descubra estabelecimentos e encontre opções de compra no comércio local de Feijó, Acre.","inLanguage":"pt-BR","isPartOf":{"@type":"WebSite","name":"PreçoCerto","url":"https://www.precocerto.live"}}</script></head>
   <body>
     <div id="root"><main id="seo-prerender" data-seo-prerender="true"><article><h1>Compare preços no comércio local de Feijó</h1><p>Compare preços, descubra estabelecimentos e encontre opções de compra no comércio local de Feijó, Acre.</p><nav aria-label="Navegação principal"><a href="/">Início</a> <a href="/buscar">Buscar</a> <a href="/explorar">Explorar</a> <a href="/estabelecimentos">Perto de mim</a> <a href="/minha-conta">Conta</a></nav><section aria-labelledby="seo-categories"><h2 id="seo-categories">Explore por categoria</h2><ul><li><a href="/mercados">Mercados</a></li><li><a href="/farmacias">Farmácias</a></li><li><a href="/padarias">Padarias</a></li><li><a href="/livros">Livros</a></li><li><a href="/servicos">Serviços</a></li></ul></section><section aria-labelledby="seo-offers"><h2 id="seo-offers">Preços disponíveis para comparar</h2><ul><li><a href="/produto/macarrao-instantaneo-nissin-lamen-sabor-carne"><strong>MACARRÃO INSTANTÂNEO NISSIN LÁMEN SABOR CARNE</strong></a> <span>R$ 1,00 em COMERCIAL VANDERLEY · atualizado em 22/07/2026</span></li><li><a href="/produto/biscoito-recheado-escureto-richester-35g"><strong>Biscoito Recheado Escureto Richester 35g</strong></a> <span>R$ 1,50 em SUPERMERCADO 100% FEIJOENSE · atualizado em 22/07/2026</span></li><li><a href="/produto/biscoito-richester-escureto-baunilha-71-2g"><strong>Biscoito Richester Escureto Baunilha 71,2g</strong></a> <span>R$ 1,99 em SUPERMERCADO 100% FEIJOENSE · atualizado em 22/07/2026</span></li><li><a href="/produto/macarrao-instantaneo-nissin-lamen-galinha-caipira-74g"><strong>Macarrão Instantâneo Nissin Lámen Galinha Caipira 74g</strong></a> <span>R$ 2,50 em Varejão Contamigos · atualizado em 06/08/2026</span></li><li><a href="/produto/miojo-nissin-lamen-galinha-caipira-picante-70g"><strong>MIOJO NISSIN LÁMEN GALINHA CAIPIRA PICANTE 70G</strong></a> <span>R$ 2,50 em SUPERMERCADO 100% FEIJOENSE · atualizado em 22/07/2026</span></li><li><a href="/produto/miojo-nissin-nosso-sabor-carne-70g"><strong>Miojo Nissin Nosso Sabor Carne 70g</strong></a> <span>R$ 2,50 em SUPERMERCADO 100% FEIJOENSE · atualizado em 22/07/2026</span></li><li><a href="/produto/miojo-nissin-nosso-sabor-carne-picante-74g"><strong>MIOJO NISSIN NOSSO SABOR CARNE PICANTE 74G</strong></a> <span>R$ 2,50 em COMERCIAL PARCEIRÃO · atualizado em 22/07/2026</span></li><li><a href="/produto/miojo-nissin-nosso-sabor-galinha-caipira-74g"><strong>MIOJO NISSIN NOSSO SABOR GALINHA CAIPIRA 74G</strong></a> <span>R$ 2,50 em COMERCIAL PARCEIRÃO · atualizado em 22/07/2026</span></li></ul></section><section aria-labelledby="seo-stores"><h2 id="seo-stores">Estabelecimentos locais</h2><ul><li><a href="/estabelecimento/demo-mercado"><strong>Demo Mercado do Bairro</strong></a> <span>· Centro</span></li><li><a href="/estabelecimento/demo-lanchonete"><strong>Demo Burger &amp; Lanches</strong></a> <span>· Zenaide Paiva</span></li><li><a href="/estabelecimento/demo-padaria"><strong>Demo Padaria Pão &amp; Arte</strong></a> <span>· Centro</span></li><li><a href="/estabelecimento/demo-restaurante"><strong>Demo Restaurante Sabor Local</strong></a> <span>· Centro</span></li><li><a href="/estabelecimento/demo-bebidas"><strong>Demo Bebidas Geladas</strong></a> <span>· Conquista</span></li><li><a href="/estabelecimento/demo-petshop"><strong>Demo Pet Feliz</strong></a> <span>· Esperança</span></li><li><a href="/estabelecimento/demo-cosmeticos"><strong>Demo Bella Cosméticos</strong></a> <span>· Centro</span></li><li><a href="/estabelecimento/demo-servicos"><strong>Demo Serviços Feijó</strong></a> <span>· Centro</span></li></ul></section></article></main></div>
