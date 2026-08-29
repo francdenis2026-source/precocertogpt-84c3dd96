@@ -1,0 +1,60 @@
+/* Focused density pass for the active homepage. Keeps the recovered visual system while removing dead space and redundant vertical rhythm. */
+.pc26-home--recovered main{display:block!important}
+
+.pc26-home--recovered .pc26-model-hero{padding:10px 0 0!important}
+.pc26-home--recovered .pc26-model-hero__inner{min-height:330px!important;padding:28px 34px!important}
+.pc26-home--recovered .pc26-model-hero__copy>p{margin-top:10px!important;margin-bottom:0!important;line-height:1.5!important}
+.pc26-home--recovered .pc26-hero__search-wrap{margin-top:14px!important}
+.pc26-home--recovered .pc26-reference-hero__benefits{gap:10px!important;margin-top:14px!important}
+.pc26-home--recovered .pc26-reference-hero__benefits>div{gap:6px!important}
+.pc26-home--recovered .pc26-reference-hero__benefits small{line-height:1.25!important}
+
+.pc26-home--recovered .pc26-reference-popular{padding:8px 0 0!important}
+.pc26-home--recovered .pc26-reference-popular__panel{gap:12px!important;padding:10px 14px!important;border-radius:13px!important}
+.pc26-home--recovered .pc26-reference-popular__items{gap:6px!important}
+.pc26-home--recovered .pc26-reference-popular__items a{min-height:42px!important;border-radius:9px!important}
+.pc26-home--recovered .pc26-reference-popular__title{white-space:nowrap!important}
+
+.pc26-home--recovered .pc26-products,.pc26-home--recovered .pc26-stores{padding-top:14px!important;padding-bottom:0!important}
+.pc26-home--recovered .pc26-section-heading{margin-bottom:9px!important;align-items:end!important}
+.pc26-home--recovered .pc26-reference-section-title{align-items:center!important}
+.pc26-home--recovered .pc26-reference-section-title h2{margin:0!important}
+.pc26-home--recovered .pc26-reference-section-title p{margin:2px 0 0!important;line-height:1.35!important}
+.pc26-home--recovered .pc26-grid,.pc26-home--recovered .pc26-store-grid{gap:10px!important}
+.pc26-home--recovered .pc26-product{border-radius:12px!important}
+.pc26-home--recovered .pc26-product__image{aspect-ratio:1.32/1!important}
+.pc26-home--recovered .pc26-store{min-height:94px!important;padding-top:10px!important;padding-bottom:10px!important;border-radius:12px!important}
+
+.pc26-home--recovered .pc26-reference-app{padding:14px 0!important}
+.pc26-home--recovered .pc26-reference-app__panel{grid-template-columns:auto 1fr auto!important;gap:14px!important;min-height:72px!important;padding:11px 16px!important;border-radius:12px!important}
+.pc26-home--recovered .pc26-reference-app__device{width:40px!important;height:40px!important}
+.pc26-home--recovered .pc26-reference-app__copy{display:grid!important;gap:1px!important}
+.pc26-home--recovered .pc26-reference-app__copy span{line-height:1.35!important}
+.pc26-home--recovered .pc26-reference-app__cta{min-height:38px!important;padding:0 14px!important;border-radius:9px!important}
+
+@media(max-width:760px){
+  .pc26-home--recovered .pc26-model-hero{padding-top:8px!important}
+  .pc26-home--recovered .pc26-model-hero__inner{min-height:460px!important;padding:22px 18px!important}
+  .pc26-home--recovered .pc26-model-hero__media{top:50%!important;height:50%!important}
+  .pc26-home--recovered .pc26-reference-hero__benefits{gap:8px 10px!important;margin-top:12px!important}
+  .pc26-home--recovered .pc26-reference-popular{padding-top:7px!important}
+  .pc26-home--recovered .pc26-reference-popular__panel{gap:8px!important;padding:9px 11px!important}
+  .pc26-home--recovered .pc26-reference-popular__items a{min-width:96px!important;min-height:40px!important}
+  .pc26-home--recovered .pc26-products,.pc26-home--recovered .pc26-stores{padding-top:12px!important}
+  .pc26-home--recovered .pc26-section-heading{align-items:flex-start!important;margin-bottom:8px!important;gap:8px!important}
+  .pc26-home--recovered .pc26-section-heading>a{white-space:nowrap!important}
+  .pc26-home--recovered .pc26-store{min-height:82px!important}
+  .pc26-home--recovered .pc26-reference-app{padding:12px 0!important}
+  .pc26-home--recovered .pc26-reference-app__panel{grid-template-columns:1fr auto!important;gap:10px!important;min-height:0!important;padding:11px 12px!important}
+  .pc26-home--recovered .pc26-reference-app__device{display:none!important}
+  .pc26-home--recovered .pc26-reference-app__cta{grid-column:auto!important;min-height:36px!important;padding-inline:12px!important}
+}
+
+@media(max-width:480px){
+  .pc26-home--recovered .pc26-model-hero__inner{min-height:440px!important;padding:20px 16px!important}
+  .pc26-home--recovered .pc26-reference-hero__benefits{grid-template-columns:1fr 1fr!important}
+  .pc26-home--recovered .pc26-reference-popular__title{white-space:normal!important}
+  .pc26-home--recovered .pc26-section-heading{display:grid!important;grid-template-columns:1fr auto!important}
+  .pc26-home--recovered .pc26-reference-section-title{grid-column:1/-1!important}
+  .pc26-home--recovered .pc26-reference-app__copy span{display:none!important}
+}
