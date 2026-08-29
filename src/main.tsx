@@ -7,137 +7,28 @@ import "./styles/AppReset.css";
 import App from "./App";
 import { initializeSiteTheme } from "./lib/siteTheme";
 
-const campaignTheme = document.createElement("link");
-campaignTheme.rel = "stylesheet";
-campaignTheme.href = "/campaign-theme.css?v=20260825-4";
-campaignTheme.dataset.precocertoTheme = "campaign-2026";
-document.head.appendChild(campaignTheme);
+const appendStyle = (href: string, key: string, value: string) => {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = href;
+  link.dataset[key] = value;
+  document.head.appendChild(link);
+};
 
-const lightProfessionalTheme = document.createElement("link");
-lightProfessionalTheme.rel = "stylesheet";
-lightProfessionalTheme.href = "/light-professional-2026.css?v=20260825-1";
-lightProfessionalTheme.dataset.precocertoLightTheme = "professional-light-2026";
-document.head.appendChild(lightProfessionalTheme);
-
-const logoIntegrationTheme = document.createElement("link");
-logoIntegrationTheme.rel = "stylesheet";
-logoIntegrationTheme.href = "/logo-integration-2026.css?v=20260825-4";
-logoIntegrationTheme.dataset.precocertoLogo = "studio-brand-2026";
-document.head.appendChild(logoIntegrationTheme);
-
-const typographyContrastTheme = document.createElement("link");
-typographyContrastTheme.rel = "stylesheet";
-typographyContrastTheme.href = "/typography-contrast-2026.css?v=20260825-1";
-typographyContrastTheme.dataset.precocertoTypography = "accessible-type-2026";
-document.head.appendChild(typographyContrastTheme);
-
-const lightIconContrastTheme = document.createElement("link");
-lightIconContrastTheme.rel = "stylesheet";
-lightIconContrastTheme.href = "/light-icon-contrast-2026.css?v=20260825-2";
-lightIconContrastTheme.dataset.precocertoLightIcons = "light-icon-contrast-2026";
-document.head.appendChild(lightIconContrastTheme);
-
-const glassShellTheme = document.createElement("link");
-glassShellTheme.rel = "stylesheet";
-glassShellTheme.href = "/glass-shell-2026.css?v=20260825-1";
-glassShellTheme.dataset.precocertoGlassShell = "glass-shell-2026";
-document.head.appendChild(glassShellTheme);
-
-const topbarControlsTheme = document.createElement("link");
-topbarControlsTheme.rel = "stylesheet";
-topbarControlsTheme.href = "/topbar-controls-2026.css?v=20260825-1";
-topbarControlsTheme.dataset.precocertoTopbarControls = "warm-controls-2026";
-document.head.appendChild(topbarControlsTheme);
-
-const mobileAppShellTheme = document.createElement("link");
-mobileAppShellTheme.rel = "stylesheet";
-mobileAppShellTheme.href = "/mobile-app-shell-2026.css?v=20260825-2";
-mobileAppShellTheme.dataset.precocertoMobileShell = "mobile-app-shell-2026";
-document.head.appendChild(mobileAppShellTheme);
-
-const pointerInteractionTheme = document.createElement("link");
-pointerInteractionTheme.rel = "stylesheet";
-pointerInteractionTheme.href = "/interaction-hover-2026.css?v=20260825-2";
-pointerInteractionTheme.dataset.precocertoPointerInteraction = "pointer-refined-2026";
-document.head.appendChild(pointerInteractionTheme);
-
-const professionalAppShellTheme = document.createElement("link");
-professionalAppShellTheme.rel = "stylesheet";
-professionalAppShellTheme.href = "/app-shell-professional-2026.css?v=20260826-2";
-professionalAppShellTheme.dataset.precocertoAppShell = "professional-app-shell-2026";
-document.head.appendChild(professionalAppShellTheme);
-
-const impeccableHomeTheme = document.createElement("link");
-impeccableHomeTheme.rel = "stylesheet";
-impeccableHomeTheme.href = "/impeccable-home-2026.css?v=20260826-1";
-impeccableHomeTheme.dataset.precocertoImpeccable = "homepage-polish-2026";
-document.head.appendChild(impeccableHomeTheme);
-
-const headerRedesignTheme = document.createElement("link");
-headerRedesignTheme.rel = "stylesheet";
-headerRedesignTheme.href = "/header-redesign-2026.css?v=20260826-3";
-headerRedesignTheme.dataset.precocertoHeader = "header-redesign-2026";
-document.head.appendChild(headerRedesignTheme);
-
-const searchRefinementTheme = document.createElement("link");
-searchRefinementTheme.rel = "stylesheet";
-searchRefinementTheme.href = "/search-refinement-2026.css?v=20260826-1";
-searchRefinementTheme.dataset.precocertoSearch = "live-search-refinement-2026";
-document.head.appendChild(searchRefinementTheme);
-
-const searchRelocationTheme = document.createElement("link");
-searchRelocationTheme.rel = "stylesheet";
-searchRelocationTheme.href = "/search-relocation-2026.css?v=20260826-1";
-searchRelocationTheme.dataset.precocertoSearchRelocation = "hero-search-2026";
-document.head.appendChild(searchRelocationTheme);
-
-const unifiedHeaderTheme = document.createElement("link");
-unifiedHeaderTheme.rel = "stylesheet";
-unifiedHeaderTheme.href = "/header-unified-2026.css?v=20260826-4";
-unifiedHeaderTheme.dataset.precocertoUnifiedHeader = "studio-header-2026";
-document.head.appendChild(unifiedHeaderTheme);
-
-const footerStudioTheme = document.createElement("link");
-footerStudioTheme.rel = "stylesheet";
-footerStudioTheme.href = "/footer-studio-2026.css?v=20260826-1";
-footerStudioTheme.dataset.precocertoFooterStudio = "studio-footer-2026";
-document.head.appendChild(footerStudioTheme);
-
-const heroMarketTheme = document.createElement("link");
-heroMarketTheme.rel = "stylesheet";
-heroMarketTheme.href = "/hero-market-2026.css?v=20260826-1";
-heroMarketTheme.dataset.precocertoHeroMarket = "local-market-hero-2026";
-document.head.appendChild(heroMarketTheme);
-
-// A camada Impeccable precisa ser a autoridade final da homepage. Folhas de
-// compatibilidade carregadas acima não podem reintroduzir o visual legado.
-const impeccableFinalTheme = document.createElement("link");
-impeccableFinalTheme.rel = "stylesheet";
-impeccableFinalTheme.href = "/impeccable-home-2026.css?v=20260827-1";
-impeccableFinalTheme.dataset.precocertoImpeccableFinal = "homepage-impeccable-final-2026";
-document.head.appendChild(impeccableFinalTheme);
-
-// Sistema visual consolidado da homepage. Carregado por último para impedir
-// que camadas históricas voltem a sobrescrever o layout responsivo atual.
-const homepageMasterTheme = document.createElement("link");
-homepageMasterTheme.rel = "stylesheet";
-homepageMasterTheme.href = "/homepage-master-2026.css?v=20260827-1";
-homepageMasterTheme.dataset.precocertoHomepageMaster = "homepage-master-2026";
-document.head.appendChild(homepageMasterTheme);
-
-// Acabamento final da homepage ativa em desktop e mobile. Esta camada fica
-// isolada para que o refinamento não altere as demais páginas do aplicativo.
-const homepageImpeccableTheme = document.createElement("link");
-homepageImpeccableTheme.rel = "stylesheet";
-homepageImpeccableTheme.href = "/homepage-impeccable-2026.css?v=20260829-17";
-homepageImpeccableTheme.dataset.precocertoHomepageImpeccable = "homepage-impeccable-2026";
-document.head.appendChild(homepageImpeccableTheme);
+// Core public system only. Historical homepage-specific override sheets were
+// removed from the global cascade so HomeNew2026 owns its own visual system.
+appendStyle("/campaign-theme.css?v=20260825-4", "precocertoTheme", "campaign-2026");
+appendStyle("/light-professional-2026.css?v=20260825-1", "precocertoLightTheme", "professional-light-2026");
+appendStyle("/logo-integration-2026.css?v=20260825-4", "precocertoLogo", "studio-brand-2026");
+appendStyle("/typography-contrast-2026.css?v=20260825-1", "precocertoTypography", "accessible-type-2026");
+appendStyle("/light-icon-contrast-2026.css?v=20260825-2", "precocertoLightIcons", "light-icon-contrast-2026");
+appendStyle("/glass-shell-2026.css?v=20260825-1", "precocertoGlassShell", "glass-shell-2026");
+appendStyle("/mobile-app-shell-2026.css?v=20260825-2", "precocertoMobileShell", "mobile-app-shell-2026");
+appendStyle("/interaction-hover-2026.css?v=20260825-2", "precocertoPointerInteraction", "pointer-refined-2026");
+appendStyle("/app-shell-professional-2026.css?v=20260826-2", "precocertoAppShell", "professional-app-shell-2026");
+appendStyle("/search-refinement-2026.css?v=20260826-1", "precocertoSearch", "live-search-refinement-2026");
 
 initializeSiteTheme();
-
-// A interface deve ficar disponível mesmo quando o proxy de preview demora
-// para responder a uma folha de estilo. As camadas visuais continuam carregando
-// em paralelo, mas nunca bloqueiam a montagem do React.
 document.documentElement.classList.remove("pc-prepaint");
 document.documentElement.classList.add("pc-styles-ready");
 
@@ -159,20 +50,9 @@ window.addEventListener("online", startNotifications, { once: true });
 
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", () => {
-    void (async () => {
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map(registration => registration.unregister()));
-      if ("caches" in window) {
-        const keys = await caches.keys();
-        await Promise.all(keys.filter(key => key.startsWith("precocerto-")).map(key => caches.delete(key)));
-      }
-      if (!navigator.serviceWorker.controller) return;
-      const reloadKey = "pc:legacy-worker-removed";
-      try {
-        if (sessionStorage.getItem(reloadKey)) return;
-        sessionStorage.setItem(reloadKey,"1");
-        window.location.reload();
-      } catch {}
-    })().catch(() => {});
+    void navigator.serviceWorker
+      .register("/sw.js", { updateViaCache: "none" })
+      .then(registration => registration.update())
+      .catch(() => {});
   }, { once: true });
 }
