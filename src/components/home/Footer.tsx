@@ -33,7 +33,7 @@ export function Footer() {
           <img src="/preco-certo-mark.svg" alt="" width="40" height="40" />
           <span><strong>Preço Certo</strong><small>Comparador local</small></span>
         </Link>
-        <p>Compare preços locais com rapidez e escolha melhor antes de comprar.</p>
+        <p>Compare preços e economize em Feijó.</p>
         <span className="pc26-footer-studio__location"><MapPin aria-hidden="true" /> Feijó, Acre</span>
       </div>
 
