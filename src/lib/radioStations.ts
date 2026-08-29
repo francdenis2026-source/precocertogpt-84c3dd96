@@ -102,6 +102,7 @@ export async function activateAdminRadio(id: string) {
   const { error } = await supabase.rpc("admin_activate_radio", {
     _station_id: id,
   });
+  if (!error) invalidateActiveRadioCache();
   if (!error && typeof window !== "undefined")
     window.dispatchEvent(new Event("pc:radio-config-changed"));
   return { error: error?.message ?? null };
