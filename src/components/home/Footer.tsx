@@ -1,4 +1,4 @@
-import { Apple, Facebook, Instagram, MapPin, MessageCircle, Play, ShieldCheck } from "lucide-react";
+import { Camera, Globe2, MapPin, MessageCircle, Play, ShieldCheck, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navigation = [
@@ -9,11 +9,11 @@ const navigation = [
   { to: "/buscar", label: "Promoções" },
 ];
 const help = [
-  { to: "/como-funciona", label: "Como funciona" },
-  { to: "/faq", label: "Perguntas frequentes" },
+  { to: "/explorar", label: "Como funciona" },
+  { to: "/contato", label: "Perguntas frequentes" },
   { to: "/contato", label: "Fale conosco" },
-  { to: "/privacidade", label: "Política de privacidade" },
-  { to: "/termos", label: "Termos de uso" },
+  { to: "/contato", label: "Política de privacidade" },
+  { to: "/contato", label: "Termos de uso" },
 ];
 const merchants = [
   { to: "/lojista", label: "Cadastre sua loja" },
@@ -33,19 +33,19 @@ export function Footer() {
         <p className="pc26-footer-studio__pitch">O menor preço da cidade, na palma da sua mão.</p>
         <span className="pc26-footer-studio__location"><MapPin aria-hidden="true" /> Feijó, Acre</span>
         <div className="pc26-reference-footer__socials">
-          <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook aria-hidden="true" /></a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram aria-hidden="true" /></a>
-          <Link to="/contato" aria-label="WhatsApp e contato"><MessageCircle aria-hidden="true" /></Link>
+          <a href="https://precocertogpt.lovable.app" target="_blank" rel="noreferrer" aria-label="Site Preço Certo"><Globe2 aria-hidden="true" /></a>
+          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><Camera aria-hidden="true" /></a>
+          <Link to="/contato" aria-label="Contato"><MessageCircle aria-hidden="true" /></Link>
         </div>
       </div>
 
       <div className="pc26-footer-studio__col"><strong>Navegação</strong>{navigation.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
-      <div className="pc26-footer-studio__col"><strong>Ajuda</strong>{help.map(item => <Link key={item.to} to={item.to}>{item.label}</Link>)}</div>
+      <div className="pc26-footer-studio__col"><strong>Ajuda</strong>{help.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
       <div className="pc26-footer-studio__col"><strong>Para comerciantes</strong>{merchants.map(item => <Link key={`${item.to}-${item.label}`} to={item.to}>{item.label}</Link>)}</div>
       <div className="pc26-footer-studio__col pc26-reference-footer__apps">
         <strong>Baixe o app</strong>
-        <Link to="/instalar"><Play aria-hidden="true" /><span>Disponível no<br/><b>Google Play</b></span></Link>
-        <Link to="/instalar"><Apple aria-hidden="true" /><span>Disponível na<br/><b>App Store</b></span></Link>
+        <Link to="/"><Play aria-hidden="true" /><span>Disponível no<br/><b>Google Play</b></span></Link>
+        <Link to="/"><Smartphone aria-hidden="true" /><span>Instale como<br/><b>Aplicativo PWA</b></span></Link>
       </div>
     </div>
 
