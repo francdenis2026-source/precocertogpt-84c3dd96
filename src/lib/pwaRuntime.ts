@@ -26,8 +26,49 @@ function showNetworkStatus(online: boolean, transient = false) {
   }
 }
 
+/**
+ * O service worker só pode assumir o controle no site publicado.
+ * Em dev, dentro de iframe ou nos domínios de prévia ele serviria HTML/chunks
+ * obsoletos (tela branca e "loop" de atualização), então nesses contextos a
+ * inscrição é recusada e qualquer registro anterior é removido.
+ */
+function shouldSkipServiceWorker() {
+  const host = window.location.hostname;
+  const previewHost =
+    host.startsWith("id-preview--") ||
+    host.startsWith("preview--") ||
+    host === "lovableproject.com" ||
+    host.endsWith(".lovableproject.com") ||
+    host === "lovableproject-dev.com" ||
+    host.endsWith(".lovableproject-dev.com") ||
+    host === "beta.lovable.dev" ||
+    host.endsWith(".beta.lovable.dev");
+  const inIframe = window.self !== window.top;
+  const killSwitch = new URLSearchParams(window.location.search).get("sw") === "off";
+  return !import.meta.env.PROD || previewHost || inIframe || killSwitch;
+}
+
+async function unregisterWorker() {
+  try {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(
+      registrations
+        .filter((registration) =>
+          (registration.active || registration.installing || registration.waiting)?.scriptURL.includes("/sw.js"),
+        )
+        .map((registration) => registration.unregister()),
+    );
+  } catch {
+    /* nada a limpar */
+  }
+}
+
 async function registerWorker() {
-  if (!("serviceWorker" in navigator) || !import.meta.env.PROD) return;
+  if (!("serviceWorker" in navigator)) return;
+  if (shouldSkipServiceWorker()) {
+    await unregisterWorker();
+    return;
+  }
   try {
     const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" });
     void registration.update();
