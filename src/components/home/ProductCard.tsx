@@ -6,7 +6,9 @@ import { resolveCutoutImage, resolveProductImage } from "../../data/productImage
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 export function ProductCard({ product }: { product: Product }) {
-  const image = resolveCutoutImage(product) || resolveProductImage(product);
+  // A foto aprovada no cadastro tem prioridade. O recorte local entra apenas
+  // como contingência, evitando substituir uma imagem real por um asset derivado.
+  const image = resolveProductImage(product) || resolveCutoutImage(product);
   const previous = product.previousPrice && product.previousPrice > product.minPrice ? product.previousPrice : product.avgPrice > product.minPrice ? product.avgPrice : undefined;
   const saving = previous ? previous - product.minPrice : 0;
 
