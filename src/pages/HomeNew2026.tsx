@@ -19,6 +19,7 @@ import "./HomeSecondPass2026.css";
 import "./HomeSophisticatedRedesign2026.css";
 import "./HomeLightImpeccableFix2026.css";
 import "./HomeReferenceMatch2026.css";
+import "./HomeReferenceFooter2026.css";
 
 const initialCatalog = buildCatalog();
 
