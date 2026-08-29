@@ -1,24 +1,26 @@
-/* Taste + Impeccable — theme/hero calibration only. */
+/* Taste — theme/hero calibration. Overlay protects copy without muting photography. */
 .pc26-home--recovered .pc26-model-hero__inner{
   background:var(--imp-surface)!important;
 }
 .pc26-home--recovered .pc26-model-hero__media img{
-  filter:saturate(1.02) contrast(1.045) brightness(1.01)!important;
+  filter:saturate(1.04) contrast(1.045) brightness(1.025)!important;
 }
 .pc26-home--recovered .pc26-model-hero__inner::before{
   background:linear-gradient(90deg,
-    rgba(255,254,250,1) 0%,
-    rgba(255,254,250,.98) 34%,
-    rgba(255,254,250,.84) 46%,
-    rgba(255,254,250,.44) 58%,
-    rgba(255,254,250,.12) 68%,
-    rgba(255,254,250,0) 78%)!important;
+    rgba(255,254,250,.98) 0%,
+    rgba(255,254,250,.96) 18%,
+    rgba(255,254,250,.86) 27%,
+    rgba(255,254,250,.64) 36%,
+    rgba(255,254,250,.36) 45%,
+    rgba(255,254,250,.14) 54%,
+    rgba(255,254,250,.03) 62%,
+    rgba(255,254,250,0) 68%)!important;
 }
 .pc26-home--recovered .pc26-model-hero__copy h1{color:#102f33!important}
 .pc26-home--recovered .pc26-model-hero__copy h1 em{color:#0c5a62!important}
 .pc26-home--recovered .pc26-model-hero__copy>p{color:#4d6260!important}
 
-/* Dark mode: neutral charcoal/cocoa base; no green cast. Green remains semantic for savings only. */
+/* Dark mode: neutral charcoal/cocoa base; green remains semantic for savings only. */
 html[data-theme="dark"] .pc26-home--recovered{
   --imp-canvas:#11100f;
   --imp-surface:#191817;
@@ -48,8 +50,18 @@ html[data-theme="dark"] .pc26-home--recovered .pc26-header-studio__tool:hover{ba
 html[data-theme="dark"] .pc26-home--recovered .pc26-header-studio__login{background:#c59b55!important;border-color:#c59b55!important;color:#18130c!important}
 html[data-theme="dark"] .pc26-home--recovered .pc26-header-studio__login:hover{background:#d8b56c!important;border-color:#d8b56c!important}
 html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__inner{background:#1a1817!important;border-color:#3b3632!important;box-shadow:0 16px 34px rgba(0,0,0,.28)!important}
-html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__inner::before{background:linear-gradient(90deg,#1a1817 0%,#1a1817 38%,rgba(26,24,23,.91) 49%,rgba(26,24,23,.55) 62%,rgba(26,24,23,.12) 76%,transparent 88%)!important}
-html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__media img{filter:saturate(.92) contrast(1.08) brightness(.78)!important}
+html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__inner::before{
+  background:linear-gradient(90deg,
+    rgba(26,24,23,.98) 0%,
+    rgba(26,24,23,.95) 18%,
+    rgba(26,24,23,.84) 28%,
+    rgba(26,24,23,.62) 38%,
+    rgba(26,24,23,.34) 48%,
+    rgba(26,24,23,.12) 58%,
+    rgba(26,24,23,.02) 66%,
+    transparent 72%)!important;
+}
+html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__media img{filter:saturate(.97) contrast(1.065) brightness(.91)!important}
 html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__copy h1{color:#f4efe8!important}
 html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__copy h1 em{color:#d8b56c!important}
 html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__copy>p{color:#c7bbb1!important}
@@ -84,7 +96,7 @@ html[data-theme="dark"] .pc26-home--recovered .pc26-reference-footer{background:
 html[data-theme="dark"] .pc26-home--recovered .pc26-footer-premium__rail{background:#0f0e0d!important;border-color:#302c29!important}
 
 @media(max-width:760px){
-  .pc26-home--recovered .pc26-model-hero__media img{filter:saturate(1.03) contrast(1.04) brightness(1.01)!important}
+  .pc26-home--recovered .pc26-model-hero__media img{filter:saturate(1.04) contrast(1.04) brightness(1.02)!important}
   html[data-theme="dark"] .pc26-home--recovered{background:linear-gradient(180deg,rgba(17,16,15,.93),#11100f 46%),url('/home-market-mobile.webp') center top/cover no-repeat!important}
-  html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__media img{filter:saturate(.92) contrast(1.08) brightness(.82)!important}
+  html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__media img{filter:saturate(.97) contrast(1.06) brightness(.92)!important}
 }
