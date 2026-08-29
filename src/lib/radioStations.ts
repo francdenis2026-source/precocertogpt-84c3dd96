@@ -22,8 +22,15 @@ export const DEFAULT_RADIO: RadioStation = {
   is_enabled: true,
 };
 
-export async function loadActiveRadio(): Promise<RadioStation> {
-  if (import.meta.env.MODE === "test") return DEFAULT_RADIO;
+/**
+ * A estação ativa é a mesma para toda a sessão de navegação.
+ * Sem cache/dedupe, cada montagem do player refazia a consulta e, quando a
+ * tabela não é legível publicamente, gerava requisições 401 repetidas.
+ */
+let activeRadioCache: RadioStation | null = null;
+let activeRadioRequest: Promise<RadioStation> | null = null;
+
+async function requestActiveRadio(): Promise<RadioStation> {
   if (!supabase) return DEFAULT_RADIO;
   const { data, error } = await supabase
     .from("radio_stations")
@@ -35,6 +42,29 @@ export async function loadActiveRadio(): Promise<RadioStation> {
     .limit(1)
     .maybeSingle();
   return error || !data ? DEFAULT_RADIO : (data as RadioStation);
+}
+
+export async function loadActiveRadio(): Promise<RadioStation> {
+  if (import.meta.env.MODE === "test") return DEFAULT_RADIO;
+  if (activeRadioCache) return activeRadioCache;
+  if (!activeRadioRequest) {
+    activeRadioRequest = requestActiveRadio()
+      .then((station) => {
+        activeRadioCache = station;
+        return station;
+      })
+      .catch(() => DEFAULT_RADIO)
+      .finally(() => {
+        activeRadioRequest = null;
+      });
+  }
+  return activeRadioRequest;
+}
+
+/** Usado quando o admin troca a estação ativa. */
+export function invalidateActiveRadioCache() {
+  activeRadioCache = null;
+  activeRadioRequest = null;
 }
 
 export async function loadAdminRadios(): Promise<RadioStation[]> {
