@@ -16,6 +16,7 @@ import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeWorldClass2026.css";
 import "./HomeReadability2026.css";
+import "./HomeSecondPass2026.css";
 
 const initialCatalog = buildCatalog();
 

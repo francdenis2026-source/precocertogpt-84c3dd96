@@ -31,11 +31,18 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
 
   useEffect(() => {
     const close = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false);
+        setActiveIndex(-1);
+      }
     };
     document.addEventListener("pointerdown", close);
     return () => document.removeEventListener("pointerdown", close);
   }, []);
+
+  useEffect(() => {
+    if (activeIndex >= suggestions.length) setActiveIndex(-1);
+  }, [activeIndex, suggestions.length]);
 
   useEffect(() => {
     if (!compact) return;
@@ -53,16 +60,21 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
   const searchAll = () => {
     const value = normalizedQuery;
     setOpen(false);
+    setActiveIndex(-1);
     navigate(value ? `/buscar?q=${encodeURIComponent(value)}` : "/buscar");
   };
   const openProduct = (product: Product) => {
     setOpen(false);
+    setActiveIndex(-1);
     navigate(`/produto/${product.slug || product.id}`);
   };
   const submit = (event: FormEvent) => { event.preventDefault(); searchAll(); };
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (!showPanel || !suggestions.length) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        setActiveIndex(-1);
+      }
       return;
     }
     if (event.key === "ArrowDown") {
@@ -71,12 +83,19 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       setActiveIndex(index => index <= 0 ? suggestions.length - 1 : index - 1);
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      setActiveIndex(0);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      setActiveIndex(suggestions.length - 1);
     } else if (event.key === "Enter" && activeIndex >= 0) {
       event.preventDefault();
       openProduct(suggestions[activeIndex]);
     } else if (event.key === "Escape") {
       event.preventDefault();
       setOpen(false);
+      setActiveIndex(-1);
     }
   };
 
@@ -97,8 +116,8 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
         autoComplete="off"
         aria-autocomplete="list"
         aria-expanded={showPanel}
-        aria-controls={listId}
-        aria-activedescendant={activeIndex >= 0 ? `${listId}-${activeIndex}` : undefined}
+        aria-controls={showPanel ? listId : undefined}
+        aria-activedescendant={showPanel && activeIndex >= 0 ? `${listId}-${activeIndex}` : undefined}
       />
       {!query && compact ? <span className="pc26-search__shortcut" aria-hidden="true">Ctrl K</span> : null}
       {query && <button className="pc26-live-search__clear" type="button" onClick={() => { setQuery(""); setActiveIndex(-1); setOpen(false); inputRef.current?.focus(); }} aria-label="Limpar busca"><X aria-hidden="true" /></button>}
@@ -115,7 +134,7 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
           role="option"
           aria-selected={index === activeIndex}
           className={index === activeIndex ? "is-active" : ""}
-          onPointerMove={() => setActiveIndex(index)}
+          onPointerMove={event => { if (event.pointerType === "mouse") setActiveIndex(index); }}
           onClick={() => openProduct(product)}
         >
           <span className="pc26-live-results__thumb">{image ? <img src={image} alt="" width="52" height="52" loading="lazy" decoding="async" /> : <PackageSearch aria-hidden="true" />}</span>
