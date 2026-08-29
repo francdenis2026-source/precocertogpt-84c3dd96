@@ -1,8 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowRight, LogIn, X } from "lucide-react";
 import type { AuthActionPromptDetail } from "../lib/authActionPrompt";
+import { loadSessionProfile } from "../lib/roles";
 import "./AuthActionPrompt.css";
+
+const AUTH_RETURN_KEY = "precocerto:auth-return-to:v1";
+const AUTH_PATHS = new Set(["/login", "/cadastro", "/registrar"]);
+
+function safeInternalDestination(value: string | null) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return null;
+  try {
+    const url = new URL(value, window.location.origin);
+    return url.origin === window.location.origin ? `${url.pathname}${url.search}${url.hash}` : null;
+  } catch {
+    return null;
+  }
+}
 
 function AccountBenefitsIllustration({ action }: { action: AuthActionPromptDetail["action"] }) {
   const title = action === "favorite" ? "Produto salvo com segurança" : "Cesta sincronizada com sua conta";
@@ -27,6 +42,8 @@ function AccountBenefitsIllustration({ action }: { action: AuthActionPromptDetai
 }
 
 export function AuthActionPrompt() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [prompt, setPrompt] = useState<AuthActionPromptDetail | null>(null);
   const dialogRef = useRef<HTMLElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -37,6 +54,27 @@ export function AuthActionPrompt() {
     window.addEventListener("pc:auth-action-required", open);
     return () => window.removeEventListener("pc:auth-action-required", open);
   }, []);
+
+  useEffect(() => {
+    if (AUTH_PATHS.has(location.pathname)) {
+      const redirect = safeInternalDestination(new URLSearchParams(location.search).get("redirect"));
+      if (redirect) window.sessionStorage.setItem(AUTH_RETURN_KEY, redirect);
+      return;
+    }
+
+    const pending = safeInternalDestination(window.sessionStorage.getItem(AUTH_RETURN_KEY));
+    if (!pending) return;
+    let cancelled = false;
+
+    void loadSessionProfile().then(profile => {
+      if (cancelled || !profile) return;
+      window.sessionStorage.removeItem(AUTH_RETURN_KEY);
+      const current = `${location.pathname}${location.search}${location.hash}`;
+      if (current !== pending) navigate(pending, { replace: true });
+    }).catch(() => undefined);
+
+    return () => { cancelled = true; };
+  }, [location.hash, location.pathname, location.search, navigate]);
 
   useEffect(() => {
     if (!prompt) return;
@@ -75,9 +113,10 @@ export function AuthActionPrompt() {
   }, [prompt]);
 
   if (!prompt) return null;
-  const destination = prompt.returnTo || `${window.location.pathname}${window.location.search}`;
+  const destination = safeInternalDestination(prompt.returnTo || `${window.location.pathname}${window.location.search}`) || "/";
   const query = encodeURIComponent(destination);
   const favorite = prompt.action === "favorite";
+  const rememberDestination = () => window.sessionStorage.setItem(AUTH_RETURN_KEY, destination);
 
   return createPortal(<div className="pc-auth-prompt" role="presentation" onMouseDown={event => { if (event.target === event.currentTarget) setPrompt(null); }}>
     <section ref={dialogRef} className="pc-auth-prompt__card" role="dialog" aria-modal="true" aria-labelledby="pc-auth-prompt-title">
@@ -90,10 +129,10 @@ export function AuthActionPrompt() {
       </div>
       <div className="pc-auth-prompt__benefits" aria-label="Benefícios da conta"><span>✓ Gratuito</span><span>✓ Seus dados sincronizados</span></div>
       <div className="pc-auth-prompt__actions">
-        <a className="is-primary" href={`/cadastro?redirect=${query}`}>Criar conta grátis <ArrowRight aria-hidden="true"/></a>
-        <a href={`/login?redirect=${query}`}><LogIn aria-hidden="true"/> Já tenho conta</a>
+        <a className="is-primary" href={`/cadastro?redirect=${query}`} onClick={rememberDestination}>Criar conta grátis <ArrowRight aria-hidden="true"/></a>
+        <a href={`/login?redirect=${query}`} onClick={rememberDestination}><LogIn aria-hidden="true"/> Já tenho conta</a>
       </div>
-      <small>Após entrar, esta ação será concluída automaticamente.</small>
+      <small>Após entrar, você voltará para continuar esta ação.</small>
     </section>
   </div>, document.body);
 }
