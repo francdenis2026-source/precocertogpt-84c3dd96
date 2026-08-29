@@ -1,0 +1,109 @@
+/* Preço Certo — Impeccable recovery layer.
+   Intentionally small and scoped: restores stable proportions, keeps the approved
+   light reference composition, and avoids the broad overrides that distorted the page. */
+
+.pc26-home--recovered{background:#f7f8f6;color:var(--hi,var(--pc-text))}
+.pc26-home--recovered .pc26-shell{width:min(1180px,calc(100% - 32px))!important;margin-inline:auto!important}
+
+/* Compact stable header */
+.pc26-home--recovered .pc26-header--studio{position:sticky;top:0;z-index:70;background:rgba(255,255,255,.96)!important;border-bottom:1px solid #e4e8e5!important;backdrop-filter:blur(16px) saturate(130%)!important}
+.pc26-home--recovered .pc26-header-studio{min-height:70px!important;display:flex!important;align-items:center!important;gap:20px!important}
+.pc26-home--recovered .pc26-header-studio__mobile-brand{flex:none!important;display:flex!important;align-items:center!important;gap:9px!important}
+.pc26-home--recovered .pc26-header-studio__mobile-brand strong{color:#0b7133!important}
+.pc26-home--recovered .pc26-header-studio__mobile-brand small{color:#66716b!important}
+.pc26-home--recovered .pc26-header-studio__nav{display:flex!important;align-items:center!important;gap:2px!important;margin-left:auto!important;padding:4px!important;border-radius:999px!important;background:#f5f7f5!important}
+.pc26-home--recovered .pc26-header-studio__nav a{min-height:38px!important;display:flex!important;align-items:center!important;padding:0 13px!important;border-radius:999px!important;color:#223029!important}
+.pc26-home--recovered .pc26-header-studio__nav a[aria-current="page"]{background:#eaf6ee!important;color:#0b7332!important}
+.pc26-home--recovered .pc26-header-studio__tools{display:flex!important;align-items:center!important;gap:7px!important;margin-left:0!important}
+
+/* Hero: old real photo restored and allowed to remain protagonist. */
+.pc26-home--recovered .pc26-model-hero{padding:14px 0 0!important;background:transparent!important}
+.pc26-home--recovered .pc26-model-hero__inner{position:relative!important;min-height:350px!important;overflow:hidden!important;padding:34px 40px!important;border:1px solid #e3e8e4!important;border-radius:18px!important;background:#fff!important;box-shadow:0 12px 30px rgba(18,42,34,.07)!important}
+.pc26-home--recovered .pc26-model-hero__copy{position:relative!important;z-index:3!important;width:min(600px,56%)!important}
+.pc26-home--recovered .pc26-model-hero__copy h1{color:#101c2d!important;text-shadow:0 2px 0 rgba(255,255,255,.82),0 7px 20px rgba(11,29,47,.08)!important}
+.pc26-home--recovered .pc26-model-hero__copy h1 em{color:#d5a52b!important;font-style:normal!important;-webkit-text-fill-color:#d5a52b!important;text-shadow:0 2px 0 rgba(255,255,255,.9),0 6px 18px rgba(146,106,14,.10)!important}
+.pc26-home--recovered .pc26-model-hero__copy>p{max-width:44ch!important;color:#2a3731!important;text-shadow:none!important}
+.pc26-home--recovered .pc26-model-hero__media{display:block!important;position:absolute!important;inset:0 0 0 auto!important;width:57%!important;height:100%!important;z-index:0!important;overflow:hidden!important}
+.pc26-home--recovered .pc26-model-hero__media picture,.pc26-home--recovered .pc26-model-hero__media img{display:block!important;width:100%!important;height:100%!important}
+.pc26-home--recovered .pc26-model-hero__media img{object-fit:cover!important;object-position:58% 50%!important;filter:saturate(1.04) contrast(1.02)!important}
+.pc26-home--recovered .pc26-model-hero__inner::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.985) 36%,rgba(255,255,255,.88) 48%,rgba(255,255,255,.48) 60%,rgba(255,255,255,.12) 73%,transparent 84%)}
+.pc26-home--recovered .pc26-hero__search-wrap{max-width:560px!important;margin-top:18px!important}
+.pc26-home--recovered .pc26-hero-search{background:#fff!important;border:1px solid #d7ded9!important;box-shadow:0 7px 20px rgba(18,45,35,.10)!important}
+.pc26-home--recovered .pc26-reference-hero__benefits{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important;max-width:600px!important}
+.pc26-home--recovered .pc26-reference-hero__benefits>div{display:flex!important;align-items:flex-start!important;gap:7px!important;color:#27342e!important;min-width:0!important}
+.pc26-home--recovered .pc26-reference-hero__benefits svg{width:18px!important;flex:none!important;color:#159247!important}
+.pc26-home--recovered .pc26-reference-hero__benefits span{display:grid!important;gap:1px!important;min-width:0!important}
+.pc26-home--recovered .pc26-reference-hero__benefits small{color:#68736d!important}
+.pc26-home--recovered .pc26-hero__media-note{position:absolute!important;right:22px!important;top:70px!important;left:auto!important;bottom:auto!important;z-index:4!important;padding:13px 15px!important;border:1px solid rgba(255,255,255,.82)!important;border-radius:13px!important;background:rgba(255,255,255,.88)!important;color:#17231d!important;backdrop-filter:blur(10px)!important;box-shadow:0 10px 24px rgba(16,38,31,.12)!important}
+.pc26-home--recovered .pc26-hero__media-note strong,.pc26-home--recovered .pc26-hero__media-note small{color:#17231d!important}
+.pc26-home--recovered .pc26-hero__proof{display:none!important}
+
+/* Reference rail and content rhythm */
+.pc26-home--recovered .pc26-reference-popular{padding:10px 0 0!important}
+.pc26-home--recovered .pc26-reference-popular__panel{display:grid!important;grid-template-columns:auto 1fr auto!important;align-items:center!important;gap:14px!important;padding:13px 16px!important;border:1px solid #e1e6e2!important;border-radius:15px!important;background:#fff!important;box-shadow:0 9px 22px rgba(17,39,31,.06)!important}
+.pc26-home--recovered .pc26-reference-popular__items{display:grid!important;grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:8px!important}
+.pc26-home--recovered .pc26-reference-popular__items a{min-height:50px!important;display:flex!important;align-items:center!important;justify-content:center!important;border:1px solid #e2e7e3!important;border-radius:10px!important;background:#fff!important;color:#27342e!important}
+
+.pc26-home--recovered .pc26-zone--products,.pc26-home--recovered .pc26-zone--stores,.pc26-home--recovered .pc26-zone--benefits{padding:0!important;background:transparent!important}
+.pc26-home--recovered .pc26-products,.pc26-home--recovered .pc26-stores{padding-top:18px!important;padding-bottom:0!important}
+.pc26-home--recovered .pc26-section-heading{margin-bottom:12px!important}
+.pc26-home--recovered .pc26-grid{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important}
+.pc26-home--recovered .pc26-product{min-width:0!important;border:1px solid #e2e7e3!important;border-radius:13px!important;background:#fff!important;box-shadow:0 7px 18px rgba(18,42,34,.055)!important;overflow:hidden!important}
+.pc26-home--recovered .pc26-product__image{background:#fff!important;min-height:0!important;aspect-ratio:1.25/1!important}
+.pc26-home--recovered .pc26-product__image img{object-fit:contain!important;padding:8px!important}
+.pc26-home--recovered .pc26-store-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.pc26-home--recovered .pc26-store{min-height:108px!important;border:1px solid #e2e7e3!important;border-radius:13px!important;background:#fff!important;box-shadow:0 7px 18px rgba(18,42,34,.055)!important}
+
+/* App and benefits */
+.pc26-home--recovered .pc26-reference-app{padding:18px 0 0!important}
+.pc26-home--recovered .pc26-reference-app__panel{display:grid!important;grid-template-columns:auto 1fr auto auto!important;align-items:center!important;gap:18px!important;min-height:92px!important;padding:15px 22px!important;border-radius:14px!important;background:linear-gradient(110deg,#075b2b,#087438 62%,#0d6b34)!important;color:#fff!important;box-shadow:0 11px 26px rgba(7,91,43,.14)!important}
+.pc26-home--recovered .pc26-reference-app__cta{min-height:42px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;padding:0 18px!important;border-radius:10px!important;background:#e4b536!important;color:#172016!important;font-weight:800!important}
+.pc26-home--recovered .pc26-benefits{margin-top:16px!important;margin-bottom:18px!important;padding:14px 16px!important;border:1px solid #e2e7e3!important;border-radius:14px!important;background:#fff!important;box-shadow:0 7px 18px rgba(18,42,34,.045)!important}
+
+/* Footer remains structured but compact. */
+.pc26-home--recovered .pc26-reference-footer{margin-top:0!important;background:#fff!important;border-top:1px solid #e4e8e5!important}
+.pc26-home--recovered .pc26-reference-footer__grid{display:grid!important;grid-template-columns:1.15fr repeat(4,minmax(0,1fr))!important;gap:24px!important;padding-top:26px!important;padding-bottom:20px!important}
+.pc26-home--recovered .pc26-footer-studio__meta-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;flex-wrap:wrap!important}
+
+/* Dark mode: preserve hierarchy without forcing the light editorial surface. */
+html[data-theme="dark"] .pc26-home--recovered{background:#0d1210}
+html[data-theme="dark"] .pc26-home--recovered .pc26-header--studio{background:rgba(15,21,18,.96)!important;border-color:#26332c!important}
+html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__inner{background:#111815!important;border-color:#27342e!important}
+html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__inner::before{background:linear-gradient(90deg,rgba(11,15,13,.98) 0%,rgba(11,15,13,.94) 37%,rgba(11,15,13,.70) 52%,rgba(11,15,13,.20) 74%,transparent 88%)}
+html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__copy h1{color:#f6f7f6!important;text-shadow:none!important}
+html[data-theme="dark"] .pc26-home--recovered .pc26-model-hero__copy>p{color:#d1d8d4!important}
+html[data-theme="dark"] .pc26-home--recovered .pc26-reference-popular__panel,html[data-theme="dark"] .pc26-home--recovered .pc26-product,html[data-theme="dark"] .pc26-home--recovered .pc26-store,html[data-theme="dark"] .pc26-home--recovered .pc26-benefits,html[data-theme="dark"] .pc26-home--recovered .pc26-reference-footer{background:#121916!important;border-color:#27342e!important}
+
+@media(max-width:1040px){
+  .pc26-home--recovered .pc26-reference-popular__items{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .pc26-home--recovered .pc26-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .pc26-home--recovered .pc26-store-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .pc26-home--recovered .pc26-reference-footer__grid{grid-template-columns:1.2fr repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+  .pc26-home--recovered .pc26-shell{width:min(100% - 20px,1180px)!important}
+  .pc26-home--recovered .pc26-header-studio{min-height:60px!important;gap:8px!important}
+  .pc26-home--recovered .pc26-header-studio__nav{position:absolute!important;top:100%;left:10px;right:10px;display:none!important;flex-direction:column!important;align-items:stretch!important;padding:8px!important;border:1px solid #dde4df!important;border-radius:14px!important;background:#fff!important;box-shadow:0 12px 28px rgba(15,35,28,.14)!important}
+  .pc26-home--recovered .pc26-header-studio__nav.is-open{display:flex!important}
+  .pc26-home--recovered .pc26-model-hero__inner{min-height:500px!important;padding:26px 22px!important}
+  .pc26-home--recovered .pc26-model-hero__copy{width:100%!important}
+  .pc26-home--recovered .pc26-model-hero__inner::before{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.98) 52%,rgba(255,255,255,.80) 69%,rgba(255,255,255,.18) 100%)}
+  .pc26-home--recovered .pc26-model-hero__media{width:100%!important;top:45%!important;height:55%!important}
+  .pc26-home--recovered .pc26-reference-hero__benefits{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .pc26-home--recovered .pc26-hero__media-note{display:none!important}
+  .pc26-home--recovered .pc26-reference-popular__panel{grid-template-columns:1fr auto!important}
+  .pc26-home--recovered .pc26-reference-popular__title{grid-column:1/-1!important}
+  .pc26-home--recovered .pc26-reference-popular__items{display:flex!important;overflow-x:auto!important;padding-bottom:3px!important;scroll-snap-type:x proximity}
+  .pc26-home--recovered .pc26-reference-popular__items a{min-width:104px!important;scroll-snap-align:start}
+  .pc26-home--recovered .pc26-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .pc26-home--recovered .pc26-store-grid{grid-template-columns:1fr!important}
+  .pc26-home--recovered .pc26-reference-app__panel{grid-template-columns:auto 1fr!important}
+  .pc26-home--recovered .pc26-reference-app__cta{grid-column:1/-1!important}
+  .pc26-home--recovered .pc26-reference-app__qr{display:none!important}
+  .pc26-home--recovered .pc26-reference-footer__grid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:480px){
+  .pc26-home--recovered .pc26-grid{grid-template-columns:1fr 1fr!important;gap:9px!important}
+  .pc26-home--recovered .pc26-reference-footer__grid{grid-template-columns:1fr!important}
+}
+@media(prefers-reduced-motion:reduce){.pc26-home--recovered *{scroll-behavior:auto!important}}
