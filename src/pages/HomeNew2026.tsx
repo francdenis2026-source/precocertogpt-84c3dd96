@@ -13,6 +13,7 @@ import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeFooterCompact2026.css";
 import "./HomeDensityPolish2026.css";
+import "./HomeFeaturedCompact2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -42,7 +43,7 @@ export function HomeNew2026() {
   }, [cycle]);
 
   const products = useMemo(() => catalog.products.filter(product => product.minPrice > 0), [catalog.products]);
-  const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 5), [products, cycle]);
+  const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 4), [products, cycle]);
 
   return <div className="pc26-home pc26-home--recovered">
     <Header theme={theme} onToggleTheme={toggleTheme}/>
