@@ -48,7 +48,7 @@ export function Footer() {
       <div className="pc26-shell pc26-footer-studio__meta-row">
         <span>© 2026 Preço Certo - Feijó/AC. Todos os direitos reservados.</span>
         <span className="pc26-footer-studio__trust"><ShieldCheck aria-hidden="true" /> Informação local para escolhas mais conscientes</span>
-        <span className="pc26-footer-studio__developer">Feito com ♥ para Feijó</span>
+        <span className="pc26-footer-studio__developer">Desenvolvido por <strong>Franc Denis</strong></span>
       </div>
     </div>
   </footer>;
