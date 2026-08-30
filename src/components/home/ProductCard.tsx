@@ -1,4 +1,4 @@
-import { ArrowRight, TrendingDown } from "lucide-react";
+import { ArrowUpRight, MapPin, Store, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { resolveCutoutImage, resolveProductImage } from "../../data/productImageResolver";
@@ -6,23 +6,41 @@ import { resolveCutoutImage, resolveProductImage } from "../../data/productImage
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 export function ProductCard({ product }: { product: Product }) {
-  // A foto aprovada no cadastro tem prioridade. O recorte local entra apenas
-  // como contingência, evitando substituir uma imagem real por um asset derivado.
   const image = resolveProductImage(product) || resolveCutoutImage(product);
-  const previous = product.previousPrice && product.previousPrice > product.minPrice ? product.previousPrice : product.avgPrice > product.minPrice ? product.avgPrice : undefined;
+  const previous = product.previousPrice && product.previousPrice > product.minPrice
+    ? product.previousPrice
+    : product.avgPrice > product.minPrice
+      ? product.avgPrice
+      : undefined;
   const saving = previous ? previous - product.minPrice : 0;
+  const storeCount = product.storeCount || 1;
 
-  return <Link className="pc26-product" to={`/produto/${product.slug || product.id}`} aria-label={`Comparar preços de ${product.name}`}>
-    <div className="pc26-product__image">
-      {saving > 0 && <span className="pc26-product__saving"><TrendingDown aria-hidden="true" />Economize {brl.format(saving)}</span>}
-      {image ? <img src={image} alt={product.name} width="180" height="180" loading="lazy" decoding="async" /> : <img className="pc26-product__placeholder" src="/product-placeholder-preco-certo.svg" alt="" width="180" height="180" loading="lazy" decoding="async" />}
-    </div>
-    <div className="pc26-product__body">
-      <span className="pc26-store-badge">{product.establishment || "Loja parceira"}</span>
-      <h3>{product.name}</h3>
-      <span className="pc26-product__meta">{product.size || product.category || "Preço atualizado"}</span>
-      <div className="pc26-prices"><span>Menor preço</span><div>{previous && <del>{brl.format(previous)}</del>}<strong>{brl.format(product.minPrice)}</strong></div></div>
-      <span className="pc26-compare">Comparar em {product.storeCount || 1} {product.storeCount === 1 ? "loja" : "lojas"} <ArrowRight aria-hidden="true" /></span>
-    </div>
-  </Link>;
+  return (
+    <Link className="pc26-product" to={`/produto/${product.slug || product.id}`} aria-label={`Comparar preços de ${product.name}`}>
+      <div className="pc26-product__image">
+        {saving > 0 && <span className="pc26-product__saving"><TrendingDown aria-hidden="true" /> Menor preço</span>}
+        {image
+          ? <img src={image} alt={product.name} width="220" height="220" loading="lazy" decoding="async" />
+          : <img className="pc26-product__placeholder" src="/product-placeholder-preco-certo.svg" alt="" width="220" height="220" loading="lazy" decoding="async" />}
+      </div>
+
+      <div className="pc26-product__body">
+        <span className="pc26-product__category">{product.category || "Produto"}</span>
+        <h3>{product.name}</h3>
+        {product.size && <span className="pc26-product__meta">{product.size}</span>}
+
+        <div className="pc26-product__store"><Store aria-hidden="true" /><span>{product.establishment || `${storeCount} ${storeCount === 1 ? "loja" : "lojas"} para comparar`}</span></div>
+
+        <div className="pc26-prices">
+          <span>Menor preço</span>
+          <div>{previous && <del>{brl.format(previous)}</del>}<strong>{brl.format(product.minPrice)}</strong></div>
+        </div>
+
+        <div className="pc26-product__footer">
+          <span><MapPin aria-hidden="true" /> Feijó, AC</span>
+          <strong>Comparar <ArrowUpRight aria-hidden="true" /></strong>
+        </div>
+      </div>
+    </Link>
+  );
 }
