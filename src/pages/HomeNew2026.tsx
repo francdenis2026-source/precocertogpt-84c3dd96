@@ -5,7 +5,7 @@ import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredR
 import { BottomNav } from "../components/home/BottomNav";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
-import { HeroSection } from "../components/home/HeroSection";
+import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
 import { HomePopularRail } from "../components/home/HomePopularRail";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { StoreRail } from "../components/home/StoreRail";
@@ -48,7 +48,7 @@ export function HomeNew2026() {
   return <div className="pc26-home pc26-home--recovered">
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
-      <HeroSection products={products} loading={loading} productCount={products.length} storeCount={catalog.metrics.stores} priceCount={catalog.metrics.prices}/>
+      <HeroUserImage2026/>
       <HomePopularRail/>
       <ProductGrid products={featured} loading={loading}/>
       <StoreRail stores={catalog.stores}/>
