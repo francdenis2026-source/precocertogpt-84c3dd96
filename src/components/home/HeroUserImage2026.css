@@ -5,28 +5,30 @@
 }
 
 .pc26-user-hero__frame {
-  width: min(100%, 1535px);
+  width: min(100%, 1536px);
   margin: 0 auto;
   overflow: hidden;
   background: #0b0f0d;
 }
 
-.pc26-user-hero__frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center;
+/* Exibição fiel: proporção intrínseca, sem corte, sem altura forçada. */
+.pc26-user-hero__frame img,
+.pc26-home .pc26-user-hero__frame img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  transform: none !important;
+  filter: none !important;
 }
 
 @media (max-width: 760px) {
   .pc26-user-hero__frame {
     width: 100%;
-  }
-
-  .pc26-user-hero__frame img {
-    width: 100%;
-    height: auto;
   }
 }
