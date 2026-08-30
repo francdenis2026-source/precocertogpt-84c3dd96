@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./HeroUserImage2026.css";
 
-const HERO_IMAGE = "/hero-preco-certo-comparacao-2026.webp?v=20260830-2";
+const HERO_IMAGE = "/hero-preco-certo-comparacao-2026.webp?build=20260830-hero-final-3";
 
 export function HeroUserImage2026() {
   return (
@@ -13,8 +13,8 @@ export function HeroUserImage2026() {
           className="pc26-user-hero__artwork"
           src={HERO_IMAGE}
           alt="Mulher em supermercado usando o Preço Certo para comparar preços e economizar"
-          width="1280"
-          height="854"
+          width="1536"
+          height="1024"
           fetchPriority="high"
           decoding="async"
         />
