@@ -21,7 +21,7 @@ export function HeroSection({ products, loading, productCount: _productCount, st
         </div>
       </div>
       <div className="pc26-model-hero__media">
-        <picture><img src="/comercio-local-comparando-precos-2026.webp" alt="Cliente comparando preços no comércio local" width="1536" height="1024" fetchPriority="high" decoding="async" /></picture>
+        <picture><img src="/hero-precocerto-mulher-supermercado-inedita-2026.webp" alt="Mulher em um supermercado usando o Preço Certo no celular para comparar preços" width="815" height="505" fetchPriority="high" decoding="async" /></picture>
       </div>
     </div>
   </section>;
