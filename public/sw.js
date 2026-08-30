@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260828-1";
+const CACHE_VERSION = "20260830-hero-2";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
@@ -9,6 +9,7 @@ const PRECACHE = [
   "/logo-preco-certo-inversa.svg?v=11",
   "/pwa-192x192.png?v=16",
   "/pwa-512x512.png?v=16",
+  "/hero-preco-certo-comparacao-2026.webp?v=20260830-2",
 ];
 
 self.addEventListener("install", event => {
@@ -34,7 +35,7 @@ self.addEventListener("activate", event => {
 async function networkFirst(request) {
   const cache = await caches.open(RUNTIME_CACHE);
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, { cache: "no-store" });
     if (response.ok) await cache.put(request, response.clone());
     return response;
   } catch {
