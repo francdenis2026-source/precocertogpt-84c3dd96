@@ -23,6 +23,7 @@ import {
   type RadioStation,
 } from "../lib/radioStations";
 import "./PersistentRadio.css";
+import "./PersistentRadioTooltip2026.css";
 
 export const JOVEM_PAN_STREAMS = [
   DEFAULT_RADIO.stream_url,
@@ -287,16 +288,6 @@ export function HeaderRadioPlayer() {
   const radio = useContext(RadioContext);
   const [showTrackNotice, setShowTrackNotice] = useState(false);
 
-  useEffect(() => {
-    if (!radio?.playing) {
-      setShowTrackNotice(false);
-      return;
-    }
-    setShowTrackNotice(true);
-    const timer = window.setTimeout(() => setShowTrackNotice(false), 4500);
-    return () => window.clearTimeout(timer);
-  }, [radio?.playing, radio?.nowPlaying]);
-
   if (!radio) return null;
   const status = radio.failed
     ? "Sinal indisponível"
@@ -310,18 +301,19 @@ export function HeaderRadioPlayer() {
     : radio.playing
       ? `Pausar ${radio.station.name}${radio.nowPlaying ? `, tocando ${radio.nowPlaying}` : ""}`
       : `Ouvir ${radio.station.name}`;
+  const hideTrackNotice = () => setShowTrackNotice(false);
+  const showCurrentTrack = () => {
+    if (radio.playing) setShowTrackNotice(true);
+  };
+
   return (
     <div
       className={`pc-radio${radio.playing ? " is-playing" : ""}${radio.loading ? " is-loading" : ""}${radio.failed ? " has-error" : ""}${radio.nowPlaying ? " has-track" : ""}${showTrackNotice ? " show-track-notice" : ""}`}
-      onMouseEnter={() => {
-        if (radio.playing) setShowTrackNotice(true);
-      }}
-      onMouseLeave={() => setShowTrackNotice(false)}
-      onFocusCapture={() => {
-        if (radio.playing) setShowTrackNotice(true);
-      }}
+      onMouseEnter={showCurrentTrack}
+      onMouseLeave={hideTrackNotice}
+      onFocusCapture={showCurrentTrack}
       onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setShowTrackNotice(false);
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) hideTrackNotice();
       }}
     >
       <button
@@ -329,7 +321,6 @@ export function HeaderRadioPlayer() {
         type="button"
         onClick={radio.failed ? radio.retry : radio.toggle}
         aria-label={label}
-        title={label}
       >
         <span className="pc-radio__control" aria-hidden="true">
           {radio.loading ? (
@@ -357,7 +348,7 @@ export function HeaderRadioPlayer() {
         <i />
         <i />
       </span>
-      <label className="pc-radio__volume" title="Volume da rádio">
+      <label className="pc-radio__volume">
         {radio.volume === 0 ? (
           <VolumeX />
         ) : radio.volume < 0.5 ? (
@@ -383,10 +374,8 @@ export function HeaderRadioPlayer() {
         >
           <Radio />
           <span>
-            <small>NO AR</small>
-            <strong title={radio.nowPlaying || radio.station.name}>
-              {radio.nowPlaying || radio.station.name}
-            </strong>
+            <small>TOCANDO AGORA</small>
+            <strong>{radio.nowPlaying || radio.station.name}</strong>
           </span>
         </span>
       ) : null}
