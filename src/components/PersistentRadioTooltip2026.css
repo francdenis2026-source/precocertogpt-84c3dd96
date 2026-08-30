@@ -1,7 +1,6 @@
 .pc-radio {
   position: relative;
   overflow: visible;
-  isolation: visible;
 }
 
 .pc-radio__track {
@@ -27,7 +26,7 @@
   pointer-events: none;
   transform: translate(-50%, -5px) scale(.985);
   transform-origin: 50% 0;
-  transition: opacity .16s ease, transform .18s cubic-bezier(.2,.8,.2,1), visibility .16s;
+  transition: opacity .14s ease, transform .16s cubic-bezier(.2,.8,.2,1), visibility 0s linear .14s;
   backdrop-filter: blur(12px) saturate(1.08);
   -webkit-backdrop-filter: blur(12px) saturate(1.08);
 }
@@ -45,12 +44,13 @@
   transform: translateX(-50%) rotate(45deg);
 }
 
-.pc-radio.show-track-notice .pc-radio__track,
-.pc-radio:hover .pc-radio__track,
-.pc-radio:focus-within .pc-radio__track {
+/* A faixa aparece somente enquanto o usuário aponta intencionalmente para o botão do player. */
+.pc-radio:has(.pc-radio__play:hover) .pc-radio__track,
+.pc-radio:has(.pc-radio__play:focus-visible) .pc-radio__track {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0) scale(1);
+  transition-delay: 0s;
 }
 
 .pc-radio__track > svg {
@@ -122,11 +122,9 @@ html[data-theme="dark"] .pc-radio__track {
 
 @media (max-width: 720px) {
   .pc-radio__track {
-    position: absolute;
     left: auto;
     right: 0;
     top: calc(100% + 9px);
-    bottom: auto;
     width: min(252px, calc(100vw - 24px));
     min-width: 0;
     max-width: calc(100vw - 24px);
@@ -134,9 +132,8 @@ html[data-theme="dark"] .pc-radio__track {
     transform-origin: 100% 0;
   }
 
-  .pc-radio.show-track-notice .pc-radio__track,
-  .pc-radio:hover .pc-radio__track,
-  .pc-radio:focus-within .pc-radio__track {
+  .pc-radio:has(.pc-radio__play:hover) .pc-radio__track,
+  .pc-radio:has(.pc-radio__play:focus-visible) .pc-radio__track {
     transform: translateY(0) scale(1);
   }
 
@@ -152,18 +149,14 @@ html[data-theme="dark"] .pc-radio__track {
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  .pc-radio__track {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pc-radio__track {
-    transition: opacity .01ms linear, visibility .01ms linear;
-    transform: translate(-50%, 0);
-  }
-
-  @media (max-width: 720px) {
-    .pc-radio__track,
-    .pc-radio.show-track-notice .pc-radio__track,
-    .pc-radio:hover .pc-radio__track,
-    .pc-radio:focus-within .pc-radio__track {
-      transform: none;
-    }
+    transition: none;
   }
 }
