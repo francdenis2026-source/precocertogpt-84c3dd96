@@ -13,9 +13,6 @@ import {
   Play,
   Radio,
   RotateCcw,
-  Volume1,
-  Volume2,
-  VolumeX,
 } from "lucide-react";
 import {
   DEFAULT_RADIO,
@@ -131,10 +128,6 @@ export function HeaderRadioPlayer() {
       <span className="pc-radio__copy"><small><i />RÁDIO AO VIVO</small><strong>{status}</strong></span>
     </button>
     <span className="pc-radio__signal" aria-hidden="true"><i /><i /><i /><i /><i /></span>
-    <label className="pc-radio__volume">
-      {radio.volume === 0 ? <VolumeX /> : radio.volume < 0.5 ? <Volume1 /> : <Volume2 />}
-      <input type="range" min="0" max="1" step="0.05" value={radio.volume} onChange={(event) => radio.setVolume(Number(event.target.value))} aria-label="Volume da rádio" />
-    </label>
     {radio.playing && radio.nowPlaying ? <span className="pc-radio__track" aria-hidden="true"><Radio /><span><small>TOCANDO AGORA</small><strong>{radio.nowPlaying}</strong></span></span> : null}
     <span className="pc-radio__announcement" aria-live="polite">{radio.failed ? "Não foi possível conectar. Tente novamente." : radio.loading ? "Conectando à transmissão." : radio.playing ? "Rádio em reprodução." : ""}</span>
   </div>;
