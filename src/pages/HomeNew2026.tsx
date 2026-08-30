@@ -2,11 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredRotation";
+import { BenefitsStrip } from "../components/home/BenefitsStrip";
 import { BottomNav } from "../components/home/BottomNav";
+import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
-import { HomePopularRail } from "../components/home/HomePopularRail";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
@@ -49,7 +50,8 @@ export function HomeNew2026() {
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
       <HeroUserImage2026/>
-      <HomePopularRail/>
+      <CategoryBar/>
+      <BenefitsStrip/>
       <ProductGrid products={featured} loading={loading}/>
       <StoreRail stores={catalog.stores}/>
     </main>
