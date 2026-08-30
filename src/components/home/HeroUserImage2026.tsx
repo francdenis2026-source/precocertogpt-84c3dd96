@@ -1,8 +1,6 @@
-import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
+import heroAsset from "../../assets/hero-preco-certo-oficial.png.asset.json";
 import "./HeroUserImage2026.css";
-
-const HERO_IMAGE = "/hero-preco-certo-comparacao-2026.webp?build=20260830-hero-final-3";
 
 export function HeroUserImage2026() {
   return (
@@ -11,17 +9,19 @@ export function HeroUserImage2026() {
       <div className="pc26-user-hero__frame">
         <img
           className="pc26-user-hero__artwork"
-          src={HERO_IMAGE}
+          src={heroAsset.url}
           alt="Mulher em supermercado usando o Preço Certo para comparar preços e economizar"
-          width="1536"
-          height="1024"
+          width="1152"
+          height="768"
           fetchPriority="high"
-          decoding="async"
+          decoding="sync"
         />
-      </div>
-      <div className="pc26-user-hero__utility">
-        <p>Pesquise produtos, compare lojas de Feijó e encontre o menor preço antes de comprar.</p>
-        <Link to="/buscar" className="pc26-user-hero__primary"><Search aria-hidden="true" /> Buscar produtos</Link>
+        <Link className="pc26-user-hero__hotspot pc26-user-hero__hotspot--search" to="/buscar">
+          <span className="pc26-user-hero__sr-only">Buscar produtos</span>
+        </Link>
+        <Link className="pc26-user-hero__hotspot pc26-user-hero__hotspot--stores" to="/estabelecimentos">
+          <span className="pc26-user-hero__sr-only">Ver estabelecimentos</span>
+        </Link>
       </div>
     </section>
   );
