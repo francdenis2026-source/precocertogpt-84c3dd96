@@ -16,7 +16,9 @@
 .pc26-home--recovered .pc26-model-hero__copy h1 em{color:#0c5a62!important}
 .pc26-home--recovered .pc26-model-hero__copy>p{color:#4d6260!important}
 .pc26-home--recovered .pc26-header-studio__theme,
-.pc26-home--recovered .pc26-header-studio__theme *{cursor:pointer!important}
+.pc26-home--recovered .pc26-header-studio__theme *,
+.pc26-home--recovered .pc26-header-studio__search,
+.pc26-home--recovered .pc26-header-studio__search *{cursor:pointer!important}
 
 /* Dark mode: neutral charcoal/cocoa base; green remains semantic for savings only. */
 html[data-theme="dark"] .pc26-home--recovered{
