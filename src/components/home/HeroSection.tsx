@@ -21,7 +21,7 @@ export function HeroSection({ products, loading, productCount: _productCount, st
         </div>
       </div>
       <div className="pc26-model-hero__media">
-        <picture><img src="/hero-precocerto-mulher-supermercado-inedita-2026.webp?v=20260829-2" alt="Mulher em supermercado usando o aplicativo Preço Certo no celular para comparar preços de produtos" width="1536" height="1024" fetchPriority="high" decoding="async" /></picture>
+        <picture><img src="/hero-precocerto-app-supermercado-v4.webp" alt="Mulher em supermercado usando o aplicativo Preço Certo no celular para comparar preços de produtos" width="598" height="510" fetchPriority="high" decoding="async" /></picture>
       </div>
     </div>
   </section>;
