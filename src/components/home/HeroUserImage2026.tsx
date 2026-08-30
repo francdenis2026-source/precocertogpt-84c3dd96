@@ -1,9 +1,7 @@
 import "./HeroUserImage2026.css";
-import heroExactPart1 from "./hero-exact/heroExactPart1";
-import heroExactPart2 from "./hero-exact/heroExactPart2";
+import heroSupermercado from "../../assets/hero-supermercado-mulher-comparando-2026.webp";
 
-const HERO_SRC = `data:image/webp;base64,${heroExactPart1}${heroExactPart2}`;
-const HERO_WIDTH = 1535;
+const HERO_WIDTH = 1536;
 const HERO_HEIGHT = 1024;
 
 export function HeroUserImage2026() {
@@ -11,8 +9,8 @@ export function HeroUserImage2026() {
     <section className="pc26-user-hero" aria-label="Apresentação do Preço Certo">
       <div className="pc26-user-hero__frame">
         <img
-          src={HERO_SRC}
-          alt="Preço Certo: compare preços e economize sempre em mercados de Feijó"
+          src={heroSupermercado}
+          alt="Mulher usando o celular para comparar preços em um supermercado"
           width={HERO_WIDTH}
           height={HERO_HEIGHT}
           fetchPriority="high"
