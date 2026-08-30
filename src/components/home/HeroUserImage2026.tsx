@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./HeroUserImage2026.css";
 
-const HERO_IMAGE = "/hero-preco-certo-comparacao-2026.webp";
+const HERO_IMAGE = "/hero-preco-certo-comparacao-2026.webp?v=20260830-2";
 
 export function HeroUserImage2026() {
   return (
