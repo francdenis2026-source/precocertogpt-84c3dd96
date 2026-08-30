@@ -1,16 +1,9 @@
 import "./HeroUserImage2026.css";
+import heroExactPart1 from "./hero-exact/heroExactPart1";
+import heroExactPart2 from "./hero-exact/heroExactPart2";
 
-/**
- * Hero da homepage.
- *
- * NOTA DE ASSET: `public/hero-preco-certo-hq-2026.webp` está corrompido no
- * repositório (bytes sem cabeçalho RIFF/WEBP — não decodifica em nenhum
- * navegador), por isso o hero aparecia vazio/deformado. Enquanto o arquivo HQ
- * original não for reenviado, usamos a última fonte fiel válida já presente no
- * repositório (1536x1024), exibida com proporção intrínseca preservada.
- */
-const HERO_SRC = "/hero-supermercado-mulher-comparando-2026.webp";
-const HERO_WIDTH = 1536;
+const HERO_SRC = `data:image/webp;base64,${heroExactPart1}${heroExactPart2}`;
+const HERO_WIDTH = 1535;
 const HERO_HEIGHT = 1024;
 
 export function HeroUserImage2026() {
