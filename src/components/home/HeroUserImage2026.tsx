@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import heroAsset from "../../assets/hero-preco-certo-oficial.png.asset.json";
 import "./HeroUserImage2026.css";
+
+const HERO_IMAGE = "/hero-preco-certo-oficial.png?v=20260830";
 
 export function HeroUserImage2026() {
   return (
@@ -9,10 +10,10 @@ export function HeroUserImage2026() {
       <div className="pc26-user-hero__frame">
         <img
           className="pc26-user-hero__artwork"
-          src={heroAsset.url}
+          src={HERO_IMAGE}
           alt="Mulher em supermercado usando o Preço Certo para comparar preços e economizar"
-          width="1152"
-          height="768"
+          width="1535"
+          height="1024"
           fetchPriority="high"
           decoding="sync"
         />
