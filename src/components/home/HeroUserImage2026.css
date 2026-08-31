@@ -117,6 +117,17 @@ html[data-theme="dark"] .pc26-user-hero__wash,
   font-weight: 760;
 }
 
+/* Neutraliza overrides globais do shell no modo claro (desktop) */
+@media (min-width: 901px) {
+  html[data-theme="light"] .pc26-user-hero__stage .pc26-user-hero__content h1,
+  html[data-theme="light"] .pc26-user-hero__stage .pc26-user-hero__content p strong {
+    color: #fff !important;
+  }
+  html[data-theme="light"] .pc26-user-hero__stage .pc26-user-hero__content p {
+    color: var(--hero-muted) !important;
+  }
+}
+
 .pc26-user-hero__panel {
   width: min(100%, 560px);
   display: flex;
