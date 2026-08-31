@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "PreçoCerto",
+    "slug": "precocerto-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#0f3d2e"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.precocerto.app"
+    },
+    "android": {
+      "package": "com.precocerto.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
