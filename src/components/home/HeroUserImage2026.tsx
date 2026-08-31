@@ -1,7 +1,7 @@
 import { Search, ShieldCheck, Tags } from "lucide-react";
 import "./HeroUserImage2026.css";
 
-const HERO_IMAGE = "/hero-supermercado-comparando-precos-2026.webp";
+const HERO_IMAGE = "/hero-preco-certo-nova-2026.webp";
 
 const HERO_BENEFITS = [
   {
@@ -28,24 +28,21 @@ export function HeroUserImage2026() {
         <img
           className="pc26-user-hero__artwork"
           src={HERO_IMAGE}
-          alt="Pessoa em supermercado comparando preços antes de comprar"
-          width="1536"
-          height="1024"
+          alt="Compare preços e economize sempre com o Preço Certo em Feijó-AC"
+          width="1280"
+          height="429"
           fetchPriority="high"
           decoding="async"
         />
-        <span className="pc26-user-hero__wash" aria-hidden="true" />
 
-        <div className="pc26-user-hero__content">
+        <div className="pc26-user-hero__mobile-content">
           <h1 id="pc26-campaign-title">Compare preços <em>e economize</em> sempre!</h1>
           <p>Encontre os menores preços nos principais mercados de <strong>Feijó-AC</strong> e aproveite as melhores ofertas.</p>
 
           <div className="pc26-user-hero__benefits" aria-label="Vantagens do Preço Certo">
             {HERO_BENEFITS.map(({ icon: Icon, title, description }) => (
               <div className="pc26-user-hero__benefit" key={title}>
-                <span className="pc26-user-hero__benefit-icon" aria-hidden="true">
-                  <Icon />
-                </span>
+                <span className="pc26-user-hero__benefit-icon" aria-hidden="true"><Icon /></span>
                 <span className="pc26-user-hero__benefit-copy">
                   <strong>{title}</strong>
                   <small>{description}</small>
