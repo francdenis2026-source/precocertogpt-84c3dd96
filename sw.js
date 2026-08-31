@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260831-hero-live-1";
+const CACHE_VERSION = "20260830-hero-2";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
@@ -9,9 +9,7 @@ const PRECACHE = [
   "/logo-preco-certo-inversa.svg?v=11",
   "/pwa-192x192.png?v=16",
   "/pwa-512x512.png?v=16",
-  "/banners/preco-certo-comercio-local-2026.webp?v=20260830-campaign-1",
-  "/banners/preco-certo-ofertas-inteligentes-2026.webp?v=20260830-campaign-1",
-  "/banners/preco-certo-app-plataforma-2026.webp?v=20260830-campaign-1",
+  "/hero-preco-certo-comparacao-2026.webp?v=20260830-2",
 ];
 
 self.addEventListener("install", event => {
@@ -55,7 +53,7 @@ async function networkFirst(request) {
 async function staleWhileRevalidate(request) {
   const cache = await caches.open(RUNTIME_CACHE);
   const cached = await cache.match(request);
-  const refresh = fetch(request, { cache: "no-store" })
+  const refresh = fetch(request)
     .then(response => {
       if (response.ok) void cache.put(request, response.clone());
       return response;
