@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260830-campaign-1";
+const CACHE_VERSION = "20260831-hero-live-1";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
@@ -9,7 +9,6 @@ const PRECACHE = [
   "/logo-preco-certo-inversa.svg?v=11",
   "/pwa-192x192.png?v=16",
   "/pwa-512x512.png?v=16",
-  "/hero-preco-certo-oficial-2026.webp?v=20260830-campaign-1",
   "/banners/preco-certo-comercio-local-2026.webp?v=20260830-campaign-1",
   "/banners/preco-certo-ofertas-inteligentes-2026.webp?v=20260830-campaign-1",
   "/banners/preco-certo-app-plataforma-2026.webp?v=20260830-campaign-1",
