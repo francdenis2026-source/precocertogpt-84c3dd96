@@ -2,14 +2,13 @@ import { ArrowRight, BadgePercent, Check, ScanSearch, Smartphone, Store } from "
 import { Link } from "react-router-dom";
 import "./PromoBands.css";
 
-const supermarketImage = "https://images.unsplash.com/photo-1601599963565-b7ba29c8e3ff?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=88&w=2200";
-const comparisonImage = "https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=88&w=2200";
-const shoppingImage = "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=88&w=2200";
+// Uma única fotografia editorial contínua para toda a sequência de faixas.
+// Evita o efeito de "colagem" e cria uma narrativa visual única.
+const continuousShoppingImage = "https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=88&w=2400";
 
 export function PromoBands() {
-  return <section className="pc26-promo" aria-label="Experiência de compra inteligente">
+  return <section className="pc26-promo" aria-label="Experiência de compra inteligente" style={{ backgroundImage: `url(${continuousShoppingImage})` }}>
     <div className="pc26-promo__band pc26-promo__band--market">
-      <div className="pc26-promo__photo" style={{ backgroundImage: `url(${supermarketImage})` }} aria-hidden="true" />
       <div className="pc26-promo__shade" aria-hidden="true" />
       <div className="pc26-promo__copy">
         <span className="pc26-promo__eyebrow"><Store aria-hidden="true" /> COMPRE MELHOR EM FEIJÓ</span>
@@ -21,7 +20,6 @@ export function PromoBands() {
     </div>
 
     <div className="pc26-promo__band pc26-promo__band--compare">
-      <div className="pc26-promo__photo" style={{ backgroundImage: `url(${comparisonImage})` }} aria-hidden="true" />
       <div className="pc26-promo__shade" aria-hidden="true" />
       <div className="pc26-compare-card" aria-label="Exemplo visual de comparação de produtos">
         <div className="pc26-compare-card__top"><span><ScanSearch /> COMPARADOR</span><b>2 ofertas</b></div>
@@ -32,7 +30,6 @@ export function PromoBands() {
     </div>
 
     <div className="pc26-promo__band pc26-promo__band--discover">
-      <div className="pc26-promo__photo" style={{ backgroundImage: `url(${shoppingImage})` }} aria-hidden="true" />
       <div className="pc26-promo__shade" aria-hidden="true" />
       <div className="pc26-promo__copy"><span className="pc26-promo__eyebrow"><Smartphone aria-hidden="true" /> PREÇO CERTO, NO MOMENTO CERTO</span><h2>Mais informação antes da compra.</h2><p>Use o PreçoCerto para pesquisar, comparar e montar sua compra com mais segurança.</p><Link to="/buscar">Começar uma busca <ArrowRight aria-hidden="true" /></Link></div>
     </div>
