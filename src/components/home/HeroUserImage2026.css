@@ -249,8 +249,8 @@ html[data-theme="dark"] .pc26-user-hero__panel-icon,
       #10120f 100%
     );
   }
-  .pc26-user-hero__content {
-    width: 100%;
+  .pc26-user-hero__stage .pc26-user-hero__content {
+    width: 100% !important;
     height: auto;
     padding: 0 20px 22px;
     margin-top: -8px;
@@ -285,8 +285,9 @@ html[data-theme="dark"] .pc26-user-hero__panel-icon,
   }
   .pc26-user-hero__panel {
     width: 100%;
-    flex-direction: column;
-    gap: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
     margin-top: 16px;
     padding: 10px 12px;
     border-left-width: 3px;
@@ -302,6 +303,9 @@ html[data-theme="dark"] .pc26-user-hero__panel-icon,
   }
   .pc26-user-hero__panel-item {
     padding: 7px 8px;
+  }
+  .pc26-user-hero__panel-item:nth-child(3) {
+    grid-column: 1 / -1;
   }
   .pc26-user-hero__panel-item + .pc26-user-hero__panel-item {
     border-left: 0;
@@ -319,6 +323,13 @@ html[data-theme="dark"] .pc26-user-hero__panel-icon,
   .pc26-user-hero__panel-text {
     color: rgba(255, 255, 255, 0.94);
     font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .pc26-user-hero__stage .pc26-user-hero__artwork,
+  .pc26-user-hero__stage .pc26-user-hero__wash {
+    height: 200px !important;
   }
 }
 
