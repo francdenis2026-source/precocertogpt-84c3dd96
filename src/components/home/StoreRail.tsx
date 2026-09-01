@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, MapPin, PackageCheck, Store } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BadgeCheck, MapPin, PackageCheck, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
@@ -12,6 +12,7 @@ export function StoreRail({ stores }: { stores: StoreRow[] }) {
 
   const [lead, ...directory] = featured;
   const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => part[0]).join("").toUpperCase();
+  const kindLabel = lead.kind === "pharmacy" ? "Farmácia" : lead.kind === "bakery" ? "Padaria" : "Comércio local";
 
   return <section className="pc26-zone pc26-zone--stores pc26-reference-stores" aria-labelledby="stores-title">
     <div className="pc26-stores pc26-shell">
@@ -21,18 +22,28 @@ export function StoreRail({ stores }: { stores: StoreRow[] }) {
       </div>
 
       <div className="pc26-store-showcase">
-        <Link className="pc26-store-featured" to={`/estabelecimento/${lead.slug}`} style={{ "--store-accent": lead.color } as CSSProperties}>
-          <div className="pc26-store-featured__top">
-            <i aria-hidden="true">{initials(lead.name)}</i>
-            <span><PackageCheck aria-hidden="true" /> Maior catálogo desta seleção</span>
+        <Link className="pc26-store-featured pc26-store-hero" to={`/estabelecimento/${lead.slug}`} style={{ "--store-accent": lead.color } as CSSProperties} aria-label={`Abrir catálogo de ${lead.name}`}>
+          <div className="pc26-store-hero__content">
+            <div className="pc26-store-featured__top">
+              <span className="pc26-store-hero__eyebrow"><BadgeCheck aria-hidden="true" /> Estabelecimento em destaque</span>
+              <span><PackageCheck aria-hidden="true" /> Catálogo ativo</span>
+            </div>
+            <div className="pc26-store-featured__copy">
+              <small>{kindLabel}</small>
+              <h3>{lead.name}</h3>
+              <p><MapPin aria-hidden="true" /> {lead.neighborhood || "Feijó"}, Feijó — Acre</p>
+              <span>Consulte produtos e preços disponíveis antes de sair de casa.</span>
+            </div>
+            <div className="pc26-store-featured__footer">
+              <span><strong>{lead.products || 0}</strong><small>produtos no catálogo</small></span>
+              <b>Ver catálogo <ArrowUpRight aria-hidden="true" /></b>
+            </div>
           </div>
-          <div className="pc26-store-featured__copy">
-            <h3>{lead.name}</h3>
-            <p><MapPin aria-hidden="true" /> {lead.neighborhood || "Feijó"}, Feijó</p>
-          </div>
-          <div className="pc26-store-featured__footer">
-            <span><strong>{lead.products || 0}</strong><small>itens listados</small></span>
-            <b>Abrir catálogo <ArrowUpRight aria-hidden="true" /></b>
+          <div className="pc26-store-hero__visual" aria-hidden="true">
+            <span className="pc26-store-hero__halo" />
+            <i>{initials(lead.name)}</i>
+            <Store />
+            <small>Comércio de Feijó</small>
           </div>
         </Link>
 
