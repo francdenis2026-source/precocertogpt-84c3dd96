@@ -250,7 +250,10 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
         <Icon aria-hidden="true" />
         <strong>Nenhum estabelecimento ativo nesta categoria.</strong>
       </section>}
+
+      {sector.id !== "books" && <SectorProductList catalog={catalog} sector={sector} />}
     </main>
+
     <DirectoryFooter sector={sector} />
   </div>;
 }
