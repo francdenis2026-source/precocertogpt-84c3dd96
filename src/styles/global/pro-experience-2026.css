@@ -1181,3 +1181,25 @@ html body .pc26-hero-panel__tag {
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
 }
+
+/* ── 16. Reforço final de legibilidade do painel da hero ────────────────── */
+html body .pc26-hero-panel {
+  background: linear-gradient(180deg, rgba(4, 14, 11, 0) 0%, rgba(4, 14, 11, 0.86) 34%, rgba(3, 11, 9, 0.96) 100%) !important;
+  padding: 26px 16px 16px !important;
+}
+html body .pc26-hero-panel__list li,
+html body .pc26-hero-panel__metrics span,
+html body .pc26-hero-panel__tag {
+  background: rgba(3, 11, 9, 0.9) !important;
+}
+html body .pc26-hero-panel__metrics small,
+html body .pc26-hero-panel__list small {
+  color: rgba(232, 242, 238, 0.92) !important;
+  -webkit-text-fill-color: rgba(232, 242, 238, 0.92) !important;
+}
+html body .pc26-hero-panel__metrics strong,
+html body .pc26-hero-panel__list strong,
+html body .pc26-hero-panel__tag {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
