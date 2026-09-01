@@ -388,14 +388,25 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
         String(a.id).localeCompare(String(b.id)));
 
     const stores: StoreRow[] = storeRows
-      .map(store => ({
-        id: store.id,
-        slug: storeSlugById.get(String(store.id)) || String(store.id),
-        name: store.name ?? "Estabelecimento",
-        neighborhood: store.neighborhood ?? "—",
-        color: store.brand_color ?? "#1473E6",
-        products: productIdsByStore.get(String(store.id))?.size ?? 0,
-      }))
+      .map(store => {
+        const extra = storeExtras.get(String(store.id));
+        return {
+          id: store.id,
+          slug: storeSlugById.get(String(store.id)) || String(store.id),
+          name: store.name ?? "Estabelecimento",
+          neighborhood: store.neighborhood ?? "—",
+          color: store.brand_color ?? "#1473E6",
+          kind: store.kind ?? undefined,
+          address: store.address ?? undefined,
+          logoUrl: store.logo_url ?? undefined,
+          city: extra?.city ?? undefined,
+          openingHours: extra?.opening_hours ?? undefined,
+          photoUrl: extra?.photo_url ?? undefined,
+          whatsapp: extra?.whatsapp ?? undefined,
+          products: productIdsByStore.get(String(store.id))?.size ?? 0,
+        };
+      })
+
       .sort((a, b) => {
         const aHasCatalog = a.products > 0 ? 1 : 0;
         const bHasCatalog = b.products > 0 ? 1 : 0;
