@@ -203,6 +203,8 @@ html[data-theme="dark"] .pc26-home--recovered .pc26-user-hero__copy h1 strong{co
   padding:0!important;overflow:hidden;border:1px solid color-mix(in srgb,var(--ux-primary) 28%,var(--ux-line))!important;
   background:linear-gradient(135deg,#102f43 0%,#124965 58%,#176783 100%)!important;color:#fff!important;box-shadow:var(--ux-shadow-2)!important;
 }
+.pc26-home--recovered .pc26-store-hero{animation:pc26-store-hour-enter 360ms var(--ux-ease) both}
+@keyframes pc26-store-hour-enter{from{opacity:.55;transform:translateY(10px) scale(.992)}to{opacity:1;transform:none}}
 .pc26-home--recovered .pc26-store-hero::before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 82% 15%,rgba(255,255,255,.16),transparent 28%),linear-gradient(115deg,transparent 54%,rgba(255,255,255,.055) 54% 55%,transparent 55%);pointer-events:none}
 .pc26-home--recovered .pc26-store-hero__content{min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:24px}
 .pc26-home--recovered .pc26-store-hero .pc26-store-featured__top{align-items:center}
@@ -237,3 +239,4 @@ html[data-theme="dark"] .pc26-home--recovered .pc26-store-hero{border-color:#3c5
   .pc26-home--recovered .pc26-store-hero__visual>small{font-size:.6rem}
   .pc26-home--recovered .pc26-store-hero__halo{width:150px;height:150px}
 }
+@media(prefers-reduced-motion:reduce){.pc26-home--recovered .pc26-store-hero{animation:none!important}}
