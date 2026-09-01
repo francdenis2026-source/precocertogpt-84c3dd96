@@ -674,9 +674,29 @@ html .pc26-header-studio__tools {
 /* Hero mobile compacto: o painel institucional é conteúdo de desktop.
    No celular ele estourava a moldura e invadia a seção seguinte. */
 @media (max-width: 760px) {
-  html .pc26-home .pc26-user-hero__media,
-  html .pc26-home--recovered .pc26-user-hero__media {
+  /* No mobile a fotografia vira uma faixa compacta no topo do cartão */
+  html body .pc26-home .pc26-user-hero__media,
+  html body .pc26-home--recovered .pc26-user-hero__media {
+    display: block !important;
+    grid-row: 1 !important;
+    height: 132px !important;
+    min-height: 0 !important;
+    border-radius: 14px 14px 0 0 !important;
+  }
+  html body .pc26-user-hero__media .pc26-hero-panel {
+    padding: 10px 12px !important;
+    justify-content: flex-end !important;
+  }
+  html body .pc26-user-hero__media .pc26-hero-panel__list,
+  html body .pc26-user-hero__media .pc26-hero-panel__metrics {
     display: none !important;
+  }
+  html body .pc26-user-hero__media .pc26-hero-panel__tag {
+    font-size: 0.62rem !important;
+  }
+  html body .pc26-user-hero__stage,
+  html body .pc26-user-hero__copy {
+    min-height: 0 !important;
   }
   html .pc26-home .pc26-user-hero__stage {
     grid-template-columns: 1fr !important;
