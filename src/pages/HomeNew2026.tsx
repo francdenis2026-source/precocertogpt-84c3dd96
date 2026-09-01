@@ -20,6 +20,7 @@ import "./HomeTaste2026.css";
 import "./HomeManualPolish2026.css";
 import "./HomeBelowHeroTaste2026.css";
 import "./HomeCatalogShowcase2026.css";
+import "./HomeUiUxProMax2026.css";
 
 const initialCatalog = buildCatalog();
 
