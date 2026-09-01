@@ -8,7 +8,7 @@ import {
   uploadOfferImage,
   type OfferInput,
   type PlatformOffer,
-} from "@/lib/offers";
+} from "../lib/offers";
 import "./AdminOffersManager.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });

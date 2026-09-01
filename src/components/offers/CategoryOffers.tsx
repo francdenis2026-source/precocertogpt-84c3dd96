@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Clock3, Store, Tag } from "lucide-react";
-import { loadPublicOffers, offerSlug, type PlatformOffer } from "@/lib/offers";
+import { loadPublicOffers, offerSlug, type PlatformOffer } from "../../lib/offers";
 import "./CategoryOffers.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
