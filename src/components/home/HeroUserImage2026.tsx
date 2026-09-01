@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
 import "./HeroUserImage2026.css";
-import heroImg from "../../assets/home-2026/hero-principal-comparando-precos.jpg";
+import heroImg from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
 
 type HeroUserImage2026Props = {

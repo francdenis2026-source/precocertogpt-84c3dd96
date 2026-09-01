@@ -5,6 +5,7 @@ import type { CatalogPayload } from "../data/catalog";
 import { businessGroups, type BusinessGroupId } from "../data/businessTaxonomy";
 import { fetchSectorCatalog, prefetchSectorCatalog, sectorProducts, sectorStores } from "../data/sectorCatalog";
 import { getStoreLogoUrl } from "../data/storeLogos";
+import { sectorHeroImage } from "../data/sectorHeroImages";
 import { PublicHeader } from "./ReferenceExperience";
 import "./PharmacyDirectory.css";
 import "./CulturalProfiles.css";
