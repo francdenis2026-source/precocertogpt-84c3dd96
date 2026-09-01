@@ -783,3 +783,26 @@ html .pc26-footer-compact {
     padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
+
+/* ── 8. Campo de busca: superfície coerente em claro e escuro ───────────── */
+html body .pc26-home .pc26-hero-search input,
+html body .pc26-hero-search input,
+html[data-theme="dark"] body .pc26-home .pc26-hero-search input,
+html[data-theme="dark"] body .pc26-hero-search input {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  width: 100% !important;
+}
+html[data-theme="dark"] body .pc26-hero-search {
+  background: #191b1c !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+html[data-theme="dark"] body .pc26-hero-search input::placeholder {
+  color: rgba(236, 240, 240, 0.55) !important;
+}
