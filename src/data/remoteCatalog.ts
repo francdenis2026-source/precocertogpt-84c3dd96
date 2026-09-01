@@ -258,6 +258,23 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
       return { ...local, source: "local", error: "Banco conectado, porém sem dados de preços." };
     }
 
+    /**
+     * Colunas opcionais de vitrine (cidade, horário, foto, WhatsApp). Só existem
+     * depois de rodar db/sql/fase2_ofertas_lojas_cidades.sql — por isso a
+     * consulta é separada e falha em silêncio quando ainda não foram criadas.
+     */
+    const storeExtras = new Map<string, Partial<EstablishmentRow>>();
+    try {
+      const { data: extraRows } = await supabase!
+        .from("establishments")
+        .select("id, city, opening_hours, photo_url, whatsapp")
+        .limit(2000);
+      for (const row of (extraRows ?? []) as EstablishmentRow[]) storeExtras.set(String(row.id), row);
+    } catch {
+      /* colunas ainda não criadas: as páginas seguem com os dados básicos */
+    }
+
+
     const q = normalizeCatalogTerm(query);
     const storesById = new Map(storeRows.map(store => [String(store.id), store]));
     const storeSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id));
