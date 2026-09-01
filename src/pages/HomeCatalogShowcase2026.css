@@ -54,7 +54,7 @@ html[data-theme="dark"] .pc26-home--recovered{
    carregada por último para impedir que regras globais da homepage os
    remapeiem para a tinta escura do modo claro. */
 .pc26-home--recovered .pc26-promo__story .pc26-promo__copy h3{color:#fff!important}
-.pc26-home--recovered .pc26-promo__story .pc26-promo__copy p{color:#d9e5e3!important}
+.pc26-home--recovered .pc26-promo__story .pc26-promo__copy p{color:#f8fbfa!important}
 .pc26-home--recovered .pc26-promo__story .pc26-promo__eyebrow{color:#f3ce72!important}
 
 /* No tema escuro, as fotografias usam carvão neutro em vez de um banho

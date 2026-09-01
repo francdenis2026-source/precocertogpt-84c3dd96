@@ -16,6 +16,7 @@ export function HeroUserImage2026({ products, loading = false }: HeroUserImage20
     <section className="pc26-user-hero" aria-labelledby="pc26-campaign-title">
       <div className="pc26-user-hero__stage">
         <div className="pc26-user-hero__copy">
+          <span className="pc26-user-hero__eyebrow">Comparação local em tempo real</span>
           <h1 id="pc26-campaign-title">
             Compare preços. <strong>Compre melhor em Feijó.</strong>
           </h1>

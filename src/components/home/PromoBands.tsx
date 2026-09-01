@@ -16,8 +16,8 @@ const stories = [
   },
   {
     className: "pc26-promo__story--local",
-    image: "/home-editorial-2026/comercio-local.webp",
-    alt: "Comerciante local organizando frutas e verduras em seu estabelecimento",
+    image: "/home-editorial-2026/promo-comercio-local-app-v2.webp",
+    alt: "Cliente comparando pelo celular enquanto comerciante organiza verduras no supermercado local",
     icon: Store,
     eyebrow: "PERTO DE VOCÊ",
     title: "Comércio local em primeiro plano.",
@@ -27,8 +27,8 @@ const stories = [
   },
   {
     className: "pc26-promo__story--basket",
-    image: "/home-editorial-2026/compra-organizada.webp",
-    alt: "Cesta de compras organizada com alimentos para a semana",
+    image: "/home-editorial-2026/promo-compra-inteligente-app-v2.webp",
+    alt: "Casal usando o celular para organizar e comparar uma compra no supermercado",
     icon: ShoppingBasket,
     eyebrow: "COMPRA ORGANIZADA",
     title: "Planeje melhor. Leve o que importa.",
