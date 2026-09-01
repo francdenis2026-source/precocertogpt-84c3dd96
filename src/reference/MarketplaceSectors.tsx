@@ -3,7 +3,7 @@ import { ArrowRight, BadgeCheck, BookOpen, BriefcaseBusiness, Croissant, Grid2X2
 import { Link } from "react-router-dom";
 import type { CatalogPayload } from "../data/catalog";
 import { businessGroups, type BusinessGroupId } from "../data/businessTaxonomy";
-import { fetchSectorCatalog, prefetchSectorCatalog, sectorStores } from "../data/sectorCatalog";
+import { fetchSectorCatalog, prefetchSectorCatalog, sectorProducts, sectorStores } from "../data/sectorCatalog";
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { PublicHeader } from "./ReferenceExperience";
 import "./PharmacyDirectory.css";
