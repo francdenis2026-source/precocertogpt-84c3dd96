@@ -3,10 +3,34 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { 
   ArrowLeft, Phone, Store, Clock, MapPin, Search, 
   MessageSquare, Star, Send, Navigation, HelpCircle,
-  ChevronDown, ChevronUp
+  ChevronDown, ChevronUp, PackageSearch, Tag
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { fetchCatalog } from "../data/remoteCatalog";
+import { sectorProducts } from "../data/sectorCatalog";
+import type { CatalogPayload, Product } from "../data/catalog";
 import "./CategoryPage.css";
+
+/** Grupo de negócio (taxonomia real) usado para listar produtos de cada categoria. */
+const categoryGroup: Record<string, string> = {
+  pizzaria: "food",
+  lanchonete: "food",
+  sorveteria: "food",
+  conveniencia: "markets",
+  padaria: "bakery",
+  acougue: "butchers",
+  farmacia: "pharmacies",
+  mercantil: "markets",
+  frutaria: "markets",
+  papelaria: "other",
+  desapego: "other",
+  "moveis-imoveis": "other",
+  hotelaria: "services",
+};
+
+const money = (value: number) =>
+  value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
 
 const categoryData: Record<string, any> = {
   "pizzaria": { 
