@@ -227,7 +227,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
   try {
     const [establishments, products, prices] = await Promise.all([
-      fetchAllRows("establishments", "id, name, neighborhood, brand_color", "id"),
+      fetchAllRows("establishments", "id, name, neighborhood, brand_color, kind, address, logo_url", "id"),
       fetchAllRows("products", "id, name, brand, category, size, unit, barcode, image_url", "id"),
       fetchAllRows("prices", "id, product_id, establishment_id, value, previous_value, captured_at", "id"),
     ]);
