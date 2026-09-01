@@ -414,9 +414,10 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
           neighborhood: store.neighborhood ?? "—",
           color: store.brand_color ?? "#1473E6",
           kind: store.kind ?? undefined,
-          address: store.address ?? undefined,
+          address: formatStoreAddress(store.address),
           logoUrl: store.logo_url ?? undefined,
-          city: extra?.city ?? undefined,
+          city: storeCityFrom(store.address) ?? extra?.city ?? undefined,
+
           openingHours: extra?.opening_hours ?? undefined,
           photoUrl: extra?.photo_url ?? undefined,
           whatsapp: extra?.whatsapp ?? undefined,
