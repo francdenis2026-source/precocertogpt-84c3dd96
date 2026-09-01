@@ -24,6 +24,7 @@ import "./HomeCatalogShowcase2026.css";
 import "./HomeUiUxProMax2026.css";
 import "./HomeHeroProfessional2026.css";
 import "./HomeThreeScreens2026.css";
+import "./HomeFinalRefinement2026.css";
 
 const initialCatalog = buildCatalog();
 
