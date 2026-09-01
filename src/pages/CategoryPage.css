@@ -418,3 +418,8 @@
 .category-product-card__price b { font-size: 1.15rem; color: var(--pc-teal); }
 .category-product-card__cta { font-size: 0.78rem; font-weight: 600; color: var(--pc-teal); }
 .category-products__empty { color: var(--pc-muted); font-size: 0.92rem; }
+
+/* Atalho para as páginas de cidade (lojas, preços e promoções por município). */
+.category-city-link{margin:0;display:flex;justify-content:center}
+.category-city-link a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid var(--px-line,#e2e7ec);border-radius:999px;background:var(--px-surface,#fff);color:var(--px-brand,#0b6757);font-size:.88rem;font-weight:600;text-decoration:none}
+.category-city-link a:hover{border-color:var(--px-brand,#0b6757);text-decoration:underline}
