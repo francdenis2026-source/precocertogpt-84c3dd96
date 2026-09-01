@@ -475,3 +475,37 @@ body::before {
 .pc26-home--recovered .pc26-user-hero__copy {
   padding: clamp(20px, 2.6vw, 34px) !important;
 }
+
+/* -------------------------------------------- 10. Acabamento final medido */
+/* A arte deixava uma faixa branca no pé da hero: agora preenche a coluna. */
+.pc26-home--recovered .pc26-user-hero__media {
+  display: grid !important;
+  align-self: stretch !important;
+}
+.pc26-home--recovered .pc26-user-hero__artwork {
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+}
+/* Produtos sem foto ficavam com um box totalmente branco e sem informação. */
+.pc26-product__no-photo {
+  width: 100%;
+  height: 100%;
+  display: grid !important;
+  place-content: center;
+  gap: 6px;
+  border: 1px dashed
+    color-mix(in srgb, var(--ux-line, #cfd8d3) 78%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ux-surface-2, #eef2ef) 70%, transparent);
+  color: var(--ux-text-soft, #5f6f6a) !important;
+  font-size: 0.66rem;
+  text-align: center;
+}
+.pc26-product__no-photo svg {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 auto;
+  opacity: 0.5;
+}
