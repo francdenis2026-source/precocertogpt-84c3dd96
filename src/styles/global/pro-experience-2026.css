@@ -674,10 +674,11 @@ html .pc26-header-studio__tools {
 /* Hero mobile compacto: o painel institucional é conteúdo de desktop.
    No celular ele estourava a moldura e invadia a seção seguinte. */
 @media (max-width: 760px) {
-  html .pc26-user-hero__media {
+  html .pc26-home .pc26-user-hero__media,
+  html .pc26-home--recovered .pc26-user-hero__media {
     display: none !important;
   }
-  html .pc26-user-hero__stage {
+  html .pc26-home .pc26-user-hero__stage {
     grid-template-columns: 1fr !important;
   }
   html .pc26-user-hero__copy {
