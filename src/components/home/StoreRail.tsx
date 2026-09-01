@@ -1,3 +1,4 @@
+import vitrineImg from "../../assets/home-2026/estabelecimentos-vitrine.jpg";
 import { ArrowRight, ArrowUpRight, MapPin, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
@@ -88,10 +89,10 @@ export function StoreRail({
               {/* Vite serves this optimized responsive hero directly from public/. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/home-editorial-2026/estabelecimento-comparador-hero-v2.webp"
+                src={vitrineImg}
                 alt=""
-                width="1600"
-                height="1067"
+                width={1280}
+                height={720}
                 loading="lazy"
                 decoding="async"
               />
