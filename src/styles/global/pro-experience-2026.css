@@ -806,3 +806,16 @@ html[data-theme="dark"] body .pc26-hero-search {
 html[data-theme="dark"] body .pc26-hero-search input::placeholder {
   color: rgba(236, 240, 240, 0.55) !important;
 }
+
+/* ── 9. Gutter mestre: mesma margem em header, conteúdo e rodapé ─────────── */
+html body .pc26-shell,
+html body .pc26-home .pc26-shell {
+  width: min(1220px, calc(100% - 40px)) !important;
+  margin-inline: auto !important;
+}
+@media (max-width: 760px) {
+  html body .pc26-shell,
+  html body .pc26-home .pc26-shell {
+    width: calc(100% - 20px) !important;
+  }
+}
