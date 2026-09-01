@@ -27,6 +27,26 @@ type EstablishmentRow = {
 };
 
 
+/** Converte o endereço (JSONB ou texto) em uma linha legível para as vitrines. */
+function formatStoreAddress(raw: EstablishmentRow["address"]): string | undefined {
+  if (!raw) return undefined;
+  if (typeof raw === "string") return raw.trim() || undefined;
+  const get = (key: string) => {
+    const value = raw[key];
+    return typeof value === "string" && value.trim() ? value.trim() : "";
+  };
+  const street = [get("street"), get("number")].filter(Boolean).join(", ");
+  const line = [street, get("neighborhood"), get("city")].filter(Boolean).join(" · ");
+  return line || undefined;
+}
+
+/** Cidade declarada no endereço estruturado, quando existir. */
+function storeCityFrom(raw: EstablishmentRow["address"]): string | undefined {
+  if (!raw || typeof raw === "string") return undefined;
+  const value = raw.city;
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
 type ProductRow = {
   id: string | number;
   slug: string | null;
