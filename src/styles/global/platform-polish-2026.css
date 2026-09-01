@@ -509,3 +509,21 @@ body::before {
   margin: 0 auto;
   opacity: 0.5;
 }
+
+/* ------------------------------------------------ 11. Ajustes mobile finais */
+@media (max-width: 760px) {
+  /* O campo de busca cobria os chips de busca rápida. */
+  .pc26-home--recovered .pc26-user-hero__search {
+    margin-bottom: 16px !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__popular {
+    margin-top: 10px !important;
+  }
+  /* As linhas do grid herdavam 1fr do container e sobrava um vão branco
+   * enorme embaixo dos cards. */
+  .pc26-home .pc26-grid,
+  .pc26-grid {
+    grid-auto-rows: minmax(0, auto) !important;
+    align-items: stretch !important;
+  }
+}
