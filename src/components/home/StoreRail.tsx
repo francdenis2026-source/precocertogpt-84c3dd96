@@ -1,16 +1,17 @@
-import { ArrowRight, ArrowUpRight, BadgeCheck, MapPin, PackageCheck, Store } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BadgeCheck, Clock3, MapPin, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
 
-export function StoreRail({ stores }: { stores: StoreRow[] }) {
-  const featured = [...stores]
-    .filter(store => store.name && store.slug)
-    .sort((a, b) => (b.products || 0) - (a.products || 0))
-    .slice(0, 4);
-  if (!featured.length) return null;
+export function StoreRail({ stores, cycle }: { stores: StoreRow[]; cycle: number }) {
+  const eligible = [...stores]
+    .filter(store => store.name && store.slug && (store.products || 0) > 0)
+    .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+  if (!eligible.length) return null;
 
-  const [lead, ...directory] = featured;
+  const leadIndex = ((cycle % eligible.length) + eligible.length) % eligible.length;
+  const rotated = [...eligible.slice(leadIndex), ...eligible.slice(0, leadIndex)];
+  const [lead, ...directory] = rotated.slice(0, 4);
   const initials = (name: string) => name.split(/\s+/).slice(0, 2).map(part => part[0]).join("").toUpperCase();
   const kindLabel = lead.kind === "pharmacy" ? "Farmácia" : lead.kind === "bakery" ? "Padaria" : "Comércio local";
 
@@ -22,17 +23,17 @@ export function StoreRail({ stores }: { stores: StoreRow[] }) {
       </div>
 
       <div className="pc26-store-showcase">
-        <Link className="pc26-store-featured pc26-store-hero" to={`/estabelecimento/${lead.slug}`} style={{ "--store-accent": lead.color } as CSSProperties} aria-label={`Abrir catálogo de ${lead.name}`}>
+        <Link key={`${lead.id}-${cycle}`} className="pc26-store-featured pc26-store-hero" to={`/estabelecimento/${lead.slug}`} style={{ "--store-accent": lead.color } as CSSProperties} aria-label={`Abrir catálogo de ${lead.name}`}>
           <div className="pc26-store-hero__content">
             <div className="pc26-store-featured__top">
               <span className="pc26-store-hero__eyebrow"><BadgeCheck aria-hidden="true" /> Estabelecimento em destaque</span>
-              <span><PackageCheck aria-hidden="true" /> Catálogo ativo</span>
+              <span><Clock3 aria-hidden="true" /> Troca a cada 60 minutos</span>
             </div>
             <div className="pc26-store-featured__copy">
               <small>{kindLabel}</small>
               <h3>{lead.name}</h3>
               <p><MapPin aria-hidden="true" /> {lead.neighborhood || "Feijó"}, Feijó — Acre</p>
-              <span>Consulte produtos e preços disponíveis antes de sair de casa.</span>
+              <span>Uma nova vitrine local aparece a cada hora. Consulte o catálogo e compare antes de sair de casa.</span>
             </div>
             <div className="pc26-store-featured__footer">
               <span><strong>{lead.products || 0}</strong><small>produtos no catálogo</small></span>
