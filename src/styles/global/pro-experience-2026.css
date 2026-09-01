@@ -945,3 +945,21 @@ html body .pc26-user-hero__media::after {
     rgba(5, 16, 13, 0.84) 100%
   ) !important;
 }
+
+/* Correção: o texto das faixas vive em .pc26-promo__copy */
+html body .pc26-promo__copy {
+  position: relative !important;
+  z-index: 2 !important;
+}
+html body .pc26-promo__copy h3,
+html body .pc26-promo .pc26-promo__copy h3 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: none !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+html body .pc26-promo__copy p,
+html body .pc26-promo .pc26-promo__copy p {
+  color: rgba(238, 245, 241, 0.92) !important;
+  -webkit-text-fill-color: rgba(238, 245, 241, 0.92) !important;
+}
