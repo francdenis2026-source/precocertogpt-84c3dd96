@@ -5,10 +5,11 @@ import {
   MessageSquare, Star, Send, Navigation, HelpCircle,
   ChevronDown, ChevronUp, PackageSearch, Tag
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { sectorProducts } from "../data/sectorCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
+import { categoryHeroImage } from "../data/sectorHeroImages";
 import "./CategoryPage.css";
 
 /** Grupo de negócio (taxonomia real) usado para listar produtos de cada categoria. */
@@ -134,7 +135,7 @@ export function CategoryPage() {
         <main className="category-content">
           <section
             className="category-hero category-hero--band pc26-sector-hero"
-            style={{ "--sector-hero": `url(${categoryHeroImage(slug || data.title)})` } as CSSProperties}
+            style={{ "--sector-hero": `url(${categoryHeroImage(category || data.title)})` } as CSSProperties}
           >
             <span className="category-hero__tag"><Tag size={14} /> {data.title} · Feijó, Acre</span>
             <h1>{data.title} em Feijó</h1>
