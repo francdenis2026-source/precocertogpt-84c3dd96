@@ -2,9 +2,10 @@ import { ArrowRight, BadgeCheck, MapPin, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
+import heroArt from "../../assets/hero-precocerto-profissional-2026-09.jpg";
 import "./HeroUserImage2026.css";
 
-const HERO_IMAGE = "/hero-supermercado-mulher-comparando-2026.webp";
+const HERO_IMAGE = heroArt;
 
 type HeroUserImage2026Props = {
   products: Product[];
@@ -88,7 +89,7 @@ export function HeroUserImage2026({
             src={HERO_IMAGE}
             alt="Mulher comparando um produto e preços pelo celular em um supermercado"
             width={1536}
-            height={1024}
+            height={1080}
             fetchPriority="high"
             decoding="async"
           />

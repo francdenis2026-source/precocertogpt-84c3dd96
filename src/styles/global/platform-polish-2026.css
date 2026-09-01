@@ -1,0 +1,529 @@
+/*
+ * Preço Certo — Camada final de polimento de plataforma (set/2026)
+ * ---------------------------------------------------------------
+ * Objetivos desta folha (aplicada por último na cascata):
+ *  1. Header compacto e sem colisão entre rádio, ícones e botões.
+ *  2. Hero baixa/compacta com arte profissional e sem sobreposições.
+ *  3. Cards de produto com proporção estável (foto sempre no mesmo box).
+ *  4. Faixas promocionais compactas em web e mobile.
+ *  5. Footer enxuto.
+ *  6. Fundo de plataforma + microinterações consistentes e acessíveis.
+ * Nenhuma regra aqui altera dados, rotas ou lógica de negócio.
+ */
+
+/* ---------------------------------------------------------------- 1. Fundo */
+body {
+  position: relative;
+  background-attachment: fixed;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      1100px 620px at 82% -12%,
+      color-mix(in srgb, var(--ux-primary, #0f766e) 16%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      900px 520px at 8% 4%,
+      color-mix(in srgb, #e9c46a 12%, transparent),
+      transparent 72%
+    );
+  opacity: 0.85;
+}
+:root[data-theme="dark"] body::before,
+.dark body::before {
+  background:
+    url("/bg-plataforma-2026-09.jpg") center top / cover no-repeat,
+    #07100f;
+  opacity: 0.42;
+  filter: saturate(0.85);
+}
+
+/* --------------------------------------------------------------- 2. Header */
+.pc26-header--studio .pc26-header-studio {
+  min-height: 58px !important;
+  padding-block: 6px !important;
+  gap: 10px !important;
+}
+.pc26-header--studio .pc26-header-studio__nav > a {
+  padding-inline: 10px !important;
+  font-size: 0.8rem !important;
+}
+.pc26-header-studio__tools {
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+}
+.pc26-header-studio__tool {
+  width: 38px !important;
+  height: 38px !important;
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px !important;
+  transition:
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 160ms ease,
+    color 160ms ease;
+}
+.pc26-header-studio__tool:hover,
+.pc26-header-studio__login:hover {
+  transform: translateY(-1px);
+}
+.pc26-header-studio__tool:active,
+.pc26-header-studio__login:active {
+  transform: scale(0.96);
+}
+/* O player de rádio colidia com os ícones: agora tem largura própria e
+ * some antes de comprimir os botões de ação. */
+.pc26-header-studio__radio {
+  max-width: 168px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  flex: 0 1 auto !important;
+}
+.pc26-header-studio__radio * {
+  min-width: 0 !important;
+}
+@media (max-width: 1180px) {
+  .pc26-header-studio__radio {
+    display: none !important;
+  }
+}
+.pc26-header-studio__login {
+  min-height: 38px !important;
+  padding-inline: 14px !important;
+  border-radius: 12px !important;
+  white-space: nowrap;
+}
+:where(.pc26-header-studio__tool, .pc26-header-studio__login):focus-visible {
+  outline: 2px solid var(--ux-primary, #0f766e);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------------------------------- 3. Hero */
+.pc26-user-hero {
+  padding-block: clamp(12px, 2vw, 22px) clamp(10px, 1.6vw, 18px) !important;
+  overflow: visible !important;
+}
+.pc26-user-hero__stage {
+  align-items: stretch !important;
+  gap: clamp(14px, 2vw, 26px) !important;
+  padding-bottom: clamp(14px, 2vw, 22px) !important;
+}
+.pc26-user-hero__copy {
+  gap: 10px !important;
+  padding-block: clamp(14px, 2vw, 24px) !important;
+}
+.pc26-user-hero__copy h1 {
+  font-size: clamp(1.75rem, 3.4vw, 2.7rem) !important;
+  line-height: 1.04 !important;
+}
+.pc26-user-hero__copy > p {
+  max-width: 48ch;
+  font-size: 0.86rem !important;
+}
+/* A busca não pode mais cobrir os chips de busca rápida. */
+.pc26-user-hero__search {
+  position: relative;
+  z-index: 3;
+  margin-bottom: 4px !important;
+}
+.pc26-user-hero__popular {
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  row-gap: 6px;
+  margin-top: 4px !important;
+}
+.pc26-user-hero__popular a {
+  transition:
+    transform 150ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 150ms ease;
+}
+.pc26-user-hero__popular a:hover {
+  transform: translateY(-1px);
+}
+.pc26-user-hero__media {
+  align-self: stretch !important;
+  min-height: 0 !important;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.pc26-user-hero__artwork {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 400px !important;
+  object-fit: cover !important;
+  object-position: 68% center !important;
+  border-radius: 20px !important;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pc26-user-hero__media:hover .pc26-user-hero__artwork {
+  transform: scale(1.02);
+}
+.pc26-user-hero__actions a {
+  transition:
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms ease;
+}
+.pc26-user-hero__actions a:hover {
+  transform: translateY(-2px);
+}
+.pc26-user-hero__actions a:active {
+  transform: scale(0.98);
+}
+
+/* As ações rápidas ficavam sob a hero; agora fluem como faixa própria. */
+.pc26-home-actions,
+.pc26-quick-actions,
+.pc26-home-quick {
+  position: relative !important;
+  z-index: 2;
+  margin-top: 0 !important;
+  transform: none !important;
+}
+
+/* --------------------------------------------------------- 4. Cards de produto */
+.pc26-product {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  overflow: hidden;
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms ease,
+    border-color 200ms ease;
+}
+.pc26-product:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(
+    in srgb,
+    var(--ux-primary, #0f766e) 42%,
+    var(--ux-line, #d8ded9)
+  );
+  box-shadow: 0 16px 34px rgba(12, 32, 30, 0.14);
+}
+.pc26-product:active {
+  transform: translateY(-1px) scale(0.995);
+}
+.pc26-product:focus-visible {
+  outline: 2px solid var(--ux-primary, #0f766e);
+  outline-offset: 2px;
+}
+.pc26-product__image {
+  position: relative;
+  aspect-ratio: 4 / 3 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  height: auto !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 10px !important;
+  overflow: hidden;
+  background: color-mix(
+    in srgb,
+    var(--ux-surface-2, #f2f5f3) 82%,
+    transparent
+  ) !important;
+}
+.pc26-product__image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pc26-product:hover .pc26-product__image img {
+  transform: scale(1.035);
+}
+.pc26-product__no-photo {
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  color: var(--ux-text-soft, #5c6b66);
+  font-size: 0.68rem;
+  text-align: center;
+}
+.pc26-product__no-photo svg {
+  width: 22px;
+  height: 22px;
+  opacity: 0.55;
+}
+.pc26-product__body {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  padding: 12px 14px 14px !important;
+}
+.pc26-product__body h3 {
+  font-size: 0.92rem !important;
+  line-height: 1.25 !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pc26-product__footer {
+  margin-top: auto !important;
+}
+
+/* ------------------------------------------------- 5. Faixas promocionais */
+.pc26-promo {
+  padding-block: clamp(16px, 2.4vw, 26px) !important;
+}
+.pc26-promo__story {
+  min-height: 0 !important;
+  max-height: 240px !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) !important;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease;
+}
+.pc26-promo__story:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(12, 32, 30, 0.18);
+}
+.pc26-promo__copy {
+  padding: clamp(16px, 2vw, 26px) !important;
+}
+.pc26-promo__copy h3 {
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem) !important;
+}
+.pc26-promo__media {
+  min-height: 0 !important;
+  overflow: hidden;
+}
+.pc26-promo__media img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 240px !important;
+  object-fit: cover !important;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pc26-promo__story:hover .pc26-promo__media img {
+  transform: scale(1.03);
+}
+@media (max-width: 860px) {
+  .pc26-promo__story {
+    max-height: none !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .pc26-promo__story .pc26-promo__media {
+    order: 2 !important;
+  }
+  .pc26-promo__story .pc26-promo__copy {
+    order: 1 !important;
+  }
+  .pc26-promo__media img {
+    max-height: 170px !important;
+  }
+}
+
+/* -------------------------------------------------------------- 6. Footer */
+.pc26-footer--studio .pc26-footer-compact {
+  padding-block: 16px !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+.pc26-footer-navigation {
+  flex-wrap: wrap !important;
+  row-gap: 6px !important;
+}
+.pc26-footer-navigation a {
+  font-size: 0.78rem !important;
+  transition:
+    color 150ms ease,
+    transform 150ms ease;
+}
+.pc26-footer-navigation a:hover {
+  transform: translateY(-1px);
+}
+.pc26-footer-business {
+  min-height: 40px !important;
+  transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pc26-footer-business:hover {
+  transform: translateY(-1px);
+}
+.pc26-footer-meta {
+  padding-block: 10px !important;
+}
+.pc26-footer-premium__rail-inner {
+  flex-wrap: wrap !important;
+  gap: 8px 16px !important;
+  font-size: 0.72rem !important;
+}
+
+/* ------------------------------------------------- 7. Mobile / ergonomia */
+@media (max-width: 720px) {
+  .pc26-user-hero {
+    padding-block: 10px !important;
+  }
+  .pc26-user-hero__copy h1 {
+    font-size: clamp(1.55rem, 8vw, 2.05rem) !important;
+  }
+  .pc26-user-hero__artwork {
+    max-height: 210px !important;
+    border-radius: 16px !important;
+  }
+  .pc26-product__image {
+    aspect-ratio: 1 / 1 !important;
+  }
+  .pc26-footer--studio .pc26-footer-compact {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left;
+  }
+  main#conteudo-principal {
+    padding-bottom: 84px;
+  }
+}
+
+/* --------------------------------------------------- 8. Preferências do SO */
+@media (prefers-reduced-motion: reduce) {
+  .pc26-product,
+  .pc26-product__image img,
+  .pc26-promo__story,
+  .pc26-promo__media img,
+  .pc26-user-hero__artwork,
+  .pc26-header-studio__tool,
+  .pc26-header-studio__login {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* -------------------------------------------------- 9. Correções medidas
+ * Ajustes derivados de inspeção real do layout renderizado:
+ *  - a hero tinha min-height fixa menor que o conteúdo, o que fazia o card
+ *    de texto vazar por cima das ações rápidas;
+ *  - a foto do produto ficava num box de 104-144px, deixando o card
+ *    desproporcional; agora o box é estável e a imagem preenche;
+ *  - o botão de menu (hambúrguer) aparecia no desktop junto da navegação. */
+.pc26-user-hero__stage {
+  min-height: 0 !important;
+  grid-auto-rows: minmax(0, auto) !important;
+  align-items: stretch !important;
+}
+.pc26-user-hero,
+.pc26-user-hero__copy,
+.pc26-user-hero__media {
+  height: auto !important;
+}
+
+.pc26-home .pc26-product__image,
+.pc26-product__image {
+  aspect-ratio: auto !important;
+  height: 168px !important;
+  min-height: 168px !important;
+  max-height: 168px !important;
+  padding: 12px !important;
+}
+.pc26-home .pc26-product__image img,
+.pc26-product__image img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+.pc26-home .pc26-product,
+.pc26-product {
+  min-height: 0 !important;
+}
+.pc26-home .pc26-product__body {
+  min-height: 0 !important;
+}
+
+@media (min-width: 1024px) {
+  .pc26-header-studio__menu {
+    display: none !important;
+  }
+  .pc26-header-studio__nav {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .pc26-home .pc26-product__image,
+  .pc26-product__image {
+    height: 132px !important;
+    min-height: 132px !important;
+    max-height: 132px !important;
+    padding: 10px !important;
+  }
+}
+
+/* A home usa `.pc26-home--recovered`, que travava a hero em max-height 310px
+ * enquanto o conteúdo real ocupa ~420px — daí o vazamento sobre as ações
+ * rápidas. Liberamos a altura e mantemos a compactação pela tipografia. */
+.pc26-home--recovered .pc26-user-hero__stage {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy,
+.pc26-home--recovered .pc26-user-hero__media {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy {
+  padding: clamp(20px, 2.6vw, 34px) !important;
+}
+
+/* -------------------------------------------- 10. Acabamento final medido */
+/* A arte deixava uma faixa branca no pé da hero: agora preenche a coluna. */
+.pc26-home--recovered .pc26-user-hero__media {
+  display: grid !important;
+  align-self: stretch !important;
+}
+.pc26-home--recovered .pc26-user-hero__artwork {
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 100% !important;
+  object-fit: cover !important;
+}
+/* Produtos sem foto ficavam com um box totalmente branco e sem informação. */
+.pc26-product__no-photo {
+  width: 100%;
+  height: 100%;
+  display: grid !important;
+  place-content: center;
+  gap: 6px;
+  border: 1px dashed
+    color-mix(in srgb, var(--ux-line, #cfd8d3) 78%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--ux-surface-2, #eef2ef) 70%, transparent);
+  color: var(--ux-text-soft, #5f6f6a) !important;
+  font-size: 0.66rem;
+  text-align: center;
+}
+.pc26-product__no-photo svg {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 auto;
+  opacity: 0.5;
+}
+
+/* ------------------------------------------------ 11. Ajustes mobile finais */
+@media (max-width: 760px) {
+  /* O campo de busca cobria os chips de busca rápida. */
+  .pc26-home--recovered .pc26-user-hero__search {
+    margin-bottom: 16px !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__popular {
+    margin-top: 10px !important;
+  }
+  /* As linhas do grid herdavam 1fr do container e sobrava um vão branco
+   * enorme embaixo dos cards. */
+  .pc26-home .pc26-grid,
+  .pc26-grid {
+    grid-auto-rows: minmax(0, auto) !important;
+    align-items: stretch !important;
+  }
+}
