@@ -1,7 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
+import {
+  buildCatalog,
+  type CatalogPayload,
+  type Product,
+  verifiedDatasetMetrics,
+} from "../data/catalog";
 import { fetchCatalog } from "../data/remoteCatalog";
-import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredRotation";
+import {
+  buildFeatured,
+  currentCycle,
+  msUntilNextCycle,
+} from "../data/featuredRotation";
 import { BottomNav } from "../components/home/BottomNav";
 import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
@@ -13,15 +22,15 @@ import { PromoBands } from "../components/home/PromoBands";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
-import "./HomeCatalogShowcase2026.css";
-import "./HomeUiUxProMax2026.css";
-import "./HomeFinalRefinement2026.css";
 import "./HomeEmilCompact2026.css";
 
 const initialCatalog = buildCatalog();
 
 export function HomeNew2026() {
-  const [catalog, setCatalog] = useState<CatalogPayload>({ ...initialCatalog, metrics: verifiedDatasetMetrics });
+  const [catalog, setCatalog] = useState<CatalogPayload>({
+    ...initialCatalog,
+    metrics: verifiedDatasetMetrics,
+  });
   const [loading, setLoading] = useState(true);
   const [cycle, setCycle] = useState(() => currentCycle());
   const { theme, toggleTheme } = useSiteTheme();
@@ -34,31 +43,48 @@ export function HomeNew2026() {
   useEffect(() => {
     let active = true;
     fetchCatalog()
-      .then(value => { if (active) setCatalog(value); })
+      .then((value) => {
+        if (active) setCatalog(value);
+      })
       .catch(() => undefined)
-      .finally(() => { if (active) setLoading(false); });
-    return () => { active = false; };
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setCycle(currentCycle()), msUntilNextCycle() + 250);
+    const timer = window.setTimeout(
+      () => setCycle(currentCycle()),
+      msUntilNextCycle() + 250,
+    );
     return () => window.clearTimeout(timer);
   }, [cycle]);
 
-  const products = useMemo(() => catalog.products.filter(product => product.minPrice > 0), [catalog.products]);
-  const featured = useMemo<Product[]>(() => buildFeatured(products, cycle, 4), [products, cycle]);
+  const products = useMemo(
+    () => catalog.products.filter((product) => product.minPrice > 0),
+    [catalog.products],
+  );
+  const featured = useMemo<Product[]>(
+    () => buildFeatured(products, cycle, 4),
+    [products, cycle],
+  );
 
-  return <div className="pc26-home pc26-home--recovered">
-    <Header theme={theme} onToggleTheme={toggleTheme}/>
-    <main id="conteudo-principal">
-      <HeroUserImage2026 products={products} loading={loading}/>
-      <HomeQuickActions/>
-      <ProductGrid products={featured} loading={loading}/>
-      <PromoBands/>
-      <CategoryBar/>
-      <StoreRail stores={catalog.stores} cycle={cycle}/>
-      <Footer/>
-    </main>
-    <BottomNav/>
-  </div>;
+  return (
+    <div className="pc26-home pc26-home--recovered">
+      <Header theme={theme} onToggleTheme={toggleTheme} />
+      <main id="conteudo-principal">
+        <HeroUserImage2026 products={products} loading={loading} />
+        <HomeQuickActions />
+        <ProductGrid products={featured} loading={loading} />
+        <PromoBands />
+        <CategoryBar />
+        <StoreRail stores={catalog.stores} cycle={cycle} />
+        <Footer />
+      </main>
+      <BottomNav />
+    </div>
+  );
 }
