@@ -16,7 +16,8 @@ type EstablishmentRow = {
   neighborhood: string | null;
   brand_color: string | null;
   kind?: string | null;
-  address?: string | null;
+  /** `address` é JSONB no banco (rua, número, bairro, cidade…) ou texto simples. */
+  address?: string | Record<string, unknown> | null;
   logo_url?: string | null;
   /** Colunas opcionais (criadas em db/sql/fase2_ofertas_lojas_cidades.sql). */
   city?: string | null;
