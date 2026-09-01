@@ -24,6 +24,9 @@ import "./styles/global/search-refinement-2026.css";
 import "./styles/global/taste-auth-2026.css";
 import "./styles/global/glass-app-shell-v3-2026.css";
 import "./styles/global/platform-polish-2026.css";
+// Camada final profissional: dona da busca, header, ritmo de seções e rodapé.
+import "./styles/global/pro-experience-2026.css";
+
 
 
 initializeSiteTheme();
