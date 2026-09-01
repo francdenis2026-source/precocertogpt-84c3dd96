@@ -64,6 +64,8 @@
   position:relative;
   z-index:30;
   width:min(100%,590px);
+  height:82px;
+  flex:0 0 82px;
   margin-top:22px;
 }
 
@@ -76,7 +78,7 @@
   text-transform:uppercase;
 }
 
-.pc26-user-hero__search .pc26-live-search{position:relative;width:100%;min-width:0}
+.pc26-user-hero__search .pc26-live-search{position:relative;width:100%;min-width:0;height:58px}
 
 .pc26-user-hero .pc26-hero-search{
   width:100%;
@@ -407,9 +409,9 @@ html[data-theme="dark"] .pc26-user-hero .pc26-live-results__all,.dark .pc26-user
   .pc26-user-hero__copy{grid-row:2;padding:22px 20px 20px;border-radius:0 0 14px 14px}
   .pc26-user-hero__copy h1{max-width:14ch;font-size:clamp(2rem,9.2vw,2.7rem);line-height:1}
   .pc26-user-hero__copy p{margin-top:13px;font-size:.94rem;line-height:1.5}
-  .pc26-user-hero__search{width:100%;margin-top:18px}
-  .pc26-user-hero__search:has(.pc26-live-search.is-open){min-height:61px}
+  .pc26-user-hero__search{width:100%;height:68px;flex-basis:68px;margin-top:18px}
   .pc26-user-hero__search-label{margin-bottom:6px;font-size:.62rem}
+  .pc26-user-hero__search .pc26-live-search{height:54px}
   .pc26-user-hero .pc26-hero-search{min-height:54px!important;grid-template-columns:19px minmax(0,1fr) 46px;padding:4px 4px 4px 13px!important;border-radius:13px!important}
   .pc26-user-hero .pc26-hero-search input{height:44px}
   .pc26-user-hero .pc26-live-search__submit{width:46px;min-width:46px;min-height:46px!important;padding:0!important;font-size:0}
@@ -422,6 +424,7 @@ html[data-theme="dark"] .pc26-user-hero .pc26-live-results__all,.dark .pc26-user
     right:10px;
     left:10px;
     width:auto;
+    height:54px;
   }
   .pc26-user-hero .pc26-live-search.is-open::before{
     content:"";
