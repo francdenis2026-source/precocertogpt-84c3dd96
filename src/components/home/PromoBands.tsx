@@ -1,15 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./PromoBands.css";
-import buscarImg from "../../assets/home-2026/promo-buscar-produto.jpg";
-import setoresImg from "../../assets/home-2026/promo-setores-organizados.jpg";
-import localImg from "../../assets/home-2026/promo-comercio-local.jpg";
 
 const stories = [
   {
     className: "pc26-promo__story--compare",
-    image: buscarImg,
-    alt: "Mãos segurando um celular para consultar preços em um corredor de mercado",
+    image: "/home-editorial-2026/campanha-homem-comparando-precos-v1.webp",
+    alt: "Homem comparando pelo celular o preço de um produto durante as compras no mercado",
     title: "O menor preço começa com uma busca.",
     text: "Consulte produtos, compare valores e saiba onde comprar antes de sair de casa.",
     action: "Buscar um produto",
@@ -17,8 +14,8 @@ const stories = [
   },
   {
     className: "pc26-promo__story--sectors",
-    image: setoresImg,
-    alt: "Compras da semana organizadas por setor sobre uma mesa clara",
+    image: "/home-editorial-2026/promo-compra-inteligente-app-v2.webp",
+    alt: "Casal organizando uma compra com apoio do celular em um supermercado",
     title: "Do mercado à farmácia, tudo organizado.",
     text: "Acesse mercearia, açougue, padaria, bebidas, higiene e outros setores em poucos toques.",
     action: "Explorar setores",
@@ -26,8 +23,8 @@ const stories = [
   },
   {
     className: "pc26-promo__story--stores",
-    image: localImg,
-    alt: "Comerciante local organizando caixas de hortifrúti na entrada da loja",
+    image: "/home-editorial-2026/promo-comercio-local-app-v2.webp",
+    alt: "Cliente em um estabelecimento local enquanto comerciante organiza produtos frescos",
     title: "Os estabelecimentos da cidade mais perto de você.",
     text: "Conheça lojas, catálogos e ofertas do comércio local em uma vitrine feita para Feijó.",
     action: "Conhecer estabelecimentos",

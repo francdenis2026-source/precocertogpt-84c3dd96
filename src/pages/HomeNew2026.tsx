@@ -23,7 +23,6 @@ import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeEmilCompact2026.css";
-import "./HomeViewportCompact2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -83,10 +82,9 @@ export function HomeNew2026() {
         <PromoBands />
         <CategoryBar />
         <StoreRail stores={catalog.stores} cycle={cycle} />
+        <Footer />
       </main>
-      <Footer />
       <BottomNav />
-
     </div>
   );
 }

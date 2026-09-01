@@ -1,10 +1,10 @@
-import { ArrowRight, BadgeCheck, MapPin, RefreshCw, Search, Store } from "lucide-react";
+import { ArrowRight, BadgeCheck, MapPin, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
 import "./HeroUserImage2026.css";
-import heroImg from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
+const HERO_IMAGE = "/hero-supermercado-mulher-comparando-2026.webp";
 
 type HeroUserImage2026Props = {
   products: Product[];
@@ -82,58 +82,17 @@ export function HeroUserImage2026({
           </div>
         </div>
 
-        <aside className="pc26-user-hero__media" aria-label="Como o PreçoCerto ajuda">
+        <div className="pc26-user-hero__media">
           <img
             className="pc26-user-hero__artwork"
-            src={heroImg}
-            alt="Cliente comparando o preço de um produto pelo celular dentro de um comércio de Feijó"
+            src={HERO_IMAGE}
+            alt="Mulher comparando um produto e preços pelo celular em um supermercado"
             width={1536}
             height={1024}
             fetchPriority="high"
             decoding="async"
           />
-          <div className="pc26-hero-panel">
-            <span className="pc26-hero-panel__tag">PreçoCerto · Feijó, Acre</span>
-            <ul className="pc26-hero-panel__list">
-              <li>
-                <RefreshCw aria-hidden="true" />
-                <span>
-                  <strong>Preços atualizados</strong>
-                  <small>Coletas verificadas nos comércios da cidade</small>
-                </span>
-              </li>
-              <li>
-                <Store aria-hidden="true" />
-                <span>
-                  <strong>Ofertas reais e locais</strong>
-                  <small>Somente estabelecimentos de Feijó cadastrados</small>
-                </span>
-              </li>
-              <li>
-                <Search aria-hidden="true" />
-                <span>
-                  <strong>Busca rápida e precisa</strong>
-                  <small>Compare o mesmo item em várias lojas</small>
-                </span>
-              </li>
-            </ul>
-            <div className="pc26-hero-panel__metrics">
-              <span>
-                <strong>{products.length || "—"}</strong>
-                <small>produtos</small>
-              </span>
-              <span>
-                <strong>{storeCount || "—"}</strong>
-                <small>lojas</small>
-              </span>
-              <span>
-                <strong>100%</strong>
-                <small>gratuito</small>
-              </span>
-            </div>
-          </div>
-        </aside>
-
+        </div>
       </div>
     </section>
   );

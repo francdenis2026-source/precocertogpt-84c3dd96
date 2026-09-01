@@ -53,27 +53,20 @@ export async function deleteAdminEstablishment(id:string,name:string,deleteDemoO
 }
 export async function setAdminProductPrice(productId:string,establishmentId:string,value:number){const r=await rpcMutation('admin_set_product_price',{_product_id:productId,_establishment_id:establishmentId,_value:value});return{error:r.error};}
 export async function deleteAdminProductPrice(productId:string,establishmentId:string){const r=await rpcMutation('admin_delete_product_price',{_product_id:productId,_establishment_id:establishmentId});return{error:r.error};}
-export async function uploadAdminProductImage(file:File,productKey:string){if(!supabase)return{url:null,error:'Supabase indisponível'};if(!file.type.startsWith('image/'))return{url:null,error:'Selecione um arquivo de imagem.'};if(file.size>5*1024*1024)return{url:null,error:'A imagem deve ter no máximo 5 MB.'};const ext=(file.name.split('.').pop()||'webp').toLowerCase().replace(/[^a-z0-9]/g,'');const safe=(productKey||'produto').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)||'produto';const path=`admin/${safe}-${Date.now()}.${ext}`;const{error}=await supabase.storage.from('products').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});if(error)return{url:null,error:error.message};const{data}=supabase.storage.from('products').getPublicUrl(path);return{url:data.publicUrl,error:null};}
-
-/**
- * Dados de vitrine da loja (cidade, endereço, horário, foto, WhatsApp).
- * As colunas são criadas em db/sql/fase2_ofertas_lojas_cidades.sql; enquanto
- * não existirem, a função devolve um aviso claro em vez de quebrar o painel.
- */
-export async function saveAdminEstablishmentDetails(id:string,input:{address?:string;city?:string;openingHours?:string;photoUrl?:string;whatsapp?:string}){
- if(!supabase)return{error:'Supabase indisponível'};
- const payload:Record<string,string|null>={address:input.address?.trim()||null};
- const optional:Record<string,string|null>={city:input.city?.trim()||null,opening_hours:input.openingHours?.trim()||null,photo_url:input.photoUrl?.trim()||null,whatsapp:input.whatsapp?.trim()||null};
- const{error}=await supabase.from('establishments').update({...payload,...optional}).eq('id',id);
- if(!error){invalidateAdminCatalog();return{error:null};}
- const text=(error.message||'').toLowerCase();
- if(text.includes('column')&&(text.includes('does not exist')||text.includes('schema cache'))){
-  const fallback=await supabase.from('establishments').update(payload).eq('id',id);
-  invalidateAdminCatalog();
-  return{error:fallback.error?fallback.error.message:'Endereço salvo. Para cidade, horário, foto e WhatsApp, execute db/sql/fase2_ofertas_lojas_cidades.sql no seu Supabase.'};
- }
- return{error:error.message};
+export async function saveAdminEstablishmentDetails(input:{establishmentId:string;address?:string;neighborhood?:string;city?:string;state?:string;whatsapp?:string;openingHours?:string;storefrontImageUrl?:string;shortDescription?:string}){
+ const r=await rpcMutation('admin_save_establishment_details',{_establishment_id:input.establishmentId,_address:input.address||null,_neighborhood:input.neighborhood||null,_city:input.city||'Feijó',_state:input.state||'AC',_whatsapp:input.whatsapp||null,_opening_hours:input.openingHours||null,_storefront_image_url:input.storefrontImageUrl||null,_short_description:input.shortDescription||null});
+ return {data:r.data as string|null,error:r.error};
 }
-
-/** Foto de fachada/vitrine da loja (bucket público de produtos). */
-export async function uploadAdminStorePhoto(file:File,storeKey:string){return uploadAdminProductImage(file,`loja-${storeKey}`);}
+export async function uploadAdminStorePhoto(file:File,storeKey:string){
+ if(!supabase)return{url:null,error:'Supabase indisponível'};
+ if(!file.type.startsWith('image/'))return{url:null,error:'Selecione uma imagem.'};
+ if(file.size>5*1024*1024)return{url:null,error:'A imagem deve ter no máximo 5 MB.'};
+ const ext=(file.name.split('.').pop()||'webp').toLowerCase().replace(/[^a-z0-9]/g,'');
+ const safe=(storeKey||'loja').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)||'loja';
+ const path=`vitrines/${safe}-${Date.now()}.${ext}`;
+ const{error}=await supabase.storage.from('storefronts').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});
+ if(error)return{url:null,error:error.message};
+ const{data}=supabase.storage.from('storefronts').getPublicUrl(path);
+ return{url:data.publicUrl,error:null};
+}
+export async function uploadAdminProductImage(file:File,productKey:string){if(!supabase)return{url:null,error:'Supabase indisponível'};if(!file.type.startsWith('image/'))return{url:null,error:'Selecione um arquivo de imagem.'};if(file.size>5*1024*1024)return{url:null,error:'A imagem deve ter no máximo 5 MB.'};const ext=(file.name.split('.').pop()||'webp').toLowerCase().replace(/[^a-z0-9]/g,'');const safe=(productKey||'produto').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)||'produto';const path=`admin/${safe}-${Date.now()}.${ext}`;const{error}=await supabase.storage.from('products').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});if(error)return{url:null,error:error.message};const{data}=supabase.storage.from('products').getPublicUrl(path);return{url:data.publicUrl,error:null};}
