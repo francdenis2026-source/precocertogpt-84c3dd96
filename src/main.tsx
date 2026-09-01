@@ -5,6 +5,7 @@ import "@fontsource-variable/outfit";
 import "@fontsource-variable/manrope";
 import "./styles/AppReset.css";
 import App from "./App";
+import { initializePwaRuntime } from "./lib/pwaRuntime";
 import { initializeSiteTheme } from "./lib/siteTheme";
 
 const appendStyle = (href: string, key: string, value: string) => {
@@ -50,11 +51,6 @@ const startNotifications = () => {
 window.setTimeout(startNotifications, 1_500);
 window.addEventListener("online", startNotifications, { once: true });
 
-if ("serviceWorker" in navigator && import.meta.env.PROD) {
-  window.addEventListener("load", () => {
-    void navigator.serviceWorker
-      .register("/sw.js", { updateViaCache: "none" })
-      .then(registration => registration.update())
-      .catch(() => {});
-  }, { once: true });
-}
+// Centraliza o ciclo do service worker. O runtime também remove registros
+// antigos em previews/iframes, evitando HTML ou chunks obsoletos e tela branca.
+initializePwaRuntime();
