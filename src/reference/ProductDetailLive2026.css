@@ -181,3 +181,7 @@
   .pdl-page *{animation:none!important;transition:none!important}
   .pdl-actions button:hover,.pdl-back a:hover,.pdl-compare__list a:hover{transform:none}
 }
+
+/* Garante o rodapé visível sem depender de reveals de scroll de outras telas */
+.pdl-page ~ footer,.pdl-page footer,.pdl-page footer *{opacity:1!important;transform:none!important;visibility:visible!important}
+.pdl-page footer{color:var(--pdl-text)}
