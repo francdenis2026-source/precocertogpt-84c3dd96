@@ -180,6 +180,7 @@ body::before {
 }
 
 /* As ações rápidas ficavam sob a hero; agora fluem como faixa própria. */
+.pc26-home-actions,
 .pc26-quick-actions,
 .pc26-home-quick {
   position: relative !important;
