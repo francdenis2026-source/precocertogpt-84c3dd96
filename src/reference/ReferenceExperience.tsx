@@ -324,6 +324,7 @@ function defaultBackBarTitle(pathname: string): string | undefined {
 
 export function PublicHeader({ current, backOnly = false, title, logo }: { current?: PublicSection; backOnly?: boolean; title?: string; logo?: string }) {
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" && window.scrollY > 10);
   const { count } = useBasket();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -333,9 +334,15 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
     "aria-current": activeSection === section ? ("page" as const) : undefined,
   });
   useEffect(() => { setMenu(false); }, [pathname]);
+  useEffect(() => {
+    const syncScrolledState = () => setScrolled(window.scrollY > 10);
+    syncScrolledState();
+    window.addEventListener("scroll", syncScrolledState, { passive: true });
+    return () => window.removeEventListener("scroll", syncScrolledState);
+  }, []);
   if (backOnly) {
     const barTitle = title ?? defaultBackBarTitle(pathname);
-    return <header className="ref-header ref-header--back-only">
+    return <header className={`ref-header ref-header--back-only${scrolled ? " is-scrolled" : ""}`} data-glass-header="true">
     <div className="ref-shell ref-header__inner">
       <div className="ref-header__back-row">
         <button className="ref-header__back" type="button" onClick={() => window.history.length > 1 ? navigate(-1) : navigate("/")} aria-label="Voltar para a página anterior">
@@ -350,8 +357,9 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
     </div>
   </header>;
   }
-  return <header className="ref-header">
+  return <header className={`ref-header${scrolled ? " is-scrolled" : ""}`} data-glass-header="true">
     <div className="ref-shell ref-header__inner">
+      <Link className="ref-header__app-brand" to="/" aria-label="Preço Certo, página inicial"><img src="/preco-certo-mark.svg?v=17" alt="" width="36" height="36"/><span><strong>Preço Certo</strong><small>Feijó, Acre</small></span></Link>
       <nav className="ref-nav" aria-label="Navegação principal">
         <Link {...activeProps("home")} to="/">Início</Link>
         <Link {...activeProps("sectors")} to="/explorar">Onde comprar</Link>

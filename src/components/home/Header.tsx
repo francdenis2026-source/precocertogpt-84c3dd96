@@ -12,6 +12,7 @@ const navItems = [
 
 export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" && window.scrollY > 10);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -28,6 +29,13 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
 
+  useEffect(() => {
+    const syncScrolledState = () => setScrolled(window.scrollY > 10);
+    syncScrolledState();
+    window.addEventListener("scroll", syncScrolledState, { passive: true });
+    return () => window.removeEventListener("scroll", syncScrolledState);
+  }, []);
+
   const openSearch = () => {
     setMenuOpen(false);
     if (pathname === "/") {
@@ -38,7 +46,7 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
   };
   const isCurrent = (to: string) => to === "/" ? pathname === "/" : pathname === to || pathname.startsWith(`${to}/`);
 
-  return <header className="pc26-header pc26-header--studio">
+  return <header className={`pc26-header pc26-header--studio${scrolled ? " is-scrolled" : ""}`} data-glass-header="true">
     <div className="pc26-shell pc26-header-studio">
       <Link className="pc26-header-studio__mobile-brand" to="/" aria-label="Preço Certo - página inicial">
         <img src="/preco-certo-mark.svg?v=17" alt="" width="38" height="38" />

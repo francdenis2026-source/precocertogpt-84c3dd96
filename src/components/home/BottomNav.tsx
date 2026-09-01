@@ -1,12 +1,12 @@
-import { Heart, Home, Search, ShoppingBasket, Store } from "lucide-react";
+import { Home, Search, ShoppingBasket, SlidersHorizontal, UserRound } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const items = [
   { to: "/", label: "Início", icon: Home },
   { to: "/buscar", label: "Buscar", icon: Search },
-  { to: "/estabelecimentos", label: "Lojas", icon: Store },
-  { to: "/cesta-inteligente", label: "Lista", icon: ShoppingBasket },
-  { to: "/favoritos", label: "Salvos", icon: Heart },
+  { to: "/explorar", label: "Explorar", icon: SlidersHorizontal },
+  { to: "/cesta-basica", label: "Cesta", icon: ShoppingBasket },
+  { to: "/minha-conta", label: "Conta", icon: UserRound },
 ];
 
 export function BottomNav() {
