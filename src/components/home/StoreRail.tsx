@@ -41,10 +41,9 @@ export function StoreRail({ stores, cycle }: { stores: StoreRow[]; cycle: number
             </div>
           </div>
           <div className="pc26-store-hero__visual" aria-hidden="true">
-            <span className="pc26-store-hero__halo" />
-            <i>{initials(lead.name)}</i>
-            <Store />
-            <small>Comércio de Feijó</small>
+            {/* Vite serves this optimized responsive hero directly from public/. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/home-editorial-2026/estabelecimento-comparador-hero-v2.webp" alt="" width="1600" height="1067" loading="lazy" decoding="async" />
           </div>
         </Link>
 
