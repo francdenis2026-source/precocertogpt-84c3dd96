@@ -398,3 +398,64 @@ body::before {
     transform: none !important;
   }
 }
+
+/* -------------------------------------------------- 9. Correções medidas
+ * Ajustes derivados de inspeção real do layout renderizado:
+ *  - a hero tinha min-height fixa menor que o conteúdo, o que fazia o card
+ *    de texto vazar por cima das ações rápidas;
+ *  - a foto do produto ficava num box de 104-144px, deixando o card
+ *    desproporcional; agora o box é estável e a imagem preenche;
+ *  - o botão de menu (hambúrguer) aparecia no desktop junto da navegação. */
+.pc26-user-hero__stage {
+  min-height: 0 !important;
+  grid-auto-rows: minmax(0, auto) !important;
+  align-items: stretch !important;
+}
+.pc26-user-hero,
+.pc26-user-hero__copy,
+.pc26-user-hero__media {
+  height: auto !important;
+}
+
+.pc26-home .pc26-product__image,
+.pc26-product__image {
+  aspect-ratio: auto !important;
+  height: 168px !important;
+  min-height: 168px !important;
+  max-height: 168px !important;
+  padding: 12px !important;
+}
+.pc26-home .pc26-product__image img,
+.pc26-product__image img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+.pc26-home .pc26-product,
+.pc26-product {
+  min-height: 0 !important;
+}
+.pc26-home .pc26-product__body {
+  min-height: 0 !important;
+}
+
+@media (min-width: 1024px) {
+  .pc26-header-studio__menu {
+    display: none !important;
+  }
+  .pc26-header-studio__nav {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .pc26-home .pc26-product__image,
+  .pc26-product__image {
+    height: 132px !important;
+    min-height: 132px !important;
+    max-height: 132px !important;
+    padding: 10px !important;
+  }
+}
