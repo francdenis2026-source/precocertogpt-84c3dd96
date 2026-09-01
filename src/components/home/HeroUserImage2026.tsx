@@ -1,10 +1,17 @@
 import { ArrowRight, MapPin, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
+import type { Product } from "../../data/catalog";
+import { LiveProductSearch } from "./LiveProductSearch";
 import "./HeroUserImage2026.css";
 
 const HERO_IMAGE = "/hero-supermercado-mulher-comparando-2026.webp";
 
-export function HeroUserImage2026() {
+type HeroUserImage2026Props = {
+  products: Product[];
+  loading?: boolean;
+};
+
+export function HeroUserImage2026({ products, loading = false }: HeroUserImage2026Props) {
   return (
     <section className="pc26-user-hero" aria-labelledby="pc26-campaign-title">
       <div className="pc26-user-hero__stage">
@@ -13,6 +20,11 @@ export function HeroUserImage2026() {
             Compare preços. <strong>Compre melhor em Feijó.</strong>
           </h1>
           <p>Descubra onde cada produto custa menos antes de sair de casa.</p>
+
+          <div className="pc26-user-hero__search">
+            <span className="pc26-user-hero__search-label">Pesquise e compare agora</span>
+            <LiveProductSearch id="price-search" products={products} loading={loading}/>
+          </div>
 
           <div className="pc26-user-hero__actions" aria-label="Ações principais">
             <Link className="pc26-user-hero__primary" to="/buscar">

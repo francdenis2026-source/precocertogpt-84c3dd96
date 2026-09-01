@@ -56,7 +56,7 @@ export function HomeNew2026() {
   return <div className="pc26-home pc26-home--recovered">
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
-      <HeroUserImage2026/>
+      <HeroUserImage2026 products={products} loading={loading}/>
       <BenefitsStrip/>
       <CategoryBar/>
       <PromoBands/>
