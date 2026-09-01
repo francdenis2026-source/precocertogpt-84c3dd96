@@ -2,29 +2,21 @@ import { useEffect, useMemo, useState } from "react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredRotation";
-import { BenefitsStrip } from "../components/home/BenefitsStrip";
-import { AppExperienceShowcase } from "../components/home/AppExperienceShowcase";
 import { BottomNav } from "../components/home/BottomNav";
 import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
+import { HomeQuickActions } from "../components/home/HomeQuickActions";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { PromoBands } from "../components/home/PromoBands";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
-import "./HomeFooterCompact2026.css";
-import "./HomeDensityPolish2026.css";
-import "./HomeThemeContrast2026.css";
-import "./HomeTaste2026.css";
-import "./HomeManualPolish2026.css";
-import "./HomeBelowHeroTaste2026.css";
 import "./HomeCatalogShowcase2026.css";
 import "./HomeUiUxProMax2026.css";
-import "./HomeHeroProfessional2026.css";
-import "./HomeThreeScreens2026.css";
 import "./HomeFinalRefinement2026.css";
+import "./HomeEmilCompact2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -59,20 +51,13 @@ export function HomeNew2026() {
   return <div className="pc26-home pc26-home--recovered">
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
-      <div className="pc26-home-screen pc26-home-screen--discover">
-        <HeroUserImage2026 products={products} loading={loading}/>
-        <BenefitsStrip/>
-      </div>
-      <div className="pc26-home-screen pc26-home-screen--explore">
-        <CategoryBar/>
-        <PromoBands/>
-        <AppExperienceShowcase/>
-      </div>
-      <div className="pc26-home-screen pc26-home-screen--compare">
-        <ProductGrid products={featured} loading={loading}/>
-        <StoreRail stores={catalog.stores} cycle={cycle}/>
-        <Footer/>
-      </div>
+      <HeroUserImage2026 products={products} loading={loading}/>
+      <HomeQuickActions/>
+      <ProductGrid products={featured} loading={loading}/>
+      <PromoBands/>
+      <CategoryBar/>
+      <StoreRail stores={catalog.stores} cycle={cycle}/>
+      <Footer/>
     </main>
     <BottomNav/>
   </div>;
