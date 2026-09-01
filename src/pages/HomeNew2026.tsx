@@ -23,6 +23,7 @@ import "./HomeBelowHeroTaste2026.css";
 import "./HomeCatalogShowcase2026.css";
 import "./HomeUiUxProMax2026.css";
 import "./HomeHeroProfessional2026.css";
+import "./HomeThreeScreens2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -57,15 +58,21 @@ export function HomeNew2026() {
   return <div className="pc26-home pc26-home--recovered">
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
-      <HeroUserImage2026 products={products} loading={loading}/>
-      <BenefitsStrip/>
-      <CategoryBar/>
-      <PromoBands/>
-      <AppExperienceShowcase/>
-      <ProductGrid products={featured} loading={loading}/>
-      <StoreRail stores={catalog.stores} cycle={cycle}/>
+      <div className="pc26-home-screen pc26-home-screen--discover">
+        <HeroUserImage2026 products={products} loading={loading}/>
+        <BenefitsStrip/>
+      </div>
+      <div className="pc26-home-screen pc26-home-screen--explore">
+        <CategoryBar/>
+        <PromoBands/>
+        <AppExperienceShowcase/>
+      </div>
+      <div className="pc26-home-screen pc26-home-screen--compare">
+        <ProductGrid products={featured} loading={loading}/>
+        <StoreRail stores={catalog.stores} cycle={cycle}/>
+        <Footer/>
+      </div>
     </main>
-    <Footer/>
     <BottomNav/>
   </div>;
 }
