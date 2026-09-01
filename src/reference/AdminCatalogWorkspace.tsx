@@ -83,7 +83,54 @@ function AuditPanel({setError}:{setError:(s:string)=>void}){
 }
 
 
-function StoreDialog({store,close,saved,setError}:{store:any;close:()=>void;saved:()=>void;setError:(s:string)=>void}){const[busy,setBusy]=useState(false);const submit=async(e:FormEvent<HTMLFormElement>)=>{e.preventDefault();setBusy(true);const fd=new FormData(e.currentTarget);const r=await saveAdminEstablishment({id:store.id||null,name:String(fd.get('name')||''),neighborhood:String(fd.get('neighborhood')||''),kind:String(fd.get('kind')||''),slug:String(fd.get('slug')||''),shortDescription:String(fd.get('description')||''),logoUrl:String(fd.get('logo')||''),isVerified:fd.get('verified')==='on',isDemo:fd.get('demo')==='on'});setBusy(false);if(r.error){setError(r.error);return;}saved()};return <div className="acw-modal" role="dialog" aria-modal="true"><form onSubmit={submit}><header><div><small>{store.id?'EDIÇÃO':'NOVO ESTABELECIMENTO'}</small><h2>{store.id?'Editar estabelecimento':'Cadastrar estabelecimento'}</h2></div><button type="button" onClick={close}><X/></button></header><div className="acw-form-grid"><label className="wide">Nome<input name="name" defaultValue={store.name||''} required/></label><label>Bairro<input name="neighborhood" defaultValue={store.neighborhood||''}/></label><label>Tipo de negócio<input name="kind" defaultValue={store.kind||''} placeholder="mercado, açougue, farmácia…"/></label><label>Slug<input name="slug" defaultValue={store.slug||''}/></label><label>URL da logomarca<input name="logo" defaultValue={store.logo_url||''}/></label><label className="wide">Descrição curta<textarea name="description" defaultValue={store.short_description||''}/></label><label className="wide check"><input type="checkbox" name="verified" defaultChecked={Boolean(store.is_verified)}/> Estabelecimento verificado</label><label className="wide check"><input type="checkbox" name="demo" defaultChecked={Boolean(store.is_demo)}/> Ambiente/estabelecimento de demonstração</label></div><footer><button type="button" className="ghost" onClick={close}>Cancelar</button><button disabled={busy}>{busy?'Salvando…':'Salvar estabelecimento'}</button></footer></form></div>}
+function StoreDialog({store,close,saved,setError}:{store:any;close:()=>void;saved:()=>void;setError:(s:string)=>void}){
+ const[busy,setBusy]=useState(false);
+ const[notice,setNotice]=useState('');
+ const[photo,setPhoto]=useState<string>(store.photo_url||'');
+ const uploadPhoto=async(file:File|null|undefined)=>{
+  if(!file)return;
+  setBusy(true);
+  const r=await uploadAdminStorePhoto(file,String(store.slug||store.name||'loja'));
+  setBusy(false);
+  if(r.error){setError(r.error);return;}
+  setPhoto(r.url||'');
+ };
+ const submit=async(e:FormEvent<HTMLFormElement>)=>{
+  e.preventDefault();
+  setBusy(true);setNotice('');
+  const fd=new FormData(e.currentTarget);
+  const base=await saveAdminEstablishment({id:store.id||null,name:String(fd.get('name')||''),neighborhood:String(fd.get('neighborhood')||''),kind:String(fd.get('kind')||''),slug:String(fd.get('slug')||''),shortDescription:String(fd.get('description')||''),logoUrl:String(fd.get('logo')||''),isVerified:fd.get('verified')==='on',isDemo:fd.get('demo')==='on'});
+  if(base.error){setBusy(false);setError(base.error);return;}
+  const storeId=store.id||base.data;
+  let warning='';
+  if(storeId){
+   const details=await saveAdminEstablishmentDetails(String(storeId),{address:String(fd.get('address')||''),city:String(fd.get('city')||''),openingHours:String(fd.get('hours')||''),photoUrl:photo,whatsapp:String(fd.get('whatsapp')||'')});
+   if(details.error)warning=details.error;
+  }
+  setBusy(false);
+  if(warning){setNotice(warning);return;}
+  saved();
+ };
+ return <div className="acw-modal" role="dialog" aria-modal="true"><form onSubmit={submit}><header><div><small>{store.id?'EDIÇÃO':'NOVO ESTABELECIMENTO'}</small><h2>{store.id?'Editar estabelecimento':'Cadastrar estabelecimento'}</h2></div><button type="button" onClick={close}><X/></button></header>
+  {notice&&<p className="acw-inline-notice">{notice}</p>}
+  <div className="acw-form-grid">
+   <label className="wide">Nome<input name="name" defaultValue={store.name||''} required/></label>
+   <label>Bairro<input name="neighborhood" defaultValue={store.neighborhood||''} placeholder="Centro, Esperança…"/></label>
+   <label>Cidade<input name="city" defaultValue={store.city||''} placeholder="Feijó, Manoel Urbano…"/></label>
+   <label>Tipo de negócio<input name="kind" defaultValue={store.kind||''} placeholder="mercado, açougue, farmácia…"/></label>
+   <label>Slug<input name="slug" defaultValue={store.slug||''}/></label>
+   <label className="wide">Endereço completo<input name="address" defaultValue={store.address||''} placeholder="Rua, número, referência"/></label>
+   <label>Horário de funcionamento<input name="hours" defaultValue={store.opening_hours||''} placeholder="Seg a sáb, 7h às 20h"/></label>
+   <label>WhatsApp<input name="whatsapp" defaultValue={store.whatsapp||''} placeholder="(68) 90000-0000"/></label>
+   <label>URL da logomarca<input name="logo" defaultValue={store.logo_url||''}/></label>
+   <label>Foto da loja<input type="file" accept="image/*" onChange={e=>void uploadPhoto(e.target.files?.[0])}/>{photo&&<img className="acw-store-photo-preview" src={photo} alt="Foto da loja"/>}</label>
+   <label className="wide">Descrição curta<textarea name="description" defaultValue={store.short_description||''}/></label>
+   <label className="wide check"><input type="checkbox" name="verified" defaultChecked={Boolean(store.is_verified)}/> Estabelecimento verificado</label>
+   <label className="wide check"><input type="checkbox" name="demo" defaultChecked={Boolean(store.is_demo)}/> Ambiente/estabelecimento de demonstração</label>
+  </div>
+  <footer><button type="button" className="ghost" onClick={close}>Cancelar</button><button disabled={busy}>{busy?'Salvando…':'Salvar estabelecimento'}</button></footer></form></div>
+}
+
 
 function GapsPanel({gaps,stores,selectedStore,setSelectedStore,onRefresh,setError}:{gaps:any[];stores:any[];selectedStore:string;setSelectedStore:(s:string)=>void;onRefresh:()=>Promise<void>;setError:(s:string)=>void}){const[busy,setBusy]=useState('');const add=async(g:any)=>{const raw=prompt(`Preço de ${g.product_name} em ${g.establishment_name}:`,g.reference_price?String(g.reference_price):'');if(!raw)return;const value=Number(raw.replace(',','.'));if(!value||value<=0)return;setBusy(`${g.establishment_id}-${g.product_id}`);const r=await setAdminProductPrice(g.product_id,g.establishment_id,value);setBusy('');if(r.error)setError(r.error);else await onRefresh()};return <><section className="acw-gap-hero"><div><small>INTELIGÊNCIA DE COBERTURA</small><h2>O que ainda falta em cada estabelecimento</h2><p>Produtos existentes em outras lojas, mas ausentes no estabelecimento selecionado.</p></div><label>Estabelecimento<select value={selectedStore} onChange={e=>setSelectedStore(e.target.value)}><option value="">Todos</option>{stores.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label></section><div className="acw-gap-list">{gaps.slice(0,300).map(g=><article key={`${g.establishment_id}-${g.product_id}`}><div><span>{g.category||'Produto'}</span><h3>{g.product_name}</h3><p>Falta em <strong>{g.establishment_name}</strong></p></div><div className="acw-gap-proof"><strong>{g.stores_with_product}</strong><small>outras lojas possuem</small></div><div><small>Referência</small><strong>{g.reference_price?money.format(Number(g.reference_price)):'—'}</strong></div><button disabled={busy===`${g.establishment_id}-${g.product_id}`} onClick={()=>void add(g)}><Tag/>{busy?'Salvando…':'Cadastrar preço'}</button></article>)}</div>{!gaps.length&&<p className="acw-empty">Nenhuma lacuna encontrada.</p>}</>}
 
