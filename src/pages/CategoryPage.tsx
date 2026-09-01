@@ -156,6 +156,11 @@ export function CategoryPage() {
 
           <CategoryOffers categorySlug={category || data.title} title={`Ofertas em ${data.title}`} />
 
+          <p className="category-city-link">
+            <Link to="/cidades">Ver lojas e preços por cidade</Link>
+          </p>
+
+
           {/* Produtos reais do catálogo */}
 
           <section className="category-section category-products">
