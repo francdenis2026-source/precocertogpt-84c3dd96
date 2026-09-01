@@ -203,11 +203,13 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
   const Icon = sector.icon;
   const stores = catalog ? sectorStores(catalog, sector) : [];
   const isPharmacy = sector.id === "pharmacies";
+  // Cada tipo de estabelecimento tem sua própria fotografia de hero.
+  const heroStyle = { "--sector-hero": `url(${sectorHeroImage(sector.id)})` } as CSSProperties;
 
   return <div className={`pharmacy-directory-page${isPharmacy ? " pharmacy-directory-page--pharmacies" : ""}`}>
     <PublicHeader backOnly title={sector.shortLabel} />
     <main id="conteudo-principal" className="pharmacy-directory">
-      {isPharmacy ? <header className="pharmacy-directory__hero">
+      {isPharmacy ? <header className="pharmacy-directory__hero pc26-sector-hero" style={heroStyle}>
         <div className="pharmacy-directory__hero-copy">
           <span><HeartPulse aria-hidden="true" /> SAÚDE PERTO DE VOCÊ</span>
           <h1>Farmácias em Feijó</h1>
@@ -217,7 +219,7 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
             <small aria-live="polite">{catalog ? `${stores.length} ${stores.length === 1 ? "estabelecimento" : "estabelecimentos"}` : "Atualizando diretório"}</small>
           </div>
         </div>
-      </header> : <header className="pharmacy-directory__heading">
+      </header> : <header className="pharmacy-directory__heading pc26-sector-hero" style={heroStyle}>
         <div>
           <span><Icon aria-hidden="true" /> {sector.eyebrow}</span>
           <h1>{sector.shortLabel}</h1>
