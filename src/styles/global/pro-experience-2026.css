@@ -819,3 +819,78 @@ html body .pc26-home .pc26-shell {
     width: calc(100% - 20px) !important;
   }
 }
+
+/* ── 10. Hero principal: fotografia + painel legível sobre a imagem ─────── */
+html body .pc26-user-hero__media {
+  position: relative !important;
+  display: block !important;
+  overflow: hidden !important;
+  isolation: isolate;
+  background: #0d1512 !important;
+}
+html body .pc26-user-hero__artwork {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 62% 40% !important;
+  z-index: 0;
+}
+html body .pc26-user-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 24, 20, 0.18) 0%,
+    rgba(8, 24, 20, 0.52) 45%,
+    rgba(6, 18, 15, 0.78) 100%
+  ) !important;
+}
+html body .pc26-user-hero__media .pc26-hero-panel {
+  position: relative !important;
+  z-index: 2;
+  height: 100%;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: clamp(16px, 2vw, 24px) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+html body .pc26-user-hero__media .pc26-hero-panel__tag {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #f4f7f4 !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  backdrop-filter: blur(8px);
+}
+html body .pc26-user-hero__media .pc26-hero-panel__list li {
+  background: rgba(12, 24, 20, 0.42) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(10px);
+}
+html body .pc26-user-hero__media .pc26-hero-panel__list li strong,
+html body .pc26-user-hero__media .pc26-hero-panel__metrics strong {
+  color: #ffffff !important;
+}
+html body .pc26-user-hero__media .pc26-hero-panel__list li small,
+html body .pc26-user-hero__media .pc26-hero-panel__metrics small {
+  color: rgba(238, 244, 240, 0.78) !important;
+}
+html body .pc26-user-hero__media .pc26-hero-panel svg {
+  color: #ffd166 !important;
+}
+html body .pc26-user-hero__media .pc26-hero-panel__metrics span {
+  background: rgba(12, 24, 20, 0.42) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+@media (max-width: 900px) {
+  html body .pc26-user-hero__media .pc26-hero-panel__list li:nth-child(n + 3) {
+    display: none !important;
+  }
+}
