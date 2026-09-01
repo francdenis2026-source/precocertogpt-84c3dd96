@@ -1,5 +1,5 @@
 import type { Product } from "./catalog";
-import { resolveProductImage } from "./productImageResolver";
+import { hasProfessionalProductPhoto, resolveProductImage } from "./productImageResolver";
 
 /** Duração de cada ciclo da vitrine. */
 export const ROTATION_MS = 60 * 60 * 1000;
@@ -55,20 +55,12 @@ const imageKey = (product: Product) =>
   resolveProductImage(product)?.split("?")[0].toLowerCase() ||
   `sem-imagem:${productKey(product)}`;
 
-// A vitrine dá preferência às imagens aprovadas no banco. Arquivos locais
-// continuam como contingência e o placeholder entra somente por último.
-const imagePriority = (product: Product) => {
-  const resolved = resolveProductImage(product);
-  if (product.image_url && resolved === product.image_url) return 0;
-  if (resolved) return 1;
-  return 2;
-};
-
 /**
  * Monta a vitrine do ciclo.
  *
- * A escolha inclui todo produto com preço válido. Quando não houver foto, o
- * card usa a ilustração genérica da marca em vez de excluir o item da vitrine.
+ * A homepage aceita somente produtos com preço e foto real vinculada ao
+ * cadastro. Fallbacks, imagens inferidas e placeholders ficam restritos à
+ * busca e aos catálogos, onde não comprometem a curadoria visual da vitrine.
  *
  * A repartição entre estabelecimentos evita que sortear produtos direto
  * favoreceria quem tem catálogo maior — uma loja com quarenta itens apareceria
@@ -77,7 +69,9 @@ const imagePriority = (product: Product) => {
  * aparecem antes que qualquer um repita.
  */
 export function buildFeatured(products: Product[], cycle: number, size = 6) {
-  const comPreco = products.filter((product) => product.minPrice > 0);
+  const comPreco = products.filter((product) =>
+    product.minPrice > 0 && hasProfessionalProductPhoto(product),
+  );
   // A ordenação torna o resultado independente da ordem recebida da API.
   const elegiveis = [...comPreco].sort((a, b) =>
     productKey(a).localeCompare(productKey(b), "pt-BR"),
@@ -114,9 +108,6 @@ export function buildFeatured(products: Product[], cycle: number, size = 6) {
     }
     if (!encontrou) break;
   }
-
-  // Preserva a ordem diversificada entre lojas dentro de cada faixa visual.
-  candidatos.sort((a, b) => imagePriority(a) - imagePriority(b));
 
   for (const produto of candidatos) {
     if (escolhidos.length >= size) break;
