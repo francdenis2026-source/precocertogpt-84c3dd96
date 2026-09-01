@@ -132,7 +132,10 @@ export function CategoryPage() {
         </header>
 
         <main className="category-content">
-          <section className="category-hero category-hero--band">
+          <section
+            className="category-hero category-hero--band pc26-sector-hero"
+            style={{ "--sector-hero": `url(${categoryHeroImage(slug || data.title)})` } as CSSProperties}
+          >
             <span className="category-hero__tag"><Tag size={14} /> {data.title} · Feijó, Acre</span>
             <h1>{data.title} em Feijó</h1>
             <p className="subtitle">{data.description}</p>
