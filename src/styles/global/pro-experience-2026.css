@@ -685,15 +685,38 @@ html .pc26-header-studio__tools {
   }
 }
 
-/* Trilha de produtos no mobile: cards com altura de conteúdo, sem vazio */
+/* Trilha de produtos no mobile: grade de 2 colunas estável (o carrossel
+   horizontal colapsava cards para 2px e deixava vazio no fim da seção) */
 @media (max-width: 760px) {
   html .pc26-products-premium__rail {
+    display: grid !important;
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-columns: auto !important;
     grid-auto-rows: max-content !important;
     align-items: start !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin-inline: 0 !important;
+    scroll-snap-type: none !important;
   }
   html .pc26-products-premium__rail .pc26-product {
+    width: auto !important;
+    min-width: 0 !important;
     height: auto !important;
     align-self: start !important;
+  }
+  html .pc26-products-premium__rail .pc26-product__image {
+    height: 132px !important;
+  }
+}
+@media (max-width: 420px) {
+  html .pc26-products-premium__rail {
+    grid-template-columns: 1fr !important;
+  }
+  html .pc26-products-premium__rail .pc26-product__image {
+    height: 160px !important;
   }
 }
 
