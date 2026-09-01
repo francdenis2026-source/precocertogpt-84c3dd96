@@ -35,6 +35,10 @@ const FALLBACK_PLACEMENT = "category_offer";
 
 let useFallback: boolean | null = null;
 
+/** Instrução exibida quando o banco ainda não recebeu a migração da Fase 2. */
+export const SETUP_MESSAGE =
+  "As ofertas ainda não têm tabela no banco. Execute db/sql/fase2_ofertas_lojas_cidades.sql no SQL Editor do seu Supabase e recarregue o painel.";
+
 function isMissingTable(message?: string | null) {
   const text = (message || "").toLowerCase();
   return text.includes("does not exist") || text.includes("could not find the table") || text.includes("schema cache");
@@ -194,7 +198,7 @@ export async function loadAdminOffers(): Promise<PlatformOffer[]> {
     .eq("placement", FALLBACK_PLACEMENT)
     .order("priority", { ascending: false })
     .limit(200);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(isMissingTable(error.message) ? SETUP_MESSAGE : error.message);
   return (data || []).map(fromFallbackRow);
 }
 
@@ -236,7 +240,7 @@ export async function saveOffer(value: OfferInput): Promise<{ error: string | nu
     ? supabase.from(FALLBACK_TABLE).update(payload).eq("id", value.id)
     : supabase.from(FALLBACK_TABLE).insert({ ...payload, created_by: profile.userId });
   const { error } = await request;
-  if (error) return { error: error.message };
+  if (error) return { error: isMissingTable(error.message) ? SETUP_MESSAGE : error.message };
   notifyOffersChanged();
   return { error: null };
 }

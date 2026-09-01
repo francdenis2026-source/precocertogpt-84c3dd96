@@ -14,7 +14,23 @@ export type Product = {
 };
 
 
-export type StoreRow = { id: string | number; slug: string; name: string; neighborhood: string; color: string; products: number; kind?: string };
+export type StoreRow = {
+  id: string | number;
+  slug: string;
+  name: string;
+  neighborhood: string;
+  color: string;
+  products: number;
+  kind?: string;
+  /** Dados de vitrine cadastrados no painel admin. */
+  address?: string;
+  logoUrl?: string;
+  city?: string;
+  openingHours?: string;
+  photoUrl?: string;
+  whatsapp?: string;
+};
+
 
 export type PlatformMetrics = { products: number; prices: number; stores: number };
 

@@ -15,7 +15,37 @@ type EstablishmentRow = {
   name: string | null;
   neighborhood: string | null;
   brand_color: string | null;
+  kind?: string | null;
+  /** `address` é JSONB no banco (rua, número, bairro, cidade…) ou texto simples. */
+  address?: string | Record<string, unknown> | null;
+  logo_url?: string | null;
+  /** Colunas opcionais (criadas em db/sql/fase2_ofertas_lojas_cidades.sql). */
+  city?: string | null;
+  opening_hours?: string | null;
+  photo_url?: string | null;
+  whatsapp?: string | null;
 };
+
+
+/** Converte o endereço (JSONB ou texto) em uma linha legível para as vitrines. */
+function formatStoreAddress(raw: EstablishmentRow["address"]): string | undefined {
+  if (!raw) return undefined;
+  if (typeof raw === "string") return raw.trim() || undefined;
+  const get = (key: string) => {
+    const value = raw[key];
+    return typeof value === "string" && value.trim() ? value.trim() : "";
+  };
+  const street = [get("street"), get("number")].filter(Boolean).join(", ");
+  const line = [street, get("neighborhood"), get("city")].filter(Boolean).join(" · ");
+  return line || undefined;
+}
+
+/** Cidade declarada no endereço estruturado, quando existir. */
+function storeCityFrom(raw: EstablishmentRow["address"]): string | undefined {
+  if (!raw || typeof raw === "string") return undefined;
+  const value = raw.city;
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
 
 type ProductRow = {
   id: string | number;
@@ -227,7 +257,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
   try {
     const [establishments, products, prices] = await Promise.all([
-      fetchAllRows("establishments", "id, name, neighborhood, brand_color", "id"),
+      fetchAllRows("establishments", "id, name, neighborhood, brand_color, kind, address, logo_url", "id"),
       fetchAllRows("products", "id, name, brand, category, size, unit, barcode, image_url", "id"),
       fetchAllRows("prices", "id, product_id, establishment_id, value, previous_value, captured_at", "id"),
     ]);
@@ -248,6 +278,23 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
     if (!storeRows.length || !productRows.length || !priceRows.length) {
       return { ...local, source: "local", error: "Banco conectado, porém sem dados de preços." };
     }
+
+    /**
+     * Colunas opcionais de vitrine (cidade, horário, foto, WhatsApp). Só existem
+     * depois de rodar db/sql/fase2_ofertas_lojas_cidades.sql — por isso a
+     * consulta é separada e falha em silêncio quando ainda não foram criadas.
+     */
+    const storeExtras = new Map<string, Partial<EstablishmentRow>>();
+    try {
+      const { data: extraRows } = await supabase!
+        .from("establishments")
+        .select("id, city, opening_hours, photo_url, whatsapp")
+        .limit(2000);
+      for (const row of (extraRows ?? []) as EstablishmentRow[]) storeExtras.set(String(row.id), row);
+    } catch {
+      /* colunas ainda não criadas: as páginas seguem com os dados básicos */
+    }
+
 
     const q = normalizeCatalogTerm(query);
     const storesById = new Map(storeRows.map(store => [String(store.id), store]));
@@ -379,14 +426,26 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
         String(a.id).localeCompare(String(b.id)));
 
     const stores: StoreRow[] = storeRows
-      .map(store => ({
-        id: store.id,
-        slug: storeSlugById.get(String(store.id)) || String(store.id),
-        name: store.name ?? "Estabelecimento",
-        neighborhood: store.neighborhood ?? "—",
-        color: store.brand_color ?? "#1473E6",
-        products: productIdsByStore.get(String(store.id))?.size ?? 0,
-      }))
+      .map(store => {
+        const extra = storeExtras.get(String(store.id));
+        return {
+          id: store.id,
+          slug: storeSlugById.get(String(store.id)) || String(store.id),
+          name: store.name ?? "Estabelecimento",
+          neighborhood: store.neighborhood ?? "—",
+          color: store.brand_color ?? "#1473E6",
+          kind: store.kind ?? undefined,
+          address: formatStoreAddress(store.address),
+          logoUrl: store.logo_url ?? undefined,
+          city: storeCityFrom(store.address) ?? extra?.city ?? undefined,
+
+          openingHours: extra?.opening_hours ?? undefined,
+          photoUrl: extra?.photo_url ?? undefined,
+          whatsapp: extra?.whatsapp ?? undefined,
+          products: productIdsByStore.get(String(store.id))?.size ?? 0,
+        };
+      })
+
       .sort((a, b) => {
         const aHasCatalog = a.products > 0 ? 1 : 0;
         const bHasCatalog = b.products > 0 ? 1 : 0;
