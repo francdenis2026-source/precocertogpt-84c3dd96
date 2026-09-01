@@ -208,14 +208,27 @@ export function CityStoresPage() {
             {data.stores.map(store => (
               <li key={String(store.id)}>
                 <Link to={`/estabelecimento/${store.slug}`}>
-                  <span className="city-store-dot" style={{ background: store.color }} aria-hidden="true" />
+                  {store.photoUrl || store.logoUrl ? (
+                    <img
+                      className="city-store-photo"
+                      src={store.photoUrl || store.logoUrl}
+                      alt={`Fachada de ${store.name}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span className="city-store-dot" style={{ background: store.color }} aria-hidden="true" />
+                  )}
                   <strong>{store.name}</strong>
-                  <small>{store.neighborhood}</small>
+                  <small>{[store.neighborhood, store.city].filter(Boolean).join(" · ")}</small>
+                  {store.address && <span className="city-store-address">{store.address}</span>}
+                  {store.openingHours && <span className="city-store-hours">{store.openingHours}</span>}
                   <em>{store.products} produtos com preço</em>
                 </Link>
               </li>
             ))}
           </ul>
+
         )}
       </section>
 
