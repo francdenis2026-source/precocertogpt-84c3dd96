@@ -9,13 +9,13 @@
   position: sticky;
   top: 0;
   z-index: 60;
-  background: hsl(var(--background) / 0.92);
+  background: var(--px-surface);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid hsl(var(--border));
+  border-bottom: 1px solid var(--px-line);
 }
 .ref-header.is-scrolled,
 .ref-header--back-only.is-scrolled {
-  box-shadow: 0 12px 30px -24px hsl(var(--foreground) / 0.7);
+  box-shadow: var(--px-shadow-lg);
 }
 
 /* Barra de voltar das páginas internas. */
@@ -39,9 +39,9 @@
   min-height: 38px;
   padding: 0 14px 0 10px;
   border-radius: 999px;
-  border: 1px solid hsl(var(--border));
-  background: hsl(var(--card));
-  color: hsl(var(--foreground));
+  border: 1px solid var(--px-line);
+  background: var(--px-surface);
+  color: var(--px-ink);
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
@@ -51,13 +51,13 @@
   height: 16px;
 }
 .ref-header__back:hover {
-  border-color: hsl(var(--primary) / 0.45);
+  border-color: var(--px-brand-soft);
 }
 .ref-header__context-title {
   display: block;
   font-size: 0.95rem;
   font-weight: 600;
-  color: hsl(var(--foreground));
+  color: var(--px-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -70,9 +70,9 @@
   min-height: 38px;
   padding: 0 14px;
   border-radius: 999px;
-  border: 1px solid hsl(var(--primary) / 0.35);
-  background: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
+  border: 1px solid var(--px-brand-soft);
+  background: var(--px-brand-soft);
+  color: var(--px-brand);
   font-size: 0.86rem;
   font-weight: 600;
   text-decoration: none;
@@ -82,11 +82,11 @@
   height: 16px;
 }
 .ref-header__home:hover {
-  background: hsl(var(--primary) / 0.16);
+  background: var(--px-brand-soft);
 }
 .ref-header__back:focus-visible,
 .ref-header__home:focus-visible {
-  outline: 2px solid hsl(var(--ring));
+  outline: 2px solid var(--px-brand);
   outline-offset: 2px;
 }
 @media (max-width: 520px) {
@@ -116,24 +116,24 @@ footer[data-footer-hidden="true"] {
   height: min(100%, 900px) !important;
 }
 .pc-gate__panel {
-  border: 1px solid hsl(var(--border)) !important;
+  border: 1px solid var(--px-line) !important;
   border-radius: 24px !important;
-  background: hsl(var(--card)) !important;
-  box-shadow: 0 30px 70px -44px hsl(var(--foreground) / 0.65) !important;
+  background: var(--px-surface) !important;
+  box-shadow: var(--px-shadow-lg) !important;
 }
 .pc-gate__cta {
-  background: hsl(var(--primary)) !important;
-  color: hsl(var(--primary-foreground)) !important;
-  border: 1px solid hsl(var(--primary)) !important;
+  background: var(--px-brand) !important;
+  color: var(--px-brand-ink) !important;
+  border: 1px solid var(--px-brand) !important;
   text-decoration: none !important;
 }
 .pc-gate__ghost {
-  background: hsl(var(--background)) !important;
-  color: hsl(var(--foreground)) !important;
-  border: 1px solid hsl(var(--border)) !important;
+  background: var(--px-surface-soft) !important;
+  color: var(--px-ink) !important;
+  border: 1px solid var(--px-line) !important;
   text-decoration: none !important;
 }
 .pc-gate__benefits li {
-  border: 1px solid hsl(var(--border)) !important;
-  background: hsl(var(--background)) !important;
+  border: 1px solid var(--px-line) !important;
+  background: var(--px-surface-soft) !important;
 }
