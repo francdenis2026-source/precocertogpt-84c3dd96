@@ -1019,3 +1019,72 @@ html body .pc26-store-hero b {
   position: relative;
   z-index: 2;
 }
+
+/* ── 13. Hero dinâmico por tipo de estabelecimento ──────────────────────── */
+html body .pc26-sector-hero {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 18px;
+  background-image:
+    linear-gradient(
+      100deg,
+      rgba(6, 20, 17, 0.94) 0%,
+      rgba(6, 20, 17, 0.82) 46%,
+      rgba(6, 20, 17, 0.5) 100%
+    ),
+    var(--sector-hero) !important;
+  background-size: cover, cover !important;
+  background-position: center, center 42% !important;
+  background-repeat: no-repeat, no-repeat !important;
+}
+html body .pc26-sector-hero > * {
+  position: relative;
+  z-index: 1;
+}
+html body .pc26-sector-hero h1,
+html body .pc26-sector-hero h2,
+html body .pc26-sector-hero p,
+html body .pc26-sector-hero span,
+html body .pc26-sector-hero small,
+html body .pc26-sector-hero strong,
+html body .pc26-sector-hero .info-item {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+html body .pc26-sector-hero p,
+html body .pc26-sector-hero small {
+  color: rgba(234, 243, 239, 0.9) !important;
+  -webkit-text-fill-color: rgba(234, 243, 239, 0.9) !important;
+}
+html body .pc26-sector-hero svg {
+  color: #f4d58a !important;
+}
+html body .pc26-sector-hero .btn {
+  position: relative;
+  z-index: 2;
+}
+html body .pc26-sector-hero .info-item {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+/* ── 14. Fundo ambiente: arte distinta em modo claro e escuro ──────────── */
+html body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--pc26-ambient, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.6;
+}
+
+:root {
+  --pc26-ambient: url("/ambient-light.jpg");
+}
+html[data-theme="dark"] {
+  --pc26-ambient: url("/ambient-dark.jpg");
+}
