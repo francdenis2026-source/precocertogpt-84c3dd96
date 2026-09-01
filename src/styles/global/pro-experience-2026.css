@@ -1203,3 +1203,12 @@ html body .pc26-hero-panel__tag {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
+
+/* Contador de estabelecimentos dentro da faixa do setor */
+html body .pharmacy-directory__heading.pc26-sector-hero > p {
+  background: rgba(3, 11, 9, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  padding: 8px 14px !important;
+}
