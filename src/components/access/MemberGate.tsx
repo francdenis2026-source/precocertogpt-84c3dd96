@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BellRing, Heart, ShieldCheck, ShoppingBasket, Sparkles, TrendingDown } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../lib/supabase";
 import "./MemberGate.css";
 
 type GateState = "checking" | "member" | "visitor";
