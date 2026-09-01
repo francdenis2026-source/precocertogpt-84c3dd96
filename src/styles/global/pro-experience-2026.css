@@ -963,3 +963,52 @@ html body .pc26-promo .pc26-promo__copy p {
   color: rgba(238, 245, 241, 0.92) !important;
   -webkit-text-fill-color: rgba(238, 245, 241, 0.92) !important;
 }
+
+/* ── 12. Card de estabelecimento em destaque: legibilidade sobre a foto ── */
+html body .pc26-store-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+html body .pc26-store-hero__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 20, 17, 0.35) 0%,
+    rgba(6, 20, 17, 0.72) 55%,
+    rgba(5, 15, 13, 0.92) 100%
+  );
+}
+html body .pc26-store-hero__visual {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+}
+html body .pc26-store-hero__visual img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+html body .pc26-store-hero > *:not(.pc26-store-hero__visual) {
+  position: relative;
+  z-index: 1;
+}
+html body .pc26-store-hero h3,
+html body .pc26-store-hero strong,
+html body .pc26-store-hero p,
+html body .pc26-store-hero span,
+html body .pc26-store-hero small {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+html body .pc26-store-hero small {
+  color: rgba(233, 241, 237, 0.82) !important;
+  -webkit-text-fill-color: rgba(233, 241, 237, 0.82) !important;
+}
+html body .pc26-store-hero b {
+  position: relative;
+  z-index: 2;
+}
