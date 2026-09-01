@@ -175,10 +175,34 @@ function DirectoryFooter({ sector }: { sector: MarketplaceSector }) {
   </footer>;
 }
 
+function SectorProductList({ catalog, sector }: { catalog: CatalogPayload | null; sector: MarketplaceSector }) {
+  if (!catalog) return null;
+  const products = sectorProducts(catalog, sector).slice(0, 12);
+  if (!products.length) return null;
+  const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  return <section className="sector-product-list" aria-label={`Produtos de ${sector.shortLabel}`}>
+    <div className="sector-product-list__heading">
+      <div><span>PRODUTOS PUBLICADOS</span><h2>Itens com preço nesta categoria</h2></div>
+      <Link to="/buscar">Ver todos <ArrowRight aria-hidden="true" /></Link>
+    </div>
+    <div className="sector-product-list__grid">
+      {products.map(product => (
+        <Link key={product.id} className="sector-product-card" to={`/produto/${product.slug || product.id}`}>
+          <small>{[product.brand, product.size].filter(Boolean).join(" · ") || sector.shortLabel}</small>
+          <strong>{product.name}</strong>
+          <span className="sector-product-card__store"><Store aria-hidden="true" /> {product.establishment}</span>
+          <span className="sector-product-card__price"><em>Menor preço</em><b>{money(product.minPrice)}</b></span>
+        </Link>
+      ))}
+    </div>
+  </section>;
+}
+
 function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload | null; sector: MarketplaceSector }) {
   const Icon = sector.icon;
   const stores = catalog ? sectorStores(catalog, sector) : [];
   const isPharmacy = sector.id === "pharmacies";
+
   return <div className={`pharmacy-directory-page${isPharmacy ? " pharmacy-directory-page--pharmacies" : ""}`}>
     <PublicHeader backOnly title={sector.shortLabel} />
     <main id="conteudo-principal" className="pharmacy-directory">
