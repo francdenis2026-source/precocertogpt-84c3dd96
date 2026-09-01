@@ -423,10 +423,16 @@ html[data-theme="dark"] .pc26-home--recovered .pc26-header-studio__login {
   ) !important;
 }
 .pc26-home--recovered .pc26-user-hero__artwork {
+  /* O arquivo original tem uma auréola clara junto ao recorte da pessoa.
+     A composição por multiplicação integra somente essa borda ao fundo,
+     sem introduzir uma faixa branca entre a foto e a hero. */
+  display: block !important;
   object-position: 58% 31% !important;
-  filter: saturate(0.88) contrast(1.03) !important;
+  mix-blend-mode: multiply;
+  filter: saturate(0.9) contrast(1.04) brightness(1.01) !important;
 }
 html[data-theme="dark"] .pc26-home--recovered .pc26-user-hero__artwork {
+  mix-blend-mode: normal;
   filter: saturate(0.72) brightness(0.72) contrast(1.08) !important;
 }
 
