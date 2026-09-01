@@ -1,0 +1,108 @@
+/**
+ * Refinamentos de navegação interna: header fixo, barra "Voltar/Início"
+ * profissional e rodapé único nas páginas internas.
+ */
+
+/* Header sempre visível ao rolar, sem sobrepor o conteúdo. */
+.ref-header,
+.ref-header--back-only {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: hsl(var(--background) / 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.ref-header.is-scrolled,
+.ref-header--back-only.is-scrolled {
+  box-shadow: 0 12px 30px -24px hsl(var(--foreground) / 0.7);
+}
+
+/* Barra de voltar das páginas internas. */
+.ref-header--back-only .ref-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+}
+.ref-header__back-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.ref-header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 14px 0 10px;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ref-header__back svg {
+  width: 16px;
+  height: 16px;
+}
+.ref-header__back:hover {
+  border-color: hsl(var(--primary) / 0.45);
+}
+.ref-header__context-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: min(46vw, 420px);
+}
+.ref-header__home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--primary) / 0.35);
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ref-header__home svg {
+  width: 16px;
+  height: 16px;
+}
+.ref-header__home:hover {
+  background: hsl(var(--primary) / 0.16);
+}
+.ref-header__back:focus-visible,
+.ref-header__home:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+@media (max-width: 520px) {
+  .ref-header__home span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .ref-header__home {
+    padding: 0 11px;
+  }
+}
+
+/* Rodapé duplicado escondido pelo FooterSingleton. */
+footer[data-footer-hidden="true"] {
+  display: none !important;
+}

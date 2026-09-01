@@ -1,0 +1,201 @@
+.aom {
+  display: grid;
+  gap: 18px;
+}
+.aom__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.aom__head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: hsl(var(--foreground));
+}
+.aom__head p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+  max-width: 60ch;
+}
+.aom__notice {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid hsl(var(--primary) / 0.35);
+  background: hsl(var(--primary) / 0.08);
+  color: hsl(var(--foreground));
+  font-size: 0.85rem;
+}
+.aom__form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 18px;
+  background: hsl(var(--card));
+}
+.aom__form label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.aom__form input:not([type="checkbox"]) {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 10px;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.aom__form input:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 1px;
+}
+.aom__image > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.aom__image img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid hsl(var(--border));
+}
+.aom__check {
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  text-transform: none;
+  letter-spacing: normal;
+  color: hsl(var(--foreground));
+}
+.aom__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+}
+.aom__primary,
+.aom__ghost,
+.aom__danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.aom__primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.aom__primary[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+.aom__ghost {
+  border-color: hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+.aom__danger {
+  border-color: hsl(var(--destructive) / 0.4);
+  background: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+  padding: 0 12px;
+}
+.aom__primary svg,
+.aom__ghost svg,
+.aom__danger svg {
+  width: 16px;
+  height: 16px;
+}
+.aom__spin {
+  animation: aom-spin 0.9s linear infinite;
+}
+@keyframes aom-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.aom__list {
+  display: grid;
+  gap: 10px;
+}
+.aom__empty {
+  margin: 0;
+  font-size: 0.88rem;
+  color: hsl(var(--muted-foreground));
+}
+.aom__card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 14px;
+  background: hsl(var(--card));
+}
+.aom__card.is-off {
+  opacity: 0.55;
+}
+.aom__card img {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.aom__card strong {
+  display: block;
+  font-size: 0.95rem;
+  color: hsl(var(--foreground));
+}
+.aom__card span {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: hsl(var(--primary));
+}
+.aom__card span s {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+.aom__card small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.76rem;
+  color: hsl(var(--muted-foreground));
+}
+.aom__card-actions {
+  display: flex;
+  gap: 8px;
+}
+@media (max-width: 640px) {
+  .aom__card {
+    grid-template-columns: 1fr;
+  }
+  .aom__card-actions {
+    justify-content: flex-start;
+  }
+}

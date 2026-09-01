@@ -46,6 +46,7 @@ import {
 } from "../lib/adminCatalog";
 import { AdminCampaignManager } from "./AdminCampaignManager";
 import { AdminRadioManager } from "./AdminRadioManager";
+import { AdminOffersManager } from "./AdminOffersManager";
 import "./AdminControlCenter.css";
 import "./AdminControlCenterEnhancements.css";
 
@@ -73,6 +74,7 @@ type Section =
   | "overview"
   | "prices"
   | "campaigns"
+  | "offers"
   | "radio"
   | "merchants"
   | "orders"
@@ -80,7 +82,9 @@ type Section =
   | "reputation"
   | "audit";
 const sectionFromPath = (p: string): Section =>
-  p.includes("/precos")
+  p.includes("/ofertas")
+    ? "offers"
+    : p.includes("/precos")
     ? "prices"
     : p.includes("/banners")
       ? "campaigns"
@@ -252,6 +256,13 @@ export function AdminControlCenter() {
           >
             Banners e propagandas
           </Nav>
+          <Nav
+            to="/admin/ofertas"
+            active={section === "offers"}
+            icon={<Tag />}
+          >
+            Ofertas
+          </Nav>
           <Nav to="/admin/radio" active={section === "radio"} icon={<Radio />}>
             Rádio do site
           </Nav>
@@ -360,6 +371,7 @@ export function AdminControlCenter() {
         {section === "campaigns" && (
           <AdminCampaignManager query={query} onError={setError} />
         )}{" "}
+        {section === "offers" && <AdminOffersManager onError={message => setError(message ?? "")} />}{" "}
         {section === "radio" && <AdminRadioManager onError={setError} />}{" "}
         {section === "merchants" && (
           <Merchants
@@ -410,6 +422,7 @@ const titles = {
   overview: "Visão geral",
   prices: "Mapa e catálogo por estabelecimento",
   campaigns: "Banners e propagandas",
+  offers: "Ofertas",
   radio: "Rádio do site",
   merchants: "Comerciantes e solicitações",
   orders: "Pedidos da plataforma",
@@ -422,6 +435,7 @@ const subtitles = {
   prices:
     "Selecione um estabelecimento para visualizar e administrar os produtos cadastrados nele.",
   campaigns: "Crie, agende e controle a comunicação exibida no site.",
+  offers: "Cadastre preços promocionais com validade e imagem para as páginas de categoria.",
   radio: "Troque a emissora, o streaming e a API da música atual.",
   merchants: "Aprove cadastros e controle a operação das lojas.",
   orders: "Acompanhe pedidos e intervenha quando necessário.",
