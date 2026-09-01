@@ -108,6 +108,37 @@ function hasKnownImageMismatch(product: Product) {
   return Boolean(product.image_url && !normalize(product.image_url).includes("empada"));
 }
 
+const NON_PRODUCT_IMAGE_MARKERS = [
+  "placeholder",
+  "fallback",
+  "generic",
+  "category-",
+  "categoria-",
+  "product-default",
+  "sem-imagem",
+];
+
+/**
+ * Política estrita da homepage: somente fotos vinculadas ao cadastro real do
+ * produto. Imagens inferidas pelo nome, artes de categoria e placeholders não
+ * são aceitos na vitrine, mesmo quando ajudam em páginas de catálogo.
+ */
+export function hasProfessionalProductPhoto(product: Product) {
+  const raw = product.image_url?.trim();
+  if (!raw || hasKnownImageMismatch(product)) return false;
+  const normalizedUrl = raw.toLowerCase();
+  if (NON_PRODUCT_IMAGE_MARKERS.some(marker => normalizedUrl.includes(marker))) return false;
+  if (normalizedUrl.startsWith("data:image/svg") || normalizedUrl.endsWith(".svg")) return false;
+
+  try {
+    const url = new URL(raw, "https://precocerto.local");
+    const path = url.pathname.toLowerCase();
+    return /\.(avif|jpe?g|png|webp)$/i.test(path) || url.origin !== "https://precocerto.local";
+  } catch {
+    return false;
+  }
+}
+
 export function resolveProductImage(product: Product): string | undefined {
   const identity = normalize([product.name, product.brand, product.size].filter(Boolean).join(" "));
 
