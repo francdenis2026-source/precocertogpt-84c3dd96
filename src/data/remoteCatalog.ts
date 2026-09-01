@@ -15,7 +15,16 @@ type EstablishmentRow = {
   name: string | null;
   neighborhood: string | null;
   brand_color: string | null;
+  kind?: string | null;
+  address?: string | null;
+  logo_url?: string | null;
+  /** Colunas opcionais (criadas em db/sql/fase2_ofertas_lojas_cidades.sql). */
+  city?: string | null;
+  opening_hours?: string | null;
+  photo_url?: string | null;
+  whatsapp?: string | null;
 };
+
 
 type ProductRow = {
   id: string | number;
