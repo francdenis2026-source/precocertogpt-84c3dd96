@@ -1,0 +1,11 @@
+/*
+ * Canonical homepage cascade for the recovered 2026 experience.
+ * Keep the legacy refinement layers in this explicit order so HomeNew2026
+ * has a single CSS entry point and future publishes cannot reorder them by
+ * changing component imports independently.
+ */
+@import "./HomeProfessional2026.css";
+@import "./HomeCatalogShowcase2026.css";
+@import "./HomeUiUxProMax2026.css";
+@import "./HomeFinalRefinement2026.css";
+@import "./HomeEmilCompact2026.css";

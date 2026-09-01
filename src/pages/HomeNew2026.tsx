@@ -21,11 +21,7 @@ import { ProductGrid } from "../components/home/ProductGrid";
 import { PromoBands } from "../components/home/PromoBands";
 import { StoreRail } from "../components/home/StoreRail";
 import { useSiteTheme } from "../hooks/useSiteTheme";
-import "./HomeProfessional2026.css";
-import "./HomeCatalogShowcase2026.css";
-import "./HomeUiUxProMax2026.css";
-import "./HomeFinalRefinement2026.css";
-import "./HomeEmilCompact2026.css";
+import "./HomeRecovered2026.css";
 
 const initialCatalog = buildCatalog();
 
