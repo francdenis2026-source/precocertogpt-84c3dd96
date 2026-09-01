@@ -60,7 +60,7 @@ export function HomeNew2026() {
       <CategoryBar/>
       <PromoBands/>
       <ProductGrid products={featured} loading={loading}/>
-      <StoreRail stores={catalog.stores}/>
+      <StoreRail stores={catalog.stores} cycle={cycle}/>
     </main>
     <Footer/>
     <BottomNav/>
