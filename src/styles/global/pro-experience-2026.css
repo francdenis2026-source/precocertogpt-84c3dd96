@@ -671,26 +671,17 @@ html .pc26-header-studio__tools {
   min-width: 0;
 }
 
-/* Painel institucional da hero: no mobile mostra os três itens por completo */
+/* Hero mobile compacto: o painel institucional é conteúdo de desktop.
+   No celular ele estourava a moldura e invadia a seção seguinte. */
 @media (max-width: 760px) {
-  html .pc26-home--recovered .pc26-user-hero__media,
   html .pc26-user-hero__media {
-    min-height: 0 !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
+    display: none !important;
   }
-  html .pc26-hero-panel {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
+  html .pc26-user-hero__stage {
+    grid-template-columns: 1fr !important;
   }
-  html .pc26-hero-panel__list {
-    display: grid !important;
-    gap: 8px !important;
-  }
-  html .pc26-hero-panel__list li {
-    display: flex !important;
+  html .pc26-user-hero__copy {
+    border-radius: 14px !important;
   }
 }
 
