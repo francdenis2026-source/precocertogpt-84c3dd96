@@ -1,14 +1,16 @@
-const CACHE_VERSION = "20260830-hero-2";
+const CACHE_VERSION = "20260901-brand-campaigns-17";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
   "/",
   "/manifest.json",
-  "/preco-certo-mark.svg?v=16",
-  "/logo-preco-certo.svg?v=11",
-  "/logo-preco-certo-inversa.svg?v=11",
-  "/pwa-192x192.png?v=16",
-  "/pwa-512x512.png?v=16",
+  "/preco-certo-mark.svg?v=17",
+  "/logo-preco-certo.svg?v=17",
+  "/logo-preco-certo-inversa.svg?v=17",
+  "/pwa-192x192.png?v=17",
+  "/pwa-512x512.png?v=17",
+  "/home-editorial-2026/campanha-homem-comparando-precos-v1.webp",
+  "/home-editorial-2026/campanha-familia-precocerto-v1.webp",
   "/hero-preco-certo-comparacao-2026.webp?v=20260830-2",
 ];
 
