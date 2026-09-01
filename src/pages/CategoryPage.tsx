@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { sectorProducts } from "../data/sectorCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
+import { ProductThumb } from "../components/catalog/ProductThumb";
 import { categoryHeroImage } from "../data/sectorHeroImages";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import "./CategoryPage.css";
@@ -173,6 +174,7 @@ export function CategoryPage() {
               <div className="category-products__grid">
                 {products.map(product => (
                   <Link key={product.id} to={`/produto/${product.slug || product.id}`} className="category-product-card">
+                    <ProductThumb product={product} size="md" className="category-product-card__photo" />
                     <span className="category-product-card__meta">{[product.brand, product.size].filter(Boolean).join(" · ")}</span>
                     <strong className="category-product-card__name">{product.name}</strong>
                     <span className="category-product-card__store"><Store size={14} /> {product.establishment}</span>
@@ -183,6 +185,7 @@ export function CategoryPage() {
                     <span className="category-product-card__cta">Comparar em {product.storeCount} loja{product.storeCount > 1 ? "s" : ""}</span>
                   </Link>
                 ))}
+
               </div>
             ) : (
               <p className="category-products__empty">

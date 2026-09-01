@@ -423,3 +423,7 @@
 .category-city-link{margin:0;display:flex;justify-content:center}
 .category-city-link a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid var(--px-line,#e2e7ec);border-radius:999px;background:var(--px-surface,#fff);color:var(--px-brand,#0b6757);font-size:.88rem;font-weight:600;text-decoration:none}
 .category-city-link a:hover{border-color:var(--px-brand,#0b6757);text-decoration:underline}
+
+/* Foto real do produto nos cartões de categoria */
+.category-product-card__photo{margin-bottom:.65rem}
+.category-product-card.is-loading{min-height:250px}

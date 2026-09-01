@@ -34,7 +34,7 @@ import "./reference/LiveSearchOverlayStackFix2026.css";
 import "./reference/PublicExperiencePolish2026.css";
 
 const SearchDiscovery2026 = lazy(() => import("./reference/SearchDiscovery2026").then(module => ({ default: module.SearchDiscovery2026 })));
-const ProductDetailProfessional = lazy(() => import("./reference/ProductDetailProfessional").then(module => ({ default: module.ProductDetailProfessional })));
+const ProductDetailProfessional = lazy(() => import("./reference/ProductDetailLive2026").then(module => ({ default: module.ProductDetailLive2026 })));
 const StoreDetailProfessional = lazy(() => import("./reference/StoreDetailProfessional").then(module => ({ default: module.StoreDetailProfessional })));
 const CulturalProfilePage = lazy(() => import("./reference/CulturalProfilePage").then(module => ({ default: module.CulturalProfilePage })));
 const DorinhaEditorialPage = lazy(() => import("./reference/DorinhaEditorialPage").then(module => ({ default: module.DorinhaEditorialPage })));
