@@ -9,7 +9,7 @@
 .pc26-promo__story>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 420ms cubic-bezier(.2,.7,.2,1)}
 .pc26-promo__story--featured>img{object-position:57% center}
 .pc26-promo__story--local>img{object-position:68% 50%}
-.pc26-promo__story--basket>img{object-position:66% 50%}
+.pc26-promo__story--basket>img{object-position:66% 18%}
 .pc26-promo__story:hover>img{transform:scale(1.018)}
 .pc26-promo__shade{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,34,36,.94) 0%,rgba(6,34,36,.78) 38%,rgba(6,34,36,.22) 72%,rgba(6,34,36,.04) 100%)}
 .pc26-promo__story:not(.pc26-promo__story--featured) .pc26-promo__shade{background:linear-gradient(90deg,rgba(5,31,33,.91) 0%,rgba(5,31,33,.72) 48%,rgba(5,31,33,.22) 100%)}
