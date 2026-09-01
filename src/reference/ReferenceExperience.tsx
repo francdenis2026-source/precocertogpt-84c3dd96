@@ -6,6 +6,7 @@ import {
   Check, Code2, Eye, Heart, Info, LayoutDashboard, LockKeyhole, Mail, Map as MapIcon,
   MapPin, Menu, MessageCircle, Minus, Moon, PackageSearch, PiggyBank, Plus, Search, ShieldCheck, ShoppingBag, ShoppingBasket,
   ReceiptText, SlidersHorizontal, Store, Sun, Tag, TrendingDown, UserRound, UsersRound, WalletCards, X,
+  Home,
 } from "lucide-react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
@@ -353,7 +354,7 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
           {barTitle && <strong className="ref-header__context-title">{barTitle}</strong>}
         </div>}
       </div>
-      <div className="ref-header__actions">{pathname === "/" && <HeaderRadioPlayer />}<ThemeButton /></div>
+      <div className="ref-header__actions"><Link className="ref-header__home" to="/" aria-label="Ir para a página inicial"><Home aria-hidden="true" /><span>Início</span></Link>{pathname === "/" && <HeaderRadioPlayer />}<ThemeButton /></div>
     </div>
   </header>;
   }
