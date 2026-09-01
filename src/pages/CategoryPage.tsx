@@ -3,10 +3,34 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { 
   ArrowLeft, Phone, Store, Clock, MapPin, Search, 
   MessageSquare, Star, Send, Navigation, HelpCircle,
-  ChevronDown, ChevronUp
+  ChevronDown, ChevronUp, PackageSearch, Tag
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { fetchCatalog } from "../data/remoteCatalog";
+import { sectorProducts } from "../data/sectorCatalog";
+import type { CatalogPayload, Product } from "../data/catalog";
 import "./CategoryPage.css";
+
+/** Grupo de negócio (taxonomia real) usado para listar produtos de cada categoria. */
+const categoryGroup: Record<string, string> = {
+  pizzaria: "food",
+  lanchonete: "food",
+  sorveteria: "food",
+  conveniencia: "markets",
+  padaria: "bakery",
+  acougue: "butchers",
+  farmacia: "pharmacies",
+  mercantil: "markets",
+  frutaria: "markets",
+  papelaria: "other",
+  desapego: "other",
+  "moveis-imoveis": "other",
+  hotelaria: "services",
+};
+
+const money = (value: number) =>
+  value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
 
 const categoryData: Record<string, any> = {
   "pizzaria": { 
@@ -55,6 +79,31 @@ export function CategoryPage() {
     lng: -70.3533
   };
 
+  const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
+  const [loadingCatalog, setLoadingCatalog] = useState(true);
+  const [productQuery, setProductQuery] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    setLoadingCatalog(true);
+    fetchCatalog()
+      .then(result => { if (active) setCatalog(result); })
+      .catch(() => { if (active) setCatalog(null); })
+      .finally(() => { if (active) setLoadingCatalog(false); });
+    return () => { active = false; };
+  }, []);
+
+  const products = useMemo<Product[]>(() => {
+    if (!catalog) return [];
+    const groupId = categoryGroup[category || ""] || "other";
+    const scoped = sectorProducts(catalog, { id: groupId });
+    const base = scoped.length ? scoped : catalog.products;
+    const term = productQuery.trim().toLowerCase();
+    return base
+      .filter(product => !term || `${product.name} ${product.brand} ${product.establishment}`.toLowerCase().includes(term))
+      .slice(0, 24);
+  }, [catalog, category, productQuery]);
+
   const handleGetDirections = () => {
     const url = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`;
     window.open(url, '_blank');
@@ -71,19 +120,27 @@ export function CategoryPage() {
         <header className="category-header">
           <button onClick={() => navigate(-1)} className="back-btn"><ArrowLeft /> Voltar</button>
           <div className="category-search">
-            <input type="text" placeholder="Buscar estabelecimento..." />
+            <input
+              type="text"
+              placeholder="Buscar produto nesta categoria..."
+              value={productQuery}
+              onChange={event => setProductQuery(event.target.value)}
+              aria-label="Buscar produto nesta categoria"
+            />
             <Search size={16} />
           </div>
         </header>
 
         <main className="category-content">
-          <section className="category-hero">
+          <section className="category-hero category-hero--band">
+            <span className="category-hero__tag"><Tag size={14} /> {data.title} · Feijó, Acre</span>
             <h1>{data.title} em Feijó</h1>
             <p className="subtitle">{data.description}</p>
-            
+
             <div className="info-grid">
               <div className="info-item"><Clock size={20} /> <strong>Horário:</strong> {data.hours}</div>
               <div className="info-item"><MapPin size={20} /> <strong>Local:</strong> {data.address}</div>
+              <div className="info-item"><Store size={20} /> <strong>Itens listados:</strong> {loadingCatalog ? "carregando…" : products.length}</div>
             </div>
 
             <div className="contact-actions">
@@ -91,6 +148,37 @@ export function CategoryPage() {
               <a href={`https://wa.me/55${data.phone.replace(/\D/g, '')}`} target="_blank" className="btn btn-whatsapp">WhatsApp</a>
             </div>
           </section>
+
+          {/* Produtos reais do catálogo */}
+          <section className="category-section category-products">
+            <h3><PackageSearch className="section-icon" /> Produtos e preços reais</h3>
+            {loadingCatalog ? (
+              <div className="category-products__grid">
+                {[...Array(6)].map((_, i) => <div key={i} className="category-product-card is-loading" aria-hidden="true" />)}
+              </div>
+            ) : products.length ? (
+              <div className="category-products__grid">
+                {products.map(product => (
+                  <Link key={product.id} to={`/produto/${product.slug || product.id}`} className="category-product-card">
+                    <span className="category-product-card__meta">{[product.brand, product.size].filter(Boolean).join(" · ")}</span>
+                    <strong className="category-product-card__name">{product.name}</strong>
+                    <span className="category-product-card__store"><Store size={14} /> {product.establishment}</span>
+                    <span className="category-product-card__price">
+                      <small>Menor preço</small>
+                      <b>{money(product.minPrice)}</b>
+                    </span>
+                    <span className="category-product-card__cta">Comparar em {product.storeCount} loja{product.storeCount > 1 ? "s" : ""}</span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="category-products__empty">
+                Nenhum produto cadastrado nesta categoria ainda. Cadastre pelo painel administrativo em <Link to="/admin/catalogo">/admin/catalogo</Link>.
+              </p>
+            )}
+          </section>
+
+
 
           {/* Map Section */}
           <section className="category-section map-section">
