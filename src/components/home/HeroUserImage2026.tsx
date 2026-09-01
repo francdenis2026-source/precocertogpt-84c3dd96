@@ -1,11 +1,9 @@
-import { ArrowRight, BadgeCheck, MapPin, Search, Store } from "lucide-react";
+import { ArrowRight, BadgeCheck, MapPin, RefreshCw, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
-import heroArt from "../../assets/hero-precocerto-profissional-2026-09.jpg";
 import "./HeroUserImage2026.css";
 
-const HERO_IMAGE = heroArt;
 
 type HeroUserImage2026Props = {
   products: Product[];
