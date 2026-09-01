@@ -1,8 +1,8 @@
 /* The catalog-derived filter guards intentionally reconcile dependent controls after data changes. */
 /* eslint-disable react-hooks/set-state-in-effect */
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
-import { ArrowRight, BadgeCheck, Building2, ChevronDown, PackageSearch, RotateCcw, Search, SlidersHorizontal, Store, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, Clock3, ExternalLink, MapPin, PackageSearch, RotateCcw, Search, SlidersHorizontal, Store, TrendingDown, X } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { fetchSectorCatalog, productHasSectorOffer, sectorStores } from "../data/sectorCatalog";
@@ -20,6 +20,48 @@ const normalize=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/
 type SortMode="relevance"|"lowest"|"highest"|"name"|"stores";
 function ProductThumb({product}:{product:Product}){const src=resolveProductImage(product);return src?<img src={src} alt={product.name} width="76" height="70" loading="lazy"/>:<PackageSearch/>}
 
+function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>void}){
+ const closeRef=useRef<HTMLButtonElement>(null);
+ const dialogRef=useRef<HTMLElement>(null);
+ const image=resolveProductImage(product);
+ const offers=(product.offers?.length?product.offers:[{establishmentId:product.establishmentId,establishmentSlug:product.establishmentSlug,establishment:product.establishment,neighborhood:product.neighborhood,storeColor:product.storeColor,value:product.minPrice,capturedAt:product.capturedAt}]).slice().sort((a,b)=>a.value-b.value);
+ const lowest=offers[0]?.value??product.minPrice;
+ const highest=offers.at(-1)?.value??product.maxPrice;
+ const saving=Math.max(0,highest-lowest);
+ useEffect(()=>{
+  const previousOverflow=document.body.style.overflow;
+  document.body.style.overflow="hidden";
+  closeRef.current?.focus();
+  const onKeyDown=(event:KeyboardEvent)=>{
+   if(event.key==="Escape"){onClose();return}
+   if(event.key!=="Tab"||!dialogRef.current)return;
+   const focusable=Array.from(dialogRef.current.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])'));
+   if(!focusable.length)return;
+   const first=focusable[0],last=focusable.at(-1)!;
+   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+   else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+  };
+  window.addEventListener("keydown",onKeyDown);
+  return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",onKeyDown)};
+ },[onClose]);
+ return <div className="search26-modal" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)onClose()}}>
+  <section ref={dialogRef} className="search26-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search26-modal-title" aria-describedby="search26-modal-description">
+   <header className="search26-modal__topbar"><div><span>COMPARAÇÃO LOCAL</span><small>Preços encontrados em Feijó</small></div><button ref={closeRef} type="button" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button></header>
+   <div className="search26-modal__content">
+    <aside className="search26-modal__summary"><div className="search26-modal__image">{image?<img src={image} alt={product.name}/>:<PackageSearch aria-hidden="true"/>}</div><span>{product.category} · {product.brand}</span><h2 id="search26-modal-title">{product.name}</h2><p id="search26-modal-description">{product.size||product.unit} · comparação em {offers.length} {offers.length===1?"estabelecimento":"estabelecimentos"}</p>
+     <div className="search26-modal__best"><small>Melhor preço encontrado</small><strong>{brl.format(lowest)}</strong><span><BadgeCheck aria-hidden="true"/> Oferta mais econômica</span></div>
+     {saving>0&&<div className="search26-modal__saving"><TrendingDown aria-hidden="true"/><span>Escolhendo a melhor oferta, você economiza até <strong>{brl.format(saving)}</strong>.</span></div>}
+    </aside>
+    <div className="search26-modal__stores"><div className="search26-modal__stores-head"><div><span>ONDE ENCONTRAR</span><h3>Preços por estabelecimento</h3></div><small>Do menor para o maior</small></div>
+     <div className="search26-modal__offer-list">{offers.map((offer,index)=><Link to={`/estabelecimento/${offer.establishmentSlug||offer.establishmentId}`} className={index===0?"is-best":undefined} key={`${offer.establishmentId}-${offer.value}`} onClick={onClose}><i style={{backgroundColor:offer.storeColor||"#14795d"}}><Store aria-hidden="true"/></i><span><strong>{offer.establishment||"Comércio local"}</strong><small><MapPin aria-hidden="true"/>{offer.neighborhood||"Feijó-AC"}</small></span><div><b>{brl.format(offer.value)}</b>{index===0&&<em>Melhor preço</em>}</div><ArrowRight aria-hidden="true"/></Link>)}</div>
+     <div className="search26-modal__freshness"><Clock3 aria-hidden="true"/><span>Preços informativos. Confirme a disponibilidade no estabelecimento antes de comprar.</span></div>
+     <footer><Link className="search26-modal__secondary" to={`/produto/${product.slug||product.id}`} onClick={onClose}>Ver página completa <ExternalLink aria-hidden="true"/></Link><button type="button" onClick={onClose}>Continuar pesquisando <Search aria-hidden="true"/></button></footer>
+    </div>
+   </div>
+  </section>
+ </div>
+}
+
 export function SearchDiscovery2026(){
  const pageRef=useRef<HTMLDivElement>(null);
  const[params,setParams]=useSearchParams();
@@ -29,7 +71,8 @@ export function SearchDiscovery2026(){
  const[sector,setSector]=useState<MarketplaceSectorId>((getMarketplaceSector(params.get("setor"))?.id||"all") as MarketplaceSectorId);
  const[store,setStore]=useState(params.get("loja")||"all"),[category,setCategory]=useState(params.get("categoria")||"all"),[neighborhood,setNeighborhood]=useState(params.get("bairro")||"all");
  const[minPrice,setMinPrice]=useState(params.get("min")||""),[maxPrice,setMaxPrice]=useState(params.get("max")||"");
- const[sort,setSort]=useState<SortMode>((params.get("ordem") as SortMode)||"relevance"),[filtersOpen,setFiltersOpen]=useState(false),[visible,setVisible]=useState(8);
+ const[sort,setSort]=useState<SortMode>((params.get("ordem") as SortMode)||"relevance"),[filtersOpen,setFiltersOpen]=useState(false),[visible,setVisible]=useState(8),[selectedProduct,setSelectedProduct]=useState<Product|null>(null);
+ const lastProductTrigger=useRef<HTMLElement|null>(null);
  useEffect(()=>{let active=true;void fetchSectorCatalog().then(data=>{if(active)setCatalog(data)}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[]);
  useEffect(()=>{const timer=window.setTimeout(()=>{const next=query.trim();setAppliedQuery(next);setVisible(8);setParams(current=>{const updated=new URLSearchParams(current);if(next)updated.set("q",next);else updated.delete("q");return updated},{replace:true})},180);return()=>window.clearTimeout(timer)},[query,setParams]);
  const activeSector=getMarketplaceSector(sector);
@@ -39,14 +82,16 @@ export function SearchDiscovery2026(){
  const activeFilters=[sector!=="all",store!=="all",category!=="all",neighborhood!=="all",Boolean(minPrice),Boolean(maxPrice)].filter(Boolean).length;
  const hasRequest=Boolean(appliedQuery.trim())||activeFilters>0;
  const results=useMemo(()=>{if(!catalog||!hasRequest)return[];const min=Number(minPrice.replace(",",".")),max=Number(maxPrice.replace(",","."));const rows=catalog.products.map(product=>({product,score:productSearchScore(product,appliedQuery)})).filter(({product,score:rank})=>{if(appliedQuery.trim()&&rank<=0)return false;if(activeSector&&!productHasSectorOffer(product,catalog,activeSector))return false;if(store!=="all"&&String(product.establishmentId)!==store&&!product.offers?.some(o=>String(o.establishmentId)===store))return false;if(category!=="all"&&product.category!==category)return false;if(neighborhood!=="all"&&normalize(product.neighborhood)!==normalize(neighborhood)&&!product.offers?.some(o=>normalize(o.neighborhood)===normalize(neighborhood)))return false;if(Number.isFinite(min)&&min>0&&product.minPrice<min)return false;if(Number.isFinite(max)&&max>0&&product.minPrice>max)return false;return true});rows.sort((a,b)=>sort==="lowest"?a.product.minPrice-b.product.minPrice:sort==="highest"?b.product.minPrice-a.product.minPrice:sort==="name"?a.product.name.localeCompare(b.product.name,"pt-BR"):sort==="stores"?(b.product.storeCount||0)-(a.product.storeCount||0):b.score-a.score||a.product.minPrice-b.product.minPrice);return rows.map(r=>r.product)},[catalog,hasRequest,appliedQuery,activeSector,store,category,neighborhood,minPrice,maxPrice,sort]);
+ const featuredProducts=useMemo(()=>catalog?.products.slice().sort((a,b)=>(b.storeCount||0)-(a.storeCount||0)||a.minPrice-b.minPrice).slice(0,4)??[],[catalog]);
  useEffect(()=>setVisible(8),[appliedQuery,sector,store,category,neighborhood,minPrice,maxPrice,sort]);
  useEffect(()=>{if(store!=="all"&&!stores.some(s=>String(s.id)===store))setStore("all")},[stores,store]);
  useEffect(()=>{if(category!=="all"&&!categories.includes(category))setCategory("all")},[categories,category]);
- useEffect(()=>{if(neighborhood!=="all"&&!neighborhoods.includes(neighborhood))setNeighborhood("all")},[neighborhoods,neighborhood]);
  const syncUrl=(nextQuery=appliedQuery)=>{const next:Record<string,string>={};if(nextQuery.trim())next.q=nextQuery.trim();if(sector!=="all")next.setor=sector;if(store!=="all")next.loja=store;if(category!=="all")next.categoria=category;if(neighborhood!=="all")next.bairro=neighborhood;if(minPrice)next.min=minPrice;if(maxPrice)next.max=maxPrice;if(sort!=="relevance")next.ordem=sort;setParams(next,{replace:true})};
  const submit=(e:FormEvent)=>{e.preventDefault();const next=query.trim();setAppliedQuery(next);setVisible(8);syncUrl(next)};
  const applyFilters=()=>{setAppliedQuery(query.trim());setVisible(8);syncUrl(query.trim());setFiltersOpen(false)};
  const reset=()=>{setQuery("");setAppliedQuery("");setSector("all");setStore("all");setCategory("all");setNeighborhood("all");setMinPrice("");setMaxPrice("");setSort("relevance");setVisible(8);setParams({}, {replace:true})};
+ const openProduct=(product:Product,event:MouseEvent<HTMLElement>)=>{lastProductTrigger.current=event.currentTarget;setSelectedProduct(product)};
+ const closeProduct=()=>{setSelectedProduct(null);window.setTimeout(()=>lastProductTrigger.current?.focus(),0)};
  useGSAP(()=>{
   if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   gsap.from(".search26-hero > *, .search26-search, .search26-filterbar",{y:16,opacity:0,duration:.55,stagger:.06,ease:"power3.out"});
@@ -56,6 +101,6 @@ export function SearchDiscovery2026(){
  <form className="search26-search" onSubmit={submit}><Search aria-hidden="true"/><label className="search26-input-label" htmlFor="product-search">Buscar produto, marca ou estabelecimento</label><input id="product-search" name="produto" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ex.: arroz, café, Mercado X…" autoComplete="off" aria-describedby="search26-live-hint"/>{query&&<button className="search26-clear" type="button" onClick={()=>setQuery("")} aria-label="Limpar busca"><X aria-hidden="true"/></button>}<button className="pc-btn pc-btn--primary" disabled={!query.trim()&&activeFilters===0}>Buscar <ArrowRight/></button><span id="search26-live-hint" className="sr-only">Os resultados são atualizados automaticamente enquanto você digita.</span></form>
  <section className="search26-filterbar"><button type="button" className={filtersOpen||activeFilters?"is-active":""} onClick={()=>setFiltersOpen(v=>!v)}><SlidersHorizontal/>Filtrar busca{activeFilters>0&&<b>{activeFilters}</b>}<ChevronDown/></button>{hasRequest&&<div className="search26-quick"><label><select value={sort} onChange={e=>setSort(e.target.value as SortMode)} aria-label="Ordenar resultados"><option value="relevance">Mais relevantes</option><option value="lowest">Menor preço</option><option value="highest">Maior preço</option><option value="stores">Mais estabelecimentos</option><option value="name">Nome A–Z</option></select></label></div>}{hasRequest&&<button type="button" className="search26-reset" onClick={reset}><RotateCcw/>Nova busca</button>}</section>
  {filtersOpen&&<section className="search26-advanced"><div><label>Estabelecimento<select value={store} onChange={e=>setStore(e.target.value)}><option value="all">Todos</option>{stores.map(s=><option key={s.id} value={String(s.id)}>{s.name}</option>)}</select></label><label>Tipo de comércio<select value={sector} onChange={e=>setSector(e.target.value as MarketplaceSectorId)}><option value="all">Todos os tipos</option>{marketplaceSectors.map(s=><option key={s.id} value={s.id}>{s.shortLabel}</option>)}</select></label><label>Categoria<select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">Todas</option>{categories.map(c=><option key={c}>{c}</option>)}</select></label><label>Bairro<select value={neighborhood} onChange={e=>setNeighborhood(e.target.value)}><option value="all">Todos</option>{neighborhoods.map(n=><option key={n}>{n}</option>)}</select></label><label>Preço mínimo<input inputMode="decimal" value={minPrice} onChange={e=>setMinPrice(e.target.value)} placeholder="R$ 0,00"/></label><label>Preço máximo<input inputMode="decimal" value={maxPrice} onChange={e=>setMaxPrice(e.target.value)} placeholder="Sem limite"/></label></div><footer><span><Building2/>Mostramos apenas opções realmente cadastradas.</span><button type="button" onClick={applyFilters}>Aplicar e ver resultados</button></footer></section>}
- {!hasRequest?<section className="search26-start"><div className="search26-start-icon"><PackageSearch/></div><div><small>BUSCA SOB DEMANDA</small><h2>O catálogo fica quieto até você pedir.</h2><p>Pesquise pelo nome do produto ou abra os filtros para procurar por estabelecimento, setor, categoria, bairro ou preço.</p></div><div className="search26-suggestions"><button onClick={()=>{setQuery("arroz");setAppliedQuery("arroz")}}>Arroz</button><button onClick={()=>{setQuery("café");setAppliedQuery("café")}}>Café</button><button onClick={()=>setFiltersOpen(true)}>Escolher estabelecimento</button></div></section>:
- <section className="search26-results"><header><div><span>RESULTADOS AO VIVO</span><h2 aria-live="polite">{loading?"Consultando catálogo…":`${results.length} ${results.length===1?"resultado":"resultados"}`}</h2></div><small>Mostrando {Math.min(visible,results.length)} por vez</small></header>{!loading&&results.length>0?<div className="search26-grid">{results.slice(0,visible).map(product=><Link to={`/produto/${product.slug||product.id}`} className="search26-card ref-catalog-card" key={product.id}><div className="search26-thumb"><ProductThumb product={product}/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} {(product.storeCount||product.offers?.length||1)===1?"estabelecimento":"estabelecimentos"}</em></div><ArrowRight/></Link>)}</div>:!loading&&<div className="search26-empty"><PackageSearch/><h2>Nenhum resultado compatível</h2><p>Tente outro nome ou use “Nova busca” acima para limpar os filtros.</p></div>}{visible<results.length&&<button className="search26-more" onClick={()=>setVisible(v=>Math.min(v+8,results.length))}>Mostrar mais 8 resultados <span>{results.length-visible} restantes</span></button>}</section>}
- </main><AppDock current="search" /></div>}
+ {!hasRequest?<section className="search26-start"><div className="search26-start__intro"><div className="search26-start-icon"><PackageSearch/></div><div><small>COMECE POR AQUI</small><h2>Pesquise ou abra uma comparação.</h2><p>Digite o nome do produto acima. Se preferir, escolha uma das sugestões e veja os preços sem sair desta tela.</p></div><div className="search26-suggestions"><button onClick={()=>{setQuery("arroz");setAppliedQuery("arroz")}}>Arroz</button><button onClick={()=>{setQuery("café");setAppliedQuery("café")}}>Café</button><button onClick={()=>setFiltersOpen(true)}>Usar filtros</button></div></div>{featuredProducts.length>0&&<div className="search26-featured"><header><div><span>PRODUTOS EM DESTAQUE</span><h3>Comparações rápidas</h3></div><small>Clique para ver preços e lojas</small></header><div>{featuredProducts.map(product=><button type="button" className="search26-featured-card" key={product.id} onClick={event=>openProduct(product,event)}><div className="search26-thumb"><ProductThumb product={product}/></div><span><small>{product.category}</small><strong>{product.name}</strong><em>{product.storeCount||product.offers?.length||1} lojas</em></span><b>{brl.format(product.minPrice)}</b><ArrowRight aria-hidden="true"/></button>)}</div></div>}</section>:
+ <section className="search26-results"><header><div><span>RESULTADOS AO VIVO</span><h2 aria-live="polite">{loading?"Consultando catálogo…":`${results.length} ${results.length===1?"resultado":"resultados"}`}</h2></div><small>Selecione um produto para comparar preços</small></header>{!loading&&results.length>0?<div className="search26-grid">{results.slice(0,visible).map(product=><button type="button" className="search26-card ref-catalog-card" key={product.id} onClick={event=>openProduct(product,event)} aria-haspopup="dialog"><div className="search26-thumb"><ProductThumb product={product}/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} {(product.storeCount||product.offers?.length||1)===1?"estabelecimento":"estabelecimentos"}</em></div><ArrowRight/></button>)}</div>:!loading&&<div className="search26-empty"><PackageSearch/><h2>Nenhum resultado compatível</h2><p>Tente outra marca, confira a escrita ou limpe os filtros para ampliar a busca.</p><button type="button" onClick={reset}>Limpar busca e filtros</button></div>}{visible<results.length&&<button className="search26-more" onClick={()=>setVisible(v=>Math.min(v+8,results.length))}>Mostrar mais 8 resultados <span>{results.length-visible} restantes</span></button>}</section>}
+ </main><AppDock current="search" />{selectedProduct&&<ProductComparisonModal product={selectedProduct} onClose={closeProduct}/>}</div>}

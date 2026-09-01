@@ -98,6 +98,19 @@ function buildLocalCatalog(query = ""): CatalogPayload {
       const values = prices.map(price => price.value);
       const best = prices.reduce((lowest, price) => (price.value < lowest.value ? price : lowest), prices[0]);
       const store = establishmentSeed.find(item => item.id === best.establishmentId)!;
+      const offers: ProductOffer[] = prices.map(price => {
+        const establishment = establishmentSeed.find(item => item.id === price.establishmentId)!;
+        return {
+          establishmentId: establishment.id,
+          establishmentSlug: establishment.slug,
+          establishment: establishment.name,
+          neighborhood: establishment.neighborhood,
+          storeColor: establishment.color,
+          value: price.value,
+          capturedAt: new Date(now - (index * 7 + 8) * 60_000).toISOString(),
+          previousPrice: price.previousValue,
+        };
+      }).sort((a, b) => a.value - b.value);
       return {
         ...product,
         minPrice: round(Math.min(...values)),
@@ -111,6 +124,7 @@ function buildLocalCatalog(query = ""): CatalogPayload {
         storeColor: store.color,
         capturedAt: new Date(now - (index * 7 + 8) * 60_000).toISOString(),
         previousPrice: best.previousValue,
+        offers,
       } satisfies Product;
     })
     .filter(product => !q || [product.name, product.category, product.brand].some(field => normalize(field).includes(q)))
