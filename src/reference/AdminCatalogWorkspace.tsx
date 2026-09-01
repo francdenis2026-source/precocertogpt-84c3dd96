@@ -3,7 +3,7 @@ import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, BadgeCheck, BarChart3, Building2, ClipboardList, ExternalLink, Eye, ImagePlus, LayoutDashboard, LogOut, PackagePlus, Pencil, RefreshCw, Search, ShieldCheck, ShoppingBasket, Store, Tag, Trash2, Upload, UsersRound, X } from 'lucide-react';
 import { loadSessionProfile, signOut, type SessionProfile, supabase } from '../lib/roles';
-import { deleteAdminEstablishment, deleteAdminProduct, deleteAdminProductPrice, loadAdminCatalog, loadAdminEstablishmentCatalog, saveAdminEstablishment, saveAdminProduct, setAdminProductPrice, uploadAdminProductImage, type AdminCatalogSnapshot } from '../lib/adminCatalog';
+import { deleteAdminEstablishment, deleteAdminProduct, deleteAdminProductPrice, loadAdminCatalog, loadAdminEstablishmentCatalog, saveAdminEstablishment, saveAdminEstablishmentDetails, saveAdminProduct, setAdminProductPrice, uploadAdminProductImage, uploadAdminStorePhoto, type AdminCatalogSnapshot } from '../lib/adminCatalog';
 import './AdminCatalogWorkspace.css';
 
 gsap.registerPlugin(ScrollTrigger);
