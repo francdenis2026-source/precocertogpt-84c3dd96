@@ -83,9 +83,10 @@ export function HomeNew2026() {
         <PromoBands />
         <CategoryBar />
         <StoreRail stores={catalog.stores} cycle={cycle} />
-        <Footer />
       </main>
+      <Footer />
       <BottomNav />
+
     </div>
   );
 }

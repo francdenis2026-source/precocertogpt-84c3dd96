@@ -1,0 +1,821 @@
+/* ============================================================================
+   PreçoCerto · Camada profissional final (2026-09)
+   Esta folha é importada por último em src/main.tsx e é a ÚNICA dona de:
+   - utilitário .sr-only (estava ausente e vazava o rótulo dentro da busca)
+   - barra de busca (desktop + mobile, claro + escuro)
+   - header público
+   - ritmo vertical das seções da home
+   - rodapé
+   Não altera dados, rotas nem lógica: apenas apresentação.
+   ========================================================================= */
+
+/* ── 0. Tokens de superfície da camada ───────────────────────────────────── */
+:root {
+  --px-radius: 14px;
+  --px-radius-sm: 10px;
+  --px-field-h: 56px;
+  --px-field-h-mobile: 50px;
+  --px-header-h: 62px;
+  --px-gap: clamp(18px, 3vw, 34px);
+  --px-section: clamp(26px, 4.2vw, 52px);
+
+  --px-surface: #ffffff;
+  --px-surface-soft: #f7f8fa;
+  --px-ink: #14181d;
+  --px-muted: #5f6b78;
+  --px-line: #e2e7ec;
+  --px-brand: #0b6757;
+  --px-brand-ink: #ffffff;
+  --px-brand-soft: rgba(11, 103, 87, 0.1);
+  --px-ring: rgba(11, 103, 87, 0.26);
+  --px-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 10px 26px rgba(16, 24, 40, 0.07);
+  --px-shadow-lg: 0 18px 44px rgba(16, 24, 40, 0.14);
+}
+
+html[data-theme="dark"],
+.dark {
+  --px-surface: #17181c;
+  --px-surface-soft: #1e2025;
+  --px-ink: #f3f4f6;
+  --px-muted: #a2aab6;
+  --px-line: #2c2f36;
+  --px-brand: #ffb800;
+  --px-brand-ink: #121214;
+  --px-brand-soft: rgba(255, 184, 0, 0.14);
+  --px-ring: rgba(255, 184, 0, 0.32);
+  --px-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.36);
+  --px-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ── 1. Acessibilidade: rótulos apenas para leitor de tela ───────────────── */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.sr-only:focus-visible,
+.visually-hidden:focus-visible {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  clip: auto !important;
+  clip-path: none !important;
+  margin: 0 !important;
+}
+
+/* ── 2. Barra de busca profissional ─────────────────────────────────────── */
+.pc26-live-search {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.pc26-hero-search,
+.pc26-search {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 20px minmax(0, 1fr) auto auto !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  min-height: var(--px-field-h) !important;
+  padding: 6px 6px 6px 16px !important;
+  border: 1px solid var(--px-line) !important;
+  border-radius: var(--px-radius) !important;
+  background: var(--px-surface) !important;
+  box-shadow: var(--px-shadow) !important;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pc26-search {
+  min-height: 44px !important;
+  padding-left: 12px !important;
+  border-radius: var(--px-radius-sm) !important;
+}
+
+.pc26-hero-search:focus-within,
+.pc26-search:focus-within {
+  border-color: var(--px-brand) !important;
+  box-shadow: 0 0 0 4px var(--px-ring), var(--px-shadow) !important;
+}
+
+.pc26-live-search__icon {
+  width: 20px !important;
+  height: 20px !important;
+  color: var(--px-brand) !important;
+  stroke-width: 2.1;
+}
+.pc26-search .pc26-live-search__icon {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+/* O campo ocupa TODA a área digitável disponível */
+.pc26-hero-search input,
+.pc26-search input {
+  grid-column: 2 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: calc(var(--px-field-h) - 14px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  color: var(--px-ink) !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em;
+  text-align: left !important;
+  text-indent: 0 !important;
+}
+.pc26-search input {
+  height: 34px !important;
+  font-size: 0.88rem !important;
+}
+.pc26-hero-search input::placeholder,
+.pc26-search input::placeholder {
+  color: var(--px-muted) !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+.pc26-live-search__clear {
+  position: static !important;
+  display: grid !important;
+  place-items: center;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: var(--px-surface-soft) !important;
+  color: var(--px-muted) !important;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pc26-live-search__clear:hover {
+  background: var(--px-brand-soft) !important;
+  color: var(--px-ink) !important;
+}
+.pc26-live-search__clear svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pc26-live-search__submit {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px !important;
+  height: 44px !important;
+  padding: 0 18px !important;
+  border: 0 !important;
+  border-radius: var(--px-radius-sm) !important;
+  background: var(--px-brand) !important;
+  color: var(--px-brand-ink) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.16s ease, filter 0.16s ease;
+}
+.pc26-search .pc26-live-search__submit {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 12px !important;
+  font-size: 0.74rem !important;
+}
+.pc26-live-search__submit svg {
+  width: 16px;
+  height: 16px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pc26-live-search__submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+}
+.pc26-live-search__submit:focus-visible,
+.pc26-live-search__clear:focus-visible {
+  outline: 2px solid var(--px-brand);
+  outline-offset: 2px;
+}
+
+.pc26-search__shortcut {
+  display: none !important;
+}
+
+/* Painel de sugestões alinhado à barra, camada única */
+.pc26-live-results {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 120 !important;
+  max-height: min(60vh, 460px);
+  overflow: auto;
+  padding: 8px !important;
+  border: 1px solid var(--px-line) !important;
+  border-radius: var(--px-radius) !important;
+  background: var(--px-surface) !important;
+  color: var(--px-ink) !important;
+  box-shadow: var(--px-shadow-lg) !important;
+}
+.pc26-live-results__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 8px 10px;
+  border-bottom: 1px solid var(--px-line);
+  color: var(--px-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pc26-live-results__state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 10px;
+  color: var(--px-muted);
+  font-size: 0.85rem;
+}
+
+/* Mobile: botão vira ícone e o campo mantém largura máxima */
+@media (max-width: 760px) {
+  .pc26-hero-search {
+    grid-template-columns: 18px minmax(0, 1fr) auto !important;
+    gap: 8px !important;
+    min-height: var(--px-field-h-mobile) !important;
+    padding: 5px 5px 5px 13px !important;
+  }
+  .pc26-hero-search input {
+    height: calc(var(--px-field-h-mobile) - 12px) !important;
+    font-size: 0.94rem !important;
+  }
+  .pc26-hero-search .pc26-live-search__submit {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
+  .pc26-hero-search .pc26-live-search__submit svg {
+    width: 19px;
+    height: 19px;
+  }
+  .pc26-hero-search .pc26-live-search__clear {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* ── 3. Header público ──────────────────────────────────────────────────── */
+.pc26-header.pc26-header--studio {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: color-mix(in srgb, var(--px-surface) 86%, transparent) !important;
+  backdrop-filter: saturate(150%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pc26-header.pc26-header--studio.is-scrolled {
+  border-bottom-color: var(--px-line);
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.06);
+}
+
+.pc26-header-studio {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  min-height: var(--px-header-h);
+}
+
+.pc26-header-studio__mobile-brand {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--px-ink);
+}
+.pc26-header-studio__mobile-brand img {
+  width: 34px;
+  height: 34px;
+}
+.pc26-header-studio__mobile-brand span {
+  display: grid;
+  line-height: 1.15;
+}
+.pc26-header-studio__mobile-brand strong {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.pc26-header-studio__mobile-brand small {
+  color: var(--px-muted);
+  font-size: 0.66rem;
+  font-weight: 600;
+}
+
+.pc26-header-studio__nav {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+}
+.pc26-header-studio__nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--px-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.pc26-header-studio__nav a:hover {
+  background: var(--px-surface-soft);
+  color: var(--px-ink);
+}
+.pc26-header-studio__nav a[aria-current="page"] {
+  background: var(--px-brand-soft);
+  color: var(--px-brand);
+}
+.pc26-header-studio__nav a svg {
+  width: 15px;
+  height: 15px;
+}
+
+.pc26-header-studio__tools {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+}
+.pc26-header-studio__tool {
+  display: grid !important;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--px-ink);
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+.pc26-header-studio__tool:hover {
+  background: var(--px-surface-soft);
+  border-color: var(--px-line);
+}
+.pc26-header-studio__tool svg {
+  width: 19px;
+  height: 19px;
+}
+.pc26-header-studio__tool:focus-visible,
+.pc26-header-studio__nav a:focus-visible,
+.pc26-header-studio__login:focus-visible {
+  outline: 2px solid var(--px-brand);
+  outline-offset: 2px;
+}
+
+.pc26-header-studio__login {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 15px;
+  border-radius: 11px;
+  background: var(--px-brand);
+  color: var(--px-brand-ink) !important;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pc26-header-studio__login svg {
+  width: 16px;
+  height: 16px;
+}
+.pc26-header-studio__menu {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .pc26-header-studio {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+  }
+  .pc26-header-studio__menu {
+    display: grid !important;
+  }
+  .pc26-header-studio__radio,
+  .pc26-header-studio__basket {
+    display: none !important;
+  }
+  .pc26-header-studio__login span {
+    display: none;
+  }
+  .pc26-header-studio__login {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+  .pc26-header-studio__nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 190;
+    display: none !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 10px;
+    border-bottom: 1px solid var(--px-line);
+    background: var(--px-surface);
+    box-shadow: var(--px-shadow-lg);
+  }
+  .pc26-header-studio__nav.is-open {
+    display: flex !important;
+  }
+  .pc26-header-studio__nav a {
+    height: 46px;
+    justify-content: flex-start;
+    border-radius: var(--px-radius-sm);
+    font-size: 0.95rem;
+  }
+  .pc26-header-studio__tool,
+  .pc26-header-studio__login {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ── 4. Ritmo vertical e cabeçalhos de seção ────────────────────────────── */
+.pc26-home > main > * + * {
+  margin-top: var(--px-section);
+}
+.pc26-home .pc26-shell {
+  width: min(1200px, 100% - clamp(24px, 5vw, 56px));
+  margin-inline: auto;
+}
+.pc26-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.pc26-section-heading h2 {
+  margin: 4px 0 0;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.pc26-section-heading p {
+  margin: 4px 0 0;
+  color: var(--px-muted);
+  font-size: 0.88rem;
+}
+
+/* Micro-interações discretas em cards */
+@media (hover: hover) and (pointer: fine) {
+  .pc26-product,
+  .pc26-store,
+  .pc26-category-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .pc26-product:hover,
+  .pc26-store:hover,
+  .pc26-category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--px-shadow-lg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── 5. Rodapé ──────────────────────────────────────────────────────────── */
+.pc26-footer.pc26-footer--studio {
+  margin-top: var(--px-section);
+  border-top: 1px solid var(--px-line);
+  background: var(--px-surface-soft) !important;
+  color: var(--px-ink);
+}
+.pc26-footer-compact {
+  display: grid !important;
+  grid-template-columns: 1.2fr 1.6fr auto;
+  align-items: start;
+  gap: var(--px-gap);
+  padding: clamp(26px, 4vw, 40px) 0;
+}
+.pc26-footer-identity {
+  display: grid;
+  gap: 10px;
+}
+.pc26-footer-studio__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--px-ink);
+  text-decoration: none;
+}
+.pc26-footer-studio__brand span {
+  display: grid;
+  line-height: 1.2;
+}
+.pc26-footer-studio__brand strong {
+  font-size: 0.98rem;
+  font-weight: 800;
+}
+.pc26-footer-studio__brand small,
+.pc26-footer-studio__location {
+  color: var(--px-muted);
+  font-size: 0.78rem;
+}
+.pc26-footer-studio__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pc26-footer-studio__location svg {
+  width: 14px;
+  height: 14px;
+}
+.pc26-footer-navigation {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px 18px;
+}
+.pc26-footer-navigation a {
+  color: var(--px-muted);
+  font-size: 0.86rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.pc26-footer-navigation a:hover {
+  color: var(--px-brand);
+}
+.pc26-footer-business {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--px-line);
+  border-radius: var(--px-radius-sm);
+  background: var(--px-surface);
+  color: var(--px-ink) !important;
+  font-size: 0.84rem;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pc26-footer-business:hover {
+  border-color: var(--px-brand);
+  color: var(--px-brand) !important;
+}
+.pc26-footer-business svg {
+  width: 16px;
+  height: 16px;
+}
+.pc26-footer-meta {
+  border-top: 1px solid var(--px-line);
+  background: var(--px-surface);
+}
+.pc26-footer-premium__rail-inner {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 14px 0;
+  color: var(--px-muted);
+  font-size: 0.75rem;
+}
+.pc26-footer-premium__rail-inner svg {
+  width: 14px;
+  height: 14px;
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+.pc26-footer-premium__signature strong {
+  color: var(--px-ink);
+}
+
+@media (max-width: 900px) {
+  .pc26-footer-compact {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .pc26-footer-navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pc26-footer-premium__rail-inner {
+    justify-content: flex-start;
+  }
+}
+
+/* Espaço para a navegação inferior fixa no mobile */
+@media (max-width: 760px) {
+  .pc26-footer.pc26-footer--studio {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── 6. Correções finais de layout (auditadas em desktop e mobile) ───────── */
+/* Gutter único para header, seções e rodapé — nada mais encosta na borda */
+html .pc26-shell,
+html .pc26-home .pc26-shell {
+  width: min(1200px, 100% - clamp(20px, 4.4vw, 56px)) !important;
+  max-width: none;
+  margin-inline: auto !important;
+  padding-inline: 0 !important;
+}
+html .pc26-header .pc26-shell {
+  width: min(1280px, 100% - clamp(16px, 3.4vw, 40px)) !important;
+}
+html .pc26-header-studio {
+  overflow: visible;
+}
+html .pc26-header-studio__tools {
+  flex: none;
+  min-width: 0;
+}
+
+/* Hero mobile compacto: o painel institucional é conteúdo de desktop.
+   No celular ele estourava a moldura e invadia a seção seguinte. */
+@media (max-width: 760px) {
+  html .pc26-home .pc26-user-hero__media,
+  html .pc26-home--recovered .pc26-user-hero__media {
+    display: none !important;
+  }
+  html .pc26-home .pc26-user-hero__stage {
+    grid-template-columns: 1fr !important;
+  }
+  html .pc26-user-hero__copy {
+    border-radius: 14px !important;
+  }
+}
+
+/* Trilha de produtos no mobile: grade de 2 colunas estável (o carrossel
+   horizontal colapsava cards para 2px e deixava vazio no fim da seção) */
+@media (max-width: 760px) {
+  html .pc26-products-premium__rail {
+    display: grid !important;
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-columns: auto !important;
+    grid-auto-rows: max-content !important;
+    align-items: start !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin-inline: 0 !important;
+    scroll-snap-type: none !important;
+  }
+  html .pc26-products-premium__rail .pc26-product {
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    align-self: start !important;
+  }
+  html .pc26-products-premium__rail .pc26-product__image {
+    height: 132px !important;
+  }
+}
+@media (max-width: 420px) {
+  html .pc26-products-premium__rail {
+    grid-template-columns: 1fr !important;
+  }
+  html .pc26-products-premium__rail .pc26-product__image {
+    height: 160px !important;
+  }
+}
+
+/* Navegação inferior: rótulos completos e área de toque confortável */
+html .pc26-bottom-nav a {
+  min-width: 0;
+  padding-inline: 2px;
+  font-size: 0.62rem !important;
+  line-height: 1.2;
+  text-align: center;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap;
+}
+
+/* ── 7. Rodapé: correções de mobile e identidade ─────────────────────────── */
+html .pc26-home .pc26-footer-studio__brand span,
+html .pc26-footer-studio__brand span {
+  display: grid !important;
+}
+html .pc26-home .pc26-footer-studio__brand strong,
+html .pc26-footer-studio__brand strong {
+  display: block !important;
+  color: var(--px-ink) !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+}
+html .pc26-home .pc26-footer-compact,
+html .pc26-footer-compact {
+  padding-block: clamp(22px, 3.6vw, 38px) !important;
+}
+@media (max-width: 900px) {
+  html .pc26-home .pc26-footer-compact,
+  html .pc26-footer-compact {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  html .pc26-home .pc26-footer-navigation,
+  html .pc26-footer-navigation {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px 16px !important;
+    justify-content: stretch !important;
+  }
+  html .pc26-home .pc26-footer-navigation a,
+  html .pc26-footer-navigation a {
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    font-size: 0.88rem !important;
+  }
+  html .pc26-footer-business {
+    justify-self: stretch !important;
+    justify-content: center;
+  }
+}
+/* Fim de página: apenas o respiro necessário acima da barra fixa */
+@media (max-width: 760px) {
+  html .pc26-footer.pc26-footer--studio {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html .pc26-home {
+    padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ── 8. Campo de busca: superfície coerente em claro e escuro ───────────── */
+html body .pc26-home .pc26-hero-search input,
+html body .pc26-hero-search input,
+html[data-theme="dark"] body .pc26-home .pc26-hero-search input,
+html[data-theme="dark"] body .pc26-hero-search input {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  width: 100% !important;
+}
+html[data-theme="dark"] body .pc26-hero-search {
+  background: #191b1c !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+html[data-theme="dark"] body .pc26-hero-search input::placeholder {
+  color: rgba(236, 240, 240, 0.55) !important;
+}
+
+/* ── 9. Gutter mestre: mesma margem em header, conteúdo e rodapé ─────────── */
+html body .pc26-shell,
+html body .pc26-home .pc26-shell {
+  width: min(1220px, calc(100% - 40px)) !important;
+  margin-inline: auto !important;
+}
+@media (max-width: 760px) {
+  html body .pc26-shell,
+  html body .pc26-home .pc26-shell {
+    width: calc(100% - 20px) !important;
+  }
+}
