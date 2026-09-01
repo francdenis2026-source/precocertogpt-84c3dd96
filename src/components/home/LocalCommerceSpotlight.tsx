@@ -1,15 +1,16 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import atendimentoImg from "../../assets/home-2026/comercio-local-atendimento.jpg";
 
 export function LocalCommerceSpotlight() {
   return <section className="pc26-zone pc26-zone--local" aria-labelledby="local-commerce-title">
     <div className="pc26-local-spotlight pc26-shell">
       <div className="pc26-local-spotlight__image">
         <img
-          src="/comercio-local-comparando-precos-2026.webp"
+          src={atendimentoImg}
           alt="Cliente comparando o preço de um produto pelo celular com auxílio do comerciante local"
-          width="1619"
-          height="971"
+          width={1280}
+          height={720}
           loading="lazy"
           decoding="async"
         />
