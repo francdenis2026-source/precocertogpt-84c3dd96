@@ -4,37 +4,37 @@ import "./PromoBands.css";
 
 const stories = [
   {
-    className: "pc26-promo__story--featured",
+    className: "pc26-promo__story--compare",
     image: "/home-editorial-2026/campanha-homem-comparando-precos-v1.webp",
     alt: "Homem comparando pelo celular o preço de um produto durante as compras no mercado",
     icon: BadgePercent,
-    eyebrow: "COMPARE ANTES DE COMPRAR",
-    title: "Compare no corredor. Decida com segurança.",
-    text: "Consulte o produto, confira as ofertas locais e escolha com mais segurança.",
-    action: "Comparar preços",
+    eyebrow: "COMPARAÇÃO LOCAL",
+    title: "O menor preço começa com uma busca.",
+    text: "Consulte produtos, compare valores e saiba onde comprar antes de sair de casa.",
+    action: "Buscar um produto",
     to: "/buscar",
   },
   {
-    className: "pc26-promo__story--local",
-    image: "/home-editorial-2026/promo-comercio-local-app-v2.webp",
-    alt: "Cliente comparando pelo celular enquanto comerciante organiza verduras no supermercado local",
-    icon: Store,
-    eyebrow: "PERTO DE VOCÊ",
-    title: "Comércio local em primeiro plano.",
-    text: "Descubra estabelecimentos e ofertas de Feijó.",
-    action: "Ver comércios",
+    className: "pc26-promo__story--sectors",
+    image: "/home-editorial-2026/promo-compra-inteligente-app-v2.webp",
+    alt: "Casal organizando uma compra com apoio do celular em um supermercado",
+    icon: ShoppingBasket,
+    eyebrow: "SETORES EM DESTAQUE",
+    title: "Do mercado à farmácia, tudo organizado.",
+    text: "Acesse mercearia, açougue, padaria, bebidas, higiene e outros setores em poucos toques.",
+    action: "Explorar setores",
     to: "/explorar",
   },
   {
-    className: "pc26-promo__story--basket",
-    image: "/home-editorial-2026/promo-compra-inteligente-app-v2.webp",
-    alt: "Casal usando o celular para organizar e comparar uma compra no supermercado",
-    icon: ShoppingBasket,
-    eyebrow: "COMPRA ORGANIZADA",
-    title: "Planeje melhor. Leve o que importa.",
-    text: "Comece pela sua lista e encontre opções para economizar.",
-    action: "Começar busca",
-    to: "/buscar",
+    className: "pc26-promo__story--stores",
+    image: "/home-editorial-2026/promo-comercio-local-app-v2.webp",
+    alt: "Cliente em um estabelecimento local enquanto comerciante organiza produtos frescos",
+    icon: Store,
+    eyebrow: "COMÉRCIO DE FEIJÓ",
+    title: "Os estabelecimentos da cidade mais perto de você.",
+    text: "Conheça lojas, catálogos e ofertas do comércio local em uma vitrine feita para Feijó.",
+    action: "Conhecer estabelecimentos",
+    to: "/estabelecimentos",
   },
 ] as const;
 
@@ -52,13 +52,14 @@ export function PromoBands() {
       <div className="pc26-promo__grid">
         {stories.map(({ className, image, alt, icon: Icon, eyebrow, title, text, action, to }) => (
           <article className={`pc26-promo__story ${className}`} key={title}>
-            <img src={image} alt={alt} loading="lazy" decoding="async" />
-            <div className="pc26-promo__shade" aria-hidden="true" />
             <div className="pc26-promo__copy">
               <span className="pc26-promo__eyebrow"><Icon aria-hidden="true" /> {eyebrow}</span>
               <h3>{title}</h3>
               <p>{text}</p>
               <Link to={to}>{action} <ArrowRight aria-hidden="true" /></Link>
+            </div>
+            <div className="pc26-promo__media">
+              <img src={image} alt={alt} loading="lazy" decoding="async" width="1200" height="800" />
             </div>
           </article>
         ))}
