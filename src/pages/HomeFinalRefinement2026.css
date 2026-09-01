@@ -1,0 +1,29 @@
+/* Refinamento final da home: ritmo vertical e legibilidade. */
+
+.pc26-home--recovered main {
+  padding-bottom: clamp(24px, 5vw, 56px);
+}
+
+.pc26-home--recovered .pc26-zone {
+  scroll-margin-top: 88px;
+}
+
+.pc26-home--recovered .pc26-shell {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+
+@media (max-width: 720px) {
+  .pc26-home--recovered .pc26-shell {
+    padding-inline: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc26-home--recovered * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
