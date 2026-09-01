@@ -18,6 +18,7 @@ import "./HomeDensityPolish2026.css";
 import "./HomeThemeContrast2026.css";
 import "./HomeTaste2026.css";
 import "./HomeManualPolish2026.css";
+import "./HomeBelowHeroTaste2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -53,8 +54,8 @@ export function HomeNew2026() {
     <Header theme={theme} onToggleTheme={toggleTheme}/>
     <main id="conteudo-principal">
       <HeroUserImage2026/>
-      <CategoryBar/>
       <BenefitsStrip/>
+      <CategoryBar/>
       <PromoBands/>
       <ProductGrid products={featured} loading={loading}/>
       <StoreRail stores={catalog.stores}/>

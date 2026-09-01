@@ -1,37 +1,68 @@
-import { ArrowRight, BadgePercent, Check, ScanSearch, Smartphone, Store } from "lucide-react";
+import { ArrowRight, BadgePercent, ShoppingBasket, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./PromoBands.css";
 
-// Uma única fotografia editorial contínua para toda a sequência de faixas.
-// Evita o efeito de "colagem" e cria uma narrativa visual única.
-const continuousShoppingImage = "https://images.unsplash.com/photo-1739302750685-122e3b768b5a?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=88&w=2400";
+const stories = [
+  {
+    className: "pc26-promo__story--featured",
+    image: "/home-editorial-2026/comparacao-no-mercado.webp",
+    alt: "Cliente comparando preços pelo celular durante as compras no mercado",
+    icon: BadgePercent,
+    eyebrow: "COMPARE ANTES DE COMPRAR",
+    title: "Veja a diferença antes de chegar ao caixa.",
+    text: "Consulte o produto, confira as ofertas locais e escolha com mais segurança.",
+    action: "Comparar preços",
+    to: "/buscar",
+  },
+  {
+    className: "pc26-promo__story--local",
+    image: "/home-editorial-2026/comercio-local.webp",
+    alt: "Comerciante local organizando frutas e verduras em seu estabelecimento",
+    icon: Store,
+    eyebrow: "PERTO DE VOCÊ",
+    title: "Comércio local em primeiro plano.",
+    text: "Descubra estabelecimentos e ofertas de Feijó.",
+    action: "Ver comércios",
+    to: "/explorar",
+  },
+  {
+    className: "pc26-promo__story--basket",
+    image: "/home-editorial-2026/compra-organizada.webp",
+    alt: "Cesta de compras organizada com alimentos para a semana",
+    icon: ShoppingBasket,
+    eyebrow: "COMPRA ORGANIZADA",
+    title: "Planeje melhor. Leve o que importa.",
+    text: "Comece pela sua lista e encontre opções para economizar.",
+    action: "Começar busca",
+    to: "/buscar",
+  },
+] as const;
 
 export function PromoBands() {
-  return <section className="pc26-promo" aria-label="Experiência de compra inteligente" style={{ backgroundImage: `url(${continuousShoppingImage})` }}>
-    <div className="pc26-promo__band pc26-promo__band--market">
-      <div className="pc26-promo__shade" aria-hidden="true" />
-      <div className="pc26-promo__copy">
-        <span className="pc26-promo__eyebrow"><Store aria-hidden="true" /> COMPRE MELHOR EM FEIJÓ</span>
-        <h2>Compare antes de colocar no carrinho.</h2>
-        <p>Pesquise produtos, compare estabelecimentos e descubra onde comprar melhor.</p>
-        <Link to="/buscar">Comparar preços <ArrowRight aria-hidden="true" /></Link>
-      </div>
-      <div className="pc26-shopping-ui" aria-hidden="true"><div className="pc26-shopping-ui__label"><Smartphone /> PREÇOCERTO</div><div className="pc26-shopping-ui__screen"><div><small>Menor preço encontrado</small><strong>R$ 24,90</strong></div><span>economize R$ 5,00</span><div className="pc26-shopping-ui__line" /><small>2 estabelecimentos comparados</small></div></div>
-    </div>
+  return (
+    <section className="pc26-promo pc26-shell" aria-labelledby="promo-title">
+      <header className="pc26-promo__heading">
+        <div>
+          <span>Compra inteligente</span>
+          <h2 id="promo-title">Informação que ajuda na escolha</h2>
+        </div>
+        <p>Do preço ao comércio local, tudo mais simples para decidir.</p>
+      </header>
 
-    <div className="pc26-promo__band pc26-promo__band--compare">
-      <div className="pc26-promo__shade" aria-hidden="true" />
-      <div className="pc26-compare-card" aria-label="Exemplo visual de comparação de produtos">
-        <div className="pc26-compare-card__top"><span><ScanSearch /> COMPARADOR</span><b>2 ofertas</b></div>
-        <div className="pc26-product-row"><div className="pc26-product-row__pack pc26-product-row__pack--blue" /><div><strong>Arroz 5 kg</strong><small>Produto equivalente</small></div><div className="pc26-product-row__price"><small>Mercado A</small><strong>R$ 29,90</strong></div></div>
-        <div className="pc26-product-row pc26-product-row--best"><div className="pc26-product-row__pack pc26-product-row__pack--gold" /><div><strong>Arroz 5 kg</strong><small>Mesmo tamanho</small></div><div className="pc26-product-row__price"><small>Mercado B</small><strong>R$ 24,90</strong></div><span className="pc26-best"><Check /> menor preço</span></div>
+      <div className="pc26-promo__grid">
+        {stories.map(({ className, image, alt, icon: Icon, eyebrow, title, text, action, to }) => (
+          <article className={`pc26-promo__story ${className}`} key={title}>
+            <img src={image} alt={alt} loading="lazy" decoding="async" />
+            <div className="pc26-promo__shade" aria-hidden="true" />
+            <div className="pc26-promo__copy">
+              <span className="pc26-promo__eyebrow"><Icon aria-hidden="true" /> {eyebrow}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+              <Link to={to}>{action} <ArrowRight aria-hidden="true" /></Link>
+            </div>
+          </article>
+        ))}
       </div>
-      <div className="pc26-promo__copy pc26-promo__copy--compare"><span className="pc26-promo__eyebrow"><BadgePercent aria-hidden="true" /> DECISÃO INTELIGENTE</span><h2>O mesmo produto. Preços diferentes. Uma escolha melhor.</h2><p>Veja as diferenças entre ofertas e escolha com informação.</p><Link to="/buscar">Encontrar menor preço <ArrowRight aria-hidden="true" /></Link></div>
-    </div>
-
-    <div className="pc26-promo__band pc26-promo__band--discover">
-      <div className="pc26-promo__shade" aria-hidden="true" />
-      <div className="pc26-promo__copy"><span className="pc26-promo__eyebrow"><Smartphone aria-hidden="true" /> PREÇO CERTO, NO MOMENTO CERTO</span><h2>Mais informação antes da compra.</h2><p>Use o PreçoCerto para pesquisar, comparar e montar sua compra com mais segurança.</p><Link to="/buscar">Começar uma busca <ArrowRight aria-hidden="true" /></Link></div>
-    </div>
-  </section>;
+    </section>
+  );
 }
