@@ -57,6 +57,31 @@ html[data-theme="dark"] .pc26-home--recovered{
 .pc26-home--recovered .pc26-promo__story .pc26-promo__copy p{color:#d9e5e3!important}
 .pc26-home--recovered .pc26-promo__story .pc26-promo__eyebrow{color:#f3ce72!important}
 
+/* No tema escuro, as fotografias usam carvão neutro em vez de um banho
+   verde. O dourado permanece como único acento cromático da composição. */
+html[data-theme="dark"] .pc26-home--recovered .pc26-promo__story>img{
+  filter:saturate(.78) brightness(.88) contrast(1.06)!important;
+}
+html[data-theme="dark"] .pc26-home--recovered .pc26-promo__story .pc26-promo__shade{
+  background:linear-gradient(90deg,rgba(16,17,18,.95) 0%,rgba(18,19,20,.79) 40%,rgba(18,19,20,.25) 74%,rgba(18,19,20,.06) 100%)!important;
+}
+html[data-theme="dark"] .pc26-home--recovered .pc26-promo__story:not(.pc26-promo__story--featured) .pc26-promo__shade{
+  background:linear-gradient(90deg,rgba(15,16,17,.93) 0%,rgba(18,19,20,.76) 50%,rgba(18,19,20,.24) 100%)!important;
+}
+html[data-theme="dark"] .pc26-home--recovered .pc26-user-hero{
+  --hero-canvas:#111315;
+  --hero-surface:#1a1c1e;
+  --hero-ink:#f4f1e9;
+  --hero-muted:#c7c8c4;
+  --hero-border:rgba(244,241,233,.17);
+}
+html[data-theme="dark"] .pc26-home--recovered .pc26-user-hero__artwork{
+  filter:saturate(.82) brightness(.91) contrast(1.05)!important;
+}
+html[data-theme="dark"] .pc26-home--recovered .pc26-user-hero__media::after{
+  background:linear-gradient(90deg,rgba(26,28,30,.3),transparent 26%)!important;
+}
+
 .pc26-home--recovered .pc26-header-studio__mobile-brand strong{color:var(--hc-text)!important}
 .pc26-home--recovered .pc26-header-studio__mobile-brand small{color:var(--hc-muted)!important}
 .pc26-home--recovered .pc26-header-studio__nav a{color:var(--hc-muted)!important}
