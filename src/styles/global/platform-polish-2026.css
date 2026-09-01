@@ -459,3 +459,19 @@ body::before {
     padding: 10px !important;
   }
 }
+
+/* A home usa `.pc26-home--recovered`, que travava a hero em max-height 310px
+ * enquanto o conteúdo real ocupa ~420px — daí o vazamento sobre as ações
+ * rápidas. Liberamos a altura e mantemos a compactação pela tipografia. */
+.pc26-home--recovered .pc26-user-hero__stage {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy,
+.pc26-home--recovered .pc26-user-hero__media {
+  min-height: 0 !important;
+  max-height: none !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy {
+  padding: clamp(20px, 2.6vw, 34px) !important;
+}
