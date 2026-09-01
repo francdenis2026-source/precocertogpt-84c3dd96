@@ -288,3 +288,4 @@
 .city-store-list li,.city-store-list li>a{height:100%}
 .city-store-list li>a{display:flex;flex-direction:column;gap:.25rem}
 .city-store-list li>a em{margin-top:auto}
+.city-store-photo--fallback{display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--store-color,#1473E6),rgba(0,0,0,.45))}

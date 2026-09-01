@@ -217,7 +217,13 @@ export function CityStoresPage() {
                       decoding="async"
                     />
                   ) : (
-                    <span className="city-store-dot" style={{ background: store.color }} aria-hidden="true" />
+                    <span
+                      className="city-store-photo city-store-photo--fallback"
+                      style={{ ["--store-color" as string]: store.color }}
+                      aria-hidden="true"
+                    >
+                      {store.name.trim().charAt(0).toUpperCase()}
+                    </span>
                   )}
                   <strong>{store.name}</strong>
                   <small>{[store.neighborhood, store.city].filter(Boolean).join(" · ")}</small>
