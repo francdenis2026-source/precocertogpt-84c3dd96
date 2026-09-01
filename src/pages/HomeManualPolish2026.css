@@ -59,3 +59,38 @@
   transform:translateY(-3px)!important;
   box-shadow:0 16px 32px rgba(16,51,38,.14)!important;
 }
+
+/* A hero owns its responsive composition. These scoped rules neutralize
+   historical full-bleed overrides that otherwise distort the new grid. */
+.pc26-home--recovered .pc26-user-hero{
+  padding:12px 14px 16px!important;
+  background:var(--hero-canvas)!important;
+}
+.pc26-home--recovered .pc26-user-hero__stage{
+  width:min(100%,1220px)!important;
+  max-width:1220px!important;
+  height:auto!important;
+  min-height:clamp(390px,40vw,500px)!important;
+  margin:0 auto!important;
+  border-radius:16px!important;
+  box-shadow:0 18px 44px rgba(20,59,50,.13)!important;
+}
+.pc26-home--recovered .pc26-user-hero__artwork{
+  width:100%!important;
+  height:100%!important;
+  object-position:58% 42%!important;
+}
+
+@media(max-width:900px){
+  .pc26-home--recovered .pc26-user-hero__stage{min-height:400px!important}
+}
+
+@media(max-width:680px){
+  .pc26-home--recovered .pc26-user-hero{padding:8px 8px 12px!important}
+  .pc26-home--recovered .pc26-user-hero__stage{
+    width:min(100%,560px)!important;
+    min-height:0!important;
+    border-radius:14px!important;
+  }
+  .pc26-home--recovered .pc26-user-hero__artwork{object-position:58% 34%!important}
+}
