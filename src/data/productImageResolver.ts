@@ -1,17 +1,27 @@
 import type { Product } from "./catalog";
 
-type AssetMeta = { url?: string; original_filename?: string; content_type?: string };
+type AssetMeta = {
+  url?: string;
+  original_filename?: string;
+  content_type?: string;
+};
 
-const assetModules = import.meta.glob("../assets/*.{png,jpg,jpeg,webp,avif}.asset.json", {
-  eager: true,
-  import: "default",
-}) as Record<string, AssetMeta>;
+const assetModules = import.meta.glob(
+  "../assets/*.{png,jpg,jpeg,webp,avif}.asset.json",
+  {
+    eager: true,
+    import: "default",
+  },
+) as Record<string, AssetMeta>;
 
-const productImages = import.meta.glob("../assets/products/*.{png,jpg,jpeg,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const productImages = import.meta.glob(
+  "../assets/products/*.{png,jpg,jpeg,webp,avif}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
 // Recortes com fundo transparente, derivados das fotos originais removendo o
 // branco ligado à borda. São preferidos porque a moldura do cartão é colorida:
@@ -22,21 +32,26 @@ const cutoutImages = import.meta.glob("../assets/products-cut/*.webp", {
   import: "default",
 }) as Record<string, string>;
 
-const normalize = (value: string) => value
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g, "")
-  .toLowerCase()
-  .replace(/\.(png|jpe?g|webp|avif)$/g, "")
-  .replace(/[^a-z0-9]+/g, "")
-  .trim();
+const normalize = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\.(png|jpe?g|webp|avif)$/g, "")
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
 
 const localAssets = Object.entries(assetModules)
   .map(([path, meta]) => {
     if (!meta?.url) return null;
-    const source = meta.original_filename || path.replace(/^.*\//, "").replace(/\.asset\.json$/i, "");
+    const source =
+      meta.original_filename ||
+      path.replace(/^.*\//, "").replace(/\.asset\.json$/i, "");
     return { url: meta.url, key: normalize(source) };
   })
-  .filter((item): item is { url: string; key: string } => Boolean(item?.url && item.key));
+  .filter((item): item is { url: string; key: string } =>
+    Boolean(item?.url && item.key),
+  );
 
 const productAssets = Object.entries(productImages).map(([path, url]) => ({
   url,
@@ -52,20 +67,24 @@ const cutoutAssets = Object.entries(cutoutImages).map(([path, url]) => ({
 localAssets.unshift(...cutoutAssets);
 localAssets.push(...productAssets);
 
-const cutoutKeys = new Set(cutoutAssets.map(item => item.key));
+const cutoutKeys = new Set(cutoutAssets.map((item) => item.key));
 
 function cutoutKeyFor(product: Product): string | undefined {
   const candidates = [
     product.slug ? normalize(String(product.slug)) : "",
     normalize(product.name || ""),
-    normalize([product.name, product.brand, product.size].filter(Boolean).join(" ")),
-  ].filter(key => key.length >= 8);
+    normalize(
+      [product.name, product.brand, product.size].filter(Boolean).join(" "),
+    ),
+  ].filter((key) => key.length >= 8);
 
   for (const candidate of candidates) {
     if (cutoutKeys.has(candidate)) return candidate;
   }
   for (const candidate of candidates) {
-    const key = [...cutoutKeys].find(k => k.includes(candidate) || candidate.includes(k));
+    const key = [...cutoutKeys].find(
+      (k) => k.includes(candidate) || candidate.includes(k),
+    );
     if (key) return key;
   }
   return undefined;
@@ -80,7 +99,7 @@ export function hasCutout(product: Product) {
 export function resolveCutoutImage(product: Product): string | undefined {
   const key = cutoutKeyFor(product);
   if (!key) return undefined;
-  return cutoutAssets.find(item => item.key === key)?.url;
+  return cutoutAssets.find((item) => item.key === key)?.url;
 }
 
 // Alguns cadastros antigos receberam a URL de outro produto. Uma empada não
@@ -88,15 +107,23 @@ export function resolveCutoutImage(product: Product): string | undefined {
 // Mantemos o estado neutro da interface até haver um arquivo identificável
 // como empada, evitando informação visual enganosa para o consumidor.
 function hasKnownImageMismatch(product: Product) {
-  const productIdentity = normalize([product.name, product.slug].filter(Boolean).join(" "));
+  const productIdentity = normalize(
+    [product.name, product.slug].filter(Boolean).join(" "),
+  );
   if (!productIdentity.includes("empada")) return false;
-  return Boolean(product.image_url && !normalize(product.image_url).includes("empada"));
+  return Boolean(
+    product.image_url && !normalize(product.image_url).includes("empada"),
+  );
 }
 
 const NON_PRODUCT_IMAGE_MARKERS = [
   "placeholder",
   "fallback",
   "generic",
+  "loremflickr",
+  "picsum",
+  "unsplash",
+  "placehold",
   "category-",
   "categoria-",
   "product-default",
@@ -112,18 +139,30 @@ export function hasProfessionalProductPhoto(product: Product) {
   const raw = product.image_url?.trim();
   if (!raw || hasKnownImageMismatch(product)) return false;
   const normalizedUrl = raw.toLowerCase();
-  if (NON_PRODUCT_IMAGE_MARKERS.some(marker => normalizedUrl.includes(marker))) return false;
-  if (normalizedUrl.startsWith("data:image/svg") || normalizedUrl.endsWith(".svg")) return false;
+  if (
+    NON_PRODUCT_IMAGE_MARKERS.some((marker) => normalizedUrl.includes(marker))
+  )
+    return false;
+  if (
+    normalizedUrl.startsWith("data:image/svg") ||
+    normalizedUrl.endsWith(".svg")
+  )
+    return false;
 
   try {
     const url = new URL(raw, "https://precocerto.local");
     const path = url.pathname.toLowerCase();
-    return /\.(avif|jpe?g|png|webp)$/i.test(path) || url.origin !== "https://precocerto.local";
+    return (
+      /\.(avif|jpe?g|png|webp)$/i.test(path) ||
+      url.origin !== "https://precocerto.local"
+    );
   } catch {
     return false;
   }
 }
 
 export function resolveProductImage(product: Product): string | undefined {
-  return hasProfessionalProductPhoto(product) ? product.image_url!.trim() : undefined;
+  return hasProfessionalProductPhoto(product)
+    ? product.image_url!.trim()
+    : undefined;
 }
