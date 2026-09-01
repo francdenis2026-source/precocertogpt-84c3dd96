@@ -5,7 +5,7 @@ import { resolveCutoutImage, resolveProductImage } from "../../data/productImage
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
   const image = resolveProductImage(product) || resolveCutoutImage(product);
   const previous = product.previousPrice && product.previousPrice > product.minPrice
     ? product.previousPrice
@@ -16,9 +16,9 @@ export function ProductCard({ product }: { product: Product }) {
   const storeCount = product.storeCount || 1;
 
   return (
-    <Link className="pc26-product" to={`/produto/${product.slug || product.id}`} aria-label={`Comparar preços de ${product.name}`}>
+    <Link className={`pc26-product${featured ? " pc26-product--featured" : ""}`} to={`/produto/${product.slug || product.id}`} aria-label={`Comparar preços de ${product.name}`}>
       <div className="pc26-product__image">
-        {saving > 0 && <span className="pc26-product__saving"><TrendingDown aria-hidden="true" /> Menor preço</span>}
+        {saving > 0 && <span className="pc26-product__saving"><TrendingDown aria-hidden="true" /> Economize {brl.format(saving)}</span>}
         {image
           ? <img src={image} alt={product.name} width="220" height="220" loading="lazy" decoding="async" />
           : <img className="pc26-product__placeholder" src="/product-placeholder-preco-certo.svg" alt="" width="220" height="220" loading="lazy" decoding="async" />}
@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="pc26-product__footer">
           <span><MapPin aria-hidden="true" /> Feijó, AC</span>
-          <strong>Comparar <ArrowUpRight aria-hidden="true" /></strong>
+          <strong>Ver comparação <ArrowUpRight aria-hidden="true" /></strong>
         </div>
       </div>
     </Link>
