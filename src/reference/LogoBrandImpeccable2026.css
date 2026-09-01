@@ -37,7 +37,7 @@ html[data-theme="dark"]{
 }
 .pcx-home{--pcx-bg:var(--pc-canvas);--pcx-paper:var(--pc-surface);--pcx-ink:var(--pc-ink);--pcx-muted:var(--pc-muted);--pcx-line:var(--pc-border);--pcx-deep:#202522;--pcx-deep-2:#29312c;--pcx-green:var(--pc-logo-green);--pcx-green-2:var(--pc-logo-green-bright);--pcx-mint:#e1f0eb;--pcx-gold:var(--pc-logo-orange)}
 .nx-header,.pcx-header{background:color-mix(in srgb,#fff 96%,var(--pc-canvas))!important;border-color:var(--pc-border)!important;box-shadow:0 8px 24px rgba(24,42,31,.07)!important;color:var(--pc-ink)!important}
-.nx-brand img,.pcx-brand img{content:url('/logo-preco-certo.svg')!important;filter:none!important}
+.nx-brand img,.pcx-brand img{content:url('/logo-preco-certo.svg?v=17')!important;filter:none!important}
 .pcx-brand span,.pcx-nav a,.pcx-theme,.pcx-menu{color:var(--pc-ink)!important}
 .pcx-brand span{border-color:var(--pc-border)!important}
 .pcx-theme,.pcx-menu{background:var(--pc-surface-2)!important;border-color:var(--pc-border)!important}
@@ -106,7 +106,7 @@ html[data-theme="dark"] :is(.ref-page,.nx-home,.mh26-page,.pcx-home,.msearch26-p
   background:var(--pc-canvas)!important;color:var(--pc-ink)!important;
 }
 html[data-theme="dark"] :is(.ref-header,.ref-mobile-menu,.ref-dock,.nx-header,.mh26-header,.pcx-header){background:color-mix(in srgb,var(--pc-footer) 94%,transparent)!important;border-color:var(--pc-border)!important;box-shadow:0 8px 28px rgba(0,0,0,.24)!important}
-html[data-theme="dark"] :is(.nx-brand img,.pcx-brand img){content:url('/logo-preco-certo-inversa.svg')!important}
+html[data-theme="dark"] :is(.nx-brand img,.pcx-brand img){content:url('/logo-preco-certo-inversa.svg?v=17')!important}
 html[data-theme="dark"] :is(.pcx-brand span,.pcx-nav a,.pcx-theme,.pcx-menu){color:var(--pc-ink)!important}
 html[data-theme="dark"] :is(.ref-footer,.nx-footer,.pcx-footer,.pcx-mobile){background:var(--pc-footer)!important;border-color:var(--pc-border)!important}
 html[data-theme="dark"] :is(.ref-product-grid>a,.ref-product-grid>article,.ref-results-table,.ref-store-list,.ref-basket-list,.ref-price-board,.ref-update,.nx-store-panel,.nx-offer-card,.nx-search-results,.pcx-product,.pcx-search-results,.pcx-modal__dialog){background:var(--pc-surface)!important;border-color:var(--pc-border)!important;color:var(--pc-ink)!important}
@@ -150,6 +150,6 @@ html[data-theme="dark"]{
 .pcx-hero h1 strong,.pcx-local,.pcx-hero__proof svg{color:#f1a184!important}.pcx-basket__inner{background:linear-gradient(135deg,#f3ddd0,#fff4e8)!important}
 html[data-theme="dark"] :is(.ref-header,.ref-mobile-menu,.ref-dock,.nx-header,.mh26-header,.pcx-header){background:rgba(42,28,23,.97)!important;border-color:var(--pc-border)!important;box-shadow:0 8px 28px rgba(65,33,23,.3)!important}
 html[data-theme="dark"] :is(.nx-brand,.pcx-brand){padding:6px 9px;border-radius:11px;background:#fff5e8!important}
-html[data-theme="dark"] :is(.nx-brand img,.pcx-brand img){content:url('/logo-preco-certo.svg')!important;filter:none!important}
+html[data-theme="dark"] :is(.nx-brand img,.pcx-brand img){content:url('/logo-preco-certo-inversa.svg?v=17')!important;filter:none!important}
 html[data-theme="dark"] :is(.ref-footer,.nx-footer,.pcx-footer,.pcx-mobile){background:var(--pc-footer)!important}
 html[data-theme="dark"] :is(.msearch26-hero,.sector-hub__hero,.sector-hub__tools){background:linear-gradient(140deg,#261611,#5a3022)!important}

@@ -1,22 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" role="img" aria-labelledby="title desc">
-  <title id="title">Preço Certo</title>
-  <desc id="desc">Logomarca Preço Certo com carrinho de compras e tipografia limpa.</desc>
-  <defs>
-    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1D4ED8"/><stop offset="1" stop-color="#0F2F75"/></linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FACC15"/><stop offset="1" stop-color="#E59A05"/></linearGradient>
-  </defs>
-  <g transform="translate(14 33)">
-    <rect width="154" height="154" rx="36" fill="#F8FAFC"/>
-    <path d="M31 39h18c7 0 12 4 14 11l7 24h62c8 0 13 8 10 15l-14 37c-2 6-8 10-15 10H75c-8 0-14-5-16-12L43 64" fill="none" stroke="url(#blue)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M73 86h53M83 106h36" stroke="#60A5FA" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="78" cy="142" r="10" fill="url(#gold)"/><circle cx="119" cy="142" r="10" fill="url(#gold)"/>
-    <path d="M123 31l21 10v24c0 15-9 27-21 32-12-5-21-17-21-32V41Z" fill="url(#gold)"/>
-    <path d="m113 63 7 7 13-15" fill="none" stroke="#713F12" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
-  <g transform="translate(194 62)" font-family="Outfit,Inter,Arial,sans-serif">
-    <text x="0" y="60" fill="#102A56" font-size="67" font-weight="760" letter-spacing="-3">Preço</text>
-    <text x="202" y="60" fill="#1D4ED8" font-size="67" font-weight="760" letter-spacing="-3">Certo</text>
-    <text x="3" y="94" fill="#64748B" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="2.3">O MELHOR PREÇO PERTO DE VOCÊ</text>
-    <path d="M3 111h399" stroke="#E2E8F0" stroke-width="3" stroke-linecap="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="128" viewBox="0 0 560 128" role="img" aria-labelledby="title desc">
+  <title id="title">Preço Certo</title><desc id="desc">Logomarca oficial do Preço Certo com etiqueta de preço e confirmação.</desc>
+  <defs><linearGradient id="bg" x1="8" y1="6" x2="118" y2="124" gradientUnits="userSpaceOnUse"><stop stop-color="#242A2F"/><stop offset="1" stop-color="#121619"/></linearGradient><linearGradient id="gold" x1="37" y1="23" x2="98" y2="108" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD968"/><stop offset="1" stop-color="#F2B705"/></linearGradient></defs>
+  <g aria-hidden="true"><rect x="4" y="4" width="120" height="120" rx="31" fill="url(#bg)"/><path d="M35 25h35.5c4.8 0 9.4 1.9 12.8 5.3l23.4 23.4a12 12 0 0 1 0 17L72 105.4a12 12 0 0 1-17 0L27.6 78A12 12 0 0 1 24 69.5V36a11 11 0 0 1 11-11Z" fill="url(#gold)"/><circle cx="47" cy="48" r="8" fill="#171C20"/><path d="m47 73 12 12 25-28" fill="none" stroke="#171C20" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g font-family="Manrope,Inter,Arial,sans-serif"><text x="145" y="72" fill="#202126" font-size="56" font-weight="800" letter-spacing="-2.2">Preço</text><text x="297" y="72" fill="#D89000" font-size="56" font-weight="800" letter-spacing="-2.2">Certo</text><text x="149" y="99" fill="#66706D" font-size="12" font-weight="750" letter-spacing="2.1">COMPARE ANTES DE COMPRAR</text></g>
 </svg>

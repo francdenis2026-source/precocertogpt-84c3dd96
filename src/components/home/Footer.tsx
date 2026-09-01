@@ -30,7 +30,7 @@ export function Footer() {
     <div className="pc26-shell pc26-footer-premium__top">
       <div className="pc26-footer-premium__identity">
         <Link className="pc26-footer-studio__brand" to="/" aria-label="Preço Certo - página inicial">
-          <img src="/preco-certo-mark.svg" alt="" width="40" height="40" />
+          <img src="/preco-certo-mark.svg?v=17" alt="" width="40" height="40" />
           <span><strong>Preço Certo</strong><small>Comparador local</small></span>
         </Link>
         <p>Compare preços e economize em Feijó.</p>

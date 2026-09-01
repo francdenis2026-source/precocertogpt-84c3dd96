@@ -11,8 +11,8 @@ const messages = [
 export function AppExperienceShowcase() {
   return <section className="pc26-app-story pc26-shell" aria-labelledby="pc26-app-story-title">
     <div className="pc26-app-story__photo">
-      <img src="/marketplace-local-profissional-v2.webp" alt="Comerciante local consultando o catálogo digital do estabelecimento" loading="lazy" decoding="async" />
-      <span><ShieldCheck aria-hidden="true" /> Informação local com contexto</span>
+      <img src="/home-editorial-2026/campanha-familia-precocerto-v1.webp" alt="Família usando o celular para comparar preços durante as compras no supermercado" loading="lazy" decoding="async" />
+      <span><ShieldCheck aria-hidden="true" /> Economia para toda a família</span>
     </div>
 
     <div className="pc26-app-story__content">
@@ -29,7 +29,7 @@ export function AppExperienceShowcase() {
 
     <div className="pc26-app-preview" aria-label="Prévia da experiência PreçoCerto">
       <div className="pc26-app-preview__speaker" aria-hidden="true" />
-      <header><img src="/logo-precocerto-wordmark.png" alt="PreçoCerto" /><BellRing aria-hidden="true" /></header>
+      <header><img src="/logo-preco-certo.svg?v=17" alt="PreçoCerto" /><BellRing aria-hidden="true" /></header>
       <span className="pc26-app-preview__location"><MapPin aria-hidden="true" /> Feijó, Acre</span>
       <div className="pc26-app-preview__search"><Search aria-hidden="true" /><span>O que você procura?</span></div>
       <div className="pc26-app-preview__notice"><TrendingDown aria-hidden="true" /><span><small>COMPARAÇÃO ATIVA</small><strong>Encontre o menor preço local</strong></span></div>

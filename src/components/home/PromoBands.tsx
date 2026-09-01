@@ -5,11 +5,11 @@ import "./PromoBands.css";
 const stories = [
   {
     className: "pc26-promo__story--featured",
-    image: "/home-editorial-2026/comparacao-no-mercado.webp",
-    alt: "Cliente comparando preços pelo celular durante as compras no mercado",
+    image: "/home-editorial-2026/campanha-homem-comparando-precos-v1.webp",
+    alt: "Homem comparando pelo celular o preço de um produto durante as compras no mercado",
     icon: BadgePercent,
     eyebrow: "COMPARE ANTES DE COMPRAR",
-    title: "Veja a diferença antes de chegar ao caixa.",
+    title: "Compare no corredor. Decida com segurança.",
     text: "Consulte o produto, confira as ofertas locais e escolha com mais segurança.",
     action: "Comparar preços",
     to: "/buscar",
