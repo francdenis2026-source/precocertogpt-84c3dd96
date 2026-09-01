@@ -2,6 +2,7 @@
 :root{
   --pc-appbar-height:64px;
   --pc-tabbar-height:72px;
+  --pc-mobile-content-clearance:calc(var(--pc-tabbar-height) + max(28px,env(safe-area-inset-bottom)));
   --pc-glass-light:rgba(255,255,252,.72);
   --pc-glass-light-scrolled:rgba(255,255,252,.84);
   --pc-glass-dark:rgba(24,24,27,.7);
@@ -54,6 +55,7 @@ html[data-theme="dark"] body.pc-app-shell :is(.pc26-header--studio,.ref-header).
 
 @media(max-width:767px){
   html,body,#root{min-height:100%;max-width:100%;overflow-x:clip}
+  html{scroll-padding-bottom:var(--pc-mobile-content-clearance)}
   body.pc-app-shell{min-height:100dvh;overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;background:var(--pc-canvas,#f5f6f4)!important}
   body.pc-app-shell #root{min-height:100dvh}
   body.pc-app-shell :is(.pc26-home,.mh26-page,.msearch26-page,.ref-page,.ref-auth,.search26-page,.sector-hub,.sector26-page,.pharmacy-directory-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page,.kelly-page,.sanduba-page,.pc-collab-page){
@@ -62,7 +64,7 @@ html[data-theme="dark"] body.pc-app-shell :is(.pc26-header--studio,.ref-header).
     min-height:100dvh!important;
     margin:0!important;
     overflow-x:clip!important;
-    padding-bottom:calc(var(--pc-tabbar-height) + max(14px,env(safe-area-inset-bottom)))!important;
+    padding-bottom:var(--pc-mobile-content-clearance)!important;
     isolation:isolate;
   }
   body.pc-app-shell :is(main,#conteudo-principal){min-width:0;scroll-margin-top:calc(var(--pc-appbar-height) + env(safe-area-inset-top))}
@@ -123,12 +125,12 @@ html[data-theme="dark"] body.pc-app-shell :is(.pc26-header--studio,.ref-header).
     border:0!important;
     border-top:1px solid var(--pc-border)!important;
     border-radius:20px 20px 0 0!important;
-    background:rgba(255,255,252,.86)!important;
+    background:var(--pc-surface,#fffdf8)!important;
     box-shadow:0 -12px 34px rgba(16,24,40,.11)!important;
-    backdrop-filter:blur(22px) saturate(145%)!important;
-    -webkit-backdrop-filter:blur(22px) saturate(145%)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
   }
-  html[data-theme="dark"] body.pc-app-shell :is(.ref-dock,.pc26-bottom-nav){background:rgba(24,24,27,.88)!important;border-top-color:rgba(255,255,255,.09)!important;box-shadow:0 -14px 36px rgba(0,0,0,.28)!important}
+  html[data-theme="dark"] body.pc-app-shell :is(.ref-dock,.pc26-bottom-nav){background:var(--pc-surface,#18181b)!important;border-top-color:rgba(255,255,255,.09)!important;box-shadow:0 -14px 36px rgba(0,0,0,.28)!important}
   body.pc-app-shell :is(.ref-dock,.pc26-bottom-nav) a{position:relative;min-width:0!important;min-height:58px!important;display:grid!important;place-items:center!important;align-content:center!important;gap:3px!important;padding:5px 2px!important;border-radius:14px!important;background:transparent!important;color:var(--pc-muted)!important;font-size:10.5px!important;font-weight:720!important;line-height:1!important;text-decoration:none!important;touch-action:manipulation;transition:color 160ms ease-out,background-color 160ms ease-out,transform 120ms ease-out!important}
   body.pc-app-shell :is(.ref-dock,.pc26-bottom-nav) a svg{width:22px!important;height:22px!important;stroke-width:2!important}
   body.pc-app-shell :is(.ref-dock,.pc26-bottom-nav) a.is-active{background:color-mix(in srgb,var(--pc-primary-soft,#fff3df) 78%,transparent)!important;color:var(--pc-primary-strong,#9d542e)!important}
