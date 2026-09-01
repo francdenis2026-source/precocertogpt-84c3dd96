@@ -7,6 +7,7 @@ import { fetchSectorCatalog, prefetchSectorCatalog, sectorProducts, sectorStores
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { sectorHeroImage } from "../data/sectorHeroImages";
 import { PublicHeader } from "./ReferenceExperience";
+import { CategoryOffers } from "../components/offers/CategoryOffers";
 import "./PharmacyDirectory.css";
 import "./CulturalProfiles.css";
 
@@ -254,6 +255,7 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
         <strong>Nenhum estabelecimento ativo nesta categoria.</strong>
       </section>}
 
+      {sector.id !== "books" && <CategoryOffers categorySlug={sector.id} title={`Ofertas em ${sector.label}`} />}
       {sector.id !== "books" && <SectorProductList catalog={catalog} sector={sector} />}
     </main>
 

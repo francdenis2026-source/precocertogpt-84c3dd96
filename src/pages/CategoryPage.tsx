@@ -10,6 +10,7 @@ import { fetchCatalog } from "../data/remoteCatalog";
 import { sectorProducts } from "../data/sectorCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { categoryHeroImage } from "../data/sectorHeroImages";
+import { CategoryOffers } from "../components/offers/CategoryOffers";
 import "./CategoryPage.css";
 
 /** Grupo de negócio (taxonomia real) usado para listar produtos de cada categoria. */
@@ -153,7 +154,10 @@ export function CategoryPage() {
             </div>
           </section>
 
+          <CategoryOffers categorySlug={category || data.title} title={`Ofertas em ${data.title}`} />
+
           {/* Produtos reais do catálogo */}
+
           <section className="category-section category-products">
             <h3><PackageSearch className="section-icon" /> Produtos e preços reais</h3>
             {loadingCatalog ? (
