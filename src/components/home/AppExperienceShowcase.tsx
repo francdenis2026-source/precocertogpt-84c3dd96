@@ -1,7 +1,7 @@
 import { ArrowRight, BellRing, ListChecks, MapPin, Search, ShieldCheck, Store, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./AppExperienceShowcase.css";
-import familiaImg from "../../assets/home-2026/familia-planejando-compras.jpg";
+import appMockupImg from "../../assets/home-2026/app-precocerto-mockup.jpg";
 
 const messages = [
   { icon: TrendingDown, title: "Menor preço encontrado", text: "A comparação destaca onde vale mais a pena comprar." },
@@ -12,8 +12,8 @@ const messages = [
 export function AppExperienceShowcase() {
   return <section className="pc26-app-story pc26-shell" aria-labelledby="pc26-app-story-title">
     <div className="pc26-app-story__photo">
-      <img src={familiaImg} width={1280} height={720} alt="Família planejando as compras da semana com o celular na cozinha" loading="lazy" decoding="async" />
-      <span><ShieldCheck aria-hidden="true" /> Economia para toda a família</span>
+      <img src={appMockupImg} width={1280} height={960} alt="Aplicativo PreçoCerto aberto em um celular mostrando a comparação de preços dos produtos" loading="lazy" decoding="async" />
+      <span><ShieldCheck aria-hidden="true" /> O aplicativo PreçoCerto</span>
     </div>
 
     <div className="pc26-app-story__content">
