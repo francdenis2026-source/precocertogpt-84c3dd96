@@ -1,5 +1,5 @@
 import { ArrowRight, LoaderCircle, PackageSearch, Search, X } from "lucide-react";
-import { FormEvent, KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+import { type CSSProperties, FormEvent, KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
@@ -99,7 +99,7 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
     }
   };
 
-  return <div ref={rootRef} className={`pc26-live-search${compact ? " pc26-live-search--compact" : ""}`}>
+  return <div ref={rootRef} className={`pc26-live-search${compact ? " pc26-live-search--compact" : ""}${showPanel ? " is-open" : ""}`}>
     <form className={compact ? "pc26-search" : "pc26-hero-search"} role="search" onSubmit={submit}>
       <Search className="pc26-live-search__icon" aria-hidden="true" />
       <label className="sr-only" htmlFor={id}>Produto para comparar</label>
@@ -138,7 +138,7 @@ export function LiveProductSearch({ products, loading = false, compact = false, 
           onClick={() => openProduct(product)}
         >
           <span className="pc26-live-results__thumb">{image ? <img src={image} alt="" width="52" height="52" loading="lazy" decoding="async" /> : <PackageSearch aria-hidden="true" />}</span>
-          <span className="pc26-live-results__copy"><strong>{product.name}</strong><small>{[product.brand, product.size || product.category].filter(Boolean).join(" · ")}</small><em>{product.establishment}</em></span>
+          <span className="pc26-live-results__copy"><strong>{product.name}</strong><small>{[product.brand, product.size || product.category].filter(Boolean).join(" · ")}</small><em style={{ "--pc26-store-accent": product.storeColor || "#17623d" } as CSSProperties}><i aria-hidden="true"/>{product.establishment || "Comércio local"}</em></span>
           <span className="pc26-live-results__price"><small>a partir de</small><strong>{brl.format(product.minPrice)}</strong></span>
         </button>;
       })}</div> : <div className="pc26-live-results__state"><PackageSearch aria-hidden="true" /><span><strong>Nenhum produto encontrado</strong><small>Tente um nome mais curto ou outra marca.</small></span></div>}

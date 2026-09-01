@@ -25,8 +25,10 @@ describe("Busca de produtos na homepage", () => {
 
     const options = screen.getAllByRole("option");
     expect(options.length).toBeGreaterThan(0);
+    expect(input.closest(".pc26-live-search")?.classList.contains("is-open")).toBe(true);
     expect(options[0].textContent).toContain("Arroz");
     expect(options[0].textContent).toContain("Central Super");
     expect(options[0].textContent).toContain("R$");
+    expect(options[0].querySelector("em")?.getAttribute("style")).toContain("--pc26-store-accent");
   });
 });
