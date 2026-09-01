@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import { sectorProducts } from "../data/sectorCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
+import { ProductThumb } from "../components/catalog/ProductThumb";
 import { categoryHeroImage } from "../data/sectorHeroImages";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import "./CategoryPage.css";
