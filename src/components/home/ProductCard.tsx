@@ -1,12 +1,14 @@
-import { ArrowUpRight, MapPin, Store, TrendingDown } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, ImageOff, MapPin, Store, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
-import { resolveCutoutImage, resolveProductImage } from "../../data/productImageResolver";
+import { resolveProductImage } from "../../data/productImageResolver";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 export function ProductCard({ product, featured = false }: { product: Product; featured?: boolean }) {
-  const image = resolveProductImage(product) || resolveCutoutImage(product);
+  const image = resolveProductImage(product);
+  const [failedSource, setFailedSource] = useState("");
   const previous = product.previousPrice && product.previousPrice > product.minPrice
     ? product.previousPrice
     : product.avgPrice > product.minPrice
@@ -19,9 +21,9 @@ export function ProductCard({ product, featured = false }: { product: Product; f
     <Link className={`pc26-product${featured ? " pc26-product--featured" : ""}`} to={`/produto/${product.slug || product.id}`} aria-label={`Comparar preços de ${product.name}`}>
       <div className="pc26-product__image">
         {saving > 0 && <span className="pc26-product__saving"><TrendingDown aria-hidden="true" /> Economize {brl.format(saving)}</span>}
-        {image
-          ? <img src={image} alt={product.name} width="220" height="220" loading="lazy" decoding="async" />
-          : <img className="pc26-product__placeholder" src="/product-placeholder-preco-certo.svg" alt="" width="220" height="220" loading="lazy" decoding="async" />}
+        {image && failedSource !== image
+          ? <img src={image} alt={product.name} width="220" height="220" loading="lazy" decoding="async" onError={() => setFailedSource(image)} />
+          : <span className="pc26-product__no-photo" role="img" aria-label={`Foto de ${product.name} indisponível`}><ImageOff aria-hidden="true" /><small>Foto indisponível</small></span>}
       </div>
 
       <div className="pc26-product__body">

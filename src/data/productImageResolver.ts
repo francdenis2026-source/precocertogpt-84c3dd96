@@ -83,21 +83,6 @@ export function resolveCutoutImage(product: Product): string | undefined {
   return cutoutAssets.find(item => item.key === key)?.url;
 }
 
-const publicFallbacks = [
-  { terms: ["aguasanitaria", "ype", "1l"], url: "/products/agua-sanitaria-ype-1l.jpg" },
-  { terms: ["aguasanitaria", "ype", "2l"], url: "/products/agua-sanitaria-ype-2l.jpg" },
-  { terms: ["bisteca"], url: "/products/bisteca.jpg" },
-  { terms: ["arroz", "tiojoao"], url: "/products/arroz-tio-joao-5kg.png" },
-  { terms: ["arroz", "bernardo"], url: "/products/arroz-branco-bernardo-1kg.jpg" },
-  { terms: ["cafe", "3coracoes"], url: "/products/cafe-3-coracoes-500g.jpg" },
-  { terms: ["leite", "empo", "italac", "integral", "400g"], url: "/products/leite-em-po-italac-integral-400g.webp" },
-  { terms: ["leite", "italac"], url: "/products/leite-italac-1l.jpg" },
-  { terms: ["feijao", "kicaldo"], url: "/products/feijao-kicaldo-1kg.jpg" },
-  { terms: ["feijao", "bernardo"], url: "/products/feijao-carioca-bernardo-1kg.jpg" },
-  { terms: ["acucar", "uniao"], url: "/products/acucar-uniao-1kg.jpg" },
-  { terms: ["detergente", "ype"], url: "/products/detergente-ypx-neutro-500ml.jpg" },
-] as const;
-
 // Alguns cadastros antigos receberam a URL de outro produto. Uma empada não
 // deve herdar uma foto genérica/vermelha só porque existe uma URL no banco.
 // Mantemos o estado neutro da interface até haver um arquivo identificável
@@ -119,9 +104,9 @@ const NON_PRODUCT_IMAGE_MARKERS = [
 ];
 
 /**
- * Política estrita da homepage: somente fotos vinculadas ao cadastro real do
+ * Política visual pública: somente fotos vinculadas ao cadastro real do
  * produto. Imagens inferidas pelo nome, artes de categoria e placeholders não
- * são aceitos na vitrine, mesmo quando ajudam em páginas de catálogo.
+ * são aceitos em nenhuma experiência de compra.
  */
 export function hasProfessionalProductPhoto(product: Product) {
   const raw = product.image_url?.trim();
@@ -140,41 +125,5 @@ export function hasProfessionalProductPhoto(product: Product) {
 }
 
 export function resolveProductImage(product: Product): string | undefined {
-  const identity = normalize([product.name, product.brand, product.size].filter(Boolean).join(" "));
-
-  // A arte antiga da cebola roxa contém uma etiqueta promocional incorporada
-  // ("400g / 2 a 3 unid.") com textos sobrepostos. Forçamos a fotografia limpa
-  // já existente no projeto em todos os cards, modais e páginas do produto.
-  if (identity.includes("cebolaroxa")) {
-    const cleanRedOnion = localAssets.find(asset => asset.key === "cebolaroxakg");
-    if (cleanRedOnion) return cleanRedOnion.url;
-  }
-
-  // A imagem vinculada ao cadastro do produto é sempre a fonte principal.
-  // Os arquivos locais existem apenas como contingência para cadastros sem foto.
-  if (product.image_url && !hasKnownImageMismatch(product)) return product.image_url;
-  const publicFallback = publicFallbacks.find(item => item.terms.every(term => identity.includes(term)));
-  if (publicFallback) return publicFallback.url;
-
-  const candidates = [
-    product.slug ? normalize(String(product.slug)) : "",
-    normalize(product.name || ""),
-    normalize([product.name, product.brand, product.size].filter(Boolean).join(" ")),
-  ].filter(Boolean);
-
-  for (const candidate of candidates) {
-    const exact = localAssets.find(asset => asset.key === candidate);
-    if (exact) return exact.url;
-  }
-
-  // Only use a fuzzy match when both keys are specific enough to avoid
-  // assigning an unrelated image to a generic product name.
-  for (const candidate of candidates.filter(key => key.length >= 8)) {
-    const fuzzy = localAssets.find(asset =>
-      asset.key.length >= 8 && (asset.key.includes(candidate) || candidate.includes(asset.key)),
-    );
-    if (fuzzy) return fuzzy.url;
-  }
-
-  return undefined;
+  return hasProfessionalProductPhoto(product) ? product.image_url!.trim() : undefined;
 }

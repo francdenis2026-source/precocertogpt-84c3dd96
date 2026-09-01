@@ -18,7 +18,7 @@ import "./MobileHome2026.css";
 const initialCatalog=buildCatalog();
 const brl=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
 
-function ProductImage({product}:{product:Product}){const[failed,setFailed]=useState(false);const src=resolveProductImage(product);return src&&!failed?<img src={src} alt={product.name} loading="lazy" onError={()=>setFailed(true)}/>:<span className="mh26-image-fallback"><PackageSearch aria-hidden="true"/><small>Imagem em atualização</small></span>}
+function ProductImage({product}:{product:Product}){const[failed,setFailed]=useState(false);const src=resolveProductImage(product);return src&&!failed?<img src={src} alt={product.name} loading="lazy" onError={()=>setFailed(true)}/>:<span className="mh26-image-fallback" role="img" aria-label={`Foto de ${product.name} indisponível`}><PackageSearch aria-hidden="true"/><small>Foto indisponível</small></span>}
 
 export function MobileHome2026(){
  const navigate=useNavigate();

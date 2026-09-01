@@ -29,6 +29,7 @@ import "./reference/AdminPerformance.css";
 import "./reference/MobileSearchStability.css";
 import "./reference/DesktopLiveSearch2026.css";
 import "./reference/LiveSearchOverlayStackFix2026.css";
+import "./reference/PublicExperiencePolish2026.css";
 
 const SearchDiscovery2026 = lazy(() => import("./reference/SearchDiscovery2026").then(module => ({ default: module.SearchDiscovery2026 })));
 const ProductDetailProfessional = lazy(() => import("./reference/ProductDetailProfessional").then(module => ({ default: module.ProductDetailProfessional })));

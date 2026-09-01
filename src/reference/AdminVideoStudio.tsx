@@ -18,7 +18,7 @@ export function AdminVideoStudio(){
  useEffect(()=>{void fetchCatalog().then(c=>{setProducts(c.products);setSelected(c.products.slice(0,3).map(p=>String(p.id)))}).finally(()=>setLoading(false))},[]);
  const chosen=useMemo(()=>selected.map(id=>products.find(p=>String(p.id)===id)).filter(Boolean) as Product[],[selected,products]);
  const toggle=(id:string)=>setSelected(current=>current.includes(id)?current.filter(x=>x!==id):current.length<3?[...current,id]:[...current.slice(1),id]);
- const renderProps=useMemo(()=>JSON.stringify({city:'Feijó, Acre',headline:title,subheadline:'Compare preços locais em segundos e escolha onde sua compra vale mais.',cta,offers:chosen.map(p=>({name:p.name,brand:p.brand,size:p.size,price:p.minPrice,previousPrice:p.previousPrice,store:p.establishment,image:resolveProductImage(p)||'products/arroz-tio-joao-5kg.png'}))}),[chosen,title,cta]);
+ const renderProps=useMemo(()=>JSON.stringify({city:'Feijó, Acre',headline:title,subheadline:'Compare preços locais em segundos e escolha onde sua compra vale mais.',cta,offers:chosen.map(p=>({name:p.name,brand:p.brand,size:p.size,price:p.minPrice,previousPrice:p.previousPrice,store:p.establishment,image:resolveProductImage(p)||null}))}),[chosen,title,cta]);
  const copyProps=async()=>{await navigator.clipboard.writeText(renderProps);setCopied(true);window.setTimeout(()=>setCopied(false),2200)};
  const openProduction=async()=>{try{await navigator.clipboard.writeText(renderProps);setCopied(true)}catch{}window.open(workflowUrl,'_blank','noopener,noreferrer')};
  useGSAP(()=>{

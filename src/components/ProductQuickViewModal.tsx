@@ -32,7 +32,7 @@ function QuickViewImage({ product }: { product: Product }) {
   const source = resolveProductImage(product);
   const [failedSource, setFailedSource] = useState("");
   if (source && failedSource !== source) return <img className="pqv-image" src={source} alt={product.name} width="400" height="400" loading="eager" onError={() => setFailedSource(source)} />;
-  return <div className="pqv-image-fallback" role="img" aria-label={`Imagem de ${product.name} em atualização`}><PackageSearch /><span>Imagem em atualização</span></div>;
+  return <div className="pqv-image-fallback" role="img" aria-label={`Foto de ${product.name} indisponível`}><PackageSearch /><span>Foto indisponível</span></div>;
 }
 
 /**

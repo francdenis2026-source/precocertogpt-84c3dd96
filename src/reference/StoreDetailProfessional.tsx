@@ -92,7 +92,7 @@ function ProductImage({ product }: { product: Product }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [source]);
   if (source && !failed) return <img src={source} alt={product.name} width="200" height="160" loading="lazy" onError={() => setFailed(true)} />;
-  return <span className="store-pro-fallback" role="img" aria-label={`Imagem de ${product.name} em atualização`}><PackageSearch /><small>{product.category}<em>Imagem em atualização</em></small></span>;
+  return <span className="store-pro-fallback" role="img" aria-label={`Foto de ${product.name} indisponível`}><PackageSearch /><small>{product.category}<em>Foto indisponível</em></small></span>;
 }
 
 export function StoreDetailProfessional() {

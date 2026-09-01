@@ -47,7 +47,7 @@ function ProductImage({ product, compact = false }: { product: Product; compact?
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [source]);
   if (source && !failed) return <img className={compact ? "pdx-image pdx-image--compact" : "pdx-image"} src={source} alt={product.name} width="400" height="400" loading={compact ? "lazy" : "eager"} onError={() => setFailed(true)} />;
-  return <div className={compact ? "pdx-image-fallback pdx-image-fallback--compact" : "pdx-image-fallback"} role="img" aria-label={`Imagem de ${product.name} em atualização`}><PackageSearch /><span>Imagem em atualização</span></div>;
+  return <div className={compact ? "pdx-image-fallback pdx-image-fallback--compact" : "pdx-image-fallback"} role="img" aria-label={`Foto de ${product.name} indisponível`}><PackageSearch /><span>Foto indisponível</span></div>;
 }
 
 function formatDate(value?: string) {
