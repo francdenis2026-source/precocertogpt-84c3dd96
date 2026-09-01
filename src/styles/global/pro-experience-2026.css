@@ -894,3 +894,54 @@ html body .pc26-user-hero__media .pc26-hero-panel__metrics span {
     display: none !important;
   }
 }
+
+/* ── 11. Faixas editoriais: contraste garantido sobre a fotografia ──────── */
+html body .pc26-promo__story {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+html body .pc26-promo__story::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 26, 22, 0.93) 0%,
+    rgba(7, 26, 22, 0.82) 42%,
+    rgba(7, 26, 22, 0.18) 78%,
+    rgba(7, 26, 22, 0.05) 100%
+  );
+}
+html body .pc26-promo__story > *:not(img):not(picture) {
+  position: relative;
+  z-index: 2;
+}
+html body .pc26-promo__story h3,
+html body .pc26-promo__story strong,
+html body .pc26-promo__story p {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+html body .pc26-promo__story p {
+  color: rgba(240, 246, 242, 0.9) !important;
+}
+html body .pc26-promo__story--sectors::before {
+  background: linear-gradient(
+    270deg,
+    rgba(7, 26, 22, 0.93) 0%,
+    rgba(7, 26, 22, 0.82) 42%,
+    rgba(7, 26, 22, 0.18) 78%,
+    rgba(7, 26, 22, 0.05) 100%
+  );
+}
+/* Painel da hero: leitura garantida no topo da fotografia */
+html body .pc26-user-hero__media::after {
+  background: linear-gradient(
+    180deg,
+    rgba(7, 22, 18, 0.45) 0%,
+    rgba(7, 22, 18, 0.62) 50%,
+    rgba(5, 16, 13, 0.84) 100%
+  ) !important;
+}
