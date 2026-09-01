@@ -49,6 +49,14 @@ html[data-theme="dark"] .pc26-home--recovered{
 .pc26-home--recovered :is(.pc26-benefits span,.pc26-category-card span,.pc26-categories .pc26-section-heading p){color:var(--hc-muted)!important}
 .pc26-home--recovered :is(.pc26-categories .pc26-section-heading>a,.pc26-categories .pc26-section-kicker){color:var(--hc-brand)!important}
 .pc26-home--recovered :is(.pc26-benefits i,.pc26-category-card i){background:var(--hc-brand-soft)!important;color:var(--hc-brand)!important}
+
+/* Textos sobre fotografia permanecem claros nos dois temas. Esta camada é
+   carregada por último para impedir que regras globais da homepage os
+   remapeiem para a tinta escura do modo claro. */
+.pc26-home--recovered .pc26-promo__story .pc26-promo__copy h3{color:#fff!important}
+.pc26-home--recovered .pc26-promo__story .pc26-promo__copy p{color:#d9e5e3!important}
+.pc26-home--recovered .pc26-promo__story .pc26-promo__eyebrow{color:#f3ce72!important}
+
 .pc26-home--recovered .pc26-header-studio__mobile-brand strong{color:var(--hc-text)!important}
 .pc26-home--recovered .pc26-header-studio__mobile-brand small{color:var(--hc-muted)!important}
 .pc26-home--recovered .pc26-header-studio__nav a{color:var(--hc-muted)!important}
