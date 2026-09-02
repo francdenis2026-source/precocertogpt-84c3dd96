@@ -70,30 +70,126 @@ export const groupCounts = (catalog: CatalogPayload) => {
   return totals;
 };
 
+type RealEstablishmentRow = {
+  id: string | number;
+  name?: string | null;
+  neighborhood?: string | null;
+  brand_color?: string | null;
+  kind?: string | null;
+  address?: string | Record<string, unknown> | null;
+  logo_url?: string | null;
+};
+
+const normalizeName = (value: string | null | undefined) =>
+  (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
+const slugifyStore = (name: string, id: string | number) => {
+  const slug = normalizeName(name)
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug || `estabelecimento-${String(id).slice(0, 8)}`;
+};
+
+const addressText = (value: RealEstablishmentRow["address"]) => {
+  if (!value) return undefined;
+  if (typeof value === "string") return value.trim() || undefined;
+  const read = (key: string) => {
+    const item = value[key];
+    return typeof item === "string" ? item.trim() : "";
+  };
+  return [
+    [read("street"), read("number")].filter(Boolean).join(", "),
+    read("neighborhood"),
+    read("city"),
+  ].filter(Boolean).join(" · ") || undefined;
+};
+
+const addressCity = (value: RealEstablishmentRow["address"]) => {
+  if (!value || typeof value === "string") return undefined;
+  const city = value.city;
+  return typeof city === "string" && city.trim() ? city.trim() : undefined;
+};
+
+/**
+ * Garante que os estabelecimentos reais do Supabase continuem visíveis mesmo
+ * quando products/prices estiverem vazios, bloqueados por RLS ou temporariamente
+ * indisponíveis. O catálogo de preços pode falhar sem apagar a tabela de lojas.
+ */
+async function mergeRealEstablishments(catalog: CatalogPayload): Promise<CatalogPayload> {
+  if (!supabase) return catalog;
+
+  const { data, error } = await supabase
+    .from("establishments")
+    .select("id,name,neighborhood,brand_color,kind,address,logo_url")
+    .order("name", { ascending: true })
+    .limit(2000);
+
+  if (error || !data?.length) return catalog;
+
+  const productCounts = new Map<string, number>();
+  for (const product of catalog.products) {
+    for (const id of productStoreIds(product)) {
+      productCounts.set(id, (productCounts.get(id) || 0) + 1);
+    }
+  }
+
+  const realRows = data as RealEstablishmentRow[];
+  const realIds = new Set(realRows.map(row => String(row.id)));
+  const realNames = new Set(realRows.map(row => normalizeName(row.name)));
+
+  const realStores: StoreRow[] = realRows.map(row => {
+    const name = row.name?.trim() || "Estabelecimento";
+    return {
+      id: row.id,
+      slug: slugifyStore(name, row.id),
+      name,
+      neighborhood: row.neighborhood?.trim() || "—",
+      color: row.brand_color || "#1473E6",
+      kind: row.kind || "",
+      address: addressText(row.address),
+      logoUrl: row.logo_url || undefined,
+      city: addressCity(row.address),
+      products: productCounts.get(String(row.id)) || 0,
+    };
+  });
+
+  // Mantém apenas adições manuais que ainda não ganharam cadastro oficial.
+  // Os 12 seeds numéricos do fallback local não podem reaparecer quando o
+  // Supabase possui estabelecimentos reais.
+  const manualOnly = catalog.stores.filter(store => {
+    const id = String(store.id);
+    const name = normalizeName(store.name);
+    if (realIds.has(id) || realNames.has(name)) return false;
+    return !/^\d+$/.test(id);
+  });
+
+  const stores = [...realStores, ...manualOnly].sort((a, b) =>
+    Number(b.products || 0) - Number(a.products || 0) || a.name.localeCompare(b.name, "pt-BR"));
+
+  return {
+    ...catalog,
+    stores,
+    metrics: {
+      ...catalog.metrics,
+      stores: stores.length,
+    },
+  };
+}
+
 let enhancedCache: { value: CatalogPayload; expires: number } | null = null;
 let pending: Promise<CatalogPayload> | null = null;
 
 export async function fetchSectorCatalog(force = false): Promise<CatalogPayload> {
   if (!force && enhancedCache && enhancedCache.expires > Date.now()) return enhancedCache.value;
   if (!force && pending) return pending;
+
   pending = (async () => {
     const catalog = await fetchCatalog("", { force });
-    if (!supabase) return catalog;
-    const { data, error } = await supabase.from("establishments").select("id,kind");
-    if (error || !data) return catalog;
-    const kinds = new Map(data.map(row => [String(row.id), String(row.kind || "")]));
-    // Nada de `|| "market"` aqui: um tipo em branco tem que continuar em
-    // branco para que a taxonomia possa deduzir pelo nome ("Padaria X" vira
-    // padaria) e, no pior caso, cair honestamente em "Outros comércios". O
-    // padrão antigo transformava todo cadastro sem tipo em mercado, que é a
-    // origem da maior parte da classificação errada que se via no site.
-    const value = {
-      ...catalog,
-      stores: catalog.stores.map(store => ({ ...store, kind: kinds.get(String(store.id)) || store.kind || "" })),
-    };
+    const value = await mergeRealEstablishments(catalog);
     enhancedCache = { value, expires: Date.now() + 60_000 };
     return value;
   })();
+
   try { return await pending; } finally { pending = null; }
 }
 
