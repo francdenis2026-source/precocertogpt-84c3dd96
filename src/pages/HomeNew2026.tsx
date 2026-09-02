@@ -5,7 +5,7 @@ import {
   type Product,
   verifiedDatasetMetrics,
 } from "../data/catalog";
-import { fetchCatalog } from "../data/remoteCatalog";
+import { fetchSectorCatalog } from "../data/sectorCatalog";
 import {
   buildFeatured,
   currentCycle,
@@ -43,7 +43,7 @@ export function HomeNew2026() {
 
   useEffect(() => {
     let active = true;
-    fetchCatalog()
+    fetchSectorCatalog()
       .then((value) => {
         if (active) setCatalog(value);
       })
