@@ -80,10 +80,31 @@ const DATABASE_PAGE_SIZE = 1000;
 // egress do Supabase. Uma hora mantém os preços atuais sem martelar a API.
 const CATALOG_CACHE_TTL_MS = 60 * 60_000;
 const FORCE_REFRESH_COOLDOWN_MS = 5 * 60_000;
+const CATALOG_SESSION_CACHE_KEY = "precocerto:catalog:v2";
 const CATALOG_REQUEST_TIMEOUT_MS = 5_000;
 const CATALOG_RETRY_DELAY_MS = 350;
 
-let cachedCatalog: { value: CatalogResult; expiresAt: number } | null = null;
+function readSessionCatalog(): { value: CatalogResult; expiresAt: number } | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const cached = JSON.parse(window.sessionStorage.getItem(CATALOG_SESSION_CACHE_KEY) || "null");
+    if (cached?.expiresAt > Date.now() && Array.isArray(cached?.value?.products)) return cached;
+  } catch {
+    // Cache inválido ou maior que a cota do navegador: consulta normalmente.
+  }
+  return null;
+}
+
+function writeSessionCatalog(entry: { value: CatalogResult; expiresAt: number }) {
+  if (typeof window === "undefined" || entry.value.source !== "supabase") return;
+  try {
+    window.sessionStorage.setItem(CATALOG_SESSION_CACHE_KEY, JSON.stringify(entry));
+  } catch {
+    // O cache em memória continua funcionando mesmo sem espaço no navegador.
+  }
+}
+
+let cachedCatalog: { value: CatalogResult; expiresAt: number } | null = readSessionCatalog();
 let pendingCatalog: Promise<CatalogResult> | null = null;
 let lastCatalogFetchAt = 0;
 
@@ -518,6 +539,7 @@ export function fetchCatalog(
     pendingCatalog = request;
     request.then(value => {
       cachedCatalog = { value, expiresAt: Date.now() + CATALOG_CACHE_TTL_MS };
+      writeSessionCatalog(cachedCatalog);
     }).finally(() => {
       if (pendingCatalog === request) pendingCatalog = null;
     });
