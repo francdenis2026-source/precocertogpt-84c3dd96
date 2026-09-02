@@ -1,0 +1,404 @@
+/* Preço Certo — final compact viewport pass.
+   This layer intentionally comes last and neutralizes older oversized homepage rules
+   without changing component behavior. */
+.pc26-home--recovered {
+  --home-shell: min(1320px, calc(100% - 36px));
+  --home-section: 18px;
+}
+
+/* Header: compact, balanced and useful across the full viewport. */
+.pc26-home--recovered .pc26-header--studio {
+  min-height: 58px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--home-line) 82%, transparent) !important;
+  background: color-mix(in srgb, var(--home-surface) 96%, transparent) !important;
+}
+.pc26-home--recovered .pc26-header-studio {
+  min-height: 58px !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: clamp(12px, 2vw, 26px) !important;
+  padding-block: 5px !important;
+}
+.pc26-home--recovered .pc26-header-studio__mobile-brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  min-width: max-content !important;
+}
+.pc26-home--recovered .pc26-header-studio__mobile-brand img {
+  width: 34px !important;
+  height: 34px !important;
+}
+.pc26-home--recovered .pc26-header-studio__mobile-brand span {
+  display: grid !important;
+  line-height: 1 !important;
+}
+.pc26-home--recovered .pc26-header-studio__mobile-brand strong {
+  font-size: .88rem !important;
+}
+.pc26-home--recovered .pc26-header-studio__mobile-brand small {
+  font-size: .58rem !important;
+}
+.pc26-home--recovered .pc26-header-studio__nav {
+  justify-self: center !important;
+  gap: 2px !important;
+}
+.pc26-home--recovered .pc26-header-studio__nav a {
+  min-height: 34px !important;
+  padding-inline: 9px !important;
+  border-radius: 9px !important;
+  font-size: .7rem !important;
+  font-weight: 650 !important;
+}
+.pc26-home--recovered .pc26-header-studio__tools {
+  justify-self: end !important;
+  gap: 4px !important;
+}
+.pc26-home--recovered :is(.pc26-header-studio__tool, .pc26-header-studio__login) {
+  min-width: 36px !important;
+  min-height: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+}
+.pc26-home--recovered .pc26-header-studio__login {
+  padding-inline: 11px !important;
+  gap: 6px !important;
+  font-size: .7rem !important;
+  font-weight: 720 !important;
+}
+.pc26-home--recovered .pc26-header-studio__tool svg,
+.pc26-home--recovered .pc26-header-studio__login svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Main hero: deliberately short. Uses width, not vertical height. */
+.pc26-home--recovered .pc26-user-hero {
+  padding: 10px 0 6px !important;
+}
+.pc26-home--recovered .pc26-user-hero__stage {
+  min-height: 286px !important;
+  max-height: 310px !important;
+  grid-template-columns: minmax(0, 1.12fr) minmax(330px, .88fr) !important;
+  border-radius: 15px !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy {
+  min-height: 286px !important;
+  padding: 20px clamp(22px, 3vw, 40px) !important;
+  justify-content: center !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy h1 {
+  max-width: 18ch !important;
+  font-size: clamp(1.9rem, 3.2vw, 3.15rem) !important;
+  line-height: 1 !important;
+}
+.pc26-home--recovered .pc26-user-hero__copy > p {
+  margin-top: 7px !important;
+  font-size: .84rem !important;
+  line-height: 1.42 !important;
+}
+.pc26-home--recovered .pc26-user-hero__search {
+  height: 62px !important;
+  flex-basis: 62px !important;
+  margin-top: 10px !important;
+}
+.pc26-home--recovered .pc26-user-hero .pc26-hero-search {
+  min-height: 48px !important;
+}
+.pc26-home--recovered .pc26-user-hero .pc26-hero-search input {
+  height: 40px !important;
+}
+.pc26-home--recovered .pc26-user-hero .pc26-live-search__submit {
+  min-height: 40px !important;
+}
+.pc26-home--recovered .pc26-user-hero__actions {
+  margin-top: 8px !important;
+}
+.pc26-home--recovered .pc26-user-hero__actions a {
+  min-height: 38px !important;
+}
+.pc26-home--recovered .pc26-user-hero__proof {
+  margin-top: 7px !important;
+}
+.pc26-home--recovered .pc26-user-hero__media {
+  min-height: 286px !important;
+  max-height: 310px !important;
+}
+
+/* Homepage rhythm: compact sections while preserving useful width. */
+.pc26-home--recovered .pc26-home-actions {
+  gap: 8px !important;
+  padding-block: 6px 8px !important;
+}
+.pc26-home--recovered .pc26-home-actions > a {
+  min-height: 56px !important;
+  padding: 8px 10px !important;
+}
+.pc26-home--recovered :is(.pc26-zone, .pc26-promo) {
+  padding-block: 18px !important;
+}
+.pc26-home--recovered :is(
+  .pc26-products-premium__heading,
+  .pc26-promo__heading,
+  .pc26-section-heading,
+  .pc26-stores-showcase__heading
+) {
+  margin-bottom: 9px !important;
+}
+.pc26-home--recovered :is(
+  .pc26-products-premium__heading h2,
+  .pc26-promo__heading h2,
+  .pc26-section-heading h2,
+  .pc26-stores-showcase__heading h2
+) {
+  font-size: clamp(1.16rem, 1.8vw, 1.5rem) !important;
+}
+.pc26-home--recovered .pc26-products-premium__rail .pc26-product__image {
+  height: 104px !important;
+  min-height: 104px !important;
+}
+.pc26-home--recovered .pc26-products-premium__rail .pc26-product__image img {
+  width: 88px !important;
+  height: 88px !important;
+  max-width: 88px !important;
+  max-height: 88px !important;
+}
+
+/* Promo/secondary hero bands must read as bands, never as full heroes. */
+.pc26-home--recovered :is(.pc26-promo__card, .pc26-promo-card, .pc26-promo-band) {
+  min-height: 0 !important;
+  height: auto !important;
+  padding-block: 16px !important;
+}
+.pc26-home--recovered :is(.pc26-promo__card, .pc26-promo-card, .pc26-promo-band) h2,
+.pc26-home--recovered :is(.pc26-promo__card, .pc26-promo-card, .pc26-promo-band) h3 {
+  font-size: clamp(1.05rem, 1.7vw, 1.42rem) !important;
+  line-height: 1.08 !important;
+}
+
+/* Footer: one compact information rail + slim metadata rail. */
+.pc26-home--recovered .pc26-footer--studio {
+  margin-top: 8px !important;
+  border-top: 1px solid var(--home-line) !important;
+  background: var(--home-surface) !important;
+}
+.pc26-home--recovered .pc26-footer-compact {
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 18px !important;
+  padding-block: 14px !important;
+}
+.pc26-home--recovered .pc26-footer-identity {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.pc26-home--recovered .pc26-footer-studio__brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.pc26-home--recovered .pc26-footer-studio__brand img {
+  width: 30px !important;
+  height: 30px !important;
+}
+.pc26-home--recovered .pc26-footer-studio__brand span {
+  display: grid !important;
+  line-height: 1.05 !important;
+}
+.pc26-home--recovered .pc26-footer-studio__brand strong {
+  font-size: .82rem !important;
+}
+.pc26-home--recovered .pc26-footer-studio__brand small,
+.pc26-home--recovered .pc26-footer-studio__location {
+  font-size: .61rem !important;
+  color: var(--home-muted) !important;
+}
+.pc26-home--recovered .pc26-footer-studio__location svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+.pc26-home--recovered .pc26-footer-navigation {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px 14px !important;
+}
+.pc26-home--recovered .pc26-footer-navigation a {
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  color: var(--home-muted) !important;
+  font-size: .67rem !important;
+  font-weight: 650 !important;
+  text-decoration: none !important;
+}
+.pc26-home--recovered .pc26-footer-business {
+  min-height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding-inline: 11px !important;
+  border: 1px solid var(--home-line) !important;
+  border-radius: 9px !important;
+  color: var(--home-brand-strong) !important;
+  font-size: .66rem !important;
+  font-weight: 720 !important;
+  text-decoration: none !important;
+}
+.pc26-home--recovered .pc26-footer-business svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+.pc26-home--recovered .pc26-footer-meta {
+  border-top: 1px solid color-mix(in srgb, var(--home-line) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--home-surface-2) 62%, var(--home-surface)) !important;
+}
+.pc26-home--recovered .pc26-footer-premium__rail-inner {
+  min-height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding-block: 7px !important;
+  color: var(--home-muted) !important;
+  font-size: .61rem !important;
+}
+.pc26-home--recovered :is(.pc26-footer-premium__trust, .pc26-footer-premium__signature) {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+.pc26-home--recovered .pc26-footer-premium__rail-inner svg {
+  width: 13px !important;
+  height: 13px !important;
+}
+.pc26-home--recovered .pc26-footer-premium__signature strong {
+  color: var(--home-ink) !important;
+  font-weight: 760 !important;
+}
+
+@media (max-width: 1040px) {
+  .pc26-home--recovered { --home-shell: min(100% - 28px, 980px); }
+  .pc26-home--recovered .pc26-header-studio {
+    grid-template-columns: auto 1fr !important;
+  }
+  .pc26-home--recovered .pc26-header-studio__nav {
+    order: 3 !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__stage {
+    min-height: 268px !important;
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr) !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__copy,
+  .pc26-home--recovered .pc26-user-hero__media {
+    min-height: 268px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .pc26-home--recovered {
+    --home-shell: calc(100% - 24px);
+    --home-section: 14px;
+  }
+  .pc26-home--recovered .pc26-header-studio {
+    min-height: 54px !important;
+    padding-block: 4px !important;
+  }
+  .pc26-home--recovered .pc26-header-studio__mobile-brand img {
+    width: 31px !important;
+    height: 31px !important;
+  }
+  .pc26-home--recovered .pc26-header-studio__tools {
+    gap: 2px !important;
+  }
+  .pc26-home--recovered :is(.pc26-header-studio__tool, .pc26-header-studio__login) {
+    min-width: 34px !important;
+    width: 34px !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+  }
+  .pc26-home--recovered .pc26-header-studio__login span {
+    display: none !important;
+  }
+  .pc26-home--recovered .pc26-user-hero {
+    padding-top: 8px !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__stage {
+    min-height: 0 !important;
+    max-height: none !important;
+    grid-template-columns: 1fr !important;
+    border-radius: 14px !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__copy {
+    min-height: 0 !important;
+    padding: 18px 16px 15px !important;
+    border-radius: 14px 14px 0 0 !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__copy h1 {
+    font-size: clamp(1.65rem, 8vw, 2.25rem) !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__media {
+    min-height: 150px !important;
+    height: 150px !important;
+    max-height: 150px !important;
+    border-radius: 0 0 14px 14px !important;
+  }
+  .pc26-home--recovered .pc26-home-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  .pc26-home--recovered :is(.pc26-zone, .pc26-promo) {
+    padding-block: 14px !important;
+  }
+  .pc26-home--recovered .pc26-footer-compact {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+    padding-block: 12px !important;
+  }
+  .pc26-home--recovered .pc26-footer-identity {
+    justify-content: space-between !important;
+  }
+  .pc26-home--recovered .pc26-footer-navigation {
+    justify-content: flex-start !important;
+    gap: 2px 12px !important;
+  }
+  .pc26-home--recovered .pc26-footer-business {
+    justify-self: start !important;
+  }
+  .pc26-home--recovered .pc26-footer-premium__rail-inner {
+    min-height: 0 !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 5px 12px !important;
+    padding-block: 8px !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .pc26-home--recovered { --home-shell: calc(100% - 18px); }
+  .pc26-home--recovered .pc26-header-studio__mobile-brand small,
+  .pc26-home--recovered .pc26-header-studio__radio,
+  .pc26-home--recovered .pc26-header-studio__favorite {
+    display: none !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__copy {
+    padding-inline: 14px !important;
+  }
+  .pc26-home--recovered .pc26-user-hero__media {
+    min-height: 132px !important;
+    height: 132px !important;
+  }
+  .pc26-home--recovered .pc26-footer-studio__location {
+    display: none !important;
+  }
+  .pc26-home--recovered .pc26-footer-navigation a {
+    min-height: 28px !important;
+  }
+  .pc26-home--recovered .pc26-footer-premium__trust {
+    display: none !important;
+  }
+}

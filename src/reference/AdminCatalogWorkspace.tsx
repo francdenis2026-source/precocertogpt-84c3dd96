@@ -104,7 +104,7 @@ function StoreDialog({store,close,saved,setError}:{store:any;close:()=>void;save
   const storeId=store.id||base.data;
   let warning='';
   if(storeId){
-   const details=await saveAdminEstablishmentDetails({establishmentId:String(storeId),address:String(fd.get('address')||''),city:String(fd.get('city')||''),openingHours:String(fd.get('hours')||''),storefrontImageUrl:photo,whatsapp:String(fd.get('whatsapp')||'')});
+   const details=await saveAdminEstablishmentDetails(String(storeId),{address:String(fd.get('address')||''),city:String(fd.get('city')||''),openingHours:String(fd.get('hours')||''),photoUrl:photo,whatsapp:String(fd.get('whatsapp')||'')});
    if(details.error)warning=details.error;
   }
   setBusy(false);

@@ -75,38 +75,12 @@ export type CatalogResult = CatalogPayload & { source: CatalogSource; error?: st
 const round = (value: number) => Math.round(value * 100) / 100;
 const toNumber = (value: number | string | null) => (value === null ? NaN : Number(value));
 const DATABASE_PAGE_SIZE = 1000;
-// O catálogo completo contém milhares de linhas. Um cache de apenas 60 s fazia
-// cada navegação/abertura de produto repetir todo o download e estourar o
-// egress do Supabase. Uma hora mantém os preços atuais sem martelar a API.
-const CATALOG_CACHE_TTL_MS = 60 * 60_000;
-const FORCE_REFRESH_COOLDOWN_MS = 5 * 60_000;
-const CATALOG_SESSION_CACHE_KEY = "precocerto:catalog:v2";
+const CATALOG_CACHE_TTL_MS = 60_000;
 const CATALOG_REQUEST_TIMEOUT_MS = 5_000;
 const CATALOG_RETRY_DELAY_MS = 350;
 
-function readSessionCatalog(): { value: CatalogResult; expiresAt: number } | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const cached = JSON.parse(window.sessionStorage.getItem(CATALOG_SESSION_CACHE_KEY) || "null");
-    if (cached?.expiresAt > Date.now() && Array.isArray(cached?.value?.products)) return cached;
-  } catch {
-    // Cache inválido ou maior que a cota do navegador: consulta normalmente.
-  }
-  return null;
-}
-
-function writeSessionCatalog(entry: { value: CatalogResult; expiresAt: number }) {
-  if (typeof window === "undefined" || entry.value.source !== "supabase") return;
-  try {
-    window.sessionStorage.setItem(CATALOG_SESSION_CACHE_KEY, JSON.stringify(entry));
-  } catch {
-    // O cache em memória continua funcionando mesmo sem espaço no navegador.
-  }
-}
-
-let cachedCatalog: { value: CatalogResult; expiresAt: number } | null = readSessionCatalog();
+let cachedCatalog: { value: CatalogResult; expiresAt: number } | null = null;
 let pendingCatalog: Promise<CatalogResult> | null = null;
-let lastCatalogFetchAt = 0;
 
 function withTimeout<T>(request: Promise<T>, timeoutMs: number): Promise<T> {
   return new Promise<T>((resolve, reject) => {
@@ -283,7 +257,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
   try {
     const [establishments, products, prices] = await Promise.all([
-      fetchAllRows("establishments", "id, slug, name, neighborhood, brand_color, kind, address, logo_url", "id"),
+      fetchAllRows("establishments", "id, name, neighborhood, brand_color, kind, address, logo_url", "id"),
       fetchAllRows("products", "id, name, brand, category, size, unit, barcode, image_url", "id"),
       fetchAllRows("prices", "id, product_id, establishment_id, value, previous_value, captured_at", "id"),
     ]);
@@ -324,11 +298,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
     const q = normalizeCatalogTerm(query);
     const storesById = new Map(storeRows.map(store => [String(store.id), store]));
-    const generatedStoreSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id));
-    const storeSlugById = new Map(storeRows.map(store => [
-      String(store.id),
-      store.slug?.trim() || generatedStoreSlugById.get(String(store.id)) || String(store.id),
-    ]));
+    const storeSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id));
     const pricesByProductId = new Map<string, PriceRow[]>();
     const productIdsByStore = new Map<string, Set<string>>();
 
@@ -455,18 +425,6 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
         a.name.localeCompare(b.name, "pt-BR") ||
         String(a.id).localeCompare(String(b.id)));
 
-    // Conta exatamente os cartões que a página do estabelecimento consegue
-    // exibir depois da consolidação de produtos, não os IDs brutos importados.
-    const visibleProductsByStore = new Map<string, Set<string>>();
-    mapped.forEach(product => {
-      (product.offers || []).forEach(offer => {
-        const storeId = String(offer.establishmentId);
-        const visible = visibleProductsByStore.get(storeId) || new Set<string>();
-        visible.add(String(product.id));
-        visibleProductsByStore.set(storeId, visible);
-      });
-    });
-
     const stores: StoreRow[] = storeRows
       .map(store => {
         const extra = storeExtras.get(String(store.id));
@@ -484,13 +442,9 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
           openingHours: extra?.opening_hours ?? undefined,
           photoUrl: extra?.photo_url ?? undefined,
           whatsapp: extra?.whatsapp ?? undefined,
-          products: visibleProductsByStore.get(String(store.id))?.size ?? 0,
+          products: productIdsByStore.get(String(store.id))?.size ?? 0,
         };
       })
-
-      // O diretório público oferece catálogos; perfis sem nenhum produto ficam
-      // nas áreas próprias e não entram na contagem de catálogos acessíveis.
-      .filter(store => store.products > 0)
 
       .sort((a, b) => {
         const aHasCatalog = a.products > 0 ? 1 : 0;
@@ -501,9 +455,9 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
       });
 
     const metrics: PlatformMetrics = {
-      products: mapped.length,
-      prices: mapped.reduce((total, product) => total + (product.offers?.length || 1), 0),
-      stores: stores.length,
+      products: productRows.length || verifiedDatasetMetrics.products,
+      prices: priceRows.length || verifiedDatasetMetrics.prices,
+      stores: storeRows.length || verifiedDatasetMetrics.stores,
     };
 
     const merged = withManualAdditions({ products: mapped, stores, metrics, updatedAt: new Date().toISOString() }, query);
@@ -541,25 +495,18 @@ export function fetchCatalog(
   query = "",
   options: { force?: boolean } = {},
 ): Promise<CatalogResult> {
-  const forceAllowed = Boolean(options.force)
-    && Date.now() - lastCatalogFetchAt >= FORCE_REFRESH_COOLDOWN_MS;
-  const cacheIsFresh = Boolean(cachedCatalog && cachedCatalog.expiresAt > Date.now());
+  const canReuse = !query && !options.force;
 
-  if (!query && cachedCatalog && (cacheIsFresh || (options.force && !forceAllowed))) {
+  if (canReuse && cachedCatalog && cachedCatalog.expiresAt > Date.now()) {
     return Promise.resolve(cachedCatalog.value);
   }
-  // Mesmo uma atualização forçada deve compartilhar a consulta que já está
-  // em andamento; isso evita rajadas duplicadas quando vários componentes
-  // montam ao mesmo tempo.
-  if (!query && pendingCatalog) return pendingCatalog;
+  if (canReuse && pendingCatalog) return pendingCatalog;
 
   const request = loadCatalogResilient(query);
   if (!query) {
-    lastCatalogFetchAt = Date.now();
     pendingCatalog = request;
     request.then(value => {
       cachedCatalog = { value, expiresAt: Date.now() + CATALOG_CACHE_TTL_MS };
-      writeSessionCatalog(cachedCatalog);
     }).finally(() => {
       if (pendingCatalog === request) pendingCatalog = null;
     });

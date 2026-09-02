@@ -137,30 +137,7 @@ export function StoreDetailProfessional() {
   const store = useMemo(() => catalog?.stores.find(item => String(item.id) === identifier || item.slug === identifier), [catalog, identifier]);
   const allProducts = useMemo(() => {
     if (!catalog || !store) return [];
-    return catalog.products.flatMap(item => {
-      const storeOffer = item.offers?.find(offer => String(offer.establishmentId) === String(store.id));
-      if (!storeOffer && String(item.establishmentId) !== String(store.id)) return [];
-
-      // A página do estabelecimento precisa mostrar o preço daquela loja,
-      // não o menor preço global calculado para a busca comparativa. Sem
-      // esta projeção, um produto da FACEM podia aparecer com o valor de
-      // outro comércio quando esse valor fosse o menor do catálogo.
-      if (!storeOffer) return [item];
-      return [{
-        ...item,
-        minPrice: storeOffer.value,
-        avgPrice: storeOffer.value,
-        maxPrice: storeOffer.value,
-        previousPrice: storeOffer.previousPrice,
-        capturedAt: storeOffer.capturedAt,
-        updated_at: storeOffer.capturedAt,
-        establishmentId: storeOffer.establishmentId,
-        establishmentSlug: storeOffer.establishmentSlug,
-        establishment: storeOffer.establishment,
-        neighborhood: storeOffer.neighborhood,
-        storeColor: storeOffer.storeColor,
-      }];
-    });
+    return catalog.products.filter(item => item.offers?.some(offer => String(offer.establishmentId) === String(store.id)) || String(item.establishmentId) === String(store.id));
   }, [catalog, store]);
 
   const specialties = useMemo(() => {

@@ -534,7 +534,7 @@ export function ReferenceHome() {
     }
     setSelectedComparison(null);
     setComparisonLoading(true);
-    void fetchCatalog()
+    void fetchCatalog("", { force: true })
       .then(freshCatalog => { if (!cancelled) setSelectedComparison(compareProductAcrossStores(freshCatalog.products, selectedProduct)); })
       .catch(() => { if (!cancelled) setSelectedComparison(null); })
       .finally(() => { if (!cancelled) setComparisonLoading(false); });
