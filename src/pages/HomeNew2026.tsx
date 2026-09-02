@@ -2,10 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import {
   buildCatalog,
   type CatalogPayload,
+  type PlatformMetrics,
   type Product,
   verifiedDatasetMetrics,
 } from "../data/catalog";
 import { fetchSectorCatalog } from "../data/sectorCatalog";
+import { supabase } from "../lib/supabase";
 import {
   buildFeatured,
   currentCycle,
@@ -32,6 +34,7 @@ export function HomeNew2026() {
     ...initialCatalog,
     metrics: verifiedDatasetMetrics,
   });
+  const [liveMetrics, setLiveMetrics] = useState<PlatformMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [cycle, setCycle] = useState(() => currentCycle());
   const { theme, toggleTheme } = useSiteTheme();
@@ -43,14 +46,44 @@ export function HomeNew2026() {
 
   useEffect(() => {
     let active = true;
-    fetchSectorCatalog()
-      .then((value) => {
-        if (active) setCatalog(value);
-      })
-      .catch(() => undefined)
-      .finally(() => {
+
+    const load = async () => {
+      try {
+        const value = await fetchSectorCatalog(true);
+        if (!active) return;
+        setCatalog(value);
+
+        if (supabase) {
+          const [productsResult, storesResult, pricesResult] = await Promise.all([
+            supabase.from("products").select("id", { count: "exact", head: true }),
+            supabase
+              .from("establishments")
+              .select("id", { count: "exact", head: true })
+              .eq("is_demo", false),
+            supabase.from("prices").select("id", { count: "exact", head: true }),
+          ]);
+
+          if (!active) return;
+          setLiveMetrics({
+            products: productsResult.count ?? value.metrics.products ?? value.products.length,
+            stores: storesResult.count ?? value.stores.length,
+            prices: pricesResult.count ?? value.metrics.prices ?? 0,
+          });
+        } else {
+          setLiveMetrics({
+            products: value.metrics.products || value.products.length,
+            stores: value.stores.length,
+            prices: value.metrics.prices || 0,
+          });
+        }
+      } catch {
+        // Mantém o fallback visual sem inventar contagens.
+      } finally {
         if (active) setLoading(false);
-      });
+      }
+    };
+
+    void load();
     return () => {
       active = false;
     };
@@ -73,11 +106,19 @@ export function HomeNew2026() {
     [products, cycle],
   );
 
+  const productCount = liveMetrics?.products ?? catalog.metrics.products ?? products.length;
+  const storeCount = liveMetrics?.stores ?? catalog.stores.length;
+
   return (
     <div className="pc26-home pc26-home--recovered">
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <main id="conteudo-principal">
-        <HeroUserImage2026 products={products} loading={loading} />
+        <HeroUserImage2026
+          products={products}
+          productCount={productCount}
+          storeCount={storeCount}
+          loading={loading}
+        />
         <HomeQuickActions />
         <ProductGrid products={featured} loading={loading} />
         <PromoBands />
