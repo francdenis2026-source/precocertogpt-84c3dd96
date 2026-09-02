@@ -283,7 +283,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
   try {
     const [establishments, products, prices] = await Promise.all([
-      fetchAllRows("establishments", "id, name, neighborhood, brand_color, kind, address, logo_url", "id"),
+      fetchAllRows("establishments", "id, slug, name, neighborhood, brand_color, kind, address, logo_url", "id"),
       fetchAllRows("products", "id, name, brand, category, size, unit, barcode, image_url", "id"),
       fetchAllRows("prices", "id, product_id, establishment_id, value, previous_value, captured_at", "id"),
     ]);
@@ -324,7 +324,11 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
     const q = normalizeCatalogTerm(query);
     const storesById = new Map(storeRows.map(store => [String(store.id), store]));
-    const storeSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id));
+    const generatedStoreSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id));
+    const storeSlugById = new Map(storeRows.map(store => [
+      String(store.id),
+      store.slug?.trim() || generatedStoreSlugById.get(String(store.id)) || String(store.id),
+    ]));
     const pricesByProductId = new Map<string, PriceRow[]>();
     const productIdsByStore = new Map<string, Set<string>>();
 
@@ -451,6 +455,18 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
         a.name.localeCompare(b.name, "pt-BR") ||
         String(a.id).localeCompare(String(b.id)));
 
+    // Conta exatamente os cartões que a página do estabelecimento consegue
+    // exibir depois da consolidação de produtos, não os IDs brutos importados.
+    const visibleProductsByStore = new Map<string, Set<string>>();
+    mapped.forEach(product => {
+      (product.offers || []).forEach(offer => {
+        const storeId = String(offer.establishmentId);
+        const visible = visibleProductsByStore.get(storeId) || new Set<string>();
+        visible.add(String(product.id));
+        visibleProductsByStore.set(storeId, visible);
+      });
+    });
+
     const stores: StoreRow[] = storeRows
       .map(store => {
         const extra = storeExtras.get(String(store.id));
@@ -468,9 +484,13 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
           openingHours: extra?.opening_hours ?? undefined,
           photoUrl: extra?.photo_url ?? undefined,
           whatsapp: extra?.whatsapp ?? undefined,
-          products: productIdsByStore.get(String(store.id))?.size ?? 0,
+          products: visibleProductsByStore.get(String(store.id))?.size ?? 0,
         };
       })
+
+      // O diretório público oferece catálogos; perfis sem nenhum produto ficam
+      // nas áreas próprias e não entram na contagem de catálogos acessíveis.
+      .filter(store => store.products > 0)
 
       .sort((a, b) => {
         const aHasCatalog = a.products > 0 ? 1 : 0;
@@ -481,9 +501,9 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
       });
 
     const metrics: PlatformMetrics = {
-      products: productRows.length || verifiedDatasetMetrics.products,
-      prices: priceRows.length || verifiedDatasetMetrics.prices,
-      stores: storeRows.length || verifiedDatasetMetrics.stores,
+      products: mapped.length,
+      prices: mapped.reduce((total, product) => total + (product.offers?.length || 1), 0),
+      stores: stores.length,
     };
 
     const merged = withManualAdditions({ products: mapped, stores, metrics, updatedAt: new Date().toISOString() }, query);
