@@ -19,7 +19,11 @@ import { businessGroups, groupForStore, type BusinessGroup } from "./businessTax
  * Agora vale a regra óbvia: uma padaria é uma padaria, um açougue é um
  * açougue. O grupo vem do TIPO DO NEGÓCIO (ver businessTaxonomy.ts) e os
  * produtos do grupo são simplesmente os produtos vendidos por essas lojas —
- * sem depender de como cada lojista escreveu a categoria do item. */
+ * sem depender de como cada lojista escreveu a categoria do item.
+ *
+ * Exceção intencional: mercados podem operar também um açougue interno. Nesse
+ * caso, os produtos de carne aparecem no catálogo de Açougues e a loja também
+ * é listada ali como ponto de venda, sem mudar seu tipo principal de mercado. */
 
 export type SectorRule = BusinessGroup | { id: string };
 
@@ -28,9 +32,21 @@ export const storeMatchesSector = (store: StoreRow, sector: SectorRule) => group
 export const productStoreIds = (product: Product) =>
   new Set([String(product.establishmentId), ...(product.offers || []).map(offer => String(offer.establishmentId))]);
 
-/** Um produto pertence ao grupo quando alguma loja que o vende pertence ao grupo. */
+const normalizeText = (value: string | null | undefined) =>
+  (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
+const isButcherProduct = (product: Product) => {
+  const text = normalizeText(`${product.category || ""} ${product.name || ""}`);
+  return /\b(carnes?|acougue|bovino|suino|porco|costela|picanha|alcatra|patinho|fraldinha|bisteca|file|peito|pescoco|canela|figado|coracao|lingua|cha de fora|cha de dentro|carne moida)\b/.test(text);
+};
+
+/** Um produto pertence ao grupo quando alguma loja que o vende pertence ao grupo.
+ * Mercados com açougue interno também têm seus cortes exibidos em Açougues. */
 export const productHasSectorOffer = (product: Product, catalog: CatalogPayload, sector: SectorRule) => {
   const ids = productStoreIds(product);
+  if (sector.id === "butchers" && isButcherProduct(product)) {
+    return catalog.stores.some(store => ids.has(String(store.id)));
+  }
   return catalog.stores.some(store => ids.has(String(store.id)) && storeMatchesSector(store, sector));
 };
 
@@ -39,17 +55,31 @@ export const sectorProducts = (catalog: CatalogPayload, sector: SectorRule) =>
 
 /* Todos os estabelecimentos do grupo, com quantos itens cada um tem no
  * catálogo. Diferente da versão anterior, uma loja NÃO é escondida por ainda
- * não ter produtos cadastrados: um açougue recém-cadastrado continua sendo um
- * açougue e precisa aparecer para quem procura açougue na cidade. Quem quiser
- * só as lojas com catálogo usa `withCatalog`. */
+ * não ter produtos cadastrados. Mercados que têm catálogo de carnes também
+ * aparecem em Açougues, preservando sua classificação principal como mercado. */
 export const sectorStores = (catalog: CatalogPayload, sector: SectorRule) => {
   const counts = new Map<string, number>();
+  const butcherStoreIds = new Set<string>();
+
   for (const product of catalog.products) {
-    for (const id of productStoreIds(product)) counts.set(id, (counts.get(id) || 0) + 1);
+    const ids = productStoreIds(product);
+    for (const id of ids) counts.set(id, (counts.get(id) || 0) + 1);
+    if (sector.id === "butchers" && isButcherProduct(product)) {
+      for (const id of ids) butcherStoreIds.add(id);
+    }
   }
+
   return catalog.stores
-    .filter(store => storeMatchesSector(store, sector))
-    .map(store => ({ store, count: counts.get(String(store.id)) || Number(store.products) || 0 }))
+    .filter(store => storeMatchesSector(store, sector) || (sector.id === "butchers" && butcherStoreIds.has(String(store.id))))
+    .map(store => {
+      if (sector.id !== "butchers") {
+        return { store, count: counts.get(String(store.id)) || Number(store.products) || 0 };
+      }
+      const meatCount = catalog.products.filter(product =>
+        isButcherProduct(product) && productStoreIds(product).has(String(store.id)),
+      ).length;
+      return { store, count: meatCount };
+    })
     .sort((a, b) => b.count - a.count || a.store.name.localeCompare(b.store.name, "pt-BR"));
 };
 
@@ -67,6 +97,18 @@ export const groupCounts = (catalog: CatalogPayload) => {
     entry.stores += 1;
     if ((Number(store.products) || 0) > 0) entry.withCatalog += 1;
   }
+
+  const butcher = totals.get("butchers");
+  if (butcher) {
+    const storesWithMeat = new Set<string>();
+    for (const product of catalog.products) {
+      if (!isButcherProduct(product)) continue;
+      for (const id of productStoreIds(product)) storesWithMeat.add(id);
+    }
+    butcher.stores = Math.max(butcher.stores, storesWithMeat.size);
+    butcher.withCatalog = Math.max(butcher.withCatalog, storesWithMeat.size);
+  }
+
   return totals;
 };
 
