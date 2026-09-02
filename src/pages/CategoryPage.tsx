@@ -1,20 +1,18 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { 
-  ArrowLeft, Phone, Store, Clock, MapPin, Search, 
-  MessageSquare, Star, Send, Navigation, HelpCircle,
-  ChevronDown, ChevronUp, PackageSearch, Tag
+import {
+  ArrowLeft, Store, Clock, MapPin, Search,
+  PackageSearch, Tag, Navigation, Building2,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
-import { fetchCatalog } from "../data/remoteCatalog";
-import { sectorProducts } from "../data/sectorCatalog";
+import { fetchSectorCatalog, sectorProducts, sectorStores } from "../data/sectorCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { ProductThumb } from "../components/catalog/ProductThumb";
 import { categoryHeroImage } from "../data/sectorHeroImages";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import "./CategoryPage.css";
 
-/** Grupo de negócio (taxonomia real) usado para listar produtos de cada categoria. */
+/** Grupo canônico da taxonomia usado por cada rota pública. */
 const categoryGroup: Record<string, string> = {
   pizzaria: "food",
   lanchonete: "food",
@@ -25,7 +23,7 @@ const categoryGroup: Record<string, string> = {
   farmacia: "pharmacies",
   mercantil: "markets",
   frutaria: "markets",
-  papelaria: "other",
+  papelaria: "books",
   desapego: "other",
   "moveis-imoveis": "other",
   hotelaria: "services",
@@ -34,52 +32,31 @@ const categoryGroup: Record<string, string> = {
 const money = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
-
-const categoryData: Record<string, any> = {
-  "pizzaria": { 
-    title: "Pizzarias", 
-    description: "As melhores pizzas artesanais de Feijó.", 
-    phone: "(68) 99999-0000", 
-    hours: "18:00 - 23:30", 
-    address: "Centro, Feijó - AC",
-    lat: -8.1633, 
-    lng: -70.3533,
-    faqs: [
-      { q: "Quais são os sabores mais pedidos?", a: "Os sabores mais pedidos são Calabresa, Portuguesa e Frango com Catupiry." },
-      { q: "Fazem entrega em todos os bairros?", a: "Sim, entregamos em todo o perímetro urbano de Feijó." }
-    ]
-  },
-  "lanchonete": { title: "Lanchonetes", description: "Lanches rápidos, saborosos e feitos na hora.", phone: "(68) 99999-1111", hours: "07:00 - 22:00", address: "Diversos Bairros", lat: -8.1650, lng: -70.3550 },
-  "sorveteria": { title: "Sorveterias", description: "Sobremesas geladas para refrescar seu dia.", phone: "(68) 99999-2222", hours: "10:00 - 22:00", address: "Centro", lat: -8.1620, lng: -70.3520 },
-  "conveniencia": { title: "Conveniência", description: "Itens essenciais sempre à mão.", phone: "(68) 99999-3333", hours: "24h", address: "Centro", lat: -8.1610, lng: -70.3510 },
-  "padaria": { title: "Padarias", description: "Pão fresco e quitutes todos os dias.", phone: "(68) 99999-4444", hours: "05:00 - 20:00", address: "Centro", lat: -8.1640, lng: -70.3540 },
-  "acougue": { title: "Açougue", description: "Carnes de qualidade e cortes selecionados.", phone: "(68) 99999-5555", hours: "07:00 - 18:00", address: "Mercado Central", lat: -8.1660, lng: -70.3560 },
-  "farmacia": { title: "Farmácias", description: "Cuidado e saúde para toda sua família.", phone: "(68) 99999-6666", hours: "08:00 - 22:00", address: "Centro", lat: -8.1670, lng: -70.3570 },
-  "mercantil": { title: "Mercantis", description: "Tudo o que você precisa para seu lar.", phone: "(68) 99999-7777", hours: "08:00 - 19:00", address: "Bairros Diversos", lat: -8.1680, lng: -70.3580 },
-  "frutaria": { title: "Frutarias", description: "Frutas e legumes frescos da estação.", phone: "(68) 99999-8888", hours: "07:00 - 18:00", address: "Feijó", lat: -8.1690, lng: -70.3590 },
-  "papelaria": { title: "Papelarias", description: "Material escolar e escritório em um só lugar.", phone: "(68) 99999-9999", hours: "08:00 - 18:00", address: "Centro", lat: -8.1700, lng: -70.3600 },
-  "desapego": { title: "Desapego", description: "Oportunidades de itens usados e seminovos em Feijó.", phone: "(68) 99999-0001", hours: "Aberto para propostas", address: "Localizado em Feijó", lat: -8.1710, lng: -70.3610 },
-  "moveis-imoveis": { title: "Móveis & Imóveis", description: "As melhores opções de mobiliário e mercado imobiliário.", phone: "(68) 99999-0002", hours: "08:00 - 18:00", address: "Centro e Expansão", lat: -8.1720, lng: -70.3620 },
-  "hotelaria": { title: "Hotelaria & Pousadas", description: "Onde se hospedar com conforto e qualidade em Feijó.", phone: "(68) 99999-0003", hours: "24h", address: "Pontos estratégicos de Feijó", lat: -8.1730, lng: -70.3630 },
+const categoryData: Record<string, { title: string; description: string; address: string; lat: number; lng: number }> = {
+  pizzaria: { title: "Pizzarias", description: "Pizzarias cadastradas e seus preços em Feijó.", address: "Feijó - AC", lat: -8.1633, lng: -70.3533 },
+  lanchonete: { title: "Lanchonetes", description: "Lanchonetes cadastradas, cardápios e preços reais.", address: "Feijó - AC", lat: -8.165, lng: -70.355 },
+  sorveteria: { title: "Sorveterias", description: "Sorveterias cadastradas na plataforma.", address: "Feijó - AC", lat: -8.162, lng: -70.352 },
+  conveniencia: { title: "Conveniência", description: "Lojas de conveniência e mercados cadastrados.", address: "Feijó - AC", lat: -8.161, lng: -70.351 },
+  padaria: { title: "Padarias", description: "Padarias e panificadoras cadastradas na plataforma.", address: "Feijó - AC", lat: -8.164, lng: -70.354 },
+  acougue: { title: "Açougues", description: "Açougues cadastrados e seus produtos com preço.", address: "Feijó - AC", lat: -8.166, lng: -70.356 },
+  farmacia: { title: "Farmácias", description: "Farmácias cadastradas e produtos com preço.", address: "Feijó - AC", lat: -8.167, lng: -70.357 },
+  mercantil: { title: "Mercantis", description: "Mercados, mercantis e mercearias cadastrados.", address: "Feijó - AC", lat: -8.168, lng: -70.358 },
+  frutaria: { title: "Frutarias", description: "Frutarias, hortifrutis e comércios relacionados.", address: "Feijó - AC", lat: -8.169, lng: -70.359 },
+  papelaria: { title: "Papelarias", description: "Papelarias e comércios de cultura cadastrados.", address: "Feijó - AC", lat: -8.17, lng: -70.36 },
+  desapego: { title: "Desapego", description: "Anúncios e estabelecimentos classificados nesta área.", address: "Feijó - AC", lat: -8.171, lng: -70.361 },
+  "moveis-imoveis": { title: "Móveis & Imóveis", description: "Negócios cadastrados nesta categoria.", address: "Feijó - AC", lat: -8.172, lng: -70.362 },
+  hotelaria: { title: "Hotelaria & Pousadas", description: "Hotéis, pousadas e serviços cadastrados.", address: "Feijó - AC", lat: -8.173, lng: -70.363 },
 };
-
-const mockTestimonials = [
-  { name: "João Silva", rating: 5, comment: "Excelente atendimento e qualidade!", date: "15/05/2026" },
-  { name: "Maria Santos", rating: 4, comment: "Muito bom, recomendo a todos em Feijó.", date: "10/05/2026" },
-];
 
 export function CategoryPage() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const data = categoryData[category || ""] || { 
-    title: "Categoria", 
-    description: "Explore nossas opções.", 
-    phone: "", 
-    hours: "", 
-    address: "",
+  const data = categoryData[category || ""] || {
+    title: "Categoria",
+    description: "Explore os estabelecimentos cadastrados.",
+    address: "Feijó - AC",
     lat: -8.1633,
-    lng: -70.3533
+    lng: -70.3533,
   };
 
   const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
@@ -89,34 +66,37 @@ export function CategoryPage() {
   useEffect(() => {
     let active = true;
     setLoadingCatalog(true);
-    fetchCatalog()
+    fetchSectorCatalog()
       .then(result => { if (active) setCatalog(result); })
       .catch(() => { if (active) setCatalog(null); })
       .finally(() => { if (active) setLoadingCatalog(false); });
     return () => { active = false; };
   }, []);
 
+  const groupId = categoryGroup[category || ""] || "other";
+
+  const establishments = useMemo(() => {
+    if (!catalog) return [];
+    return sectorStores(catalog, { id: groupId });
+  }, [catalog, groupId]);
+
   const products = useMemo<Product[]>(() => {
     if (!catalog) return [];
-    const groupId = categoryGroup[category || ""] || "other";
-    const scoped = sectorProducts(catalog, { id: groupId });
-    const base = scoped.length ? scoped : catalog.products;
-    const term = productQuery.trim().toLowerCase();
-    return base
-      .filter(product => !term || `${product.name} ${product.brand} ${product.establishment}`.toLowerCase().includes(term))
+    const term = productQuery.trim().toLocaleLowerCase("pt-BR");
+    return sectorProducts(catalog, { id: groupId })
+      .filter(product => !term || `${product.name} ${product.brand} ${product.establishment}`.toLocaleLowerCase("pt-BR").includes(term))
       .slice(0, 24);
-  }, [catalog, category, productQuery]);
+  }, [catalog, groupId, productQuery]);
 
   const handleGetDirections = () => {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`;
-    window.open(url, '_blank');
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${data.lat},${data.lng}`, "_blank", "noopener,noreferrer");
   };
 
   return (
     <HelmetProvider>
       <Helmet>
         <title>{data.title} em Feijó | PreçoCerto</title>
-        <meta name="description" content={`Confira os melhores estabelecimentos de ${data.title} em Feijó (AC). Compare preços, veja contatos e endereços.`} />
+        <meta name="description" content={`Confira estabelecimentos de ${data.title} realmente cadastrados no PreçoCerto em Feijó (AC).`} />
       </Helmet>
 
       <div className="category-page">
@@ -142,30 +122,42 @@ export function CategoryPage() {
             <span className="category-hero__tag"><Tag size={14} /> {data.title} · Feijó, Acre</span>
             <h1>{data.title} em Feijó</h1>
             <p className="subtitle">{data.description}</p>
-
             <div className="info-grid">
-              <div className="info-item"><Clock size={20} /> <strong>Horário:</strong> {data.hours}</div>
+              <div className="info-item"><Store size={20} /> <strong>Estabelecimentos:</strong> {loadingCatalog ? "carregando…" : establishments.length}</div>
+              <div className="info-item"><PackageSearch size={20} /> <strong>Produtos:</strong> {loadingCatalog ? "carregando…" : products.length}</div>
               <div className="info-item"><MapPin size={20} /> <strong>Local:</strong> {data.address}</div>
-              <div className="info-item"><Store size={20} /> <strong>Itens listados:</strong> {loadingCatalog ? "carregando…" : products.length}</div>
-            </div>
-
-            <div className="contact-actions">
-              <a href={`tel:${data.phone.replace(/\D/g, '')}`} className="btn btn-call"><Phone /> Ligar Agora</a>
-              <a href={`https://wa.me/55${data.phone.replace(/\D/g, '')}`} target="_blank" className="btn btn-whatsapp">WhatsApp</a>
             </div>
           </section>
 
           <CategoryOffers categorySlug={category || data.title} title={`Ofertas em ${data.title}`} />
 
-          <p className="category-city-link">
-            <Link to="/cidades">Ver lojas e preços por cidade</Link>
-          </p>
+          <section className="category-section category-products" aria-labelledby="category-establishments-title">
+            <h3 id="category-establishments-title"><Building2 className="section-icon" /> Estabelecimentos cadastrados</h3>
+            {loadingCatalog ? (
+              <div className="category-products__grid">
+                {[...Array(4)].map((_, i) => <div key={i} className="category-product-card is-loading" aria-hidden="true" />)}
+              </div>
+            ) : establishments.length ? (
+              <div className="category-products__grid">
+                {establishments.map(({ store, count }) => (
+                  <Link key={String(store.id)} to={`/estabelecimento/${store.slug}`} className="category-product-card">
+                    <span className="category-product-card__meta">{[store.neighborhood, store.city].filter(Boolean).join(" · ") || "Feijó - AC"}</span>
+                    <strong className="category-product-card__name">{store.name}</strong>
+                    {store.address && <span className="category-product-card__store"><MapPin size={14} /> {store.address}</span>}
+                    {store.openingHours && <span className="category-product-card__store"><Clock size={14} /> {store.openingHours}</span>}
+                    <span className="category-product-card__cta">{count} produto{count === 1 ? "" : "s"} com preço</span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="category-products__empty">Nenhum estabelecimento cadastrado nesta categoria.</p>
+            )}
+          </section>
 
-
-          {/* Produtos reais do catálogo */}
+          <p className="category-city-link"><Link to="/cidades">Ver lojas e preços por cidade</Link></p>
 
           <section className="category-section category-products">
-            <h3><PackageSearch className="section-icon" /> Produtos e preços reais</h3>
+            <h3><PackageSearch className="section-icon" /> Produtos e preços desta categoria</h3>
             {loadingCatalog ? (
               <div className="category-products__grid">
                 {[...Array(6)].map((_, i) => <div key={i} className="category-product-card is-loading" aria-hidden="true" />)}
@@ -178,129 +170,25 @@ export function CategoryPage() {
                     <span className="category-product-card__meta">{[product.brand, product.size].filter(Boolean).join(" · ")}</span>
                     <strong className="category-product-card__name">{product.name}</strong>
                     <span className="category-product-card__store"><Store size={14} /> {product.establishment}</span>
-                    <span className="category-product-card__price">
-                      <small>Menor preço</small>
-                      <b>{money(product.minPrice)}</b>
-                    </span>
+                    <span className="category-product-card__price"><small>Menor preço</small><b>{money(product.minPrice)}</b></span>
                     <span className="category-product-card__cta">Comparar em {product.storeCount} loja{product.storeCount > 1 ? "s" : ""}</span>
                   </Link>
                 ))}
-
               </div>
             ) : (
-              <p className="category-products__empty">
-                Nenhum produto cadastrado nesta categoria ainda. Cadastre pelo painel administrativo em <Link to="/admin/catalogo">/admin/catalogo</Link>.
-              </p>
+              <p className="category-products__empty">Nenhum produto cadastrado nesta categoria ainda.</p>
             )}
           </section>
 
-
-
-          {/* Map Section */}
           <section className="category-section map-section">
             <h3><MapPin className="section-icon" /> Localização</h3>
             <div className="map-placeholder">
               <div className="map-inner">
                 <MapPin size={48} className="map-pin-anim" />
                 <p>{data.address}</p>
-                <button onClick={handleGetDirections} className="btn btn-directions">
-                  <Navigation size={18} /> Gerar Rota no Google Maps
-                </button>
+                <button onClick={handleGetDirections} className="btn btn-directions"><Navigation size={18} /> Abrir Feijó no Google Maps</button>
               </div>
             </div>
-          </section>
-
-          {/* Testimonials Section */}
-          <section className="category-section testimonials-section">
-            <h3><MessageSquare className="section-icon" /> Avaliações</h3>
-            <div className="testimonials-grid">
-              {mockTestimonials.map((t, i) => (
-                <div key={i} className="testimonial-card">
-                  <div className="testimonial-header">
-                    <span className="author">{t.name}</span>
-                    <div className="stars">
-                      {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} size={14} fill={idx < t.rating ? "var(--pc-gold)" : "none"} stroke="var(--pc-gold)" />
-                      ))}
-                    </div>
-                  </div>
-                  <p>"{t.comment}"</p>
-                  <span className="date">{t.date}</span>
-                </div>
-              ))}
-            </div>
-            
-            <div className="add-review">
-              <h4>Deixe sua avaliação</h4>
-              <form className="review-form" onSubmit={async (e) => { 
-                e.preventDefault(); 
-                const form = e.currentTarget;
-                const name = (form.elements[0] as HTMLInputElement).value;
-                const rating = parseInt((form.elements[1] as HTMLSelectElement).value);
-                const comment = (form.elements[2] as HTMLTextAreaElement).value;
-                
-                const { submitReview } = await import("../lib/adminFeedback");
-                const { error } = await submitReview({
-                  category: category || "geral",
-                  author_name: name,
-                  rating,
-                  comment
-                });
-
-                if (error) alert("Erro ao enviar: " + error);
-                else {
-                  alert("Avaliação enviada para moderação!");
-                  form.reset();
-                }
-              }}>
-                <div className="form-row">
-                  <input type="text" placeholder="Seu nome" required />
-                  <select required defaultValue="">
-                    <option value="" disabled>Nota</option>
-                    <option value="5">5 Estrelas</option>
-                    <option value="4">4 Estrelas</option>
-                    <option value="3">3 Estrelas</option>
-                    <option value="2">2 Estrelas</option>
-                    <option value="1">1 Estrela</option>
-                  </select>
-                </div>
-                <textarea placeholder="Seu comentário..." rows={3} required></textarea>
-                <button type="submit" className="btn btn-submit"><Send size={16} /> Enviar Avaliação</button>
-              </form>
-            </div>
-          </section>
-
-          {/* FAQ Section */}
-          <section className="category-section faq-section">
-            <h3><HelpCircle className="section-icon" /> Perguntas Frequentes</h3>
-            <div className="faq-list">
-              {(data.faqs || [
-                { q: "Como entrar em contato?", a: "Você pode usar os botões de ligação ou WhatsApp acima para falar diretamente com o estabelecimento." },
-                { q: "Quais as formas de pagamento?", a: "A maioria aceita Dinheiro, PIX e Cartões de Crédito/Débito." }
-              ]).map((faq: any, i: number) => (
-                <div key={i} className={`faq-item ${openFaq === i ? 'open' : ''}`} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                  <div className="faq-question">
-                    <span>{faq.q}</span>
-                    {openFaq === i ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                  </div>
-                  {openFaq === i && <div className="faq-answer">{faq.a}</div>}
-                </div>
-              ))}
-            </div>
-            <div className="faq-footer">
-              <p>Ainda tem dúvidas? <Link to="/contato" className="contact-link">Entre em contato conosco</Link></p>
-            </div>
-          </section>
-
-          {/* Main Contact Form */}
-          <section className="contact-form-section">
-            <h3>Fale com nossos parceiros</h3>
-            <form onSubmit={(e) => { e.preventDefault(); alert('Mensagem enviada!'); }}>
-              <input type="text" placeholder="Seu Nome" required />
-              <input type="email" placeholder="Seu E-mail" required />
-              <textarea placeholder="Sua dúvida ou solicitação" rows={4} required></textarea>
-              <button type="submit" className="btn btn-submit">Enviar Mensagem</button>
-            </form>
           </section>
         </main>
       </div>
