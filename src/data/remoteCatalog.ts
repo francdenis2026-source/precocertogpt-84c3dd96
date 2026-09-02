@@ -75,12 +75,17 @@ export type CatalogResult = CatalogPayload & { source: CatalogSource; error?: st
 const round = (value: number) => Math.round(value * 100) / 100;
 const toNumber = (value: number | string | null) => (value === null ? NaN : Number(value));
 const DATABASE_PAGE_SIZE = 1000;
-const CATALOG_CACHE_TTL_MS = 60_000;
+// O catálogo completo contém milhares de linhas. Um cache de apenas 60 s fazia
+// cada navegação/abertura de produto repetir todo o download e estourar o
+// egress do Supabase. Uma hora mantém os preços atuais sem martelar a API.
+const CATALOG_CACHE_TTL_MS = 60 * 60_000;
+const FORCE_REFRESH_COOLDOWN_MS = 5 * 60_000;
 const CATALOG_REQUEST_TIMEOUT_MS = 5_000;
 const CATALOG_RETRY_DELAY_MS = 350;
 
 let cachedCatalog: { value: CatalogResult; expiresAt: number } | null = null;
 let pendingCatalog: Promise<CatalogResult> | null = null;
+let lastCatalogFetchAt = 0;
 
 function withTimeout<T>(request: Promise<T>, timeoutMs: number): Promise<T> {
   return new Promise<T>((resolve, reject) => {
@@ -495,15 +500,21 @@ export function fetchCatalog(
   query = "",
   options: { force?: boolean } = {},
 ): Promise<CatalogResult> {
-  const canReuse = !query && !options.force;
+  const forceAllowed = Boolean(options.force)
+    && Date.now() - lastCatalogFetchAt >= FORCE_REFRESH_COOLDOWN_MS;
+  const cacheIsFresh = Boolean(cachedCatalog && cachedCatalog.expiresAt > Date.now());
 
-  if (canReuse && cachedCatalog && cachedCatalog.expiresAt > Date.now()) {
+  if (!query && cachedCatalog && (cacheIsFresh || (options.force && !forceAllowed))) {
     return Promise.resolve(cachedCatalog.value);
   }
-  if (canReuse && pendingCatalog) return pendingCatalog;
+  // Mesmo uma atualização forçada deve compartilhar a consulta que já está
+  // em andamento; isso evita rajadas duplicadas quando vários componentes
+  // montam ao mesmo tempo.
+  if (!query && pendingCatalog) return pendingCatalog;
 
   const request = loadCatalogResilient(query);
   if (!query) {
+    lastCatalogFetchAt = Date.now();
     pendingCatalog = request;
     request.then(value => {
       cachedCatalog = { value, expiresAt: Date.now() + CATALOG_CACHE_TTL_MS };
