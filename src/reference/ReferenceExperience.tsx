@@ -14,7 +14,7 @@ import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
 import { resolveProductImage } from "../data/productImageResolver";
 import { getStoreLogoUrl } from "../data/storeLogos";
-import { loadSessionProfile, requestPasswordReset, signIn, signUp } from "../lib/roles";
+import { loadSessionProfile, requestPasswordReset } from "../lib/roles";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { OnlinePresence } from "../components/OnlinePresence";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
