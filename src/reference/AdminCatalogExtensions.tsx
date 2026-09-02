@@ -142,11 +142,12 @@ function StoreShowcaseDialog({ store, close, saved, setError }: { store: any; cl
 
   const submit = async () => {
     setBusy(true); setNotice("");
-    const result = await saveAdminEstablishmentDetails(String(store.id), {
+    const result = await saveAdminEstablishmentDetails({
+      establishmentId: String(store.id),
       address: form.address,
       city: form.city,
       openingHours: form.hours,
-      photoUrl: photo,
+      storefrontImageUrl: photo,
       whatsapp: form.whatsapp,
     });
     setBusy(false);
