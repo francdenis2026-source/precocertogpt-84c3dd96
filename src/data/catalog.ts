@@ -166,5 +166,14 @@ function buildLocalCatalog(query = ""): CatalogPayload {
 }
 
 export function buildCatalog(query = ""): CatalogPayload {
-  return withManualAdditions(buildLocalCatalog(query), query);
+  // O catálogo público não pode apresentar os registros fictícios usados no
+  // protótipo quando o Supabase estiver carregando ou indisponível. Mantemos
+  // apenas estabelecimentos reais cadastrados manualmente como contingência;
+  // assim nenhuma "loja de demonstração" volta a aparecer no site/app.
+  return withManualAdditions({
+    products: [],
+    stores: [],
+    metrics: { products: 0, prices: 0, stores: 0 },
+    updatedAt: new Date().toISOString(),
+  }, query);
 }
