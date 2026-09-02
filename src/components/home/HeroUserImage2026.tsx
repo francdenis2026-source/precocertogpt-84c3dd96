@@ -8,14 +8,19 @@ import heroImg from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
 type HeroUserImage2026Props = {
   products: Product[];
+  productCount?: number;
+  storeCount?: number;
   loading?: boolean;
 };
 
 export function HeroUserImage2026({
   products,
+  productCount,
+  storeCount,
   loading = false,
 }: HeroUserImage2026Props) {
-  const storeCount = new Set(
+  const shownProductCount = productCount ?? products.length;
+  const shownStoreCount = storeCount ?? new Set(
     products.map((product) => product.establishment).filter(Boolean),
   ).size;
 
@@ -70,11 +75,11 @@ export function HeroUserImage2026({
             aria-label="Informações do catálogo"
           >
             <span>
-              <BadgeCheck aria-hidden="true" /> {products.length || "—"}{" "}
+              <BadgeCheck aria-hidden="true" /> {shownProductCount || "—"}{" "}
               produtos monitorados
             </span>
             <span>
-              <Store aria-hidden="true" /> {storeCount || "—"} estabelecimentos
+              <Store aria-hidden="true" /> {shownStoreCount || "—"} estabelecimentos
             </span>
             <span>
               <MapPin aria-hidden="true" /> Feijó, Acre
@@ -119,11 +124,11 @@ export function HeroUserImage2026({
             </ul>
             <div className="pc26-hero-panel__metrics">
               <span>
-                <strong>{products.length || "—"}</strong>
+                <strong>{shownProductCount || "—"}</strong>
                 <small>produtos</small>
               </span>
               <span>
-                <strong>{storeCount || "—"}</strong>
+                <strong>{shownStoreCount || "—"}</strong>
                 <small>lojas</small>
               </span>
               <span>
