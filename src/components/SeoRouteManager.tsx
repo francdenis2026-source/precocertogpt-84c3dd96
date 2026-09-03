@@ -25,6 +25,8 @@ const routeMeta:Record<string,{title:string;description:string;index?:boolean}>=
   '/fale-conosco':{title:'Contato | PreçoCerto',description:'Entre em contato com a equipe do PreçoCerto em Feijó, Acre.'},
   '/dorinha-barroso':{title:'Dorinha Barroso · Escritora acreana | PreçoCerto',description:'Conheça Dorinha Barroso, sua trajetória e suas obras literárias.'},
   '/fremix-producoes':{title:'FreMix Produções · Cultura e música | PreçoCerto',description:'Conheça a FreMix Produções e conteúdos culturais de Feijó, Acre.'},
+  '/kelly-burgueria':{title:'Kelly Burgueria e Lanchonete | PreçoCerto',description:'Cardápio e preços da Kelly Burgueria e Lanchonete em Feijó (AC).'},
+  '/ponto-do-sanduba':{title:'Ponto do Sanduba | PreçoCerto',description:'Cardápio e preços do Ponto do Sanduba em Feijó (AC).'},
   '/login':{title:'Entrar | PreçoCerto',description:'Acesse sua conta PreçoCerto.',index:false},
   '/cadastro':{title:'Criar conta | PreçoCerto',description:'Crie sua conta no PreçoCerto.',index:false},
   '/registrar':{title:'Criar conta | PreçoCerto',description:'Crie sua conta no PreçoCerto.',index:false},

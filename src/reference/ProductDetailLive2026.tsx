@@ -121,6 +121,26 @@ export function ProductDetailLive2026() {
     navigate(`/produto/${product.slug}`, { replace: true });
   }, [identifier, navigate, product?.slug]);
 
+  // SeoRouteManager só conhece rotas estáticas e cai num título genérico
+  // ("Produto | PreçoCerto") para /produto/:id — aqui sobrescrevemos com o
+  // nome real assim que o catálogo carrega, já que esse efeito roda depois.
+  useEffect(() => {
+    if (!product) return;
+    const title = `${product.name} | PreçoCerto`;
+    const description = `Compare o preço de ${product.name} entre estabelecimentos de Feijó (AC) a partir de ${brl.format(product.minPrice)}.`;
+    document.title = title;
+    const setMeta = (selector: string, attr: "name" | "property", key: string, content: string) => {
+      let el = document.head.querySelector<HTMLMetaElement>(selector);
+      if (!el) { el = document.createElement("meta"); el.setAttribute(attr, key); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
+    setMeta('meta[name="description"]', "name", "description", description);
+    setMeta('meta[property="og:title"]', "property", "og:title", title);
+    setMeta('meta[property="og:description"]', "property", "og:description", description);
+    setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
+    setMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
+  }, [product]);
+
   useEffect(() => {
     if (!product || !supabase) return;
     let active = true;

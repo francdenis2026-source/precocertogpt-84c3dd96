@@ -135,6 +135,27 @@ export function StoreDetailProfessional() {
   }, []);
 
   const store = useMemo(() => catalog?.stores.find(item => String(item.id) === identifier || item.slug === identifier), [catalog, identifier]);
+
+  // Assim como no produto, SeoRouteManager cai num título genérico
+  // ("Estabelecimento | PreçoCerto") para /estabelecimento/:id — aqui
+  // sobrescrevemos com o nome real assim que o catálogo carrega.
+  useEffect(() => {
+    if (!store) return;
+    const title = `${store.name} | PreçoCerto`;
+    const description = `Catálogo e preços de ${store.name}${store.neighborhood ? ` (${store.neighborhood})` : ""} em Feijó (AC), para comparar antes de comprar.`;
+    document.title = title;
+    const setMeta = (selector: string, attr: "name" | "property", key: string, content: string) => {
+      let el = document.head.querySelector<HTMLMetaElement>(selector);
+      if (!el) { el = document.createElement("meta"); el.setAttribute(attr, key); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    };
+    setMeta('meta[name="description"]', "name", "description", description);
+    setMeta('meta[property="og:title"]', "property", "og:title", title);
+    setMeta('meta[property="og:description"]', "property", "og:description", description);
+    setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
+    setMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
+  }, [store]);
+
   const allProducts = useMemo(() => {
     if (!catalog || !store) return [];
     return catalog.products.filter(item => item.offers?.some(offer => String(offer.establishmentId) === String(store.id)) || String(item.establishmentId) === String(store.id));
