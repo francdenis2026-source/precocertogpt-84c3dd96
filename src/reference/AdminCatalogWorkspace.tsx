@@ -5,6 +5,7 @@ import { ArrowRight, BadgeCheck, BarChart3, Building2, ClipboardList, ExternalLi
 import { loadSessionProfile, signOut, type SessionProfile, supabase } from '../lib/roles';
 import { deleteAdminEstablishment, deleteAdminProduct, deleteAdminProductPrice, loadAdminCatalog, loadAdminEstablishmentCatalog, saveAdminEstablishment, saveAdminEstablishmentDetails, saveAdminProduct, setAdminProductPrice, uploadAdminProductImage, uploadAdminStorePhoto, type AdminCatalogSnapshot } from '../lib/adminCatalog';
 import './AdminCatalogWorkspace.css';
+import './AdminMerchantRedesign2026.css';
 
 gsap.registerPlugin(ScrollTrigger);
 

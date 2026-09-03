@@ -49,6 +49,7 @@ import { AdminRadioManager } from "./AdminRadioManager";
 import { AdminOffersManager } from "./AdminOffersManager";
 import "./AdminControlCenter.css";
 import "./AdminControlCenterEnhancements.css";
+import "./AdminMerchantRedesign2026.css";
 
 gsap.registerPlugin(ScrollTrigger);
 

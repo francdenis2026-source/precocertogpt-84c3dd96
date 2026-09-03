@@ -45,6 +45,7 @@ import "./StoresProfessionalRebuild.css";
 import "./StoreExperienceAcai2026.css";
 import "./CollaborationPage.css";
 import "./PublicChromeRedesign2026.css";
+import "./AdminMerchantRedesign2026.css";
 
 const initialCatalog = buildCatalog();
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
