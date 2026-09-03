@@ -2,7 +2,6 @@ import {
   Home,
   LayoutGrid,
   Menu,
-  Search,
   Store,
   Tag,
   UserRound,
@@ -13,7 +12,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
   { to: "/", label: "Início", icon: Home },
-  { to: "/buscar", label: "Buscar", icon: Search },
   { to: "/buscar", label: "Ofertas", icon: Tag },
   { to: "/estabelecimentos", label: "Estabelecimentos", icon: Store },
   { to: "/explorar", label: "Categorias", icon: LayoutGrid },
@@ -83,7 +81,7 @@ export function Header() {
             const Icon = item.icon;
             return (
               <Link
-                key={`${item.to}-${item.label}`}
+                key={item.to}
                 to={item.to}
                 aria-current={isCurrent(item.to) ? "page" : undefined}
               >
