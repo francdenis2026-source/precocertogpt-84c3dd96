@@ -22,12 +22,7 @@ import { HomeQuickActions } from "../components/home/HomeQuickActions";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { PromoBands } from "../components/home/PromoBands";
 import { StoreRail } from "../components/home/StoreRail";
-import "./HomeProfessional2026.css";
-import "./HomeEmilCompact2026.css";
-import "./HomeViewportCompact2026.css";
-import "./HomeHeaderFooterPolish2026.css";
-import "./HomeHeaderDefinitive2026.css";
-import "./HomeUxEnhancements2026.css";
+import "./HomeProfessionalRedesign2026.css";
 
 const initialCatalog = buildCatalog();
 
@@ -111,7 +106,7 @@ export function HomeNew2026() {
   const storeCount = liveMetrics?.stores ?? catalog.stores.length;
 
   return (
-    <div className="pc26-home pc26-home--recovered">
+    <div className="pcx-home">
       <Header />
       <main id="conteudo-principal">
         <HeroUserImage2026

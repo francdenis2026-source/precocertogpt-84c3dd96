@@ -49,13 +49,13 @@ export function ProductCard({
 
   return (
     <Link
-      className={`pc26-product${featured ? " pc26-product--featured" : ""}`}
+      className={`pcx-product${featured ? " pcx-product--featured" : ""}`}
       to={`/produto/${product.slug || product.id}`}
       aria-label={`Comparar preços de ${product.name}`}
     >
-      <div className="pc26-product__image">
+      <div className="pcx-product__image">
         {saving > 0 && (
-          <span className="pc26-product__saving">
+          <span className="pcx-product__saving">
             <TrendingDown aria-hidden="true" /> Economize {brl.format(saving)}
           </span>
         )}
@@ -71,7 +71,7 @@ export function ProductCard({
           />
         ) : (
           <span
-            className="pc26-product__no-photo"
+            className="pcx-product__no-photo"
             role="img"
             aria-label={`Foto de ${product.name} indisponível`}
           >
@@ -81,16 +81,16 @@ export function ProductCard({
         )}
       </div>
 
-      <div className="pc26-product__body">
-        <span className="pc26-product__category">
+      <div className="pcx-product__body">
+        <span className="pcx-product__category">
           {product.category || "Produto"}
         </span>
         <h3>{product.name}</h3>
         {product.size && (
-          <span className="pc26-product__meta">{product.size}</span>
+          <span className="pcx-product__meta">{product.size}</span>
         )}
 
-        <div className="pc26-product__store">
+        <div className="pcx-product__store">
           <Store aria-hidden="true" />
           <span>
             {product.establishment ||
@@ -98,7 +98,7 @@ export function ProductCard({
           </span>
         </div>
 
-        <div className="pc26-prices">
+        <div className="pcx-prices">
           <span>Menor preço</span>
           <div>
             {previous && <del>{brl.format(previous)}</del>}
@@ -106,7 +106,7 @@ export function ProductCard({
           </div>
         </div>
 
-        <div className="pc26-product__footer">
+        <div className="pcx-product__footer">
           <time dateTime={product.capturedAt}>
             <Clock3 aria-hidden="true" /> {freshnessText}
           </time>

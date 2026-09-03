@@ -1,4 +1,4 @@
-import { ArrowRight, LayoutGrid, Search, ShoppingBasket, Store } from "lucide-react";
+import { LayoutGrid, Search, ShoppingBasket, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const actions = [
@@ -30,27 +30,20 @@ const actions = [
 
 export function HomeQuickActions() {
   return (
-    <nav
-      className="pc26-home-actions pc26-shell"
-      aria-label="Principais funcionalidades"
-    >
-      {actions.map(({ to, icon: Icon, label, detail }) => (
-        <Link
-          key={to}
-          to={to}
-          className="pc26-quick-action-link"
-          aria-label={`${label}: ${detail}`}
-        >
-          <i className="pc26-quick-action-icon">
-            <Icon aria-hidden="true" />
-          </i>
-          <span className="pc26-quick-action-text">
-            <strong>{label}</strong>
-            <small>{detail}</small>
-          </span>
-          <ArrowRight className="pc26-quick-action-arrow" aria-hidden="true" size={16} />
-        </Link>
-      ))}
+    <nav className="pcx-shell" aria-label="Principais funcionalidades">
+      <div className="pcx-actions">
+        {actions.map(({ to, icon: Icon, label, detail }) => (
+          <Link key={to} to={to} aria-label={`${label}: ${detail}`}>
+            <i className="pcx-actions__icon">
+              <Icon aria-hidden="true" />
+            </i>
+            <span className="pcx-actions__text">
+              <strong>{label}</strong>
+              <small>{detail}</small>
+            </span>
+          </Link>
+        ))}
+      </div>
     </nav>
   );
 }

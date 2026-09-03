@@ -20,13 +20,15 @@ const navItems = [
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(
-    () => typeof window !== "undefined" && window.scrollY > 10,
+    () => typeof window !== "undefined" && window.scrollY > 8,
   );
   const { pathname } = useLocation();
+  const [lastPathname, setLastPathname] = useState(pathname);
 
-  useEffect(() => {
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
     setMenuOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -38,7 +40,7 @@ export function Header() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const syncScrolledState = () => setScrolled(window.scrollY > 10);
+    const syncScrolledState = () => setScrolled(window.scrollY > 8);
     syncScrolledState();
     window.addEventListener("scroll", syncScrolledState, { passive: true });
     return () => window.removeEventListener("scroll", syncScrolledState);
@@ -51,30 +53,25 @@ export function Header() {
 
   return (
     <header
-      className={`pc26-header pc26-header--studio${scrolled ? " is-scrolled" : ""}`}
+      className={`pcx-header${scrolled ? " is-scrolled" : ""}`}
       data-glass-header="true"
     >
-      <div className="pc26-shell pc26-header-studio">
+      <div className="pcx-header__bar">
         <Link
-          className="pc26-header-studio__mobile-brand"
+          className="pcx-header__brand"
           to="/"
           aria-label="Preço Certo - página inicial"
         >
-          <img
-            src="/preco-certo-mark.svg?v=17"
-            alt=""
-            width="44"
-            height="44"
-          />
+          <img src="/preco-certo-mark.svg?v=17" alt="" width="34" height="34" />
           <span>
             <strong>Preço Certo</strong>
-            <small>FEIJÓ · ACRE</small>
+            <small>Feijó · Acre</small>
           </span>
         </Link>
 
         <nav
-          id="pc26-navigation"
-          className={`pc26-header-studio__nav${menuOpen ? " is-open" : ""}`}
+          id="pcx-navigation"
+          className={`pcx-header__nav${menuOpen ? " is-open" : ""}`}
           aria-label="Navegação principal"
         >
           {navItems.map((item) => {
@@ -92,22 +89,21 @@ export function Header() {
           })}
         </nav>
 
-        <div className="pc26-header-studio__tools" role="group" aria-label="Ações da conta">
-          <Link className="pc26-header-studio__login" to="/login">
+        <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
+          <Link className="pcx-header__login" to="/login">
             <UserRound aria-hidden="true" />
             <span>Entrar</span>
           </Link>
 
           <button
-            className="pc26-header-studio__menu"
+            className="pcx-header__menu"
             type="button"
             onClick={() => setMenuOpen((value) => !value)}
             aria-expanded={menuOpen}
-            aria-controls="pc26-navigation"
+            aria-controls="pcx-navigation"
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           >
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-            <span>Menu</span>
           </button>
         </div>
       </div>

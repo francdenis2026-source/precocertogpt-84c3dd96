@@ -33,27 +33,20 @@ const categories = [
 ];
 export function CategoryBar() {
   return (
-    <section
-      className="pc26-zone pc26-zone--categories"
-      aria-labelledby="categories-title"
-    >
-      <div className="pc26-categories pc26-shell">
-        <div className="pc26-section-heading pc26-section-heading--center">
+    <section className="pcx-section pcx-section--muted" aria-labelledby="categories-title">
+      <div className="pcx-shell">
+        <div className="pcx-section__head">
           <div>
             <h2 id="categories-title">Explore por categoria</h2>
             <p>Entre direto no tipo de compra que você precisa.</p>
           </div>
-          <Link to="/explorar">
+          <Link className="pcx-section__link" to="/explorar">
             Ver todas <LayoutGrid aria-hidden="true" />
           </Link>
         </div>
-        <div className="pc26-category-row pc26-category-grid">
+        <div className="pcx-categories">
           {categories.map(({ label, sub, icon: Icon, to }) => (
-            <Link
-              className="pc26-category pc26-category-card"
-              key={label}
-              to={to}
-            >
+            <Link className="pcx-category" key={label} to={to}>
               <i>
                 <Icon aria-hidden="true" />
               </i>

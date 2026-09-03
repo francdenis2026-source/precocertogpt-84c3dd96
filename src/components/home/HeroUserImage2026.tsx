@@ -1,10 +1,12 @@
-import { ArrowRight, BadgeCheck, MapPin, RefreshCw, Search, Store } from "lucide-react";
+import { ArrowRight, BadgeCheck, RefreshCw, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
-import "./HeroUserImage2026.css";
-import heroImg from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
+const brl = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
 
 type HeroUserImage2026Props = {
   products: Product[];
@@ -23,145 +25,95 @@ export function HeroUserImage2026({
   const shownStoreCount = storeCount ?? new Set(
     products.map((product) => product.establishment).filter(Boolean),
   ).size;
-
-  const panelCopyStyle = {
-    display: "grid",
-    gap: "5px",
-    minWidth: 0,
-    lineHeight: 1.3,
-  } as const;
-
-  const panelTitleStyle = {
-    display: "block",
-    lineHeight: 1.22,
-  } as const;
-
-  const panelDescriptionStyle = {
-    display: "block",
-    lineHeight: 1.45,
-  } as const;
+  const proofItems = products.filter((product) => product.minPrice > 0).slice(0, 3);
 
   return (
-    <section className="pc26-user-hero" aria-labelledby="pc26-campaign-title">
-      <div className="pc26-user-hero__stage">
-        <div className="pc26-user-hero__copy">
-          <h1 id="pc26-campaign-title">
-            Compare preços e <strong>compre melhor em Feijó.</strong>
+    <section className="pcx-hero" aria-labelledby="pcx-hero-title">
+      <div className="pcx-hero__inner">
+        <div>
+          <p className="pcx-hero__eyebrow">
+            <BadgeCheck aria-hidden="true" /> Comparador oficial de Feijó, Acre
+          </p>
+          <h1 id="pcx-hero-title">
+            Compare preços e <strong>compre melhor</strong> na sua cidade.
           </h1>
-          <p>
+          <p className="pcx-hero__lead">
             Pesquise um produto e veja, em segundos, o menor preço e onde
-            comprar.
+            comprar — sem sair de casa.
           </p>
 
-          <div className="pc26-user-hero__search">
-            <span className="pc26-user-hero__search-label">
-              Qual produto você procura?
-            </span>
-            <LiveProductSearch
-              id="price-search"
-              products={products}
-              loading={loading}
-            />
+          <div className="pcx-hero__search">
+            <LiveProductSearch id="price-search" products={products} loading={loading} />
           </div>
 
-          <nav className="pc26-user-hero__popular" aria-label="Buscas rápidas">
-            <span>Busca rápida:</span>
+          <nav className="pcx-hero__tags" aria-label="Buscas rápidas">
+            <span>Buscas populares:</span>
             <Link to="/buscar?q=arroz">Arroz</Link>
             <Link to="/buscar?q=carne">Carne</Link>
             <Link to="/buscar?q=leite">Leite</Link>
             <Link to="/buscar?q=medicamento">Medicamentos</Link>
           </nav>
 
-          <div
-            className="pc26-user-hero__actions"
-            aria-label="Ações principais"
-          >
-            <Link className="pc26-user-hero__primary" to="/buscar">
-              <Search aria-hidden="true" />
-              Comparar preços
-              <ArrowRight aria-hidden="true" />
-            </Link>
-            <Link className="pc26-user-hero__secondary" to="/estabelecimentos">
-              <Store aria-hidden="true" />
-              Ver estabelecimentos
-            </Link>
+          <div className="pcx-hero__stats" aria-label="Informações do catálogo">
+            <div>
+              <strong>{shownProductCount || "—"}</strong>
+              <span>produtos monitorados</span>
+            </div>
+            <div>
+              <strong>{shownStoreCount || "—"}</strong>
+              <span>estabelecimentos</span>
+            </div>
+            <div>
+              <strong>100%</strong>
+              <span>grátis para usar</span>
+            </div>
           </div>
 
-          <div
-            className="pc26-user-hero__proof"
-            aria-label="Informações do catálogo"
-          >
-            <span>
-              <BadgeCheck aria-hidden="true" /> {shownProductCount || "—"}{" "}
-              produtos monitorados
-            </span>
-            <span>
-              <Store aria-hidden="true" /> {shownStoreCount || "—"} estabelecimentos
-            </span>
-            <span>
-              <MapPin aria-hidden="true" /> Feijó, Acre
-            </span>
+          <div className="pcx-hero__actions" aria-label="Ações principais">
+            <Link className="pcx-btn pcx-btn--primary" to="/buscar">
+              <Search aria-hidden="true" /> Comparar preços <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link className="pcx-btn pcx-btn--ghost" to="/estabelecimentos">
+              <Store aria-hidden="true" /> Ver estabelecimentos
+            </Link>
           </div>
         </div>
 
-        <aside className="pc26-user-hero__media" aria-label="Como o PreçoCerto ajuda">
-          <img
-            className="pc26-user-hero__artwork"
-            src={heroImg}
-            alt="Cliente comparando o preço de um produto pelo celular dentro de um comércio de Feijó"
-            width={1536}
-            height={1024}
-            fetchPriority="high"
-            decoding="async"
-          />
-          <div className="pc26-hero-panel">
-            <span className="pc26-hero-panel__tag">PreçoCerto · Feijó, Acre</span>
-            <ul className="pc26-hero-panel__list">
-              <li style={{ gap: "14px", alignItems: "flex-start" }}>
-                <RefreshCw aria-hidden="true" />
-                <span style={panelCopyStyle}>
-                  <strong style={panelTitleStyle}>Preços atualizados</strong>
-                  <small style={panelDescriptionStyle}>
-                    Coletas verificadas nos estabelecimentos da cidade
-                  </small>
-                </span>
-              </li>
-              <li style={{ gap: "14px", alignItems: "flex-start" }}>
-                <Store aria-hidden="true" />
-                <span style={panelCopyStyle}>
-                  <strong style={panelTitleStyle}>Ofertas reais e locais</strong>
-                  <small style={panelDescriptionStyle}>
-                    Somente estabelecimentos cadastrados em Feijó
-                  </small>
-                </span>
-              </li>
-              <li style={{ gap: "14px", alignItems: "flex-start" }}>
-                <Search aria-hidden="true" />
-                <span style={panelCopyStyle}>
-                  <strong style={panelTitleStyle}>Busca rápida e precisa</strong>
-                  <small style={panelDescriptionStyle}>
-                    Compare o mesmo item entre vários estabelecimentos
-                  </small>
+        <aside className="pcx-hero__panel" aria-label="Exemplos reais de comparação de preços">
+          <div className="pcx-hero__panel-head">
+            <span>Comparações reais</span>
+            <span className="pcx-hero__panel-live">
+              <i aria-hidden="true" /> Ao vivo
+            </span>
+          </div>
+          {proofItems.length ? (
+            <ul>
+              {proofItems.map((product) => (
+                <li key={product.id}>
+                  <span className="pcx-hero__panel-name">{product.name}</span>
+                  <span className="pcx-hero__panel-store">
+                    <Store aria-hidden="true" /> {product.establishment || "Comércio local"}
+                  </span>
+                  <strong className="pcx-hero__panel-price">
+                    {brl.format(product.minPrice)}
+                  </strong>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul>
+              <li>
+                <span className="pcx-hero__panel-name">Catálogo carregando…</span>
+                <span className="pcx-hero__panel-store">
+                  <Store aria-hidden="true" /> Feijó, Acre
                 </span>
               </li>
             </ul>
-            <div className="pc26-hero-panel__metrics">
-              <span>
-                <strong>{shownProductCount || "—"}</strong>
-                <small>produtos</small>
-              </span>
-              <span>
-                <strong>{shownStoreCount || "—"}</strong>
-                <small>estabelecimentos</small>
-              </span>
-              <span>
-                <strong>100%</strong>
-                <small>gratuito</small>
-              </span>
-            </div>
+          )}
+          <div className="pcx-hero__panel-foot">
+            <RefreshCw aria-hidden="true" /> Atualizado com dados reais da cidade
           </div>
         </aside>
-
       </div>
     </section>
   );
