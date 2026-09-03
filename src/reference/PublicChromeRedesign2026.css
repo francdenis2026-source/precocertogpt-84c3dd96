@@ -1,0 +1,280 @@
+/* ============================================================================
+   PreçoCerto · Chrome público — Redesign Profissional 2026
+   Redefine a aparência de PublicHeader/PublicFooter/AppDock (compartilhados
+   por praticamente toda página interna: busca, estabelecimentos, produto,
+   cesta, favoritos, setores, autenticação) sem alterar nenhuma lógica React.
+   Importado por último em ReferenceExperience.tsx para vencer a cascata
+   legada. Reaproveita os tokens --h-* do redesign da home.
+   ========================================================================= */
+
+.ref-page {
+  --h-canvas: #f6f7f9;
+  --h-surface: #ffffff;
+  --h-surface-2: #eef1f4;
+  --h-border: #e3e7ec;
+  --h-border-strong: #cfd6de;
+  --h-ink: #10161d;
+  --h-muted: #5c6773;
+  --h-subtle: #8993a1;
+
+  --h-primary: #0e7a5f;
+  --h-primary-dark: #0a5c47;
+  --h-primary-soft: #e3f5ee;
+  --h-on-primary: #ffffff;
+
+  --h-accent: #c8860a;
+  --h-accent-dark: #9c6a08;
+  --h-accent-soft: #fbf0dc;
+
+  --h-danger: #c0392b;
+  --h-radius-sm: 8px;
+  --h-radius-md: 12px;
+  --h-shadow-sm: 0 1px 2px rgba(16, 22, 29, 0.05), 0 2px 8px rgba(16, 22, 29, 0.06);
+  --h-shadow-md: 0 4px 16px rgba(16, 22, 29, 0.08);
+  --h-font: "Manrope Variable", Manrope, "Inter Variable", Inter, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ref-page {
+    --h-canvas: #0f1418; --h-surface: #171d23; --h-surface-2: #1e252c;
+    --h-border: #2a323a; --h-border-strong: #3a434d; --h-ink: #f1f4f7;
+    --h-muted: #a7b0ba; --h-subtle: #7c8794;
+    --h-primary: #3ecf9a; --h-primary-dark: #2fae82; --h-primary-soft: #163529; --h-on-primary: #06120d;
+    --h-accent: #e8b84b; --h-accent-dark: #c89530; --h-accent-soft: #362a14;
+    --h-shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 2px 10px rgba(0,0,0,.3);
+    --h-shadow-md: 0 6px 20px rgba(0,0,0,.36);
+  }
+}
+[data-theme="dark"] .ref-page {
+  --h-canvas: #0f1418; --h-surface: #171d23; --h-surface-2: #1e252c;
+  --h-border: #2a323a; --h-border-strong: #3a434d; --h-ink: #f1f4f7;
+  --h-muted: #a7b0ba; --h-subtle: #7c8794;
+  --h-primary: #3ecf9a; --h-primary-dark: #2fae82; --h-primary-soft: #163529; --h-on-primary: #06120d;
+  --h-accent: #e8b84b; --h-accent-dark: #c89530; --h-accent-soft: #362a14;
+  --h-shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 2px 10px rgba(0,0,0,.3);
+  --h-shadow-md: 0 6px 20px rgba(0,0,0,.36);
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.ref-page .ref-header {
+  background: color-mix(in srgb, var(--h-surface) 90%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  border-bottom: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: border-color 200ms ease, box-shadow 200ms ease !important;
+}
+.ref-page .ref-header.is-scrolled { border-bottom-color: var(--h-border) !important; box-shadow: var(--h-shadow-sm) !important; }
+.ref-page .ref-header__inner {
+  min-height: 60px !important;
+  height: auto !important;
+  padding-block: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.25rem !important;
+}
+.ref-page .ref-header__app-brand { display: flex !important; align-items: center; gap: 0.55rem; color: var(--h-ink) !important; text-decoration: none; }
+.ref-page .ref-header__app-brand img { width: 30px !important; height: 30px !important; }
+.ref-page .ref-header__app-brand span { display: grid; line-height: 1.15; }
+.ref-page .ref-header__app-brand strong { font-size: 0.92rem; font-weight: 800; color: var(--h-ink); font-family: var(--h-font); }
+.ref-page .ref-header__app-brand small { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--h-muted); }
+
+.ref-page .ref-nav { display: flex !important; align-items: center; gap: 0.2rem !important; margin-inline: auto; }
+.ref-page .ref-nav a {
+  display: flex; align-items: center; gap: 0.3rem;
+  padding: 0.45rem 0.75rem !important;
+  border-radius: var(--h-radius-sm) !important;
+  font-size: 0.85rem !important; font-weight: 600;
+  color: var(--h-muted) !important;
+  text-decoration: none;
+  background: transparent !important;
+  transition: background 150ms ease, color 150ms ease;
+}
+.ref-page .ref-nav a:hover { background: var(--h-surface-2) !important; color: var(--h-ink) !important; }
+.ref-page .ref-nav a.is-active { color: var(--h-primary-dark) !important; background: var(--h-primary-soft) !important; }
+.ref-page .ref-nav a b { background: var(--h-primary) !important; color: var(--h-on-primary) !important; border-radius: 999px; }
+
+.ref-page .ref-header__utility { display: flex; align-items: center; gap: 0.75rem; }
+.ref-page .ref-location { display: flex !important; align-items: center; gap: 0.35rem; color: var(--h-muted) !important; font-size: 0.78rem; }
+.ref-page .ref-location svg { width: 14px; height: 14px; color: var(--h-primary); }
+.ref-page .ref-location small { display: block; font-size: 0.62rem; color: var(--h-subtle); }
+.ref-page .ref-location strong { font-size: 0.78rem; color: var(--h-ink); }
+
+.ref-page .ref-header__actions { display: flex !important; align-items: center; gap: 0.5rem !important; }
+.ref-page .ref-theme {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px !important; height: 34px !important; border-radius: 999px !important;
+  border: 1px solid var(--h-border-strong) !important; background: var(--h-surface) !important; color: var(--h-ink) !important;
+  cursor: pointer;
+}
+.ref-page .ref-theme:hover { background: var(--h-surface-2) !important; border-color: var(--h-primary) !important; }
+.ref-page .ref-theme svg { width: 16px; height: 16px; }
+.ref-page .ref-favorites-link {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px !important; height: 34px !important; border-radius: 999px !important;
+  border: 1px solid var(--h-border-strong) !important; background: var(--h-surface) !important; color: var(--h-muted) !important;
+}
+.ref-page .ref-favorites-link:hover, .ref-page .ref-favorites-link.is-active { border-color: var(--h-danger) !important; color: var(--h-danger) !important; }
+.ref-page .ref-favorites-link svg { width: 16px; height: 16px; }
+.ref-page .ref-signin {
+  padding: 0.45rem 0.95rem !important; border-radius: var(--h-radius-sm) !important;
+  border: 1px solid var(--h-border-strong) !important; background: var(--h-surface) !important;
+  color: var(--h-ink) !important; font-size: 0.82rem !important; font-weight: 700 !important; text-decoration: none;
+}
+.ref-page .ref-signin:hover { background: var(--h-surface-2) !important; border-color: var(--h-primary) !important; }
+.ref-page .ref-menu {
+  display: none; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: var(--h-radius-sm);
+  border: 1px solid var(--h-border-strong); background: var(--h-surface); color: var(--h-ink); cursor: pointer;
+}
+.ref-page .ref-mobile-menu {
+  background: var(--h-surface) !important; border-color: var(--h-border) !important; box-shadow: var(--h-shadow-md) !important;
+}
+.ref-page .ref-mobile-menu a { color: var(--h-ink) !important; font-size: 0.9rem !important; }
+.ref-page .ref-mobile-menu a:hover, .ref-page .ref-mobile-menu a.is-active { background: var(--h-primary-soft) !important; color: var(--h-primary-dark) !important; }
+
+/* Back-only compact bar (product/store detail flows) */
+.ref-page .ref-header--back-only .ref-header__back {
+  display: flex; align-items: center; gap: 0.35rem;
+  color: var(--h-muted) !important; font-size: 0.85rem; font-weight: 600;
+  background: transparent !important; border: none;
+}
+.ref-page .ref-header--back-only .ref-header__back:hover { color: var(--h-primary-dark) !important; }
+.ref-page .ref-header__context-title { color: var(--h-ink) !important; font-size: 0.9rem; }
+.ref-page .ref-header__home { color: var(--h-muted) !important; }
+
+/* Radio player inside ref-header */
+.ref-page .pc-radio {
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.ref-page .pc-radio__play {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.65rem 0.35rem 0.35rem !important;
+  border: 1px solid var(--h-border-strong) !important; border-radius: 999px !important;
+  background: var(--h-surface) !important; cursor: pointer; max-width: 180px;
+}
+.ref-page .pc-radio.is-playing .pc-radio__play { border-color: var(--h-primary) !important; background: var(--h-primary-soft) !important; }
+.ref-page .pc-radio__control {
+  display: flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--h-primary) !important; color: var(--h-on-primary) !important; flex-shrink: 0;
+}
+.ref-page .pc-radio__control svg { width: 12px; height: 12px; }
+.ref-page .pc-radio__copy { display: grid; gap: 0.02rem; text-align: left; overflow: hidden; }
+.ref-page .pc-radio__copy small { display: flex; align-items: center; gap: 0.25rem; font-size: 0.58rem; font-weight: 800; color: var(--h-subtle) !important; }
+.ref-page .pc-radio__copy small i { width: 4px; height: 4px; border-radius: 50%; background: var(--h-subtle); }
+.ref-page .pc-radio.is-playing .pc-radio__copy small i { background: var(--h-primary); }
+.ref-page .pc-radio__copy strong { font-size: 0.72rem; font-weight: 700; color: var(--h-ink) !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px; display: block; }
+.ref-page .pc-radio__signal, .ref-page .pc-radio__track, .ref-page .pc-radio__announcement { display: none; }
+
+@media (max-width: 1100px) {
+  .ref-page .ref-header__utility { display: none; }
+  .ref-page .pc-radio__copy { display: none; }
+}
+@media (max-width: 900px) {
+  .ref-page .ref-nav { display: none !important; }
+  .ref-page .ref-signin span { display: none; }
+  .ref-page .pc-radio { display: none; }
+  .ref-page .ref-menu { display: flex; }
+}
+
+/* ── Footer — compacted to a single bar (was a 4-column grid) ────────────── */
+.ref-page .ref-footer {
+  background: var(--h-surface) !important;
+  border-top: 1px solid var(--h-border) !important;
+  padding: 0 !important;
+}
+.ref-page .ref-footer__grid {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.1rem var(--h-section-x, clamp(18px, 4vw, 40px)) !important;
+}
+.ref-page .ref-footer__brand { display: flex !important; align-items: center; gap: 0.6rem; }
+.ref-page .ref-footer__brand p,
+.ref-page .ref-footer__brand span { display: none !important; }
+.ref-page .ref-footer__brand .ref-brand { display: flex; align-items: center; gap: 0.5rem; }
+.ref-page .ref-footer__brand .ref-brand span { display: block !important; font-size: 0.68rem; font-weight: 700; color: var(--h-muted) !important; letter-spacing: 0.04em; }
+.ref-page .ref-footer__brand img { height: 26px !important; width: auto !important; }
+.ref-page .ref-footer__grid nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 1rem !important;
+}
+.ref-page .ref-footer__grid nav strong { display: none !important; }
+.ref-page .ref-footer__grid nav a {
+  font-size: 0.8rem !important; font-weight: 600; color: var(--h-muted) !important; text-decoration: none;
+}
+.ref-page .ref-footer__grid nav a:hover { color: var(--h-primary-dark) !important; }
+.ref-page .ref-footer__legal {
+  display: flex !important; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;
+  padding: 0.7rem var(--h-section-x, clamp(18px, 4vw, 40px)) !important;
+  border-top: 1px solid var(--h-border) !important;
+  font-size: 0.72rem !important; color: var(--h-subtle) !important;
+}
+.ref-page .ref-footer__legal small { color: var(--h-subtle) !important; }
+.ref-page .ref-footer__legal span { color: var(--h-subtle) !important; }
+
+@media (max-width: 760px) {
+  .ref-page .ref-footer__grid { flex-direction: column; align-items: flex-start; }
+  .ref-page .ref-footer__grid nav { flex-wrap: wrap; }
+}
+
+/* Interior pages: hide the large footer entirely on detail/utility flows
+   (store detail, product detail, search, basket) to keep them compact —
+   the home keeps its own full footer. */
+.store-pro-page .ref-footer,
+.pdl-page .ref-footer,
+.ref-directory .ref-footer,
+.search26-page .ref-footer,
+.pro-basket-page .ref-footer,
+.smart-basket-page .ref-footer {
+  display: none !important;
+}
+
+/* ── Compact heroes: establishment list, store detail, product detail ───── */
+.ref-page .ref-stores-hero {
+  padding: 1.5rem 0 1.25rem !important;
+  background: linear-gradient(135deg, var(--h-primary-dark), var(--h-primary)) !important;
+  border-radius: 0 !important;
+  color: #fff !important;
+}
+.ref-page .ref-stores-hero * { color: #fff !important; }
+.ref-page .ref-stores-hero h1 { font-size: clamp(1.4rem, 2.4vw, 1.9rem) !important; font-family: var(--h-font) !important; }
+.ref-page .ref-stores-hero p { font-size: 0.88rem !important; opacity: 0.88; max-width: 60ch; }
+
+.ref-page .store-pro-hero {
+  border-radius: var(--h-radius-md) !important;
+  min-height: 220px !important;
+  max-height: 280px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+}
+.ref-page .store-pro-hero::after,
+.ref-page .store-pro-hero::before {
+  background: linear-gradient(180deg, rgba(8,14,12,0.05) 0%, rgba(8,14,12,0.82) 85%) !important;
+}
+
+.ref-page .pdl-hero {
+  border-radius: var(--h-radius-md) !important;
+  padding-block: 1.25rem !important;
+}
+.ref-page .pdl-crumbs { font-size: 0.72rem !important; }
+
+@media (max-width: 720px) {
+  .ref-page .ref-stores-hero { padding: 1.1rem 0 !important; }
+  .ref-page .store-pro-hero { min-height: 170px !important; max-height: 220px !important; }
+}
+
+/* ── Bottom app dock (mobile) ──────────────────────────────────────────── */
+.ref-page .ref-dock {
+  background: color-mix(in srgb, var(--h-surface) 94%, transparent) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid var(--h-border) !important;
+}
+.ref-page .ref-dock a { color: var(--h-subtle) !important; }
+.ref-page .ref-dock a.is-active { color: var(--h-primary-dark) !important; }
+.ref-page .ref-dock a svg { width: 20px; height: 20px; }
+.ref-page .ref-dock__badge { background: var(--h-primary) !important; color: var(--h-on-primary) !important; }

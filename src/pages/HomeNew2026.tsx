@@ -98,7 +98,7 @@ export function HomeNew2026() {
     [catalog.products],
   );
   const featured = useMemo<Product[]>(
-    () => buildFeatured(products, cycle, 4),
+    () => buildFeatured(products, cycle, 6),
     [products, cycle],
   );
 

@@ -2,6 +2,7 @@ import { ArrowRight, BadgeCheck, RefreshCw, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
+import heroImg from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -29,6 +30,10 @@ export function HeroUserImage2026({
 
   return (
     <section className="pcx-hero" aria-labelledby="pcx-hero-title">
+      <div className="pcx-hero__bg" aria-hidden="true">
+        <img src={heroImg} alt="" fetchPriority="high" decoding="async" />
+        <div className="pcx-hero__scrim" />
+      </div>
       <div className="pcx-hero__inner">
         <div>
           <p className="pcx-hero__eyebrow">

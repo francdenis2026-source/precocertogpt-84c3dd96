@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { HeaderRadioPlayer } from "../PersistentRadio";
 
 const navItems = [
   { to: "/", label: "Início", icon: Home },
@@ -90,6 +91,7 @@ export function Header() {
         </nav>
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
+          <HeaderRadioPlayer />
           <Link className="pcx-header__login" to="/login">
             <UserRound aria-hidden="true" />
             <span>Entrar</span>
