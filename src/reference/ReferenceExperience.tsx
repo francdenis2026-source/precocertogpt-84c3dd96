@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
-import { fetchSectorCatalog } from "../data/sectorCatalog";
+import { fetchSectorCatalog, withoutDemoEstablishments } from "../data/sectorCatalog";
 import { resolveProductImage } from "../data/productImageResolver";
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { loadSessionProfile, requestPasswordReset } from "../lib/roles";
@@ -148,7 +148,7 @@ function productSearchScore(product: Product, rawQuery: string) {
 }
 
 function useCatalogState() {
-  const [catalog, setCatalog] = useState<CatalogPayload>({ ...initialCatalog, metrics: verifiedDatasetMetrics });
+  const [catalog, setCatalog] = useState<CatalogPayload>(() => withoutDemoEstablishments({ ...initialCatalog, metrics: verifiedDatasetMetrics }));
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     let active = true;
