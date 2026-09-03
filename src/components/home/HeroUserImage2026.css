@@ -228,6 +228,32 @@
 .pc26-user-hero .pc26-live-results__head small {
   font-size: 0.67rem;
 }
+.pc26-user-hero .pc26-live-results__head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pc26-user-hero .pc26-live-results__head-actions button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 36px;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  color: inherit;
+  cursor: pointer;
+}
+.pc26-user-hero .pc26-live-results__head-actions button svg {
+  width: 17px;
+  height: 17px;
+}
+.pc26-user-hero .pc26-live-results__head-actions button:focus-visible {
+  outline: 3px solid var(--hero-primary);
+  outline-offset: 2px;
+}
 .pc26-user-hero .pc26-live-results__list {
   padding: 6px;
 }
