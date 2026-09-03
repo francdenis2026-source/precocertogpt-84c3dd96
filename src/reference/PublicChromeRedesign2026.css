@@ -72,11 +72,16 @@
   align-items: center !important;
   gap: 1.25rem !important;
 }
-.ref-page .ref-header__app-brand { display: flex !important; align-items: center; gap: 0.55rem; color: var(--h-ink) !important; text-decoration: none; }
-.ref-page .ref-header__app-brand img { width: 30px !important; height: 30px !important; }
-.ref-page .ref-header__app-brand span { display: grid; line-height: 1.15; }
-.ref-page .ref-header__app-brand strong { font-size: 0.92rem; font-weight: 800; color: var(--h-ink); font-family: var(--h-font); }
-.ref-page .ref-header__app-brand small { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--h-muted); }
+.ref-page .ref-header__app-brand,
+.ref-header__app-brand { display: flex !important; align-items: center; gap: 0.55rem; color: var(--h-ink) !important; text-decoration: none; }
+.ref-page .ref-header__app-brand img,
+.ref-header__app-brand img { width: 30px !important; height: 30px !important; }
+.ref-page .ref-header__app-brand span,
+.ref-header__app-brand span { display: grid; line-height: 1.15; }
+.ref-page .ref-header__app-brand strong,
+.ref-header__app-brand strong { font-size: 0.92rem; font-weight: 800; color: var(--h-ink); font-family: var(--h-font); }
+.ref-page .ref-header__app-brand small,
+.ref-header__app-brand small { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--h-muted); }
 
 .ref-page .ref-nav { display: flex !important; align-items: center; gap: 0.2rem !important; margin-inline: auto; }
 .ref-page .ref-nav a {

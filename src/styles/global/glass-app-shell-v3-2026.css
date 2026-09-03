@@ -75,10 +75,6 @@ html[data-theme="dark"]
   }
 }
 
-.ref-header__app-brand {
-  display: none;
-}
-
 @media (max-width: 767px) {
   html,
   body,
