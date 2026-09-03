@@ -2,7 +2,7 @@ import { ArrowRight, BadgeCheck, RefreshCw, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
-import heroImg from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
+import heroImg from "../../assets/home-2026/comercio-local-atendimento.jpg";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
