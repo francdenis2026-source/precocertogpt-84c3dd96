@@ -268,6 +268,39 @@
   .ref-page .store-pro-hero { min-height: 170px !important; max-height: 220px !important; }
 }
 
+/* ── Info pages (404, contato, colaborar, cultura) ───────────────────────── */
+.ref-page .ref-info {
+  background: var(--h-canvas) !important;
+  color: var(--h-ink) !important;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem var(--h-section-x, clamp(18px, 4vw, 40px));
+  position: relative;
+}
+.ref-page .ref-info::before,
+.ref-page .ref-info::after {
+  display: none !important;
+  content: none !important;
+}
+.ref-page .ref-info > span {
+  color: var(--h-accent-dark) !important;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+.ref-page .ref-info h1 { color: var(--h-ink) !important; font-family: var(--h-font); }
+.ref-page .ref-info p { color: var(--h-muted) !important; }
+.ref-page .ref-info a {
+  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem;
+  padding: 0.7rem 1.2rem; border-radius: var(--h-radius-md);
+  background: var(--h-primary) !important; color: var(--h-on-primary) !important;
+  font-weight: 700; text-decoration: none;
+}
+.ref-page .ref-info a:hover { background: var(--h-primary-dark) !important; }
+
 /* ── Bottom app dock (mobile) ──────────────────────────────────────────── */
 .ref-page .ref-dock {
   background: color-mix(in srgb, var(--h-surface) 94%, transparent) !important;
