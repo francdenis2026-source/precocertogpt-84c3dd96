@@ -43,7 +43,10 @@ const RadioContext = createContext<RadioState | null>(null);
 
 export function parseZenoMetadata(raw: string): string | null {
   const clean = (value: unknown) =>
-    typeof value === "string" && value.trim() && !/^(unknown|undefined|null)$/i.test(value.trim())
+    // Algumas transmissões ao vivo (sem faixa por faixa) enviam um título
+    // vazio como "-" ou "--"; tratar isso como "sem metadado" evita mostrar
+    // um traço solto no lugar do nome da música.
+    typeof value === "string" && value.trim() && !/^(unknown|undefined|null|[-–—]+)$/i.test(value.trim())
       ? value.trim().replace(/\s+/g, " ")
       : null;
   try {

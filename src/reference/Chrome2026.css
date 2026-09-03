@@ -20,7 +20,13 @@
 .ref-header__inner{
   min-height:var(--pc-header-height);
   display:grid;
-  grid-template-columns:auto 1fr auto;
+  /* Marca | navegação | utilidade (local/online) | ações (rádio, tema,
+     favoritos, entrar, menu) — quatro blocos reais no JSX do PublicHeader.
+     Com só 3 colunas aqui, o 4º bloco (.ref-header__actions) quebrava para
+     uma "segunda linha" do grid que ficava flutuando por baixo do cabeçalho,
+     sobrepondo o conteúdo da página (ex.: botão "Entrar" caindo sobre a
+     hero de /buscar). */
+  grid-template-columns:auto 1fr auto auto;
   align-items:center;
   gap:clamp(16px,2.4vw,36px);
 }
