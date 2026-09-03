@@ -22,7 +22,6 @@ import { HomeQuickActions } from "../components/home/HomeQuickActions";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { PromoBands } from "../components/home/PromoBands";
 import { StoreRail } from "../components/home/StoreRail";
-import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeEmilCompact2026.css";
 import "./HomeViewportCompact2026.css";
@@ -38,7 +37,6 @@ export function HomeNew2026() {
   const [liveMetrics, setLiveMetrics] = useState<PlatformMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [cycle, setCycle] = useState(() => currentCycle());
-  const { theme, toggleTheme } = useSiteTheme();
 
   useEffect(() => {
     document.documentElement.classList.add("nx-home-active");
@@ -112,7 +110,7 @@ export function HomeNew2026() {
 
   return (
     <div className="pc26-home pc26-home--recovered">
-      <Header theme={theme} onToggleTheme={toggleTheme} />
+      <Header />
       <main id="conteudo-principal">
         <HeroUserImage2026
           products={products}
@@ -128,7 +126,6 @@ export function HomeNew2026() {
       </main>
       <Footer />
       <BottomNav />
-
     </div>
   );
 }
