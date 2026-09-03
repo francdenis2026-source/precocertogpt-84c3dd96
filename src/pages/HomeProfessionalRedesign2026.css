@@ -391,10 +391,17 @@
   min-height: clamp(460px, 62vh, 620px);
   display: flex;
   align-items: center;
-  overflow: hidden;
-  isolation: isolate;
+  /* Sem overflow:hidden/isolation aqui: os dois criavam uma "caixa" que
+     prendia tudo dentro da hero — inclusive o painel de resultados da
+     busca (position:absolute, z-index alto) — e ele nunca conseguia
+     pintar por cima das seções seguintes da home, ficando visualmente
+     "por baixo" delas. O recorte da imagem de fundo já vem do próprio
+     .pcx-hero__bg (inset:0 + object-fit:cover), então overflow:hidden no
+     pai não fazia falta nenhuma; a pilha de camadas abaixo (bg/scrim em
+     z-index:0, conteúdo em z-index:1) substitui o isolation:isolate sem
+     precisar de um novo contexto de empilhamento isolado. */
 }
-.pcx-hero__bg { position: absolute; inset: 0; z-index: -1; }
+.pcx-hero__bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 .pcx-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 30%; }
 .pcx-hero__scrim {
   position: absolute; inset: 0;
@@ -409,6 +416,8 @@
     linear-gradient(0deg, rgba(10, 20, 17, 0.3), transparent 40%);
 }
 .pcx-hero__inner {
+  position: relative;
+  z-index: 1;
   width: min(1240px, 100%);
   margin-inline: auto;
   padding-inline: var(--h-section-x);
