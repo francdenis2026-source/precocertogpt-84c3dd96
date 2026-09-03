@@ -5,6 +5,7 @@ import { CheckCircle2, ChevronLeft, Clock3, LockKeyhole, ShieldCheck, Store, Use
 import { signUp, supabase } from "../lib/roles";
 import "./MerchantOnboarding.css";
 import "./CompactViewportPages.css";
+import "./AdminMerchantRedesign2026.css";
 
 gsap.registerPlugin(ScrollTrigger);
 

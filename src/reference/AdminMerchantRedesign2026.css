@@ -102,3 +102,59 @@
 .acw-summary button strong { color: var(--am-navy-2) !important; }
 .acw-tabs button.active { background: var(--am-navy-2) !important; color: #fff !important; border-color: var(--am-navy-2) !important; }
 .acw-error { background: var(--am-danger) !important; color: #fff !important; }
+
+/* ── Merchant onboarding (.mo-*) — fixed-dark editorial, now on-brand ────── */
+.mo-page {
+  background: radial-gradient(circle at 15% 0%, rgba(14, 122, 95, 0.16), transparent 55%), #0b1e18 !important;
+  color: #eafff3 !important;
+}
+.mo-head span { color: var(--am-gold) !important; }
+.mo-head h1, .mo-head p { color: #eafff3 !important; }
+.mo-head a { color: rgba(234, 255, 243, 0.75) !important; }
+
+.mo-steps {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.mo-steps > div { color: rgba(234, 255, 243, 0.55) !important; }
+.mo-steps > div b {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: rgba(234, 255, 243, 0.7) !important;
+}
+.mo-steps > div.active { color: #eafff3 !important; }
+.mo-steps > div.active b { background: var(--am-navy-2) !important; color: #fff !important; }
+.mo-steps > div.done b { background: var(--am-gold) !important; color: #241a03 !important; }
+.mo-steps p { color: rgba(234, 255, 243, 0.5) !important; }
+
+.mo-card {
+  background: #ffffff !important;
+  color: var(--am-ink) !important;
+  border-radius: var(--am-radius) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+.mo-title span { color: var(--am-gold) !important; }
+.mo-title h2 { color: var(--am-ink) !important; }
+.mo-title p { color: var(--am-muted) !important; }
+.mo-card label { color: var(--am-ink) !important; }
+.mo-card input, .mo-card select, .mo-card textarea {
+  background: var(--am-surface) !important;
+  border: 1px solid var(--am-border) !important;
+  color: var(--am-ink) !important;
+  border-radius: 8px !important;
+}
+.mo-card input:focus, .mo-card select:focus, .mo-card textarea:focus {
+  border-color: var(--am-navy-2) !important;
+  outline: 2px solid rgba(14, 122, 95, 0.25) !important;
+}
+.mo-card button:not(:disabled) {
+  background: var(--am-navy-2) !important;
+  border-color: var(--am-navy-2) !important;
+  color: #fff !important;
+}
+.mo-card button:disabled { opacity: 0.6; }
+.mo-error { color: var(--am-danger) !important; }
+.mo-login { color: var(--am-muted) !important; }
+.mo-status-note { color: var(--am-muted) !important; }
+.mo-status svg { color: var(--am-navy-2) !important; }
+.mo-status span { color: var(--am-gold) !important; }
+.mo-status button { background: var(--am-navy-2) !important; color: #fff !important; }
