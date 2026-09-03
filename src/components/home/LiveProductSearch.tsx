@@ -40,7 +40,6 @@ export function LiveProductSearch({
 }: LiveProductSearchProps) {
   const navigate = useNavigate();
   const listId = `${useId().replace(/:/g, "")}-${id}-results`;
-  const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -55,17 +54,6 @@ export function LiveProductSearch({
   );
   const safeActiveIndex = activeIndex < suggestions.length ? activeIndex : -1;
   const showPanel = open && normalizedQuery.length >= 2;
-
-  useEffect(() => {
-    const close = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-        setActiveIndex(-1);
-      }
-    };
-    document.addEventListener("pointerdown", close);
-    return () => document.removeEventListener("pointerdown", close);
-  }, []);
 
   useEffect(() => {
     if (!compact) return;
@@ -96,13 +84,7 @@ export function LiveProductSearch({
     searchAll();
   };
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (!showPanel || !suggestions.length) {
-      if (event.key === "Escape") {
-        setOpen(false);
-        setActiveIndex(-1);
-      }
-      return;
-    }
+    if (!showPanel || !suggestions.length) return;
     if (event.key === "ArrowDown") {
       event.preventDefault();
       setActiveIndex((index) => (index + 1) % suggestions.length);
@@ -120,16 +102,11 @@ export function LiveProductSearch({
     } else if (event.key === "Enter" && safeActiveIndex >= 0) {
       event.preventDefault();
       openProduct(suggestions[safeActiveIndex]);
-    } else if (event.key === "Escape") {
-      event.preventDefault();
-      setOpen(false);
-      setActiveIndex(-1);
     }
   };
 
   return (
     <div
-      ref={rootRef}
       className={`pc26-live-search${compact ? " pc26-live-search--compact" : ""}${showPanel ? " is-open" : ""}`}
     >
       <form
@@ -203,11 +180,23 @@ export function LiveProductSearch({
         >
           <div className="pc26-live-results__head">
             <span>Resultados ao vivo</span>
-            <small>
-              {loading
-                ? "Atualizando catálogo…"
-                : `${suggestions.length} ${suggestions.length === 1 ? "produto" : "produtos"}`}
-            </small>
+            <div className="pc26-live-results__head-actions">
+              <small>
+                {loading
+                  ? "Atualizando catálogo…"
+                  : `${suggestions.length} ${suggestions.length === 1 ? "produto" : "produtos"}`}
+              </small>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  setActiveIndex(-1);
+                }}
+                aria-label="Fechar resultados da busca"
+              >
+                <X aria-hidden="true" />
+              </button>
+            </div>
           </div>
           {loading && !products.length ? (
             <div className="pc26-live-results__state">
