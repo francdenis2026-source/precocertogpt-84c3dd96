@@ -24,6 +24,23 @@ export function HeroUserImage2026({
     products.map((product) => product.establishment).filter(Boolean),
   ).size;
 
+  const panelCopyStyle = {
+    display: "grid",
+    gap: "5px",
+    minWidth: 0,
+    lineHeight: 1.3,
+  } as const;
+
+  const panelTitleStyle = {
+    display: "block",
+    lineHeight: 1.22,
+  } as const;
+
+  const panelDescriptionStyle = {
+    display: "block",
+    lineHeight: 1.45,
+  } as const;
+
   return (
     <section className="pc26-user-hero" aria-labelledby="pc26-campaign-title">
       <div className="pc26-user-hero__stage">
@@ -100,25 +117,31 @@ export function HeroUserImage2026({
           <div className="pc26-hero-panel">
             <span className="pc26-hero-panel__tag">PreçoCerto · Feijó, Acre</span>
             <ul className="pc26-hero-panel__list">
-              <li>
+              <li style={{ gap: "14px", alignItems: "flex-start" }}>
                 <RefreshCw aria-hidden="true" />
-                <span>
-                  <strong>Preços atualizados</strong>
-                  <small>Coletas verificadas nos comércios da cidade</small>
+                <span style={panelCopyStyle}>
+                  <strong style={panelTitleStyle}>Preços atualizados</strong>
+                  <small style={panelDescriptionStyle}>
+                    Coletas verificadas nos estabelecimentos da cidade
+                  </small>
                 </span>
               </li>
-              <li>
+              <li style={{ gap: "14px", alignItems: "flex-start" }}>
                 <Store aria-hidden="true" />
-                <span>
-                  <strong>Ofertas reais e locais</strong>
-                  <small>Somente estabelecimentos de Feijó cadastrados</small>
+                <span style={panelCopyStyle}>
+                  <strong style={panelTitleStyle}>Ofertas reais e locais</strong>
+                  <small style={panelDescriptionStyle}>
+                    Somente estabelecimentos cadastrados em Feijó
+                  </small>
                 </span>
               </li>
-              <li>
+              <li style={{ gap: "14px", alignItems: "flex-start" }}>
                 <Search aria-hidden="true" />
-                <span>
-                  <strong>Busca rápida e precisa</strong>
-                  <small>Compare o mesmo item em vários estabelecimentos</small>
+                <span style={panelCopyStyle}>
+                  <strong style={panelTitleStyle}>Busca rápida e precisa</strong>
+                  <small style={panelDescriptionStyle}>
+                    Compare o mesmo item entre vários estabelecimentos
+                  </small>
                 </span>
               </li>
             </ul>
