@@ -1,0 +1,182 @@
+/* Definitive header sizing pass. Loaded last on HomeNew2026. */
+.pc26-home--recovered .pc26-header-studio {
+  box-sizing: border-box !important;
+  width: var(--home-shell) !important;
+  grid-template-columns: auto minmax(0, 1fr) max-content !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__tools {
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  gap: 8px !important;
+  overflow: visible !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__login,
+.pc26-home--recovered .pc26-header-studio__menu {
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  padding: 0 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  line-height: 1 !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__login {
+  min-width: 104px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__menu {
+  min-width: 96px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__login span,
+.pc26-home--recovered .pc26-header-studio__menu span {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  flex: 0 0 auto !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__login svg,
+.pc26-home--recovered .pc26-header-studio__menu svg {
+  width: 20px !important;
+  height: 20px !important;
+  flex: 0 0 20px !important;
+}
+
+/* Menu belongs to the compact/tablet layout only. */
+@media (min-width: 1141px) {
+  .pc26-home--recovered .pc26-header-studio__menu {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1140px) {
+  .pc26-home--recovered .pc26-header-studio {
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__nav:not(.is-open) {
+    display: none !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__menu {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .pc26-home--recovered .pc26-header-studio {
+    gap: 8px !important;
+    padding-inline: 10px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__mobile-brand {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__mobile-brand span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login,
+  .pc26-home--recovered .pc26-header-studio__menu {
+    min-height: 46px !important;
+    height: 46px !important;
+    padding-inline: 13px !important;
+    font-size: .72rem !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login {
+    min-width: 96px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__menu {
+    min-width: 90px !important;
+  }
+}
+
+/* Preserve both button labels on narrow phones; compact the brand instead. */
+@media (max-width: 520px) {
+  .pc26-home--recovered .pc26-header-studio__mobile-brand span {
+    display: none !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__mobile-brand img {
+    width: 36px !important;
+    height: 36px !important;
+    flex: 0 0 36px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login,
+  .pc26-home--recovered .pc26-header-studio__menu {
+    padding-inline: 11px !important;
+    gap: 6px !important;
+    font-size: .69rem !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login {
+    min-width: 90px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__menu {
+    min-width: 84px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .pc26-home--recovered .pc26-header-studio {
+    padding-inline: 7px !important;
+    gap: 5px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__mobile-brand img {
+    width: 32px !important;
+    height: 32px !important;
+    flex-basis: 32px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login,
+  .pc26-home--recovered .pc26-header-studio__menu {
+    min-height: 42px !important;
+    height: 42px !important;
+    padding-inline: 9px !important;
+    font-size: .65rem !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login {
+    min-width: 84px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__menu {
+    min-width: 78px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login svg,
+  .pc26-home--recovered .pc26-header-studio__menu svg {
+    width: 17px !important;
+    height: 17px !important;
+    flex-basis: 17px !important;
+  }
+}
