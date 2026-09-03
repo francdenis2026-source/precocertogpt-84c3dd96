@@ -22,7 +22,7 @@ type EstablishmentRow = {
   /** Colunas opcionais (criadas em db/sql/fase2_ofertas_lojas_cidades.sql). */
   city?: string | null;
   opening_hours?: string | null;
-  photo_url?: string | null;
+  storefront_image_url?: string | null;
   whatsapp?: string | null;
 };
 
@@ -288,7 +288,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
     try {
       const { data: extraRows } = await supabase!
         .from("establishments")
-        .select("id, city, opening_hours, photo_url, whatsapp")
+        .select("id, city, opening_hours, storefront_image_url, whatsapp")
         .limit(2000);
       for (const row of (extraRows ?? []) as EstablishmentRow[]) storeExtras.set(String(row.id), row);
     } catch {
@@ -440,7 +440,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
           city: storeCityFrom(store.address) ?? extra?.city ?? undefined,
 
           openingHours: extra?.opening_hours ?? undefined,
-          photoUrl: extra?.photo_url ?? undefined,
+          photoUrl: extra?.storefront_image_url ?? undefined,
           whatsapp: extra?.whatsapp ?? undefined,
           products: productIdsByStore.get(String(store.id))?.size ?? 0,
         };
