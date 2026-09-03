@@ -13,8 +13,11 @@ export function FooterSingleton() {
     if (pathname.startsWith("/admin") || pathname.startsWith("/painel-lojista")) return;
 
     const dedupe = () => {
+      // Só rodapés de página inteira entram na deduplicação. `<footer>` usados
+      // como sub-elemento dentro de cards/links (preço de produto, ações do
+      // estabelecimento) não são "duplicatas" e nunca devem ser escondidos.
       const footers = Array.from(document.querySelectorAll<HTMLElement>("body footer")).filter(
-        node => !node.closest("[data-footer-ignore]"),
+        node => !node.closest("[data-footer-ignore]") && !node.closest("a, button, article"),
       );
       footers.forEach((node, index) => {
         if (index === footers.length - 1) {
