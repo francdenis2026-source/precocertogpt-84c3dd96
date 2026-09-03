@@ -2,14 +2,32 @@ import {
   Home,
   LayoutGrid,
   Menu,
+  Moon,
   Store,
+  Sun,
   Tag,
   UserRound,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
+
+function HeaderThemeToggle() {
+  const { theme, toggleTheme } = useSiteTheme();
+  const dark = theme === "dark";
+  return (
+    <button
+      className="pcx-header__theme"
+      type="button"
+      onClick={toggleTheme}
+      aria-label={dark ? "Usar tema claro" : "Usar tema escuro"}
+    >
+      {dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+    </button>
+  );
+}
 
 const navItems = [
   { to: "/", label: "Início", icon: Home },
@@ -92,6 +110,7 @@ export function Header() {
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
           <HeaderRadioPlayer />
+          <HeaderThemeToggle />
           <Link className="pcx-header__login" to="/login">
             <UserRound aria-hidden="true" />
             <span>Entrar</span>
