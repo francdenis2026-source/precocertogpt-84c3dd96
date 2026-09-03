@@ -45,7 +45,7 @@ export function HomeNew2026() {
 
     const load = async () => {
       try {
-        const value = await fetchSectorCatalog(true);
+        const value = await fetchSectorCatalog();
         if (!active) return;
         setCatalog(value);
 
