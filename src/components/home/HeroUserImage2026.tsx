@@ -66,7 +66,7 @@ export function HeroUserImage2026({
             </Link>
             <Link className="pc26-user-hero__secondary" to="/estabelecimentos">
               <Store aria-hidden="true" />
-              Ver lojas
+              Ver estabelecimentos
             </Link>
           </div>
 
@@ -118,7 +118,7 @@ export function HeroUserImage2026({
                 <Search aria-hidden="true" />
                 <span>
                   <strong>Busca rápida e precisa</strong>
-                  <small>Compare o mesmo item em várias lojas</small>
+                  <small>Compare o mesmo item em vários estabelecimentos</small>
                 </span>
               </li>
             </ul>
@@ -129,7 +129,7 @@ export function HeroUserImage2026({
               </span>
               <span>
                 <strong>{shownStoreCount || "—"}</strong>
-                <small>lojas</small>
+                <small>estabelecimentos</small>
               </span>
               <span>
                 <strong>100%</strong>
