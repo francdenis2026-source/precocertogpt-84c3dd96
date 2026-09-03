@@ -1,0 +1,295 @@
+/* Final polish for homepage header and footer. Loaded after all legacy homepage layers. */
+.pc26-home--recovered .pc26-header--studio {
+  min-height: 60px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--home-line) 58%, transparent) !important;
+  background: color-mix(in srgb, var(--home-surface) 76%, transparent) !important;
+  box-shadow: 0 8px 30px rgba(10, 31, 37, 0.06) !important;
+  backdrop-filter: blur(20px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(145%) !important;
+}
+
+.pc26-home--recovered .pc26-header--studio.is-scrolled {
+  background: color-mix(in srgb, var(--home-surface) 86%, transparent) !important;
+  border-bottom-color: color-mix(in srgb, var(--home-line) 78%, transparent) !important;
+  box-shadow: 0 12px 34px rgba(10, 31, 37, 0.1) !important;
+}
+
+html[data-theme="dark"] .pc26-home--recovered .pc26-header--studio {
+  background: color-mix(in srgb, var(--home-surface) 72%, transparent) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.09) !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+.pc26-home--recovered .pc26-header-studio {
+  min-height: 60px !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  gap: clamp(8px, 1.25vw, 18px) !important;
+  padding-block: 6px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__nav {
+  flex-wrap: nowrap !important;
+  gap: 3px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__nav a {
+  min-height: 38px !important;
+  height: 38px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 10px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__merchant-nav {
+  gap: 6px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__tools {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__radio {
+  display: flex !important;
+  align-items: center !important;
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+}
+
+.pc26-home--recovered :is(.pc26-header-studio__tool, .pc26-header-studio__login) {
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  min-width: 38px !important;
+  width: 38px !important;
+  min-height: 38px !important;
+  height: 38px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border-radius: 11px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__tool {
+  display: inline-grid !important;
+  place-items: center !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__login {
+  width: auto !important;
+  min-width: 78px !important;
+  padding: 0 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__tool svg,
+.pc26-home--recovered .pc26-header-studio__login svg {
+  width: 17px !important;
+  height: 17px !important;
+  flex: 0 0 17px !important;
+}
+
+.pc26-home--recovered .pc26-header-studio__menu {
+  overflow: hidden !important;
+}
+
+/* Compact professional footer: one restrained primary row + slim metadata row. */
+.pc26-home--recovered .pc26-footer--studio {
+  margin-top: 6px !important;
+  border-top: 1px solid color-mix(in srgb, var(--home-line) 78%, transparent) !important;
+  background: color-mix(in srgb, var(--home-surface) 97%, var(--home-canvas)) !important;
+}
+
+.pc26-home--recovered .pc26-footer-compact {
+  min-height: 54px !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  gap: clamp(12px, 2vw, 24px) !important;
+  padding-block: 8px !important;
+}
+
+.pc26-home--recovered .pc26-footer-identity {
+  gap: 10px !important;
+}
+
+.pc26-home--recovered .pc26-footer-studio__brand {
+  gap: 7px !important;
+}
+
+.pc26-home--recovered .pc26-footer-studio__brand img {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+.pc26-home--recovered .pc26-footer-studio__brand strong {
+  font-size: .76rem !important;
+  line-height: 1 !important;
+}
+
+.pc26-home--recovered .pc26-footer-studio__brand small,
+.pc26-home--recovered .pc26-footer-studio__location {
+  font-size: .56rem !important;
+  line-height: 1.2 !important;
+}
+
+.pc26-home--recovered .pc26-footer-navigation {
+  gap: 2px 12px !important;
+}
+
+.pc26-home--recovered .pc26-footer-navigation a {
+  min-height: 28px !important;
+  padding: 0 2px !important;
+  font-size: .62rem !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+}
+
+.pc26-home--recovered .pc26-footer-business {
+  min-height: 32px !important;
+  height: 32px !important;
+  padding-inline: 10px !important;
+  border-radius: 8px !important;
+  font-size: .61rem !important;
+  white-space: nowrap !important;
+}
+
+.pc26-home--recovered .pc26-footer-meta {
+  background: color-mix(in srgb, var(--home-surface-2) 45%, var(--home-surface)) !important;
+}
+
+.pc26-home--recovered .pc26-footer-premium__rail-inner {
+  min-height: 30px !important;
+  padding-block: 5px !important;
+  gap: 10px !important;
+  font-size: .56rem !important;
+  line-height: 1.2 !important;
+}
+
+.pc26-home--recovered .pc26-footer-premium__rail-inner svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+@media (max-width: 1180px) {
+  .pc26-home--recovered .pc26-header-studio__nav {
+    display: none !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__nav.is-open {
+    position: absolute !important;
+    top: calc(100% + 6px) !important;
+    right: 18px !important;
+    left: 18px !important;
+    z-index: 120 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 5px !important;
+    padding: 8px !important;
+    border: 1px solid color-mix(in srgb, var(--home-line) 86%, transparent) !important;
+    border-radius: 14px !important;
+    background: color-mix(in srgb, var(--home-surface) 94%, transparent) !important;
+    box-shadow: 0 18px 42px rgba(8, 30, 36, 0.16) !important;
+    backdrop-filter: blur(20px) saturate(135%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(135%) !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__nav.is-open a {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 42px !important;
+    white-space: normal !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__menu {
+    display: inline-grid !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .pc26-home--recovered .pc26-header--studio,
+  .pc26-home--recovered .pc26-header-studio {
+    min-height: 56px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio {
+    gap: 5px !important;
+    padding-block: 5px !important;
+  }
+
+  .pc26-home--recovered :is(.pc26-header-studio__tool, .pc26-header-studio__login) {
+    min-width: 36px !important;
+    width: 36px !important;
+    min-height: 36px !important;
+    height: 36px !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login {
+    min-width: 36px !important;
+    padding: 0 !important;
+  }
+
+  .pc26-home--recovered .pc26-header-studio__login span {
+    display: none !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-compact {
+    min-height: 0 !important;
+    grid-template-columns: 1fr auto !important;
+    gap: 6px 12px !important;
+    padding-block: 8px !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-navigation {
+    grid-column: 1 / -1 !important;
+    justify-content: flex-start !important;
+    gap: 0 10px !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-navigation a {
+    min-height: 26px !important;
+    font-size: .59rem !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-business {
+    justify-self: end !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-premium__rail-inner {
+    min-height: 28px !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 4px 10px !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .pc26-home--recovered .pc26-header-studio__radio,
+  .pc26-home--recovered .pc26-header-studio__favorite {
+    display: none !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-compact {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-business {
+    justify-self: start !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-navigation {
+    grid-column: 1 !important;
+  }
+
+  .pc26-home--recovered .pc26-footer-premium__trust {
+    display: none !important;
+  }
+}
