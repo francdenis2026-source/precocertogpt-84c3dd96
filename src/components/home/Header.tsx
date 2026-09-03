@@ -7,7 +7,7 @@ const navItems = [
   { to: "/", label: "Início" },
   { to: "/explorar", label: "Explorar" },
   { to: "/buscar", label: "Ofertas" },
-  { to: "/estabelecimentos", label: "Lojas" },
+  { to: "/estabelecimentos", label: "Estabelecimentos" },
 ];
 
 export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme: () => void }) {
@@ -55,7 +55,7 @@ export function Header({ theme, onToggleTheme }: { theme: string; onToggleTheme:
 
       <nav id="pc26-navigation" className={`pc26-header-studio__nav${menuOpen ? " is-open" : ""}`} aria-label="Navegação principal">
         {navItems.map(item => <Link key={item.to} to={item.to} aria-current={isCurrent(item.to) ? "page" : undefined}>{item.label}</Link>)}
-        <Link className="pc26-header-studio__merchant-nav" to="/lojista" aria-current={isCurrent("/lojista") ? "page" : undefined}><Store aria-hidden="true" /><span>Cadastre sua loja</span></Link>
+        <Link className="pc26-header-studio__merchant-nav" to="/lojista" aria-current={isCurrent("/lojista") ? "page" : undefined}><Store aria-hidden="true" /><span>Cadastre seu estabelecimento</span></Link>
       </nav>
 
       <div className="pc26-header-studio__tools" role="group" aria-label="Ações rápidas">
