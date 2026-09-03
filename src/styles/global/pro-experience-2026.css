@@ -856,6 +856,26 @@ html body .pc26-user-hero__media::after {
     rgba(6, 18, 15, 0.78) 100%
   ) !important;
 }
+
+/* Tema escuro: acabamento reto na lateral direita da hero. Esta regra vive
+ * na camada global final para neutralizar os raios e o fundo claro definidos
+ * por folhas anteriores com !important. A pequena sangria elimina frestas de
+ * antialiasing entre a fotografia e o contêiner. */
+html[data-theme="dark"] body .pc26-home--recovered .pc26-user-hero__media,
+html body.dark .pc26-home--recovered .pc26-user-hero__media {
+  border-radius: 0 !important;
+  clip-path: none !important;
+  background: #0d1512 !important;
+}
+
+html[data-theme="dark"] body .pc26-home--recovered .pc26-user-hero__artwork,
+html body.dark .pc26-home--recovered .pc26-user-hero__artwork {
+  inset: -2px !important;
+  width: calc(100% + 4px) !important;
+  height: calc(100% + 4px) !important;
+  min-height: calc(100% + 4px) !important;
+  border-radius: 0 !important;
+}
 html body .pc26-user-hero__media .pc26-hero-panel {
   position: relative !important;
   z-index: 2;
