@@ -295,8 +295,10 @@
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 130px;
 }
 .pcx-header .pc-radio__signal,
-.pcx-header .pc-radio__track,
 .pcx-header .pc-radio__announcement { display: none; }
+/* .pc-radio__track (a faixa "tocando agora") mantém seu próprio CSS de
+   PersistentRadioTooltip2026.css — aparece só no hover/focus do botão,
+   via :has(), e some sozinho fora de dispositivos com hover real. */
 .pcx-header .pc-radio.has-error .pc-radio__control { background: var(--h-danger); }
 
 @media (max-width: 1080px) {
@@ -581,6 +583,14 @@
 @media (max-width: 960px) {
   .pcx-hero__inner { grid-template-columns: 1fr; }
   .pcx-hero__panel { padding: 1.1rem; }
+}
+@media (max-width: 960px) {
+  /* Abaixo de 960px o painel de prova social empilha em coluna única (ver
+     regra acima) e a hero fica proporcionalmente mais estreita/alta — o
+     recorte padrão ("78% center") passa a cortar o rosto, que na foto fica
+     perto do topo. Reenquadra para manter o rosto visível em qualquer
+     largura de tablet/celular. */
+  .pcx-hero__bg img { object-position: 80% 15%; }
 }
 @media (max-width: 640px) {
   .pcx-hero { min-height: clamp(520px, 78vh, 680px); align-items: flex-end; padding-bottom: 1.5rem; }
