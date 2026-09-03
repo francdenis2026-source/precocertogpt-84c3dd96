@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260901-brand-campaigns-17";
+const CACHE_VERSION = "20260903-fresh-assets-18";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
@@ -82,7 +82,14 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  if (["style", "script", "font", "image"].includes(request.destination)) {
+  // Código e estilos NUNCA podem vir de cache velho: senão o site continua
+  // exibindo uma versão antiga depois de cada deploy.
+  if (["style", "script", "document"].includes(request.destination)) {
+    event.respondWith(networkFirst(request));
+    return;
+  }
+
+  if (["font", "image"].includes(request.destination)) {
     event.respondWith(staleWhileRevalidate(request));
   }
 });
