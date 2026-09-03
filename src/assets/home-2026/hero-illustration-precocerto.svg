@@ -1,0 +1,284 @@
+<svg viewBox="0 0 1536 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Mulher comparando preços em um supermercado usando o aplicativo Preço Certo no celular">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2620"/>
+      <stop offset="45%" stop-color="#0d3a30"/>
+      <stop offset="100%" stop-color="#0e7a5f"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a2620" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#04120e" stop-opacity="0.65"/>
+    </linearGradient>
+    <linearGradient id="ceilLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eaffef" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#eaffef" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#fff6df" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#fff6df" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#fff6df" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="jacket" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#125e49"/>
+      <stop offset="100%" stop-color="#0a4235"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c98a63"/>
+      <stop offset="100%" stop-color="#b06f4c"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2b1710"/>
+      <stop offset="100%" stop-color="#160b07"/>
+    </linearGradient>
+    <linearGradient id="shelfWood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a2b1c"/>
+      <stop offset="100%" stop-color="#241a10"/>
+    </linearGradient>
+    <linearGradient id="boxGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8b84b"/>
+      <stop offset="100%" stop-color="#c8860a"/>
+    </linearGradient>
+    <linearGradient id="boxTerra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e08a5f"/>
+      <stop offset="100%" stop-color="#c05f3a"/>
+    </linearGradient>
+    <linearGradient id="boxCream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f3ead6"/>
+      <stop offset="100%" stop-color="#d9c9a4"/>
+    </linearGradient>
+    <linearGradient id="boxTeal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2fae82"/>
+      <stop offset="100%" stop-color="#0e7a5f"/>
+    </linearGradient>
+    <linearGradient id="phoneBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1c1e"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="softer" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="cardShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#04120e" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#bg)"/>
+  <rect width="1536" height="1024" fill="url(#floor)"/>
+
+  <!-- Fundo esquerdo: corredor desfocado, mantém espaço calmo para o texto -->
+  <g opacity="0.55" filter="url(#softer)">
+    <rect x="-40" y="120" width="480" height="620" rx="10" fill="#0f4436"/>
+    <rect x="20" y="170" width="360" height="70" rx="8" fill="#1a5c49"/>
+    <rect x="20" y="270" width="360" height="70" rx="8" fill="#175041"/>
+    <rect x="20" y="370" width="360" height="70" rx="8" fill="#1a5c49"/>
+    <rect x="20" y="470" width="360" height="70" rx="8" fill="#175041"/>
+    <circle cx="140" cy="120" r="140" fill="#1a5c49" opacity="0.5"/>
+    <circle cx="360" cy="640" r="180" fill="#0a3327" opacity="0.6"/>
+  </g>
+  <rect x="0" y="0" width="820" height="1024" fill="url(#bg)" opacity="0.35"/>
+
+  <!-- Teto / iluminação -->
+  <rect x="0" y="0" width="1536" height="360" fill="url(#ceilLight)"/>
+  <g opacity="0.5">
+    <rect x="120" y="34" width="220" height="10" rx="5" fill="#eaffef" opacity="0.5"/>
+    <rect x="430" y="20" width="220" height="10" rx="5" fill="#eaffef" opacity="0.35"/>
+    <rect x="760" y="30" width="220" height="10" rx="5" fill="#eaffef" opacity="0.4"/>
+    <rect x="1080" y="18" width="220" height="10" rx="5" fill="#eaffef" opacity="0.4"/>
+  </g>
+
+  <!-- Prateleiras direita: cena principal, nítida -->
+  <g>
+    <!-- estrutura da prateleira -->
+    <rect x="980" y="90" width="560" height="880" fill="url(#shelfWood)"/>
+    <rect x="980" y="90" width="560" height="14" fill="#4a3626"/>
+    <rect x="980" y="330" width="560" height="14" fill="#4a3626"/>
+    <rect x="980" y="570" width="560" height="14" fill="#4a3626"/>
+    <rect x="980" y="810" width="560" height="14" fill="#4a3626"/>
+
+    <!-- prateleira 1: caixas -->
+    <g>
+      <rect x="1010" y="170" width="70" height="150" rx="8" fill="url(#boxGold)"/>
+      <rect x="1090" y="150" width="70" height="170" rx="8" fill="url(#boxTerra)"/>
+      <rect x="1170" y="180" width="70" height="140" rx="8" fill="url(#boxCream)"/>
+      <rect x="1250" y="160" width="70" height="160" rx="8" fill="url(#boxTeal)"/>
+      <rect x="1330" y="175" width="70" height="145" rx="8" fill="url(#boxGold)"/>
+      <rect x="1410" y="155" width="70" height="165" rx="8" fill="url(#boxTerra)"/>
+      <rect x="1490" y="170" width="60" height="150" rx="8" fill="url(#boxCream)"/>
+      <rect x="1010" y="170" width="70" height="20" rx="6" fill="#ffffff" opacity="0.18"/>
+      <rect x="1090" y="150" width="70" height="20" rx="6" fill="#ffffff" opacity="0.18"/>
+      <rect x="1250" y="160" width="70" height="20" rx="6" fill="#ffffff" opacity="0.18"/>
+    </g>
+
+    <!-- prateleira 2: latas e potes -->
+    <g>
+      <rect x="1010" y="420" width="56" height="90" rx="10" fill="url(#boxTeal)"/>
+      <rect x="1080" y="410" width="56" height="100" rx="10" fill="url(#boxGold)"/>
+      <rect x="1150" y="425" width="56" height="85" rx="10" fill="url(#boxTerra)"/>
+      <rect x="1220" y="415" width="56" height="95" rx="10" fill="url(#boxCream)"/>
+      <rect x="1290" y="420" width="56" height="90" rx="10" fill="url(#boxTeal)"/>
+      <rect x="1360" y="410" width="56" height="100" rx="10" fill="url(#boxGold)"/>
+      <rect x="1430" y="425" width="56" height="85" rx="10" fill="url(#boxTerra)"/>
+      <rect x="1500" y="418" width="50" height="92" rx="10" fill="url(#boxCream)"/>
+    </g>
+
+    <!-- prateleira 3: caixas maiores -->
+    <g>
+      <rect x="1010" y="640" width="90" height="130" rx="8" fill="url(#boxCream)"/>
+      <rect x="1115" y="655" width="90" height="115" rx="8" fill="url(#boxTerra)"/>
+      <rect x="1220" y="630" width="90" height="140" rx="8" fill="url(#boxGold)"/>
+      <rect x="1325" y="650" width="90" height="120" rx="8" fill="url(#boxTeal)"/>
+      <rect x="1430" y="645" width="100" height="125" rx="8" fill="url(#boxCream)"/>
+    </g>
+
+    <!-- prateleira 4: garrafas -->
+    <g>
+      <rect x="1020" y="880" width="34" height="120" rx="14" fill="url(#boxTeal)"/>
+      <rect x="1070" y="870" width="34" height="130" rx="14" fill="url(#boxGold)"/>
+      <rect x="1120" y="885" width="34" height="115" rx="14" fill="url(#boxTerra)"/>
+      <rect x="1170" y="875" width="34" height="125" rx="14" fill="url(#boxTeal)"/>
+      <rect x="1220" y="880" width="34" height="120" rx="14" fill="url(#boxGold)"/>
+      <rect x="1270" y="870" width="34" height="130" rx="14" fill="url(#boxTerra)"/>
+      <rect x="1320" y="885" width="34" height="115" rx="14" fill="url(#boxTeal)"/>
+      <rect x="1370" y="875" width="34" height="125" rx="14" fill="url(#boxGold)"/>
+      <rect x="1420" y="880" width="34" height="120" rx="14" fill="url(#boxTerra)"/>
+      <rect x="1470" y="870" width="34" height="130" rx="14" fill="url(#boxCream)"/>
+    </g>
+  </g>
+
+  <!-- Vinheta de foco atrás da personagem -->
+  <ellipse cx="820" cy="470" rx="420" ry="480" fill="url(#spot)"/>
+
+  <!-- Chão -->
+  <rect x="0" y="920" width="1536" height="104" fill="#04120e"/>
+  <rect x="0" y="920" width="1536" height="10" fill="#0a2620" opacity="0.7"/>
+  <ellipse cx="800" cy="960" rx="230" ry="26" fill="#000" opacity="0.28" filter="url(#soft)"/>
+
+  <!-- ===== Personagem ===== -->
+  <g transform="translate(600,150)">
+    <!-- cesta -->
+    <g transform="translate(-40,560)">
+      <path d="M0 40 L210 40 L190 130 Q105 150 20 130 Z" fill="#8a6a3f"/>
+      <path d="M6 40 L204 40 L190 60 L20 60 Z" fill="#a8845a"/>
+      <path d="M40 40 Q105 -34 170 40" fill="none" stroke="#6e5230" stroke-width="10" stroke-linecap="round"/>
+      <rect x="35" y="4" width="46" height="52" rx="6" fill="#e8b84b"/>
+      <rect x="90" y="-2" width="40" height="58" rx="18" fill="#4f9c6f"/>
+      <rect x="140" y="8" width="40" height="48" rx="6" fill="#c8860a"/>
+    </g>
+
+    <!-- perna/corpo inferior (calça) -->
+    <path d="M40 640 Q30 780 46 900 L108 900 Q104 780 118 650 Z" fill="#20303a"/>
+    <path d="M150 650 Q168 780 176 900 L232 900 Q214 780 210 640 Z" fill="#20303a"/>
+    <rect x="30" y="884" width="88" height="26" rx="10" fill="#12181c"/>
+    <rect x="168" y="884" width="88" height="26" rx="10" fill="#12181c"/>
+
+    <!-- braço esquerdo segurando a cesta -->
+    <path d="M55 430 Q-30 470 -18 590 Q-14 630 40 636 L70 610 Q30 590 40 520 Q46 470 95 445 Z" fill="url(#jacket)"/>
+    <circle cx="10" cy="588" r="22" fill="url(#skin)"/>
+
+    <!-- torso / jaqueta -->
+    <path d="M50 330 Q40 270 145 260 Q250 270 240 330 L260 640 Q145 690 30 640 Z" fill="url(#jacket)"/>
+    <path d="M110 300 L145 340 L180 300 L172 640 Q145 652 118 640 Z" fill="#0e4a3b"/>
+    <circle cx="145" cy="330" r="5" fill="#e8b84b"/>
+    <circle cx="145" cy="390" r="5" fill="#e8b84b"/>
+    <circle cx="145" cy="450" r="5" fill="#e8b84b"/>
+
+    <!-- braço direito erguido segurando o celular -->
+    <path d="M232 300 Q320 300 348 220 Q362 178 336 150 L306 168 Q322 196 306 226 Q288 264 224 268 Z" fill="url(#jacket)"/>
+    <circle cx="330" cy="168" r="24" fill="url(#skin)"/>
+
+    <!-- pescoço + cabeça -->
+    <rect x="118" y="215" width="54" height="60" rx="18" fill="url(#skin)"/>
+    <circle cx="146" cy="176" r="78" fill="url(#skin)"/>
+    <path d="M68 176 Q60 70 146 62 Q240 66 226 178 Q224 120 146 118 Q78 120 78 182 Q70 230 40 236 Q40 190 68 176 Z" fill="url(#hair)"/>
+    <path d="M60 190 Q40 260 58 330 Q80 300 76 240 Z" fill="url(#hair)"/>
+    <path d="M234 186 Q252 250 222 310 Q206 270 214 226 Z" fill="url(#hair)"/>
+    <!-- rosto -->
+    <ellipse cx="118" cy="182" rx="7" ry="9" fill="#2a170f"/>
+    <ellipse cx="172" cy="182" rx="7" ry="9" fill="#2a170f"/>
+    <path d="M104 156 Q118 148 132 156" stroke="#2a170f" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M160 156 Q174 148 188 156" stroke="#2a170f" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M132 214 Q146 228 160 214" stroke="#7a3a24" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M146 190 L140 206 L150 208" stroke="#a8663f" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <circle cx="60" cy="196" r="7" fill="#e8b84b"/>
+    <circle cx="230" cy="196" r="7" fill="#e8b84b"/>
+  </g>
+
+  <!-- ===== Celular com o app Preço Certo =====
+       Texto reduzido ao mínimo (só a marca e o preço em destaque). Linhas
+       "de conteúdo" viram barras abstratas — em recortes bem fechados
+       (mobile) isso evita parecer um segundo bloco de texto competindo
+       com o título real da página. -->
+  <g transform="translate(878,238) rotate(-6)" filter="url(#cardShadow)">
+    <rect x="0" y="0" width="230" height="470" rx="34" fill="url(#phoneBody)"/>
+    <rect x="8" y="8" width="214" height="454" rx="27" fill="#eef1ee" fill-opacity="0.94"/>
+    <rect x="86" y="16" width="58" height="16" rx="8" fill="#0c1210"/>
+
+    <!-- topo do app -->
+    <rect x="8" y="8" width="214" height="60" rx="27" fill="#0e7a5f"/>
+    <rect x="8" y="40" width="214" height="28" fill="#0e7a5f"/>
+    <circle cx="40" cy="38" r="14" fill="#ffffff"/>
+    <path d="M33 38 l4.5 5.5 l9 -11" stroke="#0e7a5f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="64" y="43" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Preço Certo</text>
+
+    <!-- linha de destaque: menor preço (única com texto legível) -->
+    <rect x="22" y="86" width="186" height="70" rx="14" fill="#e6f6ee" stroke="#0e7a5f" stroke-width="2"/>
+    <rect x="34" y="100" width="42" height="42" rx="8" fill="#c8e9d8"/>
+    <rect x="86" y="102" width="80" height="9" rx="4.5" fill="#0a4235" opacity="0.55"/>
+    <rect x="86" y="118" width="56" height="7" rx="3.5" fill="#3a6f5c" opacity="0.4"/>
+    <rect x="150" y="100" width="42" height="18" rx="9" fill="#0e7a5f"/>
+    <text x="171" y="112.5" font-family="Arial, sans-serif" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">-18%</text>
+    <text x="192" y="142" font-family="Arial, sans-serif" font-size="17" font-weight="800" fill="#0a4235" text-anchor="end">R$ 24,90</text>
+
+    <!-- linhas secundárias: só barras, sem texto -->
+    <rect x="22" y="170" width="186" height="50" rx="12" fill="#ffffff" fill-opacity="0.85" stroke="#e3e7ec" stroke-width="1.5"/>
+    <rect x="34" y="182" width="28" height="26" rx="7" fill="#f0ede3"/>
+    <rect x="74" y="186" width="78" height="8" rx="4" fill="#1a2420" opacity="0.4"/>
+    <rect x="74" y="200" width="50" height="6" rx="3" fill="#1a2420" opacity="0.25"/>
+    <rect x="150" y="190" width="46" height="10" rx="5" fill="#5a6a63" opacity="0.4"/>
+
+    <rect x="22" y="230" width="186" height="50" rx="12" fill="#ffffff" fill-opacity="0.85" stroke="#e3e7ec" stroke-width="1.5"/>
+    <rect x="34" y="242" width="28" height="26" rx="7" fill="#f0ede3"/>
+    <rect x="74" y="246" width="90" height="8" rx="4" fill="#1a2420" opacity="0.4"/>
+    <rect x="74" y="260" width="46" height="6" rx="3" fill="#1a2420" opacity="0.25"/>
+    <rect x="150" y="250" width="46" height="10" rx="5" fill="#5a6a63" opacity="0.4"/>
+
+    <!-- botão inferior -->
+    <rect x="22" y="326" width="186" height="46" rx="23" fill="#0e7a5f"/>
+    <rect x="70" y="344" width="90" height="10" rx="5" fill="#ffffff" opacity="0.85"/>
+
+    <rect x="22" y="392" width="186" height="6" rx="3" fill="#e3e7ec" opacity="0.7"/>
+    <rect x="22" y="410" width="140" height="6" rx="3" fill="#e3e7ec" opacity="0.7"/>
+  </g>
+
+  <!-- reflexo de luz na tela -->
+  <path d="M900 250 L960 250 L920 420 L878 420 Z" fill="#ffffff" opacity="0.06"/>
+
+  <!-- Selo flutuante "economize" -->
+  <g transform="translate(1180,120)" filter="url(#cardShadow)">
+    <rect width="150" height="56" rx="28" fill="#ffffff"/>
+    <circle cx="30" cy="28" r="16" fill="#c8860a"/>
+    <path d="M22 28 h16 M30 20 v16" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <text x="56" y="24" font-family="Arial, sans-serif" font-size="11" font-weight="800" fill="#0a4235">Economize até</text>
+    <text x="56" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#0e7a5f">32% hoje</text>
+  </g>
+
+  <!-- Badge "100% local" flutuante -->
+  <g transform="translate(1310,760)" filter="url(#cardShadow)">
+    <rect width="176" height="58" rx="29" fill="#ffffff"/>
+    <circle cx="30" cy="29" r="17" fill="#0e7a5f"/>
+    <path d="M22 29 l6 6 l12 -14" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="58" y="24" font-family="Arial, sans-serif" font-size="10.5" font-weight="800" fill="#0a4235">Comércio local</text>
+    <text x="58" y="42" font-family="Arial, sans-serif" font-size="10.5" font-weight="700" fill="#3a6f5c">de Feijó, Acre</text>
+  </g>
+
+  <!-- partículas suaves -->
+  <g opacity="0.5">
+    <circle cx="780" cy="120" r="4" fill="#e8b84b"/>
+    <circle cx="1010" cy="90" r="3" fill="#ffffff"/>
+    <circle cx="700" cy="700" r="4" fill="#ffffff" opacity="0.4"/>
+    <circle cx="1150" cy="900" r="3" fill="#e8b84b"/>
+  </g>
+</svg>

@@ -595,6 +595,18 @@
 @media (max-width: 640px) {
   .pcx-hero { min-height: clamp(520px, 78vh, 680px); align-items: flex-end; padding-bottom: 1.5rem; }
   .pcx-hero__bg img { object-position: 77% 0%; }
+  /* No mobile o texto fica sobre a mesma faixa vertical onde a ilustração é
+     mais "cheia" (não há como deslocar isso só no eixo Y — a imagem sempre
+     mostra 100% da própria altura aqui). Em vez de perseguir um recorte
+     perfeito, reforça o escurecimento para o texto ficar legível não
+     importa o que esteja atrás. */
+  .pcx-hero__scrim,
+  [data-theme="light"] .pcx-hero__scrim,
+  :root:not([data-theme="dark"]) .pcx-hero__scrim {
+    background:
+      linear-gradient(180deg, rgba(6, 12, 10, 0.88) 0%, rgba(6, 12, 10, 0.82) 55%, rgba(6, 12, 10, 0.9) 100%),
+      linear-gradient(90deg, rgba(6, 12, 10, 0.55) 0%, rgba(6, 12, 10, 0.35) 100%);
+  }
 }
 
 /* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important) */
