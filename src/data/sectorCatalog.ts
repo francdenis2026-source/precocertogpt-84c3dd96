@@ -125,6 +125,13 @@ type RealEstablishmentRow = {
 const normalizeName = (value: string | null | undefined) =>
   (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
+/** Remove os estabelecimentos numéricos do catálogo local de demonstração.
+ * Cadastros reais usam UUID; as inclusões manuais legítimas usam slugs. */
+export function withoutDemoEstablishments(catalog: CatalogPayload): CatalogPayload {
+  const stores = catalog.stores.filter(store => !/^\d+$/.test(String(store.id)));
+  return { ...catalog, stores, metrics: { ...catalog.metrics, stores: stores.length } };
+}
+
 const slugifyStore = (name: string, id: string | number) => {
   const slug = normalizeName(name)
     .replace(/[^a-z0-9]+/g, "-")
@@ -158,7 +165,7 @@ const addressCity = (value: RealEstablishmentRow["address"]) => {
  * indisponíveis. O catálogo de preços pode falhar sem apagar a tabela de lojas.
  */
 async function mergeRealEstablishments(catalog: CatalogPayload): Promise<CatalogPayload> {
-  if (!supabase) return catalog;
+  if (!supabase) return withoutDemoEstablishments(catalog);
 
   const { data, error } = await supabase
     .from("establishments")
@@ -166,7 +173,7 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
     .order("name", { ascending: true })
     .limit(2000);
 
-  if (error || !data?.length) return catalog;
+  if (error || !data?.length) return withoutDemoEstablishments(catalog);
 
   const productCounts = new Map<string, number>();
   for (const product of catalog.products) {
