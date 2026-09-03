@@ -26,6 +26,7 @@ import { useSiteTheme } from "../hooks/useSiteTheme";
 import "./HomeProfessional2026.css";
 import "./HomeEmilCompact2026.css";
 import "./HomeViewportCompact2026.css";
+import "./HomeHeaderFooterPolish2026.css";
 
 const initialCatalog = buildCatalog();
 
