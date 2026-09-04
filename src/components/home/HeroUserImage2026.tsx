@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
 import heroImg from "../../assets/home-2026/hero-mulher-app-precocerto.jpg";
+import heroImgMobile from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -60,15 +61,18 @@ export function HeroUserImage2026({
         </div>
 
         <div className="pcx-hero__visual">
-          <img
-            className="pcx-hero__image"
-            src={heroImg}
-            alt="Cliente comparando preços pelo celular em um supermercado"
-            width="1280"
-            height="720"
-            fetchPriority="high"
-            decoding="async"
-          />
+          <picture>
+            <source media="(max-width: 640px)" srcSet={heroImgMobile} />
+            <img
+              className="pcx-hero__image"
+              src={heroImg}
+              alt="Cliente comparando preços pelo celular em um supermercado"
+              width="1280"
+              height="720"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
           <aside className="pcx-hero__panel" aria-label="Exemplos reais de comparação de preços">
             <div className="pcx-hero__panel-head">
               <span>Preços no catálogo</span>

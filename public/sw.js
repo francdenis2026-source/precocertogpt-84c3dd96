@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260904-search-rebuild-19";
+const CACHE_VERSION = "20260904-mobile-shell-20";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
