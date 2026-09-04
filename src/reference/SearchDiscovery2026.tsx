@@ -44,19 +44,25 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
   window.addEventListener("keydown",onKeyDown);
   return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",onKeyDown)};
  },[onClose]);
+ const meaningful=(value?:string)=>{const v=(value||"").trim();return v&&v!=="-"?v:undefined};
+ const eyebrow=[meaningful(product.category),meaningful(product.brand)].filter(Boolean).join(" · ");
+ const descriptor=[meaningful(product.size)||meaningful(product.unit),`comparação em ${offers.length} ${offers.length===1?"estabelecimento":"estabelecimentos"}`].filter(Boolean).join(" · ");
  return <div className="search26-modal" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)onClose()}}>
   <section ref={dialogRef} className="search26-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search26-modal-title" aria-describedby="search26-modal-description">
-   <header className="search26-modal__topbar"><div><span>COMPARAÇÃO LOCAL</span><small>Preços encontrados em Feijó</small></div><button ref={closeRef} type="button" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button></header>
-   <div className="search26-modal__content">
-    <aside className="search26-modal__summary"><div className="search26-modal__image">{image?<img src={image} alt={product.name}/>:<PackageSearch aria-hidden="true"/>}</div><span>{product.category} · {product.brand}</span><h2 id="search26-modal-title">{product.name}</h2><p id="search26-modal-description">{product.size||product.unit} · comparação em {offers.length} {offers.length===1?"estabelecimento":"estabelecimentos"}</p>
+   <div className="search26-modal__hero">
+    <button ref={closeRef} type="button" className="search26-modal__close" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button>
+    <span className="search26-modal__eyebrow"><BadgeCheck aria-hidden="true"/> Comparação local · Feijó, AC</span>
+    <div className="search26-modal__heroRow">
+     <div className="search26-modal__image">{image?<img src={image} alt={product.name}/>:<PackageSearch aria-hidden="true"/>}</div>
+     <div className="search26-modal__heroInfo">{eyebrow&&<span>{eyebrow}</span>}<h2 id="search26-modal-title">{product.name}</h2>{descriptor&&<p id="search26-modal-description">{descriptor}</p>}</div>
      <div className="search26-modal__best"><small>Melhor preço encontrado</small><strong>{brl.format(lowest)}</strong><span><BadgeCheck aria-hidden="true"/> Oferta mais econômica</span></div>
-     {saving>0&&<div className="search26-modal__saving"><TrendingDown aria-hidden="true"/><span>Escolhendo a melhor oferta, você economiza até <strong>{brl.format(saving)}</strong>.</span></div>}
-    </aside>
-    <div className="search26-modal__stores"><div className="search26-modal__stores-head"><div><span>ONDE ENCONTRAR</span><h3>Preços por estabelecimento</h3></div><small>Do menor para o maior</small></div>
-     <div className="search26-modal__offer-list">{offers.map((offer,index)=><Link to={`/estabelecimento/${offer.establishmentSlug||offer.establishmentId}`} className={index===0?"is-best":undefined} key={`${offer.establishmentId}-${offer.value}`} onClick={onClose}><i style={{backgroundColor:offer.storeColor||"#14795d"}}><Store aria-hidden="true"/></i><span><strong>{offer.establishment||"Comércio local"}</strong><small><MapPin aria-hidden="true"/>{offer.neighborhood||"Feijó-AC"}</small></span><div><b>{brl.format(offer.value)}</b>{index===0&&<em>Melhor preço</em>}</div><ArrowRight aria-hidden="true"/></Link>)}</div>
-     <div className="search26-modal__freshness"><Clock3 aria-hidden="true"/><span>Preços informativos. Confirme a disponibilidade no estabelecimento antes de comprar.</span></div>
-     <footer><Link className="search26-modal__secondary" to={`/produto/${product.slug||product.id}`} onClick={onClose}>Ver página completa <ExternalLink aria-hidden="true"/></Link><button type="button" onClick={onClose}>Continuar pesquisando <Search aria-hidden="true"/></button></footer>
     </div>
+   </div>
+   {saving>0&&<div className="search26-modal__saving"><TrendingDown aria-hidden="true"/><span>Escolhendo a melhor oferta, você economiza até <strong>{brl.format(saving)}</strong>.</span></div>}
+   <div className="search26-modal__stores"><div className="search26-modal__stores-head"><div><span>ONDE ENCONTRAR</span><h3>Preços por estabelecimento</h3></div><small>Do menor para o maior</small></div>
+    <div className="search26-modal__offer-list">{offers.map((offer,index)=><Link to={`/estabelecimento/${offer.establishmentSlug||offer.establishmentId}`} className={index===0?"is-best":undefined} key={`${offer.establishmentId}-${offer.value}`} onClick={onClose}><i style={{backgroundColor:offer.storeColor||"#14795d"}}><Store aria-hidden="true"/></i><span><strong>{offer.establishment||"Comércio local"}</strong><small><MapPin aria-hidden="true"/>{offer.neighborhood||"Feijó-AC"}</small></span><div><b>{brl.format(offer.value)}</b>{index===0&&<em>Melhor preço</em>}</div><ArrowRight aria-hidden="true"/></Link>)}</div>
+    <div className="search26-modal__freshness"><Clock3 aria-hidden="true"/><span>Preços informativos. Confirme a disponibilidade no estabelecimento antes de comprar.</span></div>
+    <footer><Link className="search26-modal__secondary" to={`/produto/${product.slug||product.id}`} onClick={onClose}>Ver página completa <ExternalLink aria-hidden="true"/></Link><button type="button" onClick={onClose}>Continuar pesquisando <Search aria-hidden="true"/></button></footer>
    </div>
   </section>
  </div>
