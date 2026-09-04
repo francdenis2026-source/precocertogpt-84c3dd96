@@ -1136,6 +1136,16 @@ a.pcx-store-hero {
   .pcx-home { padding-bottom: 60px; }
 }
 
+@media (max-width: 720px) {
+  /* platform-polish-2026.css empurra 84px de padding-bottom em QUALQUER
+     main#conteudo-principal para abrir espaço do dock fixo — regra pensada
+     para páginas sem rodapé próprio. Na home o rodapé já vem logo depois do
+     <main>, então esse padding sobrava como uma faixa em branco entre a
+     seção de estabelecimentos e o rodapé. A home cuida da folga do dock
+     sozinha via .pcx-home acima. */
+  .pcx-home main#conteudo-principal { padding-bottom: 0; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .pcx-home * { animation: none !important; transition: none !important; }
