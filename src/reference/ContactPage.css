@@ -1,33 +1,35 @@
 /* Página de contato — canais reais (e-mail/WhatsApp) + atalhos para os
-   motivos mais comuns de quem chega aqui (lojista, colaboração). */
-.pc-contact-page { min-height: 100dvh; background: var(--px-surface-soft, #f7f8fa); }
-.pc-contact { width: min(1040px, calc(100% - 40px)); margin: 0 auto; padding: clamp(72px, 11vw, 96px) 0 56px; }
+   motivos mais comuns de quem chega aqui (lojista, colaboração).
+   Compacta o suficiente para caber numa única tela sem rolagem no
+   desktop (trava em 100dvh acima de 851px de largura). */
+.pc-contact-page { background: var(--px-surface-soft, #f7f8fa); }
+.pc-contact { width: min(1000px, calc(100% - 40px)); margin: 0 auto; padding: clamp(64px, 9vh, 80px) 0 24px; }
 
 .pc-contact__hero {
-  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(240px, .9fr); align-items: center;
-  gap: clamp(20px, 4vw, 40px); margin-bottom: clamp(28px, 5vw, 40px);
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(220px, .85fr); align-items: center;
+  gap: clamp(18px, 3vw, 32px); margin-bottom: clamp(16px, 3vh, 26px);
 }
-.pc-contact__hero-copy { max-width: 520px; }
+.pc-contact__hero-copy { max-width: 480px; }
 .pc-contact__hero-media {
-  border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3;
+  border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 11; max-height: 26vh;
   box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
 }
 .pc-contact__hero-media img { width: 100%; height: 100%; object-fit: cover; }
 .pc-contact__eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--px-brand, #0b6757); font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--px-brand, #0b6757); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em;
 }
-.pc-contact__eyebrow svg { width: 16px; height: 16px; }
+.pc-contact__eyebrow svg { width: 14px; height: 14px; }
 .pc-contact__hero h1 {
-  margin: 10px 0 8px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
-  font-size: clamp(2rem, 4.4vw, 2.9rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
+  margin: 8px 0 6px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
 }
-.pc-contact__hero p { margin: 0; color: var(--px-muted, #5f6b78); font-size: 15px; line-height: 1.55; }
+.pc-contact__hero p { margin: 0; color: var(--px-muted, #5f6b78); font-size: 12.5px; line-height: 1.45; }
 
-.pc-contact__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 32px; }
+.pc-contact__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
 .pc-contact__card {
-  display: grid; grid-template-columns: 48px minmax(0, 1fr) 18px; align-items: center; gap: 14px;
-  padding: 20px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 18px;
+  display: grid; grid-template-columns: 38px minmax(0, 1fr) 16px; align-items: center; gap: 11px;
+  padding: 12px 14px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 14px;
   background: var(--px-surface, #fff); color: inherit; text-decoration: none;
   box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
   transition: transform 0.16s ease, border-color 0.16s ease;
@@ -36,39 +38,45 @@
   .pc-contact__card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--px-brand, #0b6757) 45%, var(--px-line, #e2e7ec)); }
 }
 .pc-contact__icon {
-  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px;
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px;
   background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757); flex: 0 0 auto;
 }
-.pc-contact__icon svg { width: 21px; height: 21px; }
-.pc-contact__card > div { min-width: 0; display: grid; gap: 2px; }
-.pc-contact__card small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; color: var(--px-muted, #5f6b78); }
-.pc-contact__card strong { font-size: 15px; font-weight: 750; color: var(--px-ink, #14181d); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pc-contact__card p { margin: 0; font-size: 12.5px; color: var(--px-muted, #5f6b78); }
-.pc-contact__card > svg { width: 18px; height: 18px; color: var(--px-muted, #5f6b78); }
+.pc-contact__icon svg { width: 17px; height: 17px; }
+.pc-contact__card > div { min-width: 0; display: grid; gap: 1px; }
+.pc-contact__card small { font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em; color: var(--px-muted, #5f6b78); }
+.pc-contact__card strong { font-size: 13px; font-weight: 750; color: var(--px-ink, #14181d); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pc-contact__card p { margin: 0; font-size: 11px; color: var(--px-muted, #5f6b78); }
+.pc-contact__card > svg { width: 16px; height: 16px; color: var(--px-muted, #5f6b78); }
 
-.pc-contact__links { display: grid; gap: 10px; }
+.pc-contact__links { display: grid; gap: 7px; }
 .pc-contact__link {
-  display: grid; grid-template-columns: 42px minmax(0, 1fr) 16px; align-items: center; gap: 14px;
-  padding: 16px 18px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 14px;
+  display: grid; grid-template-columns: 36px minmax(0, 1fr) 15px; align-items: center; gap: 11px;
+  padding: 10px 13px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 12px;
   background: var(--px-surface, #fff); color: inherit; text-decoration: none;
   transition: border-color 0.16s ease, background-color 0.16s ease;
 }
 @media (hover: hover) and (pointer: fine) {
   .pc-contact__link:hover { border-color: color-mix(in srgb, var(--px-brand, #0b6757) 40%, var(--px-line, #e2e7ec)); background: var(--px-surface-soft, #f7f8fa); }
 }
-.pc-contact__link > span { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--px-surface-soft, #f7f8fa); color: var(--px-brand, #0b6757); flex: 0 0 auto; }
-.pc-contact__link > span svg { width: 19px; height: 19px; }
-.pc-contact__link > div { min-width: 0; display: grid; gap: 2px; }
-.pc-contact__link strong { font-size: 13.5px; font-weight: 700; color: var(--px-ink, #14181d); }
-.pc-contact__link small { font-size: 12px; color: var(--px-muted, #5f6b78); }
-.pc-contact__link > svg { width: 16px; height: 16px; color: var(--px-muted, #5f6b78); }
+.pc-contact__link > span { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--px-surface-soft, #f7f8fa); color: var(--px-brand, #0b6757); flex: 0 0 auto; }
+.pc-contact__link > span svg { width: 16px; height: 16px; }
+.pc-contact__link > div { min-width: 0; display: grid; gap: 1px; }
+.pc-contact__link strong { font-size: 12px; font-weight: 700; color: var(--px-ink, #14181d); }
+.pc-contact__link small { font-size: 10.5px; color: var(--px-muted, #5f6b78); }
+.pc-contact__link > svg { width: 14px; height: 14px; color: var(--px-muted, #5f6b78); }
+
+/* Trava em uma única tela sem rolagem a partir de 851px de largura */
+@media (min-width: 851px) {
+  .pc-contact-page { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+  .pc-contact { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+}
 
 @media (max-width: 780px) {
   .pc-contact__hero { grid-template-columns: 1fr; }
-  .pc-contact__hero-media { order: -1; aspect-ratio: 16 / 9; }
+  .pc-contact__hero-media { order: -1; aspect-ratio: 16 / 9; max-height: none; }
 }
 @media (max-width: 640px) {
   .pc-contact { padding-top: 64px; }
   .pc-contact__grid { grid-template-columns: 1fr; }
-  .pc-contact__card { padding: 16px; }
+  .pc-contact__card { padding: 14px; }
 }
