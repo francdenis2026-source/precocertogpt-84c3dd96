@@ -162,6 +162,11 @@ export function hasProfessionalProductPhoto(product: Product) {
 }
 
 export function resolveProductImage(product: Product): string | undefined {
+  // Quando existe um recorte local e identificado, ele é a fonte preferida:
+  // WebP leve, fundo transparente e sem depender de links externos.
+  const cutout = resolveCutoutImage(product);
+  if (cutout) return cutout;
+
   return hasProfessionalProductPhoto(product)
     ? product.image_url!.trim()
     : undefined;
