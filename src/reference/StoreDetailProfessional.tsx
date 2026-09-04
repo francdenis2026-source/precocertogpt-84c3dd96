@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, BadgeCheck, ChevronLeft, ChevronRight, Clock3, Info, MapPin, PackageSearch, Search, ShieldCheck, SlidersHorizontal, Store, Tag } from "lucide-react";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight, BadgeCheck, ChevronLeft, ChevronRight, Clock3, Info, LockKeyhole, MapPin, PackageSearch, Search, ShieldCheck, SlidersHorizontal, Sparkles, Store, Tag, UserPlus } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
@@ -9,6 +9,7 @@ import { getStoreLogoUrl } from "../data/storeLogos";
 import { groupForStore } from "../data/businessTaxonomy";
 import { marketplaceSectors } from "./MarketplaceSectors";
 import { PublicHeader } from "./ReferenceExperience";
+import { useFavorites } from "../features/favorites/FavoritesProvider";
 import "./StoreDetailProfessional.css";
 import "./StoreExperienceAcai2026.css";
 import "./StoreSectorHero.css";
@@ -16,6 +17,7 @@ import "./StoreSectorHero.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const FREE_PREVIEW_LIMIT = 4;
 const PAGE_SIZE = 20;
 
 
@@ -97,6 +99,9 @@ function ProductImage({ product }: { product: Product }) {
 
 export function StoreDetailProfessional() {
   const { identifier = "" } = useParams();
+  const location = useLocation();
+  const { userId } = useFavorites();
+  const isGuest = !userId;
   const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
@@ -190,6 +195,11 @@ export function StoreDetailProfessional() {
   const visibleProducts = useMemo(() => filteredProducts.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE), [filteredProducts, safePage]);
   useEffect(() => setPage(1), [query, category, sort]);
   useEffect(() => { if (page > pageCount) setPage(pageCount); }, [page, pageCount]);
+  const shownProducts = isGuest ? visibleProducts.slice(0, FREE_PREVIEW_LIMIT) : visibleProducts;
+  const teaserProducts = isGuest ? visibleProducts.slice(FREE_PREVIEW_LIMIT, FREE_PREVIEW_LIMIT + 4) : [];
+  const lockedTotal = isGuest ? Math.max(0, filteredProducts.length - FREE_PREVIEW_LIMIT) : 0;
+  const signupHref = `/cadastro?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
+  const loginHref = `/login?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
 
   // Enquanto o catálogo carrega (raro agora que a página reaproveita o
   // cache, mas ainda acontece na primeira visita ao site), mostra um
@@ -287,16 +297,26 @@ export function StoreDetailProfessional() {
           <label className="store-pro-select"><select value={sort} onChange={event => setSort(event.target.value as typeof sort)} aria-label="Ordenar produtos"><option value="name">Ordenar: A–Z</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option></select></label>
         </div>
 
-        {visibleProducts.length ? <div className="ref-product-grid store-pro-grid">{visibleProducts.map(product => <Link key={product.id} to={`/produto/${product.slug || product.id}`}>
+        {visibleProducts.length ? <div className="ref-product-grid store-pro-grid">
+          {shownProducts.map(product => <Link key={product.id} to={`/produto/${product.slug || product.id}`}>
           <div className="store-pro-product-image"><ProductImage product={product} /></div>
           <small className="store-pro-category">{product.category}</small>
           <strong>{product.name}</strong>
           <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
           <span className="store-pro-spec">{(product.size && product.size.trim() !== "-" ? product.size : "") || product.unit || "Unidade não informada"}</span>
           <footer><em>preço cadastrado</em><b>{brl.format(product.minPrice)}</b></footer>
-        </Link>)}</div> : <div className="store-pro-empty"><PackageSearch /><h3>Nenhum produto encontrado</h3><p>Tente outro nome ou remova algum filtro.</p><button type="button" className="pc-btn pc-btn--ghost" onClick={() => { setQuery(""); setCategory("Todos"); }}>Limpar filtros</button></div>}
+        </Link>)}
+          {teaserProducts.map(product => <Link key={product.id} to={signupHref} className="store-pro-product--teaser" aria-label={`Crie sua conta para ver o preço de ${product.name}`}>
+          <div className="store-pro-product-image"><ProductImage product={product} /></div>
+          <small className="store-pro-category">{product.category}</small>
+          <strong>{product.name}</strong>
+          <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
+          <footer className="store-pro-product__blur"><em>preço cadastrado</em><b>{brl.format(product.minPrice)}</b></footer>
+          <i className="store-pro-product__lock"><LockKeyhole aria-hidden="true"/></i>
+        </Link>)}
+        </div> : <div className="store-pro-empty"><PackageSearch /><h3>Nenhum produto encontrado</h3><p>Tente outro nome ou remova algum filtro.</p><button type="button" className="pc-btn pc-btn--ghost" onClick={() => { setQuery(""); setCategory("Todos"); }}>Limpar filtros</button></div>}
 
-        {pageCount > 1 && <nav className="store-pro-pagination" aria-label="Paginação do catálogo">
+        {isGuest && lockedTotal > 0 ? <div className="store-pro-gate"><div className="store-pro-gate__icon"><Sparkles aria-hidden="true" /></div><div className="store-pro-gate__copy"><h3>Veja os outros {lockedTotal} {lockedTotal === 1 ? "produto" : "produtos"} deste catálogo</h3><p>Visitantes veem uma prévia. Crie uma conta gratuita para comparar 100% dos preços deste e de outros estabelecimentos de Feijó.</p></div><div className="store-pro-gate__actions"><Link className="pc-btn pc-btn--primary" to={signupHref}><UserPlus aria-hidden="true" /> Criar conta grátis</Link><Link className="store-pro-gate__login" to={loginHref}>Já tenho conta</Link></div></div> : pageCount > 1 && <nav className="store-pro-pagination" aria-label="Paginação do catálogo">
           <span>Mostrando {startResult}–{endResult} de {filteredProducts.length}</span>
           <div><button type="button" disabled={safePage === 1} onClick={() => setPage(value => Math.max(1, value - 1))} aria-label="Página anterior"><ChevronLeft /></button>{Array.from({ length: pageCount }, (_, index) => index + 1).filter(number => number === 1 || number === pageCount || Math.abs(number - safePage) <= 1).map((number, index, list) => <span key={number}>{index > 0 && number - list[index - 1] > 1 && <i>…</i>}<button type="button" className={number === safePage ? "is-active" : ""} aria-current={number === safePage ? "page" : undefined} onClick={() => setPage(number)}>{number}</button></span>)}<button type="button" disabled={safePage === pageCount} onClick={() => setPage(value => Math.min(pageCount, value + 1))} aria-label="Próxima página"><ChevronRight /></button></div>
         </nav>}
