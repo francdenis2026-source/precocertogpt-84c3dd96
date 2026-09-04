@@ -53,11 +53,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .pcx-home {
-    --h-canvas: #0f1418;
-    --h-surface: #171d23;
-    --h-surface-2: #1e252c;
-    --h-border: #2a323a;
-    --h-border-strong: #3a434d;
+    --h-canvas: #0d1512;
+    --h-surface: #151f1a;
+    --h-surface-2: #1c2822;
+    --h-border: #283630;
+    --h-border-strong: #37483f;
     --h-ink: #f1f4f7;
     --h-muted: #a7b0ba;
     --h-subtle: #7c8794;
@@ -670,7 +670,19 @@
   padding: 0.4rem;
   display: grid;
   gap: 0.2rem;
+  /* Barra de rolagem sempre visível — o overlay-scrollbar padrão do SO
+     some até o usuário arrastar, o que faz a lista parecer sem mais
+     resultados abaixo da dobra. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--h-border-strong) transparent;
 }
+.pcx-hero .pc26-live-results__list::-webkit-scrollbar { width: 8px; }
+.pcx-hero .pc26-live-results__list::-webkit-scrollbar-track { background: transparent; }
+.pcx-hero .pc26-live-results__list::-webkit-scrollbar-thumb {
+  background: var(--h-border-strong);
+  border-radius: 999px;
+}
+.pcx-hero .pc26-live-results__list::-webkit-scrollbar-thumb:hover { background: var(--h-subtle); }
 .pcx-hero .pc26-live-results__list button {
   display: grid !important;
   grid-template-columns: 44px 1fr auto;
