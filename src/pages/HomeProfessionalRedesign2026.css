@@ -402,7 +402,7 @@
      precisar de um novo contexto de empilhamento isolado. */
 }
 .pcx-hero__bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-.pcx-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 30%; }
+.pcx-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 42% 6%; }
 .pcx-hero__scrim {
   position: absolute; inset: 0;
   background:
@@ -599,11 +599,11 @@
      recorte padrão corta o rosto, que na foto fica perto do topo. Reenquadra
      para manter o rosto (do lojista, lado direito da foto) visível em
      qualquer largura de tablet/celular. */
-  .pcx-hero__bg img { object-position: 82% 0%; }
+  .pcx-hero__bg img { object-position: 40% 0%; }
 }
 @media (max-width: 640px) {
   .pcx-hero { min-height: clamp(520px, 78vh, 680px); align-items: flex-end; padding-bottom: 1.5rem; }
-  .pcx-hero__bg img { object-position: 77% 0%; }
+  .pcx-hero__bg img { object-position: 47% 0%; }
   /* No mobile o texto fica sobre a mesma faixa vertical onde a ilustração é
      mais "cheia" (não há como deslocar isso só no eixo Y — a imagem sempre
      mostra 100% da própria altura aqui). Em vez de perseguir um recorte
