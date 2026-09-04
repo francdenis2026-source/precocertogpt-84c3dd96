@@ -2,19 +2,21 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { FormEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
-import { ArrowRight, BadgeCheck, Building2, ChevronDown, Clock3, ExternalLink, MapPin, PackageSearch, RotateCcw, Search, SlidersHorizontal, Store, TrendingDown, X } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, Clock3, ExternalLink, LockKeyhole, MapPin, PackageSearch, RotateCcw, Search, Sparkles, SlidersHorizontal, Store, TrendingDown, UserPlus, X } from "lucide-react";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { fetchSectorCatalog, productHasSectorOffer, sectorStores } from "../data/sectorCatalog";
 import { getMarketplaceSector, marketplaceSectors, type MarketplaceSectorId } from "./MarketplaceSectors";
 import { resolveProductImage } from "../data/productImageResolver";
 import { AppDock, PublicFooter, PublicHeader } from "./ReferenceExperience";
 import { productSearchScore } from "../lib/productSearch";
+import { useFavorites } from "../features/favorites/FavoritesProvider";
 import "./SearchDiscovery2026.css";
 import "./CompactViewportPages.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const FREE_PREVIEW_LIMIT=4;
 const brl=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
 const normalize=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR").trim();
 type SortMode="relevance"|"lowest"|"highest"|"name"|"stores";
@@ -70,6 +72,9 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
 
 export function SearchDiscovery2026(){
  const pageRef=useRef<HTMLDivElement>(null);
+ const location=useLocation();
+ const{userId}=useFavorites();
+ const isGuest=!userId;
  const[params,setParams]=useSearchParams();
  const initialQuery=params.get("q")||"";
  const[catalog,setCatalog]=useState<CatalogPayload|null>(null),[loading,setLoading]=useState(true);
@@ -108,5 +113,18 @@ export function SearchDiscovery2026(){
  <section className="search26-filterbar"><button type="button" className={filtersOpen||activeFilters?"is-active":""} onClick={()=>setFiltersOpen(v=>!v)}><SlidersHorizontal/>Filtrar busca{activeFilters>0&&<b>{activeFilters}</b>}<ChevronDown/></button>{hasRequest&&<div className="search26-quick"><label><select value={sort} onChange={e=>setSort(e.target.value as SortMode)} aria-label="Ordenar resultados"><option value="relevance">Mais relevantes</option><option value="lowest">Menor preço</option><option value="highest">Maior preço</option><option value="stores">Mais estabelecimentos</option><option value="name">Nome A–Z</option></select></label></div>}{hasRequest&&<button type="button" className="search26-reset" onClick={reset}><RotateCcw/>Nova busca</button>}</section>
  {filtersOpen&&<section className="search26-advanced"><div><label>Estabelecimento<select value={store} onChange={e=>setStore(e.target.value)}><option value="all">Todos</option>{stores.map(s=><option key={s.id} value={String(s.id)}>{s.name}</option>)}</select></label><label>Tipo de comércio<select value={sector} onChange={e=>setSector(e.target.value as MarketplaceSectorId)}><option value="all">Todos os tipos</option>{marketplaceSectors.map(s=><option key={s.id} value={s.id}>{s.shortLabel}</option>)}</select></label><label>Categoria<select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">Todas</option>{categories.map(c=><option key={c}>{c}</option>)}</select></label><label>Bairro<select value={neighborhood} onChange={e=>setNeighborhood(e.target.value)}><option value="all">Todos</option>{neighborhoods.map(n=><option key={n}>{n}</option>)}</select></label><label>Preço mínimo<input inputMode="decimal" value={minPrice} onChange={e=>setMinPrice(e.target.value)} placeholder="R$ 0,00"/></label><label>Preço máximo<input inputMode="decimal" value={maxPrice} onChange={e=>setMaxPrice(e.target.value)} placeholder="Sem limite"/></label></div><footer><span><Building2/>Mostramos apenas opções realmente cadastradas.</span><button type="button" onClick={applyFilters}>Aplicar e ver resultados</button></footer></section>}
  {!hasRequest?<section className="search26-start"><div className="search26-start__intro"><div className="search26-start-icon"><PackageSearch/></div><div><small>COMECE POR AQUI</small><h2>Pesquise ou abra uma comparação.</h2><p>Escolha uma sugestão abaixo ou use os filtros para chegar direto ao que procura.</p></div><div className="search26-suggestions"><button onClick={()=>{setQuery("arroz");setAppliedQuery("arroz")}}>Arroz</button><button onClick={()=>{setQuery("café");setAppliedQuery("café")}}>Café</button><button onClick={()=>setFiltersOpen(true)}>Usar filtros</button></div></div>{featuredProducts.length>0&&<div className="search26-featured"><header><div><span>PRODUTOS EM DESTAQUE</span><h3>Comparações rápidas</h3></div><small>Clique para ver preços e lojas</small></header><div>{featuredProducts.map(product=><button type="button" className="search26-featured-card" key={product.id} onClick={event=>openProduct(product,event)}><div className="search26-thumb"><ProductThumb product={product}/></div><span><small>{product.category}</small><strong>{product.name}</strong><em>{product.storeCount||product.offers?.length||1} lojas</em></span><b>{brl.format(product.minPrice)}</b><ArrowRight aria-hidden="true"/></button>)}</div></div>}</section>:
- <section className="search26-results"><header><div><span>RESULTADOS AO VIVO</span><h2 aria-live="polite">{loading?"Consultando catálogo…":`${results.length} ${results.length===1?"resultado":"resultados"}`}</h2></div><small>Selecione um produto para comparar preços</small></header>{!loading&&results.length>0?<div className="search26-grid">{results.slice(0,visible).map(product=><button type="button" className="search26-card ref-catalog-card" key={product.id} onClick={event=>openProduct(product,event)} aria-haspopup="dialog"><div className="search26-thumb"><ProductThumb product={product}/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} {(product.storeCount||product.offers?.length||1)===1?"estabelecimento":"estabelecimentos"}</em></div><ArrowRight/></button>)}</div>:!loading&&<div className="search26-empty"><PackageSearch/><h2>Nenhum resultado compatível</h2><p>Tente outra marca, confira a escrita ou limpe os filtros para ampliar a busca.</p><button type="button" onClick={reset}>Limpar busca e filtros</button></div>}{visible<results.length&&<button className="search26-more" onClick={()=>setVisible(v=>Math.min(v+8,results.length))}>Mostrar mais 8 resultados <span>{results.length-visible} restantes</span></button>}</section>}
+ <section className="search26-results"><header><div><span>RESULTADOS AO VIVO</span><h2 aria-live="polite">{loading?"Consultando catálogo…":`${results.length} ${results.length===1?"resultado":"resultados"}`}</h2></div><small>Selecione um produto para comparar preços</small></header>{!loading&&results.length>0?(()=>{
+  const visibleResults=results.slice(0,visible);
+  const shownResults=isGuest?visibleResults.slice(0,FREE_PREVIEW_LIMIT):visibleResults;
+  const teaserResults=isGuest?visibleResults.slice(FREE_PREVIEW_LIMIT,FREE_PREVIEW_LIMIT+3):[];
+  const lockedCount=isGuest?Math.max(0,results.length-FREE_PREVIEW_LIMIT):0;
+  const signupHref=`/cadastro?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
+  return <>
+   <div className="search26-grid">
+    {shownResults.map(product=><button type="button" className="search26-card ref-catalog-card" key={product.id} onClick={event=>openProduct(product,event)} aria-haspopup="dialog"><div className="search26-thumb"><ProductThumb product={product}/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} {(product.storeCount||product.offers?.length||1)===1?"estabelecimento":"estabelecimentos"}</em></div><ArrowRight/></button>)}
+    {teaserResults.map(product=><Link to={signupHref} className="search26-card search26-card--teaser" key={product.id} aria-label={`Crie sua conta para ver o preço de ${product.name}`}><div className="search26-thumb"><ProductThumb product={product}/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price search26-price--blurred"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} lojas</em></div><i className="search26-card__lock"><LockKeyhole aria-hidden="true"/></i></Link>)}
+   </div>
+   {lockedCount>0?<div className="search26-gate"><div className="search26-gate__icon"><Sparkles aria-hidden="true"/></div><div className="search26-gate__copy"><h3>Veja os outros {lockedCount} {lockedCount===1?"preço":"preços"} desta busca</h3><p>Visitantes veem uma prévia do catálogo. Crie uma conta gratuita para comparar 100% dos preços e estabelecimentos de Feijó.</p></div><div className="search26-gate__actions"><Link className="pc-btn pc-btn--primary" to={signupHref}><UserPlus aria-hidden="true"/> Criar conta grátis</Link><Link className="search26-gate__login" to={`/login?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`}>Já tenho conta</Link></div></div>:visible<results.length&&<button className="search26-more" onClick={()=>setVisible(v=>Math.min(v+8,results.length))}>Mostrar mais 8 resultados <span>{results.length-visible} restantes</span></button>}
+  </>;
+ })():!loading&&<div className="search26-empty"><PackageSearch/><h2>Nenhum resultado compatível</h2><p>Tente outra marca, confira a escrita ou limpe os filtros para ampliar a busca.</p><button type="button" onClick={reset}>Limpar busca e filtros</button></div>}</section>}
  </main><PublicFooter /><AppDock current="search" />{selectedProduct&&<ProductComparisonModal product={selectedProduct} onClose={closeProduct}/>}</div>}
