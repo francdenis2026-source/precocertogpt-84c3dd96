@@ -12,7 +12,13 @@
 
 .pro-basket-page{height:100dvh;min-height:0;overflow:hidden;display:flex;flex-direction:column}.pro-basket-shell{flex:1;min-height:0;overflow:hidden;padding:10px 0 12px}.pro-basket-hero{padding:14px 18px;gap:16px;border-radius:16px}.pro-basket-hero h1{font-size:clamp(1.65rem,2.6vw,2.25rem);margin:5px 0}.pro-basket-hero p{font-size:12px}.pro-basket-kpis article{min-height:62px;padding:9px}.pro-basket-workspace{height:calc(100% - 132px);min-height:0;margin-top:9px;align-items:stretch}.pro-basket-list{min-height:0;overflow-y:auto;scrollbar-width:thin}
 
-.search26-page{height:100dvh;min-height:0;overflow:hidden;display:flex;flex-direction:column}.search26-main{flex:1;min-height:0;overflow:hidden;padding-block:10px}.search26-main>.search26-shell{height:100%;display:flex;flex-direction:column}.search26-hero{padding:15px 18px;gap:16px;border-radius:16px}.search26-hero h1{margin:4px 0;font-size:clamp(1.65rem,2.8vw,2.3rem)}.search26-hero p{font-size:12px}.search26-hero aside{padding:10px}.search26-search{margin-top:8px}.search26-search input{height:42px}.search26-search button{height:40px}.search26-results{flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;margin-top:10px;padding-right:4px}.search26-results>header{margin-bottom:8px}.search26-results>header h2{font-size:1.7rem}.search26-card{padding:8px}.search26-thumb{height:60px}
+/* Bug real corrigido: esta página estava travada em height:100dvh com
+   overflow:hidden em telas >900px, forçando resultados e o estado vazio a
+   caber numa altura fixa com rolagem interna quase invisível — em telas
+   largas isso cortava a lista sem indicar rolagem nenhuma. A página agora
+   rola normalmente como qualquer outra, em qualquer largura; só os ajustes
+   de densidade (padding/fonte) do "viewport compacto" continuam. */
+.search26-hero{padding:15px 18px;gap:16px;border-radius:16px}.search26-hero h1{margin:4px 0;font-size:clamp(1.65rem,2.8vw,2.3rem)}.search26-hero p{font-size:12px}.search26-hero aside{padding:10px}.search26-search{margin-top:8px}.search26-search input{height:42px}.search26-search button{height:40px}.search26-results{margin-top:10px}.search26-results>header{margin-bottom:8px}.search26-results>header h2{font-size:1.7rem}.search26-card{padding:8px}.search26-thumb{height:60px}
 
 @media(max-width:900px){.pro-basket-page,.search26-page{height:auto;min-height:100dvh;overflow:visible}.pro-basket-shell,.search26-main{overflow:visible}.pro-basket-workspace{height:auto}.pro-basket-list,.search26-results{overflow:visible}.search26-main>.search26-shell{height:auto}}
 @media(max-width:760px){.mo-page{padding:9px 11px}.mo-head>div{margin:6px 0 7px}.mo-head h1{font-size:24px}.mo-head p{font-size:11px}.mo-shell{height:calc(100dvh - 108px);grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.mo-steps{padding:5px}.mo-steps>div{padding:5px}.mo-card{padding:12px}.mo-title h2{font-size:18px}}
