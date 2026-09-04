@@ -44,6 +44,7 @@ import "./Stores2026.css";
 import "./StoresProfessionalRebuild.css";
 import "./StoreExperienceAcai2026.css";
 import "./CollaborationPage.css";
+import "./ContactPage.css";
 import "./PublicChromeRedesign2026.css";
 import "./AdminMerchantRedesign2026.css";
 
@@ -605,24 +606,28 @@ type InfoKind = "collaborate" | "contact" | "pharmacies" | "orders" | "culture";
 const infoCopy: Record<InfoKind, { eyebrow: string; title: string; copy: string; action: string; to: string }> = { collaborate: { eyebrow: "COLABORE COM FEIJÓ", title: "Ajude a manter os preços úteis.", copy: "Compartilhe atualizações e fortaleça uma base local mais transparente para todos.", action: "Entrar para colaborar", to: "/login" }, contact: { eyebrow: "FALE COM O PREÇOCERTO", title: "Estamos perto para ouvir.", copy: "Envie sua dúvida, sugestão ou proposta de parceria com o comércio local.", action: "Acessar minha conta", to: "/login" }, pharmacies: { eyebrow: "SAÚDE LOCAL", title: "Farmácias de Feijó.", copy: "A cobertura de preços de farmácias está sendo organizada com verificação e responsabilidade.", action: "Ver estabelecimentos", to: "/estabelecimentos" }, orders: { eyebrow: "SUAS COMPRAS", title: "Pedidos em um só lugar.", copy: "Entre para acompanhar pagamentos, preparo e entrega dos pedidos feitos nas lojas participantes.", action: "Entrar para continuar", to: "/login" }, culture: { eyebrow: "CULTURA DE FEIJÓ", title: "Talento local também tem valor.", copy: "Descubra projetos, livros e produções da nossa cidade dentro do ecossistema PreçoCerto.", action: "Explorar estabelecimentos", to: "/estabelecimentos" } };
 
 function CollaborationPage() {
-  const [profile, setProfile] = useState<Awaited<ReturnType<typeof loadSessionProfile>>>(null);
-  const [loadingProfile, setLoadingProfile] = useState(true);
-
-  useEffect(() => {
-    let active = true;
-    void loadSessionProfile().then(value => {
-      if (!active) return;
-      setProfile(value);
-      setLoadingProfile(false);
-    });
-    return () => { active = false; };
-  }, []);
+  const [form, setForm] = useState({ name: "", city: "", establishment: "", address: "", email: "", whatsapp: "" });
+  const [touched, setTouched] = useState(false);
+  const field = (key: keyof typeof form) => ({
+    value: form[key],
+    onChange: (event: { target: { value: string } }) => setForm(current => ({ ...current, [key]: event.target.value })),
+  });
+  const required: (keyof typeof form)[] = ["name", "city", "establishment", "email"];
+  const missing = required.filter(key => !form[key].trim());
+  const isValid = missing.length === 0;
 
   const emailSubject = encodeURIComponent("Colaboração de preços — nota de compra");
   const emailBody = encodeURIComponent(
-    `Olá, equipe PreçoCerto!\n\nEstou enviando uma foto legível da minha nota de compra para análise e possível atualização dos preços.\n\nNome: ${profile?.name || ""}\nE-mail cadastrado: ${profile?.email || ""}\nEstabelecimento: \nData da compra: \nDiferença identificada: \n\nVou anexar a imagem da nota neste e-mail.`
+    `Olá, equipe PreçoCerto!\n\nEstou enviando uma foto legível da minha nota de compra para análise e possível atualização dos preços.\n\nNome: ${form.name}\nCidade de onde estou enviando: ${form.city}\nEstabelecimento: ${form.establishment}\nEndereço do estabelecimento: ${form.address || "não informado"}\nE-mail de contato: ${form.email}\nWhatsApp: ${form.whatsapp || "não informado"}\n\nVou anexar a imagem da nota neste e-mail.`
   );
   const emailHref = `mailto:precocerto-fj@proton.me?subject=${emailSubject}&body=${emailBody}`;
+
+  const submit = (event: FormEvent) => {
+    event.preventDefault();
+    setTouched(true);
+    if (!isValid) return;
+    window.location.href = emailHref;
+  };
 
   return <div className="ref-page pc-collab-page">
     <PublicHeader />
@@ -631,34 +636,79 @@ function CollaborationPage() {
         <div className="pc-collab__copy">
           <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
           <h1 id="pc-collab-title">Viu um preço diferente?</h1>
-          <p>Envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
+          <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
           <div className="pc-collab__trust"><ShieldCheck aria-hidden="true" /><span><strong>Análise antes da publicação</strong><small>Nenhum preço é alterado automaticamente. A equipe PreçoCerto valida estabelecimento, produto, valor e data.</small></span></div>
         </div>
 
         <aside className="pc-collab__panel" aria-label="Enviar nota de compra">
           <header><span><ReceiptText aria-hidden="true" /></span><div><small>SUA CONTRIBUIÇÃO</small><h2>Envie a nota por e-mail</h2></div></header>
-          <ol>
-            <li><b>1</b><span><strong>Fotografe a nota inteira</strong><small>Produto, preço, estabelecimento e data precisam estar legíveis.</small></span></li>
-            <li><b>2</b><span><strong>Informe a diferença encontrada</strong><small>Conte brevemente qual preço precisa ser conferido.</small></span></li>
-            <li><b>3</b><span><strong>Anexe a imagem e envie</strong><small>Destinatário: precocerto-fj@proton.me</small></span></li>
-          </ol>
-
-          {loadingProfile ? <div className="pc-collab__account is-loading">Verificando sua conta…</div> : profile ? <>
-            <div className="pc-collab__account"><BadgeCheck aria-hidden="true" /><span><small>COLABORADOR IDENTIFICADO</small><strong>{profile.name}</strong></span></div>
-            <a className="pc-collab__send" href={emailHref}><Camera aria-hidden="true" /> Preparar envio da nota <ArrowRight aria-hidden="true" /></a>
-            <small className="pc-collab__hint">Seu aplicativo de e-mail será aberto. Anexe a fotografia antes de enviar.</small>
-          </> : <>
-            <div className="pc-collab__account"><LockKeyhole aria-hidden="true" /><span><small>CONTA NECESSÁRIA</small><strong>Entre para enviar sua colaboração</strong></span></div>
-            <Link className="pc-collab__send" to="/login?redirect=/colaborar"><UserRound aria-hidden="true" /> Entrar ou criar conta <ArrowRight aria-hidden="true" /></Link>
-            <small className="pc-collab__hint">O acesso identificado ajuda a equipe a confirmar informações quando necessário.</small>
-          </>}
+          <form className="pc-collab__form" onSubmit={submit} noValidate>
+            <label>Seu nome <em>*</em><input {...field("name")} type="text" autoComplete="name" placeholder="Como podemos te chamar" /></label>
+            <label>Cidade de onde vai enviar <em>*</em><input {...field("city")} type="text" autoComplete="address-level2" placeholder="Ex.: Feijó, Acre" /></label>
+            <div className="pc-collab__row">
+              <label>Estabelecimento <em>*</em><input {...field("establishment")} type="text" placeholder="Nome da loja da nota" /></label>
+              <label>Endereço do estabelecimento<input {...field("address")} type="text" placeholder="Rua, bairro (se souber)" /></label>
+            </div>
+            <div className="pc-collab__row">
+              <label>Seu e-mail <em>*</em><input {...field("email")} type="email" autoComplete="email" placeholder="para retorno, se precisar" /></label>
+              <label>Seu WhatsApp<input {...field("whatsapp")} type="tel" autoComplete="tel" placeholder="(68) 9####-####" /></label>
+            </div>
+            {touched && !isValid && <p className="pc-collab__error"><Info aria-hidden="true" /> Preencha nome, cidade, estabelecimento e e-mail para continuar.</p>}
+            <button className="pc-collab__send" type="submit"><Camera aria-hidden="true" /> Preparar envio da nota <ArrowRight aria-hidden="true" /></button>
+            <small className="pc-collab__hint">Seu aplicativo de e-mail será aberto com esses dados preenchidos. Anexe a fotografia da nota antes de enviar — destinatário: precocerto-fj@proton.me.</small>
+          </form>
         </aside>
       </section>
     </main>
   </div>;
 }
 
-export function ReferenceInfoPage({ kind }: { kind: InfoKind }) { if (kind === "collaborate") return <CollaborationPage />; const content = infoCopy[kind]; return <div className="ref-page"><PublicHeader /><main id="conteudo-principal" className="ref-info"><span>{content.eyebrow}</span><h1>{content.title}</h1><p>{content.copy}</p><Link to={content.to}>{content.action} <ArrowRight /></Link></main><PublicFooter /></div>; }
+function ContactPage() {
+  return <div className="pc-contact-page">
+    <PublicHeader />
+    <main id="conteudo-principal" className="pc-contact">
+      <section className="pc-contact__hero">
+        <span className="pc-contact__eyebrow"><Mail aria-hidden="true" /> FALE COM O PREÇOCERTO</span>
+        <h1>Estamos perto para ouvir.</h1>
+        <p>Dúvida, sugestão ou proposta de parceria com o comércio local — escolha o canal mais rápido para você.</p>
+      </section>
+
+      <section className="pc-contact__grid" aria-label="Canais de contato">
+        <a className="pc-contact__card" href="mailto:precocerto-fj@proton.me">
+          <span className="pc-contact__icon"><Mail aria-hidden="true" /></span>
+          <div><small>E-MAIL</small><strong>precocerto-fj@proton.me</strong><p>Resposta em até 2 dias úteis.</p></div>
+          <ArrowRight aria-hidden="true" />
+        </a>
+        <a className="pc-contact__card" href="https://wa.me/5568992031340" target="_blank" rel="noreferrer">
+          <span className="pc-contact__icon"><MessageCircle aria-hidden="true" /></span>
+          <div><small>WHATSAPP</small><strong>(68) 99203-1340</strong><p>Atendimento rápido em horário comercial.</p></div>
+          <ArrowRight aria-hidden="true" />
+        </a>
+      </section>
+
+      <section className="pc-contact__links" aria-label="Outros motivos comuns de contato">
+        <Link className="pc-contact__link" to="/colaborar">
+          <span><ReceiptText aria-hidden="true" /></span>
+          <div><strong>Viu um preço diferente?</strong><small>Envie sua nota de compra para conferência da equipe.</small></div>
+          <ArrowRight aria-hidden="true" />
+        </Link>
+        <Link className="pc-contact__link" to="/login?redirect=%2Fpainel-lojista">
+          <span><Store aria-hidden="true" /></span>
+          <div><strong>Já tenho um estabelecimento</strong><small>Entrar na área do lojista com seu login.</small></div>
+          <ArrowRight aria-hidden="true" />
+        </Link>
+        <Link className="pc-contact__link" to="/lojista">
+          <span><UsersRound aria-hidden="true" /></span>
+          <div><strong>Quero cadastrar minha loja</strong><small>Começar o cadastro de estabelecimento.</small></div>
+          <ArrowRight aria-hidden="true" />
+        </Link>
+      </section>
+    </main>
+    <PublicFooter />
+  </div>;
+}
+
+export function ReferenceInfoPage({ kind }: { kind: InfoKind }) { if (kind === "collaborate") return <CollaborationPage />; if (kind === "contact") return <ContactPage />; const content = infoCopy[kind]; return <div className="ref-page"><PublicHeader /><main id="conteudo-principal" className="ref-info"><span>{content.eyebrow}</span><h1>{content.title}</h1><p>{content.copy}</p><Link to={content.to}>{content.action} <ArrowRight /></Link></main><PublicFooter /></div>; }
 export function ReferenceNotFound() {
   // Rotas inexistentes mantinham o título/robots da página anterior (SPA).
   useEffect(() => {

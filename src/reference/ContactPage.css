@@ -1,0 +1,60 @@
+/* Página de contato — canais reais (e-mail/WhatsApp) + atalhos para os
+   motivos mais comuns de quem chega aqui (lojista, colaboração). */
+.pc-contact-page { min-height: 100dvh; background: var(--px-surface-soft, #f7f8fa); }
+.pc-contact { width: min(920px, calc(100% - 40px)); margin: 0 auto; padding: clamp(32px, 6vw, 64px) 0 56px; }
+
+.pc-contact__hero { max-width: 620px; margin-bottom: clamp(28px, 5vw, 40px); }
+.pc-contact__eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--px-brand, #0b6757); font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+}
+.pc-contact__eyebrow svg { width: 16px; height: 16px; }
+.pc-contact__hero h1 {
+  margin: 10px 0 8px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
+  font-size: clamp(2rem, 4.4vw, 2.9rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
+}
+.pc-contact__hero p { margin: 0; color: var(--px-muted, #5f6b78); font-size: 15px; line-height: 1.55; }
+
+.pc-contact__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 32px; }
+.pc-contact__card {
+  display: grid; grid-template-columns: 48px minmax(0, 1fr) 18px; align-items: center; gap: 14px;
+  padding: 20px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 18px;
+  background: var(--px-surface, #fff); color: inherit; text-decoration: none;
+  box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pc-contact__card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--px-brand, #0b6757) 45%, var(--px-line, #e2e7ec)); }
+}
+.pc-contact__icon {
+  display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px;
+  background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757); flex: 0 0 auto;
+}
+.pc-contact__icon svg { width: 21px; height: 21px; }
+.pc-contact__card > div { min-width: 0; display: grid; gap: 2px; }
+.pc-contact__card small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; color: var(--px-muted, #5f6b78); }
+.pc-contact__card strong { font-size: 15px; font-weight: 750; color: var(--px-ink, #14181d); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pc-contact__card p { margin: 0; font-size: 12.5px; color: var(--px-muted, #5f6b78); }
+.pc-contact__card > svg { width: 18px; height: 18px; color: var(--px-muted, #5f6b78); }
+
+.pc-contact__links { display: grid; gap: 10px; }
+.pc-contact__link {
+  display: grid; grid-template-columns: 42px minmax(0, 1fr) 16px; align-items: center; gap: 14px;
+  padding: 16px 18px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 14px;
+  background: var(--px-surface, #fff); color: inherit; text-decoration: none;
+  transition: border-color 0.16s ease, background-color 0.16s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pc-contact__link:hover { border-color: color-mix(in srgb, var(--px-brand, #0b6757) 40%, var(--px-line, #e2e7ec)); background: var(--px-surface-soft, #f7f8fa); }
+}
+.pc-contact__link > span { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: var(--px-surface-soft, #f7f8fa); color: var(--px-brand, #0b6757); flex: 0 0 auto; }
+.pc-contact__link > span svg { width: 19px; height: 19px; }
+.pc-contact__link > div { min-width: 0; display: grid; gap: 2px; }
+.pc-contact__link strong { font-size: 13.5px; font-weight: 700; color: var(--px-ink, #14181d); }
+.pc-contact__link small { font-size: 12px; color: var(--px-muted, #5f6b78); }
+.pc-contact__link > svg { width: 16px; height: 16px; color: var(--px-muted, #5f6b78); }
+
+@media (max-width: 640px) {
+  .pc-contact__grid { grid-template-columns: 1fr; }
+  .pc-contact__card { padding: 16px; }
+}
