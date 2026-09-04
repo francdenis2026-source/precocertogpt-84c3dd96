@@ -325,6 +325,8 @@
 }
 .pcx-header__login svg { width: 16px; height: 16px; }
 .pcx-header__login:hover { background: var(--h-surface-2); border-color: var(--h-primary); }
+/* The bottom app nav already has a "Conta" tab for this. */
+@media (max-width: 640px) { .pcx-header__login { display: none; } }
 
 .pcx-header__theme {
   display: flex;
@@ -777,8 +779,23 @@
 @media (max-width: 860px) {
   .pcx-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media (max-width: 480px) {
-  .pcx-actions { grid-template-columns: 1fr; }
+@media (max-width: 640px) {
+  /* App-style quick-action grid: 4 compact tiles instead of 4 stacked rows. */
+  .pcx-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+  .pcx-actions a {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0.7rem 0.3rem;
+    gap: 0.45rem;
+    min-height: 84px;
+  }
+  .pcx-actions a:active { transform: scale(0.96); }
+  .pcx-actions__icon { width: 2.5rem; height: 2.5rem; }
+  .pcx-actions__icon svg { width: 1.1rem; height: 1.1rem; }
+  .pcx-actions__text { justify-items: center; gap: 0; }
+  .pcx-actions__text strong { font-size: 0.7rem; font-weight: 700; line-height: 1.15; }
+  .pcx-actions__text small { display: none; }
 }
 
 /* ── Product grid ───────────────────────────────────────────────────────── */
@@ -843,7 +860,7 @@
 .pcx-prices del { font-size: 0.68rem; color: var(--h-subtle); }
 .pcx-prices strong { font-size: 0.95rem; font-weight: 800; color: var(--h-primary-dark); }
 .pcx-product__footer { margin-top: 0.35rem; display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
-.pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; font-size: 0.62rem; color: var(--h-subtle); overflow: hidden; }
+.pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; min-width: 0; flex: 1 1 auto; font-size: 0.62rem; color: var(--h-subtle); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .pcx-product__footer time svg { width: 11px; height: 11px; flex-shrink: 0; }
 .pcx-product__footer strong { display: flex; align-items: center; gap: 0.2rem; font-size: 0.66rem; font-weight: 700; color: var(--h-primary-dark); white-space: nowrap; transition: gap 150ms ease; }
 .pcx-product:hover .pcx-product__footer strong { gap: 0.35rem; }
@@ -870,7 +887,13 @@
 
 @media (max-width: 1100px) { .pcx-products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 720px) { .pcx-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; } }
-@media (max-width: 480px) { .pcx-products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; } }
+@media (max-width: 480px) {
+  .pcx-products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+  .pcx-prices { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+  .pcx-prices div { gap: 0.35rem; }
+  .pcx-product__footer { flex-wrap: wrap; }
+  .pcx-product__footer strong { font-size: 0.62rem; }
+}
 
 /* ── Category bar ───────────────────────────────────────────────────────── */
 .pcx-categories { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.85rem; }
@@ -926,7 +949,7 @@
 
 /* ── Store rail ─────────────────────────────────────────────────────────── */
 .pcx-stores { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.25rem; align-items: stretch; }
-.pcx-store-hero {
+a.pcx-store-hero {
   position: relative;
   border-radius: var(--h-radius-xl);
   overflow: hidden;
@@ -941,9 +964,9 @@
 .pcx-store-hero:hover img { transform: scale(1.05); }
 .pcx-store-hero::after {
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(10,14,18,0) 0%, rgba(10,14,18,0.62) 78%);
+  background: linear-gradient(180deg, rgba(8,11,14,0.05) 0%, rgba(8,11,14,0.3) 22%, rgba(8,11,14,0.74) 45%, rgba(8,11,14,0.88) 100%);
 }
-.pcx-store-hero__content { position: relative; z-index: 2; padding: 1.5rem; width: 100%; }
+.pcx-store-hero__content { position: relative; z-index: 2; padding: 1.5rem; width: 100%; text-shadow: 0 1px 3px rgba(0,0,0,0.45); }
 .pcx-store-hero__content h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
 .pcx-store-hero__content p { display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; margin: 0 0 0.4rem; opacity: 0.92; }
 .pcx-store-hero__content p svg { width: 13px; height: 13px; }

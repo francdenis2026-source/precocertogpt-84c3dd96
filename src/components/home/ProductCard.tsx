@@ -86,7 +86,7 @@ export function ProductCard({
           {product.category || "Produto"}
         </span>
         <h3>{product.name}</h3>
-        {product.size && (
+        {product.size && product.size.trim() !== "-" && (
           <span className="pcx-product__meta">{product.size}</span>
         )}
 
