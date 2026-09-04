@@ -228,12 +228,12 @@
 }
 
 /* Interior pages: hide the large footer entirely on detail/utility flows
-   (store detail, product detail, basket) to keep them compact — the home
-   keeps its own full footer. /buscar gets its own compact, styled footer
-   below instead of going fully footerless. */
+   (store detail, product detail, search, basket) to keep them compact —
+   the home keeps its own full footer. */
 .store-pro-page .ref-footer,
 .pdl-page .ref-footer,
 .ref-directory .ref-footer,
+.search26-page .ref-footer,
 .pro-basket-page .ref-footer,
 .smart-basket-page .ref-footer {
   display: none !important;
