@@ -1,4 +1,4 @@
-import { ArrowRight, RefreshCw, Search, Store } from "lucide-react";
+import { ArrowRight, PackageSearch, RefreshCw, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
@@ -9,6 +9,7 @@ const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
 });
+const intBr = new Intl.NumberFormat("pt-BR");
 
 type HeroUserImage2026Props = {
   products: Product[];
@@ -20,6 +21,8 @@ type HeroUserImage2026Props = {
 
 export function HeroUserImage2026({
   products,
+  productCount,
+  storeCount,
   loading = false,
   cycle = 0,
 }: HeroUserImage2026Props) {
@@ -58,6 +61,23 @@ export function HeroUserImage2026({
               <Store aria-hidden="true" /> Ver estabelecimentos
             </Link>
           </div>
+
+          {(Boolean(productCount) || Boolean(storeCount)) && (
+            <div className="pcx-hero__stats" aria-label="Números da plataforma">
+              {Boolean(storeCount) && (
+                <span className="pcx-hero__stat">
+                  <Store aria-hidden="true" />
+                  <strong>{intBr.format(storeCount!)}</strong> estabelecimentos cadastrados
+                </span>
+              )}
+              {Boolean(productCount) && (
+                <span className="pcx-hero__stat">
+                  <PackageSearch aria-hidden="true" />
+                  <strong>{intBr.format(productCount!)}</strong> produtos no catálogo
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="pcx-hero__visual">

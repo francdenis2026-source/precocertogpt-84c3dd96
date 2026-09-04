@@ -445,6 +445,15 @@
 }
 .pcx-hero__search { margin-bottom: 0.9rem; }
 .pcx-hero__actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+
+/* Números da plataforma em evidência: estabelecimentos e produtos cadastrados. */
+.pcx-hero__stats { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: 1rem; }
+.pcx-hero__stat {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.84rem; font-weight: 600; color: var(--h-muted);
+}
+.pcx-hero__stat svg { width: 16px; height: 16px; color: var(--h-primary); flex-shrink: 0; }
+.pcx-hero__stat strong { font-size: 0.95rem; font-weight: 800; color: var(--h-ink); }
 .pcx-hero .pcx-btn--ghost {
   background: var(--h-surface);
   border-color: var(--h-border-strong);
@@ -605,6 +614,10 @@
   .pcx-hero__actions { gap: 0.5rem; }
   .pcx-hero .pcx-btn { padding: 0.62rem 1.1rem; font-size: 0.84rem; }
   .pcx-hero .pcx-btn svg { width: 15px; height: 15px; }
+  .pcx-hero__stats { gap: 0.4rem 0.85rem; margin-top: 0.75rem; }
+  .pcx-hero__stat { font-size: 0.76rem; }
+  .pcx-hero__stat svg { width: 14px; height: 14px; }
+  .pcx-hero__stat strong { font-size: 0.86rem; }
   .pcx-hero__visual { min-height: 190px; max-width: none; padding: 0 0 1rem 0.6rem; }
   /* Foto dedicada ao mobile (trocada via <picture><source>) tem o rosto mais
      à direita e mais alto no enquadramento original — reposiciona o corte. */
