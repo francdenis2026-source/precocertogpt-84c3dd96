@@ -8,8 +8,8 @@
 .ref-stores-page .ref-directory__main{width:min(1120px,calc(100% - 32px));flex:1;padding:18px 0 28px}
 
 .ref-stores-page .ref-stores-hero{min-height:238px;align-items:flex-end;padding:30px 32px;border:0;border-radius:20px;background:#091b2b;color:#fff;box-shadow:0 18px 46px rgb(8 27 42/15%)}
-.ref-stores-page .ref-stores-hero::before{background:url('/home-editorial-2026/comercio-local.webp') 66% 42%/cover no-repeat;filter:saturate(1.05) contrast(1.02)}
-.ref-stores-page .ref-stores-hero::after{background:linear-gradient(90deg,rgb(4 17 29/96%) 0%,rgb(5 21 34/89%) 38%,rgb(6 21 34/42%) 67%,rgb(4 15 24/12%) 100%)}
+.ref-stores-page .ref-stores-hero::before{background:url('/home-editorial-2026/comercio-local.webp') 66% 42%/cover no-repeat;filter:brightness(1.14) saturate(1.18) contrast(1.04)}
+.ref-stores-page .ref-stores-hero::after{background:linear-gradient(90deg,rgb(4 17 29/94%) 0%,rgb(5 21 34/78%) 38%,rgb(6 21 34/32%) 67%,rgb(4 15 24/8%) 100%)}
 .ref-stores-page .ref-stores-hero>div{max-width:510px}
 .ref-stores-page .ref-stores-hero>div>span{color:#62e5ad;font-size:10px;letter-spacing:.13em}
 .ref-stores-page .ref-stores-hero h1{max-width:13ch;margin:7px 0 8px;color:#fff;font-size:clamp(2rem,3.5vw,3rem);line-height:.96;letter-spacing:-.045em}
