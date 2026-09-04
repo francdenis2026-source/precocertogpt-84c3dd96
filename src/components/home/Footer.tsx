@@ -7,11 +7,11 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+/* O header já cobre Início/Buscar/Estabelecimentos/Categorias — o rodapé
+ * só acrescenta o que não está lá, em vez de repetir o mesmo menu. */
 const navigation = [
-  { to: "/buscar", label: "Buscar" },
-  { to: "/explorar", label: "Categorias" },
-  { to: "/estabelecimentos", label: "Estabelecimentos" },
   { to: "/cesta-inteligente", label: "Cesta inteligente" },
+  { to: "/favoritos", label: "Favoritos" },
   { to: "/contato", label: "Contato" },
 ] as const;
 

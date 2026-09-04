@@ -1,8 +1,10 @@
 import {
   ArrowRight,
   LoaderCircle,
+  LockKeyhole,
   PackageSearch,
   Search,
+  UserPlus,
   X,
 } from "lucide-react";
 import {
@@ -15,15 +17,17 @@ import {
   useRef,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
 import { suggestProducts } from "../../lib/productSearch";
+import { useFavorites } from "../../features/favorites/FavoritesProvider";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
 });
+const FREE_PREVIEW_LIMIT = 2;
 
 type LiveProductSearchProps = {
   products: Product[];
@@ -39,6 +43,9 @@ export function LiveProductSearch({
   id,
 }: LiveProductSearchProps) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { userId } = useFavorites();
+  const isGuest = !userId;
   const listId = `${useId().replace(/:/g, "")}-${id}-results`;
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
@@ -78,6 +85,11 @@ export function LiveProductSearch({
     setOpen(false);
     setActiveIndex(-1);
     navigate(`/produto/${product.slug || product.id}`);
+  };
+  const goToSignup = () => {
+    setOpen(false);
+    setActiveIndex(-1);
+    navigate(`/cadastro?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`);
   };
   const submit = (event: FormEvent) => {
     event.preventDefault();
@@ -217,6 +229,7 @@ export function LiveProductSearch({
             <div className="pc26-live-results__list">
               {suggestions.map((product, index) => {
                 const image = resolveProductImage(product);
+                const locked = isGuest && index >= FREE_PREVIEW_LIMIT;
                 return (
                   <button
                     id={`${listId}-${index}`}
@@ -224,11 +237,11 @@ export function LiveProductSearch({
                     type="button"
                     role="option"
                     aria-selected={index === safeActiveIndex}
-                    className={index === safeActiveIndex ? "is-active" : ""}
+                    className={`${index === safeActiveIndex ? "is-active" : ""}${locked ? " pc26-live-results__item--teaser" : ""}`}
                     onPointerMove={(event) => {
                       if (event.pointerType === "mouse") setActiveIndex(index);
                     }}
-                    onClick={() => openProduct(product)}
+                    onClick={() => (locked ? goToSignup() : openProduct(product))}
                   >
                     <span className="pc26-live-results__thumb">
                       {image ? (
@@ -263,10 +276,22 @@ export function LiveProductSearch({
                         {product.establishment || "Comércio local"}
                       </em>
                     </span>
-                    <span className="pc26-live-results__price">
-                      <small>a partir de</small>
-                      <strong>{brl.format(product.minPrice)}</strong>
-                    </span>
+                    {locked ? (
+                      <span className="pc26-live-results__price pc26-live-results__price--blurred">
+                        <small>a partir de</small>
+                        <strong>{brl.format(product.minPrice)}</strong>
+                      </span>
+                    ) : (
+                      <span className="pc26-live-results__price">
+                        <small>a partir de</small>
+                        <strong>{brl.format(product.minPrice)}</strong>
+                      </span>
+                    )}
+                    {locked && (
+                      <i className="pc26-live-results__lock">
+                        <LockKeyhole aria-hidden="true" />
+                      </i>
+                    )}
                   </button>
                 );
               })}
@@ -281,14 +306,25 @@ export function LiveProductSearch({
             </div>
           )}
           {!loading && suggestions.length > 0 && (
-            <button
-              className="pc26-live-results__all"
-              type="button"
-              onClick={searchAll}
-            >
-              Ver todos para “{normalizedQuery}”{" "}
-              <ArrowRight aria-hidden="true" />
-            </button>
+            isGuest && suggestions.length > FREE_PREVIEW_LIMIT ? (
+              <button
+                className="pc26-live-results__all pc26-live-results__all--gate"
+                type="button"
+                onClick={goToSignup}
+              >
+                <UserPlus aria-hidden="true" />
+                Criar conta grátis para ver todos os preços
+              </button>
+            ) : (
+              <button
+                className="pc26-live-results__all"
+                type="button"
+                onClick={searchAll}
+              >
+                Ver todos para “{normalizedQuery}”{" "}
+                <ArrowRight aria-hidden="true" />
+              </button>
+            )
           )}
         </div>
       )}
