@@ -8,7 +8,7 @@ import { resolveProductImage } from "../data/productImageResolver";
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { groupForStore } from "../data/businessTaxonomy";
 import { marketplaceSectors } from "./MarketplaceSectors";
-import { PublicHeader } from "./ReferenceExperience";
+import { MinimalTopBar } from "./ReferenceExperience";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import "./StoreDetailProfessional.css";
 import "./StoreExperienceAcai2026.css";
@@ -240,8 +240,8 @@ export function StoreDetailProfessional() {
   const mapsQuery = encodeURIComponent(`${store.name}, ${store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó - AC, 69960-000, Brasil`);
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
-  return <div className={`ref-page store-pro-page${isBonsAmigos ? " store-pro-page--bons-amigos" : ""}`} ref={pageRef}>
-    <PublicHeader current="stores" title={store.name} logo={showLogo ? logoUrl : undefined}/>
+  return <div className={`ref-page store-pro-page pc-noheader-page${isBonsAmigos ? " store-pro-page--bons-amigos" : ""}`} ref={pageRef}>
+    <MinimalTopBar />
     <main id="conteudo-principal" className="store-pro-shell">
       <div className="store-pro-topline store-pro-topline--location-only">
         <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin /> {store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000</a>

@@ -11,6 +11,7 @@ import {
   Home,
 } from "lucide-react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
+import contactHeroImg from "../assets/home-2026/comercio-local-atendimento.jpg";
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
 import { fetchSectorCatalog, withoutDemoEstablishments } from "../data/sectorCatalog";
 import { resolveProductImage } from "../data/productImageResolver";
@@ -45,6 +46,7 @@ import "./StoresProfessionalRebuild.css";
 import "./StoreExperienceAcai2026.css";
 import "./CollaborationPage.css";
 import "./ContactPage.css";
+import "./MinimalTopBar.css";
 import "./PublicChromeRedesign2026.css";
 import "./AdminMerchantRedesign2026.css";
 
@@ -605,6 +607,24 @@ export function ReferenceMerchantDashboard() { const catalog = useCatalog(); con
 type InfoKind = "collaborate" | "contact" | "pharmacies" | "orders" | "culture";
 const infoCopy: Record<InfoKind, { eyebrow: string; title: string; copy: string; action: string; to: string }> = { collaborate: { eyebrow: "COLABORE COM FEIJÓ", title: "Ajude a manter os preços úteis.", copy: "Compartilhe atualizações e fortaleça uma base local mais transparente para todos.", action: "Entrar para colaborar", to: "/login" }, contact: { eyebrow: "FALE COM O PREÇOCERTO", title: "Estamos perto para ouvir.", copy: "Envie sua dúvida, sugestão ou proposta de parceria com o comércio local.", action: "Acessar minha conta", to: "/login" }, pharmacies: { eyebrow: "SAÚDE LOCAL", title: "Farmácias de Feijó.", copy: "A cobertura de preços de farmácias está sendo organizada com verificação e responsabilidade.", action: "Ver estabelecimentos", to: "/estabelecimentos" }, orders: { eyebrow: "SUAS COMPRAS", title: "Pedidos em um só lugar.", copy: "Entre para acompanhar pagamentos, preparo e entrega dos pedidos feitos nas lojas participantes.", action: "Entrar para continuar", to: "/login" }, culture: { eyebrow: "CULTURA DE FEIJÓ", title: "Talento local também tem valor.", copy: "Descubra projetos, livros e produções da nossa cidade dentro do ecossistema PreçoCerto.", action: "Explorar estabelecimentos", to: "/estabelecimentos" } };
 
+/**
+ * Substitui o header fixo em páginas sem navegação (colaborar, contato,
+ * detalhe de estabelecimento): sem barra sólida ocupando espaço — só a
+ * logomarca e um botão de voltar flutuando sobre o topo da página.
+ */
+export function MinimalTopBar() {
+  const navigate = useNavigate();
+  return <div className="pc-mini-top">
+    <button type="button" className="pc-mini-top__back" onClick={() => window.history.length > 1 ? navigate(-1) : navigate("/")} aria-label="Voltar para a página anterior">
+      <ArrowLeft aria-hidden="true" />
+    </button>
+    <Link className="pc-mini-top__brand" to="/" aria-label="Preço Certo — página inicial">
+      <img src="/preco-certo-mark.svg?v=17" alt="" width="26" height="26" />
+      <span>Preço Certo</span>
+    </Link>
+  </div>;
+}
+
 function CollaborationPage() {
   const [form, setForm] = useState({ name: "", city: "", establishment: "", address: "", email: "", whatsapp: "" });
   const [touched, setTouched] = useState(false);
@@ -629,8 +649,8 @@ function CollaborationPage() {
     window.location.href = emailHref;
   };
 
-  return <div className="ref-page pc-collab-page">
-    <PublicHeader />
+  return <div className="ref-page pc-collab-page pc-noheader-page">
+    <MinimalTopBar />
     <main id="conteudo-principal" className="pc-collab">
       <section className="pc-collab__hero" aria-labelledby="pc-collab-title">
         <div className="pc-collab__copy">
@@ -664,13 +684,18 @@ function CollaborationPage() {
 }
 
 function ContactPage() {
-  return <div className="pc-contact-page">
-    <PublicHeader />
+  return <div className="pc-contact-page pc-noheader-page">
+    <MinimalTopBar />
     <main id="conteudo-principal" className="pc-contact">
       <section className="pc-contact__hero">
-        <span className="pc-contact__eyebrow"><Mail aria-hidden="true" /> FALE COM O PREÇOCERTO</span>
-        <h1>Estamos perto para ouvir.</h1>
-        <p>Dúvida, sugestão ou proposta de parceria com o comércio local — escolha o canal mais rápido para você.</p>
+        <div className="pc-contact__hero-copy">
+          <span className="pc-contact__eyebrow"><Mail aria-hidden="true" /> FALE COM O PREÇOCERTO</span>
+          <h1>Estamos perto para ouvir.</h1>
+          <p>Dúvida, sugestão ou proposta de parceria com o comércio local — escolha o canal mais rápido para você.</p>
+        </div>
+        <div className="pc-contact__hero-media" aria-hidden="true">
+          <img src={contactHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
+        </div>
       </section>
 
       <section className="pc-contact__grid" aria-label="Canais de contato">

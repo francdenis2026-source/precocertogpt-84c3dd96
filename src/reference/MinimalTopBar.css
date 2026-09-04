@@ -1,0 +1,56 @@
+/* Barra mínima flutuante: substitui o header fixo em páginas sem navegação
+   própria (colaborar, contato, detalhe de estabelecimento) — não ocupa
+   espaço de layout, só a logomarca + um botão de voltar sobrepostos ao
+   topo. Pílula clara com sombra própria: legível tanto sobre foto escura
+   quanto sobre fundo claro, sem precisar de uma variante por página. */
+.pc-mini-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(14px, 4vw, 28px);
+  padding-top: max(14px, env(safe-area-inset-top));
+  pointer-events: none;
+}
+.pc-mini-top__back,
+.pc-mini-top__brand {
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 22px rgba(10, 16, 22, 0.18);
+  backdrop-filter: blur(10px);
+  color: #14181d;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.pc-mini-top__back {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.pc-mini-top__back svg { width: 18px; height: 18px; }
+.pc-mini-top__back:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(10, 16, 22, 0.24); }
+.pc-mini-top__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 7px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.pc-mini-top__brand img { width: 26px; height: 26px; border-radius: 7px; }
+.pc-mini-top__brand:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(10, 16, 22, 0.24); }
+
+@media (max-width: 480px) {
+  .pc-mini-top__brand span { display: none; }
+  .pc-mini-top__brand { padding: 7px; }
+}
