@@ -1,6 +1,6 @@
 import { useEffect, useState, type CSSProperties } from "react";
-import { ArrowRight, BadgeCheck, BookOpen, BriefcaseBusiness, Croissant, Grid2X2, HeartPulse, MapPin, Pill, Plus, Sandwich, Scale, ShieldCheck, ShoppingBasket, Store, type LucideIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowRight, BadgeCheck, BookOpen, BriefcaseBusiness, Croissant, Grid2X2, HeartPulse, LockKeyhole, MapPin, Pill, Plus, Sandwich, Scale, ShieldCheck, ShoppingBasket, Sparkles, Store, UserPlus, type LucideIcon } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import type { CatalogPayload } from "../data/catalog";
 import { businessGroups, type BusinessGroupId } from "../data/businessTaxonomy";
 import { fetchSectorCatalog, prefetchSectorCatalog, sectorProducts, sectorStores } from "../data/sectorCatalog";
@@ -8,8 +8,11 @@ import { getStoreLogoUrl } from "../data/storeLogos";
 import { sectorHeroImage } from "../data/sectorHeroImages";
 import { PublicHeader } from "./ReferenceExperience";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
+import { useFavorites } from "../features/favorites/FavoritesProvider";
 import "./PharmacyDirectory.css";
 import "./CulturalProfiles.css";
+
+const SECTOR_FREE_PREVIEW_LIMIT = 4;
 
 /* "Setor" saiu de toda a interface. A palavra é de quem monta a plataforma,
  * não de quem compra: ninguém em Feijó diz "vou olhar o setor de padarias".
@@ -178,17 +181,26 @@ function DirectoryFooter({ sector }: { sector: MarketplaceSector }) {
 }
 
 function SectorProductList({ catalog, sector }: { catalog: CatalogPayload | null; sector: MarketplaceSector }) {
+  const location = useLocation();
+  const { userId } = useFavorites();
+  const isGuest = !userId;
   if (!catalog) return null;
-  const products = sectorProducts(catalog, sector).slice(0, 12);
+  const allProducts = sectorProducts(catalog, sector);
+  const products = allProducts.slice(0, 12);
   if (!products.length) return null;
   const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  const shownProducts = isGuest ? products.slice(0, SECTOR_FREE_PREVIEW_LIMIT) : products;
+  const teaserProducts = isGuest ? products.slice(SECTOR_FREE_PREVIEW_LIMIT) : [];
+  const lockedTotal = isGuest ? Math.max(0, allProducts.length - SECTOR_FREE_PREVIEW_LIMIT) : 0;
+  const signupHref = `/cadastro?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
+  const loginHref = `/login?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
   return <section className="sector-product-list" aria-label={`Produtos de ${sector.shortLabel}`}>
     <div className="sector-product-list__heading">
       <div><span>PRODUTOS PUBLICADOS</span><h2>Itens com preço nesta categoria</h2></div>
       <Link to="/buscar">Ver todos <ArrowRight aria-hidden="true" /></Link>
     </div>
     <div className="sector-product-list__grid">
-      {products.map(product => (
+      {shownProducts.map(product => (
         <Link key={product.id} className="sector-product-card" to={`/produto/${product.slug || product.id}`}>
           <small>{[product.brand, product.size].filter(Boolean).join(" · ") || sector.shortLabel}</small>
           <strong>{product.name}</strong>
@@ -196,7 +208,17 @@ function SectorProductList({ catalog, sector }: { catalog: CatalogPayload | null
           <span className="sector-product-card__price"><em>Menor preço</em><b>{money(product.minPrice)}</b></span>
         </Link>
       ))}
+      {teaserProducts.map(product => (
+        <Link key={product.id} className="sector-product-card sector-product-card--teaser" to={signupHref} aria-label={`Crie sua conta para ver o preço de ${product.name}`}>
+          <small>{[product.brand, product.size].filter(Boolean).join(" · ") || sector.shortLabel}</small>
+          <strong>{product.name}</strong>
+          <span className="sector-product-card__store"><Store aria-hidden="true" /> {product.establishment}</span>
+          <span className="sector-product-card__price sector-product-card__price--blurred"><em>Menor preço</em><b>{money(product.minPrice)}</b></span>
+          <i className="sector-product-card__lock"><LockKeyhole aria-hidden="true" /></i>
+        </Link>
+      ))}
     </div>
+    {isGuest && lockedTotal > 0 && <div className="sector-product-gate"><div className="sector-product-gate__icon"><Sparkles aria-hidden="true" /></div><div className="sector-product-gate__copy"><h3>Veja mais {lockedTotal} {lockedTotal === 1 ? "preço" : "preços"} nesta categoria</h3><p>Visitantes veem uma prévia. Crie uma conta gratuita para comparar 100% dos preços de {sector.shortLabel.toLowerCase()} em Feijó.</p></div><div className="sector-product-gate__actions"><Link className="pc-btn pc-btn--primary" to={signupHref}><UserPlus aria-hidden="true" /> Criar conta grátis</Link><Link className="sector-product-gate__login" to={loginHref}>Já tenho conta</Link></div></div>}
   </section>;
 }
 
