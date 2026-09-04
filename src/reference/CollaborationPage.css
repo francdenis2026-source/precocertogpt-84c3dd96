@@ -1,113 +1,126 @@
-/* Página de colaboração — hero clara com foto (mesmo padrão de /contato,
-   sem escurecimento) + formulário abaixo. Sem rodapé, sem barra de
-   rolagem forçada: compactada abaixo de 760px de altura. */
-.pc-collab-page { min-height: 100dvh; background: var(--px-surface-soft, #f7f8fa); }
+/* Página de colaboração — tudo em uma única janela no desktop (sem
+   rolagem vertical): texto + formulário à esquerda, foto ocupando a
+   coluna direita em toda a altura. Abaixo de 850px de largura passa a
+   empilhar e rolar normalmente (comportamento esperado em mobile). */
+.pc-collab-page { background: var(--px-surface-soft, #f7f8fa); }
 .pc-collab {
-  width: min(920px, calc(100% - 32px));
+  width: min(1080px, calc(100% - 32px));
   margin: 0 auto;
-  padding: clamp(68px, 11vw, 88px) 0 40px;
   display: grid;
-  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, .9fr);
+  grid-template-areas: "copy media" "panel media";
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  gap: 14px clamp(20px, 3vw, 40px);
 }
 
-.pc-collab__hero {
-  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(220px, .85fr); align-items: center;
-  gap: clamp(18px, 3vw, 36px);
-}
-.pc-collab__hero-media {
-  border-radius: 20px; overflow: hidden; aspect-ratio: 4 / 3;
-  box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
-}
-.pc-collab__hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.pc-collab__copy { grid-area: copy; padding-top: clamp(72px, 10vh, 92px); }
+.pc-collab__media { grid-area: media; border-radius: 20px; overflow: hidden; box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07)); }
+.pc-collab__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
 .pc-collab__eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
   color: var(--px-brand, #0b6757); font-size: 10.5px; font-weight: 900; letter-spacing: 0.1em;
 }
 .pc-collab__eyebrow svg { width: 14px; height: 14px; }
-.pc-collab__hero-copy h1 {
+.pc-collab__copy h1 {
   margin: 8px 0 6px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
-  font-size: clamp(1.6rem, 3.6vw, 2.1rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
 }
-.pc-collab__hero-copy p { max-width: 420px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 13px; line-height: 1.5; }
+.pc-collab__copy p { max-width: 420px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 12.5px; line-height: 1.45; }
 
 .pc-collab__panel {
-  padding: 18px 20px;
+  grid-area: panel;
+  padding: 16px 18px;
   border: 1px solid var(--px-line, #e2e7ec);
   border-radius: 18px;
   background: var(--px-surface, #fff);
   box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
+  margin-bottom: clamp(16px, 3vh, 28px);
 }
 .pc-collab__panel > header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
 .pc-collab__panel > header > span {
-  width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px;
+  width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px;
   background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757); flex: 0 0 auto;
 }
-.pc-collab__panel > header svg { width: 18px; height: 18px; }
+.pc-collab__panel > header svg { width: 16px; height: 16px; }
 .pc-collab__panel > header small { color: var(--px-brand, #0b6757); font-size: 9px; font-weight: 900; letter-spacing: 0.12em; }
-.pc-collab__panel h2 { margin: 1px 0 0; color: var(--px-ink, #14181d); font-size: 16px; font-weight: 750; }
+.pc-collab__panel h2 { margin: 1px 0 0; color: var(--px-ink, #14181d); font-size: 15px; font-weight: 750; }
 
-.pc-collab__form { display: grid; gap: 8px; margin-top: 10px; }
-.pc-collab__form label { display: grid; gap: 4px; color: var(--px-muted, #5f6b78); font-size: 10.5px; font-weight: 750; }
+.pc-collab__form { display: grid; gap: 7px; margin-top: 9px; }
+.pc-collab__form label { display: grid; gap: 3px; color: var(--px-muted, #5f6b78); font-size: 10.5px; font-weight: 750; }
 .pc-collab__form label em { margin-left: 2px; color: #d97b3f; font-style: normal; }
 .pc-collab__form input {
-  min-height: 36px; padding: 0 11px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 9px;
+  min-height: 34px; padding: 0 11px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 9px;
   background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 12.5px;
 }
 .pc-collab__form input::placeholder { color: #9aa5ad; }
-.pc-collab__form input:focus-visible { outline: 2px solid var(--px-brand, #0b6757); outline-offset: 1px; background: #fff; }
+.pc-collab__form input:focus-visible { outline: 2px solid var(--px-brand, #0b6757); outline-offset: 1px; background: var(--px-surface, #fff); }
 .pc-collab__form input[aria-invalid="true"] { border-color: #d97b3f; background: rgba(217, 123, 63, 0.06); }
 .pc-collab__row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .pc-collab__field-error { color: #b35f24; font-size: 10px; font-weight: 600; }
 
 .pc-collab__error {
-  display: flex; align-items: center; gap: 6px; margin: 0; padding: 7px 10px;
+  display: flex; align-items: center; gap: 6px; margin: 0; padding: 6px 10px;
   border: 1px solid rgba(217, 123, 63, 0.3); border-radius: 9px; background: rgba(217, 123, 63, 0.08);
   color: #b35f24; font-size: 10.5px; line-height: 1.35;
 }
 .pc-collab__error svg { width: 14px; height: 14px; flex: 0 0 auto; }
 
 .pc-collab__send {
-  min-height: 42px; margin-top: 2px; display: flex !important; align-items: center; justify-content: center; gap: 8px;
+  min-height: 40px; margin-top: 2px; display: flex !important; align-items: center; justify-content: center; gap: 8px;
   border: 0; border-radius: 10px; background: var(--px-brand, #0b6757) !important; color: #fff !important;
   font-size: 12px !important; font-weight: 800; text-decoration: none; cursor: pointer; width: 100%;
 }
 .pc-collab__send svg { width: 16px; }
 .pc-collab__send svg:last-child { margin-left: auto; }
-.pc-collab__hint { display: block; margin-top: 6px; color: var(--px-muted, #5f6b78); font-size: 10px; line-height: 1.35; text-align: center; }
+.pc-collab__hint { display: block; margin-top: 5px; color: var(--px-muted, #5f6b78); font-size: 9.5px; line-height: 1.3; text-align: center; }
 
 /* Aviso de login exigido para envio */
-.pc-collab__gate { display: grid; justify-items: center; gap: 8px; padding: 8px 4px 4px; text-align: center; }
+.pc-collab__gate { display: grid; justify-items: center; gap: 7px; padding: 6px 4px 2px; text-align: center; }
 .pc-collab__gate-icon {
-  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px;
+  width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px;
   background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757);
 }
-.pc-collab__gate-icon svg { width: 21px; height: 21px; }
-.pc-collab__gate h2 { margin: 2px 0 0; font-size: 16.5px; color: var(--px-ink, #14181d); }
-.pc-collab__gate p { max-width: 380px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 12.5px; line-height: 1.5; }
-.pc-collab__gate-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 6px; }
+.pc-collab__gate-icon svg { width: 19px; height: 19px; }
+.pc-collab__gate h2 { margin: 2px 0 0; font-size: 15.5px; color: var(--px-ink, #14181d); }
+.pc-collab__gate p { max-width: 380px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 12px; line-height: 1.45; }
+.pc-collab__gate-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 4px; }
 .pc-collab__gate-primary {
-  min-height: 42px; display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;
   border: 0; border-radius: 10px; background: var(--px-brand, #0b6757); color: #fff;
   font-size: 12px; font-weight: 800; text-decoration: none; cursor: pointer;
 }
 .pc-collab__gate-primary svg { width: 16px; }
 .pc-collab__gate-login {
-  min-height: 42px; display: flex; align-items: center; justify-content: center;
+  min-height: 40px; display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--px-line, #e2e7ec); border-radius: 10px; color: var(--px-ink, #14181d);
   text-decoration: none; font-size: 12px; font-weight: 750;
 }
-.pc-collab__gate-back { border: 0; background: none; color: var(--px-muted, #5f6b78); font-size: 11.5px; text-decoration: underline; cursor: pointer; margin-top: 2px; }
+.pc-collab__gate-back { border: 0; background: none; color: var(--px-muted, #5f6b78); font-size: 11.5px; text-decoration: underline; cursor: pointer; margin-top: 1px; }
 
-@media (max-width: 780px) {
-  .pc-collab__hero { grid-template-columns: 1fr; }
-  .pc-collab__hero-media { order: -1; aspect-ratio: 16 / 9; }
+/* Trava em uma única tela sem rolagem a partir de 851px de largura */
+@media (min-width: 851px) {
+  .pc-collab-page { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+  .pc-collab { flex: 1; min-height: 0; overflow: hidden; }
+  .pc-collab__copy { padding-top: clamp(64px, 8vh, 84px); }
+}
+@media (min-width: 851px) and (max-height: 800px) {
+  .pc-collab__copy h1 { font-size: clamp(1.2rem, 2.2vw, 1.5rem); margin: 6px 0 4px; }
+  .pc-collab__copy p { font-size: 11.5px; }
+  .pc-collab__panel { padding: 12px 16px; }
+  .pc-collab__form { gap: 5px; margin-top: 6px; }
+  .pc-collab__panel > header { margin-bottom: 2px; }
+}
+
+@media (max-width: 850px) {
+  .pc-collab { grid-template-columns: 1fr; grid-template-areas: "media" "copy" "panel"; padding: 16px 0 24px; }
+  .pc-collab__media { aspect-ratio: 16 / 9; margin-top: 56px; }
+  .pc-collab__copy { padding-top: 0; text-align: center; }
+  .pc-collab__copy p { margin: 0 auto; }
+  .pc-collab__panel { margin-bottom: 0; }
 }
 @media (max-width: 640px) {
   .pc-collab__row { grid-template-columns: 1fr; }
   .pc-collab__gate-actions { grid-template-columns: 1fr; }
-}
-@media (max-height: 760px) {
-  .pc-collab { padding-top: clamp(60px, 9vw, 76px); gap: 14px; }
-  .pc-collab__form { gap: 6px; margin-top: 8px; }
-  .pc-collab__panel { padding: 14px 16px; }
 }

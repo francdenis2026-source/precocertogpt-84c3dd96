@@ -662,16 +662,15 @@ function CollaborationPage() {
   return <div className="ref-page pc-collab-page pc-noheader-page">
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="pc-collab">
-      <section className="pc-collab__hero">
-        <div className="pc-collab__hero-copy">
-          <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
-          <h1 id="pc-collab-title">Viu um preço diferente?</h1>
-          <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
-        </div>
-        <div className="pc-collab__hero-media" aria-hidden="true">
-          <img src={collabHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
-        </div>
-      </section>
+      <div className="pc-collab__copy">
+        <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
+        <h1 id="pc-collab-title">Viu um preço diferente?</h1>
+        <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
+      </div>
+
+      <div className="pc-collab__media" aria-hidden="true">
+        <img src={collabHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
+      </div>
 
       <section className="pc-collab__panel" aria-label="Enviar nota de compra">
         {needsAccount ? (

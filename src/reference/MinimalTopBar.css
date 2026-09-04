@@ -52,10 +52,13 @@
 .pc-mini-top--dark .pc-mini-top__brand small { color: #d4dfe4; opacity: 1; }
 .pc-mini-top--dark .pc-mini-top__back { background: rgba(10, 18, 24, 0.55); border-color: rgba(255, 255, 255, 0.16); color: #fff; }
 
-/* Sobre fundo claro: texto escuro, botão claro com sombra suave */
+/* Sobre fundo claro: acompanha o tema do site (claro ou escuro), nunca
+   fica com fundo e ícone da mesma cor — bug corrigido: o botão usava
+   fundo branco fixo, que ficava invisível/ilegível com o app no modo
+   escuro (ícone claro do tema escuro sobre um botão sempre branco). */
 .pc-mini-top--light .pc-mini-top__brand { color: var(--px-ink, #14181d); }
 .pc-mini-top--light .pc-mini-top__brand small { color: var(--px-muted, #5f6b78); }
-.pc-mini-top--light .pc-mini-top__back { background: #fff; border-color: var(--px-line, #e2e7ec); color: var(--px-ink, #14181d); }
+.pc-mini-top--light .pc-mini-top__back { background: var(--px-surface, #fff); border-color: var(--px-line, #e2e7ec); color: var(--px-ink, #14181d); }
 
 @media (max-width: 480px) {
   .pc-mini-top__brand small { display: none; }
