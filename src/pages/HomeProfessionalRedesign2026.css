@@ -387,122 +387,78 @@
 /* ── Hero ───────────────────────────────────────────────────────────────── */
 .pcx-hero {
   position: relative;
-  padding: clamp(2rem, 4.5vw, 3.25rem) 0;
-  min-height: clamp(460px, 62vh, 620px);
+  padding: clamp(1.75rem, 3.5vw, 2.75rem) 0;
+  min-height: 0;
   display: flex;
   align-items: center;
-  /* Sem overflow:hidden/isolation aqui: os dois criavam uma "caixa" que
-     prendia tudo dentro da hero — inclusive o painel de resultados da
-     busca (position:absolute, z-index alto) — e ele nunca conseguia
-     pintar por cima das seções seguintes da home, ficando visualmente
-     "por baixo" delas. O recorte da imagem de fundo já vem do próprio
-     .pcx-hero__bg (inset:0 + object-fit:cover), então overflow:hidden no
-     pai não fazia falta nenhuma; a pilha de camadas abaixo (bg/scrim em
-     z-index:0, conteúdo em z-index:1) substitui o isolation:isolate sem
-     precisar de um novo contexto de empilhamento isolado. */
-}
-.pcx-hero__bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-.pcx-hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 42% 6%; }
-.pcx-hero__scrim {
-  position: absolute; inset: 0;
   background:
-    linear-gradient(90deg, rgba(8, 14, 12, 0.94) 0%, rgba(8, 14, 12, 0.86) 32%, rgba(8, 14, 12, 0.55) 58%, rgba(8, 14, 12, 0.25) 100%),
-    linear-gradient(0deg, rgba(8, 14, 12, 0.35), transparent 40%);
-}
-[data-theme="light"] .pcx-hero__scrim,
-:root:not([data-theme="dark"]) .pcx-hero__scrim {
-  background:
-    linear-gradient(90deg, rgba(10, 20, 17, 0.92) 0%, rgba(10, 20, 17, 0.82) 34%, rgba(10, 20, 17, 0.46) 60%, rgba(10, 20, 17, 0.12) 100%),
-    linear-gradient(0deg, rgba(10, 20, 17, 0.3), transparent 40%);
+    radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--h-primary) 9%, transparent), transparent 24rem),
+    var(--h-bg);
+  border-bottom: 1px solid var(--h-border);
 }
 .pcx-hero__inner {
   position: relative;
   z-index: 1;
-  width: min(1240px, 100%);
+  width: min(1180px, 100%);
   margin-inline: auto;
   padding-inline: var(--h-section-x);
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(272px, 0.8fr);
-  gap: clamp(1.5rem, 4vw, 3.25rem);
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.82fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
-.pcx-hero__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(6px);
-  color: #eafff3;
-  font-size: 0.76rem;
-  font-weight: 800;
-  margin: 0 0 0.9rem;
-}
-.pcx-hero__eyebrow svg { width: 14px; height: 14px; color: #6be3ae; }
+.pcx-hero__copy { min-width: 0; }
 .pcx-hero h1 {
-  font-size: clamp(1.75rem, 3.1vw, 2.6rem);
-  line-height: 1.1;
-  color: #ffffff;
+  max-width: 16ch;
+  margin: 0;
+  font-size: clamp(2.15rem, 4.4vw, 3.65rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: var(--h-ink);
   text-wrap: balance;
 }
-.pcx-hero h1 strong { color: #6be3ae; }
+.pcx-hero h1 strong { color: var(--h-primary-dark); }
 .pcx-hero__lead {
-  margin: 0.75rem 0 1.25rem;
-  font-size: clamp(0.9rem, 1.3vw, 1rem);
-  color: rgba(255, 255, 255, 0.82);
-  max-width: 44ch;
-  line-height: 1.5;
+  margin: 0.85rem 0 1.15rem;
+  font-size: clamp(0.95rem, 1.25vw, 1.05rem);
+  color: var(--h-muted);
+  max-width: 52ch;
+  line-height: 1.55;
 }
-.pcx-hero__search { margin-bottom: 0.85rem; }
-.pcx-hero__tags {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.82rem;
-  margin-bottom: 1.4rem;
-}
-.pcx-hero__tags span:first-child { color: rgba(255, 255, 255, 0.65); font-weight: 600; }
-.pcx-hero__tags a {
-  padding: 0.28rem 0.65rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  text-decoration: none;
-  font-weight: 600;
-  color: #fff;
-  transition: border-color 150ms ease, background 150ms ease;
-}
-.pcx-hero__tags a:hover { border-color: #6be3ae; background: rgba(107, 227, 174, 0.18); }
-
-.pcx-hero__stats {
-  display: flex;
-  gap: clamp(1.1rem, 3vw, 2rem);
-  margin-bottom: 1.4rem;
-  flex-wrap: wrap;
-}
-.pcx-hero__stats div { display: grid; gap: 0.1rem; }
-.pcx-hero__stats strong { font-size: 1.3rem; font-weight: 800; color: #fff; }
-.pcx-hero__stats span { font-size: 0.76rem; color: rgba(255, 255, 255, 0.65); font-weight: 600; }
-
-.pcx-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.pcx-hero__search { margin-bottom: 0.9rem; }
+.pcx-hero__actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
 .pcx-hero .pcx-btn--ghost {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
+  background: var(--h-surface);
+  border-color: var(--h-border-strong);
+  color: var(--h-ink);
 }
-.pcx-hero .pcx-btn--ghost:hover { background: rgba(255, 255, 255, 0.16); border-color: #fff; }
+.pcx-hero .pcx-btn--ghost:hover { background: var(--h-surface-2); border-color: var(--h-primary); }
+
+.pcx-hero__visual {
+  position: relative;
+  min-height: 350px;
+  padding: 0 0 1.85rem 1.85rem;
+}
+.pcx-hero__image {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: 54% center;
+  border-radius: var(--h-radius-xl);
+  box-shadow: 0 18px 48px rgb(20 42 34 / 16%);
+}
 
 /* Hero side panel — real-data proof card */
 .pcx-hero__panel {
+  position: absolute;
+  left: 0;
+  right: clamp(0.75rem, 5vw, 2.5rem);
+  bottom: 0;
   background: var(--h-surface);
-  border: 1px solid var(--h-border);
   border-radius: var(--h-radius-xl);
-  box-shadow: var(--h-shadow-lg);
-  padding: 1.4rem;
-  position: relative;
+  box-shadow: 0 14px 38px rgb(20 42 34 / 18%);
+  padding: 1rem;
   overflow: hidden;
 }
 .pcx-hero__panel::before {
@@ -516,7 +472,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
 }
 .pcx-hero__panel-head span {
   font-size: 0.72rem;
@@ -539,13 +495,13 @@
 }
 @keyframes pcx-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-.pcx-hero__panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.pcx-hero__panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
 .pcx-hero__panel li {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 0.15rem 0.75rem;
-  padding: 0.75rem 0.85rem;
+  padding: 0.58rem 0.7rem;
   border-radius: var(--h-radius-md);
   background: var(--h-surface-2);
   border: 1px solid var(--h-border);
@@ -580,8 +536,8 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  margin-top: 1rem;
-  padding-top: 0.9rem;
+  margin-top: 0.65rem;
+  padding-top: 0.6rem;
   border-top: 1px dashed var(--h-border);
   font-size: 0.76rem;
   color: var(--h-subtle);
@@ -590,32 +546,21 @@
 .pcx-hero__panel-foot svg { width: 14px; height: 14px; }
 
 @media (max-width: 960px) {
-  .pcx-hero__inner { grid-template-columns: 1fr; }
-  .pcx-hero__panel { padding: 1.1rem; }
-}
-@media (max-width: 960px) {
-  /* Abaixo de 960px o painel de prova social empilha em coluna única (ver
-     regra acima) e a hero fica proporcionalmente mais estreita/alta — o
-     recorte padrão corta o rosto, que na foto fica perto do topo. Reenquadra
-     para manter o rosto (do lojista, lado direito da foto) visível em
-     qualquer largura de tablet/celular. */
-  .pcx-hero__bg img { object-position: 40% 0%; }
+  .pcx-hero__inner { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr); gap: 1.5rem; }
+  .pcx-hero__visual { min-height: 320px; padding-left: 1rem; }
+  .pcx-hero__image { height: 286px; }
+  .pcx-hero__panel { right: 0.5rem; padding: 0.85rem; }
+  .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 }
 @media (max-width: 640px) {
-  .pcx-hero { min-height: clamp(520px, 78vh, 680px); align-items: flex-end; padding-bottom: 1.5rem; }
-  .pcx-hero__bg img { object-position: 47% 0%; }
-  /* No mobile o texto fica sobre a mesma faixa vertical onde a ilustração é
-     mais "cheia" (não há como deslocar isso só no eixo Y — a imagem sempre
-     mostra 100% da própria altura aqui). Em vez de perseguir um recorte
-     perfeito, reforça o escurecimento para o texto ficar legível não
-     importa o que esteja atrás. */
-  .pcx-hero__scrim,
-  [data-theme="light"] .pcx-hero__scrim,
-  :root:not([data-theme="dark"]) .pcx-hero__scrim {
-    background:
-      linear-gradient(180deg, rgba(6, 12, 10, 0.88) 0%, rgba(6, 12, 10, 0.82) 55%, rgba(6, 12, 10, 0.9) 100%),
-      linear-gradient(90deg, rgba(6, 12, 10, 0.55) 0%, rgba(6, 12, 10, 0.35) 100%);
-  }
+  .pcx-hero { padding: 1.35rem 0 1.6rem; }
+  .pcx-hero__inner { grid-template-columns: 1fr; gap: 1.3rem; }
+  .pcx-hero h1 { max-width: 18ch; font-size: clamp(2.1rem, 10.5vw, 3rem); }
+  .pcx-hero__lead { margin-bottom: 1rem; }
+  .pcx-hero__visual { min-height: 255px; padding: 0 0 1.4rem 0.75rem; }
+  .pcx-hero__image { height: 230px; object-position: 51% center; border-radius: var(--h-radius-lg); }
+  .pcx-hero__panel { right: 0.75rem; border-radius: var(--h-radius-lg); }
+  .pcx-hero__panel-foot { display: none; }
 }
 
 /* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important) */
