@@ -18,7 +18,6 @@ import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
-import { HomeQuickActions } from "../components/home/HomeQuickActions";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { PromoBands } from "../components/home/PromoBands";
 import { StoreRail } from "../components/home/StoreRail";
@@ -116,7 +115,6 @@ export function HomeNew2026() {
           loading={loading}
           cycle={cycle}
         />
-        <HomeQuickActions />
         <ProductGrid products={featured} loading={loading} />
         <PromoBands />
         <CategoryBar />

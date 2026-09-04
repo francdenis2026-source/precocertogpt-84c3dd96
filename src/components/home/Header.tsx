@@ -31,7 +31,7 @@ function HeaderThemeToggle() {
 
 const navItems = [
   { to: "/", label: "Início", icon: Home },
-  { to: "/buscar", label: "Ofertas", icon: Tag },
+  { to: "/buscar", label: "Buscar", icon: Tag },
   { to: "/estabelecimentos", label: "Estabelecimentos", icon: Store },
   { to: "/explorar", label: "Categorias", icon: LayoutGrid },
 ] as const;

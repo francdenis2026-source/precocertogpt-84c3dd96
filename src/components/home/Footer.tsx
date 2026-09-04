@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const navigation = [
   { to: "/buscar", label: "Buscar" },
-  { to: "/explorar", label: "Setores" },
+  { to: "/explorar", label: "Categorias" },
   { to: "/estabelecimentos", label: "Estabelecimentos" },
   { to: "/cesta-inteligente", label: "Cesta inteligente" },
   { to: "/contato", label: "Contato" },
