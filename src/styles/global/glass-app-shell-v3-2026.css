@@ -26,9 +26,7 @@ body.pc-app-shell
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.34) !important;
   backdrop-filter: blur(22px) saturate(145%) !important;
   -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
-  transition:
-    background-color 180ms ease-out,
-    border-color 180ms ease-out !important;
+  transition: border-color 180ms ease-out !important;
 }
 body.pc-app-shell
   :is(.pc26-header--studio, .ref-header)[data-glass-header="true"]::before {
@@ -375,7 +373,6 @@ html[data-theme="dark"]
     touch-action: manipulation;
     transition:
       color 160ms ease-out,
-      background-color 160ms ease-out,
       transform 120ms ease-out !important;
   }
   body.pc-app-shell :is(.ref-dock, .pc26-bottom-nav) a svg {
