@@ -247,7 +247,7 @@ export function LiveProductSearch({
                     <span className="pc26-live-results__copy">
                       <strong>{product.name}</strong>
                       <small>
-                        {[product.brand, product.size || product.category]
+                        {[product.brand, product.size && product.size.trim() !== "-" ? product.size : product.category]
                           .filter(Boolean)
                           .join(" · ")}
                       </small>

@@ -292,7 +292,7 @@ export function StoreDetailProfessional() {
           <small className="store-pro-category">{product.category}</small>
           <strong>{product.name}</strong>
           <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
-          <span className="store-pro-spec">{product.size || product.unit || "Unidade não informada"}</span>
+          <span className="store-pro-spec">{(product.size && product.size.trim() !== "-" ? product.size : "") || product.unit || "Unidade não informada"}</span>
           <footer><em>preço cadastrado</em><b>{brl.format(product.minPrice)}</b></footer>
         </Link>)}</div> : <div className="store-pro-empty"><PackageSearch /><h3>Nenhum produto encontrado</h3><p>Tente outro nome ou remova algum filtro.</p><button type="button" className="pc-btn pc-btn--ghost" onClick={() => { setQuery(""); setCategory("Todos"); }}>Limpar filtros</button></div>}
 

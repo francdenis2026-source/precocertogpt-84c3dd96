@@ -265,7 +265,7 @@ export function ProductDetailLive2026() {
                 </span>
                 <span className="pdl-chip"><Tag aria-hidden="true" />{cleanValue(product.brand, product.category)}</span>
                 <h1>{product.name}</h1>
-                <p>{product.size || product.unit || "Embalagem não informada"} · {product.category}</p>
+                <p>{cleanValue(product.size, "") || cleanValue(product.unit, "") || "Embalagem não informada"} · {product.category}</p>
 
                 <div className="pdl-price">
                   <div>
@@ -352,7 +352,7 @@ export function ProductDetailLive2026() {
                 <div><dt><Tag aria-hidden="true" />Marca</dt><dd>{cleanValue(product.brand)}</dd></div>
                 <div><dt><Factory aria-hidden="true" />Fabricante</dt><dd>{cleanValue(extra.manufacturer)}</dd></div>
                 <div><dt><Layers3 aria-hidden="true" />Categoria</dt><dd>{product.category}</dd></div>
-                <div><dt><Package aria-hidden="true" />Embalagem</dt><dd>{product.size || product.unit || "Não informada"}</dd></div>
+                <div><dt><Package aria-hidden="true" />Embalagem</dt><dd>{cleanValue(product.size, "") || cleanValue(product.unit, "") || "Não informada"}</dd></div>
                 <div><dt><BadgeCheck aria-hidden="true" />Código de barras</dt><dd>{cleanValue(extra.barcode || product.barcode)}</dd></div>
                 <div><dt><CalendarDays aria-hidden="true" />Atualizado</dt><dd>{formatDate(product.updated_at || product.capturedAt)}</dd></div>
               </dl>
