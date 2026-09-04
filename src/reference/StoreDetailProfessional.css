@@ -67,7 +67,7 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-catalog-hint svg{width:15px;height:15px}
 
 .store-pro-toolbar{position:sticky;top:80px;z-index:8;display:grid;grid-template-columns:minmax(320px,1fr) 210px 190px;gap:10px;margin-bottom:16px;padding:10px;border:1px solid var(--pc-border-strong);border-radius:18px;background:color-mix(in srgb,var(--pc-surface) 94%,transparent);backdrop-filter:blur(16px);box-shadow:var(--pc-shadow-sm)}
-.store-pro-search,.store-pro-select{min-height:46px;display:flex;align-items:center;gap:9px;padding:0 13px;border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface-2);color:var(--pc-muted);transition:border-color .16s ease,box-shadow .16s ease,background .16s ease}
+.store-pro-search,.store-pro-select{min-height:46px;display:flex;align-items:center;gap:9px;padding:0 13px;border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface-2);color:var(--pc-muted);transition:border-color .16s ease,box-shadow .16s ease}
 .store-pro-search:focus-within,.store-pro-select:focus-within{border-color:var(--pc-green);box-shadow:0 0 0 3px color-mix(in srgb,var(--pc-green) 15%,transparent);background:var(--pc-surface)}
 .store-pro-search svg,.store-pro-select svg{width:17px;flex:0 0 auto;height:17px}
 .store-pro-search input,.store-pro-select select{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--pc-ink);font:inherit;font-size:13px}
@@ -76,7 +76,7 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-select option{background:var(--pc-surface);color:var(--pc-ink)}
 
 .store-pro-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important}
-.store-pro-grid>a{min-height:0!important;padding:0!important;overflow:hidden;border:1px solid var(--pc-border)!important;border-radius:18px!important;background:var(--pc-surface)!important;box-shadow:none!important;text-decoration:none!important;transition:border-color .18s ease,background .18s ease,transform .16s ease,box-shadow .18s ease}
+.store-pro-grid>a{min-height:0!important;padding:0!important;overflow:hidden;border:1px solid var(--pc-border)!important;border-radius:18px!important;background:var(--pc-surface)!important;box-shadow:none!important;text-decoration:none!important;transition:border-color .18s ease,transform .16s ease,box-shadow .18s ease}
 @media(hover:hover) and (pointer:fine){.store-pro-grid>a:hover{border-color:color-mix(in srgb,var(--pc-green) 45%,var(--pc-border))!important;transform:translateY(-3px);box-shadow:var(--pc-shadow-sm)!important}}
 .store-pro-grid>a:focus-visible{outline:3px solid color-mix(in srgb,var(--pc-green) 45%,transparent);outline-offset:3px}
 .store-pro-product-image{height:160px!important;margin:0!important;padding:12px;background:var(--pc-surface-2)!important;border-radius:0!important;overflow:hidden}
@@ -107,7 +107,7 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-pagination>div{display:flex;align-items:center;gap:5px}
 .store-pro-pagination>div>span{display:flex;align-items:center;gap:5px}
 .store-pro-pagination i{color:var(--pc-muted);font-size:12.5px;font-style:normal}
-.store-pro-pagination button{min-width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--pc-border-strong);border-radius:9px;background:var(--pc-surface-2);color:var(--pc-ink);font-size:12.5px;font-weight:800;cursor:pointer;transition:background .14s ease,border-color .14s ease,transform .1s ease}
+.store-pro-pagination button{min-width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--pc-border-strong);border-radius:9px;background:var(--pc-surface-2);color:var(--pc-ink);font-size:12.5px;font-weight:800;cursor:pointer;transition:border-color .14s ease,transform .1s ease}
 .store-pro-pagination button svg{width:15px;height:15px}
 .store-pro-pagination button:hover:not(:disabled),.store-pro-pagination button.is-active{border-color:var(--pc-green);background:var(--pc-green-soft);color:var(--pc-green-strong)}
 .store-pro-pagination button:active:not(:disabled){transform:scale(.96)}

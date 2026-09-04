@@ -76,7 +76,7 @@
 
 /* Categorias: cartões horizontais compactos em grade modular. */
 .sector-hub__sectors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-.sector-hub__sector { position: relative; min-width: 0; min-height: 144px; padding: 15px; border: 1px solid var(--pc-border); border-radius: 14px; background: var(--pc-surface); color: var(--pc-ink); display: grid; grid-template-columns: 42px minmax(0, 1fr) 16px; align-items: start; gap: 11px; transition: transform 160ms var(--sh-ease), border-color 160ms ease, background-color 160ms ease; }
+.sector-hub__sector { position: relative; min-width: 0; min-height: 144px; padding: 15px; border: 1px solid var(--pc-border); border-radius: 14px; background: var(--pc-surface); color: var(--pc-ink); display: grid; grid-template-columns: 42px minmax(0, 1fr) 16px; align-items: start; gap: 11px; transition: transform 160ms var(--sh-ease), border-color 160ms ease; }
 .sector-hub__sector-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--pc-green-soft); color: var(--sh-green); display: grid; place-items: center; }
 .sector-hub__sector-icon svg { width: 20px; height: 20px; }
 .sector-hub__sector-copy { min-width: 0; display: grid; gap: 3px; }

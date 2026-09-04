@@ -32,7 +32,7 @@
   border-radius:50%;border:1px solid var(--h-border-strong, #cfd6de);
   background:color-mix(in srgb, var(--h-surface, #fff) 88%, transparent);color:var(--h-ink, #10161d);
   cursor:pointer;
-  transition:background-color .15s ease, border-color .15s ease;
+  transition:border-color .15s ease;
 }
 .pqv-close svg{width:15px;height:15px}
 .pqv-close:hover{background:var(--h-surface-2, #eef1f4);border-color:var(--h-primary, #0e7a5f)}
@@ -63,7 +63,7 @@
   padding:0.65rem 1rem;border-radius:var(--h-radius-md, 12px);
   font-size:0.82rem;font-weight:700;cursor:pointer;
   border:1px solid var(--h-border-strong, #cfd6de);background:var(--h-surface, #fff);color:var(--h-ink, #10161d);
-  transition:border-color .15s ease,background-color .15s ease,color .15s ease,transform .15s ease;
+  transition:border-color .15s ease,color .15s ease,transform .15s ease;
 }
 .pqv-btn:hover{transform:translateY(-1px)}
 .pqv-btn svg{width:16px;height:16px}
