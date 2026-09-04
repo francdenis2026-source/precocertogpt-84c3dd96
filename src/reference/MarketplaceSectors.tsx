@@ -9,6 +9,7 @@ import { sectorHeroImage } from "../data/sectorHeroImages";
 import { PublicHeader } from "./ReferenceExperience";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
+import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import "./PharmacyDirectory.css";
 import "./CulturalProfiles.css";
 
@@ -183,7 +184,8 @@ function DirectoryFooter({ sector }: { sector: MarketplaceSector }) {
 function SectorProductList({ catalog, sector }: { catalog: CatalogPayload | null; sector: MarketplaceSector }) {
   const location = useLocation();
   const { userId } = useFavorites();
-  const isGuest = !userId;
+  const { allPricesVisible } = usePriceVisibility();
+  const isGuest = !userId && !allPricesVisible;
   if (!catalog) return null;
   const allProducts = sectorProducts(catalog, sector);
   const products = allProducts.slice(0, 12);

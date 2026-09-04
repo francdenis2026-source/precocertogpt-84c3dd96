@@ -12,6 +12,7 @@ import {
   ClipboardCheck,
   ExternalLink,
   Eye,
+  EyeOff,
   LayoutDashboard,
   ListChecks,
   LogOut,
@@ -44,6 +45,8 @@ import {
   setAdminProductPrice,
   type AdminCatalogSnapshot,
 } from "../lib/adminCatalog";
+import { usePriceVisibility } from "../hooks/usePriceVisibility";
+import { setAllPricesVisible } from "../lib/priceVisibility";
 import { AdminCampaignManager } from "./AdminCampaignManager";
 import { AdminRadioManager } from "./AdminRadioManager";
 import { AdminOffersManager } from "./AdminOffersManager";
@@ -463,6 +466,54 @@ function Nav({
   );
 }
 
+function PriceVisibilityControl() {
+  const { allPricesVisible, loading } = usePriceVisibility();
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const toggle = async () => {
+    setSaving(true);
+    setError(null);
+    const { error: saveError } = await setAllPricesVisible(!allPricesVisible);
+    if (saveError) setError(saveError);
+    setSaving(false);
+  };
+
+  return (
+    <section className={`acc-panel wide acc-price-gate${allPricesVisible ? " is-open" : ""}`}>
+      <header>
+        <div>
+          <small>ACESSO PÚBLICO</small>
+          <h2>Visibilidade de preços</h2>
+        </div>
+        {allPricesVisible ? <Eye /> : <EyeOff />}
+      </header>
+      <div className="acc-price-gate__body">
+        <p>
+          {allPricesVisible
+            ? "Todos os preços do catálogo estão visíveis para qualquer visitante, mesmo sem cadastro ou login."
+            : "Visitantes não cadastrados veem apenas uma prévia dos preços; o restante fica bloqueado até criarem conta."}
+        </p>
+        <button
+          type="button"
+          className="acc-price-gate__toggle"
+          role="switch"
+          aria-checked={allPricesVisible}
+          disabled={loading || saving}
+          onClick={toggle}
+        >
+          <span className="acc-price-gate__toggle-track"><span className="acc-price-gate__toggle-thumb" /></span>
+          <span>{allPricesVisible ? "Liberado para todos" : "Restrito a cadastrados"}</span>
+        </button>
+      </div>
+      <small className="acc-price-gate__hint">
+        {saving ? "Salvando…" : "Aplicado em tempo real, no site inteiro, sem precisar publicar."}
+      </small>
+      {error && <p className="acc-price-gate__error">{error}</p>}
+    </section>
+  );
+}
+
 function Overview({ data }: { data: AdminSnapshot }) {
   const s = data.summary;
   const cards = [
@@ -517,6 +568,7 @@ function Overview({ data }: { data: AdminSnapshot }) {
           </Link>
         ))}
       </section>
+      <PriceVisibilityControl />
       <section className="acc-grid">
         <article className="acc-panel wide">
           <header>

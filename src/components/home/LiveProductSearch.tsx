@@ -22,6 +22,7 @@ import type { Product } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
 import { suggestProducts } from "../../lib/productSearch";
 import { useFavorites } from "../../features/favorites/FavoritesProvider";
+import { usePriceVisibility } from "../../hooks/usePriceVisibility";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -45,7 +46,8 @@ export function LiveProductSearch({
   const navigate = useNavigate();
   const location = useLocation();
   const { userId } = useFavorites();
-  const isGuest = !userId;
+  const { allPricesVisible } = usePriceVisibility();
+  const isGuest = !userId && !allPricesVisible;
   const listId = `${useId().replace(/:/g, "")}-${id}-results`;
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");

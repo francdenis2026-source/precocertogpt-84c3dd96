@@ -11,6 +11,7 @@ import { resolveProductImage } from "../data/productImageResolver";
 import { AppDock, PublicFooter, PublicHeader } from "./ReferenceExperience";
 import { productSearchScore } from "../lib/productSearch";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
+import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import "./SearchDiscovery2026.css";
 import "./CompactViewportPages.css";
 
@@ -74,7 +75,8 @@ export function SearchDiscovery2026(){
  const pageRef=useRef<HTMLDivElement>(null);
  const location=useLocation();
  const{userId}=useFavorites();
- const isGuest=!userId;
+ const{allPricesVisible}=usePriceVisibility();
+ const isGuest=!userId&&!allPricesVisible;
  const[params,setParams]=useSearchParams();
  const initialQuery=params.get("q")||"";
  const[catalog,setCatalog]=useState<CatalogPayload|null>(null),[loading,setLoading]=useState(true);

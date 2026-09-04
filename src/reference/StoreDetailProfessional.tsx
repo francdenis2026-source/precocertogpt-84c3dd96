@@ -10,6 +10,7 @@ import { groupForStore } from "../data/businessTaxonomy";
 import { marketplaceSectors } from "./MarketplaceSectors";
 import { MinimalTopBar } from "./ReferenceExperience";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
+import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import "./StoreDetailProfessional.css";
 import "./StoreExperienceAcai2026.css";
 import "./StoreSectorHero.css";
@@ -101,7 +102,8 @@ export function StoreDetailProfessional() {
   const { identifier = "" } = useParams();
   const location = useLocation();
   const { userId } = useFavorites();
-  const isGuest = !userId;
+  const { allPricesVisible } = usePriceVisibility();
+  const isGuest = !userId && !allPricesVisible;
   const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
