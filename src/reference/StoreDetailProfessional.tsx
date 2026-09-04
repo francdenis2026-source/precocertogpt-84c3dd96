@@ -241,7 +241,7 @@ export function StoreDetailProfessional() {
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
   return <div className={`ref-page store-pro-page pc-noheader-page${isBonsAmigos ? " store-pro-page--bons-amigos" : ""}`} ref={pageRef}>
-    <MinimalTopBar />
+    <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="store-pro-shell">
       <div className="store-pro-topline store-pro-topline--location-only">
         <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin /> {store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000</a>

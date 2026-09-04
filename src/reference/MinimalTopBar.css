@@ -1,8 +1,8 @@
 /* Barra mínima flutuante: substitui o header fixo em páginas sem navegação
    própria (colaborar, contato, detalhe de estabelecimento) — não ocupa
-   espaço de layout, só a logomarca + um botão de voltar sobrepostos ao
-   topo. Pílula clara com sombra própria: legível tanto sobre foto escura
-   quanto sobre fundo claro, sem precisar de uma variante por página. */
+   espaço de layout. Logomarca à esquerda (mesma posição/estilo do header
+   real do site, sem pílula), botão de voltar à direita. Duas variantes:
+   dark (sobre foto escura) e light (sobre fundo claro). */
 .pc-mini-top {
   position: fixed;
   top: 0;
@@ -16,41 +16,47 @@
   padding-top: max(14px, env(safe-area-inset-top));
   pointer-events: none;
 }
-.pc-mini-top__back,
+
 .pc-mini-top__brand {
   pointer-events: auto;
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 8px 22px rgba(10, 16, 22, 0.18);
-  backdrop-filter: blur(10px);
-  color: #14181d;
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
-}
-.pc-mini-top__back {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  cursor: pointer;
-}
-.pc-mini-top__back svg { width: 18px; height: 18px; }
-.pc-mini-top__back:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(10, 16, 22, 0.24); }
-.pc-mini-top__brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px 7px 7px;
-  border-radius: 999px;
+  gap: 10px;
   text-decoration: none;
-  font-size: 12.5px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  transition: opacity 0.16s ease;
 }
-.pc-mini-top__brand img { width: 26px; height: 26px; border-radius: 7px; }
-.pc-mini-top__brand:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(10, 16, 22, 0.24); }
+.pc-mini-top__brand:hover { opacity: 0.82; }
+.pc-mini-top__brand img { width: 34px; height: 34px; border-radius: 9px; flex: 0 0 auto; }
+.pc-mini-top__brand span { display: grid; gap: 1px; line-height: 1.1; }
+.pc-mini-top__brand strong { font-size: 14.5px; font-weight: 800; letter-spacing: -0.01em; }
+.pc-mini-top__brand small { font-size: 11px; font-weight: 600; opacity: 0.72; }
+
+.pc-mini-top__back {
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 16px rgba(10, 16, 22, 0.12);
+  backdrop-filter: blur(10px);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.pc-mini-top__back svg { width: 17px; height: 17px; }
+.pc-mini-top__back:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(10, 16, 22, 0.18); }
+
+/* Sobre foto/fundo escuro: texto e ícone claros, botão translúcido escuro */
+.pc-mini-top--dark .pc-mini-top__brand { color: #fff; }
+.pc-mini-top--dark .pc-mini-top__brand small { color: #d4dfe4; opacity: 1; }
+.pc-mini-top--dark .pc-mini-top__back { background: rgba(10, 18, 24, 0.55); border-color: rgba(255, 255, 255, 0.16); color: #fff; }
+
+/* Sobre fundo claro: texto escuro, botão claro com sombra suave */
+.pc-mini-top--light .pc-mini-top__brand { color: var(--px-ink, #14181d); }
+.pc-mini-top--light .pc-mini-top__brand small { color: var(--px-muted, #5f6b78); }
+.pc-mini-top--light .pc-mini-top__back { background: #fff; border-color: var(--px-line, #e2e7ec); color: var(--px-ink, #14181d); }
 
 @media (max-width: 480px) {
-  .pc-mini-top__brand span { display: none; }
-  .pc-mini-top__brand { padding: 7px; }
+  .pc-mini-top__brand small { display: none; }
 }

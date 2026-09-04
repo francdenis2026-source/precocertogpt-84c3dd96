@@ -612,22 +612,24 @@ const infoCopy: Record<InfoKind, { eyebrow: string; title: string; copy: string;
  * detalhe de estabelecimento): sem barra sólida ocupando espaço — só a
  * logomarca e um botão de voltar flutuando sobre o topo da página.
  */
-export function MinimalTopBar() {
+export function MinimalTopBar({ variant = "dark" }: { variant?: "dark" | "light" }) {
   const navigate = useNavigate();
-  return <div className="pc-mini-top">
+  return <div className={`pc-mini-top pc-mini-top--${variant}`}>
+    <Link className="pc-mini-top__brand" to="/" aria-label="Preço Certo — página inicial">
+      <img src="/preco-certo-mark.svg?v=17" alt="" width="34" height="34" />
+      <span><strong>Preço Certo</strong><small>Feijó, Acre</small></span>
+    </Link>
     <button type="button" className="pc-mini-top__back" onClick={() => window.history.length > 1 ? navigate(-1) : navigate("/")} aria-label="Voltar para a página anterior">
       <ArrowLeft aria-hidden="true" />
     </button>
-    <Link className="pc-mini-top__brand" to="/" aria-label="Preço Certo — página inicial">
-      <img src="/preco-certo-mark.svg?v=17" alt="" width="26" height="26" />
-      <span>Preço Certo</span>
-    </Link>
   </div>;
 }
 
 function CollaborationPage() {
+  const { userId } = useFavorites();
   const [form, setForm] = useState({ name: "", city: "", establishment: "", address: "", email: "", whatsapp: "" });
   const [touched, setTouched] = useState(false);
+  const [needsAccount, setNeedsAccount] = useState(false);
   const field = (key: keyof typeof form) => ({
     value: form[key],
     onChange: (event: { target: { value: string } }) => setForm(current => ({ ...current, [key]: event.target.value })),
@@ -646,25 +648,38 @@ function CollaborationPage() {
     event.preventDefault();
     setTouched(true);
     if (!isValid) return;
+    if (!userId) { setNeedsAccount(true); return; }
     window.location.href = emailHref;
   };
 
   return <div className="ref-page pc-collab-page pc-noheader-page">
-    <MinimalTopBar />
+    <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="pc-collab">
-      <section className="pc-collab__hero" aria-labelledby="pc-collab-title">
-        <div className="pc-collab__copy">
-          <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
-          <h1 id="pc-collab-title">Viu um preço diferente?</h1>
-          <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
-          <div className="pc-collab__trust"><ShieldCheck aria-hidden="true" /><span><strong>Análise antes da publicação</strong><small>Nenhum preço é alterado automaticamente. A equipe PreçoCerto valida estabelecimento, produto, valor e data.</small></span></div>
-        </div>
+      <div className="pc-collab__intro">
+        <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
+        <h1 id="pc-collab-title">Viu um preço diferente?</h1>
+        <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
+      </div>
 
-        <aside className="pc-collab__panel" aria-label="Enviar nota de compra">
+      <section className="pc-collab__panel" aria-label="Enviar nota de compra">
+        {needsAccount ? (
+          <div className="pc-collab__gate">
+            <span className="pc-collab__gate-icon"><LockKeyhole aria-hidden="true" /></span>
+            <h2>Crie sua conta para enviar</h2>
+            <p>Para enviar notas de compra é preciso estar cadastrado e logado — assim a equipe consegue confirmar informações quando necessário. Seus dados preenchidos são mantidos ao voltar.</p>
+            <div className="pc-collab__gate-actions">
+              <Link className="pc-collab__send" to="/cadastro?redirect=%2Fcolaborar">Criar conta grátis <ArrowRight aria-hidden="true" /></Link>
+              <Link className="pc-collab__gate-login" to="/login?redirect=%2Fcolaborar">Já tenho conta</Link>
+            </div>
+            <button type="button" className="pc-collab__gate-back" onClick={() => setNeedsAccount(false)}>Voltar ao formulário</button>
+          </div>
+        ) : <>
           <header><span><ReceiptText aria-hidden="true" /></span><div><small>SUA CONTRIBUIÇÃO</small><h2>Envie a nota por e-mail</h2></div></header>
           <form className="pc-collab__form" onSubmit={submit} noValidate>
-            <label>Seu nome <em>*</em><input {...field("name")} type="text" autoComplete="name" placeholder="Como podemos te chamar" /></label>
-            <label>Cidade de onde vai enviar <em>*</em><input {...field("city")} type="text" autoComplete="address-level2" placeholder="Ex.: Feijó, Acre" /></label>
+            <div className="pc-collab__row">
+              <label>Seu nome <em>*</em><input {...field("name")} type="text" autoComplete="name" placeholder="Como podemos te chamar" /></label>
+              <label>Cidade de onde vai enviar <em>*</em><input {...field("city")} type="text" autoComplete="address-level2" placeholder="Ex.: Feijó, Acre" /></label>
+            </div>
             <div className="pc-collab__row">
               <label>Estabelecimento <em>*</em><input {...field("establishment")} type="text" placeholder="Nome da loja da nota" /></label>
               <label>Endereço do estabelecimento<input {...field("address")} type="text" placeholder="Rua, bairro (se souber)" /></label>
@@ -675,17 +690,18 @@ function CollaborationPage() {
             </div>
             {touched && !isValid && <p className="pc-collab__error"><Info aria-hidden="true" /> Preencha nome, cidade, estabelecimento e e-mail para continuar.</p>}
             <button className="pc-collab__send" type="submit"><Camera aria-hidden="true" /> Preparar envio da nota <ArrowRight aria-hidden="true" /></button>
-            <small className="pc-collab__hint">Seu aplicativo de e-mail será aberto com esses dados preenchidos. Anexe a fotografia da nota antes de enviar — destinatário: precocerto-fj@proton.me.</small>
+            <small className="pc-collab__hint">É preciso estar cadastrado e logado para enviar. Seu app de e-mail abrirá com os dados preenchidos — anexe a foto da nota antes de enviar.</small>
           </form>
-        </aside>
+        </>}
       </section>
     </main>
+    <PublicFooter />
   </div>;
 }
 
 function ContactPage() {
   return <div className="pc-contact-page pc-noheader-page">
-    <MinimalTopBar />
+    <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="pc-contact">
       <section className="pc-contact__hero">
         <div className="pc-contact__hero-copy">

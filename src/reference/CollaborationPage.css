@@ -1,42 +1,96 @@
-.pc-collab-page{height:100dvh;min-height:560px;overflow:hidden;background:#08141b;color:#f8fbfc}
-.pc-collab{position:relative;isolation:isolate;height:100%;min-height:504px;display:grid;place-items:center;padding:16px clamp(18px,4vw,56px);overflow:hidden}
-.pc-collab::before{content:"";position:absolute;z-index:-2;inset:0;background:#111d27 url('/auth-market-hero-v2.webp') 66% center/auto 100% no-repeat;filter:brightness(1.16) saturate(1.18) contrast(1.04)}
-.pc-collab::after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(100deg,rgba(3,12,18,.96) 0%,rgba(3,12,18,.88) 24%,rgba(3,12,18,.3) 48%,rgba(3,12,18,.06) 66%,rgba(3,12,18,.3) 100%)}
-@media(max-width:850px){.pc-collab::before{background-position:70% 18%;background-size:cover}}
-.pc-collab__hero{width:min(1180px,100%);max-height:100%;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(360px,.8fr);align-items:center;gap:clamp(20px,4vw,52px)}
-.pc-collab__copy{max-width:560px}
-.pc-collab__eyebrow{display:flex;align-items:center;gap:8px;color:#f5bd58;font-size:10.5px;font-weight:900;letter-spacing:.14em}
-.pc-collab__eyebrow svg{width:15px}
-.pc-collab__copy h1{max-width:520px;margin:8px 0 8px;font-family:var(--pc-font-display,"Outfit Variable",Outfit,sans-serif);font-size:clamp(30px,3.6vw,46px);line-height:.98;letter-spacing:-.04em;color:#fff}
-.pc-collab__copy>p{max-width:480px;margin:0;color:#d4dfe4;font-size:clamp(12.5px,1.05vw,14.5px);line-height:1.45}
-.pc-collab__trust{max-width:480px;margin-top:14px;display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:center;padding:10px 12px;border:1px solid rgba(255,255,255,.13);border-radius:13px;background:rgba(7,24,32,.6);backdrop-filter:blur(10px)}
-.pc-collab__trust>svg{width:19px;color:#65d59a}
-.pc-collab__trust span{display:grid;gap:2px}.pc-collab__trust strong{font-size:11.5px}.pc-collab__trust small{color:#b9c8cf;font-size:10px;line-height:1.35}
-.pc-collab__panel{max-height:100%;overflow-y:auto;padding:16px 18px;border:1px solid rgba(255,255,255,.15);border-radius:20px;background:rgba(7,22,30,.9);box-shadow:0 24px 64px rgba(0,0,0,.32);backdrop-filter:blur(18px);scrollbar-width:thin}
-.pc-collab__panel>header{display:flex;align-items:center;gap:11px}.pc-collab__panel>header>span{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:#f4b544;color:#13242c;flex:0 0 auto}.pc-collab__panel>header svg{width:18px}.pc-collab__panel>header small{color:#f5bd58;font-size:8.5px;font-weight:900;letter-spacing:.13em}.pc-collab__panel h2{margin:1px 0 0;color:#fff;font-size:17px}
-.pc-collab__form{display:grid;gap:8px;margin-top:12px}
-.pc-collab__form label{display:grid;gap:4px;color:#c6d3d8;font-size:10.5px;font-weight:750}
-.pc-collab__form label em{margin-left:2px;color:#f5bd58;font-style:normal}
-.pc-collab__form input{min-height:36px;padding:0 11px;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:12.5px}
-.pc-collab__form input::placeholder{color:#7c8d94}
-.pc-collab__form input:focus-visible{outline:2px solid #f5bd58;outline-offset:1px;background:rgba(255,255,255,.08)}
-.pc-collab__row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.pc-collab__error{display:flex;align-items:center;gap:6px;margin:0;padding:7px 10px;border:1px solid rgba(240,160,138,.35);border-radius:9px;background:rgba(240,160,138,.1);color:#f0a08a;font-size:10.5px;line-height:1.35}
-.pc-collab__error svg{width:14px;height:14px;flex:0 0 auto}
-.pc-collab__send{min-height:42px;margin-top:3px;display:flex!important;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;background:#f4b544!important;color:#17252b!important;font-size:11.5px!important;font-weight:900;text-decoration:none;cursor:pointer;width:100%}.pc-collab__send svg{width:16px}.pc-collab__send svg:last-child{margin-left:auto}
-.pc-collab__hint{display:block;margin-top:6px;color:#94a8b1;font-size:8.5px;line-height:1.35;text-align:center}
-@media(max-width:850px){
-  .pc-collab-page{height:auto;min-height:100dvh;overflow:visible}
-  .pc-collab{height:auto;min-height:100dvh;padding:64px 16px 24px;overflow:visible}
-  .pc-collab__hero{grid-template-columns:1fr;gap:12px;max-height:none}
-  .pc-collab__copy{text-align:center;margin:auto}
-  .pc-collab__eyebrow{justify-content:center}
-  .pc-collab__copy h1{margin:6px 0;font-size:clamp(28px,8vw,40px)}
-  .pc-collab__copy>p{font-size:12.5px;line-height:1.4}
-  .pc-collab__trust{display:none}
-  .pc-collab__panel{width:min(480px,100%);max-height:none;margin:auto;padding:16px;border-radius:18px}
-  .pc-collab__row{grid-template-columns:1fr}
-  .pc-collab__panel h2{font-size:17px}
+/* Página de colaboração — sem foto de fundo, layout claro compacto de
+   coluna única, alinhado ao restante do site. Cabe na janela sem barra
+   de rolagem vertical (compactado ao máximo abaixo de 760px de altura). */
+.pc-collab-page { min-height: 100dvh; background: var(--px-surface-soft, #f7f8fa); display: flex; flex-direction: column; }
+.pc-collab {
+  flex: 1;
+  width: min(640px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: clamp(68px, 11vw, 88px) 0 28px;
+  display: grid;
+  gap: 16px;
+  align-content: start;
 }
-@media(max-width:520px){.pc-collab-page .ref-header__utility,.pc-collab-page .ref-nav{display:none}.pc-collab__copy h1{font-size:32px}.pc-collab__copy>p{max-width:340px}.pc-collab__panel>header>span{width:34px;height:34px}.pc-collab__panel li small{font-size:9px}.pc-collab__send{min-height:44px}}
-@media(max-height:760px) and (min-width:851px){.pc-collab__copy h1{font-size:clamp(26px,3vw,36px)}.pc-collab__trust{margin-top:10px;padding:8px 10px}.pc-collab__panel{padding:14px 16px}.pc-collab__form{gap:6px;margin-top:9px}}
+
+.pc-collab__intro { text-align: center; }
+.pc-collab__eyebrow {
+  display: inline-flex; align-items: center; gap: 7px; justify-content: center;
+  color: var(--px-brand, #0b6757); font-size: 10.5px; font-weight: 900; letter-spacing: 0.1em;
+}
+.pc-collab__eyebrow svg { width: 14px; height: 14px; }
+.pc-collab__intro h1 {
+  margin: 8px 0 6px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
+  font-size: clamp(1.5rem, 3.6vw, 1.9rem); line-height: 1.1; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
+}
+.pc-collab__intro p { max-width: 460px; margin: 0 auto; color: var(--px-muted, #5f6b78); font-size: 13px; line-height: 1.45; }
+
+.pc-collab__panel {
+  padding: 18px 20px;
+  border: 1px solid var(--px-line, #e2e7ec);
+  border-radius: 18px;
+  background: var(--px-surface, #fff);
+  box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
+}
+.pc-collab__panel > header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.pc-collab__panel > header > span {
+  width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px;
+  background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757); flex: 0 0 auto;
+}
+.pc-collab__panel > header svg { width: 18px; height: 18px; }
+.pc-collab__panel > header small { color: var(--px-brand, #0b6757); font-size: 9px; font-weight: 900; letter-spacing: 0.12em; }
+.pc-collab__panel h2 { margin: 1px 0 0; color: var(--px-ink, #14181d); font-size: 16px; font-weight: 750; }
+
+.pc-collab__form { display: grid; gap: 8px; margin-top: 10px; }
+.pc-collab__form label { display: grid; gap: 4px; color: var(--px-muted, #5f6b78); font-size: 10.5px; font-weight: 750; }
+.pc-collab__form label em { margin-left: 2px; color: #d97b3f; font-style: normal; }
+.pc-collab__form input {
+  min-height: 36px; padding: 0 11px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 9px;
+  background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 12.5px;
+}
+.pc-collab__form input::placeholder { color: #9aa5ad; }
+.pc-collab__form input:focus-visible { outline: 2px solid var(--px-brand, #0b6757); outline-offset: 1px; background: #fff; }
+.pc-collab__row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.pc-collab__error {
+  display: flex; align-items: center; gap: 6px; margin: 0; padding: 7px 10px;
+  border: 1px solid rgba(217, 123, 63, 0.3); border-radius: 9px; background: rgba(217, 123, 63, 0.08);
+  color: #b35f24; font-size: 10.5px; line-height: 1.35;
+}
+.pc-collab__error svg { width: 14px; height: 14px; flex: 0 0 auto; }
+
+.pc-collab__send {
+  min-height: 42px; margin-top: 2px; display: flex !important; align-items: center; justify-content: center; gap: 8px;
+  border: 0; border-radius: 10px; background: var(--px-brand, #0b6757) !important; color: #fff !important;
+  font-size: 12px !important; font-weight: 800; text-decoration: none; cursor: pointer; width: 100%;
+}
+.pc-collab__send svg { width: 16px; }
+.pc-collab__send svg:last-child { margin-left: auto; }
+.pc-collab__hint { display: block; margin-top: 6px; color: var(--px-muted, #5f6b78); font-size: 10px; line-height: 1.35; text-align: center; }
+
+/* Aviso de login exigido para envio */
+.pc-collab__gate { display: grid; justify-items: center; gap: 8px; padding: 8px 4px 4px; text-align: center; }
+.pc-collab__gate-icon {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px;
+  background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757);
+}
+.pc-collab__gate-icon svg { width: 21px; height: 21px; }
+.pc-collab__gate h2 { margin: 2px 0 0; font-size: 16.5px; color: var(--px-ink, #14181d); }
+.pc-collab__gate p { max-width: 380px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 12.5px; line-height: 1.5; }
+.pc-collab__gate-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 6px; }
+.pc-collab__gate .pc-collab__send { margin-top: 0; }
+.pc-collab__gate-login {
+  min-height: 42px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--px-line, #e2e7ec); border-radius: 10px; color: var(--px-ink, #14181d);
+  text-decoration: none; font-size: 12px; font-weight: 750;
+}
+.pc-collab__gate-back { border: 0; background: none; color: var(--px-muted, #5f6b78); font-size: 11.5px; text-decoration: underline; cursor: pointer; margin-top: 2px; }
+
+@media (max-width: 640px) {
+  .pc-collab__row { grid-template-columns: 1fr; }
+  .pc-collab__gate-actions { grid-template-columns: 1fr; }
+}
+@media (max-height: 760px) {
+  .pc-collab { padding-top: clamp(60px, 9vw, 76px); gap: 12px; }
+  .pc-collab__form { gap: 6px; margin-top: 8px; }
+  .pc-collab__panel { padding: 14px 16px; }
+}
