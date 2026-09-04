@@ -315,6 +315,17 @@ html[data-theme="dark"] .mh26-search-list b{color:#7b4328!important}
 .pro-basket-page :disabled,.smart-basket-page :disabled,.msearch26-page :disabled,
 .pharmacy-directory-page :disabled{opacity:.62!important}
 
+/* Dark photographic heroes stay white in both themes: general page contrast
+   rules above would otherwise force ink-dark text onto a dark image. */
+html:not([data-theme="dark"]) .ref-stores-hero h1,
+html:not([data-theme="dark"]) .ref-stores-hero span,
+html:not([data-theme="dark"]) .ref-stores-hero small{
+  color:#fff!important;
+}
+html:not([data-theme="dark"]) .ref-stores-hero p{
+  color:#c1ced7!important;
+}
+
 /* Avoid ultra-thin copy in compact UI. */
 .nx-home small,.mh26-page small,.ref-page small,.pro-basket-page small,
 .smart-basket-page small,.msearch26-page small,.pharmacy-directory-page small{
