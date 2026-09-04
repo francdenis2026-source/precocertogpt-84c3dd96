@@ -306,7 +306,23 @@
   .pcx-header .pc-radio__play { padding: 0.4rem; max-width: none; }
 }
 @media (max-width: 640px) {
-  .pcx-header .pc-radio { display: none; }
+  /* No app o rádio some do topo em telas estreitas; vira um botão redondo de
+     play/pause do mesmo tamanho dos outros ícones do header, sem o texto.
+     PersistentRadio.css tem regras !important nesta mesma breakpoint (pensadas
+     para o widget flutuante), então precisamos de !important aqui também para
+     vencer dentro do header. */
+  .pcx-header .pc-radio {
+    display: flex !important; width: 40px !important; min-width: 40px !important;
+    max-width: none !important; height: 40px !important; padding: 0 !important;
+  }
+  .pcx-header .pc-radio__play {
+    width: 40px; height: 40px; padding: 0; justify-content: center;
+    max-width: none; border-radius: 999px;
+  }
+  .pcx-header .pc-radio__copy { display: none !important; }
+  .pcx-header .pc-radio__control { width: 26px; height: 26px; }
+  .pcx-header .pc-radio__control svg { width: 12px; height: 12px; }
+  .pcx-header .pc-radio.is-playing { width: 40px !important; max-width: none !important; }
 }
 
 .pcx-header__login {
@@ -1067,8 +1083,23 @@ a.pcx-store-hero {
 .pcx-footer__meta strong { color: var(--h-muted); }
 
 @media (max-width: 720px) {
-  .pcx-footer__row { flex-direction: column; align-items: flex-start; }
-  .pcx-footer__meta { flex-direction: column; align-items: center; text-align: center; }
+  /* Rodapé da versão app: os links de navegação já existem no dock inferior,
+     então aqui sobra só marca + CTA de lojista + uma linha de crédito, tudo
+     bem mais baixo que a versão desktop com rodapé completo. */
+  .pcx-footer__row {
+    flex-direction: row; align-items: center; justify-content: space-between;
+    gap: 0.6rem; padding: 0.85rem var(--h-section-x);
+  }
+  .pcx-footer__nav { display: none; }
+  .pcx-footer__brand img { width: 24px; height: 24px; }
+  .pcx-footer__brand strong { font-size: 0.82rem; }
+  .pcx-footer__brand small { font-size: 0.68rem; }
+  .pcx-footer__cta { padding: 0.45rem 0.65rem; font-size: 0.7rem; white-space: nowrap; }
+  .pcx-footer__meta {
+    flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 0.3rem 0.6rem; padding: 0.55rem var(--h-section-x); font-size: 0.66rem;
+  }
+  .pcx-footer__meta span:nth-child(2) { display: none; }
 }
 
 /* ── Bottom nav (mobile) ────────────────────────────────────────────────── */
