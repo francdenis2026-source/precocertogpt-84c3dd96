@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import contactHeroImg from "../assets/home-2026/comercio-local-atendimento.jpg";
+import collabHeroImg from "../assets/home-2026/hero-mulher-app-precocerto.jpg";
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
 import { fetchSectorCatalog, withoutDemoEstablishments } from "../data/sectorCatalog";
 import { resolveProductImage } from "../data/productImageResolver";
@@ -636,7 +637,13 @@ function CollaborationPage() {
   });
   const required: (keyof typeof form)[] = ["name", "city", "establishment", "email"];
   const missing = required.filter(key => !form[key].trim());
-  const isValid = missing.length === 0;
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneDigits = form.whatsapp.replace(/\D/g, "");
+  const emailFormatOk = EMAIL_RE.test(form.email.trim());
+  const phoneFormatOk = !form.whatsapp.trim() || (phoneDigits.length >= 10 && phoneDigits.length <= 11);
+  const emailError = touched && form.email.trim() !== "" && !emailFormatOk;
+  const phoneError = touched && form.whatsapp.trim() !== "" && !phoneFormatOk;
+  const isValid = missing.length === 0 && emailFormatOk && phoneFormatOk;
 
   const emailSubject = encodeURIComponent("Colaboração de preços — nota de compra");
   const emailBody = encodeURIComponent(
@@ -655,11 +662,16 @@ function CollaborationPage() {
   return <div className="ref-page pc-collab-page pc-noheader-page">
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="pc-collab">
-      <div className="pc-collab__intro">
-        <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
-        <h1 id="pc-collab-title">Viu um preço diferente?</h1>
-        <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
-      </div>
+      <section className="pc-collab__hero">
+        <div className="pc-collab__hero-copy">
+          <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
+          <h1 id="pc-collab-title">Viu um preço diferente?</h1>
+          <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
+        </div>
+        <div className="pc-collab__hero-media" aria-hidden="true">
+          <img src={collabHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
+        </div>
+      </section>
 
       <section className="pc-collab__panel" aria-label="Enviar nota de compra">
         {needsAccount ? (
@@ -668,7 +680,7 @@ function CollaborationPage() {
             <h2>Crie sua conta para enviar</h2>
             <p>Para enviar notas de compra é preciso estar cadastrado e logado — assim a equipe consegue confirmar informações quando necessário. Seus dados preenchidos são mantidos ao voltar.</p>
             <div className="pc-collab__gate-actions">
-              <Link className="pc-collab__send" to="/cadastro?redirect=%2Fcolaborar">Criar conta grátis <ArrowRight aria-hidden="true" /></Link>
+              <Link className="pc-collab__gate-primary" to="/cadastro?redirect=%2Fcolaborar">Criar conta grátis <ArrowRight aria-hidden="true" /></Link>
               <Link className="pc-collab__gate-login" to="/login?redirect=%2Fcolaborar">Já tenho conta</Link>
             </div>
             <button type="button" className="pc-collab__gate-back" onClick={() => setNeedsAccount(false)}>Voltar ao formulário</button>
@@ -685,17 +697,22 @@ function CollaborationPage() {
               <label>Endereço do estabelecimento<input {...field("address")} type="text" placeholder="Rua, bairro (se souber)" /></label>
             </div>
             <div className="pc-collab__row">
-              <label>Seu e-mail <em>*</em><input {...field("email")} type="email" autoComplete="email" placeholder="para retorno, se precisar" /></label>
-              <label>Seu WhatsApp<input {...field("whatsapp")} type="tel" autoComplete="tel" placeholder="(68) 9####-####" /></label>
+              <label>Seu e-mail <em>*</em>
+                <input {...field("email")} type="email" autoComplete="email" placeholder="para retorno, se precisar" aria-invalid={emailError} />
+                {emailError && <small className="pc-collab__field-error">E-mail inválido — confira o formato.</small>}
+              </label>
+              <label>Seu WhatsApp
+                <input {...field("whatsapp")} type="tel" autoComplete="tel" placeholder="(68) 9####-####" aria-invalid={phoneError} />
+                {phoneError && <small className="pc-collab__field-error">Número inválido — use DDD + celular.</small>}
+              </label>
             </div>
-            {touched && !isValid && <p className="pc-collab__error"><Info aria-hidden="true" /> Preencha nome, cidade, estabelecimento e e-mail para continuar.</p>}
+            {touched && missing.length > 0 && <p className="pc-collab__error"><Info aria-hidden="true" /> Preencha nome, cidade, estabelecimento e e-mail para continuar.</p>}
             <button className="pc-collab__send" type="submit"><Camera aria-hidden="true" /> Preparar envio da nota <ArrowRight aria-hidden="true" /></button>
             <small className="pc-collab__hint">É preciso estar cadastrado e logado para enviar. Seu app de e-mail abrirá com os dados preenchidos — anexe a foto da nota antes de enviar.</small>
           </form>
         </>}
       </section>
     </main>
-    <PublicFooter />
   </div>;
 }
 
