@@ -1,4 +1,4 @@
-import vitrineImg from "../../assets/home-2026/estabelecimentos-vitrine.jpg";
+import vitrineImg from "../../assets/home-2026/store-rail-comercio-2026.webp";
 import { ArrowRight, ArrowUpRight, MapPin, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
