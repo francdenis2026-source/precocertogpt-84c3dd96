@@ -6,6 +6,7 @@ import { fetchCatalog } from "../data/remoteCatalog";
 import type { CatalogPayload, Product, StoreRow } from "../data/catalog";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import { cities, cityForNeighborhood, cityLabel, findCity, type CityDefinition } from "../data/cities";
+import { PublicFooter } from "../reference/ReferenceExperience";
 import "./CityStoresPage.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -105,6 +106,7 @@ export function CityDirectoryPage() {
           );
         })}
       </section>
+      <PublicFooter />
     </main>
   );
 }
@@ -269,6 +271,7 @@ export function CityStoresPage() {
           </ul>
         )}
       </section>
+      <PublicFooter />
     </main>
   );
 }

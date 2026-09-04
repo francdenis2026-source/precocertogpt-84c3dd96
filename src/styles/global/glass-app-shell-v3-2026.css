@@ -404,7 +404,12 @@ html[data-theme="dark"]
     top: 3px !important;
     left: calc(50% + 7px) !important;
   }
-  body.pc-app-shell :is(.ref-footer, .pc26-footer--studio) {
+  body.pc-app-shell .pc26-footer--studio {
+    display: none !important;
+  }
+  /* Rodapé institucional compacto (só a linha de crédito) continua visível
+     no mobile — ele é curto o bastante para não competir com o dock fixo. */
+  body.pc-app-shell .ref-footer__grid {
     display: none !important;
   }
   body.pc-app-shell :is(a, button, input, select, textarea) {

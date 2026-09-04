@@ -153,4 +153,4 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 @media(max-width:390px){.store-pro-grid{grid-template-columns:1fr!important}.store-pro-product-image{height:165px!important}}
 @media(prefers-reduced-motion:reduce){.store-pro-back,.store-pro-search,.store-pro-select,.store-pro-grid>a,.store-pro-pagination button{transition:none}}
 
-.store-pro-legal{padding:16px 20px;background:var(--pc-color-primary-hover);color:var(--pc-color-muted);font-size:12px;text-align:center}
+.store-pro-legal{padding:16px 20px;background:var(--pc-color-primary-hover,#0d2b20);color:var(--pc-color-muted,rgba(255,255,255,.72));font-size:12px;text-align:center}

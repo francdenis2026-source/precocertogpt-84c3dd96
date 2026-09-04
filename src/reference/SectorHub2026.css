@@ -1,8 +1,8 @@
 /* Explorar — diretório local compacto, editorial e orientado à ação. */
 .sector-hub {
-  --sh-blue: var(--pc-navy-2, #3156d9);
-  --sh-blue-soft: color-mix(in srgb, var(--sh-blue) 10%, var(--pc-surface));
   --sh-green: var(--pc-green-strong, #0d714d);
+  --sh-blue: var(--sh-green);
+  --sh-blue-soft: color-mix(in srgb, var(--sh-blue) 10%, var(--pc-surface));
   --sh-gold: var(--pc-gold, #ee9d21);
   --sh-ease: cubic-bezier(.23, 1, .32, 1);
   min-height: 100dvh;
@@ -26,7 +26,7 @@
   margin: 20px auto 0;
   overflow: hidden;
   border-radius: 22px;
-  background: #172654;
+  background: #0d2b20;
   color: #fff;
   box-shadow: 0 18px 48px rgb(24 32 51 / 11%);
 }
@@ -44,7 +44,7 @@
   z-index: -1;
   inset: 0;
   content: "";
-  background: linear-gradient(90deg, rgb(18 31 66 / 96%) 0%, rgb(26 43 91 / 87%) 48%, rgb(20 33 68 / 28%) 100%);
+  background: linear-gradient(90deg, rgb(9 33 24 / 96%) 0%, rgb(13 51 37 / 87%) 48%, rgb(10 36 26 / 28%) 100%);
 }
 
 .sector-hub__hero-grid { width: 100%; min-height: 300px; display: flex; align-items: center; padding: 34px 42px; }
@@ -52,14 +52,14 @@
 .sector-hub__eyebrow { display: flex; align-items: center; gap: 8px; color: #ffd27a; font-size: 12px; font-weight: 850; letter-spacing: .07em; }
 .sector-hub__eyebrow svg { width: 16px; height: 16px; }
 .sector-hub__hero h1 { max-width: 620px; margin: 8px 0 9px; font-family: var(--pc-font-display); font-size: clamp(2.55rem, 4.8vw, 4.45rem); font-weight: 680; line-height: .96; letter-spacing: -.05em; }
-.sector-hub__hero h1 em { color: #b9c8ff; font-style: normal; }
+.sector-hub__hero h1 em { color: #a7e8c4; font-style: normal; }
 .sector-hub__hero-copy > p { max-width: 610px; margin: 0; color: #e2e7f2; font-size: 15px; line-height: 1.55; }
 .sector-hub__hero-stats { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 14px; }
 .sector-hub__hero-stats span { display: flex; align-items: baseline; gap: 6px; color: #cbd3e6; font-size: 12px; }
 .sector-hub__hero-stats b { color: #fff; font-family: var(--pc-font-display); font-size: 19px; font-variant-numeric: tabular-nums; }
 .sector-hub__hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 19px; }
 .sector-hub__hero-actions a { min-height: 44px; padding: 0 14px; border: 1px solid rgb(255 255 255 / 24%); border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: #fff; font-size: 12px; font-weight: 820; transition: transform 140ms var(--sh-ease), background-color 160ms ease, border-color 160ms ease; }
-.sector-hub__hero-actions a:first-child { border-color: #fff; background: #fff; color: #233a82; }
+.sector-hub__hero-actions a:first-child { border-color: #fff; background: #fff; color: #0d5c3f; }
 .sector-hub__hero-actions svg { width: 15px; }
 .sector-hub__hero-actions a:active { transform: scale(.97); }
 
@@ -153,12 +153,12 @@
 .sector-hub__how strong { font-size: 11px; }
 
 html[data-theme="dark"] .sector-hub {
-  --sh-blue: #9bb0ff;
   --sh-green: #73e4ae;
+  --sh-blue: var(--sh-green);
   --sh-gold: #ffc25c;
 }
-html[data-theme="dark"] .sector-hub__hero { background: #16214a; }
-html[data-theme="dark"] .sector-hub__hero::after { background: linear-gradient(90deg, rgb(12 18 42 / 97%), rgb(25 37 82 / 90%) 50%, rgb(14 22 49 / 43%)); }
+html[data-theme="dark"] .sector-hub__hero { background: #0a1f16; }
+html[data-theme="dark"] .sector-hub__hero::after { background: linear-gradient(90deg, rgb(7 20 15 / 97%), rgb(12 34 25 / 90%) 50%, rgb(8 24 17 / 43%)); }
 html[data-theme="dark"] .sector-hub__sector--pharmacies .sector-hub__sector-icon { color: #67d8df; }
 html[data-theme="dark"] .sector-hub__sector--bakery .sector-hub__sector-icon { color: #ffc477; }
 html[data-theme="dark"] .sector-hub__sector--books .sector-hub__sector-icon { color: #c7b1ff; }

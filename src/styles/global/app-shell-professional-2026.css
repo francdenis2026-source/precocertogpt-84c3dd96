@@ -12,6 +12,12 @@
 }
 
 @media(max-width:767px){
+  /* App nativo não mostra a barra de rolagem do sistema — a rolagem continua
+     funcionando normalmente, só a barra visual some. */
+  html{scrollbar-width:none;-ms-overflow-style:none}
+  html::-webkit-scrollbar{display:none;width:0;height:0}
+  body,body *{scrollbar-width:none;-ms-overflow-style:none}
+  body::-webkit-scrollbar,body *::-webkit-scrollbar{display:none;width:0;height:0}
   html{min-height:100%;background:var(--pc-canvas,#f7f7f5);scroll-padding-top:calc(var(--pc-shell-header) + env(safe-area-inset-top))}
   body.pc-app-shell{min-height:100svh;overflow-x:clip;background:var(--pc-canvas,#f7f7f5)!important;overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent}
   body.pc-app-shell #root{min-height:100svh;overflow-x:clip}

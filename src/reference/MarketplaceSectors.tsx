@@ -173,7 +173,7 @@ function DirectoryFooter({ sector }: { sector: MarketplaceSector }) {
       </nav>
       <p>Preços e disponibilidade podem mudar. Confirme diretamente com o estabelecimento antes da compra.</p>
     </div>
-    <small>© 2026 PreçoCerto · Feijó, Acre</small>
+    <small>© 2026 PreçoCerto · Feijó, Acre · dev {"<Franc D’nis>"}</small>
   </footer>;
 }
 

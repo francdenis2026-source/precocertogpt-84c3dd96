@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { ArrowRight, BookOpen, Building2, MapPin, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import { PublicHeader } from "./ReferenceExperience";
+import { PublicFooter, PublicHeader } from "./ReferenceExperience";
 import "./CulturalProfilePage.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -60,5 +60,6 @@ export function CulturalProfilePage({ kind }: { kind: CulturalProfileKind }) {
       </section>
       <aside className="culture-profile-note"><BookOpen /><div><strong>Área cultural do PreçoCerto</strong><span>Perfis editoriais são organizados separadamente de lojas, mercados e estabelecimentos comerciais.</span></div><Link to="/livros">Explorar cultura <ArrowRight /></Link></aside>
     </main>
+    <PublicFooter/>
   </div>;
 }

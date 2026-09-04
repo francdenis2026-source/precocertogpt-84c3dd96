@@ -5,7 +5,7 @@ import { ArrowRight, BadgeCheck, Minus, PackageSearch, PiggyBank, Plus, Shopping
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
-import { AppDock, PublicHeader } from "./ReferenceExperience";
+import { AppDock, PublicFooter, PublicHeader } from "./ReferenceExperience";
 import "./ProfessionalBasketPage.css";
 import "./CompactViewportPages.css";
 
@@ -90,7 +90,7 @@ export function ProfessionalBasketPage() {
     }
   }, { scope: pageRef, dependencies: [loading] });
 
-  return <div className="pro-basket-page" ref={pageRef}>
+  return <><div className="pro-basket-page" ref={pageRef}>
     <PublicHeader current="basket"/>
 
     <main id="conteudo-principal" className="pro-basket-shell">
@@ -128,5 +128,6 @@ export function ProfessionalBasketPage() {
       </section>}
     </main>
     <AppDock current="basket"/>
-  </div>;
+  </div>
+  <PublicFooter/></>;
 }

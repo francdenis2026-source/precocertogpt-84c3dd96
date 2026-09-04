@@ -304,6 +304,6 @@ export function StoreDetailProfessional() {
 
       <aside className="store-pro-bottom-note"><ShieldCheck /><strong>Informação para comparação</strong><span>Confirme estoque, disponibilidade e condições diretamente no estabelecimento.</span><Link className="pc-btn pc-btn--ghost" to="/fale-conosco">Saiba mais <ArrowRight /></Link></aside>
     </main>
-    <footer className="store-pro-legal">© {new Date().getFullYear()} PreçoCerto · Feijó-AC</footer>
+    <footer className="store-pro-legal">© {new Date().getFullYear()} PreçoCerto · Feijó, Acre · dev {"<Franc D’nis>"}</footer>
   </div>;
 }

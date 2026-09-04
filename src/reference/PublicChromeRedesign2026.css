@@ -227,16 +227,29 @@
   .ref-page .ref-footer__grid nav { flex-wrap: wrap; }
 }
 
-/* Interior pages: hide the large footer entirely on detail/utility flows
-   (store detail, product detail, search, basket) to keep them compact —
-   the home keeps its own full footer. */
-.store-pro-page .ref-footer,
-.pdl-page .ref-footer,
-.ref-directory .ref-footer,
-.search26-page .ref-footer,
-.pro-basket-page .ref-footer,
-.smart-basket-page .ref-footer {
-  display: none !important;
+/* Rodapé padrão de todas as páginas internas (tudo exceto a home, que tem o
+   seu próprio .pcx-footer): uma única linha compacta com nome do app, ano,
+   cidade e desenvolvedor — sem a grade de links, para não pesar a tela em
+   telas de tarefa (busca, cesta, detalhe de produto/loja) nem no mobile. */
+.ref-footer__grid { display: none !important; }
+.ref-footer__legal {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem 1rem;
+  flex-wrap: wrap;
+  min-height: 0 !important;
+  padding: 0.6rem clamp(18px, 4vw, 40px) !important;
+  font-size: 0.72rem !important;
+}
+@media (max-width: 680px) {
+  .ref-footer__legal {
+    flex-direction: column !important;
+    gap: 3px !important;
+    padding-block: 10px !important;
+    text-align: center;
+    font-size: 10.5px !important;
+  }
 }
 
 /* ── Compact heroes: establishment list, store detail, product detail ───── */
