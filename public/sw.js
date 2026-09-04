@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260903-fresh-assets-18";
+const CACHE_VERSION = "20260904-search-rebuild-19";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const PRECACHE = [
@@ -9,8 +9,6 @@ const PRECACHE = [
   "/logo-preco-certo-inversa.svg?v=17",
   "/pwa-192x192.png?v=17",
   "/pwa-512x512.png?v=17",
-  "/home-editorial-2026/campanha-homem-comparando-precos-v1.webp",
-  "/home-editorial-2026/campanha-familia-precocerto-v1.webp",
   "/hero-preco-certo-comparacao-2026.webp?v=20260830-2",
 ];
 
