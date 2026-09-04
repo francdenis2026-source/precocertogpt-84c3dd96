@@ -1,8 +1,9 @@
-import vitrineImg from "../../assets/home-2026/store-rail-comercio-2026.webp";
 import { ArrowRight, ArrowUpRight, MapPin, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
+import { groupForStore } from "../../data/businessTaxonomy";
+import { sectorHeroImage } from "../../data/sectorHeroImages";
 
 export function StoreRail({
   stores,
@@ -30,12 +31,9 @@ export function StoreRail({
       .map((part) => part[0])
       .join("")
       .toUpperCase();
-  const kindLabel =
-    lead.kind === "pharmacy"
-      ? "Farmácia"
-      : lead.kind === "bakery"
-        ? "Padaria"
-        : "Comércio local";
+  const leadGroup = groupForStore(lead);
+  const kindLabel = leadGroup.shortLabel;
+  const leadImg = sectorHeroImage(leadGroup.id);
 
   return (
     <section className="pcx-section" aria-labelledby="stores-title">
@@ -60,7 +58,8 @@ export function StoreRail({
             aria-label={`Abrir catálogo de ${lead.name}`}
           >
             <img
-              src={vitrineImg}
+              key={leadImg}
+              src={leadImg}
               alt=""
               width={1280}
               height={720}

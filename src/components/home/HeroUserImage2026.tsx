@@ -14,13 +14,24 @@ type HeroUserImage2026Props = {
   productCount?: number;
   storeCount?: number;
   loading?: boolean;
+  cycle?: number;
 };
 
 export function HeroUserImage2026({
   products,
   loading = false,
+  cycle = 0,
 }: HeroUserImage2026Props) {
-  const proofItems = products.filter((product) => product.minPrice > 0).slice(0, 2);
+  const priced = products
+    .filter((product) => product.minPrice > 0)
+    .sort((a, b) => a.id.localeCompare(b.id));
+  // Roda a dupla exibida a cada ciclo (60 min, ver featuredRotation.ts) em vez
+  // de fixar sempre os dois primeiros produtos do catálogo.
+  const proofItems = priced.length
+    ? Array.from({ length: Math.min(2, priced.length) }, (_, i) =>
+        priced[(cycle * 2 + i) % priced.length],
+      )
+    : [];
 
   return (
     <section className="pcx-hero" aria-labelledby="pcx-hero-title">

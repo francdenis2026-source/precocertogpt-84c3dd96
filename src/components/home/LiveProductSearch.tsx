@@ -84,6 +84,13 @@ export function LiveProductSearch({
     searchAll();
   };
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Escape" && showPanel) {
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen(false);
+      setActiveIndex(-1);
+      return;
+    }
     if (!showPanel || !suggestions.length) return;
     if (event.key === "ArrowDown") {
       event.preventDefault();

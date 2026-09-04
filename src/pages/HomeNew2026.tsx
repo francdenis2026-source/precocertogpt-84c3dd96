@@ -114,6 +114,7 @@ export function HomeNew2026() {
           productCount={productCount}
           storeCount={storeCount}
           loading={loading}
+          cycle={cycle}
         />
         <HomeQuickActions />
         <ProductGrid products={featured} loading={loading} />
