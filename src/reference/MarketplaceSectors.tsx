@@ -57,7 +57,7 @@ const PRESENTATION: Record<BusinessGroupId, Pick<MarketplaceSector, "eyebrow" | 
   bakery: {
     eyebrow: "PÃO, BOLO E SALGADOS",
     title: "Padarias e confeitarias de Feijó",
-    description: "Pão feito na hora, bolo, salgado e doce — com o preço de cada casa à vista.",
+    description: "Pão feito na hora, bolo, salgado e doce, com o preço de cada casa à vista.",
     searchHint: "Pão, bolo, salgado ou o nome da padaria…",
     icon: Croissant,
   },
@@ -78,14 +78,14 @@ const PRESENTATION: Record<BusinessGroupId, Pick<MarketplaceSector, "eyebrow" | 
   books: {
     eyebrow: "CULTURA LOCAL",
     title: "Livros, autores e cultura",
-    description: "Autores, obras e projetos culturais da cidade, com espaço próprio — não são tratados como loja de produto.",
+    description: "Autores, obras e projetos culturais da cidade, com espaço próprio, sem serem tratados como loja de produto.",
     searchHint: "Título, autor ou projeto cultural…",
     icon: BookOpen,
   },
   services: {
     eyebrow: "PROFISSIONAIS DA CIDADE",
     title: "Serviços e profissionais",
-    description: "Quem faz o serviço, onde atende e como falar direto — sem produto inventado no meio.",
+    description: "Quem faz o serviço, onde atende e como falar direto, sem produto inventado no meio.",
     searchHint: "Serviço, profissão ou especialidade…",
     icon: BriefcaseBusiness,
   },

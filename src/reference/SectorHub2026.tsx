@@ -97,30 +97,33 @@ export function SectorHub2026() {
           <div className="sector-hub__shell sector-hub__hero-grid">
             <div className="sector-hub__hero-copy">
               <span className="sector-hub__eyebrow">
-                <Grid2X2 />
-                GUIA DO COMÉRCIO DE FEIJÓ
+                <Grid2X2 aria-hidden="true" />
+                Guia do comércio de Feijó
               </span>
               <h1>
                 Onde comprar <em>em Feijó</em>
               </h1>
               <p>
                 Escolha o tipo de comércio que você procura e veja quem vende,
-                onde fica e por quanto — antes de sair de casa.
+                onde fica e por quanto, antes de sair de casa.
               </p>
               <div className="sector-hub__hero-stats">
                 <span>
-                  <b>{catalog?.metrics.stores ?? "—"}</b> estabelecimentos na
+                  <b>{catalog?.metrics.stores ?? "-"}</b> estabelecimentos na
                   cidade
                 </span>
                 <span>
-                  <b>{catalog?.metrics.products ?? "—"}</b> produtos com preço
+                  <b>{catalog?.metrics.products ?? "-"}</b> produtos com preço
                 </span>
               </div>
               <div className="sector-hub__hero-actions">
-                <Link to="/buscar">Buscar um produto <Search /><span className="sr-only">no catálogo local</span></Link>
-                <Link to="/estabelecimentos">Ver estabelecimentos <ArrowRight /></Link>
+                <Link to="/buscar">Buscar um produto <Search aria-hidden="true" /><span className="sr-only">no catálogo local</span></Link>
+                <Link to="/estabelecimentos">Ver estabelecimentos <ArrowRight aria-hidden="true" /></Link>
               </div>
             </div>
+            <figure className="sector-hub__hero-visual">
+              <img src="/home-editorial-2026/campanha-familia-precocerto-v1.webp" alt="Família comparando preços no celular durante as compras no mercado" loading="eager" width="1536" height="1024" />
+            </figure>
           </div>
         </section>
         <section className="sector-hub__content sector-hub__shell">
@@ -157,7 +160,7 @@ export function SectorHub2026() {
                     </div>
                   ) : (
                     <p className="sector-hub__sector-invite">
-                      Ainda sem cadastro —{" "}
+                      Ainda sem cadastro,{" "}
                       <Link to="/cadastro-lojista">cadastre o seu</Link>
                     </p>
                   )}
@@ -344,23 +347,23 @@ export function SectorHub2026() {
           </section>
           <section className="sector-hub__how">
             <div>
-              <Grid2X2 />
+              <Grid2X2 aria-hidden="true" />
               <span>
-                <small>01 · ESCOLHA</small>
+                <small>Escolha</small>
                 <strong>Abra a categoria do que você precisa</strong>
               </span>
             </div>
             <div>
-              <TrendingDown />
+              <TrendingDown aria-hidden="true" />
               <span>
-                <small>02 · COMPARE</small>
+                <small>Compare</small>
                 <strong>Veja o preço de cada loja lado a lado</strong>
               </span>
             </div>
             <div>
-              <MapPin />
+              <MapPin aria-hidden="true" />
               <span>
-                <small>03 · VÁ</small>
+                <small>Vá</small>
                 <strong>Compre onde for mais perto ou mais barato</strong>
               </span>
             </div>

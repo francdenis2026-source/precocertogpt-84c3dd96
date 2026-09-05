@@ -1,0 +1,63 @@
+/* Estabelecimentos — reconstrução do hero e travamento de cor única.
+   Carregado por último de propósito: substitui, com !important, o hero de
+   foto de fundo em cascata (Stores2026.css, StoresProfessionalRebuild.css,
+   PublicChromeRedesign2026.css e PublicExperiencePolish2026.css disputavam
+   a mesma faixa com quatro versões diferentes) por um layout dividido com a
+   imagem em um quadro próprio, e corrige o rótulo do bairro que usava
+   dourado avulso ao lado do verde usado no resto da página. */
+
+.ref-stores-page .ref-stores-hero {
+  position: relative !important;
+  isolation: isolate !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 34%) !important;
+  align-items: center !important;
+  gap: clamp(20px, 3vw, 40px) !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: clamp(22px, 3vw, 32px) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--pc-border) !important;
+  border-radius: var(--pc-radius-block) !important;
+  background: var(--pc-surface) !important;
+  box-shadow: none !important;
+  color: var(--pc-ink, #17251d) !important;
+}
+.ref-stores-page .ref-stores-hero::before,
+.ref-stores-page .ref-stores-hero::after { content: none !important; }
+
+.ref-stores-page .ref-stores-hero__copy { min-width: 0; max-width: 56ch !important; display: grid; gap: 8px; }
+.ref-stores-page .ref-stores-hero__copy > span { color: var(--pc-green-strong, #104c30) !important; font-size: 11.5px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+.ref-stores-page .ref-stores-hero__copy > h1 { margin: 0 !important; max-width: none !important; color: var(--pc-ink, #17251d) !important; font-family: var(--pc-font-display); font-size: clamp(1.9rem, 3.2vw, 2.6rem) !important; line-height: 1.08 !important; letter-spacing: -.03em !important; }
+.ref-stores-page .ref-stores-hero__copy > p { margin: 0 !important; max-width: 52ch !important; color: var(--pc-muted) !important; font-size: 14.5px !important; line-height: 1.55; }
+
+.ref-stores-page .ref-stores-hero__row { display: flex !important; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 4px !important; padding: 0 !important; min-height: 0 !important; border: 0 !important; background: none !important; }
+.ref-stores-page div.ref-stores-hero__stat { display: flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 12px; border: 1px solid var(--pc-border); border-radius: 999px; background: var(--pc-surface-2) !important; color: var(--pc-green-strong, #104c30) !important; font-size: 12px; font-weight: 800; }
+.ref-stores-page .ref-stores-hero__stat svg { width: 14px; height: 14px; color: var(--pc-green-strong, #104c30) !important; }
+.ref-stores-page a.ref-stores-hero__cta { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border-radius: var(--pc-radius-control); background: var(--pc-gold, #b77918) !important; color: var(--pc-navy, #104c30) !important; font-size: 13px; font-weight: 850; text-decoration: none; }
+.ref-stores-page .ref-stores-hero__cta svg { width: 15px; height: 15px; color: var(--pc-navy, #104c30) !important; }
+
+.ref-stores-page .ref-stores-hero__visual { margin: 0; aspect-ratio: 4 / 3.3; border-radius: calc(var(--pc-radius-block) - 6px); overflow: hidden; background: var(--pc-surface-2); }
+.ref-stores-page .ref-stores-hero__visual img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; display: block; }
+
+@media (hover: hover) and (pointer: fine) {
+  .ref-stores-page .ref-stores-hero__cta:hover { background: color-mix(in srgb, var(--pc-gold, #b77918) 88%, #000); }
+}
+
+/* Trava de cor única: o rótulo do bairro nos cartões usava dourado avulso
+   ao lado do verde que conduz o resto da página (ícones, hover, links). */
+.ref-stores-page .ref-store-card__select small,
+.ref-stores-page .ref-store-card > a small {
+  color: var(--pc-muted) !important;
+}
+
+@media (max-width: 720px) {
+  .ref-stores-page .ref-stores-hero { grid-template-columns: 1fr !important; padding: 20px !important; }
+  .ref-stores-page .ref-stores-hero__visual { order: -1; aspect-ratio: 16 / 9; }
+  .ref-stores-page .ref-stores-hero__copy > h1 { font-size: 1.9rem !important; }
+  .ref-stores-page .ref-stores-hero__row { flex-direction: column; align-items: stretch; }
+  .ref-stores-page .ref-stores-hero__cta { justify-content: center; }
+}
+
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero__cta { color: var(--pc-navy, #104c30); }
