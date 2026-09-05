@@ -11,11 +11,24 @@
 .pc-collab {
   width: min(1080px, calc(100% - 32px));
   margin: 0 auto;
-  min-height: calc(100dvh - 96px - 64px);
-  padding: 96px 0 32px;
+  padding: 70px 0 16px;
   display: flex;
   align-items: center;
   gap: clamp(20px, 3vw, 40px);
+}
+
+/* Trava numa única janela sem rolagem: a página vira uma coluna flex de
+   altura exata 100dvh (topo + conteúdo + rodapé); o conteúdo (flex:1)
+   ocupa exatamente o espaço que sobra depois do rodapé, calculado pelo
+   próprio flexbox — sem chutar um valor fixo de altura do rodapé, que
+   é o que fazia a página ainda depender de rolagem em algumas telas.
+   Só entra em telas largas o bastante para o layout de 2 colunas E
+   altas o bastante para não espremer o conteúdo; fora disso, rola
+   normalmente (mobile e janelas muito baixas). */
+@media (min-width: 851px) and (min-height: 620px) {
+  .pc-collab-page { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+  .pc-collab { flex: 1 1 auto; min-height: 0; overflow: hidden; }
+  .pc-collab-page > footer.ref-footer { flex: 0 0 auto; }
 }
 
 .pc-collab__left {
