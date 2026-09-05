@@ -203,7 +203,7 @@ export function ProductCardQuickActions() {
             role="button"
             tabIndex={0}
             aria-label={quantity ? `${product.name} já está na lista. Altere a quantidade na cesta` : `Adicionar ${product.name} à lista`}
-            title={quantity ? "Já está na lista — altere a quantidade na cesta" : userId ? "Adicionar à lista" : "Entrar para salvar na lista"}
+            title={quantity ? "Já está na lista. Altere a quantidade na cesta" : userId ? "Adicionar à lista" : "Entrar para salvar na lista"}
             onPointerDown={stopPointer}
             onClick={event => { stopClick(event); void addToBasket(id); }}
             onKeyDown={event => keyboardActivate(event, () => { void addToBasket(id); })}

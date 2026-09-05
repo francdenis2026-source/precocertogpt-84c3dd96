@@ -101,9 +101,10 @@ export const sandubaStores: StoreRow[] = [
 // que inviabiliza usá-las como miniatura de produto — por isso Adicionais,
 // Refrigerantes e Suco Natural ficam sem foto aqui, em vez de usar uma
 // imagem com texto errado por cima.
-const SANDUBA_CATEGORY_IMAGE: Partial<Record<string, string>> = {
-  "Sanduíches": "/ponto-do-sanduba/hero-burgers.jpg",
-};
+// "Sanduiches" apontava para /ponto-do-sanduba/hero-burgers.jpg, arquivo que
+// nunca existiu: a miniatura vinha quebrada. Fica sem foto, como as demais
+// categorias desta loja, ate haver uma imagem real.
+const SANDUBA_CATEGORY_IMAGE: Partial<Record<string, string>> = {};
 
 // Nome do item -> foto atribuída, para a página do cardápio reaproveitar a
 // mesma miniatura mostrada em /buscar, /produto e no restante do site.

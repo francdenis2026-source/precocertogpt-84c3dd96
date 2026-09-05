@@ -141,7 +141,20 @@ export function StoreDetailProfessional() {
     return () => { active = false; };
   }, []);
 
-  const store = useMemo(() => catalog?.stores.find(item => String(item.id) === identifier || item.slug === identifier), [catalog, identifier]);
+  /* Resolve por id, pelo slug publicado e tambem pelo slug derivado do nome:
+     enderecos antigos, montados a partir do nome antes de o app passar a usar
+     a coluna `slug`, continuam abrindo a loja certa em vez de cair no 404. */
+  const store = useMemo(() => {
+    const wanted = identifier.trim().toLowerCase();
+    if (!wanted) return undefined;
+    const fromName = (value: string) => value
+      .normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    return catalog?.stores.find(item =>
+      String(item.id).toLowerCase() === wanted
+      || (item.slug || "").toLowerCase() === wanted
+      || fromName(item.name || "") === wanted);
+  }, [catalog, identifier]);
 
   // Assim como no produto, SeoRouteManager cai num título genérico
   // ("Estabelecimento | PreçoCerto") para /estabelecimento/:id — aqui
@@ -252,11 +265,15 @@ export function StoreDetailProfessional() {
       <section
         className={`store-pro-hero${isBonsAmigos ? " store-pro-hero--bons-amigos" : ""}${isMarketSector ? "" : ` store-pro-hero--sector store-pro-hero--${sector.id}`}`}
         aria-labelledby="store-title"
-        style={!isBonsAmigos && backdrop ? { backgroundImage: `url('${backdrop}')` } : undefined}
+        style={backdrop ? { backgroundImage: `url('${backdrop}')` } : undefined}
       >
         <div className="store-pro-hero__overlay" />
-        {isBonsAmigos && <div className="store-pro-brand-art" aria-hidden="true"><img src="/branding/bons-amigos-hero.jpg?v=20260818" alt="" width="600" height="240" /></div>}
-        {!isBonsAmigos && !isMarketSector && <SectorIcon className="store-pro-hero__watermark" aria-hidden="true" />}
+        {/* Havia aqui uma arte exclusiva do Bons Amigos apontando para
+            /branding/bons-amigos-hero.jpg, que nunca existiu no repositorio: a
+            loja abria com uma imagem quebrada e sem o fundo do setor, porque a
+            excecao tambem desligava o backdrop. Agora a loja usa o mesmo hero
+            das outras; as classes de marca continuam disponiveis para estilo. */}
+        {!isMarketSector && <SectorIcon className="store-pro-hero__watermark" aria-hidden="true" />}
         <div className="store-pro-hero__content">
           <div className={`store-pro-logo${showLogo ? " has-image" : ""}`} style={!showLogo ? { background: store.color } : undefined}>
             {showLogo
@@ -296,7 +313,7 @@ export function StoreDetailProfessional() {
         <div className="store-pro-toolbar">
           <label className="store-pro-search"><Search /><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Ex.: refresco, Brassuk, leite em pó…" aria-label="Buscar no catálogo do estabelecimento" /></label>
           <label className="store-pro-select"><SlidersHorizontal /><select value={category} onChange={event => setCategory(event.target.value)} aria-label="Filtrar por categoria">{categories.map(item => <option key={item}>{item}</option>)}</select></label>
-          <label className="store-pro-select"><select value={sort} onChange={event => setSort(event.target.value as typeof sort)} aria-label="Ordenar produtos"><option value="name">Ordenar: A–Z</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option></select></label>
+          <label className="store-pro-select"><select value={sort} onChange={event => setSort(event.target.value as typeof sort)} aria-label="Ordenar produtos"><option value="name">Ordenar: A-Z</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option></select></label>
         </div>
 
         {visibleProducts.length ? <div className="ref-product-grid store-pro-grid">
@@ -305,7 +322,11 @@ export function StoreDetailProfessional() {
           <small className="store-pro-category">{product.category}</small>
           <strong>{product.name}</strong>
           <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
-          <span className="store-pro-spec">{(product.size && product.size.trim() !== "-" ? product.size : "") || product.unit || "Unidade não informada"}</span>
+          {/* O cadastro usa varios caracteres para "sem medida": hifen, meia-risca
+              e travessao. So o hifen era tratado, entao lojas cujo cadastro veio
+              com travessao mostravam uma fileira de tracos soltos no lugar do
+              tamanho. */}
+          <span className="store-pro-spec">{(product.size && !/^[-–—\s]*$/.test(product.size) ? product.size : "") || product.unit || "Unidade não informada"}</span>
           <footer><em>preço cadastrado</em><b>{brl.format(product.minPrice)}</b></footer>
         </Link>)}
           {teaserProducts.map(product => <Link key={product.id} to={signupHref} className="store-pro-product--teaser" aria-label={`Crie sua conta para ver o preço de ${product.name}`}>

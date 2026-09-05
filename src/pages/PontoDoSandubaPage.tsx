@@ -104,10 +104,9 @@ export function PontoDoSandubaPage() {
               </div>
             </div>
           </div>
-          <div className="kelly-hero__visual" aria-hidden="true">
-            <img src="/ponto-do-sanduba/hero-burgers.jpg" alt="" />
-            <span><BadgeCheck /> Sabor feito na hora</span>
-          </div>
+          {/* Sem bloco de foto: /ponto-do-sanduba/hero-burgers.jpg nunca existiu
+              no repositorio e a pagina abria com uma imagem quebrada. Quando
+              houver uma foto real desta loja, e so recolocar o bloco. */}
         </section>
 
         <section className="kelly-info" aria-label="Informações do estabelecimento">

@@ -111,11 +111,18 @@ function slugifyName(name: string, fallbackId: string | number) {
   return base || `item-${String(fallbackId).slice(0, 8)}`;
 }
 
-function assignUniqueSlugs<T>(rows: T[], getName: (row: T) => string, getId: (row: T) => string | number) {
+/* `getSlug` traz o slug que ja esta gravado no banco. Ele tem prioridade
+ * porque e o mesmo endereco que o prerender de SEO e o sitemap publicam:
+ * quando o app derivava tudo do nome, lojas cujo slug gravado nao batia com o
+ * nome ("Comercio Bons Amigos" com slug "da-bons-amigos") abriam
+ * "Estabelecimento nao encontrado" para quem chegava pela busca. */
+function assignUniqueSlugs<T>(rows: T[], getName: (row: T) => string, getId: (row: T) => string | number, getSlug?: (row: T) => string | null | undefined) {
   const seen = new Map<string, number>();
   const slugById = new Map<string | number, string>();
   for (const row of rows) {
     const id = getId(row);
+    const stored = (getSlug?.(row) || "").trim();
+    if (stored) { slugById.set(id, stored); continue; }
     const base = slugifyName(getName(row), id);
     const count = seen.get(base) || 0;
     seen.set(base, count + 1);
@@ -257,7 +264,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
   try {
     const [establishments, products, prices] = await Promise.all([
-      fetchAllRows("establishments", "id, name, neighborhood, brand_color, kind, address, logo_url", "id"),
+      fetchAllRows("establishments", "id, name, slug, neighborhood, brand_color, kind, address, logo_url", "id"),
       fetchAllRows("products", "id, name, brand, category, size, unit, barcode, image_url", "id"),
       fetchAllRows("prices", "id, product_id, establishment_id, value, previous_value, captured_at", "id"),
     ]);
@@ -298,7 +305,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
 
     const q = normalizeCatalogTerm(query);
     const storesById = new Map(storeRows.map(store => [String(store.id), store]));
-    const storeSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id));
+    const storeSlugById = assignUniqueSlugs(storeRows, store => store.name || "Estabelecimento", store => String(store.id), store => store.slug);
     const pricesByProductId = new Map<string, PriceRow[]>();
     const productIdsByStore = new Map<string, Set<string>>();
 

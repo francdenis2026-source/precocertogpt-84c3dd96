@@ -109,7 +109,7 @@ export function MobileSearchDiscovery2026() {
 
       <section className="msearch26-toolbar">
         <button type="button" className={filtersOpen || activeFilters ? "is-active" : ""} onClick={() => setFiltersOpen(value => !value)}><SlidersHorizontal />Filtros{activeFilters > 0 && <b>{activeFilters}</b>}<ChevronDown /></button>
-        {hasRequest && <label><span className="sr-only">Ordenar</span><select value={sort} onChange={event => setSort(event.target.value as SortMode)}><option value="relevance">Relevância</option><option value="lowest">Menor preço</option><option value="highest">Maior preço</option><option value="stores">Mais lojas</option><option value="name">A–Z</option></select></label>}
+        {hasRequest && <label><span className="sr-only">Ordenar</span><select value={sort} onChange={event => setSort(event.target.value as SortMode)}><option value="relevance">Relevância</option><option value="lowest">Menor preço</option><option value="highest">Maior preço</option><option value="stores">Mais lojas</option><option value="name">A-Z</option></select></label>}
         {hasRequest && <button type="button" className="msearch26-reset" onClick={reset} aria-label="Nova busca"><RotateCcw /></button>}
       </section>
 

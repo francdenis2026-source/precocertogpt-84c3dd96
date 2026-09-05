@@ -755,7 +755,7 @@ function configureHomeCopy() {
 
   text(
     ".hero-copy > p",
-    "Pesquise produtos, compare valores entre os comércios locais e encontre onde sua compra custa menos — antes de sair de casa."
+    "Pesquise produtos, compare valores entre os comércios locais e encontre onde sua compra custa menos, antes de sair de casa."
   );
 
   const featured = document.querySelector<HTMLElement>(".featured-products .section-heading");

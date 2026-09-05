@@ -113,7 +113,7 @@ export function KellyBurgueriaPage() {
             </div>
           </div>
           <div className="kelly-hero__visual" aria-hidden="true">
-            <img src="/kelly-burgueria/hero-burger.jpg" alt="" />
+            <img src="/kelly-burgueria/item-hamburguer-2.jpg" alt="" />
             <span><BadgeCheck /> Artesanal e feito na hora</span>
           </div>
         </section>

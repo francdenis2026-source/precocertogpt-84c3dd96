@@ -22,7 +22,7 @@
 .kelly-hero{
   position:relative;overflow:hidden;border-radius:var(--pc-radius-block,20px);
   min-height:144px;display:flex;align-items:flex-end;
-  background:#0d0705 url('/kelly-burgueria/hero-burger.jpg') center 32%/cover no-repeat;
+  background:#0d0705 url('/kelly-burgueria/item-hamburguer-2.jpg') center 32%/cover no-repeat;
   border:1px solid var(--pc-border);
 }
 .kelly-hero__overlay{
@@ -47,7 +47,7 @@ html[data-theme="dark"] .kelly-hero__overlay{
 .kelly-hero__meta svg{width:12px;height:12px}
 .kelly-hero__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:1px}
 .kelly-hero__actions .pc-btn{font-size:13px}
-.kelly-hero__actions .pc-btn--primary{background:#82785e;border-color:#82785e;color:#201600}
+.kelly-hero__actions .pc-btn--primary{background:#8c8267;border-color:#8c8267;color:#1c1400}
 .kelly-hero__actions .pc-btn--primary:hover{filter:brightness(1.05)}
 .kelly-hero__actions .pc-btn--ghost{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);color:#fff}
 
@@ -118,7 +118,7 @@ html[data-theme="dark"] .kelly-hero__overlay{
 .kelly-cta h2{margin:0 0 4px;font-size:19px}
 .kelly-cta p{margin:0;font-size:13.5px;color:var(--pc-muted);max-width:44ch}
 .kelly-cta__actions{display:flex;flex-wrap:wrap;gap:10px}
-.kelly-cta__actions .pc-btn--primary{background:#82785e;border-color:#82785e;color:#201600}
+.kelly-cta__actions .pc-btn--primary{background:#8c8267;border-color:#8c8267;color:#1c1400}
 
 @media (max-width:760px){
   .kelly-info{grid-template-columns:1fr}
@@ -135,3 +135,38 @@ html[data-theme="dark"] .kelly-hero__overlay{
   .kelly-menu-list__price{align-self:flex-end}
   .kelly-quicknav{margin:0 -14px;padding:7px 14px}
 }
+
+/* Navegacao por categoria do cardapio.
+   Os links vinham sem estilo nenhum: texto corrido de 18px de altura, quase
+   impossivel de acertar com o dedo e sem parecer clicavel. Agora sao chips
+   com 44px de area de toque, na mesma familia de forma do resto da pagina. */
+.kelly-category-nav{display:flex;flex-wrap:wrap;gap:8px}
+.kelly-category-nav a{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:0 14px;
+  border:1px solid var(--pc-border);
+  border-radius:999px;
+  background:var(--pc-surface);
+  color:var(--pc-ink);
+  font-size:13px;
+  font-weight:800;
+  text-decoration:none;
+  transition:background-color .16s ease,border-color .16s ease;
+}
+.kelly-category-nav a small{
+  min-width:20px;
+  padding:1px 6px;
+  border-radius:999px;
+  background:var(--pc-surface-2);
+  color:var(--pc-muted);
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+@media(hover:hover) and (pointer:fine){
+  .kelly-category-nav a:hover{background:var(--pc-surface-2);border-color:var(--pc-border-strong,var(--pc-border))}
+}
+.kelly-category-nav a:focus-visible{outline:3px solid color-mix(in srgb,var(--pc-gold,#d99a00) 45%,transparent);outline-offset:2px}

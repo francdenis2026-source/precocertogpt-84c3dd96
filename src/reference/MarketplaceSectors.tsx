@@ -167,7 +167,7 @@ function DirectoryFooter({ sector }: { sector: MarketplaceSector }) {
   return <footer className="pharmacy-footer">
     <div className="pharmacy-footer__inner">
       <div className="pharmacy-footer__brand">
-        <Link to="/" aria-label="PreçoCerto — página inicial"><img src="/logo-preco-certo-inversa.svg" alt="PreçoCerto" /></Link>
+        <Link to="/" aria-label="PreçoCerto, página inicial"><img src="/logo-preco-certo-inversa.svg" alt="PreçoCerto" /></Link>
         <span><ShieldCheck aria-hidden="true" /> Informação local organizada com responsabilidade.</span>
       </div>
       <nav aria-label="Atalhos das farmácias">

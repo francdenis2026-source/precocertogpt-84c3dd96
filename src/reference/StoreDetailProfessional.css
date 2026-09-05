@@ -140,11 +140,15 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-bottom-note svg{width:16px;height:16px}
 .store-pro-bottom-note strong{color:var(--pc-ink);font-size:12.5px}
 .store-pro-bottom-note span{font-size:12.5px}
-.store-pro-bottom-note a{display:flex;align-items:center;gap:4px;color:var(--pc-ink);font-size:12.5px;font-weight:850}
+/* min-height de 44px: o link tinha 19px de altura. O texto segue em 12.5px,
+   quem cresce e a area de toque. */
+.store-pro-bottom-note a{min-height:44px;display:flex;align-items:center;gap:4px;padding-inline:4px;color:var(--pc-ink);font-size:12.5px;font-weight:850}
 .store-pro-bottom-note a svg{width:12px;height:12px}
 
 .store-pro-state{min-height:100dvh;display:grid;place-items:center;align-content:center;gap:12px;background:var(--pc-canvas);color:var(--pc-ink)}
-.store-pro-state>a{padding:10px 14px;border-radius:9px;background:var(--pc-green);color:#fff;font-weight:850}
+/* --pc-green e o dourado da marca; texto branco sobre ele dava 1.73:1.
+   Preenchimento dourado so aceita tinta escura. */
+.store-pro-state>a{min-height:44px;display:inline-flex;align-items:center;padding:10px 16px;border-radius:9px;background:var(--pc-green);color:var(--pc-navy,#10161d);font-weight:850}
 .store-pro-loader{width:34px;height:34px;border:3px solid var(--pc-border);border-top-color:var(--pc-green);border-radius:50%;animation:store-pro-spin .8s linear infinite}
 @keyframes store-pro-spin{to{transform:rotate(1turn)}}
 

@@ -423,7 +423,7 @@ function Brand({ compact = false, inverse = false, className = "", onClick }: { 
       style={{ cursor: 'pointer' }}
       role="link"
       tabIndex={0}
-      aria-label="PreçoCerto — página inicial"
+      aria-label="PreçoCerto, página inicial"
       onKeyDown={(e) => {
         if (e.key === 'Enter') {
           if (onClick) onClick();
@@ -4711,7 +4711,7 @@ function AuthPage({ path, onAdminAuth, onLogin }: { path: string; onAdminAuth: (
 
   return <div className="auth-page">
     <div className="auth-brand-panel">
-      <a className="auth-home-brand" href="/" aria-label="PreçoCerto — página inicial">
+      <a className="auth-home-brand" href="/" aria-label="PreçoCerto, página inicial">
         <span className="auth-home-brand__mark"><TrendingDown aria-hidden="true" /></span>
         <span>preço<strong>certo</strong></span>
       </a>
@@ -4882,7 +4882,7 @@ function PriceReportModal({ product, onClose }: { product: Product; onClose: () 
           ) : (
             <form onSubmit={submit} style={{ display: "grid", gap: "1rem" }}>
               <p style={{ margin: 0, fontSize: "0.9rem", color: "var(--muted)" }}>
-                <strong>{product.name}</strong> — {product.establishment} · registrado por {money(product.minPrice)}
+                <strong>{product.name}</strong> · {product.establishment} · registrado por {money(product.minPrice)}
               </p>
               <label style={{ display: "grid", gap: "0.35rem", fontSize: "0.85rem", fontWeight: 600 }}>
                 Motivo
@@ -5093,7 +5093,7 @@ function SearchPage({ products, stores, metrics, query, setQuery, addBasket, sav
           <label><span>Categoria</span><select value={activeCategory} onChange={e => setActiveCategory(e.target.value)}>{categories.map(value => <option value={value} key={value}>{value === "all" ? "Todas as categorias" : value}</option>)}</select></label>
           <label><span>Estabelecimento</span><select value={activeStore} onChange={e => setActiveStore(e.target.value)}>{allStores.map(value => <option value={value} key={value}>{value === "all" ? "Todos os estabelecimentos" : value}</option>)}</select></label>
           <label><span>Marca</span><select value={activeBrand} onChange={e => setActiveBrand(e.target.value)}>{allBrands.map(value => <option value={value} key={value}>{value === "all" ? "Todas as marcas" : value}</option>)}</select></label>
-          <fieldset><legend>Faixa de preço</legend><div className="professional-price-range"><label><small>Mínimo</small><input type="number" min="0" value={priceRange[0]} onChange={e => setPriceRange([Math.max(0, Number(e.target.value)), priceRange[1]])}/></label><span>—</span><label><small>Máximo</small><input type="number" min="0" value={priceRange[1]} onChange={e => setPriceRange([priceRange[0], Math.max(0, Number(e.target.value))])}/></label></div></fieldset>
+          <fieldset><legend>Faixa de preço</legend><div className="professional-price-range"><label><small>Mínimo</small><input type="number" min="0" value={priceRange[0]} onChange={e => setPriceRange([Math.max(0, Number(e.target.value)), priceRange[1]])}/></label><span>a</span><label><small>Máximo</small><input type="number" min="0" value={priceRange[1]} onChange={e => setPriceRange([priceRange[0], Math.max(0, Number(e.target.value))])}/></label></div></fieldset>
           <fieldset><legend>Atualização do preço</legend><div className="professional-radio-list">{[["all","Qualquer data"],["24h","Últimas 24 horas"],["7d","Últimos 7 dias"]].map(([value,label]) => <label key={value}><input type="radio" name="recency" checked={updateRecency === value} onChange={() => setUpdateRecency(value)}/><span>{label}</span></label>)}</div></fieldset>
           <button className="button button--primary professional-filter-apply" onClick={() => setFiltersOpen(false)}>Ver {filtered.length} resultados</button>
         </aside>

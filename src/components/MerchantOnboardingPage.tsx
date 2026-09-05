@@ -51,7 +51,7 @@ export function MerchantOnboardingPage() {
     <section className="merchant-access__visual" aria-label="PreçoCerto para comerciantes">
       <img src="/merchant-access-hero.webp" alt="Comerciante administrando seu catálogo em um tablet" width="1200" height="900" />
       <div className="merchant-access__shade" />
-      <a className="merchant-access__brand" href="/" aria-label="PreçoCerto — início"><span><TrendingDown /></span>preço<strong>certo</strong></a>
+      <a className="merchant-access__brand" href="/" aria-label="PreçoCerto, início"><span><TrendingDown /></span>preço<strong>certo</strong></a>
       <div className="merchant-access__pitch"><span className="merchant-access__eyebrow">ÁREA DO LOJISTA</span><h1>Seu negócio, pronto para ser encontrado.</h1><p>Organize catálogo, preços e presença local em um único painel.</p><div className="merchant-access__features"><span><PackageSearch /> Catálogo atualizado</span><span><BarChart3 /> Visão da operação</span><span><BadgeCheck /> Presença profissional</span></div></div>
       <small>PreçoCerto · Comércio local de Feijó</small>
     </section>

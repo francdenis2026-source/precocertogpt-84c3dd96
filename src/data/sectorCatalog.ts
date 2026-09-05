@@ -115,6 +115,7 @@ export const groupCounts = (catalog: CatalogPayload) => {
 type RealEstablishmentRow = {
   id: string | number;
   name?: string | null;
+  slug?: string | null;
   neighborhood?: string | null;
   brand_color?: string | null;
   kind?: string | null;
@@ -138,6 +139,31 @@ const slugifyStore = (name: string, id: string | number) => {
     .replace(/^-+|-+$/g, "");
   return slug || `estabelecimento-${String(id).slice(0, 8)}`;
 };
+
+/* O endereço de cada estabelecimento vem da coluna `slug` do banco, que é a
+ * mesma que o prerender de SEO e o sitemap publicam. Antes esta consulta nem
+ * trazia essa coluna: o app montava o endereço a partir do nome, e quando os
+ * dois discordavam ("Comércio Bons Amigos" virava "comercio-bons-amigos" aqui
+ * e "da-bons-amigos" no sitemap) quem chegava pela busca do Google caía em
+ * "Estabelecimento não encontrado". Três lojas estavam nessa situação.
+ * O slug derivado do nome continua valendo como apelido na hora de resolver a
+ * URL (ver storeMatchesIdentifier), para nenhum link antigo quebrar. */
+const storeSlug = (row: RealEstablishmentRow, name: string) => {
+  const fromDatabase = (row.slug || "").trim();
+  return fromDatabase || slugifyStore(name, row.id);
+};
+
+/** Aceita o id, o slug publicado e o slug derivado do nome. */
+export function storeMatchesIdentifier(
+  store: { id: string | number; slug?: string | null; name?: string | null },
+  identifier: string,
+) {
+  if (!identifier) return false;
+  const wanted = identifier.trim().toLowerCase();
+  if (String(store.id).toLowerCase() === wanted) return true;
+  if ((store.slug || "").toLowerCase() === wanted) return true;
+  return slugifyStore(store.name || "", store.id) === wanted;
+}
 
 const addressText = (value: RealEstablishmentRow["address"]) => {
   if (!value) return undefined;
@@ -169,7 +195,7 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
 
   const { data, error } = await supabase
     .from("establishments")
-    .select("id,name,neighborhood,brand_color,kind,address,logo_url")
+    .select("id,name,slug,neighborhood,brand_color,kind,address,logo_url")
     .order("name", { ascending: true })
     .limit(2000);
 
@@ -190,7 +216,7 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
     const name = row.name?.trim() || "Estabelecimento";
     return {
       id: row.id,
-      slug: slugifyStore(name, row.id),
+      slug: storeSlug(row, name),
       name,
       neighborhood: row.neighborhood?.trim() || "—",
       color: row.brand_color || "#1473E6",

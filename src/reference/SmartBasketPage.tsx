@@ -52,7 +52,7 @@ if(asksEssentials){ctx.setSelectionMode("smart");return"Troquei para a sugestão
 const asksCheap=/econom|barato|mais barato|menor pre[cç]o/.test(text);
 if(asksCheap){ctx.setSelected("multi_store");return`A opção de maior economia soma ${brl.format(ctx.multi.total)} em ${ctx.multi.stores.length} ${ctx.multi.stores.length===1?"loja":"lojas"}.`;}
 const asksSingle=/uma loja|mesma loja|pratic|um só lugar|um so lugar/.test(text);
-if(asksSingle){ctx.setSelected("single_store");return ctx.single.storeName?`A melhor combinação em uma loja só é em ${ctx.single.storeName}, somando ${brl.format(ctx.single.total)}.`:"Ainda não encontrei uma loja que cubra bem sua lista sozinha — tente aumentar o orçamento.";}
+if(asksSingle){ctx.setSelected("single_store");return ctx.single.storeName?`A melhor combinação em uma loja só é em ${ctx.single.storeName}, somando ${brl.format(ctx.single.total)}.`:"Ainda não encontrei uma loja que cubra bem sua lista sozinha. Tente aumentar o orçamento.";}
 const budgetMatch=text.match(/(\d{2,6})/);
 if(budgetMatch&&/reais|orcamento|gastar|r\$/.test(text)){const value=Math.max(10,Number(budgetMatch[1]));ctx.setBudget(value);return`Orçamento ajustado para ${brl.format(value)}.`;}
 const essential=ESSENTIALS.find(e=>e.keywords.some(k=>text.includes(normalize(k))));

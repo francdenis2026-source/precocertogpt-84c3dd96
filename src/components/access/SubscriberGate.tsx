@@ -23,7 +23,7 @@ export function SubscriberGate({ tool = "esta ferramenta" }: { children?: ReactN
         </div>
         <div className="pc-sub-gate__body">
           <h1 id="pc-sub-gate-title">{tool} chega em breve para assinantes</h1>
-          <p>Monte sua cesta automaticamente com IA — disponível assim que os planos pagos forem lançados.</p>
+          <p>Monte sua cesta automaticamente com IA, disponível assim que os planos pagos forem lançados.</p>
           <div className="pc-sub-gate__actions">
             <Link className="pc-sub-gate__cta" to="/buscar">
               <Search aria-hidden="true" /> Comparar preços

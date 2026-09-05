@@ -24,8 +24,8 @@ describe('player persistente de rádio',()=>{
     expect(audio.src).toContain(JOVEM_PAN_STREAMS[1]);
   });
   it('interpreta o título enviado pela API de metadados da rádio',()=>{
-    expect(parseZenoMetadata('{"streamTitle":"Artista — Música"}')).toBe('Artista — Música');
-    expect(parseZenoMetadata('{"metadata":{"artist":"Artista","title":"Música"}}')).toBe('Artista — Música');
+    expect(parseZenoMetadata('{"streamTitle":"Artista de música"}')).toBe('Artista de música');
+    expect(parseZenoMetadata('{"metadata":{"artist":"Artista","title":"Música"}}')).toBe('Artista de música');
     expect(parseZenoMetadata('')).toBeNull();
   });
 });
