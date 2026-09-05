@@ -1,45 +1,62 @@
-/* Estabelecimentos — reconstrução do hero e travamento de cor única.
+/* Estabelecimentos — hero como faixa fina de topo, não mais um bloco alto.
    Carregado por último de propósito: substitui, com !important, o hero de
    foto de fundo em cascata (Stores2026.css, StoresProfessionalRebuild.css,
    PublicChromeRedesign2026.css e PublicExperiencePolish2026.css disputavam
-   a mesma faixa com quatro versões diferentes) por um layout dividido com a
-   imagem em um quadro próprio, e corrige o rótulo do bairro que usava
-   dourado avulso ao lado do verde usado no resto da página. */
+   a mesma faixa com quatro versões diferentes) por uma faixa curta de
+   largura total com foto real de fachada de comércio local, texto por
+   cima com scrim, e corrige o rótulo do bairro que usava dourado avulso
+   ao lado do verde usado no resto da página. */
 
 .ref-stores-page .ref-stores-hero {
   position: relative !important;
   isolation: isolate !important;
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 34%) !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
   align-items: center !important;
-  gap: clamp(20px, 3vw, 40px) !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
   width: 100% !important;
   min-height: 0 !important;
+  height: clamp(128px, 15vw, 172px) !important;
   margin: 0 !important;
-  padding: clamp(22px, 3vw, 32px) !important;
+  padding: 0 clamp(20px, 3vw, 32px) !important;
   overflow: hidden !important;
   border: 1px solid var(--pc-border) !important;
   border-radius: var(--pc-radius-block) !important;
-  background: var(--pc-surface) !important;
+  background: var(--pc-ink, #17251d) !important;
   box-shadow: none !important;
-  color: var(--pc-ink, #17251d) !important;
+  color: #fff !important;
 }
-.ref-stores-page .ref-stores-hero::before,
-.ref-stores-page .ref-stores-hero::after { content: none !important; }
+.ref-stores-page .ref-stores-hero__bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -2 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: 68% 42% !important;
+}
+.ref-stores-page .ref-stores-hero__scrim {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  background: linear-gradient(100deg, rgba(6, 10, 8, .96) 0%, rgba(6, 10, 8, .88) 52%, rgba(6, 10, 8, .5) 100%) !important;
+}
 
-.ref-stores-page .ref-stores-hero__copy { min-width: 0; max-width: 56ch !important; display: grid; gap: 8px; }
-.ref-stores-page .ref-stores-hero__copy > span { color: var(--pc-green-strong, #104c30) !important; font-size: 11.5px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
-.ref-stores-page .ref-stores-hero__copy > h1 { margin: 0 !important; max-width: none !important; color: var(--pc-ink, #17251d) !important; font-family: var(--pc-font-display); font-size: clamp(1.9rem, 3.2vw, 2.6rem) !important; line-height: 1.08 !important; letter-spacing: -.03em !important; }
-.ref-stores-page .ref-stores-hero__copy > p { margin: 0 !important; max-width: 52ch !important; color: var(--pc-muted) !important; font-size: 14.5px !important; line-height: 1.55; }
+.ref-stores-page .ref-stores-hero__copy { position: relative; min-width: 0; max-width: 46ch !important; display: grid; gap: 3px; }
+.ref-stores-page .ref-stores-hero__copy > span { color: var(--pc-gold, #e2ba70) !important; font-size: 11px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+.ref-stores-page .ref-stores-hero__copy > h1,
+html:not([data-theme="dark"]) .ref-stores-page .ref-stores-hero__copy > h1,
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero__copy > h1 { margin: 0 !important; max-width: none !important; color: #fff !important; font-family: var(--pc-font-display); font-size: clamp(1.35rem, 2.4vw, 1.85rem) !important; line-height: 1.12 !important; letter-spacing: -.02em !important; }
+.ref-stores-page .ref-stores-hero__copy > p,
+html:not([data-theme="dark"]) .ref-stores-page .ref-stores-hero__copy > p,
+html[data-theme="dark"] .ref-stores-page .ref-stores-hero__copy > p { margin: 0 !important; max-width: 48ch !important; color: rgba(255, 255, 255, .78) !important; font-size: 13px !important; line-height: 1.4; }
 
-.ref-stores-page .ref-stores-hero__row { display: flex !important; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 4px !important; padding: 0 !important; min-height: 0 !important; border: 0 !important; background: none !important; }
-.ref-stores-page div.ref-stores-hero__stat { display: flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 12px; border: 1px solid var(--pc-border); border-radius: 999px; background: var(--pc-surface-2) !important; color: var(--pc-green-strong, #104c30) !important; font-size: 12px; font-weight: 800; }
-.ref-stores-page .ref-stores-hero__stat svg { width: 14px; height: 14px; color: var(--pc-green-strong, #104c30) !important; }
-.ref-stores-page a.ref-stores-hero__cta { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border-radius: var(--pc-radius-control); background: var(--pc-gold, #b77918) !important; color: var(--pc-navy, #104c30) !important; font-size: 13px; font-weight: 850; text-decoration: none; }
+.ref-stores-page .ref-stores-hero__row { position: relative; display: flex !important; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 !important; padding: 0 !important; min-height: 0 !important; border: 0 !important; background: none !important; flex: 0 0 auto; }
+.ref-stores-page div.ref-stores-hero__stat { display: flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 12px; border: 1px solid rgba(255, 255, 255, .22) !important; border-radius: 999px; background: rgba(255, 255, 255, .1) !important; color: #fff !important; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.ref-stores-page .ref-stores-hero__stat svg { width: 14px; height: 14px; color: var(--pc-gold, #e2ba70) !important; }
+.ref-stores-page a.ref-stores-hero__cta { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; border-radius: var(--pc-radius-control); background: var(--pc-gold, #b77918) !important; color: var(--pc-navy, #104c30) !important; font-size: 13px; font-weight: 850; text-decoration: none; white-space: nowrap; }
 .ref-stores-page .ref-stores-hero__cta svg { width: 15px; height: 15px; color: var(--pc-navy, #104c30) !important; }
-
-.ref-stores-page .ref-stores-hero__visual { margin: 0; aspect-ratio: 4 / 3.3; border-radius: calc(var(--pc-radius-block) - 6px); overflow: hidden; background: var(--pc-surface-2); }
-.ref-stores-page .ref-stores-hero__visual img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; display: block; }
 
 @media (hover: hover) and (pointer: fine) {
   .ref-stores-page .ref-stores-hero__cta:hover { background: color-mix(in srgb, var(--pc-gold, #b77918) 88%, #000); }
@@ -53,11 +70,11 @@
 }
 
 @media (max-width: 720px) {
-  .ref-stores-page .ref-stores-hero { grid-template-columns: 1fr !important; padding: 20px !important; }
-  .ref-stores-page .ref-stores-hero__visual { order: -1; aspect-ratio: 16 / 9; }
-  .ref-stores-page .ref-stores-hero__copy > h1 { font-size: 1.9rem !important; }
-  .ref-stores-page .ref-stores-hero__row { flex-direction: column; align-items: stretch; }
-  .ref-stores-page .ref-stores-hero__cta { justify-content: center; }
+  .ref-stores-page .ref-stores-hero { flex-direction: column !important; align-items: flex-start !important; justify-content: center !important; height: auto !important; min-height: 168px !important; padding: 18px !important; gap: 10px !important; }
+  .ref-stores-page .ref-stores-hero__scrim { background: linear-gradient(180deg, rgba(6, 10, 8, .9) 0%, rgba(6, 10, 8, .82) 60%, rgba(6, 10, 8, .68) 100%) !important; }
+  .ref-stores-page .ref-stores-hero__copy { max-width: none !important; }
+  .ref-stores-page .ref-stores-hero__row { width: 100%; }
+  .ref-stores-page a.ref-stores-hero__cta { flex: 1 1 auto; justify-content: center; }
 }
 
 html[data-theme="dark"] .ref-stores-page .ref-stores-hero__cta { color: var(--pc-navy, #104c30); }
