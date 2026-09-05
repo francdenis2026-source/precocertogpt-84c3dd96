@@ -667,6 +667,11 @@ function CollaborationPage() {
           <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
           <h1 id="pc-collab-title">Viu um preço diferente?</h1>
           <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
+          <div className="pc-collab__trust">
+            <span><ShieldCheck aria-hidden="true" /> Análise antes da publicação</span>
+            <span><BadgeCheck aria-hidden="true" /> Sem alteração automática</span>
+            <span><Mail aria-hidden="true" /> Resposta em até 2 dias úteis</span>
+          </div>
         </div>
 
         <section className="pc-collab__panel" aria-label="Enviar nota de compra">

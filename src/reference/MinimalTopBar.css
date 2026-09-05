@@ -1,8 +1,12 @@
-/* Barra mínima flutuante: substitui o header fixo em páginas sem navegação
-   própria (colaborar, contato, detalhe de estabelecimento) — não ocupa
-   espaço de layout. Logomarca à esquerda (mesma posição/estilo do header
-   real do site, sem pílula), botão de voltar à direita. Duas variantes:
-   dark (sobre foto escura) e light (sobre fundo claro). */
+/* Barra mínima fixa: substitui o header padrão em páginas sem navegação
+   própria (colaborar, contato, detalhe de estabelecimento). Logomarca à
+   esquerda, botão de voltar à direita. Um único detalhe indica que é um
+   header — uma linha fina embaixo — e o conteúdo passa por baixo dela ao
+   rolar, como qualquer barra fixa comum (sem desfoque, sem brilho: bug
+   corrigido — o efeito antigo usava uma cor clara fixa, o que criava uma
+   luminosidade estranha quando o site estava no modo escuro). Duas
+   variantes: light (fundo claro, acompanha o tema do site) e dark (sobre
+   foto escura, sempre escura independente do tema). */
 .pc-mini-top {
   position: fixed;
   top: 0;
@@ -14,29 +18,9 @@
   justify-content: space-between;
   padding: 14px clamp(14px, 4vw, 28px);
   padding-top: max(14px, env(safe-area-inset-top));
-  pointer-events: none;
 }
-/* Véu discreto: um leve desfoque com esmaecimento suave, só o bastante
-   para o conteúdo que rola por baixo sumir sem cortar feio contra a
-   logomarca/botão — sem virar uma mancha opaca chamando atenção. */
-.pc-mini-top::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 84px;
-  pointer-events: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
-}
-.pc-mini-top--light::before { background: linear-gradient(to bottom, rgba(247, 248, 250, 0.45) 0%, transparent 100%); }
-.pc-mini-top--dark::before { background: linear-gradient(to bottom, rgba(15, 17, 20, 0.45) 0%, transparent 100%); }
 
 .pc-mini-top__brand {
-  position: relative;
-  z-index: 1;
-  pointer-events: auto;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -50,35 +34,40 @@
 .pc-mini-top__brand small { font-size: 11px; font-weight: 600; opacity: 0.72; }
 
 .pc-mini-top__back {
-  position: relative;
-  z-index: 1;
-  pointer-events: auto;
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
+  border: 0;
+  background: transparent;
   cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 6px 16px rgba(10, 16, 22, 0.12);
-  backdrop-filter: blur(10px);
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  transition: background-color 0.16s ease;
 }
 .pc-mini-top__back svg { width: 17px; height: 17px; }
-.pc-mini-top__back:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(10, 16, 22, 0.18); }
 
-/* Sobre foto/fundo escuro: texto e ícone claros, botão translúcido escuro */
-.pc-mini-top--dark .pc-mini-top__brand { color: #fff; }
-.pc-mini-top--dark .pc-mini-top__brand small { color: #d4dfe4; opacity: 1; }
-.pc-mini-top--dark .pc-mini-top__back { background: rgba(10, 18, 24, 0.55); border-color: rgba(255, 255, 255, 0.16); color: #fff; }
-
-/* Sobre fundo claro: acompanha o tema do site (claro ou escuro), nunca
-   fica com fundo e ícone da mesma cor — bug corrigido: o botão usava
-   fundo branco fixo, que ficava invisível/ilegível com o app no modo
-   escuro (ícone claro do tema escuro sobre um botão sempre branco). */
+/* Variante clara: acompanha o tema do site (claro ou escuro) através das
+   variáveis --px-*, que já invertem sozinhas — nunca fica com brilho
+   claro fixo sobre fundo escuro. */
+.pc-mini-top--light {
+  background: var(--px-surface, #fff);
+  border-bottom: 1px solid var(--px-line, #e2e7ec);
+}
 .pc-mini-top--light .pc-mini-top__brand { color: var(--px-ink, #14181d); }
 .pc-mini-top--light .pc-mini-top__brand small { color: var(--px-muted, #5f6b78); }
-.pc-mini-top--light .pc-mini-top__back { background: var(--px-surface, #fff); border-color: var(--px-line, #e2e7ec); color: var(--px-ink, #14181d); }
+.pc-mini-top--light .pc-mini-top__back { color: var(--px-ink, #14181d); }
+.pc-mini-top--light .pc-mini-top__back:hover { background: var(--px-surface-soft, #f7f8fa); }
+
+/* Variante escura: sempre escura (usada sobre foto de capa escura),
+   independente do tema do site. */
+.pc-mini-top--dark {
+  background: rgba(10, 14, 18, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.pc-mini-top--dark .pc-mini-top__brand { color: #fff; }
+.pc-mini-top--dark .pc-mini-top__brand small { color: #d4dfe4; opacity: 1; }
+.pc-mini-top--dark .pc-mini-top__back { color: #fff; }
+.pc-mini-top--dark .pc-mini-top__back:hover { background: rgba(255, 255, 255, 0.14); }
 
 @media (max-width: 480px) {
   .pc-mini-top__brand small { display: none; }
