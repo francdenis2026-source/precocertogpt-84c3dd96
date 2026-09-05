@@ -104,10 +104,15 @@ export function HeroUserImage2026({
               <ul>
                 {proofItems.map((product) => (
                   <li key={product.id}>
-                    <span className="pcx-hero__panel-name">{product.name}</span>
-                    <span className="pcx-hero__panel-store">
-                      <Store aria-hidden="true" /> {product.establishment || "Comércio local"}
-                    </span>
+                    <ProductThumb product={product} size="sm" className="pcx-hero__panel-thumb" />
+                    <div className="pcx-hero__panel-info">
+                      <span className="pcx-hero__panel-name" title={product.name}>
+                        {product.name}
+                      </span>
+                      <span className="pcx-hero__panel-store" title={product.establishment}>
+                        <Store aria-hidden="true" /> {product.establishment || "Comércio local"}
+                      </span>
+                    </div>
                     <strong className="pcx-hero__panel-price">
                       {brl.format(product.minPrice)}
                     </strong>
@@ -116,14 +121,17 @@ export function HeroUserImage2026({
               </ul>
             ) : (
               <ul>
-                <li>
-                  <span className="pcx-hero__panel-name">Catálogo carregando…</span>
-                  <span className="pcx-hero__panel-store">
-                    <Store aria-hidden="true" /> Feijó, Acre
-                  </span>
+                <li className="pcx-hero__panel-empty">
+                  <div className="pcx-hero__panel-info">
+                    <span className="pcx-hero__panel-name">Catálogo carregando…</span>
+                    <span className="pcx-hero__panel-store">
+                      <Store aria-hidden="true" /> Feijó, Acre
+                    </span>
+                  </div>
                 </li>
               </ul>
             )}
+
             <div className="pcx-hero__panel-foot">
               <RefreshCw aria-hidden="true" /> Dados reais de Feijó
             </div>
