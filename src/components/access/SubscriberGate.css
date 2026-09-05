@@ -79,11 +79,13 @@
 .pc-sub-gate__cta:focus-visible,
 .pc-sub-gate__ghost:focus-visible { outline: 2px solid var(--px-brand); outline-offset: 2px; }
 .pc-sub-gate__back {
+  /* min-height de 44px: o link tinha 17px de altura. */
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  margin-top: 12px;
+  margin-top: 4px;
   color: var(--px-muted);
   font-size: 0.78rem;
   font-weight: 600;
