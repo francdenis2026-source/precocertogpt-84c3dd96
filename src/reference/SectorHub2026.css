@@ -17,39 +17,46 @@
 .sector-hub button { font: inherit; }
 .sector-hub__shell { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
 
-/* Hero curto: uma mensagem, dois dados e duas ações. */
+/* Hero curto: uma mensagem, dois dados e duas ações. Superfície do tema
+   (não mais uma faixa verde-escura fixa) para casar com o resto do site,
+   que já usa dourado como único destaque em /buscar e /estabelecimentos. */
 .sector-hub__hero {
   position: relative;
   width: min(1160px, calc(100% - 40px));
   margin: 20px auto 0;
   overflow: hidden;
   border-radius: 22px;
-  background: #0d2b20;
-  color: #fff;
-  box-shadow: 0 18px 48px rgb(24 32 51 / 11%);
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  color: var(--pc-ink);
 }
 
-.sector-hub__hero-grid { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 34%); align-items: center; gap: 28px; padding: 34px 38px; }
-.sector-hub__hero-copy { max-width: 560px; min-width: 0; }
-.sector-hub__hero-visual { margin: 0; aspect-ratio: 4 / 3.3; border-radius: 16px; overflow: hidden; box-shadow: 0 16px 34px rgb(3 12 8 / 45%); }
-.sector-hub__hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
-.sector-hub__eyebrow { display: flex; align-items: center; gap: 8px; color: #ffd27a; font-size: 12px; font-weight: 850; letter-spacing: .07em; }
+.sector-hub__hero-grid { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 34%); align-items: stretch; gap: clamp(20px, 3vw, 32px); height: clamp(220px, 27vw, 270px); padding: clamp(20px, 2.6vw, 28px); }
+.sector-hub__hero-copy { max-width: 560px; min-width: 0; display: grid; align-content: center; gap: 8px; }
+.sector-hub__hero-visual { position: relative; margin: 0; height: 100%; border-radius: 16px; overflow: hidden; background: var(--pc-surface-2); }
+.sector-hub__hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 24%; }
+.sector-hub__eyebrow { display: flex; align-items: center; gap: 8px; color: var(--pc-gold, #b77918); font-size: 12px; font-weight: 850; letter-spacing: .07em; }
 .sector-hub__eyebrow svg { width: 16px; height: 16px; }
-.sector-hub__hero h1 { max-width: 620px; margin: 8px 0 9px; font-family: var(--pc-font-display); font-size: clamp(2.55rem, 4.8vw, 4.45rem); font-weight: 680; line-height: .96; letter-spacing: -.05em; text-shadow: 0 2px 18px rgb(4 16 11 / 55%); }
-.sector-hub__hero h1 em { color: #a7e8c4; font-style: normal; }
-.sector-hub__hero-copy > p { max-width: 610px; margin: 0; color: #eef3ee; font-size: 15px; line-height: 1.55; text-shadow: 0 1px 10px rgb(4 16 11 / 45%); }
-.sector-hub__hero-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-.sector-hub__hero-stats span { display: flex; align-items: baseline; gap: 6px; padding: 7px 13px; border: 1px solid rgb(255 255 255 / 18%); border-radius: 999px; background: rgb(255 255 255 / 10%); backdrop-filter: blur(6px); color: #d9e6df; font-size: 12px; }
-.sector-hub__hero-stats b { color: #fff; font-family: var(--pc-font-display); font-size: 19px; font-variant-numeric: tabular-nums; }
-.sector-hub__hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 19px; }
-.sector-hub__hero-actions a { min-height: 44px; padding: 0 14px; border: 1px solid rgb(255 255 255 / 24%); border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: #fff; font-size: 12px; font-weight: 820; transition: transform 140ms var(--sh-ease), background-color 160ms ease, border-color 160ms ease; }
-.sector-hub__hero-actions a:first-child { border-color: #fff; background: #fff; color: #0d5c3f; }
+.sector-hub__hero h1 { max-width: 20ch; margin: 0; font-family: var(--pc-font-display); font-size: clamp(1.7rem, 2.6vw, 2.35rem); font-weight: 680; line-height: 1.1; letter-spacing: -.03em; }
+.sector-hub__hero h1 em { color: var(--pc-gold, #b77918); font-style: normal; }
+.sector-hub__hero-copy > p { max-width: 52ch; margin: 0; color: var(--pc-muted); font-size: 14.5px; line-height: 1.5; }
+.sector-hub__hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.sector-hub__hero-stats span { display: flex; align-items: baseline; gap: 6px; padding: 6px 12px; border: 1px solid var(--pc-border); border-radius: 999px; background: var(--pc-surface-2); color: var(--pc-muted); font-size: 12px; }
+.sector-hub__hero-stats b { color: var(--pc-ink); font-family: var(--pc-font-display); font-size: 16px; font-variant-numeric: tabular-nums; }
+.sector-hub__hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.sector-hub__hero-actions a { min-height: 42px; padding: 0 14px; border: 1px solid var(--pc-border); border-radius: var(--pc-radius-control, 10px); display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: var(--pc-ink); background: var(--pc-surface-2); font-size: 12.5px; font-weight: 820; transition: transform 140ms var(--sh-ease), background-color 160ms ease, border-color 160ms ease; }
+.sector-hub__hero-actions a:first-child { border-color: transparent; background: var(--pc-gold, #b77918); color: var(--pc-navy, #104c30); }
 .sector-hub__hero-actions svg { width: 15px; }
 .sector-hub__hero-actions a:active { transform: scale(.97); }
 
+@media (hover: hover) and (pointer: fine) {
+  .sector-hub__hero-actions a:not(:first-child):hover { background: var(--pc-surface); border-color: var(--pc-gold, #b77918); }
+  .sector-hub__hero-actions a:first-child:hover { background: color-mix(in srgb, var(--pc-gold, #b77918) 88%, #000); }
+}
+
 /* Conteúdo denso, sem grandes vazios. */
-.sector-hub__content { padding-block: 30px 42px; }
-.sector-hub__section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .62fr); align-items: end; gap: 32px; margin-bottom: 15px; }
+.sector-hub__content { padding-block: 22px 32px; }
+.sector-hub__section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .62fr); align-items: end; gap: 32px; margin-bottom: 12px; }
 .sector-hub__section-head span,
 .sector-hub__tools-copy > span,
 .sector-hub__stores header span { color: var(--sh-blue); font-size: 11px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
@@ -60,7 +67,7 @@
 
 /* Categorias: cartões horizontais compactos em grade modular. */
 .sector-hub__sectors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-.sector-hub__sector { position: relative; min-width: 0; min-height: 144px; padding: 15px; border: 1px solid var(--pc-border); border-radius: 14px; background: var(--pc-surface); color: var(--pc-ink); display: grid; grid-template-columns: 42px minmax(0, 1fr) 16px; align-items: start; gap: 11px; transition: transform 160ms var(--sh-ease), border-color 160ms ease; }
+.sector-hub__sector { position: relative; min-width: 0; min-height: 122px; padding: 14px; border: 1px solid var(--pc-border); border-radius: 14px; background: var(--pc-surface); color: var(--pc-ink); display: grid; grid-template-columns: 42px minmax(0, 1fr) 16px; align-items: start; gap: 11px; transition: transform 160ms var(--sh-ease), border-color 160ms ease; }
 .sector-hub__sector-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--pc-green-soft); color: var(--sh-green); display: grid; place-items: center; }
 .sector-hub__sector-icon svg { width: 20px; height: 20px; }
 .sector-hub__sector-copy { min-width: 0; display: grid; gap: 3px; }
@@ -83,10 +90,10 @@
 /* Ferramentas em uma faixa: painel com foto editorial à esquerda (mesma
    linguagem visual do hero) + grade de atalhos clara à direita — em vez de
    uma faixa azul plana, sem imagem, destoando do resto da página. */
-.sector-hub__tools { margin-top: 24px; border-radius: 16px; overflow: hidden; border: 1px solid var(--pc-border); display: grid; grid-template-columns: minmax(230px, .68fr) minmax(0, 1.32fr); align-items: stretch; box-shadow: 0 10px 28px rgb(13 43 32 / 8%); }
+.sector-hub__tools { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--pc-border); display: grid; grid-template-columns: minmax(230px, .68fr) minmax(0, 1.32fr); align-items: stretch; box-shadow: 0 10px 28px rgb(13 43 32 / 8%); }
 .sector-hub__tools-copy { position: relative; isolation: isolate; padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; color: #fff; }
 .sector-hub__tools-copy::before { content: ""; position: absolute; z-index: -2; inset: 0; background: url('/compra-inteligente-profissional.webp') 78% center / cover no-repeat; filter: brightness(1.1) saturate(1.15); }
-.sector-hub__tools-copy::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(100deg, rgb(6 26 18 / 96%) 0%, rgb(8 32 22 / 88%) 55%, rgb(10 36 26 / 55%) 100%); }
+.sector-hub__tools-copy::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(100deg, rgb(10 12 16 / 96%) 0%, rgb(12 15 20 / 88%) 55%, rgb(14 17 22 / 55%) 100%); }
 .sector-hub__tools-copy > span { color: #ffc767; }
 .sector-hub__tools h2 { color: #fff; text-shadow: 0 1px 12px rgb(4 16 11 / 45%); }
 .sector-hub__tools-copy p { max-width: 390px; margin: 7px 0 0; color: #dfe9e2; font-size: 12px; line-height: 1.5; }
@@ -99,7 +106,7 @@
 .sector-hub__tool-grid small { overflow: hidden; color: var(--pc-muted); font-size: 10px; white-space: nowrap; text-overflow: ellipsis; }
 
 /* Lojas: alto contraste, informação essencial e patrocinado explícito. */
-.sector-hub__stores { margin-top: 27px; }
+.sector-hub__stores { margin-top: 20px; }
 .sector-hub__stores > header { margin-bottom: 13px; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
 .sector-hub__stores > header > a { min-height: 40px; color: var(--sh-blue); display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 850; }
 .sector-hub__stores > header > a svg { width: 14px; }
@@ -124,7 +131,7 @@
 .sector-hub__empty small { font-size: 11px; }
 
 /* Conteúdo complementar no final, sem competir com o diretório. */
-.sector-hub__special { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sector-hub__special { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .sector-hub__special article { min-height: 112px; padding: 16px; border: 1px solid var(--pc-border); border-radius: 14px; background: var(--pc-surface); display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 11px; }
 .sector-hub__special article > svg { width: 36px; height: 36px; padding: 8px; border-radius: 9px; background: var(--pc-surface-2); color: var(--sh-gold); }
 .sector-hub__special article > span { display: grid; gap: 2px; }
@@ -141,12 +148,6 @@
 .sector-hub__how small { color: var(--pc-muted); font-size: 9px; font-weight: 850; letter-spacing: .06em; }
 .sector-hub__how strong { font-size: 11px; }
 
-html[data-theme="dark"] .sector-hub {
-  --sh-green: #73e4ae;
-  --sh-blue: var(--sh-green);
-  --sh-gold: #ffc25c;
-}
-html[data-theme="dark"] .sector-hub__hero { background: #0a1f16; }
 html[data-theme="dark"] .sector-hub__sector--pharmacies .sector-hub__sector-icon { color: #67d8df; }
 html[data-theme="dark"] .sector-hub__sector--bakery .sector-hub__sector-icon { color: #ffc477; }
 html[data-theme="dark"] .sector-hub__sector--books .sector-hub__sector-icon { color: #c7b1ff; }
@@ -155,8 +156,6 @@ html[data-theme="dark"] .sector-hub__tool-grid > a { background: var(--pc-surfac
 html[data-theme="dark"] .sector-hub__sponsor-badge { color: #ffe1a1; background: #4a3515; }
 
 @media (hover: hover) and (pointer: fine) {
-  .sector-hub__hero-actions a:hover { background: rgb(255 255 255 / 12%); }
-  .sector-hub__hero-actions a:first-child:hover { background: #f0f3ff; }
   .sector-hub__sector:hover, .sector-hub__store-grid > a:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--sh-blue) 48%, var(--pc-border)); }
   .sector-hub__sector:hover .sector-hub__arrow, .sector-hub__tool-grid > a:hover > svg:last-child { transform: translateX(3px); }
   .sector-hub__tool-grid > a:hover { background: rgb(255 255 255 / 13%); }
@@ -171,10 +170,10 @@ html[data-theme="dark"] .sector-hub__sponsor-badge { color: #ffe1a1; background:
 
 @media (max-width: 680px) {
   .sector-hub__shell, .sector-hub__hero { width: min(100% - 24px, 620px); }
-  .sector-hub__hero { margin-top: 10px; border-radius: 17px; box-shadow: none; }
-  .sector-hub__hero-grid { grid-template-columns: 1fr; padding: 20px; }
-  .sector-hub__hero-visual { order: -1; aspect-ratio: 16 / 9; }
-  .sector-hub__hero h1 { font-size: clamp(2.4rem, 12vw, 3.4rem); }
+  .sector-hub__hero { margin-top: 10px; border-radius: 17px; }
+  .sector-hub__hero-grid { grid-template-columns: 1fr; height: auto; padding: 18px; }
+  .sector-hub__hero-visual { order: -1; height: auto; aspect-ratio: 16 / 9; }
+  .sector-hub__hero h1 { max-width: none; font-size: clamp(1.6rem, 8vw, 2rem); }
   .sector-hub__hero-copy > p { font-size: 13px; }
   .sector-hub__hero-actions { display: grid; grid-template-columns: 1fr; }
   .sector-hub__content { padding-block: 24px 32px; }
