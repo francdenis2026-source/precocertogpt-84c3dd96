@@ -731,7 +731,7 @@ function ContactPage() {
         <div className="pc-contact__copy">
           <span className="pc-contact__eyebrow"><Mail aria-hidden="true" /> FALE COM O PREÇOCERTO</span>
           <h1>Estamos perto para ouvir.</h1>
-          <p>Dúvida, sugestão ou proposta de parceria com o comércio local — escolha o canal mais rápido para você.</p>
+          <p>Dúvida, sugestão ou proposta de parceria com o comércio local. Escolha o canal mais rápido para você.</p>
         </div>
 
         <div className="pc-contact__grid" aria-label="Canais de contato">
