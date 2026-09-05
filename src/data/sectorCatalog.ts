@@ -121,6 +121,8 @@ type RealEstablishmentRow = {
   kind?: string | null;
   address?: string | Record<string, unknown> | null;
   logo_url?: string | null;
+  whatsapp?: string | null;
+  opening_hours?: string | null;
 };
 
 const normalizeName = (value: string | null | undefined) =>
@@ -195,7 +197,7 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
 
   const { data, error } = await supabase
     .from("establishments")
-    .select("id,name,slug,neighborhood,brand_color,kind,address,logo_url")
+    .select("id,name,slug,neighborhood,brand_color,kind,address,logo_url,whatsapp,opening_hours")
     .order("name", { ascending: true })
     .limit(2000);
 
@@ -224,6 +226,8 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
       address: addressText(row.address),
       logoUrl: row.logo_url || undefined,
       city: addressCity(row.address),
+      whatsapp: row.whatsapp || undefined,
+      openingHours: row.opening_hours || undefined,
       products: productCounts.get(String(row.id)) || 0,
     };
   });
