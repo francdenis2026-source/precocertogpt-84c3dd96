@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "../lib/supabase";
 import { adminRoles, invalidateSessionProfile, type AppRole } from "../lib/roles";
+import { novoSessionId } from "../lib/deviceIdentity";
 
 export type AuthResult = { error: string | null };
 
@@ -12,6 +13,9 @@ export type AuthState = {
   roles: AppRole[];
   isAdmin: boolean;
   isMerchant: boolean;
+  /** Identificador deste login. Muda a cada entrada e é o que o
+   *  SingleSessionGuard usa para saber qual acesso é o mais recente. */
+  sessionId: string | null;
   signInWithPassword: (email: string, password: string) => Promise<AuthResult>;
   signUp: (email: string, password: string, name?: string) => Promise<AuthResult>;
   signOut: () => Promise<void>;
@@ -19,6 +23,22 @@ export type AuthState = {
 };
 
 const merchantRoles: AppRole[] = ["merchant_owner", "merchant_staff"];
+
+/* O id do login fica em localStorage e não em memória porque precisa
+   sobreviver a um F5: recarregar a página não é entrar de novo, e se o id
+   mudasse a cada recarga o próprio dispositivo se derrubaria. */
+const SESSION_ID_KEY = "precocerto:auth-session-id";
+
+function lerSessionId(): string | null {
+  try { return localStorage.getItem(SESSION_ID_KEY); } catch { return null; }
+}
+
+function gravarSessionId(id: string | null) {
+  try {
+    if (id) localStorage.setItem(SESSION_ID_KEY, id);
+    else localStorage.removeItem(SESSION_ID_KEY);
+  } catch { /* armazenamento bloqueado: a sessão vale só para esta aba */ }
+}
 
 const AuthContext = createContext<AuthState | null>(null);
 
@@ -52,6 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sessionId, setSessionId] = useState<string | null>(() => lerSessionId());
   const alive = useRef(true);
 
   const applySession = useCallback(async (next: Session | null) => {
@@ -99,6 +120,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password,
     });
     if (error || !data.session) return { error: messageFor(error?.message) };
+
+    /* Uma conta, um dispositivo. scope "others" revoga no servidor os refresh
+       tokens de todos os outros aparelhos, então a regra vale mesmo que o
+       outro esteja desligado agora. Falhar aqui não pode impedir o login: se a
+       revogação não passar, o SingleSessionGuard ainda derruba o outro lado em
+       tempo real quando ele estiver online. */
+    try {
+      await supabase.auth.signOut({ scope: "others" });
+    } catch {
+      /* segue o login; a camada de tempo real cobre */
+    }
+
+    const novo = novoSessionId();
+    gravarSessionId(novo);
+    if (alive.current) setSessionId(novo);
+
     await applySession(data.session);
     announce();
     return { error: null };
@@ -113,16 +150,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       options: { data: { name: cleanName, full_name: cleanName }, emailRedirectTo: window.location.origin },
     });
     if (error) return { error: messageFor(error.message) };
-    if (data.session) await applySession(data.session);
+    if (data.session) {
+      const novo = novoSessionId();
+      gravarSessionId(novo);
+      if (alive.current) setSessionId(novo);
+      await applySession(data.session);
+    }
     announce();
     return { error: null };
   }, [announce, applySession]);
 
   const signOutFn = useCallback(async () => {
     if (supabase) await supabase.auth.signOut();
+    gravarSessionId(null);
     if (alive.current) {
       setSession(null);
       setRoles([]);
+      setSessionId(null);
       setLoading(false);
     }
     announce();
@@ -140,11 +184,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     roles,
     isAdmin: roles.some(role => adminRoles.includes(role)),
     isMerchant: roles.some(role => merchantRoles.includes(role)),
+    sessionId,
     signInWithPassword,
     signUp,
     signOut: signOutFn,
     refreshRoles,
-  }), [session, loading, roles, signInWithPassword, signUp, signOutFn, refreshRoles]);
+  }), [session, loading, roles, sessionId, signInWithPassword, signUp, signOutFn, refreshRoles]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -1,0 +1,61 @@
+/* Faixa de aviso de aba duplicada. Fica acima do conteúdo, abaixo de modais,
+   e nunca cobre a navegação inferior do aplicativo. */
+.pc-dup-tab {
+  position: fixed;
+  left: 50%;
+  translate: -50% 0;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 84px);
+  z-index: 90;
+  width: min(520px, calc(100% - 24px));
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 12px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 14px;
+  background: #10161d;
+  color: rgb(255 255 255 / 88%);
+  box-shadow: 0 16px 40px rgb(0 0 0 / 32%);
+  animation: pc-dup-tab-entra 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes pc-dup-tab-entra {
+  from { opacity: 0; translate: -50% 10px; }
+  to { opacity: 1; translate: -50% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-dup-tab { animation: none; }
+}
+.pc-dup-tab__icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgb(255 184 0 / 16%);
+  color: var(--pc-gold, #ffb800);
+}
+.pc-dup-tab__icon svg { width: 17px; height: 17px; }
+.pc-dup-tab p { display: grid; gap: 2px; margin: 0; min-width: 0; }
+.pc-dup-tab strong { color: #fff; font-size: 13px; }
+/* 4.6:1 sobre #10161d. */
+.pc-dup-tab span { color: rgb(255 255 255 / 66%); font-size: 12px; line-height: 1.4; }
+.pc-dup-tab button {
+  /* 44px: é o botão de dispensar, e ele precisa ser acertável de primeira. */
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 10px;
+  background: transparent;
+  color: rgb(255 255 255 / 78%);
+  cursor: pointer;
+}
+.pc-dup-tab button svg { width: 15px; height: 15px; }
+@media (hover: hover) and (pointer: fine) {
+  .pc-dup-tab button:hover { background: rgb(255 255 255 / 8%); color: #fff; }
+}
+@media (max-width: 640px) {
+  .pc-dup-tab { bottom: calc(env(safe-area-inset-bottom, 0px) + 78px); padding: 10px; }
+}

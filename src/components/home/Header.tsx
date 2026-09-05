@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
+import { OnlinePresence } from "../OnlinePresence";
 
 function HeaderThemeToggle() {
   const { theme, toggleTheme } = useSiteTheme();
@@ -109,6 +110,9 @@ export function Header() {
         </nav>
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
+          {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
+              renderizado só dentro do PublicHeader, que a home não usa. */}
+          <OnlinePresence />
           <HeaderRadioPlayer />
           <HeaderThemeToggle />
           <Link className="pcx-header__login" to="/login">
