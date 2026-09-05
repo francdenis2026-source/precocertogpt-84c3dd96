@@ -29,6 +29,10 @@ import "./styles/global/platform-polish-2026.css";
 // Camada final profissional: dona da busca, header, ritmo de seções e rodapé.
 import "./styles/global/pro-experience-2026.css";
 import "./styles/global/member-experience-2026.css";
+// Piso de feedback ao toque/teclado. Entra por ultimo de proposito, mas com
+// seletores de especificidade zero: acrescenta onde nao havia nada e nunca
+// sobrepoe o que cada pagina ja define.
+import "./styles/global/touch-feedback-2026.css";
 
 
 

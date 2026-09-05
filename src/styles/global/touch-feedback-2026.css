@@ -1,0 +1,81 @@
+/* Feedback de interação — a camada que faltava para o site parecer aplicativo.
+ *
+ * O levantamento nas folhas do projeto encontrou 921 regras de :hover contra
+ * 85 de :active, e nenhuma linha de touch-action em nenhum arquivo. Ou seja: a
+ * interface inteira foi desenhada para o mouse. Quem usa no celular, que é a
+ * maioria em Feijó, não recebia nenhuma resposta ao encostar o dedo, e ainda
+ * pegava o atraso de ~300ms que o navegador reserva para detectar duplo-toque.
+ *
+ * Esta folha estabelece o piso para todo elemento clicável. É de propósito que
+ * ela use seletores de elemento (a, button) e :where(): a especificidade fica
+ * em (0,0,1) e em zero, então QUALQUER regra existente de página continua
+ * vencendo. Isto acrescenta onde não havia nada; não redesenha o que já existe.
+ */
+
+/* ── 1. Toque imediato ─────────────────────────────────────────────────────
+   touch-action:manipulation desliga o duplo-toque-para-zoom nesses elementos,
+   e com ele o atraso do clique. O realce padrão do WebKit (um retângulo escuro
+   que aparece meio quadro depois do toque) sai em favor do nosso próprio
+   :active, que responde na hora. */
+a,
+button,
+[role="button"],
+label,
+summary,
+input[type="submit"],
+input[type="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── 2. Resposta ao pressionar ─────────────────────────────────────────────
+   Um afundamento de 1px: suficiente para o dedo perceber que o toque foi
+   registrado, discreto o bastante para não parecer animação.
+
+   Usa `translate`, e não `transform`, de propósito. As duas fazem a mesma
+   coisa aqui, mas `transform` é uma propriedade só: se o elemento já usa
+   transform para outra finalidade — centralizar com translateX(-50%), crescer
+   no hover, girar uma seta — escrever transform no :active apagaria aquilo e o
+   elemento saltaria de lugar ao ser tocado. `translate` é independente e se
+   compõe com o transform existente em vez de substituí-lo. */
+:where(a, button, [role="button"], input[type="submit"]):active {
+  translate: 0 1px;
+}
+/* Cartões inteiros clicáveis afundam menos: a área é grande e o mesmo
+   deslocamento parece exagerado. */
+:where(article, li):has(> a):active,
+:where(a, button):where([class*="card"], [class*="Card"]):active {
+  translate: 0 0.5px;
+}
+
+/* Transição só na volta: ao pressionar, a resposta é imediata (sem transição);
+   ao soltar, volta suave. É o que faz o toque parecer instantâneo. */
+:where(a, button, [role="button"], input[type="submit"]) {
+  transition-property: background-color, border-color, color, box-shadow, translate;
+  transition-duration: 160ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+:where(a, button, [role="button"], input[type="submit"]):active {
+  transition-duration: 0s;
+}
+
+/* ── 3. Anel de foco ───────────────────────────────────────────────────────
+   A home deixava 42 elementos com o anel padrão do navegador (outline:auto
+   1px), fino e alheio à identidade do site. :where() zera a especificidade,
+   então todo anel já desenhado nas páginas continua valendo. */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--pc-gold, #ffb800);
+  outline-offset: 2px;
+}
+
+/* ── 4. Movimento reduzido ─────────────────────────────────────────────────
+   Quem pede menos movimento no sistema continua recebendo a resposta de cor e
+   de foco, que são informação, e perde só o deslocamento. */
+@media (prefers-reduced-motion: reduce) {
+  :where(a, button, [role="button"], input[type="submit"]):active {
+    translate: none;
+  }
+  :where(a, button, [role="button"], input[type="submit"]) {
+    transition-duration: 0s;
+  }
+}
