@@ -16,22 +16,22 @@
   padding-top: max(14px, env(safe-area-inset-top));
   pointer-events: none;
 }
-/* Camada de desfoque com esmaecimento gradual: o conteúdo que rola por
-   baixo da barra borra e desaparece suavemente em vez de cortar de
-   forma abrupta contra a logomarca/botão. */
+/* Véu discreto: um leve desfoque com esmaecimento suave, só o bastante
+   para o conteúdo que rola por baixo sumir sem cortar feio contra a
+   logomarca/botão — sem virar uma mancha opaca chamando atenção. */
 .pc-mini-top::before {
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
-  height: 132px;
+  height: 84px;
   pointer-events: none;
-  backdrop-filter: blur(18px) saturate(1.15);
-  -webkit-backdrop-filter: blur(18px) saturate(1.15);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 96%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 96%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
 }
-.pc-mini-top--light::before { background: linear-gradient(to bottom, rgba(247, 248, 250, 0.85) 0%, rgba(247, 248, 250, 0.35) 55%, transparent 100%); }
-.pc-mini-top--dark::before { background: linear-gradient(to bottom, rgba(15, 17, 20, 0.85) 0%, rgba(15, 17, 20, 0.35) 55%, transparent 100%); }
+.pc-mini-top--light::before { background: linear-gradient(to bottom, rgba(247, 248, 250, 0.45) 0%, transparent 100%); }
+.pc-mini-top--dark::before { background: linear-gradient(to bottom, rgba(15, 17, 20, 0.45) 0%, transparent 100%); }
 
 .pc-mini-top__brand {
   position: relative;
