@@ -616,7 +616,7 @@ const infoCopy: Record<InfoKind, { eyebrow: string; title: string; copy: string;
 export function MinimalTopBar({ variant = "dark" }: { variant?: "dark" | "light" }) {
   const navigate = useNavigate();
   return <div className={`pc-mini-top pc-mini-top--${variant}`}>
-    <Link className="pc-mini-top__brand" to="/" aria-label="Preço Certo — página inicial">
+    <Link className="pc-mini-top__brand" to="/" aria-label="Preço Certo, página inicial">
       <img src="/preco-certo-mark.svg?v=17" alt="" width="34" height="34" />
       <span><strong>Preço Certo</strong><small>Feijó, Acre</small></span>
     </Link>
@@ -666,7 +666,7 @@ function CollaborationPage() {
         <div className="pc-collab__copy">
           <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
           <h1 id="pc-collab-title">Viu um preço diferente?</h1>
-          <p>Preencha seus dados e envie uma foto legível da sua nota de compra. Nossa equipe confere as informações e realiza as atualizações necessárias no catálogo.</p>
+          <p>Preencha seus dados e envie uma foto legível da nota. Nossa equipe confere e atualiza o catálogo.</p>
           <div className="pc-collab__trust">
             <span><ShieldCheck aria-hidden="true" /> Análise antes da publicação</span>
             <span><BadgeCheck aria-hidden="true" /> Sem alteração automática</span>
@@ -679,7 +679,7 @@ function CollaborationPage() {
           <div className="pc-collab__gate">
             <span className="pc-collab__gate-icon"><LockKeyhole aria-hidden="true" /></span>
             <h2>Crie sua conta para enviar</h2>
-            <p>Para enviar notas de compra é preciso estar cadastrado e logado — assim a equipe consegue confirmar informações quando necessário. Seus dados preenchidos são mantidos ao voltar.</p>
+            <p>Para enviar notas de compra é preciso estar cadastrado e logado, assim a equipe consegue confirmar informações quando necessário. Seus dados preenchidos são mantidos ao voltar.</p>
             <div className="pc-collab__gate-actions">
               <Link className="pc-collab__gate-primary" to="/cadastro?redirect=%2Fcolaborar">Criar conta grátis <ArrowRight aria-hidden="true" /></Link>
               <Link className="pc-collab__gate-login" to="/login?redirect=%2Fcolaborar">Já tenho conta</Link>
@@ -700,16 +700,16 @@ function CollaborationPage() {
             <div className="pc-collab__row">
               <label>Seu e-mail <em>*</em>
                 <input {...field("email")} type="email" autoComplete="email" placeholder="para retorno, se precisar" aria-invalid={emailError} />
-                {emailError && <small className="pc-collab__field-error">E-mail inválido — confira o formato.</small>}
+                {emailError && <small className="pc-collab__field-error">E-mail inválido, confira o formato.</small>}
               </label>
               <label>Seu WhatsApp
                 <input {...field("whatsapp")} type="tel" autoComplete="tel" placeholder="(68) 9####-####" aria-invalid={phoneError} />
-                {phoneError && <small className="pc-collab__field-error">Número inválido — use DDD + celular.</small>}
+                {phoneError && <small className="pc-collab__field-error">Número inválido, use DDD + celular.</small>}
               </label>
             </div>
             {touched && missing.length > 0 && <p className="pc-collab__error"><Info aria-hidden="true" /> Preencha nome, cidade, estabelecimento e e-mail para continuar.</p>}
             <button className="pc-collab__send" type="submit"><Camera aria-hidden="true" /> Preparar envio da nota <ArrowRight aria-hidden="true" /></button>
-            <small className="pc-collab__hint">É preciso estar cadastrado e logado para enviar. Seu app de e-mail abrirá com os dados preenchidos — anexe a foto da nota antes de enviar.</small>
+            <small className="pc-collab__hint">É preciso estar cadastrado e logado para enviar. Seu app de e-mail abrirá com os dados preenchidos. Anexe a foto da nota antes de enviar.</small>
           </form>
         </>}
         </section>
