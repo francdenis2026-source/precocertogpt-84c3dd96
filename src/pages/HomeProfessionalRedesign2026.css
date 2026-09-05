@@ -1041,8 +1041,9 @@
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   /* A foto original enquadra o rosto perto do topo; cover com posição
      central cortava o rosto pela metade. Sobe o ponto de foco para
-     manter o rosto visível na faixa baixa do banner. */
-  object-position: 78% 8%;
+     manter o rosto visível na faixa baixa do banner, mas 8% ainda cortava
+     o topo do cabelo rente à borda — 0% dá a folga que falta acima da cabeça. */
+  object-position: 78% 0%;
   transition: transform 400ms ease;
 }
 .pcx-promo-feature::after {
