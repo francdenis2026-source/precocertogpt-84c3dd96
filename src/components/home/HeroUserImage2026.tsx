@@ -2,6 +2,8 @@ import { ArrowRight, PackageSearch, RefreshCw, Search, Store } from "lucide-reac
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
+import { ProductThumb } from "../catalog/ProductThumb";
+
 import heroImg from "../../assets/home-2026/hero-supermercado-precocerto-2026.jpg";
 import heroImgMobile from "../../assets/home-2026/hero-supermercado-precocerto-2026-mobile.jpg";
 
