@@ -727,47 +727,45 @@ function ContactPage() {
   return <div className="pc-contact-page pc-noheader-page">
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="pc-contact">
-      <section className="pc-contact__hero">
-        <div className="pc-contact__hero-copy">
+      <div className="pc-contact__left">
+        <div className="pc-contact__copy">
           <span className="pc-contact__eyebrow"><Mail aria-hidden="true" /> FALE COM O PREÇOCERTO</span>
           <h1>Estamos perto para ouvir.</h1>
           <p>Dúvida, sugestão ou proposta de parceria com o comércio local — escolha o canal mais rápido para você.</p>
         </div>
-        <div className="pc-contact__hero-media" aria-hidden="true">
-          <img src={contactHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
+
+        <div className="pc-contact__grid" aria-label="Canais de contato">
+          <a className="pc-contact__card" href="mailto:precocerto-fj@proton.me">
+            <span className="pc-contact__icon"><Mail aria-hidden="true" /></span>
+            <div><small>E-MAIL</small><strong>precocerto-fj@proton.me</strong><p>Resposta em até 2 dias úteis.</p></div>
+            <ArrowRight aria-hidden="true" />
+          </a>
+          <a className="pc-contact__card" href="https://wa.me/5568992031340" target="_blank" rel="noreferrer">
+            <span className="pc-contact__icon"><MessageCircle aria-hidden="true" /></span>
+            <div><small>WHATSAPP</small><strong>(68) 99203-1340</strong><p>Atendimento rápido em horário comercial.</p></div>
+            <ArrowRight aria-hidden="true" />
+          </a>
         </div>
-      </section>
 
-      <section className="pc-contact__grid" aria-label="Canais de contato">
-        <a className="pc-contact__card" href="mailto:precocerto-fj@proton.me">
-          <span className="pc-contact__icon"><Mail aria-hidden="true" /></span>
-          <div><small>E-MAIL</small><strong>precocerto-fj@proton.me</strong><p>Resposta em até 2 dias úteis.</p></div>
-          <ArrowRight aria-hidden="true" />
-        </a>
-        <a className="pc-contact__card" href="https://wa.me/5568992031340" target="_blank" rel="noreferrer">
-          <span className="pc-contact__icon"><MessageCircle aria-hidden="true" /></span>
-          <div><small>WHATSAPP</small><strong>(68) 99203-1340</strong><p>Atendimento rápido em horário comercial.</p></div>
-          <ArrowRight aria-hidden="true" />
-        </a>
-      </section>
+        <div className="pc-contact__links" aria-label="Outros motivos comuns de contato">
+          <Link className="pc-contact__link" to="/colaborar">
+            <span><ReceiptText aria-hidden="true" /></span>
+            <strong>Viu um preço diferente?</strong>
+          </Link>
+          <Link className="pc-contact__link" to="/login?redirect=%2Fpainel-lojista">
+            <span><Store aria-hidden="true" /></span>
+            <strong>Já tenho um estabelecimento</strong>
+          </Link>
+          <Link className="pc-contact__link" to="/lojista">
+            <span><UsersRound aria-hidden="true" /></span>
+            <strong>Quero cadastrar minha loja</strong>
+          </Link>
+        </div>
+      </div>
 
-      <section className="pc-contact__links" aria-label="Outros motivos comuns de contato">
-        <Link className="pc-contact__link" to="/colaborar">
-          <span><ReceiptText aria-hidden="true" /></span>
-          <div><strong>Viu um preço diferente?</strong><small>Envie sua nota de compra para conferência da equipe.</small></div>
-          <ArrowRight aria-hidden="true" />
-        </Link>
-        <Link className="pc-contact__link" to="/login?redirect=%2Fpainel-lojista">
-          <span><Store aria-hidden="true" /></span>
-          <div><strong>Já tenho um estabelecimento</strong><small>Entrar na área do lojista com seu login.</small></div>
-          <ArrowRight aria-hidden="true" />
-        </Link>
-        <Link className="pc-contact__link" to="/lojista">
-          <span><UsersRound aria-hidden="true" /></span>
-          <div><strong>Quero cadastrar minha loja</strong><small>Começar o cadastro de estabelecimento.</small></div>
-          <ArrowRight aria-hidden="true" />
-        </Link>
-      </section>
+      <div className="pc-contact__media" aria-hidden="true">
+        <img src={contactHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
+      </div>
     </main>
     <PublicFooter />
   </div>;
