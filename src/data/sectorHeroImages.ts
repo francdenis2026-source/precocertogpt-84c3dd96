@@ -1,12 +1,12 @@
 import type { BusinessGroupId } from "./businessTaxonomy";
 
 import markets from "../assets/sectors-2026/sector-markets.webp";
-import butchers from "../assets/sectors-2026/sector-butchers.jpg";
-import bakery from "../assets/sectors-2026/sector-bakery.jpg";
-import food from "../assets/sectors-2026/sector-food.jpg";
-import pharmacies from "../assets/sectors-2026/sector-pharmacies.jpg";
-import books from "../assets/sectors-2026/sector-books.jpg";
-import services from "../assets/sectors-2026/sector-services.jpg";
+import butchers from "../assets/sectors-2026/sector-butchers.webp";
+import bakery from "../assets/sectors-2026/sector-bakery.webp";
+import food from "../assets/sectors-2026/sector-food.webp";
+import pharmacies from "../assets/sectors-2026/sector-pharmacies.webp";
+import books from "../assets/sectors-2026/sector-books.webp";
+import services from "../assets/sectors-2026/sector-services.webp";
 import other from "../assets/sectors-2026/sector-other.webp";
 
 /**
@@ -14,11 +14,10 @@ import other from "../assets/sectors-2026/sector-other.webp";
  * a vitrine troca de estabelecimento a imagem acompanha o ramo, em vez de
  * mostrar sempre a mesma prateleira de mercado.
  *
- * `markets` e `other` passaram a usar fotografia real do comércio de rua do
- * interior. As anteriores eram geradas por IA e se entregavam: dominante verde
- * -azulada brigando com o dourado da marca, corredores vazios de galpão e
- * letreiros com texto ilegível. `markets` é a que mais aparece, porque a maior
- * parte dos cadastros de Feijó é mercado, então era ela que as pessoas viam.
+ * Os oito arquivos são fotografia real. O conjunto anterior era gerado por IA e
+ * se entregava: letreiros com texto ilegível, telas com palavras inventadas e,
+ * em mercados, uma dominante verde-azulada que brigava com o dourado da marca.
+ * Procedência e critério de escolha em assets/sectors-2026/CREDITOS.md.
  */
 const SECTOR_HERO_IMAGES: Record<BusinessGroupId, string> = {
   markets,
