@@ -704,7 +704,7 @@
   /* Foto dedicada ao mobile (trocada via <picture><source>) tem o rosto mais
      à direita e mais alto no enquadramento original — reposiciona o corte. */
   .pcx-hero__image { height: 200px; object-position: 62% 18%; border-radius: var(--h-radius-lg); }
-  .pcx-hero__panel { left: 0.6rem; bottom: -0.9rem; width: min(178px, 60%); padding: 0.75rem; border-radius: var(--h-radius-md); }
+  .pcx-hero__panel { left: 0.6rem; bottom: -0.9rem; width: min(238px, 80%); padding: 0.75rem; border-radius: var(--h-radius-md); }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
   .pcx-hero__panel-foot { display: none; }
 }
