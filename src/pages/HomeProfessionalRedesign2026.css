@@ -555,7 +555,7 @@
   position: absolute;
   left: -1.5rem;
   bottom: -1.25rem;
-  width: min(250px, 62%);
+  width: min(290px, 74%);
   background: var(--h-surface);
   border-radius: var(--h-radius-xl);
   box-shadow: 0 16px 38px rgb(20 42 34 / 20%);
