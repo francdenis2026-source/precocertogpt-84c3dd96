@@ -70,7 +70,7 @@ export function StoreRail({
               <h3>{lead.name}</h3>
               <p>
                 <MapPin aria-hidden="true" /> {kindLabel} ·{" "}
-                {lead.neighborhood || "Feijó"}, Feijó — Acre
+                {lead.neighborhood ? `${lead.neighborhood}, Feijó, Acre` : "Feijó, Acre"}
               </p>
               <span>
                 Catálogo local para comparar preços antes de sair de casa.

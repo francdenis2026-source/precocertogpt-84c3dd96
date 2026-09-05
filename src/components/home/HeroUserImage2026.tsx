@@ -46,7 +46,7 @@ export function HeroUserImage2026({
           </h1>
           <p className="pcx-hero__lead">
             Pesquise um produto e veja, em segundos, o menor preço e onde
-            comprar — sem sair de casa.
+            comprar, sem sair de casa.
           </p>
 
           <div className="pcx-hero__search">

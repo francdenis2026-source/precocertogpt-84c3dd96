@@ -30,7 +30,7 @@ function HomeBand({ variant, eyebrow, title, text, steps }: HomeBandProps) {
 }
 
 export function MarketVisualBand() {
-  return <HomeBand variant="market" eyebrow="Comparação inteligente" title="Veja o preço. Compare a loja. Escolha melhor." text="Uma leitura rápida do que importa antes de comprar — produto, menor preço e onde encontrar." steps={["Produto", "Menor preço", "Loja"]} />;
+  return <HomeBand variant="market" eyebrow="Comparação inteligente" title="Veja o preço. Compare a loja. Escolha melhor." text="Uma leitura rápida do que importa antes de comprar: produto, menor preço e onde encontrar." steps={["Produto", "Menor preço", "Loja"]} />;
 }
 
 export function CommunityVisualBand() {
