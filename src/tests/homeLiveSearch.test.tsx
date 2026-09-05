@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
 import { buildCatalog } from "../data/catalog";
+import { FavoritesProvider } from "../features/favorites/FavoritesProvider";
 
 afterEach(cleanup);
 
@@ -14,7 +15,9 @@ describe("Busca de produtos na homepage", () => {
 
     render(
       <MemoryRouter>
+        <FavoritesProvider>
         <HeroUserImage2026 products={catalog.products} />
+        </FavoritesProvider>
       </MemoryRouter>,
     );
 
@@ -38,8 +41,10 @@ describe("Busca de produtos na homepage", () => {
 
     render(
       <MemoryRouter>
+        <FavoritesProvider>
         <div data-testid="outside">Área externa</div>
         <HeroUserImage2026 products={catalog.products} />
+        </FavoritesProvider>
       </MemoryRouter>,
     );
 
