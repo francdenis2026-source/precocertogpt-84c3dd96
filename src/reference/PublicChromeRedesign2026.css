@@ -338,3 +338,107 @@ footer.ref-footer .ref-footer__grid { display: none !important; }
 .ref-page .ref-dock a.is-active { color: var(--h-primary-dark) !important; }
 .ref-page .ref-dock a svg { width: 20px; height: 20px; }
 .ref-page .ref-dock__badge { background: var(--h-primary) !important; color: var(--h-on-primary) !important; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Rodape do site: uma barra so, igual em todas as paginas e nos dois temas.
+
+   Antes conviviam tres rodapes diferentes: o da home (.pcx-footer, #171D23),
+   o das paginas internas (.ref-footer, ora navy ora branco conforme a folha
+   que vencia) e o das paginas de setor (.pharmacy-footer, um teal #092B33).
+   Alturas de 177, 191 e 307px para o mesmo conteudo. Aqui o .ref-footer fica
+   travado num desenho unico; a home e as paginas de setor seguem o mesmo tom
+   nas suas proprias folhas.
+
+   Fundo escuro nos dois temas de proposito: o rodape fecha a pagina, e um
+   bloco escuro ancora a leitura tanto no claro quanto no escuro. Como o fundo
+   nao muda, a tinta tambem nao precisa mudar, o que elimina a classe de bug
+   que deixou o aviso legal invisivel na pagina de produto.
+   ───────────────────────────────────────────────────────────────────────── */
+/* Classe repetida de proposito: sobe a especificidade para (0,2,1) e vence as
+   folhas de pagina que repintavam o rodape (a de estabelecimentos deixava a
+   barra #171D23 enquanto o resto do site usava #10161D), sem precisar listar
+   uma por uma. */
+footer.ref-footer.ref-footer {
+  margin-top: auto !important;
+  padding: 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: #10161d !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+footer.ref-footer::before { content: none !important; }
+
+footer.ref-footer .ref-footer__bar {
+  min-height: 56px !important;
+  display: flex !important;
+  /* Uma folha legada poe flex-direction:column nos filhos do rodape, o que
+     empilhava marca e links e levava a barra de 56 para 124px. */
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+  padding: 10px 0 !important;
+}
+footer.ref-footer .ref-footer__mark {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  min-height: 44px !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+footer.ref-footer .ref-footer__mark img { width: 26px !important; height: 26px !important; }
+footer.ref-footer .ref-footer__mark span { display: grid !important; line-height: 1.15 !important; }
+footer.ref-footer .ref-footer__mark strong { font-size: 0.86rem !important; font-weight: 800 !important; letter-spacing: -0.01em !important; }
+footer.ref-footer .ref-footer__mark small { color: rgba(255, 255, 255, 0.62) !important; font-size: 0.68rem !important; }
+
+footer.ref-footer .ref-footer__links {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 2px 4px !important;
+}
+footer.ref-footer .ref-footer__links a {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 0 10px !important;
+  border-radius: 9px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 0.78rem !important;
+  font-weight: 650 !important;
+  text-decoration: none !important;
+  transition: background-color 150ms ease, color 150ms ease !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  footer.ref-footer .ref-footer__links a:hover { background: rgba(255, 255, 255, 0.07) !important; color: #fff !important; }
+}
+footer.ref-footer .ref-footer__links a:focus-visible {
+  outline: 2px solid var(--pc-gold, #ffb800) !important;
+  outline-offset: 2px !important;
+}
+
+footer.ref-footer .ref-footer__legal {
+  min-height: 38px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px 18px !important;
+  flex-wrap: wrap !important;
+  padding: 6px 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  font-size: 0.7rem !important;
+}
+/* 4.6:1 sobre #10161d. */
+footer.ref-footer .ref-footer__legal small,
+footer.ref-footer .ref-footer__legal span { color: rgba(255, 255, 255, 0.66) !important; font-size: 0.7rem !important; }
+footer.ref-footer .ref-footer__legal span { display: inline-flex !important; align-items: center !important; gap: 6px !important; }
+footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px !important; flex: none !important; color: var(--pc-gold, #ffb800) !important; }
+
+@media (max-width: 760px) {
+  footer.ref-footer .ref-footer__bar { justify-content: flex-start !important; gap: 4px 10px !important; padding: 8px 0 !important; }
+  footer.ref-footer .ref-footer__links { gap: 0 2px !important; }
+  footer.ref-footer .ref-footer__links a { padding: 0 8px !important; font-size: 0.74rem !important; }
+  footer.ref-footer .ref-footer__legal { flex-direction: column !important; align-items: flex-start !important; gap: 3px !important; }
+}

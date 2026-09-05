@@ -247,15 +247,35 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
   </header>;
 }
 
+/* Rodape unico do site.
+ *
+ * Antes havia aqui uma grade de quatro colunas com doze links, e toda ela era
+ * escondida por CSS (`.ref-footer__grid{display:none!important}`) em todas as
+ * paginas. Ou seja: doze links invisiveis viajavam no HTML de cada rota, sem
+ * servir a ninguem, e o que sobrava na tela era so a linha legal, ocupando
+ * quase 200px de altura.
+ *
+ * Agora o que existe no HTML e o que aparece na tela: uma barra com a marca,
+ * os quatro destinos que as pessoas realmente procuram no rodape, e a linha
+ * legal com o aviso de preco. */
 export function PublicFooter() {
   return <footer className="ref-footer">
-    <div className="ref-shell ref-footer__grid">
-      <div className="ref-footer__brand"><Brand inverse /><p>Compare preços reais do comércio local e escolha onde comprar melhor em Feijó.</p><span><BadgeCheck aria-hidden="true" /> Informação local verificada</span></div>
-      <nav aria-label="PreçoCerto"><strong>PreçoCerto</strong><Link to="/buscar">Buscar produtos</Link><Link to="/estabelecimentos">Estabelecimentos</Link><Link to="/cesta-basica">Lista de compras</Link></nav>
-      <nav aria-label="Categorias"><strong>Categorias</strong><Link to="/mercados">Mercados</Link><Link to="/acougues">Açougues</Link><Link to="/padarias">Padarias</Link><Link to="/farmacias">Farmácias</Link></nav>
-      <nav aria-label="Suporte e negócios"><strong>Suporte e negócios</strong><Link to="/lojista">Área do lojista</Link><Link to="/quero-vender">Quero vender</Link><Link to="/colaborar">Colaborar</Link><Link to="/contato">Fale conosco</Link></nav>
+    <div className="ref-shell ref-footer__bar">
+      <Link className="ref-footer__mark" to="/" aria-label="Preço Certo, página inicial">
+        <img src="/preco-certo-mark.svg?v=17" alt="" width="26" height="26" />
+        <span><strong>Preço Certo</strong><small>Feijó, Acre</small></span>
+      </Link>
+      <nav className="ref-footer__links" aria-label="Links do rodapé">
+        <Link to="/estabelecimentos">Estabelecimentos</Link>
+        <Link to="/lojista">Área do lojista</Link>
+        <Link to="/colaborar">Colaborar</Link>
+        <Link to="/contato">Fale conosco</Link>
+      </nav>
     </div>
-    <div className="ref-shell ref-footer__legal"><small>&copy; 2026 PreçoCerto · Feijó, Acre · dev &lt;Franc D’nis&gt;</small><span>Preços podem mudar. Confirme no estabelecimento antes da compra.</span></div>
+    <div className="ref-shell ref-footer__legal">
+      <small>&copy; 2026 PreçoCerto · Feijó, Acre · dev &lt;Franc D’nis&gt;</small>
+      <span><BadgeCheck aria-hidden="true" /> Preços podem mudar. Confirme no estabelecimento antes da compra.</span>
+    </div>
   </footer>;
 }
 

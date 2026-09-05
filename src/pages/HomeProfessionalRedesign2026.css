@@ -1250,3 +1250,48 @@ a.pcx-store-hero {
     align-items: center;
   }
 }
+
+/* ── Rodape: o mesmo do resto do site ──────────────────────────────────────
+   A home usava .pcx-footer com fundo var(--h-surface) e altura de 141px,
+   enquanto as paginas internas usavam .ref-footer com #10161D e 103px. Eram
+   dois rodapes diferentes para o mesmo site. Aqui a home passa a usar o mesmo
+   tom, a mesma altura e os mesmos alvos de toque.
+
+   Os cinco links tambem deixam de ser escondidos no mobile: eles existiam no
+   HTML e sumiam por CSS abaixo de 640px, o que e o pior dos dois mundos. Agora
+   quebram em duas linhas, que e o que um rodape faz. */
+.pcx-home .pcx-footer {
+  background: #10161d;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
+}
+.pcx-home .pcx-footer__row { min-height: 56px; padding-block: 10px; }
+.pcx-home .pcx-footer__brand { min-height: 44px; color: #fff; }
+.pcx-home .pcx-footer__brand small { color: rgba(255, 255, 255, 0.62); }
+.pcx-home .pcx-footer__nav { gap: 0 4px; }
+.pcx-home .pcx-footer__nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 9px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.78rem;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pcx-home .pcx-footer__nav a:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
+}
+.pcx-home .pcx-footer__cta {
+  min-height: 44px;
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.pcx-home .pcx-footer__cta:hover { background: var(--pc-gold, #ffb800); border-color: var(--pc-gold, #ffb800); color: #10161d; }
+.pcx-home .pcx-footer__meta { border-top-color: rgba(255, 255, 255, 0.08); }
+/* 4.6:1 sobre #10161d. */
+.pcx-home .pcx-footer__meta,
+.pcx-home .pcx-footer__meta strong { color: rgba(255, 255, 255, 0.66); }
+@media (max-width: 640px) {
+  .pcx-home .pcx-footer__nav { display: flex; }
+  .pcx-home .pcx-footer__row { flex-wrap: wrap; gap: 4px 10px; }
+}
