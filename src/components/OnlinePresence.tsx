@@ -99,6 +99,9 @@ export function OnlinePresence() {
   return <div className={`ref-online${count === null ? " is-connecting" : ""}`} role="status" aria-live="polite" aria-label={count === null ? "Conectando ao contador de usuários" : `${count} ${count === 1 ? "pessoa online" : "pessoas online"}`}>
     <span className="ref-online__signal"><Wifi aria-hidden="true" /></span>
     <strong>{count ?? "—"}</strong>
-    <span className="ref-online__label">{count === 1 ? "pessoa online" : "pessoas online"}</span>
+    {/* Só "online" no visível: o número ao lado já diz quantos, e "2 pessoas
+        online" não cabia na barra sem cortar. A frase inteira continua no
+        aria-label acima, que é o que o leitor de tela anuncia. */}
+    <span className="ref-online__label">online</span>
   </div>;
 }
