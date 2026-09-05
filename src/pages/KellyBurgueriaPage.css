@@ -54,7 +54,7 @@ html[data-theme="dark"] .kelly-hero__overlay{
 /* ---------- Info cards ---------- */
 .kelly-info{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .kelly-info__card{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--pc-radius-card);border:1px solid var(--pc-border);background:var(--pc-surface);color:var(--pc-ink);text-decoration:none}
-.kelly-info__card svg{flex:none;width:20px;height:20px;color:var(--pc-gold)}
+.kelly-info__card svg{flex:none;width:20px;height:20px;color:var(--pc-gold-ink)}
 .kelly-info__card strong{display:block;font-size:13px}
 .kelly-info__card small{display:block;font-size:13px;color:var(--pc-muted);margin-top:2px;line-height:1.4}
 .kelly-info__card:hover{border-color:color-mix(in srgb,var(--pc-gold) 45%,var(--pc-border))}

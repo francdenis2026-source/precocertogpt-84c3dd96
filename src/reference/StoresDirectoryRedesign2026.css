@@ -78,3 +78,12 @@ html[data-theme="dark"] .ref-stores-page .ref-stores-hero__copy > p { margin: 0 
 }
 
 html[data-theme="dark"] .ref-stores-page .ref-stores-hero__cta { color: var(--pc-navy, #104c30); }
+
+/* Alvo de toque no mobile: os botoes "Localizar" e "Abrir catalogo" do rodape
+   do card ficavam com 34px de altura. */
+@media (max-width: 680px) {
+  .ref-stores-page .ref-store-card footer > a,
+  .ref-stores-page .ref-store-card footer > button {
+    min-height: 44px !important;
+  }
+}

@@ -87,7 +87,7 @@ main[tabindex="-1"]:focus{outline:none}
 .ref-product-dialog__close{position:absolute;z-index:2;top:12px;right:12px;width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid var(--pc-border);border-radius:50%;background:var(--pc-surface-2);color:var(--pc-ink);cursor:pointer}
 .ref-product-dialog__close svg{width:18px;height:18px}
 .ref-product-dialog__visual{min-height:320px;display:grid;place-items:center;align-content:center;gap:18px;padding:30px;background:var(--pc-surface-2)}
-.ref-product-dialog__visual>span{color:var(--pc-gold);font-size:var(--pc-text-xs);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.ref-product-dialog__visual>span{color:var(--pc-gold-ink);font-size:var(--pc-text-xs);font-weight:900;letter-spacing:.1em;text-transform:uppercase}
 .ref-product-dialog__visual>img{width:min(190px,100%);height:190px;object-fit:contain}
 .ref-product-dialog__visual .ref-product-fallback{width:100%}
 .ref-product-dialog>section{display:flex;flex-direction:column;justify-content:center;padding:42px 34px 30px}

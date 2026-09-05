@@ -50,10 +50,16 @@ html[data-theme="light"]{
   --bg-secondary:#FFFFFF;
   --bg-tertiary:#EEF1F4;
   --accent:#D99A00;
-  --accent-strong:#B97F00;
+  /* Tom de texto do destaque. Era #B97F00, que dá só 3.46:1 sobre branco e
+     é usado justamente em rótulos de 9 a 12px (eyebrows, "Abrir catálogo",
+     nomes de categoria). Escurecido para 5.4:1, continua âmbar. */
+  --accent-strong:#8F6200;
   --accent-soft:#FFF4CC;
   --text-primary:#18181B;
-  --text-secondary:#667085;
+  /* Era #667085: 5.4:1 sobre branco, mas so 4.39:1 sobre a superficie
+     secundaria #EEF1F4, onde ele aparece nos rotulos de 10 a 12px dos cards.
+     Escurecido para passar o AA nas duas superficies. */
+  --text-secondary:#5C6773;
   --border-color:#E1E5EA;
   --pc-canvas:var(--bg-primary);
   --pc-surface:var(--bg-secondary);
@@ -68,6 +74,16 @@ html[data-theme="light"]{
   --pc-green:var(--accent);
   --pc-green-strong:var(--accent-strong);
   --pc-green-soft:var(--accent-soft);
+  /* --pc-gold e --pc-navy nunca foram mapeados: cada folha caía no próprio
+     fallback (#b77918 dourado e #104c30 verde-escuro), então "dourado" não
+     era um tom só, e texto escuro-esverdeado sobre dourado dava 2.7:1.
+     Mapeados aqui: um dourado só, e tinta neutra para texto sobre ele. */
+  --pc-gold:var(--accent);
+  --pc-gold-soft:var(--accent-soft);
+  /* O dourado da marca so passa no AA como PREENCHIMENTO. Como TINTA sobre
+     branco ele da 2.45:1, entao texto dourado usa --pc-gold-ink. */
+  --pc-gold-ink:var(--accent-strong);
+  --pc-navy:#10161D;
   color-scheme:light;
   background:#F5F6F8!important;
 }
@@ -170,6 +186,11 @@ html[data-theme="dark"]{
   --pc-green:var(--accent);
   --pc-green-strong:var(--accent-hover);
   --pc-green-soft:rgba(255,184,0,.14);
+  --pc-gold:var(--accent);
+  --pc-gold-soft:rgba(255,184,0,.16);
+  /* No escuro o dourado ja e claro o bastante para servir de tinta. */
+  --pc-gold-ink:var(--accent);
+  --pc-navy:#10161D;
   color-scheme:dark;
   background:#121214!important;
 }

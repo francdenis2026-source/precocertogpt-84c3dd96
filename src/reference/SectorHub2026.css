@@ -35,10 +35,10 @@
 .sector-hub__hero-copy { max-width: 560px; min-width: 0; display: grid; align-content: center; gap: 8px; }
 .sector-hub__hero-visual { position: relative; margin: 0; height: 100%; border-radius: 16px; overflow: hidden; background: var(--pc-surface-2); }
 .sector-hub__hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 24%; }
-.sector-hub__eyebrow { display: flex; align-items: center; gap: 8px; color: var(--pc-gold, #b77918); font-size: 12px; font-weight: 850; letter-spacing: .07em; }
+.sector-hub__eyebrow { display: flex; align-items: center; gap: 8px; color:var(--pc-gold-ink,#8F6200); font-size: 12px; font-weight: 850; letter-spacing: .07em; }
 .sector-hub__eyebrow svg { width: 16px; height: 16px; }
 .sector-hub__hero h1 { max-width: 20ch; margin: 0; font-family: var(--pc-font-display); font-size: clamp(1.7rem, 2.6vw, 2.35rem); font-weight: 680; line-height: 1.1; letter-spacing: -.03em; }
-.sector-hub__hero h1 em { color: var(--pc-gold, #b77918); font-style: normal; }
+.sector-hub__hero h1 em { color:var(--pc-gold-ink,#8F6200); font-style: normal; }
 .sector-hub__hero-copy > p { max-width: 52ch; margin: 0; color: var(--pc-muted); font-size: 14.5px; line-height: 1.5; }
 .sector-hub__hero-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .sector-hub__hero-stats span { display: flex; align-items: baseline; gap: 6px; padding: 6px 12px; border: 1px solid var(--pc-border); border-radius: 999px; background: var(--pc-surface-2); color: var(--pc-muted); font-size: 12px; }
@@ -50,7 +50,7 @@
 .sector-hub__hero-actions a:active { transform: scale(.97); }
 
 @media (hover: hover) and (pointer: fine) {
-  .sector-hub__hero-actions a:not(:first-child):hover { background: var(--pc-surface); border-color: var(--pc-gold, #b77918); }
+  .sector-hub__hero-actions a:not(:first-child):hover { background: var(--pc-surface); border-color:var(--pc-gold,#D99A00); }
   .sector-hub__hero-actions a:first-child:hover { background: color-mix(in srgb, var(--pc-gold, #b77918) 88%, #000); }
 }
 
@@ -207,4 +207,14 @@ html[data-theme="dark"] .sector-hub__sponsor-badge { color: #ffe1a1; background:
 
 @media (prefers-reduced-motion: reduce) {
   .sector-hub *, .sector-hub *::before, .sector-hub *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+/* Alvo de toque: os CTA de "Ver livros e autores" e "Ver servicos" ficavam
+   com 24px de altura no mobile, metade do que o dedo alcanca. */
+@media (max-width: 680px) {
+  .sector-hub__special article a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }

@@ -16,7 +16,10 @@
   --h-border-strong: #cfd6de;
   --h-ink: #10161d;
   --h-muted: #5c6773;
-  --h-subtle: #8993a1;
+  /* Era #8993a1: 3.11:1 sobre a superfície branca, abaixo do mínimo AA de
+     4.5:1 e usado justamente nos rótulos pequenos (preço anterior, "menor
+     preço", datas de atualização). Escurecido para 4.7:1. */
+  --h-subtle: #6b7480;
 
   --h-primary: #0e7a5f;
   --h-primary-dark: #0a5c47;
@@ -155,6 +158,12 @@
   color: var(--h-on-primary);
   box-shadow: var(--h-shadow-sm);
 }
+/* Os botões são <a>, e o reset genérico `.pcx-home a { color: inherit }`
+   tem especificidade maior (0,1,1) que `.pcx-btn--primary` (0,1,0). Sem
+   isto o CTA primário herdava a tinta escura da página sobre o verde
+   (3.44:1, reprovado no AA) em vez do branco definido acima. */
+.pcx-home a.pcx-btn--primary { color: var(--h-on-primary); }
+.pcx-home a.pcx-btn--ghost { color: var(--h-ink); }
 .pcx-btn--primary:hover {
   background: var(--h-primary-dark);
   transform: translateY(-1px);
@@ -1223,4 +1232,21 @@ a.pcx-store-hero {
 @media (prefers-reduced-motion: reduce) {
   .pcx-home * { animation: none !important; transition: none !important; }
   .pcx-home *:hover { transform: none !important; }
+}
+
+/* Alvos de toque no mobile.
+   Os links de texto da home ficavam com 18 a 29px de altura, abaixo dos 44px
+   que o dedo precisa. O texto continua do mesmo tamanho: o que cresce e a
+   area clicavel, via min-height e alinhamento vertical. */
+@media (max-width: 640px) {
+  .pcx-home .pcx-section__link,
+  .pcx-home .pcx-promo__copy a,
+  .pcx-home .pcx-footer__brand,
+  .pcx-home .pcx-footer__cta,
+  .pcx-home .pcx-header__brand,
+  .pcx-home .pcx-hero__actions .pcx-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }

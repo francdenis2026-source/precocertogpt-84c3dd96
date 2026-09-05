@@ -15,7 +15,9 @@
   --h-border-strong: #cfd6de;
   --h-ink: #10161d;
   --h-muted: #5c6773;
-  --h-subtle: #8993a1;
+  /* Era #8993a1: 3.11:1 sobre branco, abaixo do minimo AA de 4.5:1, e usado
+     no aviso legal do rodape em 10px. Mesmo tom ja corrigido na home. */
+  --h-subtle: #6b7480;
 
   --h-primary: #0e7a5f;
   --h-primary-dark: #0a5c47;

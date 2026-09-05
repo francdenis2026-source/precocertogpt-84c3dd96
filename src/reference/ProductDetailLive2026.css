@@ -53,7 +53,10 @@
 .pdl-actions button svg{width:16px;height:16px}
 .pdl-actions button:hover{background:var(--pdl-surface);transform:translateY(-1px)}
 .pdl-actions button:disabled{opacity:.55;cursor:progress;transform:none}
-.pdl-actions__primary{background:var(--pdl-accent)!important;border-color:transparent!important;color:#fff;box-shadow:0 8px 20px color-mix(in srgb,var(--pdl-accent) 32%,transparent)}
+/* `.pdl-actions button` (0,1,1) tem especificidade maior que
+   `.pdl-actions__primary` (0,1,0), então o CTA herdava a tinta escura da
+   página sobre o verde (3.36:1, reprovado no AA) em vez do branco. */
+.pdl-actions button.pdl-actions__primary{background:var(--pdl-accent)!important;border-color:transparent!important;color:#fff;box-shadow:0 8px 20px color-mix(in srgb,var(--pdl-accent) 32%,transparent)}
 .pdl-actions button.is-active{background:color-mix(in srgb,#e11d48 14%,transparent)!important;border-color:color-mix(in srgb,#e11d48 45%,transparent)!important;color:#e11d48!important}
 .pdl-actions button:focus-visible{outline:2px solid var(--pdl-accent);outline-offset:2px}
 
