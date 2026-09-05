@@ -6,6 +6,8 @@ import { ProductThumb } from "../catalog/ProductThumb";
 
 import heroImg from "../../assets/home-2026/hero-supermercado-precocerto-2026.jpg";
 import heroImgMobile from "../../assets/home-2026/hero-supermercado-precocerto-2026-mobile.jpg";
+import heroBackdrop from "../../assets/home-2026/hero-backdrop-precocerto-2026.jpg";
+
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
