@@ -1,0 +1,65 @@
+/* Aviso de conexão.
+ *
+ * O elemento já era criado por pwaRuntime.ts, mas não existia nenhuma regra
+ * para ele em folha nenhuma: nascia `position: static`, sem fundo, no fim do
+ * <body>. Na home isso o colocava a 4852px do topo, fora de qualquer tela. O
+ * aviso existia no código e não aparecia para ninguém.
+ *
+ * Fica fixo no topo, acima do conteúdo e abaixo dos modais, e sai da árvore de
+ * layout quando escondido para não empurrar nada. */
+.pc-network-status {
+  position: fixed;
+  top: max(8px, env(safe-area-inset-top));
+  left: 50%;
+  translate: -50% 0;
+  z-index: 9000;
+  width: min(520px, calc(100% - 24px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 9px 16px;
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 12px;
+  background: #3a2a06;
+  color: #ffe6a8;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  box-shadow: 0 14px 36px rgb(0 0 0 / 34%);
+  /* Escondido de verdade: sem ocupar espaço e sem ser lido por leitor de tela. */
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  translate: -50% -12px;
+  transition: opacity 200ms ease, translate 200ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 200ms;
+}
+.pc-network-status::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: #ffb800;
+}
+.pc-network-status.is-visible {
+  visibility: visible;
+  opacity: 1;
+  translate: -50% 0;
+}
+/* Conexão de volta: verde, e some sozinho depois de alguns segundos. */
+.pc-network-status.is-online {
+  background: #10331f;
+  color: #c9f2d9;
+  border-color: rgb(255 255 255 / 12%);
+}
+.pc-network-status.is-online::before { background: #4ade80; }
+
+@media (max-width: 640px) {
+  .pc-network-status { font-size: 12.5px; padding: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pc-network-status { transition: none; }
+}

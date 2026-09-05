@@ -32,6 +32,8 @@ import "./styles/global/member-experience-2026.css";
 // seletores de especificidade zero: acrescenta onde nao havia nada e nunca
 // sobrepoe o que cada pagina ja define.
 import "./styles/global/touch-feedback-2026.css";
+// Aviso de conexão: o elemento era criado sem nenhuma regra de estilo.
+import "./styles/global/network-status-2026.css";
 
 
 
