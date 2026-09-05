@@ -9,6 +9,7 @@ import "./styles/AppReset.css";
 import App from "./App";
 import { initializePwaRuntime } from "./lib/pwaRuntime";
 import { initializeSiteTheme } from "./lib/siteTheme";
+import { initializeImageLoadFade } from "./lib/imageLoadFade";
 
 // Sistema visual público central. Estas folhas antes eram injetadas por
 // <link> em runtime (11 requisições bloqueantes, sem minificação nem hash).
@@ -38,6 +39,7 @@ import "./styles/global/network-status-2026.css";
 
 
 initializeSiteTheme();
+initializeImageLoadFade();
 document.documentElement.classList.remove("pc-prepaint");
 document.documentElement.classList.add("pc-styles-ready");
 

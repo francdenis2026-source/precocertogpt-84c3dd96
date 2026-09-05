@@ -13,6 +13,16 @@ html[data-theme="dark"], html[data-theme="dark"] body, html[data-theme="dark"] #
 html[data-theme="light"], html[data-theme="light"] body, html[data-theme="light"] #root { background:#F6F7F9 !important; color:#17181C; }
 button, input, select, textarea { font: inherit; }
 img, svg { display: block; max-width: 100%; }
+
+/* Evita o flash de uma foto "pipocando" por cima de um espaço em branco: a
+   imagem some até o carregamento terminar (marcado por initializeImageLoadFade
+   em main.tsx) e então aparece com uma transição suave, em vez de um pop seco.
+   Ícones/SVGs ficam de fora — carregam junto com o próprio HTML/CSS. */
+img:not([data-pc-img-ready]) { opacity: 0; }
+img[data-pc-img-ready] { opacity: 1; transition: opacity 220ms ease; }
+@media (prefers-reduced-motion: reduce) {
+  img[data-pc-img-ready] { transition: none; }
+}
 #root { min-height: 100vh; min-height: 100dvh; background:inherit; }
 
 #lovable-badge,
