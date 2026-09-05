@@ -121,6 +121,8 @@ type RealEstablishmentRow = {
   kind?: string | null;
   address?: string | Record<string, unknown> | null;
   logo_url?: string | null;
+  whatsapp?: string | null;
+  opening_hours?: string | null;
 };
 
 const normalizeName = (value: string | null | undefined) =>
