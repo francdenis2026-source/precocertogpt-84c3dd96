@@ -30,11 +30,9 @@ import { businessGroups } from "./data/businessTaxonomy";
 // O sistema visual público antigo foi removido; a identidade ativa vem do
 // campaign-theme.css carregado em main.tsx.
 import "./reference/FavoritesAndSectorStability.css";
-import "./reference/ExploreViewportFit.css";
 import "./reference/AdminCatalogWorkspaceEnhancements.css";
 import "./reference/AdminPerformance.css";
 import "./reference/MobileSearchStability.css";
-import "./reference/DesktopLiveSearch2026.css";
 import "./reference/LiveSearchOverlayStackFix2026.css";
 import "./reference/PublicExperiencePolish2026.css";
 
