@@ -266,6 +266,7 @@ export function PublicFooter() {
         <span><strong>Preço Certo</strong><small>Feijó, Acre</small></span>
       </Link>
       <nav className="ref-footer__links" aria-label="Links do rodapé">
+        <Link to="/sobre">Sobre</Link>
         <Link to="/estabelecimentos">Estabelecimentos</Link>
         <Link to="/lojista">Área do lojista</Link>
         <Link to="/colaborar">Colaborar</Link>

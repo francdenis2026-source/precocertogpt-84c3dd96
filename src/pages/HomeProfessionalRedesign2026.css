@@ -1281,9 +1281,14 @@ a.pcx-store-hero {
 @media (hover: hover) and (pointer: fine) {
   .pcx-home .pcx-footer__nav a:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
 }
+/* O botao mantinha o preenchimento claro do desenho anterior (--h-primary-soft,
+   um verde bem claro) e recebeu tinta branca quando o rodape passou a ser
+   escuro: branco sobre verde claro, 1.13:1. Ficava invisivel no tema claro.
+   Vira um botao de contorno sobre a barra escura, que e o que a barra pede. */
 .pcx-home .pcx-footer__cta {
   min-height: 44px;
-  border-color: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
   color: #fff;
 }
 .pcx-home .pcx-footer__cta:hover { background: var(--pc-gold, #ffb800); border-color: var(--pc-gold, #ffb800); color: #10161d; }

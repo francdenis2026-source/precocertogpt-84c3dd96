@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 /* O header já cobre Início/Buscar/Estabelecimentos/Categorias — o rodapé
  * só acrescenta o que não está lá, em vez de repetir o mesmo menu. */
 const navigation = [
+  { to: "/sobre", label: "Sobre" },
   { to: "/colaborar", label: "Colaborar" },
   { to: "/login?redirect=%2Fpainel-lojista", label: "Área do lojista" },
   { to: "/cesta-inteligente", label: "Cesta inteligente" },

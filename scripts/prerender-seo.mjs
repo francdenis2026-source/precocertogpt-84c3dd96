@@ -18,6 +18,7 @@ const routes = [
   ['/autora/dorinha-barroso', 'Dorinha Barroso · Escritora acreana | PreçoCerto', 'Conheça Dorinha Barroso, sua trajetória e suas obras literárias.', 'Dorinha Barroso'],
   ['/cultura/fremix-producoes', 'FreMix Produções · Cultura e música | PreçoCerto', 'Conheça a FreMix Produções e conteúdos culturais de Feijó, Acre.', 'FreMix Produções'],
   ['/lojista', 'Venda no PreçoCerto | Cadastro de lojista', 'Cadastre seu estabelecimento para participar do marketplace local PreçoCerto.', 'Cadastre seu estabelecimento'],
+  ['/sobre', 'Sobre o PreçoCerto', 'Como funciona a plataforma de comparação de preços de Feijó, quem a desenvolveu e como solicitar um site ou aplicativo.', 'Sobre o PreçoCerto'],
   ['/colaborar', 'Colabore com o PreçoCerto', 'Ajude a manter informações do comércio local atualizadas no PreçoCerto.', 'Colabore com o PreçoCerto'],
   ['/fale-conosco', 'Contato | PreçoCerto', 'Entre em contato com a equipe do PreçoCerto em Feijó, Acre.', 'Fale com o PreçoCerto'],
 ];

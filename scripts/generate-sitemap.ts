@@ -24,6 +24,7 @@ const entries: SitemapEntry[] = [
   { path: "/autora/dorinha-barroso", changefreq: "monthly", priority: "0.7" },
   { path: "/cultura/fremix-producoes", changefreq: "monthly", priority: "0.6" },
   { path: "/lojista", changefreq: "monthly", priority: "0.6" },
+  { path: "/sobre", changefreq: "monthly", priority: "0.6" },
   { path: "/colaborar", changefreq: "monthly", priority: "0.5" },
   { path: "/fale-conosco", changefreq: "monthly", priority: "0.5" },
 ];
