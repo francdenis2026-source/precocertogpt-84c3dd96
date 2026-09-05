@@ -4,7 +4,7 @@ import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 const state: { session: unknown; roles: string[] } = { session: null, roles: [] };
-const signOutSpy = vi.fn(async () => ({ error: null }));
+const signOutSpy = vi.hoisted(() => vi.fn(async () => ({ error: null })));
 
 vi.mock("../lib/supabase", () => ({
   isSupabaseConfigured: true,

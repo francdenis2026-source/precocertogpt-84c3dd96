@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
 import { buildCatalog } from "../data/catalog";
+import { FavoritesProvider } from "../features/favorites/FavoritesProvider";
 
 afterEach(cleanup);
 
@@ -14,7 +15,9 @@ describe("Busca de produtos na homepage", () => {
 
     render(
       <MemoryRouter>
-        <HeroUserImage2026 products={catalog.products} />
+        <FavoritesProvider>
+          <HeroUserImage2026 products={catalog.products} />
+        </FavoritesProvider>
       </MemoryRouter>,
     );
 
@@ -33,24 +36,25 @@ describe("Busca de produtos na homepage", () => {
     expect(options[0].querySelector("em")?.getAttribute("style")).toContain("--pc26-store-accent");
   });
 
-  it("mantém os resultados abertos até o usuário clicar em fechar", () => {
+  it("mantém os resultados abertos ao clicar fora, mas fecha com Escape", () => {
     const catalog = buildCatalog();
 
     render(
       <MemoryRouter>
-        <div data-testid="outside">Área externa</div>
-        <HeroUserImage2026 products={catalog.products} />
+        <FavoritesProvider>
+          <div data-testid="outside">Área externa</div>
+          <HeroUserImage2026 products={catalog.products} />
+        </FavoritesProvider>
       </MemoryRouter>,
     );
 
     const input = screen.getByRole("combobox", { name: "Produto para comparar" });
     fireEvent.change(input, { target: { value: catalog.products[0].name } });
     fireEvent.pointerDown(screen.getByTestId("outside"));
-    fireEvent.keyDown(input, { key: "Escape" });
 
     expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Fechar resultados da busca" }));
+    fireEvent.keyDown(input, { key: "Escape" });
     expect(screen.queryByRole("listbox", { name: "Sugestões de produtos" })).toBeNull();
   });
 });
