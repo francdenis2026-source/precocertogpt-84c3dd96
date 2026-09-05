@@ -53,6 +53,8 @@ html[data-theme="light"]{
   --border-color:#E1E5EA;
   --pc-canvas:var(--bg-primary);
   --pc-surface:var(--bg-secondary);
+  --pc-surface-2:var(--bg-tertiary);
+  --pc-ink:var(--text-primary);
   --pc-muted:var(--text-secondary);
   --pc-border:var(--border-color);
   --pc-ring:#F2B705;
@@ -142,6 +144,7 @@ html[data-theme="light"] .pc26-section-heading>a{color:#B97F00!important}
 html[data-theme="dark"]{
   --bg-primary:#121214;
   --bg-secondary:#202024;
+  --bg-tertiary:#28282E;
   --accent:#FFB800;
   --accent-hover:#E0A200;
   --text-primary:#FFFFFF;
@@ -149,6 +152,8 @@ html[data-theme="dark"]{
   --border-color:#2E2E35;
   --pc-canvas:var(--bg-primary);
   --pc-surface:var(--bg-secondary);
+  --pc-surface-2:var(--bg-tertiary);
+  --pc-ink:var(--text-primary);
   --pc-muted:var(--text-secondary);
   --pc-border:var(--border-color);
   --pc-ring:var(--accent);
