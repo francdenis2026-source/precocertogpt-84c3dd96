@@ -1028,7 +1028,14 @@
   text-decoration: none;
   isolation: isolate;
 }
-.pcx-promo-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.pcx-promo-feature img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  /* A foto original enquadra o rosto perto do topo; cover com posição
+     central cortava o rosto pela metade. Sobe o ponto de foco para
+     manter o rosto visível na faixa baixa do banner. */
+  object-position: 78% 8%;
+  transition: transform 400ms ease;
+}
 .pcx-promo-feature::after {
   content: "";
   position: absolute; inset: 0;
