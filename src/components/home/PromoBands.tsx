@@ -21,15 +21,16 @@ const stories = [
     action: "Explorar setores",
     to: "/explorar",
   },
-  {
-    image: localImg,
-    alt: "Comerciante local organizando caixas de hortifrúti na entrada da loja",
-    title: "Os estabelecimentos da cidade mais perto de você.",
-    text: "Conheça lojas, catálogos e ofertas do comércio local em uma vitrine feita para Feijó.",
-    action: "Conhecer estabelecimentos",
-    to: "/estabelecimentos",
-  },
 ] as const;
+
+const feature = {
+  image: localImg,
+  alt: "Comerciante local organizando caixas de hortifrúti na entrada da loja",
+  title: "Os estabelecimentos da cidade mais perto de você.",
+  text: "Conheça lojas, catálogos e ofertas do comércio local em uma vitrine feita para Feijó.",
+  action: "Conhecer estabelecimentos",
+  to: "/estabelecimentos",
+} as const;
 
 export function PromoBands() {
   return (
@@ -64,6 +65,24 @@ export function PromoBands() {
               </div>
             </article>
           ))}
+
+          <Link className="pcx-promo-feature" to={feature.to}>
+            <img
+              src={feature.image}
+              alt={feature.alt}
+              loading="lazy"
+              decoding="async"
+              width="1600"
+              height="640"
+            />
+            <div className="pcx-promo-feature__copy">
+              <h3>{feature.title}</h3>
+              <p>{feature.text}</p>
+              <span>
+                {feature.action} <ArrowRight aria-hidden="true" />
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
     </section>

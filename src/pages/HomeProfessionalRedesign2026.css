@@ -421,17 +421,21 @@
   margin-inline: auto;
   padding-inline: var(--h-section-x);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.95fr);
+  /* Coluna de texto mais generosa (era ~1:0.95, quase 50/50): o título de
+     7 palavras quebrava em 3 linhas porque a coluna de texto era estreita
+     demais para o tamanho da fonte. Split assimétrico dá mais respiro ao
+     texto sem espremer a foto abaixo do tamanho mínimo confortável. */
+  grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.85fr);
   gap: clamp(2rem, 5vw, 4.5rem);
   align-items: center;
 }
 .pcx-hero__copy { min-width: 0; }
 .pcx-hero h1 {
-  max-width: 16ch;
+  max-width: 26ch;
   margin: 0;
-  font-size: clamp(2.15rem, 4.4vw, 3.65rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   color: var(--h-ink);
   text-wrap: balance;
 }
@@ -1011,6 +1015,42 @@
   .pcx-promo, .pcx-promo:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
   .pcx-promo__media { order: -1; min-height: 160px; }
 }
+
+/* Terceiro item do grupo: banner de largura total com a foto como fundo
+   e texto sobreposto, em vez de repetir pela terceira vez a mesma divisão
+   foto/texto lado a lado dos dois cards acima. */
+.pcx-promo-feature {
+  position: relative;
+  display: block;
+  min-height: 220px;
+  border-radius: var(--h-radius-xl);
+  overflow: hidden;
+  text-decoration: none;
+  isolation: isolate;
+}
+.pcx-promo-feature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.pcx-promo-feature::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(10, 20, 16, 0.86) 0%, rgba(10, 20, 16, 0.55) 45%, rgba(10, 20, 16, 0.1) 80%);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pcx-promo-feature:hover img { transform: scale(1.04); }
+}
+.pcx-promo-feature__copy {
+  position: relative; z-index: 1;
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  max-width: 480px;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; }
+.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.82); font-size: 0.92rem; line-height: 1.55; }
+.pcx-promo-feature__copy span {
+  margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem;
+  font-weight: 700; font-size: 0.9rem; color: #fff; width: fit-content;
+}
+.pcx-promo-feature__copy span svg { width: 15px; height: 15px; transition: transform 150ms ease; }
+.pcx-promo-feature:hover .pcx-promo-feature__copy span svg { transform: translateX(3px); }
 
 /* ── Store rail ─────────────────────────────────────────────────────────── */
 .pcx-stores { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.25rem; align-items: stretch; }
