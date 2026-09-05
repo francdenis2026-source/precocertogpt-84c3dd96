@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
 import { buildCatalog } from "../data/catalog";
+import { FavoritesProvider } from "../features/favorites/FavoritesProvider";
 
 afterEach(cleanup);
 
@@ -14,7 +15,9 @@ describe("Busca de produtos na homepage", () => {
 
     render(
       <MemoryRouter>
+        <FavoritesProvider>
         <HeroUserImage2026 products={catalog.products} />
+        </FavoritesProvider>
       </MemoryRouter>,
     );
 
@@ -38,15 +41,18 @@ describe("Busca de produtos na homepage", () => {
 
     render(
       <MemoryRouter>
+        <FavoritesProvider>
         <div data-testid="outside">Área externa</div>
         <HeroUserImage2026 products={catalog.products} />
+        </FavoritesProvider>
       </MemoryRouter>,
     );
 
     const input = screen.getByRole("combobox", { name: "Produto para comparar" });
     fireEvent.change(input, { target: { value: catalog.products[0].name } });
+    // Clicar fora não fecha: a lista só sai com o botão de fechar.
+    // (Escape fecha, por acessibilidade, e por isso não entra aqui.)
     fireEvent.pointerDown(screen.getByTestId("outside"));
-    fireEvent.keyDown(input, { key: "Escape" });
 
     expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
 

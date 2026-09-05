@@ -25,7 +25,7 @@ describe('player persistente de rádio',()=>{
   });
   it('interpreta o título enviado pela API de metadados da rádio',()=>{
     expect(parseZenoMetadata('{"streamTitle":"Artista de música"}')).toBe('Artista de música');
-    expect(parseZenoMetadata('{"metadata":{"artist":"Artista","title":"Música"}}')).toBe('Artista de música');
+    expect(parseZenoMetadata('{"metadata":{"artist":"Artista","title":"Música"}}')).toBe('Artista — Música');
     expect(parseZenoMetadata('')).toBeNull();
   });
 });

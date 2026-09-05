@@ -3,8 +3,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
-const state: { session: unknown; roles: string[] } = { session: null, roles: [] };
-const signOutSpy = vi.fn(async () => ({ error: null }));
+const { state, signOutSpy } = vi.hoisted(() => ({
+  state: { session: null as unknown, roles: [] as string[] },
+  signOutSpy: vi.fn(async () => ({ error: null })),
+}));
 
 vi.mock("../lib/supabase", () => ({
   isSupabaseConfigured: true,
