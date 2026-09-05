@@ -714,6 +714,7 @@ function CollaborationPage() {
         <img src={collabHeroImg} alt="" width="1280" height="853" loading="eager" decoding="async" />
       </div>
     </main>
+    <PublicFooter />
   </div>;
 }
 

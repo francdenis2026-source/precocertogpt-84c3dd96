@@ -1,14 +1,20 @@
-/* Página de colaboração — tudo em uma única janela no desktop (sem
-   rolagem vertical): texto + formulário compacto (largura travada,
-   nunca esticando) centralizados na coluna esquerda; foto ocupa a
-   coluna direita em toda a altura. Abaixo de 850px empilha e rola
-   normalmente (comportamento esperado em mobile). */
-.pc-collab-page { background: var(--px-surface-soft, #f7f8fa); }
+/* Página de colaboração — compacta, com rodapé padrão da plataforma e
+   um fundo sutil nas cores da marca (sem foto, sem exagero). O topo é
+   travado com folga suficiente para nunca encostar na barra flutuante
+   (bug corrigido: eyebrow "COLABORAÇÃO VERIFICADA" colava no logo). */
+.pc-collab-page {
+  background:
+    radial-gradient(620px 420px at 12% 8%, rgba(11,103,87,.07), transparent 60%),
+    radial-gradient(560px 420px at 92% 88%, rgba(244,181,68,.10), transparent 60%),
+    var(--px-surface-soft, #f7f8fa);
+}
 .pc-collab {
   width: min(1080px, calc(100% - 32px));
   margin: 0 auto;
+  min-height: calc(100dvh - 96px - 64px);
+  padding: 96px 0 32px;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: clamp(20px, 3vw, 40px);
 }
 
@@ -20,24 +26,24 @@
   justify-content: center;
   gap: 14px;
 }
-.pc-collab__media { flex: 0 0 min(360px, 40%); border-radius: 20px; overflow: hidden; box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07)); }
+.pc-collab__media { flex: 0 0 clamp(320px, 42vh, 560px); align-self: center; border-radius: 20px; overflow: hidden; box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07)); }
 .pc-collab__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.pc-collab__copy { max-width: 380px; }
+.pc-collab__copy { max-width: 420px; }
 .pc-collab__eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
-  color: var(--px-brand, #0b6757); font-size: 10px; font-weight: 900; letter-spacing: 0.1em;
+  color: var(--px-brand, #0b6757); font-size: clamp(10px, 1vh, 11.5px); font-weight: 900; letter-spacing: 0.1em;
 }
 .pc-collab__eyebrow svg { width: 13px; height: 13px; }
 .pc-collab__copy h1 {
-  margin: 6px 0 5px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
-  font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.1; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
+  margin: 8px 0 6px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
+  font-size: clamp(1.3rem, 3.4vh, 2.2rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
 }
-.pc-collab__copy p { max-width: 360px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 12px; line-height: 1.4; }
+.pc-collab__copy p { max-width: 400px; margin: 0; color: var(--px-muted, #5f6b78); font-size: clamp(12px, 1.4vh, 14px); line-height: 1.45; }
 
 .pc-collab__panel {
-  max-width: 400px;
-  padding: 13px 15px;
+  max-width: 440px;
+  padding: clamp(13px, 2vh, 20px) clamp(15px, 2vh, 22px);
   border: 1px solid var(--px-line, #e2e7ec);
   border-radius: 16px;
   background: var(--px-surface, #fff);
@@ -52,12 +58,12 @@
 .pc-collab__panel > header small { color: var(--px-brand, #0b6757); font-size: 8.5px; font-weight: 900; letter-spacing: 0.12em; }
 .pc-collab__panel h2 { margin: 1px 0 0; color: var(--px-ink, #14181d); font-size: 13.5px; font-weight: 750; }
 
-.pc-collab__form { display: grid; gap: 6px; margin-top: 8px; }
-.pc-collab__form label { display: grid; gap: 3px; color: var(--px-muted, #5f6b78); font-size: 10px; font-weight: 750; }
+.pc-collab__form { display: grid; gap: clamp(6px, 1vh, 10px); margin-top: 8px; }
+.pc-collab__form label { display: grid; gap: 3px; color: var(--px-muted, #5f6b78); font-size: 10.5px; font-weight: 750; }
 .pc-collab__form label em { margin-left: 2px; color: #d97b3f; font-style: normal; }
 .pc-collab__form input {
-  min-height: 30px; padding: 0 10px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 8px;
-  background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 12px;
+  min-height: clamp(30px, 4.4vh, 40px); padding: 0 11px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 8px;
+  background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 12.5px;
 }
 .pc-collab__form input::placeholder { color: #9aa5ad; }
 .pc-collab__form input:focus-visible { outline: 2px solid var(--px-brand, #0b6757); outline-offset: 1px; background: var(--px-surface, #fff); }
@@ -104,19 +110,13 @@
 }
 .pc-collab__gate-back { border: 0; background: none; color: var(--px-muted, #5f6b78); font-size: 11px; text-decoration: underline; cursor: pointer; margin-top: 1px; }
 
-/* Trava em uma única tela sem rolagem a partir de 851px de largura */
-@media (min-width: 851px) {
-  .pc-collab-page { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
-  .pc-collab { flex: 1; min-height: 0; overflow: hidden; padding-top: 64px; }
-}
-
 @media (max-width: 850px) {
-  .pc-collab { flex-direction: column; padding: 16px 0 24px; }
+  .pc-collab { flex-direction: column; min-height: 0; padding: 72px 0 24px; align-items: stretch; }
   .pc-collab__left { order: 2; align-items: center; text-align: center; }
-  .pc-collab__media { order: 1; flex: 0 0 auto; aspect-ratio: 16 / 9; margin-top: 56px; width: 100%; }
-  .pc-collab__copy { max-width: 420px; }
+  .pc-collab__media { order: 1; flex: 0 0 auto; align-self: stretch; aspect-ratio: 16 / 9; }
+  .pc-collab__copy { max-width: 420px; margin: 0 auto; }
   .pc-collab__copy p { margin: 0 auto; }
-  .pc-collab__panel { width: 100%; max-width: 420px; }
+  .pc-collab__panel { width: 100%; max-width: 420px; margin: 0 auto; }
 }
 @media (max-width: 640px) {
   .pc-collab__row { grid-template-columns: 1fr; }
