@@ -76,7 +76,7 @@ const round = (value: number) => Math.round(value * 100) / 100;
 const toNumber = (value: number | string | null) => (value === null ? NaN : Number(value));
 const DATABASE_PAGE_SIZE = 1000;
 const CATALOG_CACHE_TTL_MS = 60_000;
-const CATALOG_REQUEST_TIMEOUT_MS = 5_000;
+const CATALOG_REQUEST_TIMEOUT_MS = 20_000;
 const CATALOG_RETRY_DELAY_MS = 350;
 
 let cachedCatalog: { value: CatalogResult; expiresAt: number } | null = null;
@@ -84,7 +84,10 @@ let pendingCatalog: Promise<CatalogResult> | null = null;
 
 function withTimeout<T>(request: Promise<T>, timeoutMs: number): Promise<T> {
   return new Promise<T>((resolve, reject) => {
-    const timer = globalThis.setTimeout(() => reject(new Error("A consulta de preços excedeu 5 segundos.")), timeoutMs);
+    const timer = globalThis.setTimeout(
+      () => reject(new Error(`A consulta de preços excedeu ${Math.round(timeoutMs / 1000)} segundos.`)),
+      timeoutMs,
+    );
     request.then(value => {
       globalThis.clearTimeout(timer);
       resolve(value);

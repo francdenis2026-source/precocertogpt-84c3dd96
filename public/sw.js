@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260905-offline-catalogo-1";
+const CACHE_VERSION = "20260905-supabase-externo-2";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const DADOS_CACHE = `precocerto-dados-${CACHE_VERSION}`;
