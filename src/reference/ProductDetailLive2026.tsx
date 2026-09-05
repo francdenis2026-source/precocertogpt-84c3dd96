@@ -13,7 +13,6 @@ import { supabase } from "../lib/supabase";
 import { buildComparableOffers, findComparableProducts, type ComparableOffer } from "../lib/productSearch";
 import { ProductThumb } from "../components/catalog/ProductThumb";
 import { PublicFooter, PublicHeader } from "./ReferenceExperience";
-import heroBand from "../assets/product-detail-hero-2026.jpg";
 import "./ProductDetailLive2026.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -246,59 +245,59 @@ export function ProductDetailLive2026() {
       <PublicHeader />
 
       <main id="conteudo-principal" className="pdl-main">
-        <section className="pdl-hero" style={{ ["--pdl-hero-image" as string]: `url(${heroBand})` }}>
-          <div className="pdl-hero__inner">
-            <nav className="pdl-crumbs" aria-label="Navegação estrutural">
-              <Link to="/"><Home aria-hidden="true" /><span>Início</span></Link>
-              <ChevronRight aria-hidden="true" />
-              <Link to={`/buscar?q=${encodeURIComponent(product.category)}`}>{product.category}</Link>
-              <ChevronRight aria-hidden="true" />
-              <span>{product.name}</span>
-            </nav>
+        <section className="pdl-hero">
+          <nav className="pdl-crumbs" aria-label="Navegação estrutural">
+            <Link to="/"><Home aria-hidden="true" /><span>Início</span></Link>
+            <ChevronRight aria-hidden="true" />
+            <Link to={`/buscar?q=${encodeURIComponent(product.category)}`}>{product.category}</Link>
+            <ChevronRight aria-hidden="true" />
+            <span>{product.name}</span>
+          </nav>
 
-            <div className="pdl-hero__grid">
-              <div className="pdl-hero__copy">
+          <div className="pdl-hero__grid">
+            <div className="pdl-hero__copy">
+              <div className="pdl-hero__tags">
                 <span className="pdl-live" data-syncing={syncing ? "true" : "false"}>
                   <RadioTower aria-hidden="true" />
-                  {syncing ? "Sincronizando com o banco…" : single ? "Preço monitorado em tempo real" : `Comparando ${storeOffers.length} estabelecimentos ao vivo`}
+                  {syncing ? "Sincronizando com o banco…" : single ? "Preço monitorado em tempo real" : `Comparando ${storeOffers.length} estabelecimentos`}
                   {liveAt && !syncing && <small>· {formatClock(liveAt)}</small>}
                 </span>
                 <span className="pdl-chip"><Tag aria-hidden="true" />{cleanValue(product.brand, product.category)}</span>
-                <h1>{product.name}</h1>
-                <p>{cleanValue(product.size, "") || cleanValue(product.unit, "") || "Embalagem não informada"} · {product.category}</p>
+              </div>
+              <h1>{product.name}</h1>
+              <p>{cleanValue(product.size, "") || cleanValue(product.unit, "") || "Embalagem não informada"} · {product.category}</p>
 
-                <div className="pdl-price">
-                  <div>
-                    <small>{single ? "PREÇO REGISTRADO" : selected ? "OFERTA SELECIONADA" : "MENOR PREÇO ENCONTRADO"}</small>
-                    <strong>{brl.format(price)}</strong>
-                    <Link to={storeHref}><Store aria-hidden="true" />{displayed?.establishment || product.establishment}</Link>
-                  </div>
-                  {!single && spread > 0 && (
-                    <span className="pdl-price__save"><PiggyBank aria-hidden="true" />Economize até {brl.format(spread)}</span>
-                  )}
-                  {dropped > 0 && (
-                    <span className="pdl-price__drop"><TrendingDown aria-hidden="true" />{brl.format(dropped)} abaixo do preço anterior</span>
-                  )}
+              <div className="pdl-price">
+                <div>
+                  <small>{single ? "PREÇO REGISTRADO" : selected ? "OFERTA SELECIONADA" : "MENOR PREÇO ENCONTRADO"}</small>
+                  <strong>{brl.format(price)}</strong>
+                  <Link to={storeHref}><Store aria-hidden="true" />{displayed?.establishment || product.establishment}</Link>
                 </div>
-
-                <div className="pdl-actions">
-                  <button type="button" className="pdl-actions__primary" onClick={() => void addToBasket(basketTarget)}>
-                    <ShoppingBasket aria-hidden="true" />{inBasket ? "Na sua lista · abrir cesta" : "Adicionar à lista"}
-                  </button>
-                  <button type="button" className={favorite ? "is-active" : ""} onClick={() => void toggleFavorite(product.id)} aria-pressed={favorite}>
-                    <Heart aria-hidden="true" fill={favorite ? "currentColor" : "none"} />{favorite ? "Salvo" : "Salvar"}
-                  </button>
-                  <button type="button" className="pdl-actions__ghost" onClick={() => void loadCatalog(true)} disabled={syncing}>
-                    <RefreshCw aria-hidden="true" />Atualizar preços
-                  </button>
-                </div>
+                {!single && spread > 0 && (
+                  <span className="pdl-price__save"><PiggyBank aria-hidden="true" />Economize até {brl.format(spread)}</span>
+                )}
+                {dropped > 0 && (
+                  <span className="pdl-price__save"><TrendingDown aria-hidden="true" />{brl.format(dropped)} abaixo do preço anterior</span>
+                )}
               </div>
 
-              <figure className="pdl-hero__visual">
-                <ProductThumb product={product} size="lg" eager />
-                <figcaption><ShieldCheck aria-hidden="true" />Imagem informativa · embalagem pode variar</figcaption>
-              </figure>
+              <div className="pdl-actions">
+                <button type="button" className="pdl-actions__primary" onClick={() => void addToBasket(basketTarget)}>
+                  <ShoppingBasket aria-hidden="true" />{inBasket ? "Na sua lista, abrir cesta" : "Adicionar à lista"}
+                </button>
+                <button type="button" className={favorite ? "is-active" : ""} onClick={() => void toggleFavorite(product.id)} aria-pressed={favorite}>
+                  <Heart aria-hidden="true" fill={favorite ? "currentColor" : "none"} />{favorite ? "Salvo" : "Salvar"}
+                </button>
+                <button type="button" className="pdl-actions__ghost" onClick={() => void loadCatalog(true)} disabled={syncing}>
+                  <RefreshCw aria-hidden="true" />Atualizar preços
+                </button>
+              </div>
             </div>
+
+            <figure className="pdl-hero__visual">
+              <ProductThumb product={product} size="lg" eager />
+              <figcaption><ShieldCheck aria-hidden="true" />Imagem informativa, embalagem pode variar</figcaption>
+            </figure>
           </div>
         </section>
 
