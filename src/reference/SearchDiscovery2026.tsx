@@ -117,7 +117,7 @@ export function SearchDiscovery2026(){
     <p>Digite um produto, marca ou loja e compare o menor preço em segundos.</p>
    </div>
    <figure className="search26-hero__visual">
-    <img src="/home-editorial-2026/comercio-local.webp" alt="Comerciante local organizando frutas e verduras frescas em uma banca" loading="eager" width="1400" height="934"/>
+    <img src="/mercado-local-profissional.webp" alt="Corredor de um mercado local com prateleiras de frutas, verduras e grãos" loading="eager" width="1280" height="960"/>
     <figcaption><BadgeCheck aria-hidden="true"/><strong>{catalog?.metrics.products||0} produtos</strong><small>disponíveis para consulta</small></figcaption>
    </figure>
   </section>
