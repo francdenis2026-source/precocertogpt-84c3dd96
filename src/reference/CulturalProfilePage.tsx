@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { ArrowRight, BookOpen, Building2, MapPin, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import { PublicFooter, PublicHeader } from "./ReferenceExperience";
+import { PublicFooter, PublicHeader } from "./PublicChrome";
 import "./CulturalProfilePage.css";
 
 gsap.registerPlugin(ScrollTrigger);

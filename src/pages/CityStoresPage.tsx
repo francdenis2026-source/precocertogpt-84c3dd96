@@ -6,7 +6,7 @@ import { fetchCatalog } from "../data/remoteCatalog";
 import type { CatalogPayload, Product, StoreRow } from "../data/catalog";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import { cities, cityForNeighborhood, cityLabel, findCity, type CityDefinition } from "../data/cities";
-import { PublicFooter } from "../reference/ReferenceExperience";
+import { PublicFooter } from "../reference/PublicChrome";
 import "./CityStoresPage.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });

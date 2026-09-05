@@ -6,7 +6,7 @@ import { businessGroups, type BusinessGroupId } from "../data/businessTaxonomy";
 import { fetchSectorCatalog, prefetchSectorCatalog, sectorProducts, sectorStores } from "../data/sectorCatalog";
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { sectorHeroImage } from "../data/sectorHeroImages";
-import { PublicHeader } from "./ReferenceExperience";
+import { PublicHeader } from "./PublicChrome";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { usePriceVisibility } from "../hooks/usePriceVisibility";

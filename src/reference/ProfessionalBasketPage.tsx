@@ -5,7 +5,7 @@ import { ArrowRight, BadgeCheck, Minus, PackageSearch, PiggyBank, Plus, Shopping
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
-import { AppDock, PublicFooter, PublicHeader } from "./ReferenceExperience";
+import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import "./ProfessionalBasketPage.css";
 import "./CompactViewportPages.css";
 

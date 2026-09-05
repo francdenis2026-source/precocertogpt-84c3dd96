@@ -9,7 +9,7 @@ import { buildFeatured, currentCycle, msUntilNextCycle } from "../data/featuredR
 import { FestivalAcaiBar } from "../components/FestivalAcaiBar";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
 import { useSiteTheme } from "../hooks/useSiteTheme";
-import { AppDock, FooterInfoDialogs, type FooterPanel } from "../reference/ReferenceExperience";
+import { AppDock, FooterInfoDialogs, type FooterPanel } from "../reference/PublicChrome";
 import { HomeQuickActionsCarousel } from "../components/HomeQuickActionsCarousel";
 import { LocationSwitcher } from "../components/LocationSwitcher";
 import { suggestProducts } from "../lib/productSearch";

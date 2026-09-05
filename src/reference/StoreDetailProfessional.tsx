@@ -8,7 +8,7 @@ import { resolveProductImage } from "../data/productImageResolver";
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { groupForStore } from "../data/businessTaxonomy";
 import { marketplaceSectors } from "./MarketplaceSectors";
-import { MinimalTopBar } from "./ReferenceExperience";
+import { MinimalTopBar } from "./PublicChrome";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import "./StoreDetailProfessional.css";

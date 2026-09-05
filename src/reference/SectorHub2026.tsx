@@ -24,7 +24,7 @@ import {
   withCatalog,
 } from "../data/sectorCatalog";
 import { primarySectors } from "./MarketplaceSectors";
-import { AppDock, PublicFooter, PublicHeader } from "./ReferenceExperience";
+import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import "./SectorHub2026.css";
 
 const normalize = (value: string) =>

@@ -3,7 +3,7 @@ import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, BadgeCheck, Citrus, Clock3, CupSoda, MapPin, MessageCircle, Plus, Sandwich, ShieldCheck, Store, UtensilsCrossed } from "lucide-react";
 import type { ReactNode } from "react";
-import { PublicFooter, PublicHeader } from "../reference/ReferenceExperience";
+import { PublicFooter, PublicHeader } from "../reference/PublicChrome";
 import { ProductQuickViewModal } from "../components/ProductQuickViewModal";
 import type { Product } from "../data/catalog";
 import {

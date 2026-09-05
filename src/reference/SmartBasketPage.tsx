@@ -5,7 +5,7 @@ import { Bot, Building2, CheckCircle2, LoaderCircle, Minus, PackagePlus, PiggyBa
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product, ProductOffer } from "../data/catalog";
 import { loadSessionProfile, supabase, type SessionProfile } from "../lib/roles";
-import { AppDock, PublicFooter, PublicHeader } from "./ReferenceExperience";
+import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import "./SmartBasketPage.css";
 
 gsap.registerPlugin(ScrollTrigger);

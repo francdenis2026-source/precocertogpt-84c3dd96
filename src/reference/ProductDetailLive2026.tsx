@@ -12,7 +12,7 @@ import { requestAuthAction } from "../lib/authActionPrompt";
 import { supabase } from "../lib/supabase";
 import { buildComparableOffers, findComparableProducts, type ComparableOffer } from "../lib/productSearch";
 import { ProductThumb } from "../components/catalog/ProductThumb";
-import { PublicFooter, PublicHeader } from "./ReferenceExperience";
+import { PublicFooter, PublicHeader } from "./PublicChrome";
 import "./ProductDetailLive2026.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });

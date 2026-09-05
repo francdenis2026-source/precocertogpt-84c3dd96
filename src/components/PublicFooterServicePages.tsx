@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { ArrowLeft, ArrowRight, Building2, CheckCircle2, Clock3, HeartHandshake, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Store } from "lucide-react";
 import { supabase } from "../lib/supabase";
-import { PublicFooter } from "../reference/ReferenceExperience";
+import { PublicFooter } from "../reference/PublicChrome";
 import "./PublicFooterServicePages.css";
 
 function Layout({ children }: { children: React.ReactNode }) {

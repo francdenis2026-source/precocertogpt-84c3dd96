@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Heart, LogOut, PackageSearch, ReceiptText, ShoppingBasket, Store, UserRound, ChevronDown, ShieldCheck, ArrowRight, LayoutDashboard, Sparkles } from "lucide-react";
 import { loadSessionProfile, roleLabels, signOut, supabase, type SessionProfile } from "../lib/roles";
-import { PublicFooter, PublicHeader } from "../reference/ReferenceExperience";
+import { PublicFooter, PublicHeader } from "../reference/PublicChrome";
 import "./UserAccountExperience.css";
 
 function shortName(name: string) { const parts=name.trim().split(/\s+/).filter(Boolean); return parts.length>1?`${parts[0]} ${parts[parts.length-1]}`:parts[0]||"Minha conta"; }

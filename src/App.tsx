@@ -15,17 +15,15 @@ import { AuthActionPrompt } from "./components/AuthActionPrompt";
 import { SeoRouteManager } from "./components/SeoRouteManager";
 import { AdminMaintenanceControl, PlatformMaintenanceGate } from "./components/PlatformMaintenance";
 import { FavoritesProvider } from "./features/favorites/FavoritesProvider";
-import { ReferenceAuthPage, ReferenceFavoritesPage, ReferenceInfoPage, ReferenceMerchantDashboard, ReferenceNotFound, ReferenceStoresPage } from "./reference/ReferenceExperience";
 import { MarketplaceSectorLanding } from "./reference/MarketplaceSectors";
 import { HomeNew2026 } from "./pages/HomeNew2026";
 import { SubscriberGate } from "./components/access/SubscriberGate";
 /* As rotas de categoria sao montadas a partir da taxonomia (dado puro), e nao
    da lista pronta de MarketplaceSectors: assim App.tsx nao precisa do objeto
    completo de cada categoria so para declarar um <Route>.
-   ReferenceExperience e MarketplaceSectors seguem sincronos de proposito. Ja
-   sao carregados por outros modulos do primeiro load (UserAccountExperience e
-   MobileHome2026 usam PublicHeader/PublicFooter/AppDock), entao um lazy() aqui
-   nao tiraria um byte do CSS critico, so somaria um round trip em cada rota. */
+   O chrome (PublicHeader, PublicFooter, AppDock) mora em PublicChrome, que
+   todo mundo importa direto. Com isso ReferenceExperience passou a ser so as
+   telas dele, e pode entrar sob demanda levando junto o CSS dessas telas. */
 import { businessGroups } from "./data/businessTaxonomy";
 
 // Somente CSS técnico/funcional permanece global aqui.
@@ -43,6 +41,12 @@ import "./reference/PublicExperiencePolish2026.css";
 const SectorHub2026 = lazy(() => import("./reference/SectorHub2026").then(module => ({ default: module.SectorHub2026 })));
 const KellyBurgueriaPage = lazy(() => import("./pages/KellyBurgueriaPage").then(module => ({ default: module.KellyBurgueriaPage })));
 const PontoDoSandubaPage = lazy(() => import("./pages/PontoDoSandubaPage").then(module => ({ default: module.PontoDoSandubaPage })));
+const ReferenceAuthPage = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceAuthPage })));
+const ReferenceFavoritesPage = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceFavoritesPage })));
+const ReferenceInfoPage = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceInfoPage })));
+const ReferenceMerchantDashboard = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceMerchantDashboard })));
+const ReferenceNotFound = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceNotFound })));
+const ReferenceStoresPage = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceStoresPage })));
 const SearchDiscovery2026 = lazy(() => import("./reference/SearchDiscovery2026").then(module => ({ default: module.SearchDiscovery2026 })));
 const ProductDetailProfessional = lazy(() => import("./reference/ProductDetailLive2026").then(module => ({ default: module.ProductDetailLive2026 })));
 const StoreDetailProfessional = lazy(() => import("./reference/StoreDetailProfessional").then(module => ({ default: module.StoreDetailProfessional })));

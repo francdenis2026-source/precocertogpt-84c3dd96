@@ -5,7 +5,7 @@ import type { CatalogPayload, Product } from "../data/catalog";
 import { fetchSectorCatalog, productHasSectorOffer, sectorStores } from "../data/sectorCatalog";
 import { getMarketplaceSector, marketplaceSectors, type MarketplaceSectorId } from "./MarketplaceSectors";
 import { resolveProductImage } from "../data/productImageResolver";
-import { AppDock, PublicHeader } from "./ReferenceExperience";
+import { AppDock, PublicHeader } from "./PublicChrome";
 import { productSearchScore } from "../lib/productSearch";
 import "./MobileSearchDiscovery2026.css";
 

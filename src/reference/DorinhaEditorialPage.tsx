@@ -6,7 +6,7 @@ import imagimacaoAsset from "../assets/uma-viagem-ao-mundo-da-imaginacao.png.ass
 import mentePerversaAsset from "../assets/mente-perversa.png.asset.json";
 import superacaoAsset from "../assets/uma-historia-de-superacao.png.asset.json";
 import despertarAsset from "../assets/o-despertar-para-o-mundo-literario.png.asset.json";
-import { PublicHeader } from "./ReferenceExperience";
+import { PublicHeader } from "./PublicChrome";
 import "./DorinhaEditorialPage.css";
 
 gsap.registerPlugin(ScrollTrigger);
