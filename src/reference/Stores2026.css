@@ -32,6 +32,7 @@
 .ref-store-card__select small,.ref-store-card>a small{color:var(--pc-gold-ink);font-size:var(--pc-text-xs);font-weight:850;letter-spacing:.05em;text-transform:uppercase}
 .ref-store-card__select strong,.ref-store-card>a strong{overflow:hidden;color:var(--pc-ink);font-size:var(--pc-text-sm);text-overflow:ellipsis;white-space:nowrap}
 .ref-store-card__select em,.ref-store-card>a em{color:var(--pc-muted);font-size:var(--pc-text-xs);font-style:normal}
+.ref-store-card__meta{overflow:hidden;color:var(--pc-muted);font-size:var(--pc-text-xs);font-weight:400;text-overflow:ellipsis;white-space:nowrap}
 .ref-store-card__select>svg,.ref-store-card>a>svg{width:16px;color:var(--pc-green-strong);height:16px}
 .ref-store-card>footer{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--pc-border)}
 .ref-store-card>footer>:is(button,a),.ref-store-card>button{min-height:36px;display:flex;align-items:center;justify-content:center;gap:5px;border:0;background:var(--pc-surface-2);color:var(--pc-green-strong);font-size:var(--pc-text-xs);font-weight:850}
