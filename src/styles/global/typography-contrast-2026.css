@@ -4,7 +4,7 @@
 
 :root{
   --pc-type-display:"Outfit Variable",Outfit,"Arial Narrow",Arial,sans-serif;
-  --pc-type-body:"Inter Variable",Inter,"Manrope Variable",Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --pc-type-body:"Manrope Variable", Manrope,"Manrope Variable",Manrope,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 html,body,#root,

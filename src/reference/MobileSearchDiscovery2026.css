@@ -1,6 +1,6 @@
 /* PreçoCerto — página Buscar mobile totalmente nova */
 @media(max-width:767px){
-  .msearch26-page{min-height:100dvh;background:#f3f6f5;color:#112933;padding-bottom:calc(76px + env(safe-area-inset-bottom));font-family:var(--pc-font-body,Inter,sans-serif)}
+  .msearch26-page{min-height:100dvh;background:#f3f6f5;color:#112933;padding-bottom:calc(76px + env(safe-area-inset-bottom));font-family:var(--pc-font-body,"Manrope Variable",Manrope,sans-serif)}
   html[data-theme="dark"] .msearch26-page{background:#0f1825;color:#f6f8fb}
   .msearch26-main{width:min(100%,620px);margin:0 auto;padding:0 12px 24px}
   .msearch26-hero{position:relative;overflow:hidden;margin:0 -12px;padding:24px 16px 22px;background:radial-gradient(circle at 92% 0,rgba(80,168,199,.32),transparent 34%),linear-gradient(145deg,#0c2838 0%,#123d51 58%,#176079 100%);color:#fff}

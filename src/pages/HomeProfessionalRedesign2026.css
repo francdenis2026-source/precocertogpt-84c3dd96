@@ -42,7 +42,7 @@
   --h-shadow-md: 0 4px 16px rgba(16, 22, 29, 0.08);
   --h-shadow-lg: 0 16px 40px rgba(16, 22, 29, 0.14);
 
-  --h-font: "Manrope Variable", Manrope, "Inter Variable", Inter, system-ui, sans-serif;
+  --h-font: "Manrope Variable", Manrope, "Manrope Variable", Manrope, system-ui, sans-serif;
   --h-section-x: clamp(18px, 4vw, 40px);
   --h-section-y: clamp(40px, 6vw, 76px);
 

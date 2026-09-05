@@ -2,7 +2,7 @@
 .ref-footer .ref-brand{position:relative!important;display:inline-flex!important;align-items:center!important;gap:10px!important;min-height:44px!important;padding-left:48px!important}
 .ref-footer .ref-brand>img{display:none!important}
 .ref-footer .ref-brand::before{content:"";position:absolute;left:0;top:50%;width:40px;height:40px;transform:translateY(-50%);background:url('/preco-certo-mark.svg?v=17') center/contain no-repeat;filter:drop-shadow(0 5px 10px rgba(0,0,0,.14))}
-.ref-footer .ref-brand>span{font-family:"Inter Variable",Inter,sans-serif!important;font-size:.68rem!important;font-weight:800!important;letter-spacing:.12em!important;color:inherit!important}
+.ref-footer .ref-brand>span{font-family:"Manrope Variable", Manrope,sans-serif!important;font-size:.68rem!important;font-weight:800!important;letter-spacing:.12em!important;color:inherit!important}
 
 /* Header sem logomarca. Mantém controles e navegação existentes. */
 .nx-brand,

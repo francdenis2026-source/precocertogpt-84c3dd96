@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@fontsource-variable/inter";
+// Duas familias, nao tres: Outfit para titulos e Manrope para texto. Inter
+// saiu porque so restava em um punhado de rotulos e ainda assim custava 47 KB
+// de woff2 no caminho critico da home.
 import "@fontsource-variable/outfit";
 import "@fontsource-variable/manrope";
 import "./styles/AppReset.css";

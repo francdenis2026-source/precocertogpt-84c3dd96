@@ -28,7 +28,7 @@ export function HeroUserImage2026({
 }: HeroUserImage2026Props) {
   const priced = products
     .filter((product) => product.minPrice > 0)
-    .sort((a, b) => a.id.localeCompare(b.id));
+    .sort((a, b) => String(a.id).localeCompare(String(b.id)));
   // Roda a dupla exibida a cada ciclo (60 min, ver featuredRotation.ts) em vez
   // de fixar sempre os dois primeiros produtos do catálogo.
   const proofItems = priced.length

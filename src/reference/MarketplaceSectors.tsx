@@ -287,12 +287,17 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
   </div>;
 }
 
-export function MarketplaceSectorLanding({ sector }: { sector: MarketplaceSector }) {
+/* Recebe o id da categoria, nao o objeto pronto. Assim App.tsx monta as rotas
+   so com a taxonomia (dado puro) e carrega esta tela sob demanda, em vez de
+   importar este modulo, e todo o CSS que ele arrasta, no primeiro load. */
+export function MarketplaceSectorLanding({ sectorId }: { sectorId: BusinessGroupId }) {
+  const sector = getMarketplaceSector(sectorId);
   const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
   useEffect(() => {
     let active = true;
     void fetchSectorCatalog().then(data => { if (active) setCatalog(data); }).catch(() => undefined);
     return () => { active = false; };
   }, []);
+  if (!sector) return null;
   return <CompactSectorDirectory catalog={catalog} sector={sector} />;
 }

@@ -1,8 +1,8 @@
 /* PreçoCerto Design System 2.0 — shared semantic tokens for all public and private surfaces. */
 :root{
   color-scheme:light;
-  --pc-font-display:"Manrope Variable",Manrope,"Inter Variable",Inter,system-ui,sans-serif;
-  --pc-font-body:"Manrope Variable",Manrope,"Inter Variable",Inter,system-ui,sans-serif;
+  --pc-font-display:"Manrope Variable",Manrope,"Manrope Variable", Manrope,system-ui,sans-serif;
+  --pc-font-body:"Manrope Variable",Manrope,"Manrope Variable", Manrope,system-ui,sans-serif;
   --pc-canvas:#f4f6f5;--pc-surface:#ffffff;--pc-surface-2:#eaf0ed;--pc-surface-3:#dce5e1;
   --pc-ink:#17251d;--pc-muted:#53645c;--pc-subtle:#66736d;--pc-border:#d3ded8;--pc-border-strong:#a9bbb2;
   /* Paleta "Mercado de Feijó": verde como identidade e ação, ouro como
