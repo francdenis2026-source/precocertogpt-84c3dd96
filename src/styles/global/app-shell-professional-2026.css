@@ -9,6 +9,10 @@
   --pc-shell-z-dock:90;
   --pc-shell-z-overlay:120;
   --pc-shell-motion:180ms cubic-bezier(.2,.8,.2,1);
+  --pc-radius-control:10px;
+  --pc-radius-card:14px;
+  --pc-radius-block:18px;
+  --pc-radius-hero:24px;
 }
 
 @media(max-width:767px){
@@ -61,6 +65,9 @@ html[data-theme="light"]{
   --pc-primary:var(--accent);
   --pc-primary-strong:var(--accent-strong);
   --pc-primary-soft:var(--accent-soft);
+  --pc-green:var(--accent);
+  --pc-green-strong:var(--accent-strong);
+  --pc-green-soft:var(--accent-soft);
   color-scheme:light;
   background:#F5F6F8!important;
 }
@@ -159,6 +166,10 @@ html[data-theme="dark"]{
   --pc-ring:var(--accent);
   --pc-primary:var(--accent);
   --pc-primary-strong:var(--accent-hover);
+  --pc-primary-soft:rgba(255,184,0,.14);
+  --pc-green:var(--accent);
+  --pc-green-strong:var(--accent-hover);
+  --pc-green-soft:rgba(255,184,0,.14);
   color-scheme:dark;
   background:#121214!important;
 }
