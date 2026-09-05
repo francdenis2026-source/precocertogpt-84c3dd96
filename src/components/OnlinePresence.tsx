@@ -73,7 +73,9 @@ export function OnlinePresence() {
       if (!locks) return;
 
       void locks.request(CHANNEL_NAME, { ifAvailable: true }, async lock => {
-        if (!lock || !active) {
+        // Se o componente já foi desmontado, o canal está fechado: não publicar.
+        if (!active) return;
+        if (!lock) {
           coordinator.postMessage({ type: "request-count" });
           return;
         }
