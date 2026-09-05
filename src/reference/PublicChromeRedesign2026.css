@@ -39,7 +39,7 @@
   :root:not([data-theme="light"]) .ref-page {
     --h-canvas: #0f1418; --h-surface: #171d23; --h-surface-2: #1e252c;
     --h-border: #2a323a; --h-border-strong: #3a434d; --h-ink: #f1f4f7;
-    --h-muted: #a7b0ba; --h-subtle: #7c8794;
+    --h-muted: #a7b0ba; --h-subtle: #949fac;
     --h-primary: #3ecf9a; --h-primary-dark: #2fae82; --h-primary-soft: #163529; --h-on-primary: #06120d;
     --h-accent: #e8b84b; --h-accent-dark: #c89530; --h-accent-soft: #362a14;
     --h-shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 2px 10px rgba(0,0,0,.3);
@@ -49,7 +49,7 @@
 [data-theme="dark"] .ref-page {
   --h-canvas: #0f1418; --h-surface: #171d23; --h-surface-2: #1e252c;
   --h-border: #2a323a; --h-border-strong: #3a434d; --h-ink: #f1f4f7;
-  --h-muted: #a7b0ba; --h-subtle: #7c8794;
+  --h-muted: #a7b0ba; --h-subtle: #949fac;
   --h-primary: #3ecf9a; --h-primary-dark: #2fae82; --h-primary-soft: #163529; --h-on-primary: #06120d;
   --h-accent: #e8b84b; --h-accent-dark: #c89530; --h-accent-soft: #362a14;
   --h-shadow-sm: 0 1px 2px rgba(0,0,0,.35), 0 2px 10px rgba(0,0,0,.3);

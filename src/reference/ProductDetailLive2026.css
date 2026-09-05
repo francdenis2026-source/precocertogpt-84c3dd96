@@ -182,4 +182,16 @@
 
 /* Garante o rodapé visível sem depender de reveals de scroll de outras telas */
 .pdl-page ~ footer,.pdl-page footer,.pdl-page footer *{opacity:1!important;transform:none!important;visibility:visible!important}
-.pdl-page footer{color:var(--pdl-text)}
+/* Removido `.pdl-page footer{color:var(--pdl-text)}`: com (0,1,1) ele vencia
+   a cor do proprio rodape (.ref-footer, 0,1,0) e forcava a tinta escura da
+   pagina sobre o fundo navy, deixando o aviso legal a 1.03:1. O rodape ja
+   define a propria cor conforme o fundo que recebe. */
+
+/* Alvo de toque no mobile: a trilha, o link do estabelecimento no bloco de
+   preco e o link do cabecalho da comparacao tinham 17 a 18px de altura.
+   O texto continua igual, o que cresce e a area clicavel. */
+@media (max-width: 680px) {
+  .pdl-crumbs a,
+  .pdl-price a,
+  .pdl-compare > header a { min-height: 44px; display: inline-flex; align-items: center; }
+}

@@ -282,7 +282,10 @@
 
 /* Fotos, endereço e horário cadastrados no painel admin */
 .city-store-photo{width:100%;height:112px;object-fit:cover;border-radius:12px;margin-bottom:.6rem;background:var(--px-surface-2,rgba(120,120,120,.12))}
-.city-store-address,.city-store-hours{display:block;font-size:.78rem;line-height:1.35;color:var(--px-text-muted,#6b7280)}
+/* --px-text-muted nunca foi declarado em lugar nenhum, entao isto sempre caia
+   no fallback #6b7280: 3.67:1 sobre o fundo escuro. Passa a usar o token de
+   texto secundario do tema, que muda junto com claro/escuro. */
+.city-store-address,.city-store-hours{display:block;font-size:.78rem;line-height:1.35;color:var(--pc-muted,#5c6773)}
 .city-store-hours{font-weight:600}
 .city-store-list{grid-auto-rows:1fr}
 .city-store-list li,.city-store-list li>a{height:100%}

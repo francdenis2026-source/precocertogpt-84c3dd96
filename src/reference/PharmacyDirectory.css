@@ -246,3 +246,8 @@ html[data-theme="dark"] .pharmacy-directory-page{background:var(--pc-canvas,#061
 .sector-product-gate .pc-btn--primary { background: #fff; color: #0d5c3f; }
 .sector-product-gate__login { color: #fff; font-size: 12.5px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 620px) { .sector-product-gate { flex-direction: column; align-items: flex-start; padding: 16px; } .sector-product-gate__actions { width: 100%; flex-direction: column; align-items: stretch; gap: 8px; } .sector-product-gate .pc-btn--primary { width: 100%; justify-content: center; } }
+
+/* Alvo de toque no mobile: a marca no rodape tinha 28px de altura. */
+@media (max-width: 680px) {
+  .pharmacy-footer__brand > a { min-height: 44px; display: inline-flex; align-items: center; }
+}

@@ -38,3 +38,13 @@ html[data-theme="dark"] .ref-auth{--auth-bg:#0d1210;--auth-surface:#151c18;--aut
 @media(max-width:560px){.ref-auth__story{min-height:190px!important;padding:16px!important}.ref-auth__story .ref-brand img{max-width:130px!important}.ref-auth__hero-copy{padding:18px 0 6px!important}.ref-auth__hero-copy .ref-kicker{font-size:.64rem!important}.ref-auth__hero-copy h1{font-size:1.9rem!important;line-height:1.12!important}.ref-auth__hero-copy>p{max-width:31ch!important;margin-top:10px!important;font-size:.82rem!important}.ref-auth__form{padding:16px 12px 60px!important}.ref-auth__back{margin-bottom:8px!important;font-size:.72rem!important}.ref-auth__card{padding:18px 15px!important;border-radius:14px!important;box-shadow:0 12px 30px rgba(19,49,33,.075)!important}.ref-auth__card h2{font-size:1.5rem!important}.ref-auth__card>p:not(.ref-auth__safe):not(.ref-auth__message){font-size:.78rem!important}.ref-account-tabs{gap:7px!important;margin-top:14px!important}.ref-account-tabs button{min-height:64px!important;padding:9px!important;font-size:.72rem!important}.ref-account-tabs button small{font-size:.6rem!important}.ref-auth__card form{gap:10px!important;margin-top:12px!important}.ref-auth__card form input{min-height:42px!important;font-size:.84rem!important}.ref-auth__submit{min-height:44px!important}}
 @media(max-width:380px){.ref-auth__hero-copy h1{font-size:1.7rem!important}.ref-account-tabs{grid-template-columns:1fr!important}.ref-account-tabs button{min-height:56px!important}}
 @media(prefers-reduced-motion:reduce){.ref-auth *,.ref-auth *::before,.ref-auth *::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+/* Alvo de toque no mobile: "Voltar ao PreçoCerto", "Esqueci minha senha" e
+   "Criar conta" tinham 18 a 20px de altura, e sao as tres acoes da tela. */
+@media(max-width:680px){
+  .ref-auth__back,.ref-auth__recover,.ref-auth__switch a{min-height:44px!important;display:inline-flex!important;align-items:center!important}
+}
+/* Rotulos de 9.6 a 10.5px no tema claro ficavam entre 3.65:1 e 4.46:1. Sao os
+   textos menores da tela, justamente onde o AA menos perdoa. */
+.ref-account-tabs button small{color:#5f6d65!important}
+.ref-account-tabs button.is-active small{color:#4e6857!important}
+.ref-auth__safe{color:#5f6c64!important}

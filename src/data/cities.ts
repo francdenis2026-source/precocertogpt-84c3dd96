@@ -89,5 +89,5 @@ export function findCity(slug: string | null | undefined): CityDefinition | null
 }
 
 export function cityLabel(city: CityDefinition) {
-  return `${city.name} — ${city.state}`;
+  return `${city.name}, ${city.state}`;
 }

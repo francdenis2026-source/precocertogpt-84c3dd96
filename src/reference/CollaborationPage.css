@@ -81,7 +81,10 @@
 
 .pc-collab__form { display: grid; gap: clamp(6px, 1vh, 10px); margin-top: 8px; }
 .pc-collab__form label { display: grid; gap: 3px; color: var(--px-muted, #5f6b78); font-size: 10.5px; font-weight: 750; }
-.pc-collab__form label em { margin-left: 2px; color: #d97b3f; font-style: normal; }
+/* Era #d97b3f: 3.06:1 no tema claro. Como o asterisco e o unico sinal de
+   "campo obrigatorio", ele precisa passar no AA. */
+.pc-collab__form label em { margin-left: 2px; color: #a8501c; font-style: normal; }
+html[data-theme="dark"] .pc-collab__form label em { color: #f0a06a; }
 .pc-collab__form input {
   min-height: clamp(30px, 4.4vh, 40px); padding: 0 11px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 8px;
   background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 12.5px;
