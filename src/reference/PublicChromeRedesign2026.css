@@ -230,8 +230,15 @@
 /* Rodapé padrão de todas as páginas internas (tudo exceto a home, que tem o
    seu próprio .pcx-footer): uma única linha compacta com nome do app, ano,
    cidade e desenvolvedor — sem a grade de links, para não pesar a tela em
-   telas de tarefa (busca, cesta, detalhe de produto/loja) nem no mobile. */
-.ref-footer__grid { display: none !important; }
+   telas de tarefa (busca, cesta, detalhe de produto/loja) nem no mobile.
+   Usa "footer.ref-footer" (tag + classe) para bater a especificidade da
+   regra ".ref-page .ref-footer__grid{display:flex!important}" acima em
+   QUALQUER página — não depender de ".ref-page" no wrapper, porque nem
+   toda página que usa <PublicFooter/> tem essa classe na raiz (ex.: a
+   página de contato usa "pc-contact-page", não "ref-page", e sem esse
+   ajuste a grade de links não era escondida nem tomava o display:flex de
+   cima — ficava com o display:block padrão do navegador). */
+footer.ref-footer .ref-footer__grid { display: none !important; }
 .ref-footer__legal {
   display: flex !important;
   align-items: center;
