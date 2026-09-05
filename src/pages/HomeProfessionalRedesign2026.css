@@ -673,7 +673,7 @@
   .pcx-hero__inner { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr); gap: 1.5rem; }
   .pcx-hero__visual { min-height: 340px; max-width: 380px; padding: 0 0 1.6rem 1.2rem; }
   .pcx-hero__image { height: 340px; object-position: 55% 18%; }
-  .pcx-hero__panel { width: min(210px, 66%); padding: 0.85rem; }
+  .pcx-hero__panel { width: min(260px, 82%); padding: 0.85rem; }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 }
 @media (max-width: 640px) {
