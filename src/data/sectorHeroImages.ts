@@ -4,7 +4,7 @@ import markets from "../assets/sectors-2026/sector-markets.webp";
 import butchers from "../assets/sectors-2026/sector-butchers.webp";
 import bakery from "../assets/sectors-2026/sector-bakery.webp";
 import food from "../assets/sectors-2026/sector-food.webp";
-import pharmacies from "../assets/sectors-2026/sector-pharmacies.webp";
+import pharmacies from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
 import books from "../assets/sectors-2026/sector-books.webp";
 import services from "../assets/sectors-2026/sector-services.webp";
 import other from "../assets/sectors-2026/sector-other.webp";
