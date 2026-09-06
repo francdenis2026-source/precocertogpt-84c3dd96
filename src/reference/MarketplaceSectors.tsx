@@ -270,7 +270,10 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
             <small>CATÁLOGO</small>
             <strong>{count ? `${count} ${count === 1 ? "item publicado" : "itens publicados"}` : "Perfil disponível"}</strong>
           </div>
-          <Link className="pharmacy-establishment__action" to={`/estabelecimento/${store.slug || store.id}`}>
+          <Link
+            className="pharmacy-establishment__action"
+            to={`/estabelecimento/${store.slug || store.id}${sector.id === "butchers" ? "?categoria=acougue" : ""}`}
+          >
             Abrir estabelecimento <ArrowRight aria-hidden="true" />
           </Link>
         </article>})}

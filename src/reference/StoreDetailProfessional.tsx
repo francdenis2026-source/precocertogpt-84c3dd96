@@ -191,6 +191,19 @@ export function StoreDetailProfessional() {
   }, [allProducts]);
 
   const categories = useMemo(() => ["Todos", ...Array.from(new Set(allProducts.map(product => product.category).filter(Boolean))).sort((a, b) => a.localeCompare(b, "pt-BR"))], [allProducts]);
+
+  // Um mercado que também tem açougue interno aparece no diretório de
+  // Açougues (ver sectorCatalog.ts), mas o link de lá levava ao catálogo
+  // inteiro da loja — misturando carnes com todo o resto. Quem chega por
+  // ?categoria=<slug> já cai com o filtro de categoria aplicado, vendo só a
+  // vitrine daquele nicho, como se fosse um açougue à parte.
+  useEffect(() => {
+    const wanted = new URLSearchParams(location.search).get("categoria");
+    if (!wanted) return;
+    const match = categories.find(item => item.toLowerCase() === wanted.toLowerCase());
+    if (match) setCategory(match);
+  }, [location.search, categories]);
+
   const filteredProducts = useMemo(() => {
     const term = normalize(query);
     const filtered = allProducts.filter(product => {
