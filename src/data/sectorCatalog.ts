@@ -35,9 +35,19 @@ export const productStoreIds = (product: Product) =>
 const normalizeText = (value: string | null | undefined) =>
   (value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
+/* Antes esta função batia a palavra "carne" (ou "canela", que também é
+ * pescoço/corte, não só a especiaria) contra o nome inteiro do produto — e
+ * assim miojo sabor carne, salgadinho sabor carne e canela em pó (a
+ * especiaria) entravam na vitrine de Açougues junto com os cortes de
+ * verdade. A categoria cadastrada no produto já diz com precisão o que é
+ * açougue de verdade; nome só decide quando não há categoria nenhuma. */
+const BUTCHER_CATEGORY_KEYS = new Set(["acougue", "acougues", "carne", "carnes"]);
+
 const isButcherProduct = (product: Product) => {
-  const text = normalizeText(`${product.category || ""} ${product.name || ""}`);
-  return /\b(carnes?|acougue|bovino|suino|porco|costela|picanha|alcatra|patinho|fraldinha|bisteca|file|peito|pescoco|canela|figado|coracao|lingua|cha de fora|cha de dentro|carne moida)\b/.test(text);
+  const category = normalizeText(product.category).replace(/[^a-z]/g, "");
+  if (category) return BUTCHER_CATEGORY_KEYS.has(category);
+  const name = normalizeText(product.name);
+  return /\b(bovino|suino|picanha|alcatra|patinho|fraldinha|bisteca|acougue|corte bovino|carne bovina|carne suina|carne de porco|carne de boi)\b/.test(name);
 };
 
 /** Um produto pertence ao grupo quando alguma loja que o vende pertence ao grupo.
