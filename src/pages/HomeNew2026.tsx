@@ -20,6 +20,7 @@ import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { PromoBands } from "../components/home/PromoBands";
+import { SmartBasketSpotlight } from "../components/home/SmartBasketSpotlight";
 import { StoreRail } from "../components/home/StoreRail";
 import "./HomeProfessionalRedesign2026.css";
 
@@ -115,6 +116,7 @@ export function HomeNew2026() {
           loading={loading}
           cycle={cycle}
         />
+        <SmartBasketSpotlight />
         <ProductGrid products={featured} loading={loading} />
         <PromoBands />
         <CategoryBar />

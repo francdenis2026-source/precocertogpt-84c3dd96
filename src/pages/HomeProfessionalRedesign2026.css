@@ -1138,6 +1138,83 @@
 .pcx-promo-feature__copy span svg { width: 15px; height: 15px; transition: transform 150ms ease; }
 .pcx-promo-feature:hover .pcx-promo-feature__copy span svg { transform: translateX(3px); }
 
+/* Cesta Inteligente é a ferramenta monetizada: banner de destaque próprio,
+   logo abaixo do herói, com paleta accent (dourado) para se diferenciar
+   das faixas informativas comuns e puxar atenção para a conversão. */
+.pcx-spotlight {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem);
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0;
+  border-radius: var(--h-radius-xl);
+  background: linear-gradient(120deg, var(--h-accent-dark) 0%, var(--h-accent) 55%, #e0a53a 100%);
+  box-shadow: var(--h-shadow-lg);
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+.pcx-spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(120% 140% at 100% 0%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 55%);
+}
+.pcx-spotlight__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(16, 22, 29, 0.18);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pcx-spotlight__badge svg { width: 14px; height: 14px; }
+.pcx-spotlight__copy { flex: 1 1 320px; min-width: 0; }
+.pcx-spotlight__copy h2 {
+  margin: 0 0 0.35rem;
+  color: #17110a;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  line-height: 1.25;
+}
+.pcx-spotlight__copy p {
+  margin: 0;
+  color: rgba(23, 17, 10, 0.82);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+.pcx-spotlight__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--h-radius-md);
+  background: #17110a;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  transition: transform 150ms ease, background 150ms ease;
+}
+.pcx-spotlight__cta svg { width: 16px; height: 16px; transition: transform 150ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .pcx-spotlight:hover .pcx-spotlight__cta { background: #2a1f12; }
+  .pcx-spotlight:hover .pcx-spotlight__cta svg { transform: translateX(3px); }
+}
+@media (max-width: 720px) {
+  .pcx-spotlight { flex-direction: column; align-items: flex-start; }
+  .pcx-spotlight__cta { width: 100%; justify-content: center; }
+}
+
 /* ── Store rail ─────────────────────────────────────────────────────────── */
 .pcx-stores { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.25rem; align-items: stretch; }
 a.pcx-store-hero {
