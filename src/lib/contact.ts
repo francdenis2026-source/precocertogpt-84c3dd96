@@ -1,6 +1,6 @@
 // Único lugar para configurar o WhatsApp de vendas do PreçoCerto.
 // Formato: código do país + DDD + número, sem espaços/símbolos. Ex.: "5568999999999".
-export const WHATSAPP_SALES_NUMBER = "";
+export const WHATSAPP_SALES_NUMBER = "5568992031340";
 
 export function whatsappSalesLink(message: string) {
   const text = encodeURIComponent(message);
