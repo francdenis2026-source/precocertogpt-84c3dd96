@@ -1,8 +1,9 @@
 import { FormEvent, type ReactNode, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Crown, KeyRound, LoaderCircle, Search, ShoppingBasket, Sparkles } from "lucide-react";
+import { Crown, KeyRound, LoaderCircle, MessageCircle, Search, ShoppingBasket, Sparkles } from "lucide-react";
 import heroImg from "../../assets/home-2026/app-precocerto-mockup.jpg";
 import { supabase } from "../../lib/supabase";
+import { whatsappSalesLink } from "../../lib/contact";
 import "./SubscriberGate.css";
 
 type CheckState = "checking" | "locked" | "unlocked";
@@ -67,6 +68,14 @@ export function SubscriberGate({ tool = "esta ferramenta", plan = "cesta_intelig
         <div className="pc-sub-gate__body">
           <h1 id="pc-sub-gate-title">{tool} é exclusiva de quem tem uma licença ativa</h1>
           <p>Monte sua cesta automaticamente com IA. Peça seu código de acesso pelo WhatsApp do PreçoCerto e resgate abaixo.</p>
+          <a
+            className="pc-sub-gate__whatsapp"
+            href={whatsappSalesLink("Olá! Quero comprar acesso à Cesta Inteligente do PreçoCerto.")}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MessageCircle aria-hidden="true" /> Comprar pelo WhatsApp
+          </a>
           <form className="pc-sub-gate__redeem" onSubmit={redeem}>
             <label htmlFor="pc-sub-gate-key"><KeyRound aria-hidden="true" /> Código de acesso</label>
             <div className="pc-sub-gate__redeem-row">

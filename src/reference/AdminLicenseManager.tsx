@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Copy, KeyRound, Loader2, MessageCircle, RefreshCw, ShieldBan, Sparkles } from "lucide-react";
 import { supabase } from "../lib/roles";
+import { whatsappSalesLink } from "../lib/contact";
 import "./AdminLicenseManager.css";
 
 type LicenseRow = {
@@ -17,13 +18,10 @@ type LicenseRow = {
 const dt = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
 const fmt = (v: string | null) => (v ? dt.format(new Date(v)) : "—");
 
-const WHATSAPP_NUMBER = ""; // preencha com o número do WhatsApp do PreçoCerto, ex.: 5568999999999
-
 function whatsappLink(licenseKey: string) {
-  const text = encodeURIComponent(
+  return whatsappSalesLink(
     `Olá! Aqui está seu código de acesso à Cesta Inteligente do PreçoCerto: ${licenseKey}\n\nBasta colar esse código na tela de desbloqueio dentro do app. Qualquer dúvida, é só chamar por aqui. 🛒`
   );
-  return WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}?text=${text}` : `https://wa.me/?text=${text}`;
 }
 
 export function AdminLicenseManager() {
