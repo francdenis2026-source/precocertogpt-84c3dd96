@@ -33,14 +33,18 @@ const CATEGORY_PHOTOS: Record<string, string> = {};
 
 const CATEGORY_ICONS: Record<string, ReactNode> = {
   "Sanduíches": <Sandwich aria-hidden="true" />,
+  "Sanduíches Artesanais": <UtensilsCrossed aria-hidden="true" />,
   "Adicionais": <Plus aria-hidden="true" />,
+  "Porções": <UtensilsCrossed aria-hidden="true" />,
   "Refrigerantes": <CupSoda aria-hidden="true" />,
   "Suco Natural": <Citrus aria-hidden="true" />,
 };
 
 const CATEGORY_NOTES: Record<string, string> = {
   "Sanduíches": "Feitos na hora, no pão e no ponto que você pedir.",
+  "Sanduíches Artesanais": "Pão brioche, blend bovino 180g e monte de recheio.",
   "Adicionais": "Complemente seu lanche do jeito que preferir.",
+  "Porções": "Pra dividir ou devorar sozinho.",
   "Refrigerantes": "Geladinhos, prontos pra acompanhar o pedido.",
   "Suco Natural": "Feito na hora.",
 };
@@ -141,7 +145,7 @@ export function PontoDoSandubaPage() {
           {groups.map(group => <a key={group.category} href={`#sanduba-${group.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{group.category}<small>{group.items.length}</small></a>)}
         </nav>
 
-        <div className="kelly-notice"><BadgeCheck /><span><strong>Cardápio informado pelo Ponto do Sanduba</strong><small>Preços e disponibilidade podem mudar. Confirme as condições diretamente com o estabelecimento antes de concluir o pedido.</small></span></div>
+        <div className="kelly-notice"><BadgeCheck /><span><strong>Cardápio informado pelo {SANDUBA_NAME}</strong><small>Preços e disponibilidade podem mudar. Confirme as condições diretamente com o estabelecimento antes de concluir o pedido.</small></span></div>
 
         <div className="kelly-menu-grid">
         {groups.map(group => (
@@ -187,7 +191,7 @@ export function PontoDoSandubaPage() {
         <aside className="kelly-cta">
           <div>
             <h2>Bateu a fome?</h2>
-            <p>Chame no WhatsApp e faça seu pedido direto com o Ponto do Sanduba.</p>
+            <p>Chame no WhatsApp e faça seu pedido direto com o {SANDUBA_NAME}.</p>
           </div>
           <div className="kelly-cta__actions">
             <a className="pc-btn pc-btn--primary" href={whatsappHref} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Chamar no WhatsApp</a>

@@ -1,12 +1,15 @@
 // Segundo negócio cadastrado manualmente (ver manualEstablishments.ts para o
-// contexto completo do porquê deste arquivo existir). Ponto do Sanduba —
+// contexto completo do porquê deste arquivo existir). Beto Burguer —
 // hamburgueria em Feijó-AC, cardápio e logomarca enviados pelo proprietário
-// em 22/08/2026.
+// em 22/08/2026. Renomeado de "Ponto do Sanduba" para "Beto Burguer" em
+// 05/09/2026 a pedido do proprietário; o slug/id antigo continua existindo
+// como rota de compatibilidade em App.tsx para não quebrar links já
+// compartilhados.
 
 import type { Product, ProductOffer, StoreRow } from "./catalog";
 
-export const SANDUBA_ID = "ponto-do-sanduba";
-export const SANDUBA_NAME = "Ponto do Sanduba";
+export const SANDUBA_ID = "beto-burguer";
+export const SANDUBA_NAME = "Beto Burguer";
 export const SANDUBA_NEIGHBORHOOD = "Centro";
 export const SANDUBA_COLOR = "#f07d17";
 export const SANDUBA_ADDRESS = "Travessa Floriano Peixoto, Centro, Feijó - AC, 69960-000";
@@ -15,9 +18,16 @@ export const SANDUBA_WHATSAPP = "5568999754141";
 
 export type MenuItem = { name: string; category: string; price: number; description?: string };
 
-export const SANDUBA_MENU_CATEGORIES = ["Sanduíches", "Adicionais", "Refrigerantes", "Suco Natural"] as const;
+export const SANDUBA_MENU_CATEGORIES = ["Sanduíches", "Sanduíches Artesanais", "Adicionais", "Porções", "Refrigerantes", "Suco Natural"] as const;
 
 export const SANDUBA_MENU: MenuItem[] = [
+  // Sanduíches Artesanais (linha smash)
+  { name: "Super Smash", category: "Sanduíches Artesanais", price: 40, description: "Pão brioche, 2 hambúrgueres bovinos 180g, queijo cheddar, queijo mussarela, bacon, ovos, molho barbecue e banana." },
+  { name: "Smash Crispy", category: "Sanduíches Artesanais", price: 35, description: "Pão brioche, burger bovino 180g, queijo mussarela, queijo cheddar, bacon e molho barbecue." },
+  { name: "Smash Duplo", category: "Sanduíches Artesanais", price: 30, description: "Pão brioche, 2 hambúrgueres bovinos 180g, queijo mussarela, queijo cheddar e banana." },
+  { name: "Smash Acreano", category: "Sanduíches Artesanais", price: 25, description: "Pão brioche, 1 hambúrguer bovino 180g, bacon, mussarela, banana frita e molho barbecue." },
+  { name: "Smash Kids", category: "Sanduíches Artesanais", price: 16, description: "Pão brioche, 1 hambúrguer bovino 180g e queijo mussarela." },
+
   // Sanduíches
   { name: "Tudão Big", category: "Sanduíches", price: 30, description: "Hambúrguer, filé, frango, presunto, queijo, calabresa, bacon, salsicha, ovo, salada, cheddar, catupiry, molho barbecue e banana frita." },
   { name: "X-Tudão", category: "Sanduíches", price: 25, description: "Hambúrguer, filé, frango, presunto, queijo, calabresa, bacon, salsicha, ovo e salada." },
@@ -49,6 +59,13 @@ export const SANDUBA_MENU: MenuItem[] = [
   { name: "X-Bauru", category: "Sanduíches", price: 10, description: "Presunto, queijo e salada." },
   { name: "X-Misto Duplo", category: "Sanduíches", price: 10, description: "2 presuntos e 2 queijos." },
   { name: "X-Misto", category: "Sanduíches", price: 8, description: "Presunto e queijo." },
+  { name: "X-Americano", category: "Sanduíches", price: 16, description: "Hambúrguer, queijo, ovo e salada." },
+  { name: "X-Banana", category: "Sanduíches", price: 13, description: "Pão, hambúrguer, banana frita e queijo." },
+
+  // Porções
+  { name: "Porção de Batata Frita 300g", category: "Porções", price: 20 },
+  { name: "Porção de Batata Frita 200g", category: "Porções", price: 15 },
+  { name: "Porção de Batata Frita 100g", category: "Porções", price: 10 },
 
   // Adicionais
   { name: "Hambúrguer (adicional)", category: "Adicionais", price: 4 },
@@ -127,7 +144,7 @@ export const sandubaProducts: Product[] = SANDUBA_MENU.map((item) => {
     id,
     slug: id,
     name: item.name,
-    brand: "Ponto do Sanduba",
+    brand: SANDUBA_NAME,
     category: item.category,
     size: item.description || "Porção única",
     unit: "un",
@@ -141,7 +158,7 @@ export const sandubaProducts: Product[] = SANDUBA_MENU.map((item) => {
     neighborhood: SANDUBA_NEIGHBORHOOD,
     storeColor: SANDUBA_COLOR,
     capturedAt: CAPTURED_AT,
-    source: "Cardápio oficial (Ponto do Sanduba)",
+    source: `Cardápio oficial (${SANDUBA_NAME})`,
     image_url: image,
     offers: [offer],
   } satisfies Product;
