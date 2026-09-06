@@ -68,6 +68,13 @@ export function SubscriberGate({ tool = "esta ferramenta", plan = "cesta_intelig
         <div className="pc-sub-gate__body">
           <h1 id="pc-sub-gate-title">{tool} é exclusiva de quem tem uma licença ativa</h1>
           <p>Monte sua cesta automaticamente com IA. Peça seu código de acesso pelo WhatsApp do PreçoCerto e resgate abaixo.</p>
+          <ul className="pc-sub-gate__plans">
+            <li><span>24 horas</span><b>R$ 10,00</b></li>
+            <li><span>7 dias</span><b>R$ 15,00</b></li>
+            <li><span>30 dias</span><b>R$ 29,90</b></li>
+            <li><span>Trimestral</span><b>R$ 69,90</b></li>
+            <li><span>Semestral</span><b>R$ 119,90</b></li>
+          </ul>
           <a
             className="pc-sub-gate__whatsapp"
             href={whatsappSalesLink("Olá! Quero comprar acesso à Cesta Inteligente do PreçoCerto.")}

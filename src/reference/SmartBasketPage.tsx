@@ -1,7 +1,9 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Bot, Building2, CheckCircle2, LoaderCircle, Minus, PackagePlus, PiggyBank, Plus, Save, Search, Send, ShoppingBasket, Sparkles, Store, Trash2, WalletCards, X } from "lucide-react";
+import { Bot, Building2, CheckCircle2, Download, ImageDown, LoaderCircle, Minus, PackagePlus, PiggyBank, Plus, Save, Search, Send, ShoppingBasket, Sparkles, Store, Trash2, WalletCards, X } from "lucide-react";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product, ProductOffer } from "../data/catalog";
 import { loadSessionProfile, type SessionProfile } from "../lib/roles";
@@ -28,7 +30,7 @@ function readStoredPrefill(){try{const raw=sessionStorage.getItem("precocerto:sm
 export function SmartBasketPage(){
 const pageRef=useRef<HTMLDivElement>(null);
 const navigate=useNavigate();const[searchParams]=useSearchParams();const stored=useMemo(readStoredPrefill,[]);const initialBudget=Math.max(50,Number(searchParams.get("budget")||stored.budget||350));const initialPeople=Math.min(8,Math.max(1,Number(searchParams.get("people")||stored.people||2)));
-const[profile,setProfile]=useState<SessionProfile|null>(null),[authLoading,setAuthLoading]=useState(true),[products,setProducts]=useState<Product[]>([]),[loading,setLoading]=useState(true);const[budget,setBudget]=useState(initialBudget),[income,setIncome]=useState<number|"">(""),[people,setPeople]=useState(initialPeople),[selected,setSelected]=useState<"multi_store"|"single_store">("multi_store"),[saving,setSaving]=useState(false),[message,setMessage]=useState("");const[selectionMode,setSelectionMode]=useState<"smart"|"custom">("smart"),[query,setQuery]=useState(""),[custom,setCustom]=useState<Record<string,number>>({});
+const[profile,setProfile]=useState<SessionProfile|null>(null),[authLoading,setAuthLoading]=useState(true),[products,setProducts]=useState<Product[]>([]),[loading,setLoading]=useState(true);const[budget,setBudget]=useState(initialBudget),[income,setIncome]=useState<number|"">(""),[people,setPeople]=useState(initialPeople),[selected,setSelected]=useState<"multi_store"|"single_store">("multi_store"),[saving,setSaving]=useState(false),[message,setMessage]=useState(""),[exportMsg,setExportMsg]=useState("");const[selectionMode,setSelectionMode]=useState<"smart"|"custom">("smart"),[query,setQuery]=useState(""),[custom,setCustom]=useState<Record<string,number>>({});
 const[assistantOpen,setAssistantOpen]=useState(false),[assistantInput,setAssistantInput]=useState(""),[assistantLog,setAssistantLog]=useState<AssistantTurn[]>([{from:"assistant",text:"Olá! Posso sugerir itens, buscar um produto ou ajustar seu orçamento — e para qualquer outra dúvida, chamo a Claude pra te ajudar."}]),[assistantThinking,setAssistantThinking]=useState(false);
 const assistantLogRef=useRef<HTMLDivElement>(null);
 useEffect(()=>{assistantLogRef.current?.scrollTo({top:assistantLogRef.current.scrollHeight});},[assistantLog,assistantOpen]);
@@ -101,6 +103,76 @@ useGSAP(() => {
   gsap.from(".smart-results .smart-strategies > *", { y: 14, opacity: 0, duration: .5, delay: .18, stagger: .06, ease: "power2.out" });
 }, { scope: pageRef });
 
+function exportBasketPDF(){
+  try{
+    const now=new Date();
+    const doc=new jsPDF();
+    doc.setFillColor(5,38,74);
+    doc.rect(0,0,210,40,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(22);
+    doc.text("PreçoCerto Feijó",15,20);
+    doc.setFontSize(10);
+    doc.text(`Cesta Inteligente — ${now.toLocaleDateString("pt-BR")} às ${now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})}`,15,30);
+    const tableData=active.items.map(item=>[item.product.name,`${item.quantity}x`,item.offer.establishment,brl.format(item.offer.value),brl.format(item.subtotal)]);
+    autoTable(doc,{
+      startY:50,
+      head:[["Produto","Qtd","Loja","Preço unit.","Subtotal"]],
+      body:tableData,
+      theme:"striped",
+      headStyles:{fillColor:[49,181,34],textColor:[255,255,255]},
+      styles:{fontSize:9},
+      columnStyles:{3:{halign:"right"},4:{halign:"right",fontStyle:"bold"}},
+    });
+    const finalY=(doc as unknown as {lastAutoTable:{finalY:number}}).lastAutoTable?.finalY||60;
+    doc.setTextColor(20,20,20);
+    doc.setFontSize(12);
+    doc.text(`Total: ${brl.format(active.total)}`,15,finalY+10);
+    doc.setFontSize(10);
+    doc.text(`Orçamento: ${brl.format(budget)}  ·  Saldo: ${brl.format(Math.max(0,budget-active.total))}  ·  ${active.stores.length} estabelecimento(s)`,15,finalY+18);
+    const pageCount=(doc as unknown as {internal:{getNumberOfPages:()=>number}}).internal.getNumberOfPages();
+    for(let i=1;i<=pageCount;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(150);doc.text("PreçoCerto Feijó — www.precocerto.live",105,285,{align:"center"});}
+    doc.save(`cesta-inteligente-${now.toISOString().split("T")[0]}-${now.toTimeString().slice(0,5).replace(":","")}.pdf`);
+    setExportMsg("PDF da cesta exportado com sucesso.");
+  }catch{setExportMsg("Não foi possível gerar o PDF agora.");}
+}
+function exportBasketImage(){
+  try{
+    const now=new Date();
+    const width=800,rowH=40,headerH=90,footerH=64;
+    const height=headerH+Math.max(1,active.items.length)*rowH+120+footerH;
+    const canvas=document.createElement("canvas");
+    canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext("2d");
+    if(!ctx){setExportMsg("Não foi possível gerar a imagem agora.");return;}
+    ctx.fillStyle="#ffffff";ctx.fillRect(0,0,width,height);
+    ctx.fillStyle="#05264a";ctx.fillRect(0,0,width,headerH);
+    ctx.fillStyle="#ffffff";ctx.font="bold 24px sans-serif";ctx.fillText("PreçoCerto Feijó",24,36);
+    ctx.font="14px sans-serif";
+    ctx.fillText(`Cesta Inteligente — ${now.toLocaleDateString("pt-BR")} às ${now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})}`,24,66);
+    let y=headerH+34;
+    if(!active.items.length){ctx.fillStyle="#6b7280";ctx.font="14px sans-serif";ctx.fillText("Nenhum item na cesta.",24,y);y+=rowH;}
+    active.items.forEach(item=>{
+      ctx.fillStyle="#111827";ctx.font="bold 15px sans-serif";ctx.fillText(item.product.name.slice(0,46),24,y);
+      ctx.fillStyle="#6b7280";ctx.font="12px sans-serif";ctx.fillText(`${item.quantity}x · ${item.offer.establishment}`,24,y+18);
+      ctx.fillStyle="#111827";ctx.font="bold 15px sans-serif";ctx.textAlign="right";ctx.fillText(brl.format(item.subtotal),width-24,y+8);ctx.textAlign="left";
+      y+=rowH;
+    });
+    y+=16;
+    ctx.strokeStyle="#e5e7eb";ctx.beginPath();ctx.moveTo(24,y);ctx.lineTo(width-24,y);ctx.stroke();
+    y+=34;
+    ctx.fillStyle="#111827";ctx.font="bold 19px sans-serif";ctx.fillText(`Total: ${brl.format(active.total)}`,24,y);
+    y+=28;
+    ctx.fillStyle="#374151";ctx.font="13px sans-serif";
+    ctx.fillText(`Orçamento: ${brl.format(budget)} · Saldo: ${brl.format(Math.max(0,budget-active.total))} · ${active.stores.length} estabelecimento(s)`,24,y);
+    ctx.fillStyle="#9ca3af";ctx.font="11px sans-serif";ctx.fillText("www.precocerto.live",24,height-20);
+    const link=document.createElement("a");
+    link.download=`cesta-inteligente-${now.toISOString().split("T")[0]}-${now.toTimeString().slice(0,5).replace(":","")}.png`;
+    link.href=canvas.toDataURL("image/png");
+    link.click();
+    setExportMsg("Imagem da cesta exportada com sucesso.");
+  }catch{setExportMsg("Não foi possível gerar a imagem agora.");}
+}
 async function savePlan(){if(!profile||!supabase||!active.items.length)return;setSaving(true);setMessage("");const payload={user_id:profile.userId,name:`Cesta ${new Date().toLocaleDateString("pt-BR")}`,budget,household_income:income||null,household_size:people,strategy:active.strategy,total:active.total,savings:active.savings,store_count:active.stores.length,items:active.items.map(i=>({product_id:i.product.id,name:i.product.name,quantity:i.quantity,unit_price:i.offer.value,subtotal:i.subtotal,establishment:i.offer.establishment,establishment_id:i.offer.establishmentId}))};const{error}=await supabase.from("smart_basket_plans").insert(payload);setSaving(false);setMessage(error?`Não foi possível salvar: ${error.message}`:"Cesta salva na sua conta.");}
 if(authLoading||loading)return <main className="smart-basket-state"><LoaderCircle className="spin"/><strong>Preparando sua cesta inteligente…</strong></main>;if(!profile)return null;
 return <><div className="smart-basket-page" ref={pageRef}><PublicHeader current="basket"/><main id="conteudo-principal" className="smart-basket-shell">
@@ -108,7 +180,7 @@ return <><div className="smart-basket-page" ref={pageRef}><PublicHeader current=
 <section className="smart-planner"><div className="smart-controls"><label><span><WalletCards/> Quanto você tem disponível?</span><div className="money-input"><b>R$</b><input type="number" min="10" step="10" value={budget} onChange={e=>setBudget(Math.max(0,Number(e.target.value)))}/></div></label><label><span>Renda mensal da família <em>opcional</em></span><div className="money-input"><b>R$</b><input type="number" min="0" step="100" value={income} placeholder="Ex.: 2.500" onChange={e=>setIncome(e.target.value===""?"":Number(e.target.value))}/></div>{suggestedBudget&&<button type="button" className="budget-suggestion" onClick={()=>setBudget(suggestedBudget)}>Usar referência de {brl.format(suggestedBudget)} <small>25% da renda · ajustável</small></button>}</label><label><span>Pessoas na casa</span><select value={people} onChange={e=>setPeople(Number(e.target.value))}>{[1,2,3,4,5,6,7,8].map(n=><option key={n}>{n}</option>)}</select></label></div></section>
 <section className="smart-product-picker"><header><div><small>PRODUTOS DA CESTA</small><h2>Como você quer montar sua lista?</h2></div><div className="smart-picker-tabs"><button className={selectionMode==="smart"?"is-active":""} onClick={()=>setSelectionMode("smart")}><Sparkles/> Sugestão inteligente</button><button className={selectionMode==="custom"?"is-active":""} onClick={()=>setSelectionMode("custom")}><PackagePlus/> Escolher meus produtos</button></div></header>{selectionMode==="custom"&&<><div className="smart-product-search"><Search/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Busque arroz, café, leite, frango, marca..."/></div>{searchResults.length>0&&<div className="smart-product-results">{searchResults.map(product=><button key={String(product.id)} onClick={()=>addProduct(product)}><span><strong>{product.name}</strong><small>{product.brand||product.category} · a partir de {brl.format(product.minPrice)}</small></span><Plus/></button>)}</div>}<div className="smart-custom-list">{customRows.length?customRows.map(row=><article key={String(row.product.id)}><div><strong>{row.product.name}</strong><small>{row.product.brand||row.product.category} · menor preço {brl.format(row.product.minPrice)}</small></div><div className="smart-qty"><button onClick={()=>changeQty(String(row.product.id),-1)} aria-label="Diminuir quantidade"><Minus/></button><b>{row.quantity}</b><button onClick={()=>changeQty(String(row.product.id),1)} aria-label="Aumentar quantidade"><Plus/></button></div><button className="smart-remove" onClick={()=>setCustom(current=>{const copy={...current};delete copy[row.product.id];return copy;})} aria-label={`Remover ${row.product.name}`}><Trash2/></button></article>):<div className="smart-custom-empty"><PackagePlus/><strong>Sua seleção está vazia.</strong><span>Pesquise acima e adicione os produtos que deseja comprar.</span></div>}</div></>}</section>
 <section className="smart-results"><header><div><small>COMPARAÇÃO AUTOMÁTICA</small><h2>Escolha como quer comprar</h2></div><strong>Orçamento: {brl.format(budget)}</strong></header><div className="smart-strategies"><button type="button" className={selected==="multi_store"?"is-active":""} onClick={()=>setSelected("multi_store")}><span className="strategy-icon"><PiggyBank/></span><span><small>MAIOR ECONOMIA</small><strong>Menores preços em várias lojas</strong><em>O sistema escolhe a oferta mais barata de cada produto.</em></span><b>{brl.format(multi.total)}</b><i>{multi.stores.length} {multi.stores.length===1?"loja":"lojas"}</i></button><button type="button" className={selected==="single_store"?"is-active":""} onClick={()=>setSelected("single_store")}><span className="strategy-icon"><Store/></span><span><small>MAIS PRATICIDADE</small><strong>Melhor compra em uma loja</strong><em>{single.storeName?`Melhor combinação em ${single.storeName}.`:"Procura uma loja com a melhor combinação."}</em></span><b>{brl.format(single.total)}</b><i>{single.items.length} produtos atendidos</i></button></div></section>
-<section className="smart-plan"><div className="smart-plan-list"><header><span><CheckCircle2/><div><small>CESTA CALCULADA</small><h2>{active.label}</h2></div></span><strong>{active.items.reduce((s,i)=>s+i.quantity,0)} unidades</strong></header>{active.items.map(item=><article key={`${item.product.id}-${item.offer.establishment}`}><div><small>{item.essential}</small><strong>{item.product.name}</strong><em>{item.product.size} · {item.offer.establishment}</em></div><span>{item.quantity} × {brl.format(item.offer.value)}</span><b>{brl.format(item.subtotal)}</b></article>)}{!active.items.length&&<div className="smart-empty">{selectionMode==="custom"&&!customRows.length?"Escolha ao menos um produto para calcular sua cesta.":"Nenhum item cabe neste orçamento com os preços disponíveis."}</div>}</div><aside className="smart-summary"><small>RESUMO</small><h2>{brl.format(active.total)}</h2><div><span>Saldo do orçamento</span><strong>{brl.format(Math.max(0,budget-active.total))}</strong></div><div><span>Estabelecimentos</span><strong>{active.stores.length}</strong></div><div><span>Produtos não atendidos</span><strong>{active.missing.length}</strong></div><button type="button" disabled={saving||!active.items.length} onClick={savePlan}>{saving?<LoaderCircle className="spin"/>:<Save/>}{saving?"Salvando…":"Salvar esta cesta"}</button>{message&&<p className={message.startsWith("Cesta salva")?"success":"error"}>{message}</p>}<Link to="/buscar"><Building2/> Explorar catálogo</Link></aside></section>
+<section className="smart-plan"><div className="smart-plan-list"><header><span><CheckCircle2/><div><small>CESTA CALCULADA</small><h2>{active.label}</h2></div></span><strong>{active.items.reduce((s,i)=>s+i.quantity,0)} unidades</strong></header>{active.items.map(item=><article key={`${item.product.id}-${item.offer.establishment}`}><div><small>{item.essential}</small><strong>{item.product.name}</strong><em>{item.product.size} · {item.offer.establishment}</em></div><span>{item.quantity} × {brl.format(item.offer.value)}</span><b>{brl.format(item.subtotal)}</b></article>)}{!active.items.length&&<div className="smart-empty">{selectionMode==="custom"&&!customRows.length?"Escolha ao menos um produto para calcular sua cesta.":"Nenhum item cabe neste orçamento com os preços disponíveis."}</div>}</div><aside className="smart-summary"><small>RESUMO</small><h2>{brl.format(active.total)}</h2><div><span>Saldo do orçamento</span><strong>{brl.format(Math.max(0,budget-active.total))}</strong></div><div><span>Estabelecimentos</span><strong>{active.stores.length}</strong></div><div><span>Produtos não atendidos</span><strong>{active.missing.length}</strong></div><button type="button" disabled={saving||!active.items.length} onClick={savePlan}>{saving?<LoaderCircle className="spin"/>:<Save/>}{saving?"Salvando…":"Salvar esta cesta"}</button>{message&&<p className={message.startsWith("Cesta salva")?"success":"error"}>{message}</p>}<div className="smart-export-row"><button type="button" className="smart-export-btn" disabled={!active.items.length} onClick={exportBasketPDF}><Download/> Exportar PDF</button><button type="button" className="smart-export-btn" disabled={!active.items.length} onClick={exportBasketImage}><ImageDown/> Exportar imagem</button></div>{exportMsg&&<p className="success">{exportMsg}</p>}<Link to="/buscar"><Building2/> Explorar catálogo</Link></aside></section>
 
 <button type="button" className="smart-assistant-fab" onClick={()=>setAssistantOpen(v=>!v)} aria-expanded={assistantOpen} aria-label={assistantOpen?"Fechar assistente":"Abrir assistente de compras"}>{assistantOpen?<X/>:<Bot/>}{!assistantOpen&&<span>Assistente</span>}</button>
 {assistantOpen&&<aside className="smart-assistant" role="dialog" aria-label="Assistente de compras PreçoCerto">

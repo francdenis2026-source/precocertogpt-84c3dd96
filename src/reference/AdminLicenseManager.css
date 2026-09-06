@@ -11,6 +11,16 @@
 .adm-lic__card h2 { margin: 0 0 12px; font-size: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--px-ink); }
 .adm-lic__card h2 svg { width: 16px; height: 16px; color: var(--px-brand); }
 
+.adm-lic__plans { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.adm-lic__plan {
+  display: flex; flex-direction: column; gap: 2px; padding: 8px 14px; border-radius: 10px;
+  border: 1px solid var(--px-line); background: var(--px-surface-soft); color: var(--px-ink);
+  cursor: pointer; text-align: left; min-width: 108px;
+}
+.adm-lic__plan strong { font-size: 0.78rem; font-weight: 700; }
+.adm-lic__plan span { font-size: 0.82rem; font-weight: 700; color: var(--px-brand); }
+.adm-lic__plan.is-active { border-color: var(--px-brand); box-shadow: 0 0 0 1px var(--px-brand); }
+
 .adm-lic__gen label { display: block; margin-bottom: 6px; font-size: 0.8rem; font-weight: 600; color: var(--px-ink); }
 .adm-lic__gen-row { display: flex; gap: 8px; }
 .adm-lic__gen-row input {

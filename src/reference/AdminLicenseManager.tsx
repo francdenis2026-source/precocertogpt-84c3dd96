@@ -18,6 +18,14 @@ type LicenseRow = {
 const dt = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" });
 const fmt = (v: string | null) => (v ? dt.format(new Date(v)) : "—");
 
+const PLANS = [
+  { days: "1", label: "24 horas", price: "R$ 10,00" },
+  { days: "7", label: "7 dias", price: "R$ 15,00" },
+  { days: "30", label: "30 dias", price: "R$ 29,90" },
+  { days: "90", label: "Trimestral (90 dias)", price: "R$ 69,90" },
+  { days: "180", label: "Semestral (180 dias)", price: "R$ 119,90" },
+];
+
 function whatsappLink(licenseKey: string) {
   return whatsappSalesLink(
     `Olá! Aqui está seu código de acesso à Cesta Inteligente do PreçoCerto: ${licenseKey}\n\nBasta colar esse código na tela de desbloqueio dentro do app. Qualquer dúvida, é só chamar por aqui. 🛒`
@@ -94,8 +102,21 @@ export function AdminLicenseManager() {
 
       <section className="adm-lic__card">
         <h2><KeyRound aria-hidden="true" /> Gerar novo código</h2>
+        <div className="adm-lic__plans">
+          {PLANS.map(plan => (
+            <button
+              key={plan.days}
+              type="button"
+              className={`adm-lic__plan${days === plan.days ? " is-active" : ""}`}
+              onClick={() => setDays(plan.days)}
+            >
+              <strong>{plan.label}</strong>
+              <span>{plan.price}</span>
+            </button>
+          ))}
+        </div>
         <form className="adm-lic__gen" onSubmit={generate}>
-          <label htmlFor="adm-lic-days">Duração (dias, vazio = vitalício)</label>
+          <label htmlFor="adm-lic-days">Duração em dias (ou escolha um plano acima)</label>
           <div className="adm-lic__gen-row">
             <input
               id="adm-lic-days"
