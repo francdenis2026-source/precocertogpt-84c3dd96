@@ -18,6 +18,7 @@ export type AuthState = {
   sessionId: string | null;
   signInWithPassword: (email: string, password: string) => Promise<AuthResult>;
   signUp: (email: string, password: string, name?: string) => Promise<AuthResult>;
+  signInWithGoogle: () => Promise<AuthResult>;
   signOut: () => Promise<void>;
   refreshRoles: () => Promise<void>;
 };
@@ -47,9 +48,33 @@ function messageFor(raw: string | undefined): string {
   if (text.includes("invalid login") || text.includes("invalid credentials"))
     return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
   if (text.includes("email not confirmed")) return "Confirme seu e-mail para concluir o acesso.";
-  if (text.includes("user already registered")) return "Já existe uma conta com este e-mail. Faça login.";
-  if (text.includes("password")) return "A senha precisa ter pelo menos 6 caracteres.";
+  if (text.includes("already registered") || text.includes("already exists"))
+    return "Já existe uma conta com este e-mail. Faça login ou recupere sua senha.";
+  if (text.includes("password")) return "A senha precisa ter 6 números.";
   return raw || "Não foi possível concluir a operação. Tente novamente.";
+}
+
+/**
+ * A Auth API do Supabase responde a mesma mensagem genérica
+ * ("Invalid login credentials") tanto para senha errada quanto para e-mail
+ * sem conta — por padrão, contra enumeração de contas. O produto decidiu
+ * abrir mão dessa proteção aqui para orientar melhor quem erra a senha vs.
+ * quem nunca teve conta; a checagem roda numa Edge Function com
+ * service_role (auth-check-email) porque o cliente não tem esse dado.
+ */
+async function describeLoginFailure(email: string): Promise<string> {
+  if (!supabase) return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
+  try {
+    const { data, error } = await supabase.functions.invoke<{ exists: boolean }>("auth-check-email", {
+      body: { email: email.trim().toLocaleLowerCase("pt-BR") },
+    });
+    if (error || !data) return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
+    return data.exists
+      ? "Senha incorreta para este e-mail. Tente novamente ou toque em \"Esqueci minha senha\"."
+      : "Não encontramos uma conta com este e-mail. Confira o endereço ou crie uma conta nova.";
+  } catch {
+    return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
+  }
 }
 
 /**
@@ -119,7 +144,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       email: email.trim().toLocaleLowerCase("pt-BR"),
       password,
     });
-    if (error || !data.session) return { error: messageFor(error?.message) };
+    if (error || !data.session) {
+      const text = (error?.message || "").toLocaleLowerCase("pt-BR");
+      const isBadCredentials = text.includes("invalid login") || text.includes("invalid credentials");
+      if (isBadCredentials) return { error: await describeLoginFailure(email) };
+      return { error: messageFor(error?.message) };
+    }
 
     /* Uma conta, um dispositivo. scope "others" revoga no servidor os refresh
        tokens de todos os outros aparelhos, então a regra vale mesmo que o
@@ -160,6 +190,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: null };
   }, [announce, applySession]);
 
+  const signInWithGoogle = useCallback<AuthState["signInWithGoogle"]>(async () => {
+    if (!supabase) return { error: "Autenticação indisponível: banco não configurado." };
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin },
+    });
+    if (error) return { error: messageFor(error.message) };
+    // O redirecionamento para o Google acontece aqui; a sessão volta pelo
+    // onAuthStateChange já registrado no efeito acima quando o usuário retorna.
+    return { error: null };
+  }, []);
+
   const signOutFn = useCallback(async () => {
     if (supabase) await supabase.auth.signOut();
     gravarSessionId(null);
@@ -187,9 +229,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     sessionId,
     signInWithPassword,
     signUp,
+    signInWithGoogle,
     signOut: signOutFn,
     refreshRoles,
-  }), [session, loading, roles, sessionId, signInWithPassword, signUp, signOutFn, refreshRoles]);
+  }), [session, loading, roles, sessionId, signInWithPassword, signUp, signInWithGoogle, signOutFn, refreshRoles]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
