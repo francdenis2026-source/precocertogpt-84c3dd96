@@ -4,7 +4,8 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Bot, Building2, CheckCircle2, LoaderCircle, Minus, PackagePlus, PiggyBank, Plus, Save, Search, Send, ShoppingBasket, Sparkles, Store, Trash2, WalletCards, X } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product, ProductOffer } from "../data/catalog";
-import { loadSessionProfile, supabase, type SessionProfile } from "../lib/roles";
+import { loadSessionProfile, type SessionProfile } from "../lib/roles";
+import { supabase } from "../lib/supabase";
 import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import "./SmartBasketPage.css";
 
@@ -28,7 +29,7 @@ export function SmartBasketPage(){
 const pageRef=useRef<HTMLDivElement>(null);
 const navigate=useNavigate();const[searchParams]=useSearchParams();const stored=useMemo(readStoredPrefill,[]);const initialBudget=Math.max(50,Number(searchParams.get("budget")||stored.budget||350));const initialPeople=Math.min(8,Math.max(1,Number(searchParams.get("people")||stored.people||2)));
 const[profile,setProfile]=useState<SessionProfile|null>(null),[authLoading,setAuthLoading]=useState(true),[products,setProducts]=useState<Product[]>([]),[loading,setLoading]=useState(true);const[budget,setBudget]=useState(initialBudget),[income,setIncome]=useState<number|"">(""),[people,setPeople]=useState(initialPeople),[selected,setSelected]=useState<"multi_store"|"single_store">("multi_store"),[saving,setSaving]=useState(false),[message,setMessage]=useState("");const[selectionMode,setSelectionMode]=useState<"smart"|"custom">("smart"),[query,setQuery]=useState(""),[custom,setCustom]=useState<Record<string,number>>({});
-const[assistantOpen,setAssistantOpen]=useState(false),[assistantInput,setAssistantInput]=useState(""),[assistantLog,setAssistantLog]=useState<AssistantTurn[]>([{from:"assistant",text:"Olá! Posso sugerir itens, buscar um produto ou ajustar seu orçamento. O que você precisa?"}]);
+const[assistantOpen,setAssistantOpen]=useState(false),[assistantInput,setAssistantInput]=useState(""),[assistantLog,setAssistantLog]=useState<AssistantTurn[]>([{from:"assistant",text:"Olá! Posso sugerir itens, buscar um produto ou ajustar seu orçamento — e para qualquer outra dúvida, chamo a Claude pra te ajudar."}]),[assistantThinking,setAssistantThinking]=useState(false);
 const assistantLogRef=useRef<HTMLDivElement>(null);
 useEffect(()=>{assistantLogRef.current?.scrollTo({top:assistantLogRef.current.scrollHeight});},[assistantLog,assistantOpen]);
 useEffect(()=>{loadSessionProfile().then(p=>{setProfile(p);setAuthLoading(false);if(!p)navigate(`/login?redirect=${encodeURIComponent(`/cesta-inteligente?budget=${budget}&people=${people}`)}`,{replace:true});});},[navigate,budget,people]);
@@ -38,8 +39,33 @@ const customRows=useMemo(()=>Object.entries(custom).map(([id,quantity],index)=>{
 const searchResults=useMemo(()=>{const q=normalize(query);if(q.length<2)return[];return products.filter(p=>p.minPrice>0&&normalize(`${p.name} ${p.brand} ${p.category}`).includes(q)&&!custom[p.id]).sort((a,b)=>a.minPrice-b.minPrice).slice(0,8);},[query,products,custom]);
 const multi=useMemo(()=>buildMulti(rows,Math.max(0,budget)),[rows,budget]),single=useMemo(()=>buildSingle(rows,Math.max(0,budget)),[rows,budget]);const baseline=Math.max(multi.total,single.total);multi.savings=Math.max(0,baseline-multi.total);single.savings=Math.max(0,baseline-single.total);const active=selected==="multi_store"?multi:single;
 function addProduct(product:Product){setSelectionMode("custom");setCustom(current=>({...current,[product.id]:current[product.id]||1}));setQuery("");}
-function askAssistant(raw:string){const text=raw.trim();if(!text)return;const reply=assistantReply(text,{products,budget,people,active,multi,single,setBudget,setSelectionMode,setSelected,addProduct});setAssistantLog(current=>[...current,{from:"user",text},{from:"assistant",text:reply}]);setAssistantInput("");}
-function submitAssistant(event:FormEvent){event.preventDefault();askAssistant(assistantInput);}function changeQty(id:string,delta:number){setCustom(current=>{const next=Math.max(0,(current[id]||1)+delta);const copy={...current};if(!next)delete copy[id];else copy[id]=next;return copy;});}
+const RULE_BASED_MARKER = "__ask_ai__";
+async function askAssistant(raw:string){
+  const text=raw.trim();if(!text)return;
+  setAssistantInput("");
+  setAssistantLog(current=>[...current,{from:"user",text}]);
+  const reply=assistantReply(text,{products,budget,people,active,multi,single,setBudget,setSelectionMode,setSelected,addProduct});
+  if(reply!==RULE_BASED_MARKER){setAssistantLog(current=>[...current,{from:"assistant",text:reply}]);return;}
+  // Nenhuma regra local respondeu: pergunta aberta vai pra Claude de verdade
+  // (Edge Function smart-basket-assistant), com o contexto atual da cesta.
+  if(!supabase){setAssistantLog(current=>[...current,{from:"assistant",text:"Assistente de IA indisponível no momento."}]);return;}
+  setAssistantThinking(true);
+  try{
+    const{data:{session}}=await supabase.auth.getSession();
+    const{data,error}=await supabase.functions.invoke("smart-basket-assistant",{
+      body:{
+        message:text,budget,people,missing:active.missing,
+        items:active.items.map(i=>({name:i.product.name,quantity:i.quantity,price:i.offer.value,establishment:i.offer.establishment})),
+      },
+      headers:session?{Authorization:`Bearer ${session.access_token}`}:undefined,
+    });
+    const text2=error?(data as {error?:string})?.error||"Não consegui falar com o assistente de IA agora. Tente de novo em instantes.":(data as {reply?:string})?.reply||"Não consegui gerar uma resposta agora.";
+    setAssistantLog(current=>[...current,{from:"assistant",text:text2}]);
+  }catch{
+    setAssistantLog(current=>[...current,{from:"assistant",text:"Não consegui falar com o assistente de IA agora. Tente de novo em instantes."}]);
+  }finally{setAssistantThinking(false);}
+}
+function submitAssistant(event:FormEvent){event.preventDefault();void askAssistant(assistantInput);}function changeQty(id:string,delta:number){setCustom(current=>{const next=Math.max(0,(current[id]||1)+delta);const copy={...current};if(!next)delete copy[id];else copy[id]=next;return copy;});}
 const ASSISTANT_CHIPS=["Sugerir itens essenciais","Qual o jeito mais econômico?","O que ainda falta na cesta?","Buscar arroz"];
 type AssistantTurn={from:"user"|"assistant";text:string};
 function assistantReply(input:string,ctx:{products:Product[];budget:number;people:number;active:Plan;multi:Plan;single:Plan;setBudget:(v:number)=>void;setSelectionMode:(v:"smart"|"custom")=>void;setSelected:(v:"multi_store"|"single_store")=>void;addProduct:(p:Product)=>void}):string{
@@ -60,7 +86,7 @@ if(essential){const product=candidateFor(ctx.products,essential);if(product){ctx
 const found=ctx.products.filter(p=>p.minPrice>0&&normalize(`${p.name} ${p.brand} ${p.category}`).includes(text)).sort((a,b)=>a.minPrice-b.minPrice)[0];
 if(found){ctx.addProduct(found);return`Adicionei ${found.name} (a partir de ${brl.format(found.minPrice)}) à sua cesta.`;}
 if(budgetMatch){const value=Math.max(10,Number(budgetMatch[1]));ctx.setBudget(value);return`Orçamento ajustado para ${brl.format(value)}.`;}
-return"Não encontrei esse produto no catálogo. Tente outro nome, ou peça 'itens essenciais', 'mais economia' ou 'uma loja só'.";
+return"__ask_ai__";
 }
 // Entrada suave da hero, dos controles de orçamento e do seletor de
 // estratégia ao montar a página. Respeita prefers-reduced-motion e usa só
@@ -87,9 +113,9 @@ return <><div className="smart-basket-page" ref={pageRef}><PublicHeader current=
 <button type="button" className="smart-assistant-fab" onClick={()=>setAssistantOpen(v=>!v)} aria-expanded={assistantOpen} aria-label={assistantOpen?"Fechar assistente":"Abrir assistente de compras"}>{assistantOpen?<X/>:<Bot/>}{!assistantOpen&&<span>Assistente</span>}</button>
 {assistantOpen&&<aside className="smart-assistant" role="dialog" aria-label="Assistente de compras PreçoCerto">
 <header><span className="smart-assistant__avatar"><Bot/></span><div><strong>Assistente PreçoCerto</strong><small>Ajuda a montar sua cesta mais rápido</small></div><button type="button" onClick={()=>setAssistantOpen(false)} aria-label="Fechar assistente"><X/></button></header>
-<div className="smart-assistant__log" ref={assistantLogRef}>{assistantLog.map((turn,index)=><p key={index} className={turn.from}>{turn.text}</p>)}</div>
-<div className="smart-assistant__chips">{ASSISTANT_CHIPS.map(chip=><button key={chip} type="button" onClick={()=>askAssistant(chip)}>{chip}</button>)}</div>
-<form className="smart-assistant__form" onSubmit={submitAssistant}><input value={assistantInput} onChange={e=>setAssistantInput(e.target.value)} placeholder="Ex.: arroz, 300, mais economia…" aria-label="Pergunte ao assistente"/><button type="submit" aria-label="Enviar"><Send/></button></form>
+<div className="smart-assistant__log" ref={assistantLogRef}>{assistantLog.map((turn,index)=><p key={index} className={turn.from}>{turn.text}</p>)}{assistantThinking&&<p className="assistant smart-assistant__thinking"><LoaderCircle className="spin"/> Consultando a Claude…</p>}</div>
+<div className="smart-assistant__chips">{ASSISTANT_CHIPS.map(chip=><button key={chip} type="button" disabled={assistantThinking} onClick={()=>void askAssistant(chip)}>{chip}</button>)}</div>
+<form className="smart-assistant__form" onSubmit={submitAssistant}><input value={assistantInput} disabled={assistantThinking} onChange={e=>setAssistantInput(e.target.value)} placeholder="Ex.: arroz, 300, mais economia…" aria-label="Pergunte ao assistente"/><button type="submit" disabled={assistantThinking} aria-label="Enviar"><Send/></button></form>
 </aside>}
 </main><AppDock current="basket"/></div>
 <PublicFooter/></>;

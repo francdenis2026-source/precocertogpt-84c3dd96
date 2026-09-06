@@ -55,6 +55,39 @@
   line-height: 1.45;
   color: var(--px-muted);
 }
+.pc-sub-gate__loading {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--px-muted); font-size: 0.9rem; font-weight: 600;
+}
+.pc-sub-gate__loading .spin { width: 18px; height: 18px; animation: pc-sub-gate-spin 0.9s linear infinite; }
+@keyframes pc-sub-gate-spin { to { transform: rotate(360deg); } }
+
+.pc-sub-gate__redeem { margin-bottom: 16px; text-align: left; }
+.pc-sub-gate__redeem label {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-bottom: 6px; font-size: 0.78rem; font-weight: 700; color: var(--px-ink);
+}
+.pc-sub-gate__redeem label svg { width: 14px; height: 14px; color: var(--px-brand); }
+.pc-sub-gate__redeem-row { display: flex; gap: 8px; }
+.pc-sub-gate__redeem-row input {
+  flex: 1; min-height: 42px; padding: 0 12px;
+  border: 1px solid var(--px-line); border-radius: 10px;
+  background: var(--px-surface-soft); color: var(--px-ink);
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.pc-sub-gate__redeem-row input:focus-visible { outline: 2px solid var(--px-brand); outline-offset: 1px; }
+.pc-sub-gate__redeem-row button {
+  min-width: 108px; min-height: 42px; border: 0; border-radius: 10px;
+  background: var(--px-brand); color: var(--px-brand-ink);
+  font-size: 0.82rem; font-weight: 700; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.pc-sub-gate__redeem-row button:disabled { opacity: 0.6; cursor: default; }
+.pc-sub-gate__redeem-row button .spin { width: 16px; height: 16px; animation: pc-sub-gate-spin 0.9s linear infinite; }
+.pc-sub-gate__msg { margin: 8px 0 0; font-size: 0.78rem; font-weight: 600; color: #dc2626; }
+.pc-sub-gate__msg--ok { color: #16a34a; }
+
 .pc-sub-gate__actions { display: flex; gap: 8px; }
 .pc-sub-gate__cta,
 .pc-sub-gate__ghost {
