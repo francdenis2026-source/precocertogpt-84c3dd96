@@ -14,6 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 import { OnlinePresence } from "../OnlinePresence";
+import { useCurrentProfile } from "../UserAccountExperience";
 
 function HeaderThemeToggle() {
   const { theme, toggleTheme } = useSiteTheme();
@@ -44,6 +45,7 @@ export function Header() {
   );
   const { pathname } = useLocation();
   const [lastPathname, setLastPathname] = useState(pathname);
+  const { profile } = useCurrentProfile();
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -115,10 +117,12 @@ export function Header() {
           <OnlinePresence />
           <HeaderRadioPlayer />
           <HeaderThemeToggle />
-          <Link className="pcx-header__login" to="/login">
-            <UserRound aria-hidden="true" />
-            <span>Entrar</span>
-          </Link>
+          {!profile && (
+            <Link className="pcx-header__login" to="/login">
+              <UserRound aria-hidden="true" />
+              <span>Entrar</span>
+            </Link>
+          )}
 
           <button
             className="pcx-header__menu"

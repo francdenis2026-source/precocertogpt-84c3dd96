@@ -385,6 +385,56 @@
 }
 .pcx-header__menu svg { width: 18px; height: 18px; }
 
+/* Botão "área do cliente" (UserAccountHub) portado para dentro do header —
+   sem isto ele cai no fallback flutuante fixo (.pc-user-floating), que fica
+   sobreposto por cima do próprio header em vez de fazer parte dele. */
+/* O botão de menu (hambúrguer) é anexado antes do portal no DOM, mas
+   precisa continuar por último visualmente — daí o order explícito nos
+   dois, em vez de depender da ordem natural do DOM. */
+.pcx-header__menu { order: 2; }
+.pcx-header__tools .pc-user-root { order: 1; }
+.pcx-header__tools .pc-user-trigger {
+  height: 40px;
+  min-height: 40px;
+  padding: 0.3rem 0.75rem 0.3rem 0.4rem;
+  border: 1px solid var(--h-border-strong);
+  border-radius: var(--h-radius-sm);
+  background: var(--h-surface);
+  color: var(--h-ink);
+}
+.pcx-header__tools .pc-user-trigger:hover,
+.pcx-header__tools .pc-user-trigger:focus-visible {
+  background: var(--h-surface-2);
+  border-color: var(--h-primary);
+}
+.pcx-header__tools .pc-user-avatar {
+  background: linear-gradient(135deg, var(--h-primary), var(--h-primary-dark));
+  color: var(--h-on-primary);
+}
+.pcx-header__tools .pc-user-trigger__text strong { color: var(--h-ink); }
+.pcx-header__tools .pc-user-trigger__text small { color: var(--h-muted); }
+.pcx-header__tools .pc-user-trigger > svg { color: var(--h-subtle); }
+.pcx-header__tools .pc-user-menu {
+  border-color: var(--h-border);
+  background: var(--h-surface);
+  color: var(--h-ink);
+  box-shadow: var(--h-shadow-lg);
+}
+.pcx-header__tools .pc-user-menu > header { border-color: var(--h-border); }
+.pcx-header__tools .pc-user-menu > header small { color: var(--h-muted); }
+.pcx-header__tools .pc-user-menu > header em { background: var(--h-surface-2); color: var(--h-muted); }
+.pcx-header__tools .pc-user-menu nav a { color: var(--h-ink); }
+.pcx-header__tools .pc-user-menu nav a:hover,
+.pcx-header__tools .pc-user-menu nav a:focus-visible { background: var(--h-surface-2); }
+.pcx-header__tools .pc-user-menu nav a > svg { background: var(--h-surface-2); color: var(--h-subtle); }
+.pcx-header__tools .pc-user-menu nav small { color: var(--h-muted); }
+.pcx-header__tools .pc-user-menu > button { border-color: var(--h-border); color: var(--h-muted); }
+.pcx-header__tools .pc-user-menu > button:hover { background: var(--h-surface-2); color: var(--h-ink); }
+@media (max-width: 640px) {
+  .pcx-header__tools .pc-user-trigger__text { display: none; }
+  .pcx-header__tools .pc-user-trigger { padding: 0.3rem; }
+}
+
 @media (max-width: 860px) {
   .pcx-header__bar { height: 58px; gap: 0.75rem; }
   .pcx-header__brand small { display: none; }

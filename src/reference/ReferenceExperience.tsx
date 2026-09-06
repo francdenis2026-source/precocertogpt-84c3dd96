@@ -192,11 +192,32 @@ export function ReferenceStoresPage() {
 
 export function ReferenceFavoritesPage() { const catalog = useCatalog(); const { favoriteIds, loading, toggleFavorite } = useFavorites(); const products = catalog.products.filter(item => favoriteIds.includes(String(item.id))); return <div className="ref-page ref-directory"><PublicHeader /><main id="conteudo-principal" className="ref-shell ref-directory__main"><div className="ref-page-title"><div><span>SEUS PRODUTOS</span><h1>Favoritos para acompanhar.</h1><p>Reúna aqui os preços que você quer consultar de novo.</p></div><div className="ref-update"><Heart /><span>{favoriteIds.length} favoritos<small>sincronizados com sua conta</small></span></div></div>{loading ? <div className="ref-empty"><span className="ref-spinner" /><p>Carregando favoritos…</p></div> : products.length ? <div className="ref-product-grid">{products.map(product => <article key={product.id}><button type="button" onClick={() => void toggleFavorite(product.id)} aria-label={`Remover ${product.name}`}><X /></button><Link to={`/produto/${product.slug}`}><div><ProductVisual product={product} /></div><small>{product.category}</small><strong>{product.name}</strong><span>{product.size}</span><footer><em>a partir de</em><b>{brl.format(product.minPrice)}</b></footer></Link></article>)}</div> : <div className="ref-empty ref-empty--large"><Heart /><h2>Nenhum favorito ainda</h2><p>Salve produtos para consultar os preços mais rápido.</p><Link to="/buscar">Explorar preços <ArrowRight /></Link></div>}</main><PublicFooter /><AppDock current="profile" /></div>; }
 
+/**
+ * Explica por que a pessoa caiu na tela de login em vez de simplesmente
+ * mostrar "bem-vindo de volta" sem contexto — ela normalmente chegou aqui
+ * porque tentou abrir algo que exige conta (RequireAuth redirecionou com
+ * ?redirect=). Sem isso, a experiência de "não estou cadastrado" era um
+ * redirecionamento silencioso, sem explicação nenhuma.
+ */
+function reasonForRedirect(safePath: string, rawRedirect: string | null): string | null {
+  if (!rawRedirect || safePath === "/") return null;
+  const path = safePath.split(/[?#]/)[0];
+  if (path.startsWith("/cesta-inteligente")) return "Entre para usar a Cesta Inteligente.";
+  if (path.startsWith("/cesta")) return "Entre para acessar sua cesta de compras.";
+  if (path.startsWith("/favoritos")) return "Entre para ver seus produtos favoritos.";
+  if (path.startsWith("/minha-conta")) return "Entre para acessar sua conta.";
+  if (path.startsWith("/meus-pedidos")) return "Entre para acompanhar seus pedidos.";
+  if (path.startsWith("/painel-lojista")) return "Entre com sua conta de lojista para continuar.";
+  return "Você precisa entrar para continuar.";
+}
+
 export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { signInWithPassword, signUp: signUpAuth } = useAuth();
-  const redirectTo = sanitizeRedirect(new URLSearchParams(location.search).get("redirect"));
+  const rawRedirect = new URLSearchParams(location.search).get("redirect");
+  const redirectTo = sanitizeRedirect(rawRedirect);
+  const redirectReason = mode === "login" ? reasonForRedirect(redirectTo, rawRedirect) : null;
   const [accountType, setAccountType] = useState<"consumer" | "merchant">("consumer");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
@@ -237,7 +258,13 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     setRecoverSent(true);
   };
 
-  return <div className="ref-auth"><aside className="ref-auth__story"><Brand inverse /><div className="ref-auth__hero-copy"><span className="ref-kicker"><MapPin /> FEIJÓ, ACRE</span><h1>Escolhas melhores começam por aqui.</h1><p>Compare preços locais com clareza e compre com mais confiança.</p></div><small>PreçoCerto · Economia perto de você</small></aside><main className="ref-auth__form"><Link className="ref-auth__back" to="/"><ArrowLeft /> Voltar ao PreçoCerto</Link><div className="ref-auth__card">
+  return <div className="ref-auth"><aside className="ref-auth__story"><Brand inverse /><div className="ref-auth__hero-copy"><span className="ref-kicker"><MapPin /> FEIJÓ, ACRE</span><h1>Escolhas melhores começam por aqui.</h1><p>Compare preços locais com clareza e compre com mais confiança.</p></div><small>PreçoCerto · Economia perto de você</small></aside><main className="ref-auth__form"><Link className="ref-auth__back" to="/"><ArrowLeft /> Voltar ao PreçoCerto</Link>
+
+    {!showRecover && redirectReason && (
+      <p className="ref-auth__reason"><LockKeyhole aria-hidden="true" /> {redirectReason}</p>
+    )}
+
+    <div className="ref-auth__card">
 
     {showRecover ? (
       <>

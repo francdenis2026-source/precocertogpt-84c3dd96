@@ -44,6 +44,9 @@ html[data-theme="dark"] .ref-auth__google:hover:not(:disabled){border-color:#3b4
 html[data-theme="dark"] .ref-auth__divider{color:#7d8a83!important}
 html[data-theme="dark"] .ref-auth__divider::before,html[data-theme="dark"] .ref-auth__divider::after{background:#2b3831}
 html[data-theme="dark"] .ref-auth__hint{color:#9ca8a1!important}
+.ref-auth__reason{display:flex!important;align-items:center!important;gap:7px!important;width:min(100%,460px)!important;margin:0 0 12px!important;padding:9px 12px!important;border:1px solid #cfe3d8!important;border-radius:10px!important;background:var(--auth-green-soft)!important;color:var(--auth-green-strong)!important;font-size:.76rem!important;font-weight:750!important}
+.ref-auth__reason svg{width:15px!important;height:15px!important;flex-shrink:0!important}
+html[data-theme="dark"] .ref-auth__reason{border-color:#2f4536!important;background:#16241b!important;color:#8bd6a3!important}
 .ref-auth--single{grid-template-columns:1fr!important}
 .ref-auth--single .ref-auth__form{padding-top:60px!important}
 .ref-auth--single .ref-auth__back{width:min(100%,460px)!important}
