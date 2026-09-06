@@ -195,7 +195,7 @@ export function ReferenceFavoritesPage() { const catalog = useCatalog(); const {
 export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signInWithPassword, signUp: signUpAuth, signInWithGoogle } = useAuth();
+  const { signInWithPassword, signUp: signUpAuth } = useAuth();
   const redirectTo = sanitizeRedirect(new URLSearchParams(location.search).get("redirect"));
   const [accountType, setAccountType] = useState<"consumer" | "merchant">("consumer");
   const [busy, setBusy] = useState(false);
@@ -222,15 +222,6 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     }
     if (mode === "register") setMessage("Conta criada com sucesso.");
     navigate(redirectTo !== "/" ? redirectTo : accountType === "merchant" ? "/painel-lojista" : "/", { replace: true });
-  };
-
-  const submitGoogle = async () => {
-    setBusy(true);
-    setMessage("");
-    const result = await signInWithGoogle();
-    setBusy(false);
-    if (result.error) setMessage(result.error);
-    // Login bem-sucedido navega para fora desta página (redirecionamento ao Google).
   };
 
   /* Recuperação de senha "discreta": nunca revela se o e-mail digitado tem
@@ -276,10 +267,6 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
           <button type="button" className={accountType === "consumer" ? "is-active" : ""} onClick={() => setAccountType("consumer")}><UserRound /> Consumidor<small>Quero comparar preços</small></button>
           <button type="button" className={accountType === "merchant" ? "is-active" : ""} onClick={() => setAccountType("merchant")}><Store /> Comerciante<small>Quero divulgar ofertas</small></button>
         </div>
-        <button type="button" className="ref-auth__google" onClick={submitGoogle} disabled={busy}>
-          <GoogleGlyph /> Continuar com o Google
-        </button>
-        <div className="ref-auth__divider"><span>ou {mode === "login" ? "entre" : "cadastre-se"} com e-mail</span></div>
         <form onSubmit={submit}>
           {mode === "register" && <label>Nome completo<input name="name" required autoComplete="name" /></label>}
           <label>E-mail<input name="email" type="email" required autoComplete="email" /></label>
@@ -313,17 +300,6 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     )}
 
   </div></main><AppDock current="profile" /></div>;
-}
-
-function GoogleGlyph() {
-  return (
-    <svg viewBox="0 0 48 48" aria-hidden="true" width="18" height="18">
-      <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34 5.1 29.3 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.5-.4-3.5z" />
-      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.3 18.9 12 24 12c3.1 0 5.8 1.1 8 3l6-6C34 5.1 29.3 3 24 3 16.3 3 9.6 7.3 6.3 14.7z" />
-      <path fill="#4CAF50" d="M24 45c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 36.2 26.7 37 24 37c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 40.6 16.2 45 24 45z" />
-      <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.2-4.1 5.6l6.2 5.2C40.8 36 44 30.6 44 24c0-1.4-.1-2.5-.4-3.5z" />
-    </svg>
-  );
 }
 
 export function ReferenceMerchantDashboard() { const catalog = useCatalog(); const rows = catalog.products.slice(0, 6); return <div className="ref-admin ref-merchant-admin"><aside className="ref-admin__sidebar"><Brand inverse /><nav><span>GESTÃO</span><Link className="is-active" to="/painel-lojista"><LayoutDashboard /> Visão geral</Link><Link to="/painel-lojista/catalogo"><PackageSearch /> Catálogo</Link><Link to="/painel-lojista/vendas-online"><ShoppingBasket /> Pedidos</Link><span>NEGÓCIO</span><Link to="/painel-lojista/configurar-negocio"><Store /> Minha loja</Link><Link to="/estabelecimentos"><Eye /> Ver no site</Link></nav><small>PreçoCerto · Feijó, Acre</small></aside><main id="conteudo-principal" className="ref-admin__main"><header><div><span>PAINEL DO COMERCIANTE</span><h1>Central Super</h1><p>Preços, estoque e visibilidade do seu catálogo.</p></div><div><ThemeButton /><Link to="/">Ver site</Link></div></header><section className="ref-admin__cards"><article><Tag /><span>Produtos publicados</span><strong>{rows.length}</strong><small>catálogo ativo</small></article><article><BadgeCheck /><span>Preços atualizados</span><strong>92%</strong><small>nas últimas 24 horas</small></article><article><Eye /><span>Visualizações</span><strong>1.284</strong><small>nesta semana</small></article><article><TrendingDown /><span>Melhores preços</span><strong>4</strong><small>liderando comparações</small></article></section><section className="ref-merchant-table"><header><div><span>CATÁLOGO</span><h2>Preços e estoque</h2></div><button type="button"><Plus /> Novo produto</button></header><div className="ref-results-table"><div className="ref-results-table__head"><span>Produto</span><span>Status</span><span>Mercado local</span><span>Seu preço</span><span /></div>{rows.map(product => <div className="ref-result-row" key={product.id}><span className="ref-result-product"><i><ProductVisual product={product} /></i><span><small>{product.category}</small><strong>{product.name}</strong><em>{product.size}</em></span></span><span className="ref-status"><Check /> publicado</span><span className="ref-result-range">{brl.format(product.minPrice)} a {brl.format(product.maxPrice)}<small>{product.storeCount} lojas</small></span><strong className="ref-result-price">{brl.format(product.minPrice)}</strong><button type="button" aria-label={`Editar ${product.name}`}>Editar</button></div>)}</div></section></main></div>; }
