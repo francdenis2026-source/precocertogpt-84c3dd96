@@ -1290,6 +1290,14 @@ a.pcx-store-hero {
   .pcx-store-hero { min-height: 240px; }
 }
 
+/* Placeholder de carregamento: o card e as linhas de loja não têm proporção
+   3:4 como os produtos, então o skeleton genérico precisa da própria altura. */
+div.pcx-skeleton.pcx-store-hero { aspect-ratio: auto; min-height: 300px; }
+div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
+@media (max-width: 860px) {
+  div.pcx-skeleton.pcx-store-hero { min-height: 240px; }
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────────── */
 .pcx-footer { background: var(--h-surface); border-top: 1px solid var(--h-border); margin-top: auto; }
 .pcx-footer__row {

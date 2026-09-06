@@ -104,7 +104,7 @@ export function HeroUserImage2026({
                 <i aria-hidden="true" /> Atualizados
               </span>
             </div>
-            {proofItems.length ? (
+            {!loading && proofItems.length ? (
               <ul>
                 {proofItems.map((product) => (
                   <li key={product.id}>

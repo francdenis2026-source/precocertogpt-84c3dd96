@@ -8,13 +8,41 @@ import { sectorHeroImage } from "../../data/sectorHeroImages";
 export function StoreRail({
   stores,
   cycle,
+  loading = false,
 }: {
   stores: StoreRow[];
   cycle: number;
+  loading?: boolean;
 }) {
   const eligible = [...stores]
     .filter((store) => store.name && store.slug && (store.products || 0) > 0)
     .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+
+  if (loading) {
+    return (
+      <section className="pcx-section" aria-labelledby="stores-title" aria-busy="true">
+        <div className="pcx-shell">
+          <div className="pcx-section__head">
+            <div>
+              <h2 id="stores-title">Comércios para comparar</h2>
+              <p>
+                Encontre catálogos ativos por bairro e veja os preços disponíveis.
+              </p>
+            </div>
+          </div>
+          <div className="pcx-stores">
+            <div className="pcx-skeleton pcx-store-hero" aria-hidden="true" />
+            <div className="pcx-store-list">
+              {Array.from({ length: 3 }, (_, index) => (
+                <div className="pcx-skeleton pcx-store-row" key={index} aria-hidden="true" />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (!eligible.length) return null;
 
   const leadIndex =

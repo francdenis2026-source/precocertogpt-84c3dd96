@@ -120,7 +120,7 @@ export function HomeNew2026() {
         <ProductGrid products={featured} loading={loading} />
         <PromoBands />
         <CategoryBar />
-        <StoreRail stores={catalog.stores} cycle={cycle} />
+        <StoreRail stores={catalog.stores} cycle={cycle} loading={loading} />
       </main>
       <Footer />
       <BottomNav />

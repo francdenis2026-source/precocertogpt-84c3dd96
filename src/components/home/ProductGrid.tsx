@@ -18,7 +18,7 @@ export function ProductGrid({ products, loading }: { products: Product[]; loadin
         </div>
 
         <div className="pcx-products" aria-busy={loading} aria-live="polite">
-          {loading && !products.length
+          {loading
             ? Array.from({ length: 6 }, (_, index) => <div className="pcx-skeleton" key={index} aria-hidden="true" />)
             : products.length
               ? products.map((product, index) => <ProductCard featured={index === 0} key={product.id} product={product} />)
