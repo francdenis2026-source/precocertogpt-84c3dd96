@@ -13,6 +13,7 @@ import {
   ExternalLink,
   Eye,
   EyeOff,
+  KeyRound,
   LayoutDashboard,
   ListChecks,
   LogOut,
@@ -276,6 +277,10 @@ export function AdminControlCenter() {
           </Nav>
           <Nav to="/admin/ambientes" active={false} icon={<ExternalLink />}>
             Ambientes
+          </Nav>
+          <small>MONETIZAÇÃO</small>
+          <Nav to="/admin/licencas" active={false} icon={<KeyRound />}>
+            Cesta Inteligente (licenças)
           </Nav>
           <small>OPERAÇÕES</small>
           <Nav
