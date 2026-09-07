@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
 import { groupForStore } from "../../data/businessTaxonomy";
-import comercianteFeijoImg from "../../assets/home-2026/comerciante-feijo-app.webp";
+import { sectorLeadPhoto } from "../../data/sectorLeadPhotos";
 
 export function StoreRail({
   stores,
@@ -61,6 +61,7 @@ export function StoreRail({
       .toUpperCase();
   const leadGroup = groupForStore(lead);
   const kindLabel = leadGroup.shortLabel;
+  const leadImg = sectorLeadPhoto(leadGroup.id);
 
   return (
     <section className="pcx-section" aria-labelledby="stores-title">
@@ -85,7 +86,8 @@ export function StoreRail({
             aria-label={`Abrir catálogo de ${lead.name}`}
           >
             <img
-              src={comercianteFeijoImg}
+              key={leadImg}
+              src={leadImg}
               alt=""
               width={1600}
               height={703}
