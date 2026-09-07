@@ -157,7 +157,7 @@ html:not([data-theme="dark"]) .mh26-page .ref-dock a svg{
   opacity:1!important;
 }
 html:not([data-theme="dark"]) .mh26-page .ref-dock a.is-active{
-  color:var(--pc-icon-accent-strong)!important;
+  color:#0a5c47!important;
 }
 
 /* Elementos SVG genéricos que ficavam claros demais em superfícies brancas. */
