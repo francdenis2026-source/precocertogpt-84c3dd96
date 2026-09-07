@@ -79,7 +79,7 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-grid>a{min-height:0!important;padding:0!important;overflow:hidden;border:1px solid var(--pc-border)!important;border-radius:18px!important;background:var(--pc-surface)!important;box-shadow:none!important;text-decoration:none!important;transition:border-color .18s ease,transform .16s ease,box-shadow .18s ease}
 @media(hover:hover) and (pointer:fine){.store-pro-grid>a:hover{border-color:color-mix(in srgb,var(--pc-green) 45%,var(--pc-border))!important;transform:translateY(-3px);box-shadow:var(--pc-shadow-sm)!important}}
 .store-pro-grid>a:focus-visible{outline:3px solid color-mix(in srgb,var(--pc-green) 45%,transparent);outline-offset:3px}
-.store-pro-product-image{height:160px!important;margin:0!important;padding:12px;background:var(--pc-surface-2)!important;border-radius:0!important;overflow:hidden}
+.store-pro-product-image{position:relative!important;height:160px!important;margin:0!important;padding:12px;background:var(--pc-surface-2)!important;border-radius:0!important;overflow:hidden}
 .store-pro-product-image>img{width:100%!important;height:100%!important;object-fit:contain!important}
 .store-pro-grid>a>small,.store-pro-grid>a>strong,.store-pro-grid>a>span,.store-pro-grid>a>footer{margin-left:14px!important;margin-right:14px!important}
 .store-pro-category{display:block;margin-top:12px!important;color:var(--pc-green-strong)!important;font-size:12px!important;font-weight:850!important;letter-spacing:.075em;text-transform:uppercase}

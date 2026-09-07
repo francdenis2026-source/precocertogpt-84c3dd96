@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
 import { priceFreshness } from "../../lib/pricing";
+import { ProductCardActions } from "../catalog/ProductCardActions";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -54,6 +55,7 @@ export function ProductCard({
       aria-label={`Comparar preços de ${product.name}`}
     >
       <div className="pcx-product__image">
+        <ProductCardActions product={product} className="pca-row--overlay" />
         {saving > 0 && (
           <span className="pcx-product__saving">
             <TrendingDown aria-hidden="true" /> Economize {brl.format(saving)}

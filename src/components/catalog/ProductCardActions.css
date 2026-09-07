@@ -1,0 +1,45 @@
+.pca-row {
+  display: flex;
+  gap: 0.4rem;
+}
+.pca-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 22, 29, 0.12);
+  background: rgba(255, 255, 255, 0.94);
+  color: #10161d;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.pca-btn svg { width: 16px; height: 16px; }
+.pca-btn .pca-spin { animation: pca-spin 0.8s linear infinite; }
+@keyframes pca-spin { to { transform: rotate(360deg); } }
+.pca-btn:hover { transform: translateY(-1px); border-color: #0e7a5f; }
+.pca-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
+.pca-btn.is-active { background: #0e7a5f; border-color: #0e7a5f; color: #fff; }
+.pca-btn--buy { background: #c8860a; border-color: #c8860a; color: #fff; text-decoration: none; }
+.pca-btn--buy:hover { background: #9c6a08; border-color: #9c6a08; }
+
+html[data-theme="dark"] .pca-btn { background: rgba(23, 29, 35, 0.9); border-color: rgba(241, 244, 247, 0.14); color: #f1f4f7; }
+html[data-theme="dark"] .pca-btn:hover { border-color: #3ecf9a; }
+html[data-theme="dark"] .pca-btn.is-active { background: #3ecf9a; border-color: #3ecf9a; color: #06120d; }
+
+/* Overlay: encaixa no canto de um card com imagem, como no e-commerce comum. */
+.pca-row--overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+/* Compacto: para miniaturas pequenas (cards de lista da busca/catálogo),
+   onde o botão de 34px do overlay padrão não cabe. */
+.pca-row--compact { top: 4px; right: 4px; gap: 3px; }
+.pca-row--compact .pca-btn { width: 22px; height: 22px; border-width: 1px; }
+.pca-row--compact .pca-btn svg { width: 11px; height: 11px; }
