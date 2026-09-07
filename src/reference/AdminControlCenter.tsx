@@ -282,6 +282,9 @@ export function AdminControlCenter() {
           <Nav to="/admin/licencas" active={false} icon={<KeyRound />}>
             Cesta Inteligente (licenças)
           </Nav>
+          <Nav to="/admin/clientes" active={false} icon={<CircleDollarSign />}>
+            Clientes e financeiro
+          </Nav>
           <small>OPERAÇÕES</small>
           <Nav
             to="/admin/comerciantes"
