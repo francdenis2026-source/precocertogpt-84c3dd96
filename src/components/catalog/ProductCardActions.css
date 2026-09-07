@@ -53,3 +53,18 @@ html[data-theme="dark"] .pca-btn.is-active { background: #3ecf9a; border-color: 
 .pca-row--compact { top: 4px; right: 4px; gap: 3px; }
 .pca-row--compact .pca-btn { width: 22px; height: 22px; border-width: 1px; }
 .pca-row--compact .pca-btn svg { width: 11px; height: 11px; }
+
+/* Alvo de toque mínimo recomendado (~44px) no overlay padrão em telas
+   de toque — 34px fica no limite para acertar com o dedo. */
+@media (max-width: 720px) {
+  .pca-row--overlay .pca-btn,
+  .pca-row--overlay-left .pca-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .pca-row--overlay .pca-btn svg,
+  .pca-row--overlay-left .pca-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}

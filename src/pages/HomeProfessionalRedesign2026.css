@@ -1007,6 +1007,7 @@
   background: var(--h-surface);
   border: 1px solid var(--h-border);
   border-radius: var(--h-radius-md);
+  box-shadow: var(--h-shadow-sm);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
@@ -1057,12 +1058,12 @@
 .pcx-prices span { font-size: 0.62rem; color: var(--h-subtle); font-weight: 600; }
 .pcx-prices div { display: flex; align-items: baseline; gap: 0.3rem; }
 .pcx-prices del { font-size: 0.68rem; color: var(--h-subtle); }
-.pcx-prices strong { font-size: 0.95rem; font-weight: 800; color: var(--h-primary-dark); }
+.pcx-prices strong { font-size: 1.1rem; font-weight: 900; letter-spacing: -0.01em; color: var(--h-primary-dark); }
 .pcx-product__footer { margin-top: 0.35rem; display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
 .pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; min-width: 0; flex: 1 1 auto; font-size: 0.62rem; color: var(--h-subtle); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .pcx-product__footer time svg { width: 11px; height: 11px; flex-shrink: 0; }
-.pcx-product__footer strong { display: flex; align-items: center; gap: 0.2rem; font-size: 0.66rem; font-weight: 700; color: var(--h-primary-dark); white-space: nowrap; transition: gap 150ms ease; }
-.pcx-product:hover .pcx-product__footer strong { gap: 0.35rem; }
+.pcx-product__footer strong { display: flex; align-items: center; gap: 0.2rem; font-size: 0.66rem; font-weight: 700; color: var(--h-muted); white-space: nowrap; transition: gap 150ms ease, color 150ms ease; }
+.pcx-product:hover .pcx-product__footer strong { gap: 0.35rem; color: var(--h-primary-dark); }
 .pcx-product__footer strong svg { width: 12px; height: 12px; }
 .pcx-product--featured { border-color: var(--h-primary); box-shadow: 0 0 0 1px var(--h-primary); }
 
