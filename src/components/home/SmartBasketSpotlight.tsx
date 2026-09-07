@@ -5,11 +5,21 @@ export function SmartBasketSpotlight() {
   return (
     <section className="pcx-shell" aria-labelledby="smart-basket-title">
       <Link to="/cesta-inteligente" className="pcx-spotlight">
-        <span className="pcx-spotlight__badge">
-          <Sparkles aria-hidden="true" />
-          Ferramenta com IA
+        <span className="pcx-spotlight__art">
+          <img
+            src="/home-editorial-2026/promo-compra-inteligente-app-v2.webp"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width="220"
+            height="140"
+          />
         </span>
         <div className="pcx-spotlight__copy">
+          <span className="pcx-spotlight__badge">
+            <Sparkles aria-hidden="true" />
+            Ferramenta com IA
+          </span>
           <h2 id="smart-basket-title">Cesta Inteligente: monte sua compra e economize sem esforço</h2>
           <p>
             Diga o que você precisa e deixe a IA montar a lista com os menores preços
