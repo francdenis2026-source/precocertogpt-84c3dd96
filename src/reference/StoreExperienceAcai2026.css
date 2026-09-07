@@ -5,21 +5,32 @@
 /* A imagem vem inline no elemento (uma por loja); aqui só o enquadramento. */
 .store-pro-hero {
   min-height: 232px;
-  background-position: center 42%;
+  background-position: center 32%;
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 20px;
 }
 
-/* Véu em açaí: escuro à esquerda, onde fica o texto, e aberto à direita
-   para a imagem do comércio aparecer. */
+/* Véu: escuro só o suficiente pra ler o texto à esquerda, aberto à
+   direita pra imagem do comércio aparecer de verdade — antes ficava
+   quase preto (.96 a .24) nos dois temas, apagando a foto inteira. */
 .store-pro-hero__overlay {
   background: linear-gradient(
     100deg,
-    rgba(9,24,35, .96) 0%,
-    rgba(9,24,35, .90) 38%,
-    rgba(9,24,35, .58) 64%,
-    rgba(9,24,35, .24) 100%
+    rgba(9,24,35, .82) 0%,
+    rgba(9,24,35, .64) 38%,
+    rgba(9,24,35, .32) 64%,
+    rgba(9,24,35, .06) 100%
+  );
+}
+
+html[data-theme="light"] .store-pro-hero__overlay {
+  background: linear-gradient(
+    100deg,
+    rgba(9,24,35, .74) 0%,
+    rgba(9,24,35, .55) 38%,
+    rgba(9,24,35, .26) 64%,
+    rgba(9,24,35, .04) 100%
   );
 }
 

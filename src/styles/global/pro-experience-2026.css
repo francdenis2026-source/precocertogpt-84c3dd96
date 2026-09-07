@@ -1049,14 +1049,26 @@ html body .pc26-sector-hero {
   background-image:
     linear-gradient(
       100deg,
-      rgba(6, 20, 17, 0.94) 0%,
-      rgba(6, 20, 17, 0.82) 46%,
-      rgba(6, 20, 17, 0.5) 100%
+      rgba(6, 20, 17, 0.8) 0%,
+      rgba(6, 20, 17, 0.6) 46%,
+      rgba(6, 20, 17, 0.22) 100%
     ),
     var(--sector-hero) !important;
   background-size: cover, cover !important;
-  background-position: center, center 42% !important;
+  background-position: center, center 32% !important;
   background-repeat: no-repeat, no-repeat !important;
+}
+/* Mesmo véu escuro no claro e no escuro apagava a foto por completo —
+   no claro dá pra abrir bem mais e ainda manter o texto branco legível. */
+html[data-theme="light"] body .pc26-sector-hero {
+  background-image:
+    linear-gradient(
+      100deg,
+      rgba(6, 20, 17, 0.66) 0%,
+      rgba(6, 20, 17, 0.42) 46%,
+      rgba(6, 20, 17, 0.1) 100%
+    ),
+    var(--sector-hero) !important;
 }
 html body .pc26-sector-hero > * {
   position: relative;
