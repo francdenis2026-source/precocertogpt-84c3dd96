@@ -11,8 +11,8 @@ function statusOf(item:PlatformCampaign){const now=Date.now();if(!item.isActive)
 
 export function AdminCampaignManager({query='',onError}:{query?:string;onError:(message:string)=>void}){
   const[items,setItems]=useState<PlatformCampaign[]>([]),[loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[editor,setEditor]=useState<CampaignInput|null>(null),[uploading,setUploading]=useState(false);
-  const refresh=async()=>{setLoading(true);try{setItems(await loadAdminCampaigns())}catch(error:unknown){onError(error instanceof Error?error.message:'Falha ao carregar campanhas.')}finally{setLoading(false)}};
-  useEffect(()=>{let active=true;loadAdminCampaigns().then(rows=>{if(active)setItems(rows)}).catch((error:unknown)=>{if(active)onError(error instanceof Error?error.message:'Falha ao carregar campanhas.')}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[onError]);
+  const refresh=async()=>{setLoading(true);try{setItems(await loadAdminCampaigns())}catch(error:unknown){onError((error as {message?:string})?.message||'Falha ao carregar campanhas.')}finally{setLoading(false)}};
+  useEffect(()=>{let active=true;loadAdminCampaigns().then(rows=>{if(active)setItems(rows)}).catch((error:unknown)=>{if(active)onError((error as {message?:string})?.message||'Falha ao carregar campanhas.')}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[onError]);
   const filtered=useMemo(()=>{const q=query.trim().toLocaleLowerCase('pt-BR');return q?items.filter(item=>`${item.title} ${item.subtitle||''} ${item.kind}`.toLocaleLowerCase('pt-BR').includes(q)):items},[items,query]);
   const edit=(item:PlatformCampaign)=>setEditor({...item});
   const persist=async()=>{if(!editor)return;if(editor.title.trim().length<3){onError('Informe um título com pelo menos 3 caracteres.');return;}setBusy(true);const result=await saveCampaign(editor);setBusy(false);if(result.error){onError(result.error);return;}setEditor(null);await refresh()};
