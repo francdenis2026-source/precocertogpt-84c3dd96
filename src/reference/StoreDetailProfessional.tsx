@@ -55,19 +55,20 @@ function sectorForStore(store: { kind?: string | null; name?: string | null }) {
   return marketplaceSectors.find(sector => sector.id === group.id) || marketplaceSectors[0];
 }
 
-// Um hero por setor, adequado ao tipo de comércio. Não há fotos reais no
-// acervo para farmácia/padaria/livraria/serviços (as fotos genéricas
-// disponíveis são todas de supermercado — usá-las aqui mostraria a coisa
-// errada), então cada setor ganha uma ilustração vetorial própria e limpa
-// no mesmo tom de cor já usado nesse hero (cruz e cápsulas para farmácia,
-// pão e trigo para padaria, livros abertos para livraria/cultura, maleta e
-// engrenagem para serviços). Antes esses 4 setores caíam num cartão de cor
-// sólida sem nenhum elemento visual — agora todo estabelecimento tem hero.
+// Um hero por setor, adequado ao tipo de comércio: fotografia real, sem
+// texto embutido, uma por setor.
+//
+// Os arquivos apontados aqui nunca existiram no repositório (404 silencioso
+// — o navegador só descartava a imagem e mostrava a cor sólida de fundo por
+// baixo). Além disso açougue e lanchonete não tinham entrada nenhuma neste
+// mapa, então caíam sem nenhum hero.
 const SECTOR_BACKDROPS: Record<string, string> = {
-  pharmacies: "/sector-heroes/pharmacies.svg",
-  bakery: "/sector-heroes/bakery.svg",
-  books: "/sector-heroes/books.svg",
-  services: "/sector-heroes/services.svg",
+  pharmacies: "/sector-heroes/pharmacies.webp",
+  bakery: "/sector-heroes/bakery.webp",
+  books: "/sector-heroes/books.webp",
+  services: "/sector-heroes/services.webp",
+  butchers: "/sector-heroes/butchers.webp",
+  food: "/sector-heroes/food.webp",
 };
 
 const SECTOR_TAGLINES: Record<string, string> = {
