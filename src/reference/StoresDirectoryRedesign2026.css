@@ -34,7 +34,9 @@
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: 68% 42% !important;
+  /* Rosto da modelo fica no terço superior da foto original; 42% cortava
+     acima do queixo numa faixa tão baixa. 22% mantém o rosto visível. */
+  object-position: 70% 22% !important;
 }
 .ref-stores-page .ref-stores-hero__scrim {
   position: absolute !important;
