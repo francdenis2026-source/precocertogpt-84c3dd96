@@ -8,37 +8,20 @@ import {
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
-import { requestAuthAction } from "../lib/authActionPrompt";
 import { supabase } from "../lib/supabase";
+import { addToBasketWithAuthGuard, type BasketEntry, readBasket } from "../lib/basket";
+import { getCachedAvailability, useProductOnlineSales } from "../lib/onlineSalesAvailability";
 import { buildComparableOffers, findComparableProducts, type ComparableOffer } from "../lib/productSearch";
 import { ProductThumb } from "../components/catalog/ProductThumb";
 import { PublicFooter, PublicHeader } from "./PublicChrome";
 import "./ProductDetailLive2026.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-const BASKET_KEY = "precocerto:active_basket_items";
-const PENDING_BASKET_KEY = "pc:pending_basket_item";
-
-type BasketEntry = { productId: string; quantity: number };
 
 function cleanValue(value?: string | null, fallback = "Não informado") {
   const text = (value || "").trim();
   if (!text || text === "-" || text === "—" || text.toLocaleLowerCase("pt-BR") === "não identificada") return fallback;
   return text;
-}
-
-function readBasket(): BasketEntry[] {
-  try {
-    const parsed = JSON.parse(localStorage.getItem(BASKET_KEY) || "[]") as BasketEntry[];
-    return Array.isArray(parsed) ? parsed.filter(item => item?.productId && item.quantity > 0) : [];
-  } catch {
-    return [];
-  }
-}
-
-function writeBasket(items: BasketEntry[]) {
-  localStorage.setItem(BASKET_KEY, JSON.stringify(items));
-  window.dispatchEvent(new Event("pc:basket-changed"));
 }
 
 function formatDate(value?: string) {
@@ -115,6 +98,11 @@ export function ProductDetailLive2026() {
     [catalog, identifier],
   );
 
+  // Só usado para garantir que o mapa de disponibilidade carregue nesta
+  // página; a leitura de fato usa getCachedAvailability com o estabelecimento
+  // realmente exibido (que muda conforme a oferta selecionada abaixo).
+  useProductOnlineSales(product?.id ?? "", product?.establishmentId ?? "", product?.establishmentSlug);
+
   useEffect(() => {
     if (!product?.slug || !identifier || identifier === product.slug) return;
     navigate(`/produto/${product.slug}`, { replace: true });
@@ -175,24 +163,9 @@ export function ProductDetailLive2026() {
   );
 
   const addToBasket = async (target: Product) => {
-    const session = supabase ? (await supabase.auth.getSession()).data.session : null;
-    if (!session?.user) {
-      const returnTo = `${window.location.pathname}${window.location.search}`;
-      sessionStorage.setItem(PENDING_BASKET_KEY, JSON.stringify({ productId: String(target.id), returnTo, createdAt: Date.now() }));
-      requestAuthAction("basket", returnTo);
-      return;
-    }
-    const current = readBasket();
-    const id = String(target.id);
-    if (current.some(item => item.productId === id)) {
-      setMessage("Produto já está na sua lista.");
-      window.setTimeout(() => setMessage(""), 2200);
-      return;
-    }
-    const next = [...current, { productId: id, quantity: 1 }];
-    writeBasket(next);
-    setBasket(next);
-    setMessage("Produto adicionado à sua lista.");
+    const result = await addToBasketWithAuthGuard(target.id);
+    if (result === "auth-required") return;
+    setMessage(result === "exists" ? "Produto já está na sua lista." : "Produto adicionado à sua lista.");
     window.setTimeout(() => setMessage(""), 2200);
   };
 
@@ -239,6 +212,9 @@ export function ProductDetailLive2026() {
   const storeHref = displayed
     ? `/estabelecimento/${displayed.establishmentSlug || displayed.establishmentId}`
     : "/estabelecimentos";
+  const displayedEstablishmentId = displayed?.establishmentId ?? product.establishmentId;
+  const onlineStore = getCachedAvailability(displayedEstablishmentId);
+  const canBuyDisplayedOnline = Boolean(onlineStore?.serviceLive && onlineStore.activeProductIds.has(String(basketTarget.id)));
 
   return (
     <div className="pdl-page">
@@ -280,6 +256,12 @@ export function ProductDetailLive2026() {
                   <span className="pdl-price__save"><TrendingDown aria-hidden="true" />{brl.format(dropped)} abaixo do preço anterior</span>
                 )}
               </div>
+
+              {canBuyDisplayedOnline && onlineStore && (
+                <Link className="pdl-buy-online" to={`/loja/${onlineStore.merchantId}`}>
+                  <ShoppingBasket aria-hidden="true" />Comprar online nesta loja
+                </Link>
+              )}
 
               <div className="pdl-actions">
                 <button type="button" className="pdl-actions__primary" onClick={() => void addToBasket(basketTarget)}>

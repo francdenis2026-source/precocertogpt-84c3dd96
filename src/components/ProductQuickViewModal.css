@@ -71,6 +71,12 @@
 .pqv-btn--primary:hover{background:var(--h-primary-dark, #0a5c47);border-color:var(--h-primary-dark, #0a5c47)}
 .pqv-btn--primary.is-active{background:var(--h-danger, #c0392b);border-color:var(--h-danger, #c0392b)}
 .pqv-btn--ghost:hover{border-color:var(--h-primary, #0e7a5f);background:var(--h-surface-2, #eef1f4)}
+.pqv-btn--buy{
+  width:100%;justify-content:center;margin-top:0.5rem;
+  background:var(--h-accent, #c8860a);border-color:var(--h-accent, #c8860a);color:#fff;
+  text-decoration:none;
+}
+.pqv-btn--buy:hover{background:var(--h-accent-dark, #9c6a08);border-color:var(--h-accent-dark, #9c6a08)}
 
 .pqv-message{margin:0;font-size:0.78rem;font-weight:700;color:var(--h-primary-dark, #0a5c47)}
 

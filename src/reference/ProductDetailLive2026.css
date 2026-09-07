@@ -48,6 +48,9 @@
 .pdl-price__save{display:inline-flex;align-items:center;gap:.32rem;font-size:.76rem;font-weight:650;padding:.28rem .55rem;border-radius:999px;background:color-mix(in srgb,var(--pdl-accent) 16%,transparent);color:var(--pdl-accent)}
 .pdl-price__save svg{width:13px;height:13px}
 
+.pdl-buy-online{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;margin-bottom:.6rem;padding:0 1rem;border-radius:12px;background:#c8860a;color:#fff;font-size:.87rem;font-weight:800;text-decoration:none;transition:background .18s ease,transform .18s ease}
+.pdl-buy-online:hover{background:#9c6a08;transform:translateY(-1px)}
+.pdl-buy-online svg{width:17px;height:17px}
 .pdl-actions{display:flex;flex-wrap:wrap;gap:.5rem}
 .pdl-actions button{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;padding:0 .95rem;border-radius:12px;font-size:.83rem;font-weight:650;cursor:pointer;border:1px solid var(--pdl-border);background:var(--pdl-surface-2);color:var(--pdl-text);transition:transform .18s ease,background .18s ease,opacity .18s ease}
 .pdl-actions button svg{width:16px;height:16px}

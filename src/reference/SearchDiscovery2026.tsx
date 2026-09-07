@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { FormEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
-import { ArrowRight, BadgeCheck, Building2, ChevronDown, Clock3, ExternalLink, LockKeyhole, MapPin, PackageSearch, RotateCcw, Search, Sparkles, SlidersHorizontal, Store, TrendingDown, UserPlus, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, Clock3, ExternalLink, Heart, LockKeyhole, MapPin, PackageSearch, RotateCcw, Search, ShoppingBasket, ShoppingCart, Sparkles, SlidersHorizontal, Store, TrendingDown, UserPlus, X } from "lucide-react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { fetchSectorCatalog, productHasSectorOffer, sectorStores } from "../data/sectorCatalog";
@@ -12,6 +12,8 @@ import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import { productSearchScore } from "../lib/productSearch";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { usePriceVisibility } from "../hooks/usePriceVisibility";
+import { addToBasketWithAuthGuard } from "../lib/basket";
+import { useProductOnlineSales } from "../lib/onlineSalesAvailability";
 import "./SearchDiscovery2026.css";
 import "./CompactViewportPages.css";
 
@@ -31,6 +33,16 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
  const lowest=offers[0]?.value??product.minPrice;
  const highest=offers.at(-1)?.value??product.maxPrice;
  const saving=Math.max(0,highest-lowest);
+ const {isFavorite,toggleFavorite}=useFavorites();
+ const favorite=isFavorite(product.id);
+ const [basketMessage,setBasketMessage]=useState("");
+ const {canBuyOnline,merchantId}=useProductOnlineSales(product.id,offers[0]?.establishmentId??product.establishmentId,offers[0]?.establishmentSlug??product.establishmentSlug);
+ const handleAddToBasket=async()=>{
+  const result=await addToBasketWithAuthGuard(product.id);
+  if(result==="auth-required")return;
+  setBasketMessage(result==="exists"?"Já está na sua cesta.":"Adicionado à cesta.");
+  window.setTimeout(()=>setBasketMessage(""),2200);
+ };
  useEffect(()=>{
   const previousOverflow=document.body.style.overflow;
   document.body.style.overflow="hidden";
@@ -52,21 +64,40 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
  const descriptor=[meaningful(product.size)||meaningful(product.unit),`comparação em ${offers.length} ${offers.length===1?"estabelecimento":"estabelecimentos"}`].filter(Boolean).join(" · ");
  return <div className="search26-modal" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)onClose()}}>
   <section ref={dialogRef} className="search26-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search26-modal-title" aria-describedby="search26-modal-description">
-   <div className="search26-modal__showcase">
-    <button ref={closeRef} type="button" className="search26-modal__close" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button>
-    <span className="search26-modal__badge"><BadgeCheck aria-hidden="true"/> Comparação local, Feijó-AC</span>
+   <button ref={closeRef} type="button" className="search26-modal__close" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button>
+
+   <div className="search26-modal__header">
     <div className="search26-modal__image">{image?<img src={image} alt={product.name}/>:<PackageSearch aria-hidden="true"/>}</div>
+    <div className="search26-modal__heroInfo">
+     {eyebrow&&<span>{eyebrow}</span>}
+     <h2 id="search26-modal-title">{product.name}</h2>
+     {descriptor&&<p id="search26-modal-description">{descriptor}</p>}
+    </div>
+    <div className="search26-modal__best">
+     <small>Melhor preço</small>
+     <strong>{brl.format(lowest)}</strong>
+     {saving>0&&<span><TrendingDown aria-hidden="true"/> Economize até {brl.format(saving)}</span>}
+    </div>
    </div>
-   <div className="search26-modal__summary">
-    <div className="search26-modal__heroInfo">{eyebrow&&<span>{eyebrow}</span>}<h2 id="search26-modal-title">{product.name}</h2>{descriptor&&<p id="search26-modal-description">{descriptor}</p>}</div>
-    <div className="search26-modal__best"><small>Melhor preço encontrado</small><strong>{brl.format(lowest)}</strong><span><BadgeCheck aria-hidden="true"/> Oferta mais econômica</span></div>
+
+   <div className="search26-modal__actions">
+    <button type="button" className={`search26-modal__action${favorite?" is-active":""}`} onClick={()=>void toggleFavorite(product.id)}>
+     <Heart aria-hidden="true" fill={favorite?"currentColor":"none"}/> {favorite?"Nos favoritos":"Favoritar"}
+    </button>
+    <button type="button" className="search26-modal__action" onClick={()=>void handleAddToBasket()}>
+     <ShoppingBasket aria-hidden="true"/> Adicionar à cesta
+    </button>
    </div>
-   {saving>0&&<div className="search26-modal__saving"><TrendingDown aria-hidden="true"/><span>Escolhendo a melhor oferta, você economiza até <strong>{brl.format(saving)}</strong>.</span></div>}
-   <div className="search26-modal__stores"><div className="search26-modal__stores-head"><div><span>Onde encontrar</span><h3>Preços por estabelecimento</h3></div><small>Do menor para o maior</small></div>
+   {basketMessage&&<p className="search26-modal__toast" role="status">{basketMessage}</p>}
+   {canBuyOnline&&merchantId&&<Link className="search26-modal__buy" to={`/loja/${merchantId}`} onClick={onClose}><ShoppingCart aria-hidden="true"/> Comprar online nesta loja</Link>}
+
+   <div className="search26-modal__stores">
+    <div className="search26-modal__stores-head"><span><BadgeCheck aria-hidden="true"/> Onde encontrar, do menor para o maior preço</span></div>
     <div className="search26-modal__offer-list">{offers.map((offer,index)=><Link to={`/estabelecimento/${offer.establishmentSlug||offer.establishmentId}`} className={index===0?"is-best":undefined} key={`${offer.establishmentId}-${offer.value}`} onClick={onClose}><i style={{backgroundColor:offer.storeColor||"#14795d"}}><Store aria-hidden="true"/></i><span><strong>{offer.establishment||"Comércio local"}</strong><small><MapPin aria-hidden="true"/>{offer.neighborhood||"Feijó-AC"}</small></span><div><b>{brl.format(offer.value)}</b>{index===0&&<em>Melhor preço</em>}</div><ArrowRight aria-hidden="true"/></Link>)}</div>
     <div className="search26-modal__freshness"><Clock3 aria-hidden="true"/><span>Preços informativos. Confirme a disponibilidade no estabelecimento antes de comprar.</span></div>
-    <footer><Link className="search26-modal__secondary" to={`/produto/${product.slug||product.id}`} onClick={onClose}>Ver página completa <ExternalLink aria-hidden="true"/></Link><button type="button" onClick={onClose}>Continuar pesquisando <Search aria-hidden="true"/></button></footer>
    </div>
+
+   <footer className="search26-modal__footer"><Link to={`/produto/${product.slug||product.id}`} onClick={onClose}>Ver página completa do produto <ExternalLink aria-hidden="true"/></Link></footer>
   </section>
  </div>
 }
