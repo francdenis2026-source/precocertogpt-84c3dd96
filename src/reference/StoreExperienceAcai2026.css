@@ -62,6 +62,16 @@ html[data-theme="light"] .store-pro-hero__overlay {
   letter-spacing: -.03em;
 }
 
+/* typography-contrast-2026.css força ".ref-page h1" pra quase-preto no
+   modo claro (regra de acessibilidade genérica, pensada pro corpo da
+   página, não pra título dentro de um cartão escuro). Aqui o fundo é
+   sempre escuro nos dois temas, então o título sempre precisa ficar
+   branco — vencendo com !important + especificidade maior. */
+html body .store-pro-hero .store-pro-copy h1 {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
 /* A linha descritiva genérica sai: as especialidades dizem mais e ocupam menos. */
 .store-pro-copy > p { display: none; }
 
