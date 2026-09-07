@@ -108,6 +108,16 @@ html:not([data-theme="dark"]) .pharmacy-directory-page small{
   opacity:1!important;
 }
 
+/* .ref-footer é uma faixa escura fixa (var(--pc-navy)) mesmo no tema claro —
+   não reage a data-theme. A regra ".ref-page small" acima presume texto
+   sobre superfície clara e deixava o rodapé com texto escuro sobre fundo
+   escuro (contraste 2.9:1). Restaura o branco translúcido que o próprio
+   Chrome2026.css já usa para o restante do rodapé. */
+html:not([data-theme="dark"]) .ref-page .ref-footer small,
+html:not([data-theme="dark"]) .ref-page .ref-footer span{
+  color:rgba(255,255,255,.82)!important;
+}
+
 html:not([data-theme="dark"]) .nx-category-strip strong,
 html:not([data-theme="dark"]) .nx-offer-card__copy strong,
 html:not([data-theme="dark"]) .nx-offer-card__copy>b,

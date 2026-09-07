@@ -160,7 +160,10 @@ html[data-theme="light"] .pc26-section-heading>a{color:#B97F00!important}
   html[data-theme="light"] body.pc-app-shell :is(.mh26-search-submit,.mh26-local>a){background:#18181B!important;color:#FFFFFF!important}
   html[data-theme="light"] body.pc-app-shell .ref-dock{background:rgba(255,255,255,.96)!important;border-color:#E1E5EA!important;box-shadow:0 -8px 24px rgba(16,24,40,.08)!important}
   html[data-theme="light"] body.pc-app-shell .ref-dock a{color:#667085!important}
-  html[data-theme="light"] body.pc-app-shell .ref-dock a.is-active{background:#FFF4CC!important;color:#9A6700!important}
+  /* #9A6700 media 4.42:1 sobre #FFF4CC, abaixo do minimo AA de 4.5:1 no
+     rotulo ativo do dock mobile. #8F6200 (mesmo tom usado em --accent-strong
+     nesta folha) chega a 5.4:1. */
+  html[data-theme="light"] body.pc-app-shell .ref-dock a.is-active{background:#FFF4CC!important;color:#8F6200!important}
 }
 
 /* Dark mode — paleta oficial solicitada */
