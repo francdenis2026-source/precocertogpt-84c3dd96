@@ -9,12 +9,23 @@
    hero, planner, seletor de produtos e resultado — empilhar um painel de
    chat fixo ali quebraria a promessa de caber numa janela só. Como overlay,
    ele ajuda sem ocupar espaço permanente. */
-.smart-assistant-fab{position:fixed;z-index:70;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:8px;height:48px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--sb-green);color:#fff;font-size:13px;font-weight:850;cursor:pointer;box-shadow:0 14px 32px rgba(13,30,42,.28)}
-.smart-assistant-fab svg{width:19px;height:19px}
+.smart-assistant-fab{position:fixed;isolation:isolate;z-index:70;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:8px;height:48px;padding:0 16px 0 14px;border:0;border-radius:999px;background:var(--sb-green);color:#fff;font-size:13px;font-weight:850;cursor:pointer;box-shadow:0 14px 32px rgba(13,30,42,.28);transform-origin:center;animation:smart-fab-enter .5s cubic-bezier(.23,1,.32,1) both;transition:transform .16s cubic-bezier(.23,1,.32,1)}
+.smart-assistant-fab:active{transform:scale(.96)}
+.smart-assistant-fab svg{width:19px;height:19px;position:relative;z-index:1}
+.smart-assistant-fab::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--sb-green);opacity:.55}
+.smart-assistant-fab::after{content:"";position:absolute;top:-2px;right:-2px;width:11px;height:11px;border-radius:50%;background:#ffb020;border:2px solid var(--sb-page);opacity:0;transform:scale(.4);transition:opacity .2s ease,transform .2s ease}
+.smart-assistant-fab[aria-expanded="false"]::before{animation:smart-fab-pulse 2.6s cubic-bezier(.4,0,.6,1) infinite}
+.smart-assistant-fab[aria-expanded="false"]::after{opacity:1;transform:scale(1);animation:smart-fab-ping 2.6s cubic-bezier(.4,0,.6,1) infinite}
+.smart-assistant-fab[aria-expanded="false"] svg{animation:smart-fab-bob 3.2s ease-in-out infinite}
 @media(hover:hover) and (pointer:fine){.smart-assistant-fab:hover{filter:brightness(1.06)}}
-.smart-assistant{position:fixed;z-index:71;right:18px;bottom:calc(74px + env(safe-area-inset-bottom));width:min(360px,calc(100vw - 32px));max-height:min(72vh,540px);display:flex;flex-direction:column;border:1px solid var(--sb-line);border-radius:18px;background:var(--sb-surface);box-shadow:0 26px 60px rgba(8,18,26,.30);overflow:hidden}
+@keyframes smart-fab-enter{from{opacity:0;transform:scale(.9) translateY(6px)}to{opacity:1;transform:none}}
+@keyframes smart-fab-pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:0;transform:scale(1.35)}}
+@keyframes smart-fab-ping{0%,80%,100%{opacity:1;transform:scale(1)}40%{opacity:.35;transform:scale(1.25)}}
+@keyframes smart-fab-bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-6deg)}}
+.smart-assistant{position:fixed;z-index:71;right:18px;bottom:calc(74px + env(safe-area-inset-bottom));width:min(360px,calc(100vw - 32px));max-height:min(72vh,540px);display:flex;flex-direction:column;border:1px solid var(--sb-line);border-radius:18px;background:var(--sb-surface);box-shadow:0 26px 60px rgba(8,18,26,.30);overflow:hidden;transform-origin:bottom right;animation:smart-panel-enter .28s cubic-bezier(.23,1,.32,1) both}
+@keyframes smart-panel-enter{from{opacity:0;transform:scale(.92) translateY(10px)}to{opacity:1;transform:none}}
 .smart-assistant>header{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px;border-bottom:1px solid var(--sb-line);background:linear-gradient(120deg,var(--sb-navy),#4d4329)}
-.smart-assistant__avatar{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.16);color:#fff;flex:none}
+.smart-assistant__avatar{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.16);color:#fff;flex:none;animation:smart-fab-bob 3.2s ease-in-out infinite}
 .smart-assistant__avatar svg{width:17px;height:17px}
 .smart-assistant>header div{flex:1;min-width:0}
 .smart-assistant>header strong{display:block;color:#fff;font-size:13px}
@@ -46,3 +57,4 @@
 .smart-basket-page :is(button,a,input,select):focus-visible{outline:3px solid var(--pc-gold);outline-offset:3px}.smart-basket-page :is(button,a){touch-action:manipulation}.smart-basket-page button:active{transform:translateY(1px)}.smart-basket-page button:disabled{cursor:not-allowed;opacity:.5}
 @media(max-width:820px){.smart-basket-shell{padding-bottom:88px}.smart-basket-hero h1{max-width:19ch}.smart-controls{gap:10px}.smart-plan-list article{min-height:64px}.smart-summary{order:-1}.smart-strategies>button{min-height:96px}}
 @media(max-width:520px){.smart-basket-hero p{font-size:13px}.smart-planner,.smart-product-picker{padding:14px}.smart-picker-tabs{overflow-x:auto}.smart-picker-tabs button{min-width:max-content}.smart-summary>h2{font-size:30px}}
+@media(prefers-reduced-motion:reduce){.smart-assistant-fab,.smart-assistant-fab::before,.smart-assistant-fab::after,.smart-assistant-fab[aria-expanded="false"] svg,.smart-assistant,.smart-assistant__avatar{animation:none}}

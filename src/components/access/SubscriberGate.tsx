@@ -1,6 +1,6 @@
 import { FormEvent, type ReactNode, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Copy, Crown, KeyRound, LoaderCircle, MessageCircle, QrCode, Search, ShoppingBasket, Sparkles } from "lucide-react";
+import { Bot, Copy, Crown, KeyRound, LoaderCircle, MessageCircle, QrCode, Search, ShoppingBasket, Sparkles } from "lucide-react";
 import heroImg from "../../assets/home-2026/app-precocerto-mockup.jpg";
 import { supabase } from "../../lib/supabase";
 import { whatsappSalesLink } from "../../lib/contact";
@@ -135,6 +135,10 @@ export function SubscriberGate({ tool = "esta ferramenta", plan = "cesta_intelig
         <div className="pc-sub-gate__body">
           <h1 id="pc-sub-gate-title">{tool} é exclusiva de quem tem uma licença ativa</h1>
           <p>Escolha um plano, pague no PIX e o acesso é liberado sozinho — sem precisar digitar código nem esperar resposta.</p>
+          <div className="pc-sub-gate__teaser">
+            <span className="pc-sub-gate__teaser-icon"><Bot aria-hidden="true" /></span>
+            <span>Inclui um assistente de compras interativo, só para quem assina.</span>
+          </div>
           <ul className="pc-sub-gate__plans" role="radiogroup" aria-label="Escolha o plano">
             {PLANS.map((item) => (
               <li key={item.key}>
