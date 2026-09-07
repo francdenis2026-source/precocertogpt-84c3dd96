@@ -66,21 +66,52 @@
   display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 6px;
   margin: 0 0 14px; padding: 0; list-style: none;
 }
-.pc-sub-gate__plans li {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
+.pc-sub-gate__plans button {
+  width: 100%; display: flex; flex-direction: column; align-items: center; gap: 2px;
   padding: 8px 6px; border: 1px solid var(--px-line); border-radius: 10px; background: var(--px-surface-soft);
+  cursor: pointer; transition: border-color 0.16s ease, background 0.16s ease;
 }
+.pc-sub-gate__plans button.is-selected { border-color: var(--px-brand); background: color-mix(in srgb, var(--px-brand) 14%, var(--px-surface-soft)); }
 .pc-sub-gate__plans span { font-size: 0.7rem; color: var(--px-muted); font-weight: 600; }
 .pc-sub-gate__plans b { font-size: 0.85rem; color: var(--px-ink); font-weight: 800; }
 
+.pc-sub-gate__pix {
+  display: grid; justify-items: center; gap: 8px;
+  margin-bottom: 14px; padding: 14px; border: 1px solid var(--px-line); border-radius: 14px; background: var(--px-surface-soft);
+}
+.pc-sub-gate__pix-qr { width: 180px; height: 180px; border-radius: 10px; background: #fff; padding: 8px; }
+.pc-sub-gate__pix-amount { margin: 0; font-size: 0.9rem; font-weight: 800; color: var(--px-ink); }
+.pc-sub-gate__pix-copy {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px;
+  border: 1px solid var(--px-line); border-radius: 999px; background: var(--px-surface); color: var(--px-ink);
+  font-size: 0.8rem; font-weight: 700; cursor: pointer;
+}
+.pc-sub-gate__pix-copy svg { width: 14px; height: 14px; }
+.pc-sub-gate__pix-wait {
+  display: inline-flex; align-items: center; gap: 6px; margin: 4px 0 0;
+  font-size: 0.76rem; font-weight: 600; color: var(--px-muted);
+}
+.pc-sub-gate__pix-wait .spin { width: 14px; height: 14px; animation: pc-sub-gate-spin 0.9s linear infinite; }
+.pc-sub-gate__pix-cancel { border: 0; background: transparent; color: var(--px-muted); font-size: 0.76rem; font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+.pc-sub-gate__whatsapp-link {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 40px; margin-bottom: 16px; border-radius: 999px;
+  color: #128c4a; font-size: 0.8rem; font-weight: 700; text-decoration: none;
+}
+.pc-sub-gate__whatsapp-link svg { width: 15px; height: 15px; }
+.pc-sub-gate__whatsapp-link:hover { text-decoration: underline; }
+
 .pc-sub-gate__whatsapp {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 46px; margin-bottom: 14px; border-radius: 999px;
-  background: #25d366; color: #fff; font-weight: 700; font-size: 0.88rem;
-  text-decoration: none;
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; margin-bottom: 14px; border: 0; border-radius: 999px;
+  background: var(--px-brand); color: var(--px-brand-ink); font-weight: 700; font-size: 0.88rem;
+  text-decoration: none; cursor: pointer;
 }
 .pc-sub-gate__whatsapp svg { width: 17px; height: 17px; }
+.pc-sub-gate__whatsapp .spin { animation: pc-sub-gate-spin 0.9s linear infinite; }
 .pc-sub-gate__whatsapp:hover { filter: brightness(0.96); }
+.pc-sub-gate__whatsapp:disabled { opacity: 0.7; cursor: default; }
 
 .pc-sub-gate__redeem { margin-bottom: 16px; text-align: left; }
 .pc-sub-gate__redeem label {
