@@ -25,6 +25,7 @@ import {
 } from "../data/sectorCatalog";
 import { primarySectors } from "./MarketplaceSectors";
 import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
+import { SectorPhotoBanners } from "./SectorPhotoBanners";
 import "./SectorHub2026.css";
 
 const normalize = (value: string) =>
@@ -205,6 +206,7 @@ export function SectorHub2026() {
               );
             })}
           </div>
+          <SectorPhotoBanners />
           <section className="sector-hub__tools">
             <div className="sector-hub__tools-copy">
               <span>Ferramentas</span>

@@ -92,6 +92,37 @@
 .sector-hub__sector-invite a { color: var(--sh-blue); font-weight: 850; }
 .sector-hub__sector-link { min-width: 44px; min-height: 44px; margin: -10px -12px 0 0; display: grid; place-items: center; }
 
+/* Banners próprios por setor: a imagem já traz marca e texto prontos, então
+   entra inteira, sem nenhum overlay — o resto do site sempre sobrepõe texto
+   em foto crua, mas aqui isso duplicaria a mensagem. */
+.sector-hub__banners { margin-top: 18px; }
+.sector-hub__banners-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 30%);
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.sector-hub__banners-row::-webkit-scrollbar { display: none; }
+.sector-hub__banner {
+  scroll-snap-align: start;
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--pc-border);
+  transition: transform 160ms var(--sh-ease), border-color 160ms ease;
+}
+.sector-hub__banner:hover { transform: translateY(-2px); border-color: var(--sh-green); }
+.sector-hub__banner:focus-visible { outline: 2px solid var(--sh-green); outline-offset: 2px; }
+.sector-hub__banner img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+@media (max-width: 640px) {
+  .sector-hub__banners-row { grid-auto-columns: minmax(170px, 62%); }
+}
+
 /* Ferramentas em uma faixa: painel com foto editorial à esquerda (mesma
    linguagem visual do hero) + grade de atalhos clara à direita — em vez de
    uma faixa azul plana, sem imagem, destoando do resto da página. */
