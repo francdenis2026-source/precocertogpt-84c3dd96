@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import {
   ArrowUpRight,
   Clock3,
@@ -17,7 +17,7 @@ const brl = new Intl.NumberFormat("pt-BR", {
   currency: "BRL",
 });
 
-export function ProductCard({
+export const ProductCard = memo(function ProductCard({
   product,
   featured = false,
 }: {
@@ -119,4 +119,4 @@ export function ProductCard({
       </div>
     </Link>
   );
-}
+});
