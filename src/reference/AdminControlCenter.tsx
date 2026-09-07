@@ -655,6 +655,10 @@ function Prices({
   const [selected, setSelected] = useState("");
   const [rows, setRows] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const sortedMap = useMemo(
+    () => map.slice().sort((a, b) => (Number(b.product_count) || 0) - (Number(a.product_count) || 0)),
+    [map],
+  );
   useEffect(() => {
     if (!selected) {
       setRows([]);
@@ -669,6 +673,10 @@ function Prices({
       .finally(() => setLoading(false));
   }, [selected]);
   const store = map.find((s) => s.id === selected);
+  const address = store?.address && typeof store.address === "object"
+    ? [store.address.street, store.address.number, store.address.neighborhood || store.neighborhood, store.address.city]
+        .filter(Boolean).join(", ")
+    : (typeof store?.address === "string" ? store.address : null);
   const change = async (r: any) => {
     const raw = prompt(`Novo preço de ${r.name}:`, String(r.value || ""));
     if (!raw) return;
@@ -697,20 +705,24 @@ function Prices({
         </header>
         <select value={selected} onChange={(e) => setSelected(e.target.value)}>
           <option value="">Visão geral de todos os estabelecimentos</option>
-          {map.map((s) => (
+          {sortedMap.map((s) => (
             <option key={s.id} value={s.id}>
               {s.name} · {s.product_count} produtos
             </option>
           ))}
         </select>
         {selected && (
-          <div className="acc-store-tools">
+          <div className="acc-store-tools acc-store-tools--detail">
             <span>
               <strong>{store?.name}</strong>
-              <small>
-                {store?.neighborhood || "Feijó"} · {rows.length} produtos
-              </small>
+              <small>{store?.neighborhood || "Feijó"} · {rows.length} produtos</small>
             </span>
+            <dl>
+              <div><dt>Endereço</dt><dd>{address || "Não informado"}</dd></div>
+              <div><dt>Cadastrado em</dt><dd>{fmt(store?.created_at)}</dd></div>
+              <div><dt>Última atualização de preço</dt><dd>{fmt(store?.last_price_update)}</dd></div>
+              <div><dt>Verificado</dt><dd>{store?.is_verified ? "Sim" : "Não"}</dd></div>
+            </dl>
             <Link to={`/admin/catalogo?tab=store&store=${selected}`}>
               Gestão completa <ExternalLink />
             </Link>
@@ -773,8 +785,8 @@ function Prices({
                 </div>
               </header>
               <div className="acc-bars">
-                {map.slice(0, 15).map((s) => (
-                  <button key={s.id} onClick={() => setSelected(s.id)}>
+                {sortedMap.slice(0, 15).map((s) => (
+                  <button key={s.id} onClick={() => setSelected(s.id)} title="Ver produtos e detalhes deste estabelecimento">
                     <span>
                       <strong>{s.name}</strong>
                       <small>{s.neighborhood || "Feijó"}</small>
@@ -792,27 +804,7 @@ function Prices({
               </div>
             </article>
           </section>
-          <Table
-            heads={[
-              "Produto",
-              "Estabelecimento",
-              "Valor",
-              "Variação",
-              "Atualizado",
-            ]}
-            rows={fallbackRows.map((r) => (
-              <tr key={r.id}>
-                <td>
-                  <strong>{r.product_name}</strong>
-                  <small>{r.category}</small>
-                </td>
-                <td>{r.establishment_name}</td>
-                <td>{money.format(Number(r.value) || 0)}</td>
-                <td>{r.variation_percent ?? "—"}</td>
-                <td>{fmt(r.captured_at)}</td>
-              </tr>
-            ))}
-          />
+          <p className="acc-bars-hint">Clique em um estabelecimento acima para ver o catálogo completo dele.</p>
         </>
       )}
     </>
