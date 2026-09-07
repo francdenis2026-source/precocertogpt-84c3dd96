@@ -34,7 +34,12 @@
 .sector-hub__hero-grid { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 34%); align-items: stretch; gap: clamp(20px, 3vw, 32px); height: clamp(220px, 27vw, 270px); padding: clamp(20px, 2.6vw, 28px); }
 .sector-hub__hero-copy { max-width: 560px; min-width: 0; display: grid; align-content: center; gap: 8px; }
 .sector-hub__hero-visual { position: relative; margin: 0; height: 100%; border-radius: 16px; overflow: hidden; background: var(--pc-surface-2); }
-.sector-hub__hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 24%; }
+/* O arquivo da foto já traz um degradê escuro embutido do lado direito
+   (pensado para outra composição). Aqui ela aparece sozinha, sem texto por
+   cima, então esse canto escuro só sobra como uma mancha sem função —
+   desloca o enquadramento para a esquerda (onde está a família) e clareia
+   um pouco para disfarçar o que sobra do degradê. */
+.sector-hub__hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 24%; filter: brightness(1.12); }
 .sector-hub__eyebrow { display: flex; align-items: center; gap: 8px; color:var(--pc-gold-ink,#8F6200); font-size: 12px; font-weight: 850; letter-spacing: .07em; }
 .sector-hub__eyebrow svg { width: 16px; height: 16px; }
 .sector-hub__hero h1 { max-width: 20ch; margin: 0; font-family: var(--pc-font-display); font-size: clamp(1.7rem, 2.6vw, 2.35rem); font-weight: 680; line-height: 1.1; letter-spacing: -.03em; }
@@ -92,8 +97,12 @@
    uma faixa azul plana, sem imagem, destoando do resto da página. */
 .sector-hub__tools { margin-top: 18px; border-radius: 16px; overflow: hidden; border: 1px solid var(--pc-border); display: grid; grid-template-columns: minmax(230px, .68fr) minmax(0, 1.32fr); align-items: stretch; box-shadow: 0 10px 28px rgb(13 43 32 / 8%); }
 .sector-hub__tools-copy { position: relative; isolation: isolate; padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; color: #fff; }
-.sector-hub__tools-copy::before { content: ""; position: absolute; z-index: -2; inset: 0; background: url('/compra-inteligente-profissional.webp') 78% center / cover no-repeat; filter: brightness(1.1) saturate(1.15); }
-.sector-hub__tools-copy::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(100deg, rgb(10 12 16 / 96%) 0%, rgb(12 15 20 / 88%) 55%, rgb(14 17 22 / 55%) 100%); }
+.sector-hub__tools-copy::before { content: ""; position: absolute; z-index: -2; inset: 0; background: url('/compra-inteligente-profissional.webp') 78% center / cover no-repeat; filter: brightness(1.25) saturate(1.15); }
+/* A foto já tem uma vinheta escura própria do lado esquerdo (onde o texto
+   fica); o degradê aqui era quase opaco (96%→55%) e escurecia demais por
+   cima disso, deixando a foto praticamente invisível. Reduzido para só o
+   necessário para o texto branco continuar legível. */
+.sector-hub__tools-copy::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(100deg, rgb(10 12 16 / 60%) 0%, rgb(12 15 20 / 42%) 55%, rgb(14 17 22 / 15%) 100%); }
 .sector-hub__tools-copy > span { color: #ffc767; }
 .sector-hub__tools h2 { color: #fff; text-shadow: 0 1px 12px rgb(4 16 11 / 45%); }
 .sector-hub__tools-copy p { max-width: 390px; margin: 7px 0 0; color: #dfe9e2; font-size: 12px; line-height: 1.5; }
