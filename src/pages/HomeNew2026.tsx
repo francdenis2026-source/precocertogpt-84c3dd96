@@ -26,13 +26,21 @@ import "./HomeProfessionalRedesign2026.css";
 
 const initialCatalog = buildCatalog();
 
+/** Contagens ao vivo (produtos/lojas/preços) não tinham cache: toda vez que
+ *  a home remontava (ex.: voltando de outra página) refazia as 3 consultas
+ *  ao Supabase do zero, mesmo com o catálogo já em cache — atraso e flash
+ *  de skeleton evitáveis numa navegação de ida e volta. Mesma janela de
+ *  60s usada pelo cache do catálogo em sectorCatalog.ts. */
+let liveMetricsCache: { value: PlatformMetrics; expires: number } | null = null;
+
 export function HomeNew2026() {
+  const cachedMetrics = liveMetricsCache && liveMetricsCache.expires > Date.now() ? liveMetricsCache.value : null;
   const [catalog, setCatalog] = useState<CatalogPayload>({
     ...initialCatalog,
     metrics: verifiedDatasetMetrics,
   });
-  const [liveMetrics, setLiveMetrics] = useState<PlatformMetrics | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [liveMetrics, setLiveMetrics] = useState<PlatformMetrics | null>(cachedMetrics);
+  const [loading, setLoading] = useState(!cachedMetrics);
   const [cycle, setCycle] = useState(() => currentCycle());
 
   useEffect(() => {
@@ -49,7 +57,9 @@ export function HomeNew2026() {
         if (!active) return;
         setCatalog(value);
 
-        if (supabase) {
+        if (liveMetricsCache && liveMetricsCache.expires > Date.now()) {
+          setLiveMetrics(liveMetricsCache.value);
+        } else if (supabase) {
           const [productsResult, storesResult, pricesResult] = await Promise.all([
             supabase.from("products").select("id", { count: "exact", head: true }),
             supabase
@@ -60,11 +70,13 @@ export function HomeNew2026() {
           ]);
 
           if (!active) return;
-          setLiveMetrics({
+          const nextMetrics = {
             products: productsResult.count ?? value.metrics.products ?? value.products.length,
             stores: storesResult.count ?? value.stores.length,
             prices: pricesResult.count ?? value.metrics.prices ?? 0,
-          });
+          };
+          liveMetricsCache = { value: nextMetrics, expires: Date.now() + 60_000 };
+          setLiveMetrics(nextMetrics);
         } else {
           setLiveMetrics({
             products: value.metrics.products || value.products.length,
