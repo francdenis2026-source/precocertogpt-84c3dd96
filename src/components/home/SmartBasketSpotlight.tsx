@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function SmartBasketSpotlight() {
@@ -25,6 +25,10 @@ export function SmartBasketSpotlight() {
             Diga o que você precisa e deixe a IA montar a lista com os menores preços
             entre os estabelecimentos de Feijó, comparando tudo por você em segundos.
           </p>
+          <span className="pcx-spotlight__assistant">
+            <span className="pcx-spotlight__assistant-icon"><Bot aria-hidden="true" /></span>
+            Tem um assistente virtual para montar a cesta e ajudar na compra
+          </span>
         </div>
         <span className="pcx-spotlight__cta">
           Experimentar a Cesta Inteligente <ArrowRight aria-hidden="true" />

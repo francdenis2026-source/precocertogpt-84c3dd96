@@ -8,8 +8,8 @@
    tentar encaixar dentro dessa barra (ela é estreita e o nome comprido
    sobrepunha "Ver site"), fixa num canto totalmente separado, que nunca
    muda de tamanho nem some por trás de outro conteúdo. */
-body[data-app-route="admin"] .pc-user-floating{top:auto;bottom:16px;right:16px}
-body[data-app-route="admin"] .pc-user-menu{top:auto;bottom:calc(100% + 8px)}
+body[data-app-route="admin"] .pc-user-floating{top:auto;bottom:16px;left:16px;right:auto}
+body[data-app-route="admin"] .pc-user-menu{top:auto;bottom:calc(100% + 8px);right:auto;left:0}
 
 /* A conta pertence à linha de ações do cabeçalho. No mobile ela nunca deve
    cair sobre a campanha nem disputar o canto reservado ao botão de fechar. */
