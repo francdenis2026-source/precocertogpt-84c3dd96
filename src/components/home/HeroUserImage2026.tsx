@@ -42,7 +42,14 @@ export function HeroUserImage2026({
     : [];
 
   return (
-    <section className="pcx-hero" aria-labelledby="pcx-hero-title">
+    <section
+      className="pcx-hero"
+      aria-labelledby="pcx-hero-title"
+      // O CSS do hero usa esta variavel no ::after. Sem defini-la, a
+      // declaracao background-image inteira era invalida: nem textura nem
+      // veu de contraste eram pintados.
+      style={{ "--pcx-hero-backdrop": `url(${heroBackdrop})` } as React.CSSProperties}
+    >
       <div className="pcx-hero__inner">
         <div className="pcx-hero__copy">
           <h1 id="pcx-hero-title">
