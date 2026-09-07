@@ -5,8 +5,6 @@ import {
 } from "lucide-react";
 import { type Product } from "../data/catalog";
 import { money } from "../lib/pricing";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
 
 
 interface FavoritesPageProps {
@@ -127,8 +125,12 @@ export default function FavoritesPage({
   };
 
 
-  const exportFavoritesPDF = () => {
+  const exportFavoritesPDF = async () => {
     try {
+      const [{ jsPDF }, { default: autoTable }] = await Promise.all([
+        import("jspdf"),
+        import("jspdf-autotable"),
+      ]);
       const doc = new jsPDF();
       
       // Header do PDF

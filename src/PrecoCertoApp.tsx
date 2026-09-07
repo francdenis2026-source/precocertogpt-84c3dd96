@@ -24,7 +24,6 @@ import { CustomerOrders } from "./components/CustomerOrders";
 import { PriceHistorySection } from "./components/PriceHistorySection";
 
 import { optimizeBasket, saveBasket, getBasketSnapshot, type OptimizationMode, type BasketItemConfig, type BasketResult } from "./lib/smartBasket";
-import { jsPDF } from "jspdf";
 import { planBasketPdf, renderPlanToPdf } from "./lib/basketPdf";
 import { getPdfOrientation, setPdfOrientation as savePdfOrientation } from "./lib/pdfPrefs";
 import { AdminStoreCatalog } from "./components/AdminStoreCatalog";
@@ -1502,10 +1501,12 @@ function BasketPage({ products, addBasket, cart: initialCart, removeBasket, clea
     }
   };
 
-  /** Monta o PDF A4 pronto para impressão (cabeçalho + agrupamento + margens automáticas). */
-  const buildPDF = (orientation: "portrait" | "landscape") => {
+  /** Monta o PDF A4 pronto para impressão (cabeçalho + agrupamento + margens automáticas).
+   *  jsPDF é carregado sob demanda para não engordar o bundle inicial de quem nunca exporta PDF. */
+  const buildPDF = async (orientation: "portrait" | "landscape") => {
     if (!optimizationResult) return null;
 
+    const { jsPDF } = await import("jspdf");
     const plan = planBasketPdf(optimizationResult, mode, orientation);
     const doc = new jsPDF({ orientation, unit: "mm", format: "a4" });
     const now = new Date();
@@ -1517,13 +1518,13 @@ function BasketPage({ products, addBasket, cart: initialCart, removeBasket, clea
     return { doc, fileName: `lista-compras-precocerto-${dateLabel.replace(/\//g, "-")}.pdf` };
   };
 
-  const downloadPDF = () => {
-    const built = buildPDF(pdfOrientation);
+  const downloadPDF = async () => {
+    const built = await buildPDF(pdfOrientation);
     if (built) built.doc.save(built.fileName);
   };
 
   const sharePDF = async () => {
-    const built = buildPDF(pdfOrientation);
+    const built = await buildPDF(pdfOrientation);
     if (!built) return;
     const blob = built.doc.output("blob");
     const file = new File([blob], built.fileName, { type: "application/pdf" });
@@ -2589,7 +2590,7 @@ function UserBasketHistory({ user, products }: { user: any; products: Product[] 
     }
   };
 
-  const handleExportPDF = (basket: any) => {
+  const handleExportPDF = async (basket: any) => {
     // Simulamos a estrutura que o optimizeBasket retorna para o basketPdf
     const items = basket.snapshots.map((s: any) => ({
       product: products.find(p => p.id === s.product_id) || { 
@@ -2623,6 +2624,7 @@ function UserBasketHistory({ user, products }: { user: any; products: Product[] 
     };
 
     const plan = planBasketPdf(result, basket.optimization_mode, "portrait");
+    const { jsPDF } = await import("jspdf");
     const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
     const dateLabel = new Date(basket.created_at).toLocaleDateString("pt-BR");
     const timeLabel = new Date(basket.created_at).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });

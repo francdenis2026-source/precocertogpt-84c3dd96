@@ -2,8 +2,6 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Bot, Building2, CheckCircle2, Download, ImageDown, LoaderCircle, Minus, PackagePlus, PiggyBank, Plus, Save, Search, Send, ShoppingBasket, Sparkles, Store, Trash2, WalletCards, X } from "lucide-react";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product, ProductOffer } from "../data/catalog";
 import { loadSessionProfile, type SessionProfile } from "../lib/roles";
@@ -103,9 +101,10 @@ useGSAP(() => {
   gsap.from(".smart-results .smart-strategies > *", { y: 14, opacity: 0, duration: .5, delay: .18, stagger: .06, ease: "power2.out" });
 }, { scope: pageRef });
 
-function exportBasketPDF(){
+async function exportBasketPDF(){
   try{
     const now=new Date();
+    const [{ jsPDF }, { default: autoTable }] = await Promise.all([import("jspdf"), import("jspdf-autotable")]);
     const doc=new jsPDF();
     doc.setFillColor(5,38,74);
     doc.rect(0,0,210,40,'F');

@@ -15,14 +15,20 @@
   color: #10161d;
   cursor: pointer;
   backdrop-filter: blur(4px);
-  transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 .pca-btn svg { width: 16px; height: 16px; }
 .pca-btn .pca-spin { animation: pca-spin 0.8s linear infinite; }
 @keyframes pca-spin { to { transform: rotate(360deg); } }
 .pca-btn:hover { transform: translateY(-1px); border-color: #0e7a5f; }
+.pca-btn:active { transform: scale(0.88); transition-duration: 0.08s; }
 .pca-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
 .pca-btn.is-active { background: #0e7a5f; border-color: #0e7a5f; color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pca-btn { transition-duration: 0.01ms !important; }
+  .pca-btn:hover, .pca-btn:active { transform: none !important; }
+}
 .pca-btn--buy { background: #c8860a; border-color: #c8860a; color: #fff; text-decoration: none; }
 .pca-btn--buy:hover { background: #9c6a08; border-color: #9c6a08; }
 

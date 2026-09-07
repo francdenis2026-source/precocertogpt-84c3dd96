@@ -26,7 +26,6 @@ export default defineConfig({
           if (/node_modules\/(react|react-dom|react-router|react-router-dom)\//.test(id)) return "react-vendor";
           if (id.includes("node_modules/@supabase/")) return "supabase-vendor";
           if (id.includes("node_modules/lucide-react/")) return "icons-vendor";
-          if (/node_modules\/(jspdf|jspdf-autotable|html2canvas|canvg)\//.test(id)) return "pdf-vendor";
         },
       },
     },
