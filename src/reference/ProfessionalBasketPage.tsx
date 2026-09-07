@@ -122,6 +122,7 @@ export function ProfessionalBasketPage() {
           <div className="pro-basket-total"><span>Melhor total estimado</span><strong>{brl.format(bestTotal)}</strong><small><BadgeCheck /> preços do catálogo local</small></div>
           <div className="pro-basket-saving"><span>Você pode economizar</span><strong>{brl.format(savings)}</strong></div>
           <Link className="pro-basket-primary" to="/cesta-inteligente"><Sparkles /> Otimizar com Cesta Inteligente <ArrowRight /></Link>
+          <Link className="pro-basket-secondary" to="/minhas-listas"><ShoppingBasket /> Salvar como lista, criar outras</Link>
           <Link className="pro-basket-secondary" to="/estabelecimentos"><Store /> Ver estabelecimentos</Link>
           <p>Os valores são estimativas com base nos preços cadastrados. Confirme disponibilidade e preço antes da compra.</p>
         </aside>
