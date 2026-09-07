@@ -10,6 +10,13 @@ import App from "./App";
 import { initializePwaRuntime } from "./lib/pwaRuntime";
 import { initializeSiteTheme } from "./lib/siteTheme";
 import { initializeImageLoadFade } from "./lib/imageLoadFade";
+import { prefetchSectorCatalog } from "./data/sectorCatalog";
+
+// Dispara a busca do catálogo real antes de o React sequer montar a árvore,
+// em vez de só começar dentro do useEffect da home — encolhe a janela em
+// que a home mostra o skeleton cinza (ou o catálogo estático de fallback,
+// dominado pelos dois únicos negócios cadastrados manualmente).
+prefetchSectorCatalog();
 
 // Sistema visual público central. Estas folhas antes eram injetadas por
 // <link> em runtime (11 requisições bloqueantes, sem minificação nem hash).

@@ -109,6 +109,14 @@ export function buildFeatured(products: Product[], cycle: number, size = 6) {
     if (!encontrou) break;
   }
 
+  // Hoje só um punhado de estabelecimentos tem foto profissional cadastrada
+  // (exigida acima), então sem um teto por loja a vitrine inteira saía do
+  // mesmo negócio — ex.: só hambúrgueres, porque só as lanchonetes tinham
+  // fotos prontas. Limita quantos itens de uma mesma loja entram, mesmo que
+  // isso deixe a vitrine com menos de `size` itens.
+  const porLojaEscolhidos = new Map<string, number>();
+  const tetoPorLoja = Math.max(1, Math.ceil(size / Math.max(2, lojas.length)));
+
   for (const produto of candidatos) {
     if (escolhidos.length >= size) break;
     const chaveProduto = productKey(produto);
@@ -117,9 +125,13 @@ export function buildFeatured(products: Product[], cycle: number, size = 6) {
     // para o mesmo arquivo. A vitrine mostra cada identidade visual uma vez.
     if (produtosUsados.has(chaveProduto) || imagensUsadas.has(chaveImagem))
       continue;
+    const chaveLoja = storeKey(produto);
+    const usadosDaLoja = porLojaEscolhidos.get(chaveLoja) || 0;
+    if (usadosDaLoja >= tetoPorLoja) continue;
     escolhidos.push(produto);
     produtosUsados.add(chaveProduto);
     imagensUsadas.add(chaveImagem);
+    porLojaEscolhidos.set(chaveLoja, usadosDaLoja + 1);
   }
 
   return escolhidos;
