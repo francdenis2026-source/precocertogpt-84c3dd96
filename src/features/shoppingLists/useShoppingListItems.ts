@@ -4,11 +4,12 @@ import { fetchCatalog } from "../../data/remoteCatalog";
 import type { Product } from "../../data/catalog";
 import type { ShoppingListMode } from "./useShoppingLists";
 
-export type ShoppingListItemRow = { productId: string; quantity: number; establishmentId: string | null };
+export type ShoppingListItemRow = { productId: string; quantity: number; establishmentId: string | null; purchased: boolean };
 
 export type ResolvedItem = {
   product: Product;
   quantity: number;
+  purchased: boolean;
   /** Preço/loja usados no total desta linha, já respeitando o modo da lista. */
   unitPrice: number | null;
   establishment: string | null;
@@ -17,7 +18,10 @@ export type ResolvedItem = {
   unavailableAtStore: boolean;
 };
 
-type ListMeta = { id: string; name: string; mode: ShoppingListMode; targetEstablishmentId: string | null } | null;
+type ListMeta = {
+  id: string; name: string; mode: ShoppingListMode; targetEstablishmentId: string | null;
+  shareToken: string; shareEnabled: boolean;
+} | null;
 
 function offerAtEstablishment(product: Product, establishmentId: string) {
   if (String(product.establishmentId) === establishmentId) {
@@ -37,12 +41,15 @@ export function useShoppingListItems(listId: string | undefined) {
     if (!supabase || !listId) { setLoading(false); return; }
     setLoading(true);
     const [{ data: list }, { data: items }, catalog] = await Promise.all([
-      supabase.from("shopping_lists").select("id, name, mode, target_establishment_id").eq("id", listId).single(),
-      supabase.from("shopping_list_items").select("product_id, quantity, establishment_id").eq("list_id", listId),
+      supabase.from("shopping_lists").select("id, name, mode, target_establishment_id, share_token, share_enabled").eq("id", listId).single(),
+      supabase.from("shopping_list_items").select("product_id, quantity, establishment_id, purchased").eq("list_id", listId),
       fetchCatalog(),
     ]);
-    setMeta(list ? { id: list.id, name: list.name, mode: list.mode, targetEstablishmentId: list.target_establishment_id } : null);
-    setRows((items ?? []).map(row => ({ productId: String(row.product_id), quantity: row.quantity, establishmentId: row.establishment_id })));
+    setMeta(list ? {
+      id: list.id, name: list.name, mode: list.mode, targetEstablishmentId: list.target_establishment_id,
+      shareToken: list.share_token, shareEnabled: list.share_enabled,
+    } : null);
+    setRows((items ?? []).map(row => ({ productId: String(row.product_id), quantity: row.quantity, establishmentId: row.establishment_id, purchased: Boolean(row.purchased) })));
     setProducts(catalog.products);
     setLoading(false);
   }, [listId]);
@@ -66,7 +73,7 @@ export function useShoppingListItems(listId: string | undefined) {
       return;
     }
     const { error } = await supabase.from("shopping_list_items").insert({ list_id: listId, product_id: id, quantity });
-    if (!error) setRows(current => [...current, { productId: id, quantity, establishmentId: null }]);
+    if (!error) setRows(current => [...current, { productId: id, quantity, establishmentId: null, purchased: false }]);
   }, [listId, rows]);
 
   const setQuantity = useCallback(async (productId: string | number, quantity: number) => {
@@ -84,6 +91,25 @@ export function useShoppingListItems(listId: string | undefined) {
   const removeItem = useCallback(async (productId: string | number) => {
     await setQuantity(productId, 0);
   }, [setQuantity]);
+
+  const togglePurchased = useCallback(async (productId: string | number, purchased: boolean) => {
+    if (!supabase || !listId) return;
+    const id = String(productId);
+    setRows(current => current.map(row => row.productId === id ? { ...row, purchased } : row));
+    await supabase.from("shopping_list_items")
+      .update({ purchased, purchased_at: purchased ? new Date().toISOString() : null })
+      .eq("list_id", listId).eq("product_id", id);
+  }, [listId]);
+
+  /** Liga/desliga o link público. `rotate` gera um novo token, invalidando o link anterior. */
+  const toggleShare = useCallback(async (enabled: boolean, rotate = false) => {
+    if (!supabase || !listId) return;
+    const { data } = await supabase.rpc("set_shopping_list_sharing", { _list_id: listId, _enabled: enabled, _rotate_token: rotate });
+    const result = data as { ok?: boolean; share_token?: string; share_enabled?: boolean } | null;
+    if (result?.ok) {
+      setMeta(current => current ? { ...current, shareEnabled: Boolean(result.share_enabled), shareToken: result.share_token || current.shareToken } : current);
+    }
+  }, [listId]);
 
   /** Aplica em lote os itens sugeridos pela IA (substitui o que já existir na lista). */
   const applyBulk = useCallback(async (items: { productId: string; quantity: number }[]) => {
@@ -105,7 +131,7 @@ export function useShoppingListItems(listId: string | undefined) {
         if (mode === "store" && target) {
           const offer = offerAtEstablishment(product, target);
           return {
-            product, quantity: row.quantity,
+            product, quantity: row.quantity, purchased: row.purchased,
             unitPrice: offer?.value ?? null,
             establishment: offer?.establishment ?? null,
             establishmentId: offer ? target : null,
@@ -113,7 +139,7 @@ export function useShoppingListItems(listId: string | undefined) {
           };
         }
         return {
-          product, quantity: row.quantity,
+          product, quantity: row.quantity, purchased: row.purchased,
           unitPrice: product.minPrice,
           establishment: product.establishment,
           establishmentId: String(product.establishmentId),
@@ -128,5 +154,5 @@ export function useShoppingListItems(listId: string | undefined) {
   const storeCount = new Set(resolved.map(row => row.establishmentId).filter(Boolean)).size;
   const missingAtStore = resolved.filter(row => row.unavailableAtStore).length;
 
-  return { meta, resolved, loading, total, itemCount, storeCount, missingAtStore, addItem, setQuantity, removeItem, setListMode, applyBulk, refresh: load };
+  return { meta, resolved, loading, total, itemCount, storeCount, missingAtStore, addItem, setQuantity, removeItem, togglePurchased, toggleShare, setListMode, applyBulk, refresh: load };
 }

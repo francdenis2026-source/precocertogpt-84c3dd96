@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  ArrowLeft, Check, Copy, ListChecks, LoaderCircle, MessageCircle, Minus, PackageSearch, Pencil, Plus, Search,
+  ArrowLeft, Check, Copy, Link2, ListChecks, LoaderCircle, MessageCircle, Minus, PackageSearch, Pencil, Plus, RefreshCw, Search,
   Sparkles, Store, Trash2, Wallet, X,
 } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
@@ -116,7 +116,7 @@ export function ShoppingListDetailPage() {
   const navigate = useNavigate();
   const {
     meta, resolved, loading, total, itemCount, storeCount, missingAtStore,
-    addItem, setQuantity, removeItem, setListMode, applyBulk,
+    addItem, setQuantity, removeItem, togglePurchased, toggleShare, setListMode, applyBulk,
   } = useShoppingListItems(id);
   const [catalog, setCatalog] = useState<Product[]>([]);
   const [stores, setStores] = useState<StoreRow[]>([]);
@@ -128,6 +128,8 @@ export function ShoppingListDetailPage() {
   const [deleting, setDeleting] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [shareBusy, setShareBusy] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -166,6 +168,22 @@ export function ShoppingListDetailPage() {
 
   const shareText = id ? buildShareText(displayName, mode, resolved, total) : "";
   const whatsappShareLink = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+  const shareLinkUrl = meta?.shareToken ? `${window.location.origin}/lista-compartilhada/${meta.shareToken}` : "";
+
+  async function handleToggleShare(enabled: boolean, rotate = false) {
+    setShareBusy(true);
+    await toggleShare(enabled, rotate);
+    setShareBusy(false);
+  }
+
+  async function copyShareLink() {
+    if (!shareLinkUrl) return;
+    try {
+      await navigator.clipboard.writeText(shareLinkUrl);
+      setLinkCopied(true);
+      window.setTimeout(() => setLinkCopied(false), 2000);
+    } catch { /* clipboard indisponível — o link continua visível pra copiar manualmente */ }
+  }
 
   if (loading) return <main className="pc-lists-state"><LoaderCircle className="spin" aria-hidden="true" /><strong>Carregando sua lista…</strong></main>;
   if (!meta) return <main className="pc-lists-state"><strong>Lista não encontrada.</strong><Link to="/minhas-listas">Voltar para minhas listas</Link></main>;
@@ -193,8 +211,25 @@ export function ShoppingListDetailPage() {
             <button type="button" className="is-danger" onClick={() => void handleDelete()} disabled={deleting}><Trash2 aria-hidden="true" /> {deleting ? "Excluindo…" : "Excluir lista"}</button>
           </div>
           {shareOpen && <div className="pc-lists-share">
-            <a href={whatsappShareLink} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Enviar pelo WhatsApp</a>
-            <button type="button" onClick={() => void copyShareText()}>{copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />} {copied ? "Copiado!" : "Copiar texto da lista"}</button>
+            <div className="pc-lists-share__row">
+              <a href={whatsappShareLink} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Enviar pelo WhatsApp</a>
+              <button type="button" onClick={() => void copyShareText()}>{copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />} {copied ? "Copiado!" : "Copiar texto da lista"}</button>
+            </div>
+            <div className="pc-lists-share__link">
+              <p><Link2 aria-hidden="true" /> Link para acompanhar a compra: quem tiver o link marca os itens como comprados conforme vai levando, sem precisar de conta.</p>
+              {meta?.shareEnabled ? <>
+                <div className="pc-lists-share__link-row">
+                  <input readOnly value={shareLinkUrl} onFocus={e => e.target.select()} />
+                  <button type="button" onClick={() => void copyShareLink()}>{linkCopied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />} {linkCopied ? "Copiado!" : "Copiar"}</button>
+                </div>
+                <div className="pc-lists-share__link-actions">
+                  <button type="button" onClick={() => void handleToggleShare(true, true)} disabled={shareBusy}><RefreshCw aria-hidden="true" /> Gerar novo link (invalida o antigo)</button>
+                  <button type="button" className="is-danger" onClick={() => void handleToggleShare(false)} disabled={shareBusy}>Desativar link</button>
+                </div>
+              </> : <button type="button" className="pc-lists-share__enable" onClick={() => void handleToggleShare(true)} disabled={shareBusy}>
+                {shareBusy ? <LoaderCircle className="spin" aria-hidden="true" /> : <Link2 aria-hidden="true" />} Ativar link de acompanhamento
+              </button>}
+            </div>
           </div>}
         </div>
         <div className="pc-lists-kpis">
@@ -252,7 +287,10 @@ export function ShoppingListDetailPage() {
         <h2>Essa lista ainda está vazia.</h2>
         <p>Busque produtos acima ou use a montagem automática para preencher pelo seu orçamento.</p>
       </section> : <section className="pc-lists-items">
-        {resolved.map(row => <article key={String(row.product.id)} className={row.unavailableAtStore ? "pc-lists-item is-unavailable" : "pc-lists-item"}>
+        {resolved.map(row => <article key={String(row.product.id)} className={["pc-lists-item", row.unavailableAtStore && "is-unavailable", row.purchased && "is-purchased"].filter(Boolean).join(" ")}>
+          <label className="pc-lists-item__check" aria-label={row.purchased ? `Desmarcar ${row.product.name} como comprado` : `Marcar ${row.product.name} como comprado`}>
+            <input type="checkbox" checked={row.purchased} onChange={e => void togglePurchased(row.product.id, e.target.checked)} />
+          </label>
           <div className="pc-lists-item__product"><span className="pc-lists-thumb"><ProductThumb product={row.product} /></span>
             <span><small>{row.product.category}</small><strong>{row.product.name}</strong><em>{[row.product.brand, row.product.size].filter(Boolean).join(" · ")}</em></span>
           </div>
