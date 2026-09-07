@@ -1094,8 +1094,33 @@
 
 @media (max-width: 1100px) { .pcx-products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 720px) { .pcx-products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; } }
+@media (max-width: 640px) {
+  /* Grade de 2 colunas empilhava a vitrine inteira em rolagem vertical
+     (muitos produtos, tela pequena). Vira carrossel horizontal: cada card
+     tem largura fixa, a fileira rola pro lado com snap, e sobra 1 card
+     "espiando" na borda como indício de que dá pra arrastar. */
+  .pcx-products {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(152px, 40vw);
+    grid-template-columns: none;
+    gap: 0.6rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--h-section-x);
+    margin-inline: calc(var(--h-section-x) * -1);
+    padding-inline: var(--h-section-x);
+    padding-bottom: 0.3rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pcx-products::-webkit-scrollbar { display: none; }
+  .pcx-product { scroll-snap-align: start; }
+  .pcx-empty { grid-column: auto; min-width: 100%; }
+  .pcx-skeleton { min-width: 152px; }
+}
 @media (max-width: 480px) {
-  .pcx-products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
   .pcx-prices { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
   .pcx-prices div { gap: 0.35rem; }
   .pcx-product__footer { flex-wrap: wrap; }
@@ -1526,7 +1551,9 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 /* 4.6:1 sobre #10161d. */
 .pcx-home .pcx-footer__meta,
 .pcx-home .pcx-footer__meta strong { color: rgba(255, 255, 255, 0.66); }
-@media (max-width: 640px) {
-  .pcx-home .pcx-footer__nav { display: flex; }
-  .pcx-home .pcx-footer__row { flex-wrap: wrap; gap: 4px 10px; }
-}
+/* Um ajuste anterior forçava os 6 links de volta no mobile ("display:flex"
+   por cima do "display:none" já definido acima para <=720px), quebrando em
+   duas linhas cheias por cima de marca + CTA + crédito — o dock inferior já
+   cobre Início/Buscar/Explorar/Cesta/Conta, então isso só duplicava
+   navegação e inchava o rodapé. Mobile fica só com marca, CTA de lojista e
+   a linha de crédito, como o comentário original (linha ~1409) já pedia. */
