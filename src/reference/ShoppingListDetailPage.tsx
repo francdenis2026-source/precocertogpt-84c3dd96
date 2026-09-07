@@ -7,9 +7,9 @@ import {
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { Product, StoreRow } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
+import { buildAutoBasket } from "../data/autoBasket";
 import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import { SubscriberGate } from "../components/access/SubscriberGate";
-import { supabase } from "../lib/supabase";
 import { useShoppingListItems } from "../features/shoppingLists/useShoppingListItems";
 import type { ShoppingListMode } from "../features/shoppingLists/useShoppingLists";
 import "./ShoppingLists.css";
@@ -55,48 +55,42 @@ function ProductPicker({ products, onPick }: { products: Product[]; onPick: (id:
   </div>;
 }
 
-function AiPanel({ budget, people, catalog, onApplied }: {
-  budget: number; people: number; catalog: Product[];
+/**
+ * Montagem automática por regras (sem IA generativa, sem custo de API):
+ * escolhe os itens essenciais por prioridade no menor preço disponível até
+ * bater o orçamento. Fica atrás do mesmo paywall da Cesta Inteligente
+ * porque o valor está em economizar tempo montando a lista, não no texto
+ * gerado — não precisa de um modelo de linguagem para isso.
+ */
+function AutoBuildPanel({ budget, people, catalog, targetEstablishmentId, onApplied }: {
+  budget: number; people: number; catalog: Product[]; targetEstablishmentId?: string | null;
   onApplied: (items: { productId: string; quantity: number }[]) => Promise<void>;
 }) {
-  const [notes, setNotes] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [suggestion, setSuggestion] = useState<{ items: { productId: string; quantity: number }[]; message: string } | null>(null);
+  const [suggestion, setSuggestion] = useState<{ items: { productId: string; quantity: number }[]; missing: string[]; total: number } | null>(null);
 
-  async function runAi() {
-    if (!supabase) return;
+  function runAutoBuild() {
     setBusy(true);
     setError("");
     setSuggestion(null);
-    const catalogPayload = catalog.slice(0, 220).map(p => ({ id: String(p.id), name: p.name, category: p.category, minPrice: p.minPrice }));
-    const { data, error: fnError } = await supabase.functions.invoke<{ items?: { productId: string; quantity: number }[]; message?: string; error?: string }>(
-      "shopping-list-ai",
-      { body: { budget, people, notes, catalog: catalogPayload } },
-    );
+    const result = buildAutoBasket(catalog, budget, people, targetEstablishmentId);
     setBusy(false);
-    if (fnError || !data || data.error || !data.items) {
-      setError(data?.error || "Não foi possível montar a lista agora. Tente novamente.");
+    if (!result.items.length) {
+      setError("Não foi possível montar uma lista com esse orçamento. Tente aumentar o valor.");
       return;
     }
-    setSuggestion({ items: data.items, message: data.message || "" });
+    setSuggestion(result);
   }
 
   return <div className="pc-lists-ai">
-    <p className="pc-lists-ai__intro"><Sparkles aria-hidden="true" /> Diga o que você precisa e a IA escolhe os produtos do catálogo que cabem no seu orçamento.</p>
-    <textarea
-      value={notes}
-      onChange={e => setNotes(e.target.value)}
-      placeholder="Ex.: quero itens de mercado básicos, sem carne, priorizando limpeza e higiene…"
-      rows={3}
-    />
-    <button type="button" onClick={() => void runAi()} disabled={busy}>
-      {busy ? <LoaderCircle className="spin" aria-hidden="true" /> : <Sparkles aria-hidden="true" />} {busy ? "Montando lista…" : "Montar lista com IA"}
+    <p className="pc-lists-ai__intro"><Sparkles aria-hidden="true" /> Escolhe automaticamente os itens essenciais que cabem no seu orçamento, no melhor preço disponível.</p>
+    <button type="button" onClick={runAutoBuild} disabled={busy}>
+      {busy ? <LoaderCircle className="spin" aria-hidden="true" /> : <Sparkles aria-hidden="true" />} {busy ? "Montando lista…" : "Montar lista automaticamente"}
     </button>
     {error && <p className="pc-lists-ai__error">{error}</p>}
     {suggestion && <div className="pc-lists-ai__result">
-      <p>{suggestion.message}</p>
-      <strong>{suggestion.items.length} produtos sugeridos</strong>
+      <p>{suggestion.items.length} produtos escolhidos, somando {brl.format(suggestion.total)}.{suggestion.missing.length > 0 && ` Não achamos preço para: ${suggestion.missing.join(", ")}.`}</p>
       <button type="button" onClick={() => void onApplied(suggestion.items)}>Aplicar esta lista</button>
     </div>}
   </div>;
@@ -167,19 +161,20 @@ export function ShoppingListDetailPage() {
       <ProductPicker products={catalog} onPick={id => void addItem(id)} />
 
       <section className="pc-lists-ai-toggle">
-        <button type="button" onClick={() => setShowAi(v => !v)}><Sparkles aria-hidden="true" /> {showAi ? "Fechar montagem por IA" : "Montar (ou completar) esta lista com IA"}</button>
+        <button type="button" onClick={() => setShowAi(v => !v)}><Sparkles aria-hidden="true" /> {showAi ? "Fechar montagem automática" : "Montar (ou completar) esta lista automaticamente"}</button>
       </section>
 
       {showAi && <section className="pc-lists-ai-wrap">
-        <SubscriberGate tool="A montagem de listas por IA" plan="cesta_inteligente">
+        <SubscriberGate tool="A montagem automática de listas" plan="cesta_inteligente">
           <div className="pc-lists-ai-inputs">
             <label>Orçamento <input type="number" min={1} value={budgetInput} onChange={e => setBudgetInput(e.target.value)} /></label>
             <label>Pessoas na casa <input type="number" min={1} value={peopleInput} onChange={e => setPeopleInput(e.target.value)} /></label>
           </div>
-          <AiPanel
+          <AutoBuildPanel
             budget={Number(budgetInput) || 0}
             people={Number(peopleInput) || 1}
             catalog={catalog}
+            targetEstablishmentId={mode === "store" ? meta.targetEstablishmentId : null}
             onApplied={async items => { await applyBulk(items); setShowAi(false); }}
           />
         </SubscriberGate>
@@ -188,7 +183,7 @@ export function ShoppingListDetailPage() {
       {!resolved.length ? <section className="pc-lists-empty">
         <div className="pc-lists-empty__icon"><ListChecks aria-hidden="true" /></div>
         <h2>Essa lista ainda está vazia.</h2>
-        <p>Busque produtos acima ou peça para a IA montar uma lista pelo seu orçamento.</p>
+        <p>Busque produtos acima ou use a montagem automática para preencher pelo seu orçamento.</p>
       </section> : <section className="pc-lists-items">
         {resolved.map(row => <article key={String(row.product.id)} className={row.unavailableAtStore ? "pc-lists-item is-unavailable" : "pc-lists-item"}>
           <div className="pc-lists-item__product"><span className="pc-lists-thumb"><ProductThumb product={row.product} /></span>

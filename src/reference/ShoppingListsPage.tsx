@@ -76,7 +76,7 @@ export function ShoppingListsPage() {
         </section> : <section className="pc-lists-grid">
           {lists.map(list => <article key={list.id} className="pc-lists-card">
             <Link to={`/lista/${list.id}`} className="pc-lists-card__body">
-              <span className="pc-lists-card__mode">{MODES.find(m => m.id === list.mode)?.label}{list.source === "ai" && <em><Sparkles aria-hidden="true" /> IA</em>}</span>
+              <span className="pc-lists-card__mode">{MODES.find(m => m.id === list.mode)?.label}{list.source === "ai" && <em><Sparkles aria-hidden="true" /> Automática</em>}</span>
               {renamingId === list.id
                 ? <input
                     className="pc-lists-card__rename"
