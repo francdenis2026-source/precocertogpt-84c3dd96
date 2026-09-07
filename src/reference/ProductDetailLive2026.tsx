@@ -11,6 +11,7 @@ import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { supabase } from "../lib/supabase";
 import { addToBasketWithAuthGuard, type BasketEntry, readBasket } from "../lib/basket";
 import { getCachedAvailability, useProductOnlineSales } from "../lib/onlineSalesAvailability";
+import { trackProductView } from "../lib/analytics";
 import { buildComparableOffers, findComparableProducts, type ComparableOffer } from "../lib/productSearch";
 import { ProductThumb } from "../components/catalog/ProductThumb";
 import { PublicFooter, PublicHeader } from "./PublicChrome";
@@ -107,6 +108,12 @@ export function ProductDetailLive2026() {
     if (!product?.slug || !identifier || identifier === product.slug) return;
     navigate(`/produto/${product.slug}`, { replace: true });
   }, [identifier, navigate, product?.slug]);
+
+  // Alimenta "produtos mais buscados": conta a visualização uma vez por
+  // produto resolvido, independente de o visitante estar logado ou não.
+  useEffect(() => {
+    if (product?.id) trackProductView(String(product.id));
+  }, [product?.id]);
 
   // SeoRouteManager só conhece rotas estáticas e cai num título genérico
   // ("Produto | PreçoCerto") para /produto/:id — aqui sobrescrevemos com o

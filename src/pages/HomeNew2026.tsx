@@ -19,6 +19,7 @@ import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
 import { ProductGrid } from "../components/home/ProductGrid";
+import { TrendingProducts } from "../components/home/TrendingProducts";
 import { PromoBands } from "../components/home/PromoBands";
 import { SmartBasketSpotlight } from "../components/home/SmartBasketSpotlight";
 import { StoreRail } from "../components/home/StoreRail";
@@ -144,6 +145,7 @@ export function HomeNew2026() {
         />
         <SmartBasketSpotlight />
         <ProductGrid products={featured} loading={loading} />
+        <TrendingProducts products={products} />
         <PromoBands />
         <CategoryBar />
         <StoreRail stores={catalog.stores} cycle={cycle} loading={loading} />

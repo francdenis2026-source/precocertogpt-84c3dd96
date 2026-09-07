@@ -937,6 +937,7 @@
   flex-wrap: wrap;
 }
 .pcx-section__head h2 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
+.pcx-trending__flame { width: 0.85em; height: 0.85em; margin-right: 0.15em; color: var(--h-accent); vertical-align: -0.08em; }
 .pcx-section__head p { margin: 0.35rem 0 0; color: var(--h-muted); font-size: 0.9rem; }
 .pcx-section__link {
   display: inline-flex; align-items: center; gap: 0.35rem;

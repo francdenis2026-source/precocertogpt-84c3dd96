@@ -15,6 +15,7 @@ import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import { addToBasketWithAuthGuard } from "../lib/basket";
 import { useProductOnlineSales } from "../lib/onlineSalesAvailability";
 import { ProductCardActions } from "../components/catalog/ProductCardActions";
+import { trackSearch } from "../lib/analytics";
 import "./SearchDiscovery2026.css";
 import "./CompactViewportPages.css";
 
@@ -129,6 +130,9 @@ export function SearchDiscovery2026(){
  const results=useMemo(()=>{if(!catalog||!hasRequest)return[];const min=Number(minPrice.replace(",",".")),max=Number(maxPrice.replace(",","."));const rows=catalog.products.map(product=>({product,score:productSearchScore(product,appliedQuery)})).filter(({product,score:rank})=>{if(appliedQuery.trim()&&rank<=0)return false;if(activeSector&&!productHasSectorOffer(product,catalog,activeSector))return false;if(store!=="all"&&String(product.establishmentId)!==store&&!product.offers?.some(o=>String(o.establishmentId)===store))return false;if(category!=="all"&&product.category!==category)return false;if(neighborhood!=="all"&&normalize(product.neighborhood)!==normalize(neighborhood)&&!product.offers?.some(o=>normalize(o.neighborhood)===normalize(neighborhood)))return false;if(Number.isFinite(min)&&min>0&&product.minPrice<min)return false;if(Number.isFinite(max)&&max>0&&product.minPrice>max)return false;return true});rows.sort((a,b)=>sort==="lowest"?a.product.minPrice-b.product.minPrice:sort==="highest"?b.product.minPrice-a.product.minPrice:sort==="name"?a.product.name.localeCompare(b.product.name,"pt-BR"):sort==="stores"?(b.product.storeCount||0)-(a.product.storeCount||0):b.score-a.score||a.product.minPrice-b.product.minPrice);return rows.map(r=>r.product)},[catalog,hasRequest,appliedQuery,activeSector,store,category,neighborhood,minPrice,maxPrice,sort]);
  const featuredProducts=useMemo(()=>catalog?.products.slice().sort((a,b)=>(b.storeCount||0)-(a.storeCount||0)||a.minPrice-b.minPrice).slice(0,4)??[],[catalog]);
  useEffect(()=>setVisible(8),[appliedQuery,sector,store,category,neighborhood,minPrice,maxPrice,sort]);
+ // Alimenta "produtos mais buscados": um registro por termo aplicado
+ // (já debounced acima), independente de o visitante estar logado ou não.
+ useEffect(()=>{if(appliedQuery.trim())trackSearch(appliedQuery)},[appliedQuery]);
  useEffect(()=>{if(store!=="all"&&!stores.some(s=>String(s.id)===store))setStore("all")},[stores,store]);
  useEffect(()=>{if(category!=="all"&&!categories.includes(category))setCategory("all")},[categories,category]);
  const syncUrl=(nextQuery=appliedQuery)=>{const next:Record<string,string>={};if(nextQuery.trim())next.q=nextQuery.trim();if(sector!=="all")next.setor=sector;if(store!=="all")next.loja=store;if(category!=="all")next.categoria=category;if(neighborhood!=="all")next.bairro=neighborhood;if(minPrice)next.min=minPrice;if(maxPrice)next.max=maxPrice;if(sort!=="relevance")next.ordem=sort;setParams(next,{replace:true})};
