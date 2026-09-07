@@ -15,7 +15,21 @@ import "./ProductCardActions.css";
  * modal), então cada botão aqui trava a propagação do clique para não
  * disparar a navegação ou a abertura do modal por baixo.
  */
-export function ProductCardActions({ product, className }: { product: Product; className?: string }) {
+export function ProductCardActions({
+  product,
+  className,
+  showFavorite = true,
+  showCart = true,
+}: {
+  product: Product;
+  className?: string;
+  /** Página de catálogo do estabelecimento já tem seu próprio favoritar/cesta
+   *  (ProductCardQuickActions, injetado globalmente nos cards de
+   *  .ref-product-grid) — aqui só entra o botão de comprar online, que
+   *  aquele sistema não tem, para não duplicar o coração e a cesta. */
+  showFavorite?: boolean;
+  showCart?: boolean;
+}) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorite = isFavorite(product.id);
   const [addBusy, setAddBusy] = useState(false);
@@ -43,20 +57,26 @@ export function ProductCardActions({ product, className }: { product: Product; c
     window.setTimeout(() => setAdded(false), 1800);
   };
 
+  if (!showFavorite && !showCart && !(canBuyOnline && merchantId)) return null;
+
   return (
     <div className={`pca-row${className ? ` ${className}` : ""}`} onClick={(event) => event.stopPropagation()}>
-      <button
-        type="button"
-        className={`pca-btn${favorite ? " is-active" : ""}`}
-        onClick={onFavorite}
-        aria-label={favorite ? "Remover dos favoritos" : "Favoritar"}
-        aria-pressed={favorite}
-      >
-        <Heart aria-hidden="true" fill={favorite ? "currentColor" : "none"} />
-      </button>
-      <button type="button" className={`pca-btn${added ? " is-active" : ""}`} onClick={(event) => void onAdd(event)} aria-label="Adicionar à cesta" disabled={addBusy}>
-        {addBusy ? <LoaderCircle aria-hidden="true" className="pca-spin" /> : added ? <Check aria-hidden="true" /> : <ShoppingBasket aria-hidden="true" />}
-      </button>
+      {showFavorite && (
+        <button
+          type="button"
+          className={`pca-btn${favorite ? " is-active" : ""}`}
+          onClick={onFavorite}
+          aria-label={favorite ? "Remover dos favoritos" : "Favoritar"}
+          aria-pressed={favorite}
+        >
+          <Heart aria-hidden="true" fill={favorite ? "currentColor" : "none"} />
+        </button>
+      )}
+      {showCart && (
+        <button type="button" className={`pca-btn${added ? " is-active" : ""}`} onClick={(event) => void onAdd(event)} aria-label="Adicionar à cesta" disabled={addBusy}>
+          {addBusy ? <LoaderCircle aria-hidden="true" className="pca-spin" /> : added ? <Check aria-hidden="true" /> : <ShoppingBasket aria-hidden="true" />}
+        </button>
+      )}
       {canBuyOnline && merchantId && (
         <Link to={`/loja/${merchantId}`} className="pca-btn pca-btn--buy" onClick={(event) => event.stopPropagation()} aria-label="Comprar online nesta loja">
           <ShoppingCart aria-hidden="true" />

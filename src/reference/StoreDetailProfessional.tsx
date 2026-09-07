@@ -332,7 +332,7 @@ export function StoreDetailProfessional() {
 
         {visibleProducts.length ? <div className="ref-product-grid store-pro-grid">
           {shownProducts.map(product => <Link key={product.id} to={`/produto/${product.slug || product.id}`}>
-          <div className="store-pro-product-image"><ProductImage product={product} /><ProductCardActions product={product} className="pca-row--overlay" /></div>
+          <div className="store-pro-product-image"><ProductImage product={product} /><ProductCardActions product={product} className="pca-row--overlay-left" showFavorite={false} showCart={false} /></div>
           <small className="store-pro-category">{product.category}</small>
           <strong>{product.name}</strong>
           <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>

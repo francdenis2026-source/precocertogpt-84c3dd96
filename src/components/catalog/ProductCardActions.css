@@ -38,6 +38,16 @@ html[data-theme="dark"] .pca-btn.is-active { background: #3ecf9a; border-color: 
   z-index: 2;
 }
 
+/* Catálogo do estabelecimento já injeta favoritar/cesta no canto superior
+   direito (ver ProductCardQuickActions) — quando só o botão de comprar
+   online entra aqui, ele fica do outro lado para não empilhar em cima. */
+.pca-row--overlay-left {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+}
+
 /* Compacto: para miniaturas pequenas (cards de lista da busca/catálogo),
    onde o botão de 34px do overlay padrão não cabe. */
 .pca-row--compact { top: 4px; right: 4px; gap: 3px; }
