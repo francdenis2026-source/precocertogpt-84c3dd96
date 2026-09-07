@@ -75,16 +75,25 @@ export function useShoppingLists() {
   }, [refresh]);
 
   const renameList = useCallback(async (id: string, name: string) => {
-    if (!supabase || !name.trim()) return;
-    await supabase.from("shopping_lists").update({ name: name.trim() }).eq("id", id);
+    await renameShoppingList(id, name);
     await refresh();
   }, [refresh]);
 
   const deleteList = useCallback(async (id: string) => {
-    if (!supabase) return;
-    await supabase.from("shopping_lists").delete().eq("id", id);
+    await deleteShoppingList(id);
     setLists(current => current.filter(list => list.id !== id));
   }, []);
 
   return { lists, loading, refresh, createList, renameList, deleteList };
+}
+
+/** Fora do hook: usadas tanto pela listagem quanto pela tela de detalhe da lista. */
+export async function renameShoppingList(id: string, name: string) {
+  if (!supabase || !name.trim()) return;
+  await supabase.from("shopping_lists").update({ name: name.trim() }).eq("id", id);
+}
+
+export async function deleteShoppingList(id: string) {
+  if (!supabase) return;
+  await supabase.from("shopping_lists").delete().eq("id", id);
 }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  ArrowLeft, ListChecks, LoaderCircle, Minus, PackageSearch, Plus, Search,
+  ArrowLeft, Check, Copy, ListChecks, LoaderCircle, MessageCircle, Minus, PackageSearch, Pencil, Plus, Search,
   Sparkles, Store, Trash2, Wallet, X,
 } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
@@ -10,8 +10,8 @@ import { resolveProductImage } from "../data/productImageResolver";
 import { buildAutoBasket } from "../data/autoBasket";
 import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import { SubscriberGate } from "../components/access/SubscriberGate";
-import { useShoppingListItems } from "../features/shoppingLists/useShoppingListItems";
-import type { ShoppingListMode } from "../features/shoppingLists/useShoppingLists";
+import { useShoppingListItems, type ResolvedItem } from "../features/shoppingLists/useShoppingListItems";
+import { renameShoppingList, deleteShoppingList, type ShoppingListMode } from "../features/shoppingLists/useShoppingLists";
 import "./ShoppingLists.css";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -96,8 +96,24 @@ function AutoBuildPanel({ budget, people, catalog, targetEstablishmentId, onAppl
   </div>;
 }
 
+function buildShareText(name: string, mode: ShoppingListMode, resolved: ResolvedItem[], total: number) {
+  const lines = resolved.map(row => {
+    const price = row.unavailableAtStore ? "indisponível" : brl.format((row.unitPrice ?? 0) * row.quantity);
+    return `• ${row.quantity}x ${row.product.name} — ${price}${row.establishment ? ` (${row.establishment})` : ""}`;
+  });
+  return [
+    `🛒 ${name} — lista do PreçoCerto`,
+    MODE_LABEL[mode],
+    "",
+    ...lines,
+    "",
+    `Total estimado: ${brl.format(total)}`,
+  ].join("\n");
+}
+
 export function ShoppingListDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const {
     meta, resolved, loading, total, itemCount, storeCount, missingAtStore,
     addItem, setQuantity, removeItem, setListMode, applyBulk,
@@ -107,6 +123,11 @@ export function ShoppingListDetailPage() {
   const [showAi, setShowAi] = useState(false);
   const [budgetInput, setBudgetInput] = useState("150");
   const [peopleInput, setPeopleInput] = useState("3");
+  const [renaming, setRenaming] = useState(false);
+  const [nameOverride, setNameOverride] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -116,6 +137,35 @@ export function ShoppingListDetailPage() {
 
   const mode = meta?.mode ?? "search";
   const targetStore = stores.find(s => String(s.id) === meta?.targetEstablishmentId);
+  const displayName = nameOverride ?? meta?.name ?? "";
+
+  async function handleRename(nextName: string) {
+    if (!id || !nextName.trim() || nextName.trim() === displayName) { setRenaming(false); return; }
+    setNameOverride(nextName.trim());
+    setRenaming(false);
+    await renameShoppingList(id, nextName.trim());
+  }
+
+  async function handleDelete() {
+    if (!id) return;
+    if (!confirm(`Excluir a lista "${displayName}"? Essa ação não pode ser desfeita.`)) return;
+    setDeleting(true);
+    await deleteShoppingList(id);
+    navigate("/minhas-listas");
+  }
+
+  async function copyShareText() {
+    if (!id) return;
+    const text = buildShareText(displayName, mode, resolved, total);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard indisponível — o texto continua visível pra copiar manualmente */ }
+  }
+
+  const shareText = id ? buildShareText(displayName, mode, resolved, total) : "";
+  const whatsappShareLink = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
 
   if (loading) return <main className="pc-lists-state"><LoaderCircle className="spin" aria-hidden="true" /><strong>Carregando sua lista…</strong></main>;
   if (!meta) return <main className="pc-lists-state"><strong>Lista não encontrada.</strong><Link to="/minhas-listas">Voltar para minhas listas</Link></main>;
@@ -128,7 +178,24 @@ export function ShoppingListDetailPage() {
       <section className="pc-lists-hero pc-lists-hero--detail">
         <div>
           <span><ListChecks aria-hidden="true" /> {MODE_LABEL[mode]}</span>
-          <h1>{meta.name}</h1>
+          {renaming
+            ? <input
+                className="pc-lists-title-rename"
+                defaultValue={displayName}
+                autoFocus
+                onBlur={e => void handleRename(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter") (e.target as HTMLInputElement).blur(); if (e.key === "Escape") setRenaming(false); }}
+              />
+            : <h1>{displayName}</h1>}
+          <div className="pc-lists-header-actions">
+            <button type="button" onClick={() => setRenaming(true)}><Pencil aria-hidden="true" /> Renomear</button>
+            <button type="button" onClick={() => setShareOpen(v => !v)}><MessageCircle aria-hidden="true" /> Compartilhar</button>
+            <button type="button" className="is-danger" onClick={() => void handleDelete()} disabled={deleting}><Trash2 aria-hidden="true" /> {deleting ? "Excluindo…" : "Excluir lista"}</button>
+          </div>
+          {shareOpen && <div className="pc-lists-share">
+            <a href={whatsappShareLink} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Enviar pelo WhatsApp</a>
+            <button type="button" onClick={() => void copyShareText()}>{copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />} {copied ? "Copiado!" : "Copiar texto da lista"}</button>
+          </div>}
         </div>
         <div className="pc-lists-kpis">
           <article><small>ITENS</small><strong>{itemCount}</strong></article>
