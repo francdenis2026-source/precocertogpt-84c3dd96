@@ -5,6 +5,8 @@ import butchersImg from "../assets/sectors-2026/sector-banner-butchers.webp";
 import foodImg from "../assets/sectors-2026/sector-banner-food.webp";
 import booksImg from "../assets/sectors-2026/sector-banner-books.webp";
 import marketsImg from "../assets/sectors-2026/sector-banner-markets.webp";
+import pharmaciesImg from "../assets/sectors-2026/sector-banner-pharmacies.webp";
+import servicesImg from "../assets/sectors-2026/sector-banner-services.webp";
 
 /**
  * Banners próprios por setor (fornecidos prontos, com marca e texto já
@@ -19,6 +21,8 @@ const SECTOR_BANNERS: Partial<Record<BusinessGroupId, { image: string; alt: stri
   bakery: { image: bakeryImg, alt: "Padaria — pães fresquinhos todos os dias", href: "/padarias" },
   food: { image: foodImg, alt: "Lanchonete — sabor que combina com o seu dia", href: "/lanchonetes" },
   books: { image: booksImg, alt: "Livraria — mais que livros, novas histórias", href: "/livros" },
+  pharmacies: { image: pharmaciesImg, alt: "Farmácia — saúde e bem-estar sempre com você", href: "/farmacias" },
+  services: { image: servicesImg, alt: "Serviços — tudo o que você precisa em um só lugar", href: "/servicos" },
 };
 
 export function SectorPhotoBanners() {
