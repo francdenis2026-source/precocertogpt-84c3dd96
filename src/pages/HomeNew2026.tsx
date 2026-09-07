@@ -51,9 +51,23 @@ export function HomeNew2026() {
   useEffect(() => {
     let active = true;
 
+    // Sem retry, uma falha/timeout passageiro na primeira consulta (rede
+    // instável, cold start) deixava a home travada para sempre nos 2
+    // estabelecimentos estáticos e "Catálogo carregando…", sem nenhuma
+    // tentativa nova nem sinal de erro para o usuário.
+    const loadWithRetry = async (attempt = 0): Promise<CatalogPayload> => {
+      try {
+        return await fetchSectorCatalog();
+      } catch (error) {
+        if (attempt >= 2) throw error;
+        await new Promise(resolve => window.setTimeout(resolve, 1000 * 2 ** attempt));
+        return loadWithRetry(attempt + 1);
+      }
+    };
+
     const load = async () => {
       try {
-        const value = await fetchSectorCatalog();
+        const value = await loadWithRetry();
         if (!active) return;
         setCatalog(value);
 
