@@ -28,7 +28,7 @@ export function AdminCatalogWorkspace(){
  const chooseStore=(id:string)=>{setSelectedStore(id);setTab('store');const p=new URLSearchParams(params);p.set('tab','store');p.set('store',id);setParams(p,{replace:true})};
  const logout=async()=>{await signOut();navigate('/login')}; const q=query.trim().toLocaleLowerCase('pt-BR');
  const products=useMemo(()=>!data?[]:data.products.filter(p=>!q||[p.name,p.brand,p.category,p.barcode].some(v=>String(v||'').toLocaleLowerCase('pt-BR').includes(q))),[data,q]);
- const stores=useMemo(()=>!data?[]:data.establishments.filter(s=>!q||[s.name,s.neighborhood,s.kind].some(v=>String(v||'').toLocaleLowerCase('pt-BR').includes(q))),[data,q]);
+ const stores=useMemo(()=>!data?[]:data.establishments.filter(s=>!q||[s.name,s.neighborhood,s.kind].some(v=>String(v||'').toLocaleLowerCase('pt-BR').includes(q))).slice().sort((a,b)=>(b.product_count||0)-(a.product_count||0)),[data,q]);
  const gaps=useMemo(()=>!data?[]:data.coverageGaps.filter(g=>(!selectedStore||g.establishment_id===selectedStore)&&(!q||[g.product_name,g.category,g.brand,g.establishment_name].some(v=>String(v||'').toLocaleLowerCase('pt-BR').includes(q)))),[data,q,selectedStore]);
  useGSAP(()=>{
    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
