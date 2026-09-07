@@ -335,20 +335,27 @@ export function StoreDetailProfessional() {
           <div className="store-pro-product-image"><ProductImage product={product} /><ProductCardActions product={product} className="pca-row--overlay-left" showFavorite={false} showCart={false} /></div>
           <small className="store-pro-category">{product.category}</small>
           <strong>{product.name}</strong>
-          <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
+          {/* "Marca não informada" quebrava em duas linhas e ocupava o card
+              inteiro sem dizer nada útil — some quando a marca é desconhecida
+              em vez de anunciar a ausência dela. */}
+          {cleanBrand(product.brand) !== "Marca não informada" && (
+            <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
+          )}
           {/* O cadastro usa varios caracteres para "sem medida": hifen, meia-risca
               e travessao. So o hifen era tratado, entao lojas cujo cadastro veio
               com travessao mostravam uma fileira de tracos soltos no lugar do
               tamanho. */}
           <span className="store-pro-spec">{(product.size && !/^[-–—\s]*$/.test(product.size) ? product.size : "") || product.unit || "Unidade não informada"}</span>
-          <footer><em>preço cadastrado</em><b>{brl.format(product.minPrice)}</b></footer>
+          <footer><em>Menor preço</em><b>{brl.format(product.minPrice)}</b></footer>
         </Link>)}
           {teaserProducts.map(product => <Link key={product.id} to={signupHref} className="store-pro-product--teaser" aria-label={`Crie sua conta para ver o preço de ${product.name}`}>
           <div className="store-pro-product-image"><ProductImage product={product} /></div>
           <small className="store-pro-category">{product.category}</small>
           <strong>{product.name}</strong>
-          <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
-          <footer className="store-pro-product__blur"><em>preço cadastrado</em><b>{brl.format(product.minPrice)}</b></footer>
+          {cleanBrand(product.brand) !== "Marca não informada" && (
+            <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
+          )}
+          <footer className="store-pro-product__blur"><em>Menor preço</em><b>{brl.format(product.minPrice)}</b></footer>
           <i className="store-pro-product__lock"><LockKeyhole aria-hidden="true"/></i>
         </Link>)}
         </div> : <div className="store-pro-empty"><PackageSearch /><h3>Nenhum produto encontrado</h3><p>Tente outro nome ou remova algum filtro.</p><button type="button" className="pc-btn pc-btn--ghost" onClick={() => { setQuery(""); setCategory("Todos"); }}>Limpar filtros</button></div>}

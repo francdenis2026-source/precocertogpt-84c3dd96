@@ -1,8 +1,8 @@
 /* PreçoCerto — shell público adaptativo. Esta é a camada final de estrutura,
    navegação e áreas seguras; não altera regras de catálogo ou autenticação. */
 :root{
-  --pc-shell-header:64px;
-  --pc-shell-dock:72px;
+  --pc-shell-header:68px;
+  --pc-shell-dock:78px;
   --pc-shell-max:540px;
   --pc-shell-gutter:14px;
   --pc-shell-z-header:80;
@@ -29,7 +29,7 @@
   body.pc-app-shell :is(.mh26-header,.ref-header,.msearch26-header){z-index:var(--pc-shell-z-header)!important;padding-top:env(safe-area-inset-top);backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25)}
   body.pc-app-shell :is(main,#conteudo-principal){scroll-margin-top:calc(var(--pc-shell-header) + env(safe-area-inset-top))}
   body.pc-app-shell .ref-dock{position:fixed!important;z-index:var(--pc-shell-z-dock)!important;left:50%!important;right:auto!important;bottom:0!important;width:min(100%,var(--pc-shell-max))!important;min-height:var(--pc-shell-dock)!important;transform:translateX(-50%)!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;padding:5px 8px max(5px,env(safe-area-inset-bottom))!important;border:1px solid color-mix(in srgb,var(--pc-border,#dfe3df) 84%,transparent)!important;border-bottom:0!important;border-radius:20px 20px 0 0!important;background:color-mix(in srgb,var(--pc-surface,#fff) 94%,transparent)!important;box-shadow:0 -10px 32px rgb(16 24 40 / 10%)!important;backdrop-filter:blur(20px) saturate(1.35)!important;-webkit-backdrop-filter:blur(20px) saturate(1.35)!important}
-  body.pc-app-shell .ref-dock a{position:relative;min-width:0;min-height:56px;display:grid!important;place-items:center;align-content:center;gap:2px;padding:5px 2px;border-radius:14px;color:var(--pc-muted,#66736d)!important;font-size:11px!important;font-weight:720;text-decoration:none;touch-action:manipulation;transition:color var(--pc-shell-motion),background-color var(--pc-shell-motion)}
+  body.pc-app-shell .ref-dock a{position:relative;min-width:0;min-height:60px;display:grid!important;place-items:center;align-content:center;gap:3px;padding:5px 2px;border-radius:14px;color:var(--pc-muted,#66736d)!important;font-size:11.5px!important;font-weight:720;text-decoration:none;touch-action:manipulation;transition:color var(--pc-shell-motion),background-color var(--pc-shell-motion)}
   body.pc-app-shell .ref-dock a svg{width:22px!important;height:22px!important;stroke-width:2}
   body.pc-app-shell .ref-dock a.is-active{background:color-mix(in srgb,var(--pc-primary-soft,#fff3df) 78%,transparent)!important;color:var(--pc-primary-strong,#9d542e)!important}
   body.pc-app-shell .ref-dock a.is-active::before{top:2px;width:22px;height:3px;border-radius:999px;background:currentColor}

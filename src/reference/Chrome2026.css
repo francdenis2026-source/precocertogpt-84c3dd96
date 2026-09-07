@@ -96,11 +96,12 @@ html[data-theme="dark"] .ref-brand img.ref-brand__dark{display:block}
   .ref-header__utility{gap:8px}
 }
 @media(max-width:680px){
-  .ref-header__inner{grid-template-columns:1fr auto;min-height:60px}
+  .ref-header__inner{grid-template-columns:1fr auto;min-height:68px}
   .ref-header__utility{display:none}
   .ref-signin{display:none}
   .ref-menu{display:inline-grid}
   .ref-brand span{display:none}
+  .ref-brand img{height:34px}
 }
 
 /* ---------------------------------------------------------------------
