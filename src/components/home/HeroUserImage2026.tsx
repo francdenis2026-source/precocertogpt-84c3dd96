@@ -1,3 +1,4 @@
+import type React from "react";
 import { ArrowRight, PackageSearch, RefreshCw, Search, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
