@@ -81,6 +81,7 @@ Deno.serve(async (req) => {
     });
     const payment = await mpResponse.json().catch(() => ({}));
     if (!mpResponse.ok || !payment?.id) {
+      console.error("Mercado Pago recusou o pagamento:", mpResponse.status, JSON.stringify(payment));
       await admin.from("license_orders").update({ status: "cancelled", updated_at: new Date().toISOString() }).eq("id", order.id);
       return json({ error: "O Mercado Pago não conseguiu gerar o PIX.", detail: payment?.message }, 502);
     }
