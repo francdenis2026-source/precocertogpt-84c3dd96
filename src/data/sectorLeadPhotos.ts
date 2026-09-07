@@ -1,19 +1,31 @@
 import type { BusinessGroupId } from "./businessTaxonomy";
 import { sectorHeroImage } from "./sectorHeroImages";
 
+import butchersImg from "../assets/sectors-2026/sector-photo-butchers.webp";
+import foodImg from "../assets/sectors-2026/sector-photo-food.webp";
+import booksImg from "../assets/sectors-2026/sector-photo-books.webp";
+import bakeryImg from "../assets/sectors-2026/sector-photo-bakery.webp";
+import marketsImg from "../assets/sectors-2026/sector-photo-markets.webp";
+import pharmaciesImg from "../assets/sectors-2026/sector-photo-pharmacies.webp";
+import servicesImg from "../assets/home-2026/comerciante-feijo-app.webp";
+
 /**
  * Foto do card de estabelecimento em destaque na home, trocando junto com o
- * negócio que a rotação exibe.
- *
- * Os banners de "banco de fotos" (mercantil, açougue, padaria, lanchonete,
- * livraria, farmácia, serviços) são cartazes prontos, com texto/sinalização
- * espalhado pela imagem inteira — não só num canto que dê pra recortar fora.
- * Esse card sobrepõe o nome do estabelecimento em cima da foto (como todo
- * card com foto+overlay do site), então usar um cartaz já cheio de texto ali
- * sobrescrevia/competia com o nome. Fica só com fotografia limpa (sem texto
- * embutido); os cartazes completos aparecem inteiros, sem overlay nosso, na
- * vitrine "Setores em destaque" de /explorar.
+ * negócio que a rotação exibe. Diferente dos banners de "Setores em
+ * destaque" (/explorar), essas são fotografia crua, sem nenhum texto
+ * embutido — porque este card sobrepõe o nome do estabelecimento em cima da
+ * foto, e um banner com texto próprio brigava com esse nome.
  */
+const DEDICATED_PHOTOS: Partial<Record<BusinessGroupId, string>> = {
+  markets: marketsImg,
+  butchers: butchersImg,
+  bakery: bakeryImg,
+  food: foodImg,
+  books: booksImg,
+  pharmacies: pharmaciesImg,
+  services: servicesImg,
+};
+
 export function sectorLeadPhoto(id: BusinessGroupId): string {
-  return sectorHeroImage(id);
+  return DEDICATED_PHOTOS[id] ?? sectorHeroImage(id);
 }
