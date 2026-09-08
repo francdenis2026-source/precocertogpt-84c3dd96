@@ -590,6 +590,25 @@
   justify-self: end;
   padding: 0 0 1.9rem 1.8rem;
 }
+/* Enquanto a foto do hero ainda não chegou, o espaço reservado dela fica só
+   com a mancha borrada abaixo (::before) por trás, parada, sem nenhum sinal
+   de que algo está de fato carregando — lida como tela travada, não como
+   carregamento. Um brilho correndo devagar avisa "isso é temporário". Some
+   sozinho assim que a <img> ganha data-pc-img-ready (ver imageLoadFade.ts). */
+.pcx-hero__visual:has(.pcx-hero__image:not([data-pc-img-ready])) {
+  border-radius: var(--h-radius-xl);
+  overflow: hidden;
+  background: linear-gradient(100deg, var(--h-surface-2) 25%, var(--h-surface) 50%, var(--h-surface-2) 75%);
+  background-size: 220% 100%;
+  animation: pcx-hero-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes pcx-hero-shimmer {
+  0% { background-position: 120% 0; }
+  100% { background-position: -20% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pcx-hero__visual:has(.pcx-hero__image:not([data-pc-img-ready])) { animation: none; }
+}
 .pcx-hero__visual::before {
   content: "";
   position: absolute;
