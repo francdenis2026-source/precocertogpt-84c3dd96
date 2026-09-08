@@ -69,3 +69,37 @@ window.addEventListener("online", startNotifications, { once: true });
 // Centraliza o ciclo do service worker. O runtime também remove registros
 // antigos em previews/iframes, evitando HTML ou chunks obsoletos e tela branca.
 initializePwaRuntime();
+
+// Toda página troca de rota carregando um pedaço de código sob demanda
+// (lazy import). Depois de um novo deploy, o arquivo antigo que o navegador
+// tinha em mente simplesmente não existe mais no servidor — a busca falha,
+// a promise do import() nunca resolve, e a tela fica presa para sempre no
+// "carregando" (fundo cinza, sem erro visível, sem reação a clique: "trava
+// cinza" na prática). Um recarregamento único e automático resolve, porque
+// ele busca o HTML novo com os nomes de arquivo certos.
+(() => {
+  const RELOAD_GUARD_KEY = "pc:stale-chunk-reload";
+  const isStaleChunkError = (message: unknown) =>
+    typeof message === "string" &&
+    /failed to fetch dynamically imported module|error loading dynamically imported module|importing a module script failed/i.test(message);
+
+  const reloadOnce = () => {
+    if (window.sessionStorage.getItem(RELOAD_GUARD_KEY)) return;
+    window.sessionStorage.setItem(RELOAD_GUARD_KEY, "1");
+    window.location.reload();
+  };
+
+  // Evento nativo do Vite para exatamente este caso.
+  window.addEventListener("vite:preloadError", reloadOnce);
+
+  window.addEventListener("unhandledrejection", (event) => {
+    if (isStaleChunkError(event.reason?.message)) reloadOnce();
+  });
+  window.addEventListener("error", (event) => {
+    if (isStaleChunkError(event.message)) reloadOnce();
+  });
+
+  // Depois de uma navegação bem-sucedida, libera a trava — assim um problema
+  // real e persistente (não só o deploy antigo) não vira loop de recarga.
+  window.setTimeout(() => window.sessionStorage.removeItem(RELOAD_GUARD_KEY), 10_000);
+})();
