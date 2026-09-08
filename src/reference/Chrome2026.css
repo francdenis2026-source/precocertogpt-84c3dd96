@@ -107,7 +107,7 @@ html[data-theme="dark"] .ref-brand img.ref-brand__dark{display:block}
 /* ---------------------------------------------------------------------
    Footer
    --------------------------------------------------------------------- */
-.ref-footer{background:var(--pc-navy);color:rgba(255,255,255,.86);margin-top:auto}
+.ref-footer{background:var(--pc-forest-950,#022C20);color:rgba(255,255,255,.86);margin-top:auto}
 .ref-footer__inner{display:grid;grid-template-columns:1.1fr 2fr;gap:clamp(28px,5vw,64px);padding-block:clamp(40px,6vw,72px) 28px}
 .ref-footer__identity{display:flex;flex-direction:column;gap:14px;max-width:280px}
 .ref-footer__identity .ref-brand{color:#fff}

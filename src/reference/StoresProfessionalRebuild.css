@@ -66,7 +66,7 @@
   .ref-stores-page .ref-store-cards>header{position:sticky;top:0;z-index:2;background:var(--pc-canvas);padding-top:3px;padding-bottom:2px}
 }
 
-.ref-stores-page>.ref-footer{margin-top:auto;padding:0;background:var(--pc-navy);border-top:1px solid rgb(255 255 255/10%)}
+.ref-stores-page>.ref-footer{margin-top:auto;padding:0;background:var(--pc-forest-950,#022C20);border-top:1px solid rgb(255 255 255/10%)}
 .ref-stores-page>.ref-footer .ref-footer__grid{display:none}
 .ref-stores-page>.ref-footer .ref-footer__legal{min-height:54px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0;color:rgb(255 255 255/65%)}
 .ref-stores-page>.ref-footer .ref-footer__legal small,.ref-stores-page>.ref-footer .ref-footer__legal span{font-size:11.5px}

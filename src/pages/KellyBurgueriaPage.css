@@ -91,7 +91,7 @@ html[data-theme="dark"] .kelly-hero__overlay{
 
 /* ---------- Menu groups ---------- */
 .kelly-menu-group{border:1px solid var(--pc-border);border-radius:var(--pc-radius-block,18px);overflow:hidden;background:var(--pc-surface);scroll-margin-top:66px}
-.kelly-menu-group__head{position:relative;padding:14px 18px;background:var(--pc-navy) center/cover no-repeat;min-height:56px;display:flex;align-items:center}
+.kelly-menu-group__head{position:relative;padding:14px 18px;background:var(--pc-forest-950,#022C20) center/cover no-repeat;min-height:56px;display:flex;align-items:center}
 .kelly-menu-group__head-veil{position:absolute;inset:0;background:linear-gradient(100deg,rgba(12,20,26,.9),rgba(12,20,26,.6) 60%,rgba(12,20,26,.35))}
 .kelly-menu-group__head-copy{position:relative;z-index:1;color:#fff;display:flex;align-items:center;flex-wrap:wrap;column-gap:10px;row-gap:2px}
 .kelly-menu-group__head-icon{flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:9px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24)}

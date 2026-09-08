@@ -39,7 +39,7 @@
 .ref-search-results>footer{padding:8px;border-top:1px solid var(--pc-border)}
 .ref-search-results>footer>small{display:flex;align-items:center;gap:4px;padding-left:5px;color:var(--pc-muted);font-size:var(--pc-text-xs);white-space:nowrap}
 .ref-search-results kbd{min-width:20px;min-height:20px;display:inline-grid;place-items:center;padding:0 4px;border:1px solid var(--pc-border);border-radius:4px;background:var(--pc-surface);color:var(--pc-ink);font:inherit;font-weight:800}
-.ref-search-results>footer button{width:100%;min-height:36px;display:flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:var(--pc-radius-control);background:var(--pc-navy);color:#fff;font-size:var(--pc-text-sm);font-weight:850}
+.ref-search-results>footer button{width:100%;min-height:36px;display:flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:var(--pc-radius-control);background:var(--pc-forest-950,#022C20);color:#fff;font-size:var(--pc-text-sm);font-weight:850}
 .ref-search-results>footer svg{width:14px;height:14px}
 
 @media(hover:hover) and (pointer:fine){
@@ -106,7 +106,7 @@ main[tabindex="-1"]:focus{outline:none}
 .ref-product-dialog__store{display:flex;align-items:center;gap:12px;margin:18px 0;padding:13px;border-radius:var(--pc-radius-card);background:var(--pc-green-soft)}
 .ref-product-dialog__store>svg{width:20px;color:var(--pc-green-strong);height:20px}.ref-product-dialog__store>span{display:grid;gap:2px}
 .ref-product-dialog__store small,.ref-product-dialog__store em{color:var(--pc-muted);font-size:var(--pc-text-xs);font-style:normal}.ref-product-dialog__store strong{font-size:var(--pc-text-meta)}
-.ref-product-dialog section>a{min-height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:var(--pc-radius-control);background:var(--pc-navy);color:#fff;font-size:var(--pc-text-meta);font-weight:850}.ref-product-dialog section>a svg{width:16px;height:16px}
+.ref-product-dialog section>a{min-height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:var(--pc-radius-control);background:var(--pc-forest-950,#022C20);color:#fff;font-size:var(--pc-text-meta);font-weight:850}.ref-product-dialog section>a svg{width:16px;height:16px}
 @keyframes ref-dialog-in{from{opacity:0;transform:translateY(12px) scale(.975)}to{opacity:1;transform:none}}
 
 /* Carregamento progressivo do catálogo. */

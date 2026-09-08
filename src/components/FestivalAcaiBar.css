@@ -286,7 +286,7 @@ html[data-theme="dark"] .pc-festival-bar,
 html[data-theme="dark"] .pc-festival-bar.theme-emerald,
 html[data-theme="dark"] .pc-festival-bar.theme-amber,
 html[data-theme="dark"] .pc-festival-bar.theme-slate{
-  background:var(--pc-navy,#252b30);
+  background:var(--pc-forest-950,#022C20);
   color:var(--pc-on-structural,#f5f7f5);
 }
 html[data-theme="dark"] .pc-festival-bar__art strong{color:var(--pc-on-structural,#f5f7f5)}
