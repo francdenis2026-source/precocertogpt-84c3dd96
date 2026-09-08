@@ -161,8 +161,37 @@ html[data-theme="dark"] .ref-brand img.ref-brand__dark{display:block}
   color:var(--pc-muted);text-decoration:none;font-size:12px;font-weight:var(--pc-weight-medium);
   touch-action:manipulation;
 }
-.ref-dock a svg{width:21px;height:21px}
+/* Um pouco maiores que antes (21px): pequenos demais para o alvo de toque
+   de 5 abas — sem virar ícone gigante, só mais fácil de mirar e ler. */
+.ref-dock a svg{width:23px;height:23px}
 .ref-dock a.is-active{color:var(--pc-green-strong)}
+/* Cada aba com a própria cor no tema claro (mesma lógica das categorias
+   coloridas da home: identidade visual, não "tudo cinza até ficar ativo").
+   Só o ícone muda de cor — o rótulo continua neutro, e vira o tom da aba
+   só quando ativa, com uma pílula suave atrás pra marcar a seleção. No
+   escuro mantém o cinza neutro + verde no ativo. */
+html[data-theme="light"] .ref-dock a:nth-child(1) { --dock-color: #1AA362; } /* Início */
+html[data-theme="light"] .ref-dock a:nth-child(2) { --dock-color: #2563EB; } /* Buscar */
+html[data-theme="light"] .ref-dock a:nth-child(3) { --dock-color: #D97706; } /* Cesta */
+html[data-theme="light"] .ref-dock a:nth-child(4) { --dock-color: #7C3AED; } /* Lojas */
+html[data-theme="light"] .ref-dock a:nth-child(5) { --dock-color: #DB2777; } /* Favoritos */
+html[data-theme="light"] .ref-dock a svg { color: var(--dock-color, var(--pc-muted)); }
+html[data-theme="light"] .ref-dock a.is-active {
+  position: relative;
+  color: var(--dock-color, var(--pc-green-strong));
+  font-weight: var(--pc-weight-bold, 700);
+}
+html[data-theme="light"] .ref-dock a.is-active::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--dock-color, var(--pc-green-strong));
+  opacity: 0.14;
+  z-index: -1;
+}
 @media(max-width:680px){
   .ref-dock{display:grid}
 }

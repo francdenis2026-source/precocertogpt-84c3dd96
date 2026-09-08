@@ -433,7 +433,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 /* Ficam visíveis em qualquer largura: o dock inferior do app não tem um
    atalho para Favoritos, então este é o único caminho direto no mobile. */
 @media (max-width: 480px) {
+  .pcx-header__theme,
   .pcx-header__icon { width: 36px; height: 36px; }
+  .pcx-header__theme svg,
   .pcx-header__icon svg { width: 16px; height: 16px; }
 }
 .pcx-header__menu {
@@ -525,6 +527,27 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-header__login span { display: none; }
   .pcx-header__login { padding: 0.5rem; }
   .pcx-header__menu { display: inline-flex; }
+
+  /* A barra de ferramentas (presença online + favoritos + cesta + rádio +
+     tema + menu) não cabia na largura de um celular sem quebrar — nada
+     nela tinha wrap nem encolhia, então os últimos itens (o seletor de
+     tema, às vezes até o menu) ficavam empurrados para fora da tela,
+     invisíveis sem rolar. Cada peça fica um pouco mais compacta aqui, e
+     o scroll horizontal serve só de rede de segurança caso ainda não
+     caiba tudo numa tela muito estreita — nunca deveria precisar dele. */
+  .pcx-header__tools {
+    flex-shrink: 1;
+    min-width: 0;
+    gap: 0.4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .pcx-header__tools::-webkit-scrollbar { display: none; }
+  /* Decorativo (prova social, não navegação) — o primeiro a ceder espaço
+     para o resto da barra caber sem precisar rolar, principalmente o
+     seletor de tema, que é funcional e não pode ficar escondido. */
+  .pcx-header__tools .ref-online { display: none; }
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
@@ -902,18 +925,29 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 }
 @media (max-width: 640px) {
   /* Hero compacto no app: menos altura em título, busca e botões — o
-     objetivo é caber mais tela útil acima da dobra num celular. A foto de
-     fundo continua full-bleed (herdada de .pcx-hero); só o enquadramento
-     muda de posição para manter a cliente visível num recorte mais alto
-     que largo, e o véu vira um degradê de cima para baixo (o layout aqui
-     é 1 coluna só, não faz mais sentido opaco-esquerda/claro-direita). */
-  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 80% 18%; }
+     objetivo é caber mais tela útil acima da dobra num celular. O véu
+     opaco (.92-.82 em todas as paradas) apagava a foto quase por completo;
+     a cliente do carrinho ficava irreconhecível. Baixa a opacidade bastante
+     e troca o desfoque de contraste (que antes vinha só do véu escuro) por
+     uma camada dedicada com blur leve atrás do véu — texto continua nítido,
+     a foto aparece de verdade sem perder a legibilidade. Enquadramento
+     ajustado para trazer o rosto/carrinho mais para dentro do recorte. */
+  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 72% 26%; }
+  .pcx-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    inset: -12px;
+    background: var(--pcx-hero-photo) 72% 26% / cover no-repeat;
+    filter: blur(3px);
+  }
   .pcx-hero::before {
     background-image: linear-gradient(
       180deg,
-      rgba(2, 44, 32, 0.92) 0%,
-      rgba(2, 44, 32, 0.88) 55%,
-      rgba(2, 44, 32, 0.82) 100%
+      rgba(2, 44, 32, 0.42) 0%,
+      rgba(2, 44, 32, 0.5) 40%,
+      rgba(2, 44, 32, 0.72) 78%,
+      rgba(2, 44, 32, 0.8) 100%
     );
   }
   .pcx-hero__inner { grid-template-columns: 1fr; gap: 1rem; }
@@ -1277,7 +1311,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-products {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(152px, 40vw);
+    grid-auto-columns: minmax(168px, 44vw);
     grid-template-columns: none;
     gap: 0.6rem;
     overflow-x: auto;
@@ -1293,13 +1327,22 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-products::-webkit-scrollbar { display: none; }
   .pcx-product { scroll-snap-align: start; }
   .pcx-empty { grid-column: auto; min-width: 100%; }
-  .pcx-skeleton { min-width: 152px; }
+  .pcx-skeleton { min-width: 168px; }
+  /* Cards um pouco maiores no app pediam texto um pouco maior junto — os
+     valores base (pensados pra grade densa de 6 colunas do desktop) ficavam
+     pequenos demais pra leitura confortável numa tela de celular. Aumento
+     modesto (não dobra nada, só sobe uma faixa), preços e botões continuam
+     do tamanho que já estava. */
+  .pcx-product__category { font-size: 0.66rem; }
+  .pcx-product__body h3 { font-size: 0.88rem; min-height: 2.2em; }
+  .pcx-product__meta,
+  .pcx-product__store { font-size: 0.74rem; }
 }
 @media (max-width: 480px) {
   .pcx-prices { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
   .pcx-prices div { gap: 0.35rem; }
   .pcx-product__footer { flex-wrap: wrap; }
-  .pcx-product__footer strong { font-size: 0.62rem; }
+  .pcx-product__footer strong { font-size: 0.68rem; }
 }
 
 /* ── Category bar ───────────────────────────────────────────────────────── */
@@ -1348,7 +1391,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-categories {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 78px;
+    grid-auto-columns: 86px;
     grid-template-columns: none;
     gap: 0.6rem;
     overflow-x: auto;
@@ -1367,14 +1410,14 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
     text-align: center;
     justify-content: center;
     gap: 0.4rem;
-    padding: 0.65rem 0.4rem;
+    padding: 0.7rem 0.4rem;
     max-height: none;
     scroll-snap-align: start;
   }
-  .pcx-category i { width: 2.3rem; height: 2.3rem; }
-  .pcx-category i svg { width: 1.05rem; height: 1.05rem; }
+  .pcx-category i { width: 2.5rem; height: 2.5rem; }
+  .pcx-category i svg { width: 1.15rem; height: 1.15rem; }
   .pcx-category__text { justify-items: center; }
-  .pcx-category strong { font-size: 0.68rem; white-space: normal; line-height: 1.15; }
+  .pcx-category strong { font-size: 0.74rem; white-space: normal; line-height: 1.2; }
   .pcx-category__text span { display: none; }
 }
 
