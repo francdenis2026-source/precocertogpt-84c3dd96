@@ -57,3 +57,11 @@ a[href*="lovable.app"][target="_blank"]:has(img[src*="lovable"]) {
 }
 .pc-skip-link:focus { translate: 0; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Troca de página (Suspense entre rotas): sem isso era só o fundo cinza do
+   app aparecendo vazio por um instante — parecia falha de carregamento, não
+   um carregamento de verdade. */
+.pc-route-loading{min-height:100dvh;display:grid;place-items:center;background:var(--pc-canvas,#F5F6F8)}
+.pc-route-loading::after{content:"";width:30px;height:30px;border:3px solid color-mix(in srgb,var(--pc-green,#0e7a5f) 22%,transparent);border-top-color:var(--pc-green,#0e7a5f);border-radius:50%;animation:pc-route-loading-spin .8s linear infinite}
+@keyframes pc-route-loading-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.pc-route-loading::after{animation:none;opacity:.5}}
