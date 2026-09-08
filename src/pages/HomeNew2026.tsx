@@ -13,6 +13,7 @@ import {
   currentCycle,
   msUntilNextCycle,
 } from "../data/featuredRotation";
+import { FestivalAcaiBar } from "../components/FestivalAcaiBar";
 import { BottomNav } from "../components/home/BottomNav";
 import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
@@ -134,6 +135,7 @@ export function HomeNew2026() {
 
   return (
     <div className="pcx-home">
+      <FestivalAcaiBar />
       <Header />
       <main id="conteudo-principal">
         <HeroUserImage2026
