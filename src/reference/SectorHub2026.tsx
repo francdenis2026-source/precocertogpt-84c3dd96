@@ -123,7 +123,7 @@ export function SectorHub2026() {
               </div>
             </div>
             <figure className="sector-hub__hero-visual">
-              <img src="/home-editorial-2026/campanha-familia-precocerto-v1.webp" alt="Família comparando preços no celular durante as compras no mercado" loading="eager" width="1536" height="1024" />
+              <img src="/home-editorial-2026/campanha-familia-precocerto-v2.webp" alt="Família comparando preços no celular durante as compras no mercado" loading="eager" width="1264" height="848" />
             </figure>
           </div>
         </section>
