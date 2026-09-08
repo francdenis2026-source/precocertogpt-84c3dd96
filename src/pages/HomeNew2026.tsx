@@ -19,6 +19,7 @@ import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
+import { TrustBar } from "../components/home/TrustBar";
 import { LocalBanner } from "../components/home/LocalBanner";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { TrendingProducts } from "../components/home/TrendingProducts";
@@ -145,7 +146,8 @@ export function HomeNew2026() {
           loading={loading}
           cycle={cycle}
         />
-        <CategoryBar />
+        <TrustBar />
+        <CategoryBar stores={catalog.stores} />
         <ProductGrid products={featured} loading={loading} />
         <TrendingProducts products={products} />
         <SmartBasketSpotlight products={products} />

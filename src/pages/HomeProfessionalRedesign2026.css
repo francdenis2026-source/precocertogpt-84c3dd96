@@ -1830,3 +1830,70 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
    cobre Início/Buscar/Explorar/Cesta/Conta, então isso só duplicava
    navegação e inchava o rodapé. Mobile fica só com marca, CTA de lojista e
    a linha de crédito, como o comentário original (linha ~1409) já pedia. */
+
+/* ── Faixa de confiança (logo abaixo do hero) ─────────────────────────────
+   Existe no pacote de referência visual (hero principal.png, faixa clara
+   sob a foto) mas não tinha equivalente na home — só o hero escuro seguido
+   direto de "Explore por categoria". Fundo verde bem claro (--h-primary-soft,
+   o mesmo tom do selo de menor preço) para separar visualmente do hero
+   escuro sem competir com ele. */
+.pcx-trustbar {
+  background: var(--h-primary-soft);
+  border-bottom: 1px solid var(--h-border);
+}
+.pcx-trustbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-block: 0.9rem;
+}
+.pcx-trustbar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem 1.9rem;
+}
+.pcx-trustbar__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.pcx-trustbar__icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--h-surface);
+  color: var(--h-primary-dark);
+}
+.pcx-trustbar__icon svg { width: 16px; height: 16px; }
+.pcx-trustbar__list strong { display: block; font-size: 0.86rem; font-weight: 800; color: var(--h-ink); line-height: 1.25; }
+.pcx-trustbar__list small { display: block; font-size: 0.74rem; color: var(--h-muted); line-height: 1.3; }
+.pcx-trustbar__tag {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding-left: 1.9rem;
+  border-left: 1px solid var(--h-border);
+}
+.pcx-trustbar__tag svg { width: 18px; height: 18px; color: var(--h-primary-dark); flex-shrink: 0; }
+.pcx-trustbar__tag strong { display: block; font-size: 0.86rem; font-weight: 900; color: var(--h-ink); }
+.pcx-trustbar__tag small { display: block; font-size: 0.74rem; color: var(--h-muted); }
+@media (max-width: 760px) {
+  .pcx-trustbar__tag { display: none; }
+  .pcx-trustbar__list { gap: 0.9rem 1.3rem; }
+  .pcx-trustbar__icon { width: 30px; height: 30px; }
+  .pcx-trustbar__icon svg { width: 14px; height: 14px; }
+  .pcx-trustbar__list strong { font-size: 0.78rem; }
+  .pcx-trustbar__list small { font-size: 0.68rem; }
+}
+@media (max-width: 480px) {
+  .pcx-trustbar__list small { display: none; }
+}
