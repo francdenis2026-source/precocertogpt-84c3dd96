@@ -2,20 +2,20 @@ import { ArrowRight, PackageSearch } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { ProductCard } from "./ProductCard";
+import { SectionHeader } from "./SectionHeader";
 
 export function ProductGrid({ products, loading }: { products: Product[]; loading: boolean }) {
   return (
     <section className="pcx-section" aria-labelledby="offers-title">
       <div className="pcx-shell">
-        <div className="pcx-section__head">
-          <div>
-            <h2 id="offers-title">Comparações em destaque</h2>
-            <p>Preço, loja e economia reunidos para você decidir mais rápido.</p>
-          </div>
-          <Link className="pcx-section__link" to="/buscar">
-            Explorar catálogo <ArrowRight aria-hidden="true" />
-          </Link>
-        </div>
+        <SectionHeader
+          id="offers-title"
+          title="Ofertas em destaque"
+          description="Preço, loja e economia reunidos para você decidir mais rápido."
+          linkTo="/buscar"
+          linkLabel="Explorar catálogo"
+          linkIcon={<ArrowRight aria-hidden="true" />}
+        />
 
         <div className="pcx-products" aria-busy={loading} aria-live="polite">
           {loading

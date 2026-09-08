@@ -52,7 +52,7 @@
 .sector-hub__hero-actions a:active { transform: scale(.97); }
 
 @media (hover: hover) and (pointer: fine) {
-  .sector-hub__hero-actions a:not(:first-child):hover { background: var(--pc-surface); border-color:var(--pc-gold,#D99A00); }
+  .sector-hub__hero-actions a:not(:first-child):hover { background: var(--pc-surface); border-color:var(--pc-gold,#0fa958); }
   .sector-hub__hero-actions a:first-child:hover { background: color-mix(in srgb, var(--pc-gold, #b77918) 88%, #000); }
 }
 

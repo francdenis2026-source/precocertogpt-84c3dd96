@@ -35,6 +35,7 @@ type LiveProductSearchProps = {
   loading?: boolean;
   compact?: boolean;
   id: string;
+  placeholder?: string;
 };
 
 export function LiveProductSearch({
@@ -42,6 +43,7 @@ export function LiveProductSearch({
   loading = false,
   compact = false,
   id,
+  placeholder,
 }: LiveProductSearchProps) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -153,9 +155,10 @@ export function LiveProductSearch({
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder={
-            compact
+            placeholder ||
+            (compact
               ? "Busque produto, marca ou categoria"
-              : "Buscar produto ou marca"
+              : "Buscar produto ou marca")
           }
           autoComplete="off"
           aria-autocomplete="list"

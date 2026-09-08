@@ -77,14 +77,14 @@
     font-size:.72rem!important;font-weight:800!important;letter-spacing:0!important;
     white-space:nowrap!important;
   }
-  html[data-theme="dark"] .pc26-header__search .pc26-live-search__submit{background:#FFB800!important;color:#121214!important}
+  html[data-theme="dark"] .pc26-header__search .pc26-live-search__submit{background:#28CC70!important;color:#09130f!important}
   .pc26-header__search .pc26-live-search__submit svg{width:14px!important;height:14px!important}
 
   .pc26-header__search .pc26-search:focus-within{
     border-color:color-mix(in srgb,var(--primary) 58%,var(--border))!important;
     box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 10%,transparent),0 4px 16px rgba(16,24,40,.055)!important;
   }
-  html[data-theme="dark"] .pc26-header__search .pc26-search:focus-within{box-shadow:0 0 0 3px rgba(255,184,0,.10)!important}
+  html[data-theme="dark"] .pc26-header__search .pc26-search:focus-within{box-shadow:0 0 0 3px rgba(40,204,112,.10)!important}
 
   .pc26-header__search .pc26-live-results{
     position:absolute!important;

@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
 import { groupForStore } from "../../data/businessTaxonomy";
 import { sectorLeadPhoto } from "../../data/sectorLeadPhotos";
+import { SectionHeader } from "./SectionHeader";
 
 export function StoreRail({
   stores,
@@ -22,14 +23,11 @@ export function StoreRail({
     return (
       <section className="pcx-section" aria-labelledby="stores-title" aria-busy="true">
         <div className="pcx-shell">
-          <div className="pcx-section__head">
-            <div>
-              <h2 id="stores-title">Comércios para comparar</h2>
-              <p>
-                Encontre catálogos ativos por bairro e veja os preços disponíveis.
-              </p>
-            </div>
-          </div>
+          <SectionHeader
+            id="stores-title"
+            title="Comércio perto de você"
+            description="Encontre catálogos ativos por bairro e veja os preços disponíveis."
+          />
           <div className="pcx-stores">
             <div className="pcx-skeleton pcx-store-hero" aria-hidden="true" />
             <div className="pcx-store-list">
@@ -66,17 +64,14 @@ export function StoreRail({
   return (
     <section className="pcx-section" aria-labelledby="stores-title">
       <div className="pcx-shell">
-        <div className="pcx-section__head">
-          <div>
-            <h2 id="stores-title">Comércios para comparar</h2>
-            <p>
-              Encontre catálogos ativos por bairro e veja os preços disponíveis.
-            </p>
-          </div>
-          <Link className="pcx-section__link" to="/estabelecimentos">
-            Todos os estabelecimentos <ArrowRight aria-hidden="true" />
-          </Link>
-        </div>
+        <SectionHeader
+          id="stores-title"
+          title="Comércio perto de você"
+          description="Encontre catálogos ativos por bairro e veja os preços disponíveis."
+          linkTo="/estabelecimentos"
+          linkLabel="Todos os estabelecimentos"
+          linkIcon={<ArrowRight aria-hidden="true" />}
+        />
 
         <div className="pcx-stores">
           <Link
@@ -109,7 +104,7 @@ export function StoreRail({
                   <small>produtos no catálogo</small>
                 </span>
                 <b>
-                  Ver catálogo <ArrowUpRight aria-hidden="true" />
+                  Ver preços <ArrowUpRight aria-hidden="true" />
                 </b>
               </div>
             </div>

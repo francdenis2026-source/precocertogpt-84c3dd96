@@ -19,9 +19,9 @@ import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
 import { HeroUserImage2026 } from "../components/home/HeroUserImage2026";
+import { LocalBanner } from "../components/home/LocalBanner";
 import { ProductGrid } from "../components/home/ProductGrid";
 import { TrendingProducts } from "../components/home/TrendingProducts";
-import { PromoBands } from "../components/home/PromoBands";
 import { SmartBasketSpotlight } from "../components/home/SmartBasketSpotlight";
 import { StoreRail } from "../components/home/StoreRail";
 import "./HomeProfessionalRedesign2026.css";
@@ -136,7 +136,7 @@ export function HomeNew2026() {
   return (
     <div className="pcx-home">
       <FestivalAcaiBar />
-      <Header />
+      <Header products={products} />
       <main id="conteudo-principal">
         <HeroUserImage2026
           products={products}
@@ -145,12 +145,12 @@ export function HomeNew2026() {
           loading={loading}
           cycle={cycle}
         />
-        <SmartBasketSpotlight />
+        <CategoryBar />
         <ProductGrid products={featured} loading={loading} />
         <TrendingProducts products={products} />
-        <PromoBands />
-        <CategoryBar />
+        <SmartBasketSpotlight products={products} />
         <StoreRail stores={catalog.stores} cycle={cycle} loading={loading} />
+        <LocalBanner />
       </main>
       <Footer />
       <BottomNav />

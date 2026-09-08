@@ -35,7 +35,7 @@
   transition:border-color .15s ease;
 }
 .pqv-close svg{width:15px;height:15px}
-.pqv-close:hover{background:var(--h-surface-2, #eef1f4);border-color:var(--h-primary, #0e7a5f)}
+.pqv-close:hover{background:var(--h-surface-2, #eef1f4);border-color:var(--h-primary, #0fa958)}
 
 .pqv-media{flex:none;position:relative;background:var(--h-surface-2, #eef1f4);display:flex;align-items:center;justify-content:center}
 .pqv-media{height:200px}
@@ -53,7 +53,7 @@
 .pqv-size{margin:0;font-size:0.78rem;color:var(--h-muted, #5c6773);line-height:1.5}
 
 .pqv-price-row{display:flex;flex-wrap:wrap;align-items:center;gap:0.6rem;margin-top:0.2rem}
-.pqv-price{font-size:1.3rem;font-weight:800;color:var(--h-primary-dark, #0a5c47)}
+.pqv-price{font-size:1.3rem;font-weight:800;color:var(--h-primary-dark, #087a45)}
 .pqv-store{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.78rem;color:var(--h-muted, #5c6773)}
 .pqv-store svg{width:13px;height:13px;flex:none}
 
@@ -67,21 +67,21 @@
 }
 .pqv-btn:hover{transform:translateY(-1px)}
 .pqv-btn svg{width:16px;height:16px}
-.pqv-btn--primary{background:var(--h-primary, #0e7a5f);border-color:var(--h-primary, #0e7a5f);color:var(--h-on-primary, #fff)}
-.pqv-btn--primary:hover{background:var(--h-primary-dark, #0a5c47);border-color:var(--h-primary-dark, #0a5c47)}
+.pqv-btn--primary{background:var(--h-primary, #0fa958);border-color:var(--h-primary, #0fa958);color:var(--h-on-primary, #fff)}
+.pqv-btn--primary:hover{background:var(--h-primary-dark, #087a45);border-color:var(--h-primary-dark, #087a45)}
 .pqv-btn--primary.is-active{background:var(--h-danger, #c0392b);border-color:var(--h-danger, #c0392b)}
-.pqv-btn--ghost:hover{border-color:var(--h-primary, #0e7a5f);background:var(--h-surface-2, #eef1f4)}
+.pqv-btn--ghost:hover{border-color:var(--h-primary, #0fa958);background:var(--h-surface-2, #eef1f4)}
 .pqv-btn--buy{
   width:100%;justify-content:center;margin-top:0.5rem;
-  background:var(--h-accent, #c8860a);border-color:var(--h-accent, #c8860a);color:#fff;
+  background:var(--h-primary, #0fa958);border-color:var(--h-primary, #0fa958);color:#fff;
   text-decoration:none;
 }
-.pqv-btn--buy:hover{background:var(--h-accent-dark, #9c6a08);border-color:var(--h-accent-dark, #9c6a08)}
+.pqv-btn--buy:hover{background:var(--h-primary-dark, #087a45);border-color:var(--h-primary-dark, #087a45)}
 
-.pqv-message{margin:0;font-size:0.78rem;font-weight:700;color:var(--h-primary-dark, #0a5c47)}
+.pqv-message{margin:0;font-size:0.78rem;font-weight:700;color:var(--h-primary-dark, #087a45)}
 
 .pqv-link{margin-top:auto;padding-top:0.3rem;font-size:0.78rem;font-weight:700;color:var(--h-muted, #5c6773);text-decoration:underline;text-underline-offset:3px;align-self:flex-start}
-.pqv-link:hover{color:var(--h-primary-dark, #0a5c47)}
+.pqv-link:hover{color:var(--h-primary-dark, #087a45)}
 
 /* Item de cardápio clicável (Kelly/Sanduba) */
 .kelly-menu-list__item-btn{

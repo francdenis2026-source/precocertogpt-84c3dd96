@@ -29,7 +29,7 @@
   margin: 0 auto 12px;
   border-radius: 14px;
   background: rgb(255 184 0 / 16%);
-  color: var(--pc-gold, #ffb800);
+  color: var(--pc-gold, #28cc70);
 }
 .pc-session-kick__icon svg { width: 22px; height: 22px; }
 .pc-session-kick__card h2 {
@@ -52,7 +52,7 @@
   gap: 7px;
   font-size: 12.5px !important;
 }
-.pc-session-kick__hint svg { width: 15px; height: 15px; flex: none; color: var(--pc-gold, #ffb800); }
+.pc-session-kick__hint svg { width: 15px; height: 15px; flex: none; color: var(--pc-gold, #28cc70); }
 .pc-session-kick__actions { display: grid; gap: 8px; margin-top: 16px; }
 .pc-session-kick__primary,
 .pc-session-kick__ghost {
@@ -69,7 +69,7 @@
 }
 .pc-session-kick__primary {
   border: 0;
-  background: var(--pc-gold, #ffb800);
+  background: var(--pc-gold, #28cc70);
   /* Preenchimento dourado só aceita tinta escura. */
   color: #10161d;
 }

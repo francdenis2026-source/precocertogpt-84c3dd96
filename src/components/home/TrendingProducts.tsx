@@ -3,6 +3,7 @@ import { Flame } from "lucide-react";
 import type { Product } from "../../data/catalog";
 import { fetchTopProducts } from "../../lib/analytics";
 import { ProductCard } from "./ProductCard";
+import { SectionHeader } from "./SectionHeader";
 
 /**
  * "Mais buscados da plataforma": ranking real de visualizações de produto,
@@ -33,14 +34,11 @@ export function TrendingProducts({ products }: { products: Product[] }) {
   return (
     <section className="pcx-section" aria-labelledby="trending-title">
       <div className="pcx-shell">
-        <div className="pcx-section__head">
-          <div>
-            <h2 id="trending-title">
-              <Flame aria-hidden="true" className="pcx-trending__flame" /> Mais buscados da plataforma
-            </h2>
-            <p>Os produtos que mais gente comparou nos últimos 30 dias em Feijó.</p>
-          </div>
-        </div>
+        <SectionHeader
+          id="trending-title"
+          title={<><Flame aria-hidden="true" className="pcx-trending__flame" /> Mais buscados da plataforma</>}
+          description="Os produtos que mais gente comparou nos últimos 30 dias em Feijó."
+        />
         <div className="pcx-products">
           {trending.map(product => (
             <ProductCard key={product.id} product={product} />

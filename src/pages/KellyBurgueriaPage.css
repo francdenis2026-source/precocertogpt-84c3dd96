@@ -169,4 +169,4 @@ html[data-theme="dark"] .kelly-hero__overlay{
 @media(hover:hover) and (pointer:fine){
   .kelly-category-nav a:hover{background:var(--pc-surface-2);border-color:var(--pc-border-strong,var(--pc-border))}
 }
-.kelly-category-nav a:focus-visible{outline:3px solid color-mix(in srgb,var(--pc-gold,#d99a00) 45%,transparent);outline-offset:2px}
+.kelly-category-nav a:focus-visible{outline:3px solid color-mix(in srgb,var(--pc-gold,#0fa958) 45%,transparent);outline-offset:2px}

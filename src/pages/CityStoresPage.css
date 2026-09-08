@@ -28,8 +28,8 @@
 }
 
 .city-back a:hover {
-  border-color: var(--px-brand, #0b6757);
-  color: var(--px-brand, #0b6757);
+  border-color: var(--px-brand, #0fa958);
+  color: var(--px-brand, #0fa958);
 }
 
 .city-back svg,
@@ -60,7 +60,7 @@
   border-radius: 999px;
   border: 1px solid var(--px-brand-soft, rgba(11, 103, 87, 0.18));
   background: var(--px-brand-soft, rgba(11, 103, 87, 0.08));
-  color: var(--px-brand, #0b6757);
+  color: var(--px-brand, #0fa958);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -120,7 +120,7 @@
 
 .city-card:hover {
   transform: translateY(-2px);
-  border-color: var(--px-brand, #0b6757);
+  border-color: var(--px-brand, #0fa958);
 }
 
 .city-card strong {
@@ -138,7 +138,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--px-brand, #0b6757);
+  color: var(--px-brand, #0fa958);
   font-size: 0.82rem;
   font-style: normal;
   font-weight: 600;
@@ -191,7 +191,7 @@
 }
 
 .city-store-list a:hover {
-  border-color: var(--px-brand, #0b6757);
+  border-color: var(--px-brand, #0fa958);
 }
 
 .city-store-dot {
@@ -213,7 +213,7 @@
 
 .city-store-list em,
 .city-product-grid em {
-  color: var(--px-brand, #0b6757);
+  color: var(--px-brand, #0fa958);
   font-size: 0.78rem;
   font-style: normal;
   font-weight: 600;
@@ -235,7 +235,7 @@
 }
 
 .city-product-grid a:hover {
-  border-color: var(--px-brand, #0b6757);
+  border-color: var(--px-brand, #0fa958);
 }
 
 .city-product-grid img,
@@ -264,7 +264,7 @@
 }
 
 .city-product-grid b {
-  color: var(--px-brand, #0b6757);
+  color: var(--px-brand, #0fa958);
   font-size: 1.02rem;
 }
 

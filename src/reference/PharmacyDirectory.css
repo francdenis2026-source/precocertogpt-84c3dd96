@@ -261,7 +261,7 @@ html[data-theme="dark"] .pharmacy-directory-page{background:var(--pc-canvas,#061
 .pharmacy-footer__brand { gap: 4px; }
 .pharmacy-footer__brand img { width: 112px; }
 .pharmacy-footer__brand span { color: rgba(255, 255, 255, 0.62); font-size: 11.5px; }
-.pharmacy-footer__brand svg { color: var(--pc-gold, #ffb800); }
+.pharmacy-footer__brand svg { color: var(--pc-gold, #28cc70); }
 .pharmacy-footer nav a {
   min-height: 44px;
   display: inline-flex;

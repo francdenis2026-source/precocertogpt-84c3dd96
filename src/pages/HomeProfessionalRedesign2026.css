@@ -9,28 +9,30 @@
    ========================================================================= */
 
 .pcx-home {
-  --h-canvas: #f6f7f9;
+  /* Paleta verde PreçoCerto 2026-09 (migração da identidade terracota/dourada
+     anterior — ver DESIGN.md). Valores alinhados a --pc-green-600/700 etc. */
+  --h-canvas: #f5f7f4;
   --h-surface: #ffffff;
-  --h-surface-2: #eef1f4;
-  --h-border: #e3e7ec;
-  --h-border-strong: #cfd6de;
-  --h-ink: #10161d;
-  --h-muted: #5c6773;
+  --h-surface-2: #eff4ef;
+  --h-border: #dde5df;
+  --h-border-strong: #cbd6cd;
+  --h-ink: #10231a;
+  --h-muted: #66756d;
   /* Era #8993a1: 3.11:1 sobre a superfície branca, abaixo do mínimo AA de
      4.5:1 e usado justamente nos rótulos pequenos (preço anterior, "menor
      preço", datas de atualização). Escurecido para 4.7:1. */
-  --h-subtle: #6b7480;
+  --h-subtle: #66756d;
 
-  --h-primary: #0e7a5f;
-  --h-primary-dark: #0a5c47;
-  --h-primary-soft: #e3f5ee;
+  --h-primary: #0fa958;
+  --h-primary-dark: #087a45;
+  --h-primary-soft: #e7f6ec;
   --h-on-primary: #ffffff;
 
-  --h-accent: #c8860a;
-  --h-accent-dark: #9c6a08;
-  --h-accent-soft: #fbf0dc;
+  --h-accent: #f1b72c;
+  --h-accent-dark: #8a6210;
+  --h-accent-soft: #fdf3dc;
 
-  --h-danger: #c0392b;
+  --h-danger: #e85151;
   --h-danger-soft: #fbe9e7;
 
   --h-radius-sm: 8px;
@@ -56,25 +58,25 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .pcx-home {
-    --h-canvas: #0d1512;
-    --h-surface: #151f1a;
-    --h-surface-2: #1c2822;
-    --h-border: #283630;
-    --h-border-strong: #37483f;
-    --h-ink: #f1f4f7;
-    --h-muted: #a7b0ba;
-    --h-subtle: #949fac;
+    --h-canvas: #09130f;
+    --h-surface: #101d17;
+    --h-surface-2: #17261e;
+    --h-border: rgba(255, 255, 255, 0.08);
+    --h-border-strong: rgba(255, 255, 255, 0.14);
+    --h-ink: #f5fbf7;
+    --h-muted: #9baaa2;
+    --h-subtle: #9baaa2;
 
-    --h-primary: #3ecf9a;
-    --h-primary-dark: #2fae82;
-    --h-primary-soft: #163529;
-    --h-on-primary: #06120d;
+    --h-primary: #28cc70;
+    --h-primary-dark: #21c768;
+    --h-primary-soft: #12281f;
+    --h-on-primary: #09130f;
 
-    --h-accent: #e8b84b;
+    --h-accent: #f1c24e;
     --h-accent-dark: #c89530;
     --h-accent-soft: #362a14;
 
-    --h-danger: #e5786a;
+    --h-danger: #f0776b;
     --h-danger-soft: #3a211d;
 
     --h-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -83,25 +85,25 @@
   }
 }
 [data-theme="dark"] .pcx-home {
-  --h-canvas: #0f1418;
-  --h-surface: #171d23;
-  --h-surface-2: #1e252c;
-  --h-border: #2a323a;
-  --h-border-strong: #3a434d;
-  --h-ink: #f1f4f7;
-  --h-muted: #a7b0ba;
-  --h-subtle: #949fac;
+  --h-canvas: #09130f;
+  --h-surface: #101d17;
+  --h-surface-2: #17261e;
+  --h-border: rgba(255, 255, 255, 0.08);
+  --h-border-strong: rgba(255, 255, 255, 0.14);
+  --h-ink: #f5fbf7;
+  --h-muted: #9baaa2;
+  --h-subtle: #9baaa2;
 
-  --h-primary: #3ecf9a;
-  --h-primary-dark: #2fae82;
-  --h-primary-soft: #163529;
-  --h-on-primary: #06120d;
+  --h-primary: #28cc70;
+  --h-primary-dark: #21c768;
+  --h-primary-soft: #12281f;
+  --h-on-primary: #09130f;
 
-  --h-accent: #e8b84b;
+  --h-accent: #f1c24e;
   --h-accent-dark: #c89530;
   --h-accent-soft: #362a14;
 
-  --h-danger: #e5786a;
+  --h-danger: #f0776b;
   --h-danger-soft: #3a211d;
 
   --h-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -223,11 +225,29 @@
 .pcx-header__brand strong { font-size: 1rem; font-weight: 800; }
 .pcx-header__brand small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; color: var(--h-muted); text-transform: uppercase; }
 
+/* Busca central do header — versão compacta da mesma LiveProductSearch do
+   hero (`compact`), só para desktop. No mobile/tablet a busca grande já
+   aparece logo abaixo do header, dentro do hero, então esta cópia soma
+   ruído sem ganho — some antes da faixa em que o header colapsa o menu. */
+.pcx-header__search {
+  /* basis 0 (não "auto") é o que faz o item crescer a partir do espaço livre
+     real da barra, em vez de partir do tamanho de conteúdo do formulário
+     (que sozinho já não cabe) e ser espremido a quase zero pelos vizinhos
+     de largura fixa (marca, nav, ferramentas). */
+  flex: 1 1 0%;
+  min-width: 160px;
+  max-width: 360px;
+  margin-inline: auto;
+}
+@media (max-width: 1180px) {
+  .pcx-header__search { display: none; }
+}
+
 .pcx-header__nav {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  margin-inline: auto;
+  flex-shrink: 0;
 }
 .pcx-header__nav a {
   display: flex;
@@ -258,6 +278,11 @@
   align-items: center;
   gap: 0.5rem;
   position: relative;
+  /* PersistentRadio.css define min-width:178px pensando no widget flutuante
+     (com o texto "tocando agora" sempre visível). Aqui, com o texto oculto
+     de propósito (ver .pc-radio__copy abaixo), o floor de 178px sobrava
+     como espaço vazio disputando lugar com a busca central do header. */
+  min-width: 0;
 }
 .pcx-header .pc-radio__play {
   display: flex;
@@ -310,10 +335,12 @@
    via :has(), e some sozinho fora de dispositivos com hover real. */
 .pcx-header .pc-radio.has-error .pc-radio__control { background: var(--h-danger); }
 
-@media (max-width: 1080px) {
-  .pcx-header .pc-radio__copy { display: none; }
-  .pcx-header .pc-radio__play { padding: 0.4rem; max-width: none; }
-}
+/* Sempre compacto (não só abaixo de uma largura): agora que o header tem
+   busca central, o rádio — decorativo — não pode ser o motivo de ela ficar
+   espremida. O nome da rádio continua acessível: aria-label no botão e a
+   dica ".pc-radio__track" no hover/focus (ver comentário abaixo). */
+.pcx-header .pc-radio__copy { display: none; }
+.pcx-header .pc-radio__play { padding: 0.4rem; max-width: none; }
 @media (max-width: 640px) {
   /* No app o rádio some do topo em telas estreitas; vira um botão redondo de
      play/pause do mesmo tamanho dos outros ícones do header, sem o texto.
@@ -353,7 +380,8 @@
 /* The bottom app nav already has a "Conta" tab for this. */
 @media (max-width: 640px) { .pcx-header__login { display: none; } }
 
-.pcx-header__theme {
+.pcx-header__theme,
+.pcx-header__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -365,12 +393,23 @@
   background: var(--h-surface);
   color: var(--h-ink);
   cursor: pointer;
+  text-decoration: none;
   transition: border-color 150ms ease, transform 150ms ease;
 }
-.pcx-header__theme svg { width: 17px; height: 17px; }
-.pcx-header__theme:hover { background: var(--h-surface-2); border-color: var(--h-primary); }
-.pcx-header__theme:active { transform: scale(0.94); }
-.pcx-header__theme:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
+.pcx-header__theme svg,
+.pcx-header__icon svg { width: 17px; height: 17px; }
+.pcx-header__theme:hover,
+.pcx-header__icon:hover { background: var(--h-surface-2); border-color: var(--h-primary); }
+.pcx-header__theme:active,
+.pcx-header__icon:active { transform: scale(0.94); }
+.pcx-header__theme:focus-visible,
+.pcx-header__icon:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
+/* Ficam visíveis em qualquer largura: o dock inferior do app não tem um
+   atalho para Favoritos, então este é o único caminho direto no mobile. */
+@media (max-width: 480px) {
+  .pcx-header__icon { width: 36px; height: 36px; }
+  .pcx-header__icon svg { width: 16px; height: 16px; }
+}
 .pcx-header__menu {
   display: none;
   align-items: center;
@@ -470,7 +509,7 @@
      busca ao vivo (absolute, abre para baixo) sempre que ele passava da
      borda inferior do hero. */
   overflow-x: clip;
-  padding: clamp(1.75rem, 3.5vw, 2.75rem) 0;
+  padding: clamp(1.4rem, 2.6vw, 2.1rem) 0;
   min-height: 0;
   display: flex;
   align-items: center;
@@ -519,6 +558,20 @@
   align-items: center;
 }
 .pcx-hero__copy { min-width: 0; }
+/* LocationSwitcher (.pc-location) nasceu para um fundo escuro/glass — aqui,
+   dentro da coluna de texto clara do herói, reskin para os tokens --h-*. */
+.pcx-hero__copy .pc-location { margin-bottom: 0.75rem; }
+.pcx-hero__copy .pc-location__chip {
+  background: var(--h-surface-2);
+  border-color: var(--h-border);
+  color: var(--h-ink);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.pcx-hero__copy .pc-location__chip > svg { background: var(--h-primary-soft); color: var(--h-primary-dark); }
+.pcx-hero__copy .pc-location__chip small { color: var(--h-subtle); }
+.pcx-hero__copy .pc-location__chip strong { color: var(--h-ink); }
 .pcx-hero h1 {
   max-width: 26ch;
   margin: 0;
@@ -546,7 +599,7 @@
   z-index: -1;
 }
 .pcx-hero__lead {
-  margin: 0.95rem 0 1.25rem;
+  margin: 0.7rem 0 1rem;
   font-size: clamp(1rem, 1.35vw, 1.12rem);
   color: var(--h-muted);
   max-width: 50ch;
@@ -584,9 +637,9 @@
 
 .pcx-hero__visual {
   position: relative;
-  min-height: 420px;
+  min-height: 390px;
   width: 100%;
-  max-width: 480px;
+  max-width: 460px;
   justify-self: end;
   padding: 0 0 1.9rem 1.8rem;
 }
@@ -610,7 +663,7 @@
 .pcx-hero__image {
   display: block;
   width: 100%;
-  height: 420px;
+  height: 390px;
   object-fit: cover;
   object-position: 55% 16%;
   border-radius: var(--h-radius-xl);
@@ -736,6 +789,77 @@
 }
 .pcx-hero__panel-foot svg { width: 14px; height: 14px; }
 
+/* Título do produto comparado, dentro do rótulo "COMPARAÇÃO REAL". */
+.pcx-hero__panel-title {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--h-ink);
+}
+/* Nome + selo "menor preço" na mesma linha, quebrando se precisar. */
+.pcx-hero__panel-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.pcx-hero__panel-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  background: var(--h-primary);
+  color: var(--h-on-primary);
+  font-style: normal;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.pcx-hero__panel-thumb--muted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--h-subtle);
+}
+.pcx-hero__panel-thumb--muted svg { width: 18px; height: 18px; }
+.pcx-hero__panel-price--muted {
+  color: var(--h-subtle) !important;
+  font-weight: 700 !important;
+  text-decoration: line-through;
+}
+
+/* Chips de sugestão de busca (não são um resultado do catálogo, só um
+   atalho de digitação — por isso vivem fora do painel de resultados). */
+.pcx-hero__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+}
+.pcx-hero__suggestions > span { color: var(--h-subtle); font-weight: 600; }
+.pcx-hero__suggestions a {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--h-border-strong);
+  background: var(--h-surface);
+  color: var(--h-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.pcx-hero__suggestions a:hover { border-color: var(--h-primary); background: var(--h-primary-soft); }
+.pcx-hero__suggestions a:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
+
+/* Faixa "economize" compacta — só existe no layout do app (ver @media 640px
+   abaixo). No desktop o painel flutuante sobre a foto já cumpre esse papel. */
+.pcx-hero__mobile-banner { display: none; }
+
 @media (max-width: 960px) {
   .pcx-hero__inner { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr); gap: 1.5rem; }
   .pcx-hero__visual { min-height: 340px; max-width: 380px; padding: 0 0 1.6rem 1.2rem; }
@@ -774,6 +898,27 @@
   .pcx-hero__panel { left: 0.6rem; bottom: -0.9rem; width: min(238px, 80%); padding: 0.75rem; border-radius: var(--h-radius-md); }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
   .pcx-hero__panel-foot { display: none; }
+
+  .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.72rem; }
+  .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
+
+  /* Faixa "economize até encontrar o menor preço": banner compacto verde
+     escuro, com pequeno ícone, logo abaixo da busca — só existe no app. */
+  .pcx-hero__mobile-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: var(--h-radius-lg);
+    background: linear-gradient(120deg, #0b2f22 0%, #0f4a30 60%, #136b3f 100%);
+    color: #fff;
+  }
+  .pcx-hero__mobile-banner svg {
+    width: 20px; height: 20px; flex-shrink: 0; color: #bdf3d2;
+  }
+  .pcx-hero__mobile-banner strong { display: block; font-size: 0.82rem; font-weight: 800; line-height: 1.25; }
+  .pcx-hero__mobile-banner span { display: block; font-size: 0.72rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
 }
 
 /* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important) */
@@ -1140,60 +1285,69 @@
 }
 
 /* ── Category bar ───────────────────────────────────────────────────────── */
-.pcx-categories { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.85rem; }
+/* 8 setores reais (businessTaxonomy.ts) — 4 colunas fecham em 2 linhas
+   arrumadas, em vez de sobrar 2 órfãos numa grade de 6. */
+.pcx-categories { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.85rem; }
 .pcx-category {
-  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem;
-  padding: 1.15rem 0.75rem; background: var(--h-surface); border: 1px solid var(--h-border);
+  display: flex; flex-direction: row; align-items: center; text-align: left; gap: 0.75rem;
+  max-height: 90px;
+  padding: 0.9rem 1rem; background: var(--h-surface); border: 1px solid var(--h-border);
   border-radius: var(--h-radius-lg); text-decoration: none; color: inherit;
   transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 }
 .pcx-category:hover { transform: translateY(-2px); border-color: var(--h-primary); box-shadow: var(--h-shadow-md); }
 .pcx-category:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
 .pcx-category i {
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   width: 2.75rem; height: 2.75rem; border-radius: 999px;
   background: var(--h-primary-soft); color: var(--h-primary-dark);
 }
 .pcx-category i svg { width: 1.3rem; height: 1.3rem; }
-.pcx-category strong { font-size: 0.85rem; font-weight: 700; }
-.pcx-category span { font-size: 0.72rem; color: var(--h-muted); }
+.pcx-category__text { display: grid; gap: 0.1rem; min-width: 0; }
+.pcx-category strong { display: block; font-size: 0.85rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-category__text span { font-size: 0.72rem; color: var(--h-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-@media (max-width: 960px) { .pcx-categories { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 480px) { .pcx-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-
-/* ── Promo bands ────────────────────────────────────────────────────────── */
-.pcx-promo-grid { display: grid; gap: 1rem; }
-.pcx-promo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-  background: var(--h-surface);
-  border: 1px solid var(--h-border);
-  border-radius: var(--h-radius-xl);
-  overflow: hidden;
+@media (max-width: 960px) { .pcx-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  /* Vira carrossel horizontal: cards de 72–82px de largura numa fileira só,
+     como o resto dos rails da home no app. */
+  .pcx-categories {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 78px;
+    grid-template-columns: none;
+    gap: 0.6rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--h-section-x);
+    margin-inline: calc(var(--h-section-x) * -1);
+    padding-inline: var(--h-section-x);
+    padding-bottom: 0.3rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pcx-categories::-webkit-scrollbar { display: none; }
+  .pcx-category {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem 0.4rem;
+    max-height: none;
+    scroll-snap-align: start;
+  }
+  .pcx-category i { width: 2.3rem; height: 2.3rem; }
+  .pcx-category i svg { width: 1.05rem; height: 1.05rem; }
+  .pcx-category__text { justify-items: center; }
+  .pcx-category strong { font-size: 0.68rem; white-space: normal; line-height: 1.15; }
+  .pcx-category__text span { display: none; }
 }
-.pcx-promo:nth-child(even) { grid-template-columns: 1fr 1fr; direction: rtl; }
-.pcx-promo:nth-child(even) > * { direction: ltr; }
-.pcx-promo__copy { padding: clamp(1.25rem, 3vw, 2.25rem); display: flex; flex-direction: column; justify-content: center; gap: 0.6rem; }
-.pcx-promo__copy h3 { font-size: clamp(1.1rem, 1.6vw, 1.4rem); line-height: 1.25; }
-.pcx-promo__copy p { margin: 0; color: var(--h-muted); font-size: 0.9rem; line-height: 1.55; max-width: 42ch; }
-.pcx-promo__copy a {
-  margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.4rem;
-  font-weight: 700; font-size: 0.88rem; color: var(--h-primary-dark); text-decoration: none; width: fit-content;
-}
-.pcx-promo__copy a svg { width: 15px; height: 15px; transition: transform 150ms ease; }
-.pcx-promo__copy a:hover svg { transform: translateX(3px); }
-.pcx-promo__media { position: relative; min-height: 200px; }
-.pcx-promo__media img { width: 100%; height: 100%; object-fit: cover; }
 
-@media (max-width: 780px) {
-  .pcx-promo, .pcx-promo:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
-  .pcx-promo__media { order: -1; min-height: 160px; }
-}
-
-/* Terceiro item do grupo: banner de largura total com a foto como fundo
-   e texto sobreposto, em vez de repetir pela terceira vez a mesma divisão
-   foto/texto lado a lado dos dois cards acima. */
+/* ── Banner local ───────────────────────────────────────────────────────── */
+/* Banner de largura total com a foto como fundo e texto sobreposto —
+   substitui a antiga seção "Informação que ajuda na escolha" (2 promos +
+   1 destaque): agora só o destaque fica, focado só em comércio local. */
 .pcx-promo-feature {
   position: relative;
   display: block;
@@ -1242,14 +1396,13 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(0.65rem, 1.6vw, 1.15rem);
-  padding: clamp(0.75rem, 1.6vw, 1.1rem) clamp(1rem, 3vw, 1.6rem);
+  align-items: stretch;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 3.5vw, 2.25rem);
   margin: clamp(1.1rem, 2.4vw, 1.75rem) 0;
   border-radius: var(--h-radius-xl);
   background: linear-gradient(120deg, #0b2f47 0%, #124a63 55%, #1b6b74 100%);
   box-shadow: var(--h-shadow-lg);
-  text-decoration: none;
   overflow: hidden;
   isolation: isolate;
 }
@@ -1260,15 +1413,6 @@
   z-index: -1;
   background: radial-gradient(120% 140% at 100% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 55%);
 }
-.pcx-spotlight__art {
-  flex: 0 0 auto;
-  width: clamp(56px, 8vw, 84px);
-  height: clamp(56px, 8vw, 84px);
-  border-radius: var(--h-radius-md);
-  overflow: hidden;
-  box-shadow: 0 4px 14px rgba(4, 12, 18, 0.35);
-}
-.pcx-spotlight__art img { width: 100%; height: 100%; object-fit: cover; object-position: 78% 22%; }
 .pcx-spotlight__badge {
   display: inline-flex;
   align-items: center;
@@ -1331,23 +1475,84 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.1rem;
+  margin-top: 1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: var(--h-radius-md);
   background: #fff;
   color: #0b2f47;
+  text-decoration: none;
   font-weight: 700;
   font-size: 0.88rem;
   white-space: nowrap;
+  width: fit-content;
   transition: transform 150ms ease, background 150ms ease;
 }
 .pcx-spotlight__cta svg { width: 16px; height: 16px; transition: transform 150ms ease; }
 @media (hover: hover) and (pointer: fine) {
-  .pcx-spotlight:hover .pcx-spotlight__cta { background: #eaf3f2; }
-  .pcx-spotlight:hover .pcx-spotlight__cta svg { transform: translateX(3px); }
+  .pcx-spotlight__cta:hover { background: #eaf3f2; }
+  .pcx-spotlight__cta:hover svg { transform: translateX(3px); }
+}
+
+/* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
+   já carregado, cada um com o estabelecimento mais barato encontrado. */
+.pcx-spotlight__mock {
+  flex: 1 1 260px;
+  max-width: 320px;
+  min-width: 0;
+  align-self: center;
+  padding: 1rem 1.1rem;
+  border-radius: var(--h-radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+}
+.pcx-spotlight__mock-head {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+}
+.pcx-spotlight__mock ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.pcx-spotlight__mock li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.1rem 0.6rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--h-radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+}
+.pcx-spotlight__mock-name {
+  grid-column: 1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pcx-spotlight__mock-store {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pcx-spotlight__mock-store svg { width: 10px; height: 10px; flex-shrink: 0; }
+.pcx-spotlight__mock li b { grid-column: 2; grid-row: 1 / span 2; font-size: 0.92rem; font-weight: 900; color: #fff; white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .pcx-spotlight__mock { max-width: none; width: 100%; }
 }
 @media (max-width: 720px) {
-  .pcx-spotlight { flex-direction: column; align-items: flex-start; }
-  .pcx-spotlight__art { display: none; }
+  .pcx-spotlight { flex-direction: column; align-items: stretch; }
   /* flex:1 1 320px (herdado do layout em linha) fazia o bloco de texto
      esticar por todo o espaço vertical disponível na coluna, empurrando o
      botão para o rodapé e deixando um vão vazio enorme no meio do card. */
@@ -1586,7 +1791,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   background: transparent;
   color: #fff;
 }
-.pcx-home .pcx-footer__cta:hover { background: var(--pc-gold, #ffb800); border-color: var(--pc-gold, #ffb800); color: #10161d; }
+.pcx-home .pcx-footer__cta:hover { background: var(--pc-gold, #0fa958); border-color: var(--pc-gold, #0fa958); color: #ffffff; }
 .pcx-home .pcx-footer__meta { border-top-color: rgba(255, 255, 255, 0.08); }
 /* 4.6:1 sobre #10161d. */
 .pcx-home .pcx-footer__meta,

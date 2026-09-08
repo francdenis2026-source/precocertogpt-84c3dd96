@@ -6,29 +6,29 @@
 .pc-auth-prompt__close{position:absolute;z-index:2;top:12px;right:12px;width:44px;height:44px;display:grid;place-items:center;border:1px solid #e3e7ec;border-radius:14px;background:rgb(255 255 255 / 92%);color:#5c6773;cursor:pointer}
 .pc-auth-prompt__close svg{width:20px}
 .pc-auth-illustration{display:block;width:100%;height:auto;max-height:190px;margin:0 auto 3px}
-.pc-auth-prompt__copy>span{display:block;color:#0e7a5f;font-size:10px;font-weight:900;letter-spacing:.09em}
+.pc-auth-prompt__copy>span{display:block;color:#0fa958;font-size:10px;font-weight:900;letter-spacing:.09em}
 .pc-auth-prompt__copy h2{margin:7px 0 8px;font-family:"Outfit Variable",Outfit,system-ui,sans-serif;font-size:clamp(1.55rem,7vw,2rem);line-height:1.05;letter-spacing:-.035em}
 .pc-auth-prompt__copy p{max-width:35ch;margin:0 auto;color:#5c6773;font-size:13.5px;line-height:1.5}
-.pc-auth-prompt__benefits{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin:14px 0;color:#0a5c47;font-size:11.5px;font-weight:750}
+.pc-auth-prompt__benefits{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin:14px 0;color:#087a45;font-size:11.5px;font-weight:750}
 .pc-auth-prompt__actions{display:grid;gap:8px}
 .pc-auth-prompt__actions a{min-height:49px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #e3e7ec;border-radius:14px;background:#fff;color:#10161d;font-size:13px;font-weight:850;text-decoration:none;transition:border-color 150ms ease,background 150ms ease,transform 150ms ease}
-.pc-auth-prompt__actions a.is-primary{border-color:#0e7a5f;background:linear-gradient(135deg,#0e7a5f,#0a5c47);color:#fff;box-shadow:0 8px 20px rgb(14 122 95 / 26%)}
+.pc-auth-prompt__actions a.is-primary{border-color:#0fa958;background:linear-gradient(135deg,#0fa958,#087a45);color:#fff;box-shadow:0 8px 20px rgb(15 169 88 / 26%)}
 .pc-auth-prompt__actions svg{width:18px}
 .pc-auth-prompt__card>small{display:block;margin-top:10px;color:#8a9199;font-size:10.5px}
-.pc-auth-prompt :focus-visible{outline:3px solid #c8860a;outline-offset:2px}
+.pc-auth-prompt :focus-visible{outline:3px solid #0fa958;outline-offset:2px}
 @media(hover:hover) and (pointer:fine){
-  .pc-auth-prompt__actions a:hover{border-color:#0e7a5f;background:#e3f5ee}
-  .pc-auth-prompt__actions a.is-primary:hover{background:linear-gradient(135deg,#0a5c47,#084a39);transform:translateY(-1px)}
+  .pc-auth-prompt__actions a:hover{border-color:#0fa958;background:#e3f5ee}
+  .pc-auth-prompt__actions a.is-primary:hover{background:linear-gradient(135deg,#087a45,#065c37);transform:translateY(-1px)}
   .pc-auth-prompt__close:hover{background:#e3f5ee}
 }
 html[data-theme="dark"] .pc-auth-prompt__card{border-color:#2a323a;background:#171d23;color:#f1f4f7}
 html[data-theme="dark"] .pc-auth-prompt__close{border-color:#2a323a;background:#1e252c;color:#a7b0ba}
 html[data-theme="dark"] .pc-auth-illustration{filter:brightness(.91) saturate(.94)}
-html[data-theme="dark"] .pc-auth-prompt__copy>span{color:#3ecf9a}
+html[data-theme="dark"] .pc-auth-prompt__copy>span{color:#28cc70}
 html[data-theme="dark"] .pc-auth-prompt__copy p{color:#a7b0ba}
-html[data-theme="dark"] .pc-auth-prompt__benefits{color:#3ecf9a}
+html[data-theme="dark"] .pc-auth-prompt__benefits{color:#28cc70}
 html[data-theme="dark"] .pc-auth-prompt__actions a{border-color:#2a323a;background:#1e252c;color:#f1f4f7}
-html[data-theme="dark"] .pc-auth-prompt__actions a.is-primary{border-color:#3ecf9a;background:linear-gradient(135deg,#3ecf9a,#2fae82);color:#06120d}
+html[data-theme="dark"] .pc-auth-prompt__actions a.is-primary{border-color:#28cc70;background:linear-gradient(135deg,#28cc70,#21c768);color:#06120d}
 html[data-theme="dark"] .pc-auth-prompt__card>small{color:#7d868f}
 @media(max-width:480px){.pc-auth-prompt{align-items:end;padding:8px}.pc-auth-prompt__card{width:100%;max-height:calc(100dvh - 16px);padding:12px 16px calc(16px + env(safe-area-inset-bottom));border-radius:22px 22px 16px 16px}.pc-auth-illustration{max-height:164px}.pc-auth-prompt__copy h2{font-size:1.65rem}.pc-auth-prompt__benefits{margin:11px 0}.pc-auth-prompt__actions a{min-height:50px}}
 @media(prefers-reduced-motion:reduce){.pc-auth-prompt,.pc-auth-prompt__card{animation:none}}

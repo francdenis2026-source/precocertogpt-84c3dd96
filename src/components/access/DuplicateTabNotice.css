@@ -33,7 +33,7 @@
   place-items: center;
   border-radius: 10px;
   background: rgb(255 184 0 / 16%);
-  color: var(--pc-gold, #ffb800);
+  color: var(--pc-gold, #28cc70);
 }
 .pc-dup-tab__icon svg { width: 17px; height: 17px; }
 .pc-dup-tab p { display: grid; gap: 2px; margin: 0; min-width: 0; }

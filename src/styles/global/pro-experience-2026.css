@@ -24,10 +24,10 @@
   --px-ink: #14181d;
   --px-muted: #5f6b78;
   --px-line: #e2e7ec;
-  --px-brand: #0b6757;
+  --px-brand: #0fa958;
   --px-brand-ink: #ffffff;
-  --px-brand-soft: rgba(11, 103, 87, 0.1);
-  --px-ring: rgba(11, 103, 87, 0.26);
+  --px-brand-soft: rgba(15, 169, 88, 0.1);
+  --px-ring: rgba(15, 169, 88, 0.26);
   --px-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 10px 26px rgba(16, 24, 40, 0.07);
   --px-shadow-lg: 0 18px 44px rgba(16, 24, 40, 0.14);
 }
@@ -39,10 +39,10 @@ html[data-theme="dark"],
   --px-ink: #f3f4f6;
   --px-muted: #a2aab6;
   --px-line: #2c2f36;
-  --px-brand: #ffb800;
-  --px-brand-ink: #121214;
-  --px-brand-soft: rgba(255, 184, 0, 0.14);
-  --px-ring: rgba(255, 184, 0, 0.32);
+  --px-brand: #28cc70;
+  --px-brand-ink: #09130f;
+  --px-brand-soft: rgba(40, 204, 112, 0.14);
+  --px-ring: rgba(40, 204, 112, 0.32);
   --px-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.36);
   --px-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
 }

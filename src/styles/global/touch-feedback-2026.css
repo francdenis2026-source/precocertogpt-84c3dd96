@@ -64,7 +64,7 @@ input[type="button"] {
    1px), fino e alheio à identidade do site. :where() zera a especificidade,
    então todo anel já desenhado nas páginas continua valendo. */
 :where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
-  outline: 3px solid var(--pc-gold, #ffb800);
+  outline: 3px solid var(--pc-gold, #28cc70);
   outline-offset: 2px;
 }
 

@@ -64,8 +64,8 @@
   }
   .mh26-section>header{margin-bottom:12px!important}
   .mh26-section h2{color:#202126!important;font-size:1.34rem!important}
-  .mh26-section>header small{color:#b86f48!important}
-  .mh26-section>header>a{color:#955436!important;min-height:36px!important}
+  .mh26-section>header small{color:#0FA958!important}
+  .mh26-section>header>a{color:#087A45!important;min-height:36px!important}
 
   .mh26-products{gap:8px!important}
   .mh26-product{
@@ -83,7 +83,7 @@
   .mh26-product>i img{max-width:64px!important;max-height:64px!important}
   .mh26-product>span strong{color:#202126!important;font-size:13px!important}
   .mh26-product>span small,.mh26-product>span em{color:#74777d!important}
-  .mh26-product>b{color:#b86f48!important}
+  .mh26-product>b{color:#0FA958!important}
 
   .mh26-local{
     margin:12px var(--pc-app-gutter) 0!important;
@@ -116,7 +116,7 @@
     -webkit-backdrop-filter:blur(16px)!important;
   }
   .mh26-page .ref-dock a{min-height:52px!important;border-radius:16px!important;display:grid!important;place-items:center!important;gap:2px!important;padding:5px 3px!important;color:#5f636b!important}
-  .mh26-page .ref-dock a.is-active{background:#e3f5ee!important;color:#0a5c47!important;box-shadow:inset 0 0 0 1px rgba(14,122,95,.28)!important}
+  .mh26-page .ref-dock a.is-active{background:#e3f5ee!important;color:#087A45!important;box-shadow:inset 0 0 0 1px rgba(15,169,88,.28)!important}
 
   /* Modo escuro: uma única superfície carvão em todo o app; cor só nos detalhes. */
   html[data-theme="dark"] body,
@@ -156,9 +156,9 @@
   html[data-theme="dark"] .mh26-product>span em,
   html[data-theme="dark"] .mh26-page .ref-dock a{color:#c9c5be!important}
   html[data-theme="dark"] .mh26-section>header small,
-  html[data-theme="dark"] .mh26-product>b{color:#f6b82f!important}
-  html[data-theme="dark"] .mh26-section>header>a{color:#dfaa82!important}
-  html[data-theme="dark"] .mh26-page .ref-dock a.is-active{background:#202126!important;color:#3ecf9a!important;box-shadow:inset 0 -2px 0 #3ecf9a!important}
+  html[data-theme="dark"] .mh26-product>b{color:#28CC70!important}
+  html[data-theme="dark"] .mh26-section>header>a{color:#21C768!important}
+  html[data-theme="dark"] .mh26-page .ref-dock a.is-active{background:#202126!important;color:#28CC70!important;box-shadow:inset 0 -2px 0 #28CC70!important}
 
   @media(min-width:540px){.mh26-page{border-radius:0!important}}
 }

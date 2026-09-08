@@ -169,7 +169,7 @@ html:not([data-theme="dark"]) textarea::placeholder{
 
 /* ---------------- DARK ---------------- */
 html[data-theme="dark"]{
-  --pc-text-strong-dark:#fffaf4;
+  --pc-text-strong-dark:#f5fbf7;
   --pc-text-body-dark:#e9e2da;
   --pc-text-muted-dark:#c7bdb2;
   --pc-text-subtle-dark:#b9aea3;

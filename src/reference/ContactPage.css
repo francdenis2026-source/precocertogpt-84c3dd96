@@ -34,7 +34,7 @@
 .pc-contact__copy { max-width: 480px; }
 .pc-contact__eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
-  color: var(--px-brand, #0b6757); font-size: 11px; font-weight: 900; letter-spacing: 0.1em;
+  color: var(--px-brand, #0fa958); font-size: 11px; font-weight: 900; letter-spacing: 0.1em;
 }
 .pc-contact__eyebrow svg { width: 14px; height: 14px; }
 .pc-contact__hero h1, .pc-contact__copy h1 {
@@ -52,11 +52,11 @@
   transition: transform 0.16s ease, border-color 0.16s ease;
 }
 @media (hover: hover) and (pointer: fine) {
-  .pc-contact__card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--px-brand, #0b6757) 45%, var(--px-line, #e2e7ec)); }
+  .pc-contact__card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--px-brand, #0fa958) 45%, var(--px-line, #e2e7ec)); }
 }
 .pc-contact__icon {
   display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px;
-  background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757); flex: 0 0 auto;
+  background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0fa958); flex: 0 0 auto;
 }
 .pc-contact__icon svg { width: 19px; height: 19px; }
 .pc-contact__card > div { min-width: 0; display: grid; gap: 2px; }
@@ -76,9 +76,9 @@
   transition: border-color 0.16s ease, background-color 0.16s ease;
 }
 @media (hover: hover) and (pointer: fine) {
-  .pc-contact__link:hover { border-color: color-mix(in srgb, var(--px-brand, #0b6757) 40%, var(--px-line, #e2e7ec)); background: var(--px-surface-soft, #f7f8fa); }
+  .pc-contact__link:hover { border-color: color-mix(in srgb, var(--px-brand, #0fa958) 40%, var(--px-line, #e2e7ec)); background: var(--px-surface-soft, #f7f8fa); }
 }
-.pc-contact__link > span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0b6757); flex: 0 0 auto; }
+.pc-contact__link > span { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; background: var(--px-brand-soft, rgba(11,103,87,.1)); color: var(--px-brand, #0fa958); flex: 0 0 auto; }
 .pc-contact__link > span svg { width: 13px; height: 13px; }
 
 /* Trava em uma única tela sem rolagem só quando há espaço de sobra nos

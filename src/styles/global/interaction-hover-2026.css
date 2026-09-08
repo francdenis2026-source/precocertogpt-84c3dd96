@@ -6,7 +6,7 @@
 
   /* Navegação: indicador linear e contraste, sem mover o elemento. */
   .nx-header nav a{position:relative}
-  .nx-header nav a::before{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;border-radius:99px;background:linear-gradient(90deg,#dfaa82,#f6b82f);opacity:0;transition:opacity .16s ease}
+  .nx-header nav a::before{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;border-radius:99px;background:linear-gradient(90deg,#3fce7e,#0fa958);opacity:0;transition:opacity .16s ease}
   .nx-header nav a:hover{color:#fff!important}
   .nx-header nav a:hover::before{opacity:1}
 
@@ -14,10 +14,10 @@
   .nx-theme:hover,.nx-menu:hover,.mh26-theme:hover,.mh26-head-actions>a:hover,
   .pc-radio:hover,.nx-login:hover{
     transform:none!important;
-    border-color:rgba(246,184,47,.5)!important;
-    box-shadow:inset 0 0 0 1px rgba(246,184,47,.18)!important;
+    border-color:rgba(15,169,88,.5)!important;
+    box-shadow:inset 0 0 0 1px rgba(15,169,88,.18)!important;
   }
-  .nx-theme:hover,.nx-menu:hover,.mh26-theme:hover,.mh26-head-actions>a:hover{color:#ffd56d!important}
+  .nx-theme:hover,.nx-menu:hover,.mh26-theme:hover,.mh26-head-actions>a:hover{color:#21c768!important}
   .nx-theme:hover svg,.nx-menu:hover svg,.mh26-theme:hover svg{transform:none!important}
 
   /* Botões e CTAs: apenas mudança de superfície/contraste. */
@@ -25,7 +25,7 @@
   .nx-hero__ctas .is-primary:hover,.nx-hero__ctas .is-secondary:hover{
     transform:none!important;
     filter:none!important;
-    box-shadow:inset 0 0 0 1px rgba(32,33,38,.12),0 0 0 3px rgba(246,184,47,.10)!important;
+    box-shadow:inset 0 0 0 1px rgba(32,33,38,.12),0 0 0 3px rgba(15,169,88,.10)!important;
   }
 
   /* Cards e opções: borda de seleção sutil, sem elevar ou ampliar. */
@@ -33,8 +33,8 @@
   .nx-live-results>button:hover,.nx-live-results>a:hover,
   .ref-page a:hover,.mh26-page a:hover{
     transform:none!important;
-    border-color:rgba(246,184,47,.52)!important;
-    box-shadow:inset 3px 0 0 #f6b82f!important;
+    border-color:rgba(15,169,88,.52)!important;
+    box-shadow:inset 3px 0 0 #0fa958!important;
   }
   .nx-offer-card:hover .nx-offer-card__image img,
   .nx-category-strip a:hover i,
@@ -43,7 +43,7 @@
   .nx-footer a:hover svg,.ref-page a:hover svg,.mh26-page a:hover svg{
     transform:none!important;
   }
-  .nx-section-title>a:hover,.nx-footer a:hover,.ref-page a:hover,.mh26-page a:hover{color:#f6b82f!important}
+  .nx-section-title>a:hover,.nx-footer a:hover,.ref-page a:hover,.mh26-page a:hover{color:#0fa958!important}
 }
 
 /* Clique e teclado: feedback claro, sem animação de escala. */
@@ -52,7 +52,7 @@
   opacity:.78!important;
 }
 .nx-home :is(a,button,input):focus-visible,.mh26-page :is(a,button,input):focus-visible,.ref-page :is(a,button,input):focus-visible,.pc-radio:focus-within{
-  outline:2px solid #f6b82f!important;
+  outline:2px solid #0fa958!important;
   outline-offset:3px!important;
 }
 

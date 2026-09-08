@@ -1,20 +1,22 @@
 import {
-  Home,
+  Heart,
   LayoutGrid,
   Menu,
   Moon,
+  ShoppingBasket,
   Store,
   Sun,
-  Tag,
   UserRound,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import type { Product } from "../../data/catalog";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 import { OnlinePresence } from "../OnlinePresence";
 import { useCurrentProfile } from "../UserAccountExperience";
+import { LiveProductSearch } from "./LiveProductSearch";
 
 function HeaderThemeToggle() {
   const { theme, toggleTheme } = useSiteTheme();
@@ -32,13 +34,11 @@ function HeaderThemeToggle() {
 }
 
 const navItems = [
-  { to: "/", label: "Início", icon: Home },
-  { to: "/buscar", label: "Buscar", icon: Tag },
   { to: "/estabelecimentos", label: "Estabelecimentos", icon: Store },
   { to: "/explorar", label: "Categorias", icon: LayoutGrid },
 ] as const;
 
-export function Header() {
+export function Header({ products = [] }: { products?: Product[] }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(
     () => typeof window !== "undefined" && window.scrollY > 8,
@@ -91,6 +91,10 @@ export function Header() {
           </span>
         </Link>
 
+        <div className="pcx-header__search">
+          <LiveProductSearch id="header-search" products={products} compact />
+        </div>
+
         <nav
           id="pcx-navigation"
           className={`pcx-header__nav${menuOpen ? " is-open" : ""}`}
@@ -115,6 +119,12 @@ export function Header() {
           {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
               renderizado só dentro do PublicHeader, que a home não usa. */}
           <OnlinePresence />
+          <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
+            <Heart aria-hidden="true" />
+          </Link>
+          <Link className="pcx-header__icon" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta">
+            <ShoppingBasket aria-hidden="true" />
+          </Link>
           <HeaderRadioPlayer />
           <HeaderThemeToggle />
           {!profile && (
