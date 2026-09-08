@@ -23,6 +23,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FREE_PREVIEW_LIMIT=4;
 const brl=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
+const intBr=new Intl.NumberFormat("pt-BR");
 const normalize=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR").trim();
 type SortMode="relevance"|"lowest"|"highest"|"name"|"stores";
 function ProductThumb({product}:{product:Product}){const src=resolveProductImage(product);return src?<img src={src} alt={product.name} width="76" height="70" loading="lazy"/>:<PackageSearch/>}
@@ -158,7 +159,7 @@ export function SearchDiscovery2026(){
    </div>
    <figure className="search26-hero__visual">
     <img src="/mercado-local-profissional.webp" alt="Corredor de um mercado local com prateleiras de frutas, verduras e grãos" loading="eager" width="1280" height="960"/>
-    <figcaption><BadgeCheck aria-hidden="true"/><strong>{catalog?.metrics.products||0} produtos</strong><small>disponíveis para consulta</small></figcaption>
+    <figcaption><BadgeCheck aria-hidden="true"/><strong>{intBr.format(catalog?.metrics.products||0)} produtos</strong><small>disponíveis para consulta</small></figcaption>
    </figure>
   </section>
  <form className="search26-search" onSubmit={submit}><Search aria-hidden="true"/><label className="search26-input-label" htmlFor="product-search">Buscar produto, marca ou estabelecimento</label><input id="product-search" name="produto" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ex.: arroz, café, Mercado X…" autoComplete="off" aria-describedby="search26-live-hint"/>{query&&<button className="search26-clear" type="button" onClick={()=>setQuery("")} aria-label="Limpar busca"><X aria-hidden="true"/></button>}<button className="pc-btn pc-btn--primary" disabled={!query.trim()&&activeFilters===0}>Buscar <ArrowRight/></button><span id="search26-live-hint" className="sr-only">Os resultados são atualizados automaticamente enquanto você digita.</span></form>

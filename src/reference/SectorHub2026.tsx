@@ -28,6 +28,8 @@ import { AppDock, PublicFooter, PublicHeader } from "./PublicChrome";
 import { SectorPhotoBanners } from "./SectorPhotoBanners";
 import "./SectorHub2026.css";
 
+const intBr = new Intl.NumberFormat("pt-BR");
+
 const normalize = (value: string) =>
   value
     .normalize("NFD")
@@ -110,11 +112,11 @@ export function SectorHub2026() {
               </p>
               <div className="sector-hub__hero-stats">
                 <span>
-                  <b>{catalog?.metrics.stores ?? "-"}</b> estabelecimentos na
+                  <b>{catalog ? intBr.format(catalog.metrics.stores) : "-"}</b> estabelecimentos na
                   cidade
                 </span>
                 <span>
-                  <b>{catalog?.metrics.products ?? "-"}</b> produtos com preço
+                  <b>{catalog ? intBr.format(catalog.metrics.products) : "-"}</b> produtos com preço
                 </span>
               </div>
               <div className="sector-hub__hero-actions">
