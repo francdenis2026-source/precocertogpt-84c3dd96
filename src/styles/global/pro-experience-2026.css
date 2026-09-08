@@ -1046,29 +1046,48 @@ html body .pc26-sector-hero {
   isolation: isolate;
   overflow: hidden;
   border-radius: 18px;
+  background: rgba(6, 20, 17, 0.9) !important;
+}
+/* Foto e véu viram duas camadas separadas (antes eram um background-image
+   só, foto+gradiente): backdrop-filter no véu borra só a foto atrás dele,
+   sem tocar no texto (que é outra camada, os filhos diretos do herói) —
+   título/eyebrow ganham contraste sem precisar escurecer tanto a ponto de
+   apagar a foto, que continua sendo a protagonista. */
+html body .pc26-sector-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--sector-hero) !important;
+  background-size: cover !important;
+  background-position: center 32% !important;
+  background-repeat: no-repeat !important;
+}
+html body .pc26-sector-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background-image:
     linear-gradient(
       100deg,
       rgba(6, 20, 17, 0.8) 0%,
       rgba(6, 20, 17, 0.6) 46%,
       rgba(6, 20, 17, 0.22) 100%
-    ),
-    var(--sector-hero) !important;
-  background-size: cover, cover !important;
-  background-position: center, center 32% !important;
-  background-repeat: no-repeat, no-repeat !important;
+    ) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 /* Mesmo véu escuro no claro e no escuro apagava a foto por completo —
    no claro dá pra abrir bem mais e ainda manter o texto branco legível. */
-html[data-theme="light"] body .pc26-sector-hero {
+html[data-theme="light"] body .pc26-sector-hero::after {
   background-image:
     linear-gradient(
       100deg,
       rgba(6, 20, 17, 0.66) 0%,
       rgba(6, 20, 17, 0.42) 46%,
       rgba(6, 20, 17, 0.1) 100%
-    ),
-    var(--sector-hero) !important;
+    ) !important;
 }
 html body .pc26-sector-hero > * {
   position: relative;

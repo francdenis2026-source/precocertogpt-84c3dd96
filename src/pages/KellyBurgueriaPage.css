@@ -29,6 +29,8 @@
   position:absolute;inset:0;
   background:linear-gradient(100deg,rgba(18,12,8,.86) 0%,rgba(18,12,8,.7) 34%,rgba(18,12,8,.42) 60%,rgba(18,12,8,.16) 82%,transparent 100%),
              linear-gradient(180deg,rgba(18,12,8,.1) 0%,transparent 34%,rgba(18,12,8,.3) 100%);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
 }
 html[data-theme="dark"] .kelly-hero__overlay{
   background:linear-gradient(100deg,rgba(22,15,10,.78) 0%,rgba(22,15,10,.62) 34%,rgba(22,15,10,.36) 60%,rgba(22,15,10,.12) 82%,transparent 100%),
@@ -42,6 +44,15 @@ html[data-theme="dark"] .kelly-hero__overlay{
 .kelly-hero__kicker svg{width:12px;height:12px}
 .kelly-hero__copy h1{margin:0;font-size:clamp(1.15rem,2.1vw,1.55rem);line-height:1.1;font-weight:900}
 .kelly-hero__copy p{margin:0;max-width:56ch;font-size:13px;line-height:1.4;color:rgba(255,255,255,.86)}
+/* typography-contrast-2026.css força ".ref-page h1"/"p" pra tinta escura no
+   tema claro (!important + especificidade (0,2,2)/(0,1,1) — pensado pro
+   corpo comum da página, não pro título/parágrafo dentro do herói
+   fotográfico escuro). A página da Kelly herda .ref-page, então título e
+   descrição do herói (texto branco sobre foto) ficavam ilegíveis. Mesma
+   técnica já usada em StoreExperienceAcai2026.css pro mesmo problema:
+   especificidade extra (html body .kelly-hero ...) pra vencer de volta. */
+html body .kelly-hero .kelly-hero__copy h1{color:#fff!important}
+html body .kelly-hero .kelly-hero__copy p{color:rgba(255,255,255,.86)!important}
 .kelly-hero__meta{display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px;color:rgba(255,255,255,.82)}
 .kelly-hero__meta span{display:inline-flex;align-items:center;gap:5px}
 .kelly-hero__meta svg{width:12px;height:12px}
@@ -50,6 +61,38 @@ html[data-theme="dark"] .kelly-hero__overlay{
 .kelly-hero__actions .pc-btn--primary{background:#8c8267;border-color:#8c8267;color:#1c1400}
 .kelly-hero__actions .pc-btn--primary:hover{filter:brightness(1.05)}
 .kelly-hero__actions .pc-btn--ghost{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);color:#fff}
+
+/* .kelly-hero__visual (foto de detalhe + selo "Artesanal e feito na hora")
+   nunca teve regra própria — sem CSS nenhum, um <img> em tamanho natural
+   entrava no fluxo flex do herói ao lado de .kelly-hero__content (que já
+   pede width:100%) e caía por cima do texto. Vira um cartão pequeno,
+   ancorado fora do fluxo, só onde sobra espaço ao lado do texto — em telas
+   estreitas fica escondido (o fundo do herói já usa a mesma foto). */
+.kelly-hero__visual{display:none}
+@media (min-width:560px){
+  .kelly-hero__visual{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    position:absolute;
+    z-index:1;
+    right:18px;
+    bottom:14px;
+  }
+  .kelly-hero__visual img{
+    width:76px;height:76px;border-radius:14px;object-fit:cover;display:block;
+    border:2px solid rgba(255,255,255,.4);
+    box-shadow:0 10px 24px rgba(0,0,0,.35);
+  }
+  .kelly-hero__visual span{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:3px 8px;border-radius:999px;
+    background:rgba(13,7,5,.72);color:#fff;
+    font-size:10px;font-weight:800;white-space:nowrap;
+  }
+  .kelly-hero__visual span svg{width:11px;height:11px;color:#ffd764;flex-shrink:0}
+}
 
 /* ---------- Info cards ---------- */
 .kelly-info{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}

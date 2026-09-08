@@ -937,15 +937,25 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
      a cliente do carrinho ficava irreconhecível. Baixa a opacidade bastante
      e troca o desfoque de contraste (que antes vinha só do véu escuro) por
      uma camada dedicada com blur leve atrás do véu — texto continua nítido,
-     a foto aparece de verdade sem perder a legibilidade. Enquadramento
-     ajustado para trazer o rosto/carrinho mais para dentro do recorte. */
-  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 72% 26%; }
+     a foto aparece de verdade sem perder a legibilidade.
+
+     "cover" sozinho, num recorte alto e estreito como o do celular, mostra
+     a foto inteira de cima a baixo (a altura já é o lado que "cobre" o
+     contêiner) — então a única coisa que a posição horizontal decide é ONDE
+     nessa faixa vertical completa (céu, rosto, carrinho, tudo empilhado) a
+     janela estreita cai. Não tinha como isolar só o carrinho assim: ele fica
+     logo abaixo do rosto na foto original, então qualquer recorte que
+     mostrasse o carrinho também trazia o rosto goma no topo, grande demais.
+     Um tamanho maior que "cover" (165% de altura) cria fôlego vertical de
+     verdade: dá pra ancorar embaixo (posição Y perto de 100%) e cortar o
+     céu/rosto por cima, deixando o carrinho de compras como protagonista. */
+  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 74% 100%; background-size: auto 168%; }
   .pcx-hero::after {
     content: "";
     position: absolute;
     z-index: -2;
     inset: -12px;
-    background: var(--pcx-hero-photo) 72% 26% / cover no-repeat;
+    background: var(--pcx-hero-photo) 74% 100% / auto 168% no-repeat;
     filter: blur(3px);
   }
   .pcx-hero::before {

@@ -24,6 +24,8 @@
     rgba(2,44,32, .32) 64%,
     rgba(2,44,32, .06) 100%
   );
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 html[data-theme="light"] .store-pro-hero__overlay {
