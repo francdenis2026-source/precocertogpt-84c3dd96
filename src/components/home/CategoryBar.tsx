@@ -40,6 +40,20 @@ const CATEGORY_SUB: Record<BusinessGroupId, string> = {
   other: "Outros comércios",
 };
 
+/* Fundo pastel por categoria (como no pacote de referência visual: cada
+ * categoria com uma cor sutil própria, não tudo verde). Só o chip do ícone
+ * muda — o card continua branco. */
+const CATEGORY_TINT: Record<BusinessGroupId, string> = {
+  markets: "pcx-category--green",
+  butchers: "pcx-category--red",
+  bakery: "pcx-category--amber",
+  food: "pcx-category--orange",
+  pharmacies: "pcx-category--blue",
+  books: "pcx-category--violet",
+  services: "pcx-category--slate",
+  other: "pcx-category--pink",
+};
+
 export function CategoryBar() {
   return (
     <section className="pcx-section pcx-section--muted" aria-labelledby="categories-title">
@@ -57,7 +71,7 @@ export function CategoryBar() {
             const Icon = CATEGORY_ICON[group.id];
             return (
               <Link className="pcx-category" key={group.id} to={group.href}>
-                <i>
+                <i className={CATEGORY_TINT[group.id]}>
                   <Icon aria-hidden="true" />
                 </i>
                 <span className="pcx-category__text">

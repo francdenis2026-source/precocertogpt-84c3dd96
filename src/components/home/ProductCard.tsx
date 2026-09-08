@@ -11,6 +11,7 @@ import type { Product } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
 import { priceFreshness } from "../../lib/pricing";
 import { ProductCardActions } from "../catalog/ProductCardActions";
+import { PriceBadge } from "../catalog/PriceBadge";
 
 const brl = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -101,7 +102,7 @@ export const ProductCard = memo(function ProductCard({
         </div>
 
         <div className="pcx-prices">
-          <span>Menor preço</span>
+          {storeCount > 1 ? <PriceBadge tone="soft" /> : <span>Preço</span>}
           <div>
             {previous && <del>{brl.format(previous)}</del>}
             <strong>{brl.format(product.minPrice)}</strong>

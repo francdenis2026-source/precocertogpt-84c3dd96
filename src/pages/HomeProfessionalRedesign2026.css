@@ -23,10 +23,15 @@
      preço", datas de atualização). Escurecido para 4.7:1. */
   --h-subtle: #66756d;
 
-  --h-primary: #0fa958;
-  --h-primary-dark: #087a45;
-  --h-primary-soft: #e7f6ec;
+  --h-primary: #13b954;
+  --h-primary-dark: #07563a;
+  --h-primary-soft: #e7f9ee;
   --h-on-primary: #ffffff;
+
+  /* Verde-floresta profundo — grandes superfícies (hero, banners, cesta
+     inteligente), nunca CTA/preço (isso é --h-primary, verde vivo). */
+  --h-forest: #043d2c;
+  --h-forest-deep: #022c20;
 
   --h-accent: #f1b72c;
   --h-accent-dark: #8a6210;
@@ -58,19 +63,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .pcx-home {
-    --h-canvas: #09130f;
-    --h-surface: #101d17;
-    --h-surface-2: #17261e;
+    --h-canvas: #07130e;
+    --h-surface: #0e1d16;
+    --h-surface-2: #14271d;
     --h-border: rgba(255, 255, 255, 0.08);
     --h-border-strong: rgba(255, 255, 255, 0.14);
     --h-ink: #f5fbf7;
     --h-muted: #9baaa2;
     --h-subtle: #9baaa2;
 
-    --h-primary: #28cc70;
-    --h-primary-dark: #21c768;
+    --h-primary: #2adc6c;
+    --h-primary-dark: #22d65f;
     --h-primary-soft: #12281f;
-    --h-on-primary: #09130f;
+    --h-on-primary: #07130e;
+    --h-forest: #043d2c;
+    --h-forest-deep: #022c20;
 
     --h-accent: #f1c24e;
     --h-accent-dark: #c89530;
@@ -85,19 +92,21 @@
   }
 }
 [data-theme="dark"] .pcx-home {
-  --h-canvas: #09130f;
-  --h-surface: #101d17;
-  --h-surface-2: #17261e;
+  --h-canvas: #07130e;
+  --h-surface: #0e1d16;
+  --h-surface-2: #14271d;
   --h-border: rgba(255, 255, 255, 0.08);
   --h-border-strong: rgba(255, 255, 255, 0.14);
   --h-ink: #f5fbf7;
   --h-muted: #9baaa2;
   --h-subtle: #9baaa2;
 
-  --h-primary: #28cc70;
-  --h-primary-dark: #21c768;
+  --h-primary: #2adc6c;
+  --h-primary-dark: #22d65f;
   --h-primary-soft: #12281f;
-  --h-on-primary: #09130f;
+  --h-on-primary: #07130e;
+  --h-forest: #043d2c;
+  --h-forest-deep: #022c20;
 
   --h-accent: #f1c24e;
   --h-accent-dark: #c89530;
@@ -137,6 +146,23 @@
 .pcx-home img {
   max-width: 100%;
   display: block;
+}
+
+/* app-shell-professional-2026.css força #18181B (preto) em qualquer botão
+   de busca (.pc26-search/.pc26-hero-search/.pc26-button) no tema claro —
+   pensado para outras telas, mas também pega a busca do header e do herói
+   aqui dentro, que devem usar o verde vivo da marca como qualquer outro CTA
+   primário da home. */
+html[data-theme="light"] .pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button),
+html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button),
+.pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button) {
+  background: var(--h-primary) !important;
+  color: var(--h-on-primary) !important;
+}
+html[data-theme="light"] .pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button):hover,
+html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button):hover,
+.pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button):hover {
+  background: var(--h-primary-dark) !important;
 }
 
 .pcx-btn {
@@ -514,7 +540,7 @@
   display: flex;
   align-items: center;
   background:
-    radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--h-primary) 9%, transparent), transparent 24rem),
+    radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--h-forest) 10%, transparent), transparent 24rem),
     var(--h-canvas);
   border-bottom: 1px solid var(--h-border);
 }
@@ -668,6 +694,16 @@
   object-position: 55% 16%;
   border-radius: var(--h-radius-xl);
   box-shadow: 0 12px 28px rgb(20 42 34 / 10%);
+}
+/* Overlay verde-floresta localizado sobre a foto (identidade 2026-09) — um
+   véu sutil na base/lateral da foto, não uma camada cobrindo tudo. */
+.pcx-hero__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 1.9rem 1.8rem;
+  border-radius: var(--h-radius-xl);
+  pointer-events: none;
+  background: linear-gradient(200deg, transparent 55%, color-mix(in srgb, var(--h-forest-deep) 55%, transparent) 100%);
 }
 
 /* Hero side panel — real-data proof card */
@@ -877,7 +913,7 @@
   .pcx-hero__lead { margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.45; max-width: 44ch; }
   .pcx-hero__search { margin-bottom: 0.6rem; }
   .pcx-hero .pc26-hero-search { min-height: 50px !important; padding: 5px 5px 5px 14px !important; }
-  .pcx-hero .pc26-live-search__submit { height: 40px; padding: 0 1rem !important; font-size: 0.82rem !important; }
+  .pcx-hero .pc26-live-search__submit { height: 40px; padding: 0 0.85rem !important; font-size: 0.82rem !important; }
   .pcx-hero__actions { gap: 0.5rem; }
   .pcx-hero .pcx-btn { padding: 0.62rem 1.1rem; font-size: 0.84rem; }
   .pcx-hero .pcx-btn svg { width: 15px; height: 15px; }
@@ -901,6 +937,14 @@
 
   .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.72rem; }
   .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
+}
+
+@media (max-width: 420px) {
+  /* Em telas bem estreitas o rótulo "Buscar preço" não cabe ao lado do
+     campo sem estourar o cartão de busca — mantém só o ícone (com
+     aria-label preservando o texto para leitor de tela). */
+  .pcx-hero .pc26-live-search__submit-label { display: none; }
+  .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
 
   /* Faixa "economize até encontrar o menor preço": banner compacto verde
      escuro, com pequeno ícone, logo abaixo da busca — só existe no app. */
@@ -957,6 +1001,7 @@
   background: var(--h-surface-2); color: var(--h-muted); cursor: pointer;
 }
 .pcx-hero .pc26-live-search__clear svg { width: 15px; height: 15px; }
+.pcx-home .pcx-hero .pc26-live-search__submit,
 .pcx-hero .pc26-live-search__submit {
   display: inline-flex !important; align-items: center; gap: 0.4rem;
   padding: 0 1.25rem !important; height: 46px; border: none; border-radius: var(--h-radius-md) !important;
@@ -1165,7 +1210,22 @@
 .pcx-product__store { display: flex; align-items: center; gap: 0.25rem; font-size: 0.68rem; color: var(--h-muted); margin-top: 0.05rem; overflow: hidden; }
 .pcx-product__store svg { width: 11px; height: 11px; flex-shrink: 0; }
 .pcx-product__store span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-prices { margin-top: 0.3rem; padding-top: 0.4rem; border-top: 1px solid var(--h-border); display: flex; align-items: baseline; justify-content: space-between; }
+/* Selo "Menor preço" — componente compartilhado PriceBadge (verde vivo,
+   fundo sólido; variante --soft para uso sobre fundos escuros/fotográficos). */
+.pc-price-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.pc-price-badge--solid { background: var(--h-primary); color: var(--h-on-primary); }
+.pc-price-badge--soft { background: var(--h-primary-soft); color: var(--h-primary-dark); }
+
+.pcx-prices { margin-top: 0.3rem; padding-top: 0.4rem; border-top: 1px solid var(--h-border); display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
 .pcx-prices span { font-size: 0.62rem; color: var(--h-subtle); font-weight: 600; }
 .pcx-prices div { display: flex; align-items: baseline; gap: 0.3rem; }
 .pcx-prices del { font-size: 0.68rem; color: var(--h-subtle); }
@@ -1250,6 +1310,22 @@
   background: var(--h-primary-soft); color: var(--h-primary-dark);
 }
 .pcx-category i svg { width: 1.3rem; height: 1.3rem; }
+/* Um tom pastel por categoria, como no pacote de referência visual — evita
+   que a grade inteira fique verde sobre verde. */
+.pcx-category i.pcx-category--green { background: var(--h-primary-soft); color: var(--h-primary-dark); }
+.pcx-category i.pcx-category--red { background: color-mix(in srgb, #e8503f 16%, var(--h-surface)); color: #c03a2a; }
+.pcx-category i.pcx-category--amber { background: color-mix(in srgb, #e8a83f 18%, var(--h-surface)); color: #935f0c; }
+.pcx-category i.pcx-category--orange { background: color-mix(in srgb, #ef8a3f 18%, var(--h-surface)); color: #a4540f; }
+.pcx-category i.pcx-category--blue { background: color-mix(in srgb, #4f7de8 16%, var(--h-surface)); color: #2e50ad; }
+.pcx-category i.pcx-category--violet { background: color-mix(in srgb, #8a63e0 16%, var(--h-surface)); color: #5b3ec2; }
+.pcx-category i.pcx-category--pink { background: color-mix(in srgb, #e563a0 16%, var(--h-surface)); color: #b23d78; }
+.pcx-category i.pcx-category--slate { background: var(--h-surface-2); color: var(--h-muted); }
+[data-theme="dark"] .pcx-category i.pcx-category--red { background: rgba(232,80,63,.16); color: #f3897a; }
+[data-theme="dark"] .pcx-category i.pcx-category--amber { background: rgba(232,168,63,.16); color: #f0c675; }
+[data-theme="dark"] .pcx-category i.pcx-category--orange { background: rgba(239,138,63,.16); color: #f4ab72; }
+[data-theme="dark"] .pcx-category i.pcx-category--blue { background: rgba(79,125,232,.18); color: #9db4f0; }
+[data-theme="dark"] .pcx-category i.pcx-category--violet { background: rgba(138,99,224,.18); color: #bda7ef; }
+[data-theme="dark"] .pcx-category i.pcx-category--pink { background: rgba(229,99,160,.18); color: #f0a5c8; }
 .pcx-category__text { display: grid; gap: 0.1rem; min-width: 0; }
 .pcx-category strong { display: block; font-size: 0.85rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pcx-category__text span { font-size: 0.72rem; color: var(--h-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -1316,7 +1392,9 @@
 .pcx-promo-feature::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(100deg, rgba(10, 20, 16, 0.86) 0%, rgba(10, 20, 16, 0.55) 45%, rgba(10, 20, 16, 0.1) 80%);
+  /* Verde-floresta (identidade 2026-09) em vez de neutro escuro — bate com
+     o banner "Valorize o comércio local" do pacote de referência. */
+  background: linear-gradient(100deg, color-mix(in srgb, var(--h-forest-deep) 92%, black) 0%, color-mix(in srgb, var(--h-forest) 70%, transparent) 48%, transparent 82%);
 }
 @media (hover: hover) and (pointer: fine) {
   .pcx-promo-feature:hover img { transform: scale(1.04); }
@@ -1348,7 +1426,10 @@
   padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 3.5vw, 2.25rem);
   margin: clamp(1.1rem, 2.4vw, 1.75rem) 0;
   border-radius: var(--h-radius-xl);
-  background: linear-gradient(120deg, #0b2f47 0%, #124a63 55%, #1b6b74 100%);
+  /* Verde-floresta profundo (identidade 2026-09) — era azul/petróleo, fora
+     da paleta de marca. Bate com o banner "Cesta Inteligente" das
+     referências visuais. */
+  background: linear-gradient(120deg, var(--h-forest-deep) 0%, var(--h-forest) 60%, var(--h-primary-dark) 130%);
   box-shadow: var(--h-shadow-lg);
   overflow: hidden;
   isolation: isolate;
@@ -1426,7 +1507,7 @@
   padding: 0.7rem 1.2rem;
   border-radius: var(--h-radius-md);
   background: #fff;
-  color: #0b2f47;
+  color: var(--h-forest-deep);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.88rem;

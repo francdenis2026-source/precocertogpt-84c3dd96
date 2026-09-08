@@ -190,8 +190,14 @@ export function LiveProductSearch({
             <X aria-hidden="true" />
           </button>
         )}
-        <button className="pc26-live-search__submit" type="submit">
-          {compact ? "Buscar" : "Buscar preço"}
+        <button
+          className="pc26-live-search__submit"
+          type="submit"
+          aria-label={compact ? "Buscar" : "Buscar preço"}
+        >
+          <span className="pc26-live-search__submit-label">
+            {compact ? "Buscar" : "Buscar preço"}
+          </span>
           <ArrowRight aria-hidden="true" />
         </button>
       </form>

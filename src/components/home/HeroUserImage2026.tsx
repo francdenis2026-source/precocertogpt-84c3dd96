@@ -6,6 +6,7 @@ import type { Product, ProductOffer } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
 import { LocationSwitcher } from "../LocationSwitcher";
 import { LiveProductSearch } from "./LiveProductSearch";
+import { PriceBadge } from "../catalog/PriceBadge";
 
 import heroImg from "../../assets/home-2026/hero-cliente-comparando-precos-2026.webp";
 import heroBackdrop from "../../assets/home-2026/hero-backdrop-precocerto-2026.jpg";
@@ -161,7 +162,7 @@ export function HeroUserImage2026({
                   <span className="pcx-hero__panel-info">
                     <span className="pcx-hero__panel-name">
                       {comparison.cheap.establishment}
-                      <em className="pcx-hero__panel-badge">MENOR PREÇO</em>
+                      <PriceBadge />
                     </span>
                     <span className="pcx-hero__panel-store">
                       <Store aria-hidden="true" /> {comparison.cheap.neighborhood || "Feijó"}
