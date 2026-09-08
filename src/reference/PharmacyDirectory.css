@@ -256,7 +256,7 @@ html[data-theme="dark"] .pharmacy-directory-page{background:var(--pc-canvas,#071
    103px e o #10161D do rodape das outras paginas. Era o terceiro desenho de
    rodape do site. Passa a usar o mesmo tom e a mesma escala; o conteudo
    continua o mesmo. */
-.pharmacy-footer { background: #10161d; color: rgba(255, 255, 255, 0.88); }
+.pharmacy-footer { background: var(--pc-forest-950, #022C20); color: rgba(255, 255, 255, 0.88); }
 .pharmacy-footer__inner { min-height: 56px; gap: 16px; padding: 10px 0; }
 .pharmacy-footer__brand { gap: 4px; }
 .pharmacy-footer__brand img { width: 112px; }

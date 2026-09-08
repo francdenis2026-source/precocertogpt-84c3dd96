@@ -1789,7 +1789,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
    HTML e sumiam por CSS abaixo de 640px, o que e o pior dos dois mundos. Agora
    quebram em duas linhas, que e o que um rodape faz. */
 .pcx-home .pcx-footer {
-  background: #10161d;
+  background: var(--pc-forest-950, #022C20);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.88);
 }

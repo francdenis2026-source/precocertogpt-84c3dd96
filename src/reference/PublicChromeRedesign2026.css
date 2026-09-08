@@ -363,7 +363,7 @@ footer.ref-footer.ref-footer {
   margin-top: auto !important;
   padding: 0 !important;
   border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background: #10161d !important;
+  background: var(--pc-forest-950, #022C20) !important;
   color: rgba(255, 255, 255, 0.88) !important;
 }
 footer.ref-footer::before { content: none !important; }
