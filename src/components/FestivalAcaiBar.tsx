@@ -34,8 +34,10 @@ export function FestivalAcaiBar() {
   if (!campaign || hidden) return null;
   const content=<>{campaign.imageUrl&&<img src={campaign.imageUrl} width="1024" height="62" alt="" aria-hidden="true"/>}<span><i><Megaphone aria-hidden="true"/></i><b><strong>{campaign.title}</strong>{campaign.subtitle&&<small>{campaign.subtitle}</small>}</b><em>{campaign.linkLabel}</em></span></>;
   const external=/^https?:\/\//i.test(campaign.linkUrl);
+  const artClass=`pc-festival-bar__art${campaign.imageUrl?' has-image':''}`;
+  const artStyle=campaign.imagePosition?{['--campaign-focus' as string]:campaign.imagePosition}:undefined;
   return <div className={`pc-festival-bar theme-${campaign.theme} kind-${campaign.kind}`} role="region" aria-label={campaign.title}>
-    {external?<a className="pc-festival-bar__art" href={campaign.linkUrl} target="_blank" rel="noreferrer">{content}</a>:<Link className="pc-festival-bar__art" to={campaign.linkUrl||'/buscar'}>{content}</Link>}
+    {external?<a className={artClass} style={artStyle} href={campaign.linkUrl} target="_blank" rel="noreferrer">{content}</a>:<Link className={artClass} style={artStyle} to={campaign.linkUrl||'/buscar'}>{content}</Link>}
     {campaign.isDismissible&&<button type="button" className="pc-festival-bar__close" onClick={closeBanner} aria-label="Fechar banner"><X aria-hidden="true"/></button>}
   </div>;
 }
