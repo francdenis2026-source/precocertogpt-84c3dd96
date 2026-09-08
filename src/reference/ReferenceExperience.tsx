@@ -221,6 +221,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const [accountType, setAccountType] = useState<"consumer" | "merchant">("consumer");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageKind, setMessageKind] = useState<"error" | "info">("error");
   const [showRecover, setShowRecover] = useState(false);
   const [recoverEmail, setRecoverEmail] = useState("");
   const [recoverBusy, setRecoverBusy] = useState(false);
@@ -230,6 +231,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     event.preventDefault();
     setBusy(true);
     setMessage("");
+    setMessageKind("error");
     const data = new FormData(event.currentTarget);
     const email = String(data.get("email") || "").trim();
     const password = String(data.get("password") || "");
@@ -241,7 +243,14 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
       setMessage(result.error);
       return;
     }
-    if (mode === "register") setMessage("Conta criada com sucesso.");
+    if (result.needsEmailConfirmation) {
+      // Sem isso, quem cadastra caía direto na home sem estar logado de
+      // verdade (o projeto exige confirmar o e-mail antes) — parecia que o
+      // cadastro simplesmente não tinha ido a lugar nenhum.
+      setMessageKind("info");
+      setMessage("Conta criada! Confira seu e-mail e clique no link de confirmação para entrar.");
+      return;
+    }
     navigate(redirectTo !== "/" ? redirectTo : accountType === "merchant" ? "/painel-lojista" : "/", { replace: true });
   };
 
@@ -317,7 +326,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
             )}
           </label>
           {mode === "register" && <small className="ref-auth__hint">Sua senha são só 6 números — só isso, sem letras nem símbolos.</small>}
-          {message && <p className="ref-auth__message" role="status">{message}</p>}
+          {message && <p className={messageKind === "info" ? "ref-auth__message ref-auth__message--info" : "ref-auth__message"} role="status">{message}</p>}
           <button className="ref-auth__submit" type="submit" disabled={busy}>{busy ? "Aguarde…" : mode === "login" ? "Entrar" : "Criar minha conta"}<ArrowRight /></button>
         </form>
         {mode === "login" && <button type="button" className="ref-auth__recover" onClick={() => { setShowRecover(true); setMessage(""); }}>Esqueci minha senha</button>}

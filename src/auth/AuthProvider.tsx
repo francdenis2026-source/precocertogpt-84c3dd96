@@ -4,7 +4,7 @@ import { supabase } from "../lib/supabase";
 import { adminRoles, invalidateSessionProfile, type AppRole } from "../lib/roles";
 import { novoSessionId } from "../lib/deviceIdentity";
 
-export type AuthResult = { error: string | null };
+export type AuthResult = { error: string | null; needsEmailConfirmation?: boolean };
 
 export type AuthState = {
   session: Session | null;
@@ -185,9 +185,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       gravarSessionId(novo);
       if (alive.current) setSessionId(novo);
       await applySession(data.session);
+      announce();
+      return { error: null };
     }
-    announce();
-    return { error: null };
+    // Sem sessão: o projeto exige confirmação por e-mail antes de liberar o
+    // acesso. A conta já existe, mas navegar pra home aqui deixaria a pessoa
+    // "deslogada" numa tela que parece não ter acontecido nada — melhor
+    // avisar explicitamente o próximo passo.
+    return { error: null, needsEmailConfirmation: true };
   }, [announce, applySession]);
 
   const signInWithGoogle = useCallback<AuthState["signInWithGoogle"]>(async () => {
