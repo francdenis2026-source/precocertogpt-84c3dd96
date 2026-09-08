@@ -1,10 +1,10 @@
 import { ArrowRight, ArrowUpRight, MapPin, Store } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
 import { groupForStore } from "../../data/businessTaxonomy";
 import { sectorLeadPhoto } from "../../data/sectorLeadPhotos";
 import { SectionHeader } from "./SectionHeader";
+import { StoreCard } from "./StoreCard";
 
 export function StoreRail({
   stores,
@@ -50,16 +50,12 @@ export function StoreRail({
     ...eligible.slice(0, leadIndex),
   ];
   const [lead, ...directory] = rotated.slice(0, 4);
-  const initials = (name: string) =>
-    name
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((part) => part[0])
-      .join("")
-      .toUpperCase();
   const leadGroup = groupForStore(lead);
   const kindLabel = leadGroup.shortLabel;
-  const leadImg = sectorLeadPhoto(leadGroup.id);
+  // Prioriza a foto/fachada real do estabelecimento (vinda do Supabase);
+  // só cai para a foto genérica do setor quando o comércio não tem foto
+  // própria cadastrada.
+  const leadImg = lead.photoUrl || lead.logoUrl || sectorLeadPhoto(leadGroup.id);
 
   return (
     <section className="pcx-section" aria-labelledby="stores-title">
@@ -112,28 +108,7 @@ export function StoreRail({
 
           <div className="pcx-store-list">
             {directory.map((store) => (
-              <Link
-                className="pcx-store-row"
-                key={store.id}
-                to={`/estabelecimento/${store.slug}`}
-                style={{ "--store-accent": store.color } as CSSProperties}
-              >
-                <i aria-hidden="true">{initials(store.name)}</i>
-                <span>
-                  <strong>{store.name}</strong>
-                  <small>
-                    <MapPin aria-hidden="true" />{" "}
-                    {store.neighborhood || "Feijó"}
-                  </small>
-                </span>
-                <em>
-                  <b>{store.products || 0}</b> itens
-                </em>
-                <ArrowUpRight
-                  className="pcx-store-row__arrow"
-                  aria-hidden="true"
-                />
-              </Link>
+              <StoreCard key={store.id} store={store} />
             ))}
             <Link className="pcx-store-list__all" to="/estabelecimentos">
               <Store aria-hidden="true" /> Ver diretório completo{" "}

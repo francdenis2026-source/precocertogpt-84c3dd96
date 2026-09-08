@@ -14,7 +14,7 @@ import {
   msUntilNextCycle,
 } from "../data/featuredRotation";
 import { FestivalAcaiBar } from "../components/FestivalAcaiBar";
-import { BottomNav } from "../components/home/BottomNav";
+import { AppDock } from "../reference/PublicChrome";
 import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
@@ -153,7 +153,7 @@ export function HomeNew2026() {
         <LocalBanner />
       </main>
       <Footer />
-      <BottomNav />
+      <AppDock current="home" />
     </div>
   );
 }

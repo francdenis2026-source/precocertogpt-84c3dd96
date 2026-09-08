@@ -373,7 +373,7 @@ export function SectorHub2026() {
         </section>
       </main>
       <PublicFooter />
-      <AppDock current="explore" />
+      <AppDock current="stores" />
     </div>
   );
 }
