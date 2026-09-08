@@ -36,9 +36,9 @@ const meaningful = value => {
   return text && !['-', '--', 'n/a', 'na', 'null', 'undefined'].includes(text.toLowerCase()) ? text : '';
 };
 
-function replaceMeta(html, {pathname,title,description,h1,image='/og.png',jsonLd,content=''}) {
+function replaceMeta(html, {pathname,title,description,h1,image='/og-preco-certo-oficial-v2.jpg',jsonLd,content=''}) {
   const canonical = absolute(pathname);
-  const socialImage = image?.startsWith('http') ? image : `${BASE}${image || '/og.png'}`;
+  const socialImage = image?.startsWith('http') ? image : `${BASE}${image || '/og-preco-certo-oficial-v2.jpg'}`;
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${esc(title)}</title>`)
     .replace(/<meta name="description"[^>]*>/i, `<meta name="description" content="${esc(description)}" />`)
     .replace(/<link rel="canonical"[^>]*>/i, `<link rel="canonical" href="${canonical}" />`)
@@ -99,7 +99,7 @@ for (const p of products) {
   const detail = [brand,size,unit,category].filter(Boolean).join(' · ');
   const description = `${name}${detail ? ` — ${detail}` : ''}. Compare preços e disponibilidade no comércio local de Feijó (AC).`;
   const schema = {'@context':'https://schema.org','@type':'Product',name,brand:brand?{'@type':'Brand',name:brand}:undefined,category:category||undefined,image:meaningful(p.image_url)||undefined,url:absolute(pathname),description};
-  await writeRoute(pathname, replaceMeta(template,{pathname,title:`${name} | PreçoCerto`,description,h1:name,image:meaningful(p.image_url)||'/og.png',jsonLd:schema}));
+  await writeRoute(pathname, replaceMeta(template,{pathname,title:`${name} | PreçoCerto`,description,h1:name,image:meaningful(p.image_url)||'/og-preco-certo-oficial-v2.jpg',jsonLd:schema}));
   sitemapPaths.push(pathname);
 }
 
@@ -109,7 +109,7 @@ for (const s of stores) {
   const neighborhood=meaningful(s.neighborhood); const customDescription=meaningful(s.short_description);
   const description = customDescription || `${name}${neighborhood?` em ${neighborhood}`:''}. Consulte catálogo, produtos e preços no PreçoCerto.`;
   const schema = {'@context':'https://schema.org','@type':'Store',name,url:absolute(pathname),description,image:meaningful(s.logo_url)||undefined,address:neighborhood?{'@type':'PostalAddress',addressLocality:'Feijó',addressRegion:'AC',addressCountry:'BR',addressDistrict:neighborhood}:undefined};
-  await writeRoute(pathname, replaceMeta(template,{pathname,title:`${name} | PreçoCerto`,description,h1:name,image:meaningful(s.logo_url)||'/og.png',jsonLd:schema}));
+  await writeRoute(pathname, replaceMeta(template,{pathname,title:`${name} | PreçoCerto`,description,h1:name,image:meaningful(s.logo_url)||'/og-preco-certo-oficial-v2.jpg',jsonLd:schema}));
   sitemapPaths.push(pathname);
 }
 
