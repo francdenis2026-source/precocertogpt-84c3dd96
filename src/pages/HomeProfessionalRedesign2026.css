@@ -1475,46 +1475,46 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   line-height: 1.25;
 }
+.pcx-spotlight__copy h2 strong { color: var(--h-primary); font-weight: 800; }
 .pcx-spotlight__copy p {
-  margin: 0 0 0.55rem;
+  margin: 0 0 0.85rem;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.86rem;
   line-height: 1.5;
   max-width: 60ch;
 }
-.pcx-spotlight__assistant {
-  display: inline-flex;
+/* 3 chamadas de valor rápidas (identidade 2026-09, ver "cesta inteligente"
+   no pacote de referência) — substituem o antigo aviso solto do assistente
+   de IA, texto fixo sem número. */
+.pcx-spotlight__highlights {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.4rem;
+}
+.pcx-spotlight__highlights li {
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
-  border-radius: 999px;
-  border: 1px dashed rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 0.74rem;
-  font-weight: 700;
+  gap: 0.5rem;
 }
-.pcx-spotlight__assistant-icon {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  flex: none;
+.pcx-spotlight__highlights svg {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
   border-radius: 50%;
-  background: #fff;
-  color: #10161d;
-  animation: pcx-spotlight-bot-bob 3.2s ease-in-out infinite;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
 }
-.pcx-spotlight__assistant-icon svg { width: 12px; height: 12px; }
-@keyframes pcx-spotlight-bot-bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-2px) rotate(-8deg); } }
-@media (prefers-reduced-motion: reduce) {
-  .pcx-spotlight__assistant-icon { animation: none; }
-}
+.pcx-spotlight__highlights strong { display: block; font-size: 0.78rem; font-weight: 800; color: #fff; line-height: 1.2; }
+.pcx-spotlight__highlights small { display: block; font-size: 0.7rem; color: rgba(255, 255, 255, 0.72); line-height: 1.2; }
+.pcx-spotlight__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.2rem; }
 .pcx-spotlight__cta {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1rem;
   padding: 0.7rem 1.2rem;
   border-radius: var(--h-radius-md);
   background: #fff;
@@ -1531,6 +1531,28 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-spotlight__cta:hover { background: #eaf3f2; }
   .pcx-spotlight__cta:hover svg { transform: translateX(3px); }
 }
+.pcx-spotlight__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pcx-spotlight__link svg { width: 14px; height: 14px; }
+.pcx-spotlight__mock-saving {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.7rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.24);
+}
+.pcx-spotlight__mock-saving span { font-size: 0.72rem; color: rgba(255, 255, 255, 0.72); font-weight: 700; }
+.pcx-spotlight__mock-saving strong { font-size: 1.05rem; color: var(--h-primary); font-weight: 900; }
 
 /* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
    já carregado, cada um com o estabelecimento mais barato encontrado. */
@@ -1596,7 +1618,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
      esticar por todo o espaço vertical disponível na coluna, empurrando o
      botão para o rodapé e deixando um vão vazio enorme no meio do card. */
   .pcx-spotlight__copy { flex: 0 0 auto; width: 100%; }
+  .pcx-spotlight__actions { width: 100%; flex-direction: column; align-items: stretch; }
   .pcx-spotlight__cta { width: 100%; justify-content: center; }
+  .pcx-spotlight__link { justify-content: center; }
 }
 
 /* ── Store rail ─────────────────────────────────────────────────────────── */

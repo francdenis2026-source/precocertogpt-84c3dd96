@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ArrowRight, Bot, Sparkles, Store } from "lucide-react";
+import { ArrowRight, Clock, RefreshCw, ShoppingCart, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 
@@ -23,29 +23,59 @@ function pickBasketSample(products: Product[]): Product[] {
   return sample;
 }
 
+/** Chamadas de valor (identidade 2026-09, ver banco de fotos/
+ *  precocerto_pacote_visual/cesta inteligente.png) — texto fixo, nenhum
+ *  número inventado. */
+const HIGHLIGHTS = [
+  { icon: RefreshCw, title: "Comparação", text: "em tempo real" },
+  { icon: Clock, title: "Mais economia", text: "na sua rotina" },
+  { icon: Store, title: "Comércio local", text: "mais forte" },
+] as const;
+
 export function SmartBasketSpotlight({ products = [] }: { products?: Product[] }) {
   const sample = useMemo(() => pickBasketSample(products), [products]);
+  // Economia real: soma, para os produtos da amostra, a diferença entre o
+  // preço médio do catálogo e o menor preço encontrado — os dois números já
+  // vêm calculados do catálogo, nada aqui é estimado às cegas.
+  const estimatedSaving = useMemo(
+    () => sample.reduce((total, product) => total + Math.max(0, product.avgPrice - product.minPrice), 0),
+    [sample],
+  );
 
   return (
     <section className="pcx-shell" aria-labelledby="smart-basket-title">
       <div className="pcx-spotlight">
         <div className="pcx-spotlight__copy">
           <span className="pcx-spotlight__badge">
-            <Sparkles aria-hidden="true" />
-            Ferramenta com IA
+            <ShoppingCart aria-hidden="true" />
+            Cesta inteligente
           </span>
-          <h2 id="smart-basket-title">Monte sua lista e descubra onde comprar mais barato</h2>
+          <h2 id="smart-basket-title">
+            Monte sua cesta <strong>e economize de verdade.</strong>
+          </h2>
           <p>
-            Diga o que você precisa e deixe a IA montar a lista com os menores preços
-            entre os estabelecimentos de Feijó, comparando tudo por você em segundos.
+            Compare preços automaticamente, encontre o menor valor e faça uma
+            compra mais inteligente no comércio local.
           </p>
-          <span className="pcx-spotlight__assistant">
-            <span className="pcx-spotlight__assistant-icon"><Bot aria-hidden="true" /></span>
-            Tem um assistente virtual para montar a cesta e ajudar na compra
-          </span>
-          <Link to="/cesta-inteligente" className="pcx-spotlight__cta">
-            Criar cesta inteligente <ArrowRight aria-hidden="true" />
-          </Link>
+          <ul className="pcx-spotlight__highlights">
+            {HIGHLIGHTS.map(({ icon: Icon, title, text }) => (
+              <li key={title}>
+                <Icon aria-hidden="true" />
+                <span>
+                  <strong>{title}</strong>
+                  <small>{text}</small>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <div className="pcx-spotlight__actions">
+            <Link to="/cesta-inteligente" className="pcx-spotlight__cta">
+              Criar minha cesta <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link to="/cesta-inteligente" className="pcx-spotlight__link">
+              Saiba como funciona <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
         </div>
 
         {sample.length > 0 && (
@@ -62,6 +92,12 @@ export function SmartBasketSpotlight({ products = [] }: { products?: Product[] }
                 </li>
               ))}
             </ul>
+            {estimatedSaving > 0 && (
+              <div className="pcx-spotlight__mock-saving">
+                <span>Economia estimada</span>
+                <strong>{brl.format(estimatedSaving)}</strong>
+              </div>
+            )}
           </div>
         )}
       </div>
