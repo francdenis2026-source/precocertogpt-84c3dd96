@@ -84,6 +84,9 @@
 .sector-hub__sector--bakery .sector-hub__sector-icon { background: var(--pc-gold-soft); color: #a65d00; }
 .sector-hub__sector--books .sector-hub__sector-icon { background: color-mix(in srgb, #7048c8 12%, var(--pc-surface)); color: #6540b8; }
 .sector-hub__sector--services .sector-hub__sector-icon { background: color-mix(in srgb, #53617a 12%, var(--pc-surface)); color: #53617a; }
+.sector-hub__sector--butchers .sector-hub__sector-icon { background: color-mix(in srgb, #d63b3b 12%, var(--pc-surface)); color: #c2372f; }
+.sector-hub__sector--food .sector-hub__sector-icon { background: color-mix(in srgb, #ef7f1a 13%, var(--pc-surface)); color: #c2650f; }
+.sector-hub__sector--other .sector-hub__sector-icon { background: color-mix(in srgb, #d6499b 12%, var(--pc-surface)); color: #b83a83; }
 .sector-hub__sector--empty { border-style: dashed; background: color-mix(in srgb, var(--pc-surface-2) 42%, var(--pc-surface)); }
 .sector-hub__sector-invite { margin-top: 4px !important; color: var(--pc-muted); font-size: 10px !important; }
 .sector-hub__sector-invite a { color: var(--sh-blue); font-weight: 850; }
@@ -189,6 +192,9 @@ html[data-theme="dark"] .sector-hub__sector--pharmacies .sector-hub__sector-icon
 html[data-theme="dark"] .sector-hub__sector--bakery .sector-hub__sector-icon { color: #ffc477; }
 html[data-theme="dark"] .sector-hub__sector--books .sector-hub__sector-icon { color: #c7b1ff; }
 html[data-theme="dark"] .sector-hub__sector--services .sector-hub__sector-icon { color: #b6c1d7; }
+html[data-theme="dark"] .sector-hub__sector--butchers .sector-hub__sector-icon { color: #ff8a80; }
+html[data-theme="dark"] .sector-hub__sector--food .sector-hub__sector-icon { color: #ffb066; }
+html[data-theme="dark"] .sector-hub__sector--other .sector-hub__sector-icon { color: #ff9ad1; }
 html[data-theme="dark"] .sector-hub__tool-grid > a { background: var(--pc-surface); }
 html[data-theme="dark"] .sector-hub__sponsor-badge { color: #ffe1a1; background: #4a3515; }
 

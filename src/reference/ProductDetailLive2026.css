@@ -7,9 +7,9 @@
   --pdl-surface:var(--pc-surface,#fff);
   --pdl-surface-2:color-mix(in srgb, var(--pdl-surface) 92%, #6b7280);
   --pdl-border:color-mix(in srgb, currentColor 14%, transparent);
-  --pdl-text:var(--pc-text,#111827);
+  --pdl-text:var(--pc-ink,#17231C);
   --pdl-muted:var(--pc-muted,#5b6472);
-  --pdl-accent:var(--pc-accent,#0f7b52);
+  --pdl-accent:var(--accent,#13B954);
   --pdl-gap:clamp(.8rem,2vw,1.2rem);
   display:flex;flex-direction:column;min-height:100vh;color:var(--pdl-text);
 }
@@ -48,18 +48,18 @@
 .pdl-price__save{display:inline-flex;align-items:center;gap:.32rem;font-size:.76rem;font-weight:650;padding:.28rem .55rem;border-radius:999px;background:color-mix(in srgb,var(--pdl-accent) 16%,transparent);color:var(--pdl-accent)}
 .pdl-price__save svg{width:13px;height:13px}
 
-.pdl-buy-online{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;margin-bottom:.6rem;padding:0 1rem;border-radius:12px;background:#0fa958;color:#fff;font-size:.87rem;font-weight:800;text-decoration:none;transition:background .18s ease,transform .18s ease}
-.pdl-buy-online:hover{background:#087a45;transform:translateY(-1px)}
+.pdl-buy-online{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;margin-bottom:.6rem;padding:0 1rem;border-radius:12px;background:var(--accent-strong,#07563A);color:#fff;font-size:.87rem;font-weight:800;text-decoration:none;transition:background .18s ease,transform .18s ease}
+.pdl-buy-online:hover{background:color-mix(in srgb,var(--accent-strong,#07563A) 85%,#000);transform:translateY(-1px)}
 .pdl-buy-online svg{width:17px;height:17px}
 .pdl-actions{display:flex;flex-wrap:wrap;gap:.5rem}
 .pdl-actions button{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;padding:0 .95rem;border-radius:12px;font-size:.83rem;font-weight:650;cursor:pointer;border:1px solid var(--pdl-border);background:var(--pdl-surface-2);color:var(--pdl-text);transition:transform .18s ease,background .18s ease,opacity .18s ease}
 .pdl-actions button svg{width:16px;height:16px}
 .pdl-actions button:hover{background:var(--pdl-surface);transform:translateY(-1px)}
 .pdl-actions button:disabled{opacity:.55;cursor:progress;transform:none}
-/* `.pdl-actions button` (0,1,1) tem especificidade maior que
-   `.pdl-actions__primary` (0,1,0), então o CTA herdava a tinta escura da
-   página sobre o verde (3.36:1, reprovado no AA) em vez do branco. */
-.pdl-actions button.pdl-actions__primary{background:var(--pdl-accent)!important;border-color:transparent!important;color:#fff;box-shadow:0 8px 20px color-mix(in srgb,var(--pdl-accent) 32%,transparent)}
+/* CTA em verde vivo (--pdl-accent = --accent): texto branco falha o AA sobre
+   esse verde claro, então o preenchimento usa tinta escura (mesmo padrão do
+   selo "Menor preço" e do botão de estabelecimento nas categorias). */
+.pdl-actions button.pdl-actions__primary{background:var(--pdl-accent)!important;border-color:transparent!important;color:#04170f;box-shadow:0 8px 20px color-mix(in srgb,var(--pdl-accent) 32%,transparent)}
 .pdl-actions button.is-active{background:color-mix(in srgb,#e11d48 14%,transparent)!important;border-color:color-mix(in srgb,#e11d48 45%,transparent)!important;color:#e11d48!important}
 .pdl-actions button:focus-visible{outline:2px solid var(--pdl-accent);outline-offset:2px}
 
@@ -91,7 +91,7 @@
 .pdl-compare__list li.is-best a{border-color:color-mix(in srgb,var(--pdl-accent) 55%,transparent);background:color-mix(in srgb,var(--pdl-accent) 8%,transparent)}
 .pdl-compare__list li.is-active a{box-shadow:inset 0 0 0 1px var(--pdl-accent)}
 .pdl-compare__rank{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--pdl-surface-2);font-size:.78rem;font-weight:700;color:var(--pdl-muted)}
-.pdl-compare__list li.is-best .pdl-compare__rank{background:var(--pdl-accent);color:#fff}
+.pdl-compare__list li.is-best .pdl-compare__rank{background:var(--pdl-accent);color:#04170f}
 .pdl-compare__rank svg{width:15px;height:15px}
 .pdl-compare__store{display:flex;flex-direction:column;min-width:0}
 .pdl-compare__store strong{font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -151,10 +151,11 @@
 .pdl-toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);transform:translateX(-50%);z-index:60;padding:.6rem 1rem;border-radius:999px;background:#111827;color:#fff;font-size:.82rem;box-shadow:0 12px 28px rgba(0,0,0,.28)}
 
 /* Dark */
-:root[data-theme="dark"] .pdl-page,.dark .pdl-page{--pdl-surface:#12161b;--pdl-surface-2:#1b2128;--pdl-border:rgba(255,255,255,.12);--pdl-text:#eef2f6;--pdl-muted:#9aa6b4;--pdl-accent:#d9b566}
-:root[data-theme="dark"] .pdl-actions__primary,.dark .pdl-actions__primary{color:#161208;box-shadow:0 8px 20px rgba(217,181,102,.28)}
-:root[data-theme="dark"] .pdl-live,.dark .pdl-live{background:rgba(217,181,102,.18);color:#f4e3bd}
-:root[data-theme="dark"] .pdl-similar b,.dark .pdl-similar b{color:#e7cf9a}
+:root[data-theme="dark"] .pdl-page,.dark .pdl-page{--pdl-surface:#0E1D16;--pdl-surface-2:#14271D;--pdl-border:rgba(255,255,255,.12);--pdl-text:#F4FAF6;--pdl-muted:#9AA9A1;--pdl-accent:#2ADC6C}
+:root[data-theme="dark"] .pdl-actions__primary,.dark .pdl-actions__primary{color:#07130E;box-shadow:0 8px 20px rgba(42,220,108,.28)}
+:root[data-theme="dark"] .pdl-live,.dark .pdl-live{background:rgba(42,220,108,.18);color:#8ff2b0}
+:root[data-theme="dark"] .pdl-similar b,.dark .pdl-similar b{color:#6bdf9a}
+:root[data-theme="dark"] .pdl-compare__list li.is-best .pdl-compare__rank,.dark .pdl-compare__list li.is-best .pdl-compare__rank{color:#07130E}
 
 /* Responsivo */
 @media (max-width:1000px){
@@ -175,7 +176,7 @@
   .pdl-mobile-bar div{display:flex;flex-direction:column}
   .pdl-mobile-bar small{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--pdl-muted,#5b6472)}
   .pdl-mobile-bar strong{font-size:1.05rem;font-variant-numeric:tabular-nums}
-  .pdl-mobile-bar button{display:inline-flex;align-items:center;gap:.4rem;min-height:42px;padding:0 1rem;border-radius:12px;border:0;background:var(--pdl-accent,#0f7b52);color:#fff;font-weight:700;font-size:.84rem;cursor:pointer}
+  .pdl-mobile-bar button{display:inline-flex;align-items:center;gap:.4rem;min-height:42px;padding:0 1rem;border-radius:12px;border:0;background:var(--accent-strong,#07563A);color:#fff;font-weight:700;font-size:.84rem;cursor:pointer}
   .pdl-mobile-bar button svg{width:16px;height:16px}
 }
 @media (prefers-reduced-motion:reduce){
