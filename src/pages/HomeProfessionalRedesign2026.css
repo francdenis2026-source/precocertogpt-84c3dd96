@@ -528,44 +528,60 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
+/* Herói fotográfico full-bleed (identidade 2026-09, pacote de referência
+   visual). Regra dos dois verdes: grandes superfícies fotográficas usam
+   --pc-forest-*, sempre — este herói é intencionalmente escuro nos dois
+   temas do site, como já é .store-pro-hero em StoreDetailProfessional.css.
+   Por isso nenhum estilo aqui dentro depende de --h-* nem de data-theme: definimos
+   uma paleta fixa própria (--hero-*) e a busca/painel flutuantes usam tokens
+   globais sempre-claros (--pc-white, --pc-surface-soft etc.), não --h-*. */
 .pcx-hero {
+  --hero-ink: #ffffff;
+  --hero-muted: #d9e8df;
+  --hero-border: rgba(255, 255, 255, 0.28);
+  --hero-border-strong: rgba(255, 255, 255, 0.4);
+  --hero-glass: rgba(255, 255, 255, 0.12);
+  --hero-glass-strong: rgba(255, 255, 255, 0.2);
+
+  /* Busca e painel "COMPARAÇÃO REAL" são ilhas de contraste sempre
+     brancas/claras sobre a foto — não trocam com o tema. */
+  --hero-panel-surface: var(--pc-white);
+  --hero-panel-surface-2: var(--pc-surface-soft);
+  --hero-panel-border: var(--pc-border-forest);
+  --hero-panel-ink: var(--pc-graphite);
+  --hero-panel-muted: var(--pc-muted-forest);
+
   position: relative;
-  /* Só o fundo decorativo (::after, preso a inset:0) precisa ser recortado;
-     overflow:hidden nos dois eixos também cortava o painel de resultados da
-     busca ao vivo (absolute, abre para baixo) sempre que ele passava da
-     borda inferior do hero. */
+  isolation: isolate;
+  /* Só o véu (::before, preso a inset:0) precisa ser recortado; overflow
+     nos dois eixos também cortava o painel de resultados da busca ao vivo
+     (absolute, abre para baixo) sempre que ele passava da borda inferior
+     do hero. */
   overflow-x: clip;
-  padding: clamp(1.4rem, 2.6vw, 2.1rem) 0;
-  min-height: 0;
   display: flex;
   align-items: center;
-  background:
-    radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--h-forest) 10%, transparent), transparent 24rem),
-    var(--h-canvas);
-  border-bottom: 1px solid var(--h-border);
+  min-height: clamp(420px, 46vw, 560px);
+  padding: clamp(1.6rem, 3vw, 2.4rem) 0;
+  background: var(--pc-forest-950) var(--pcx-hero-photo) 78% 22% / cover no-repeat;
+  border-bottom: 1px solid var(--pc-forest-800);
 }
-/* Fundo editorial (textura escura com feixes de luz verde/âmbar): só faz
-   sentido no tema escuro, onde o hero já é dramático/escuro por natureza.
-   No claro ela sempre vazava um pouco na borda (o véu nunca é 100% opaco),
-   um traço de luz solto que não combinava com o visual limpo da página —
-   removida daqui; o hero claro fica só com o brilho radial sutil já
-   definido em .pcx-hero. */
-.pcx-hero::after {
+/* Véu gradiente verde-floresta: opaco à esquerda (onde o texto fica),
+   transparente à direita (onde a foto aparece limpa) — mesma técnica de
+   .store-pro-hero__overlay, sempre ativo, independente do tema claro/escuro
+   do resto da home. */
+.pcx-hero::before {
   content: "";
   position: absolute;
+  z-index: -1;
   inset: 0;
-  z-index: 0;
   pointer-events: none;
-  opacity: 0;
-}
-:root[data-theme="dark"] .pcx-hero::after,
-.dark .pcx-hero::after {
-  background-image:
-    linear-gradient(100deg, var(--h-canvas) 6%, color-mix(in srgb, var(--h-canvas) 86%, transparent) 46%, color-mix(in srgb, var(--h-canvas) 62%, transparent) 100%),
-    var(--pcx-hero-backdrop);
-  background-size: cover, cover;
-  background-position: center, center;
-  opacity: 0.9;
+  background-image: linear-gradient(
+    96deg,
+    rgba(2, 44, 32, 0.94) 0%,
+    rgba(2, 44, 32, 0.88) 34%,
+    rgba(2, 44, 32, 0.55) 64%,
+    rgba(2, 44, 32, 0.14) 100%
+  );
 }
 
 .pcx-hero__inner {
@@ -584,32 +600,34 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   align-items: center;
 }
 .pcx-hero__copy { min-width: 0; }
-/* LocationSwitcher (.pc-location) nasceu para um fundo escuro/glass — aqui,
-   dentro da coluna de texto clara do herói, reskin para os tokens --h-*. */
+/* LocationSwitcher (.pc-location) nasceu para um fundo escuro/glass — aqui
+   ela já está em cima da foto, então volta a ser um chip "glass" (fundo
+   translúcido branco + blur), só que com a paleta fixa --hero-* em vez dos
+   tokens --h-* que trocam com o tema do resto da home. */
 .pcx-hero__copy .pc-location { margin-bottom: 0.75rem; }
 .pcx-hero__copy .pc-location__chip {
-  background: var(--h-surface-2);
-  border-color: var(--h-border);
-  color: var(--h-ink);
+  background: var(--hero-glass);
+  border-color: var(--hero-border);
+  color: var(--hero-ink);
   box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-.pcx-hero__copy .pc-location__chip > svg { background: var(--h-primary-soft); color: var(--h-primary-dark); }
-.pcx-hero__copy .pc-location__chip small { color: var(--h-subtle); }
-.pcx-hero__copy .pc-location__chip strong { color: var(--h-ink); }
+.pcx-hero__copy .pc-location__chip > svg { background: rgba(255, 255, 255, 0.18); color: var(--pc-green-400); }
+.pcx-hero__copy .pc-location__chip small { color: var(--hero-muted); }
+.pcx-hero__copy .pc-location__chip strong { color: var(--hero-ink); }
 .pcx-hero h1 {
   max-width: 26ch;
   margin: 0;
   font-size: clamp(2.1rem, 3.6vw, 3.15rem);
   line-height: 1.06;
   letter-spacing: -0.035em;
-  color: var(--h-ink);
+  color: var(--hero-ink);
   text-wrap: balance;
-  text-shadow: 0 1px 0 color-mix(in srgb, var(--h-surface) 70%, transparent);
+  text-shadow: 0 2px 16px rgba(2, 20, 14, 0.45);
 }
 .pcx-hero h1 strong {
-  color: var(--h-primary-dark);
+  color: var(--pc-green-400);
   font-weight: 900;
   position: relative;
 }
@@ -620,17 +638,18 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   right: -2px;
   bottom: 0.05em;
   height: 0.18em;
-  background: linear-gradient(90deg, var(--h-primary-soft), transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--pc-green-400) 45%, transparent), transparent);
   border-radius: 2px;
   z-index: -1;
 }
 .pcx-hero__lead {
   margin: 0.7rem 0 1rem;
   font-size: clamp(1rem, 1.35vw, 1.12rem);
-  color: var(--h-muted);
+  color: var(--hero-muted);
   max-width: 50ch;
   line-height: 1.55;
   font-weight: 500;
+  text-shadow: 0 1px 10px rgba(2, 20, 14, 0.4);
 }
 .pcx-hero__search { margin-bottom: 0.9rem; }
 .pcx-hero__actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
@@ -642,32 +661,40 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 0.55rem 1.25rem;
   margin-top: 1.1rem;
   padding: 0.55rem 0.85rem;
-  background: color-mix(in srgb, var(--h-surface) 86%, transparent);
-  border: 1px solid var(--h-border);
+  background: var(--hero-glass);
+  border: 1px solid var(--hero-border);
   border-radius: 999px;
-  box-shadow: var(--h-shadow-sm);
+  box-shadow: 0 8px 24px rgba(2, 20, 14, 0.22);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .pcx-hero__stat {
   display: inline-flex; align-items: center; gap: 0.4rem;
-  font-size: 0.85rem; font-weight: 600; color: var(--h-muted);
+  font-size: 0.85rem; font-weight: 600; color: var(--hero-muted);
 }
-.pcx-hero__stat svg { width: 17px; height: 17px; color: var(--h-primary); flex-shrink: 0; }
-.pcx-hero__stat strong { font-size: 1rem; font-weight: 900; color: var(--h-ink); }
+.pcx-hero__stat svg { width: 17px; height: 17px; color: var(--pc-green-400); flex-shrink: 0; }
+.pcx-hero__stat strong { font-size: 1rem; font-weight: 900; color: var(--hero-ink); }
 .pcx-hero .pcx-btn--ghost {
-  background: var(--h-surface);
-  border-color: var(--h-border-strong);
-  color: var(--h-ink);
+  background: var(--hero-glass);
+  border-color: var(--hero-border-strong);
+  color: var(--hero-ink);
 }
-.pcx-hero .pcx-btn--ghost:hover { background: var(--h-surface-2); border-color: var(--h-primary); }
+/* `.pcx-home a.pcx-btn--ghost { color: var(--h-ink) }` (regra global, no
+   topo deste arquivo) tem especificidade igual à regra acima — precisa de
+   um seletor mais específico aqui para garantir que o texto do botão
+   "Explorar lojas" fique branco sobre a foto, não na tinta do tema. */
+.pcx-home .pcx-hero a.pcx-btn--ghost { color: var(--hero-ink); }
+.pcx-hero .pcx-btn--ghost:hover { background: var(--hero-glass-strong); border-color: var(--pc-green-400); }
 
+/* Antes ancorava a <img> do cartão-foto e o painel absoluto sobre ela; a
+   foto agora é o fundo full-bleed da seção inteira (.pcx-hero), então esta
+   coluna só existe para posicionar o painel "COMPARAÇÃO REAL" flutuando
+   sobre a foto, do lado direito — sem imagem própria. */
 .pcx-hero__visual {
   position: relative;
-  min-height: 390px;
   width: 100%;
-  max-width: 460px;
+  max-width: 340px;
   justify-self: end;
-  padding: 0 0 1.9rem 1.8rem;
 }
 /* Removido o shimmer cinza de carregamento: o usuário o lia como uma
    camada cinza sobre a homepage inteira. As imagens da home agora aparecem
@@ -675,46 +702,17 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
    escondia <img> até carregar é desfeita aqui, só na home). */
 .pcx-home img:not([data-pc-img-ready]) { opacity: 1; }
 .pcx-home img[data-pc-img-ready] { transition: none; }
-.pcx-hero__visual::before {
-  content: "";
-  position: absolute;
-  inset: -8% 0 8% 5%;
-  z-index: -1;
-  background:
-    radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--h-primary) 16%, transparent), transparent 60%),
-    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--h-accent) 14%, transparent), transparent 55%);
-  filter: blur(24px);
-  opacity: 0.35;
-}
-.pcx-hero__image {
-  display: block;
-  width: 100%;
-  height: 390px;
-  object-fit: cover;
-  object-position: 55% 16%;
-  border-radius: var(--h-radius-xl);
-  box-shadow: 0 12px 28px rgb(20 42 34 / 10%);
-}
-/* Overlay verde-floresta localizado sobre a foto (identidade 2026-09) — um
-   véu sutil na base/lateral da foto, não uma camada cobrindo tudo. */
-.pcx-hero__visual::after {
-  content: "";
-  position: absolute;
-  inset: 0 0 1.9rem 1.8rem;
-  border-radius: var(--h-radius-xl);
-  pointer-events: none;
-  background: linear-gradient(200deg, transparent 55%, color-mix(in srgb, var(--h-forest-deep) 55%, transparent) 100%);
-}
 
-/* Hero side panel — real-data proof card */
+/* Hero side panel — real-data proof card. Fica sobre a foto, então é uma
+   "ilha" sempre branca/clara (tokens globais --pc-*, não --h-*): precisa
+   continuar legível nos dois temas do site, já que o fundo por trás dela
+   (a foto) não muda com o tema. */
 .pcx-hero__panel {
-  position: absolute;
-  left: -1.5rem;
-  bottom: -1.25rem;
-  width: min(290px, 74%);
-  background: var(--h-surface);
+  position: relative;
+  width: 100%;
+  background: var(--hero-panel-surface);
   border-radius: var(--h-radius-xl);
-  box-shadow: 0 16px 38px rgb(20 42 34 / 20%);
+  box-shadow: 0 20px 46px rgba(2, 20, 14, 0.35);
   padding: 1rem;
   overflow: hidden;
 }
@@ -723,7 +721,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   position: absolute;
   inset: 0 0 auto 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--h-primary), var(--h-accent));
+  background: linear-gradient(90deg, var(--pc-green-600), var(--pc-green-400));
 }
 .pcx-hero__panel-head {
   display: flex;
@@ -738,7 +736,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.15;
-  color: var(--h-subtle);
+  color: var(--hero-panel-muted);
 }
 .pcx-hero__panel-live {
   display: inline-flex;
@@ -748,10 +746,10 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   white-space: nowrap;
   font-size: 0.62rem;
   font-weight: 700;
-  color: var(--h-primary);
+  color: var(--pc-green-600);
 }
 .pcx-hero__panel-live i {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--h-primary);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--pc-green-600);
   animation: pcx-pulse 1.8s ease-in-out infinite;
 }
 @keyframes pcx-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -764,8 +762,8 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 0.1rem 0.6rem;
   padding: 0.6rem 0.7rem;
   border-radius: var(--h-radius-md);
-  background: var(--h-surface-2);
-  border: 1px solid var(--h-border);
+  background: var(--hero-panel-surface-2);
+  border: 1px solid var(--hero-panel-border);
 }
 .pcx-hero__panel-thumb {
   grid-column: 1;
@@ -775,7 +773,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
-  background: var(--h-surface);
+  background: var(--hero-panel-surface);
 }
 .pcx-hero__panel-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .pcx-hero__panel-info { grid-column: 2; grid-row: 1 / span 2; min-width: 0; display: grid; gap: 0.15rem; }
@@ -783,7 +781,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   font-weight: 700;
   font-size: 0.85rem;
   line-height: 1.2;
-  color: var(--h-ink);
+  color: var(--hero-panel-ink);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -795,7 +793,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 0.3rem;
   min-width: 0;
   font-size: 0.72rem;
-  color: var(--h-muted);
+  color: var(--hero-panel-muted);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -807,7 +805,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   margin-top: 0.3rem;
   font-size: 1.05rem;
   font-weight: 900;
-  color: var(--h-primary-dark);
+  color: var(--pc-forest-800);
   white-space: nowrap;
   letter-spacing: -0.02em;
 }
@@ -818,9 +816,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 0.4rem;
   margin-top: 0.65rem;
   padding-top: 0.6rem;
-  border-top: 1px dashed var(--h-border);
+  border-top: 1px dashed var(--hero-panel-border);
   font-size: 0.76rem;
-  color: var(--h-subtle);
+  color: var(--hero-panel-muted);
   font-weight: 600;
 }
 .pcx-hero__panel-foot svg { width: 14px; height: 14px; }
@@ -833,7 +831,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   font-weight: 800;
   letter-spacing: normal;
   text-transform: none;
-  color: var(--h-ink);
+  color: var(--hero-panel-ink);
 }
 /* Nome + selo "menor preço" na mesma linha, quebrando se precisar. */
 .pcx-hero__panel-name {
@@ -847,8 +845,8 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   align-items: center;
   padding: 0.1rem 0.35rem;
   border-radius: 999px;
-  background: var(--h-primary);
-  color: var(--h-on-primary);
+  background: var(--pc-green-600);
+  color: var(--pc-white);
   font-style: normal;
   font-size: 0.56rem;
   font-weight: 800;
@@ -859,11 +857,11 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--h-subtle);
+  color: var(--hero-panel-muted);
 }
 .pcx-hero__panel-thumb--muted svg { width: 18px; height: 18px; }
 .pcx-hero__panel-price--muted {
-  color: var(--h-subtle) !important;
+  color: var(--hero-panel-muted) !important;
   font-weight: 700 !important;
   text-decoration: line-through;
 }
@@ -878,36 +876,47 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   margin-top: 0.6rem;
   font-size: 0.78rem;
 }
-.pcx-hero__suggestions > span { color: var(--h-subtle); font-weight: 600; }
+.pcx-hero__suggestions > span { color: var(--hero-muted); font-weight: 600; }
 .pcx-hero__suggestions a {
   padding: 0.25rem 0.7rem;
   border-radius: 999px;
-  border: 1px solid var(--h-border-strong);
-  background: var(--h-surface);
-  color: var(--h-ink);
+  border: 1px solid var(--hero-border-strong);
+  background: var(--hero-glass);
+  color: var(--hero-ink);
   font-weight: 600;
   text-decoration: none;
   transition: border-color 150ms ease, background 150ms ease;
 }
-.pcx-hero__suggestions a:hover { border-color: var(--h-primary); background: var(--h-primary-soft); }
-.pcx-hero__suggestions a:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
+.pcx-hero__suggestions a:hover { border-color: var(--pc-green-400); background: var(--hero-glass-strong); }
+.pcx-hero__suggestions a:focus-visible { outline: 2px solid var(--pc-green-400); outline-offset: 2px; }
 
 /* Faixa "economize" compacta — só existe no layout do app (ver @media 640px
    abaixo). No desktop o painel flutuante sobre a foto já cumpre esse papel. */
 .pcx-hero__mobile-banner { display: none; }
 
 @media (max-width: 960px) {
-  .pcx-hero__inner { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr); gap: 1.5rem; }
-  .pcx-hero__visual { min-height: 340px; max-width: 380px; padding: 0 0 1.6rem 1.2rem; }
-  .pcx-hero__image { height: 340px; object-position: 55% 18%; }
-  .pcx-hero__panel { width: min(260px, 82%); padding: 0.85rem; }
+  .pcx-hero__inner { grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr); gap: 1.5rem; }
+  .pcx-hero__visual { max-width: 300px; }
+  .pcx-hero__panel { padding: 0.85rem; }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 }
 @media (max-width: 640px) {
-  /* Hero compacto no app: menos altura em título, busca, botões e foto —
-     o objetivo é caber mais tela útil acima da dobra num celular. */
-  .pcx-hero { padding: 0.9rem 0 1.1rem; }
-  .pcx-hero__inner { grid-template-columns: 1fr; gap: 0.85rem; }
+  /* Hero compacto no app: menos altura em título, busca e botões — o
+     objetivo é caber mais tela útil acima da dobra num celular. A foto de
+     fundo continua full-bleed (herdada de .pcx-hero); só o enquadramento
+     muda de posição para manter a cliente visível num recorte mais alto
+     que largo, e o véu vira um degradê de cima para baixo (o layout aqui
+     é 1 coluna só, não faz mais sentido opaco-esquerda/claro-direita). */
+  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 80% 18%; }
+  .pcx-hero::before {
+    background-image: linear-gradient(
+      180deg,
+      rgba(2, 44, 32, 0.92) 0%,
+      rgba(2, 44, 32, 0.88) 55%,
+      rgba(2, 44, 32, 0.82) 100%
+    );
+  }
+  .pcx-hero__inner { grid-template-columns: 1fr; gap: 1rem; }
   .pcx-hero h1 { max-width: 18ch; margin: 0 0 0.45rem; font-size: clamp(1.7rem, 7.8vw, 2.25rem); line-height: 1.1; letter-spacing: -0.03em; }
   .pcx-hero h1 strong::after { height: 0.16em; }
   .pcx-hero__lead { margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.45; max-width: 44ch; }
@@ -927,13 +936,13 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__stat { font-size: 0.78rem; }
   .pcx-hero__stat svg { width: 15px; height: 15px; }
   .pcx-hero__stat strong { font-size: 0.92rem; }
-  .pcx-hero__visual { min-height: 200px; max-width: none; padding: 0 0 1rem 0.6rem; }
-  /* Foto dedicada ao mobile (trocada via <picture><source>) tem o rosto mais
-     à direita e mais alto no enquadramento original — reposiciona o corte. */
-  .pcx-hero__image { height: 200px; object-position: 62% 18%; border-radius: var(--h-radius-lg); }
-  .pcx-hero__panel { left: 0.6rem; bottom: -0.9rem; width: min(238px, 80%); padding: 0.75rem; border-radius: var(--h-radius-md); }
+
+  /* Sem imagem própria para ancorar, o painel "COMPARAÇÃO REAL" deixa de
+     flutuar em posição absoluta e passa a fluir normalmente, abaixo do
+     texto — mais legível que sobrepor a foto num viewport estreito. */
+  .pcx-hero__visual { max-width: none; margin-top: 1rem; }
+  .pcx-hero__panel { width: 100%; max-width: 380px; border-radius: var(--h-radius-md); }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
-  .pcx-hero__panel-foot { display: none; }
 
   .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.72rem; }
   .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
@@ -965,7 +974,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__mobile-banner span { display: block; font-size: 0.72rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
 }
 
-/* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important) */
+/* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important).
+   Igual ao painel "COMPARAÇÃO REAL": fica sobre a foto, então é sempre
+   branca/opaca (tokens fixos --hero-panel-*), não troca com o tema. */
 .pcx-hero .pc26-live-search { width: 100%; }
 .pcx-hero .pc26-hero-search {
   display: grid !important;
@@ -974,31 +985,31 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 10px !important;
   min-height: 60px !important;
   padding: 6px 6px 6px 18px !important;
-  border: 1px solid var(--h-border-strong) !important;
+  border: 1px solid var(--hero-panel-border) !important;
   border-radius: var(--h-radius-lg) !important;
-  background: var(--h-surface) !important;
-  box-shadow: var(--h-shadow-md) !important;
+  background: var(--hero-panel-surface) !important;
+  box-shadow: 0 12px 30px rgba(2, 20, 14, 0.32) !important;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 .pcx-hero .pc26-hero-search:focus-within {
-  border-color: var(--h-primary) !important;
-  box-shadow: 0 0 0 4px var(--h-primary-soft), var(--h-shadow-md) !important;
+  border-color: var(--pc-green-600) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--pc-green-600) 22%, transparent), 0 12px 30px rgba(2, 20, 14, 0.32) !important;
 }
-.pcx-hero .pc26-live-search__icon { width: 20px; height: 20px; color: var(--h-subtle); }
+.pcx-hero .pc26-live-search__icon { width: 20px; height: 20px; color: var(--hero-panel-muted); }
 .pcx-hero .pc26-hero-search input {
   border: none !important;
   outline: none !important;
   background: transparent !important;
   font-size: 0.95rem !important;
-  color: var(--h-ink) !important;
+  color: var(--hero-panel-ink) !important;
   font-family: var(--h-font);
   min-width: 0;
 }
-.pcx-hero .pc26-hero-search input::placeholder { color: var(--h-subtle); }
+.pcx-hero .pc26-hero-search input::placeholder { color: var(--hero-panel-muted); }
 .pcx-hero .pc26-live-search__clear {
   display: inline-flex; align-items: center; justify-content: center;
   width: 30px; height: 30px; border-radius: 999px; border: none;
-  background: var(--h-surface-2); color: var(--h-muted); cursor: pointer;
+  background: var(--hero-panel-surface-2); color: var(--hero-panel-muted); cursor: pointer;
 }
 .pcx-hero .pc26-live-search__clear svg { width: 15px; height: 15px; }
 .pcx-home .pcx-hero .pc26-live-search__submit,

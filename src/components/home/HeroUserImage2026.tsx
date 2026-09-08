@@ -8,8 +8,13 @@ import { LocationSwitcher } from "../LocationSwitcher";
 import { LiveProductSearch } from "./LiveProductSearch";
 import { PriceBadge } from "../catalog/PriceBadge";
 
-import heroImg from "../../assets/home-2026/hero-cliente-comparando-precos-2026.webp";
-import heroBackdrop from "../../assets/home-2026/hero-backdrop-precocerto-2026.jpg";
+// Foto full-bleed do herói (identidade 2026-09, ver banco de fotos/
+// precocerto_pacote_visual/ como referência de ESTILO — nunca usada como
+// asset final). Entre as fotos reais já existentes em src/assets/home-2026,
+// esta foi escolhida por ter negativo natural do lado esquerdo (onde o véu
+// verde-floresta fica opaco, sob o texto) e a cliente com sacola de compras
+// posicionada à direita — o mesmo enquadramento do mockup de referência.
+import heroPhoto from "../../assets/home-2026/hero-campanha-precocerto-pro.jpg";
 
 const intBr = new Intl.NumberFormat("pt-BR");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -58,11 +63,16 @@ export function HeroUserImage2026({
     <section
       className="pcx-hero"
       aria-labelledby="pcx-hero-title"
-      // O CSS do hero usa esta variavel no ::after. Sem defini-la, a
-      // declaracao background-image inteira era invalida: nem textura nem
+      // O CSS do hero usa esta variavel como background-image da secao.
+      // Sem defini-la, a declaracao inteira era invalida: nem a foto nem o
       // veu de contraste eram pintados.
-      style={{ "--pcx-hero-backdrop": `url(${heroBackdrop})` } as React.CSSProperties}
+      style={{ "--pcx-hero-photo": `url(${heroPhoto})` } as React.CSSProperties}
     >
+      {/* Mantem o alt descritivo da foto acessivel a leitor de tela — a foto
+          em si agora e pintada via background-image (menos acessivel por
+          natureza), entao preservamos a semantica original com uma <img>
+          visualmente oculta em vez de perder o texto alternativo. */}
+      <img className="sr-only" src={heroPhoto} alt="Cliente sorridente segurando o celular e uma sacola de compras com hortifruti em um corredor de mercado" />
       <div className="pcx-hero__inner">
         <div className="pcx-hero__copy">
           <LocationSwitcher />
@@ -128,16 +138,6 @@ export function HeroUserImage2026({
         </div>
 
         <div className="pcx-hero__visual">
-          <img
-            className="pcx-hero__image"
-            src={heroImg}
-            alt="Cliente comparando preços pelo celular em um supermercado"
-            width="1400"
-            height="933"
-            fetchPriority="high"
-            decoding="async"
-          />
-
           {comparison && (
             <div className="pcx-hero__panel">
               <div className="pcx-hero__panel-head">
