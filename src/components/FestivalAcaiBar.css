@@ -75,6 +75,12 @@
    princípio já aplicado nos heros do site inteiro. Só entra quando existe
    imagem de verdade (classe condicional), pra não escurecer à toa os
    banners que já usam cor sólida de tema. */
+/* Banner pronto: a imagem já traz o texto, então ela é o conteúdo inteiro,
+   em fluxo normal (não absoluta) e sem véu nem span por cima. */
+.pc-festival-bar__art.is-bare-image{padding:0;display:block}
+.pc-festival-bar__art.is-bare-image img{display:block;position:static;width:100%;height:62px;object-fit:cover;object-position:var(--campaign-focus,center)}
+@media(max-width:640px){.pc-festival-bar__art.is-bare-image img{height:56px}}
+
 .pc-festival-bar__art.has-image::before{
   content:"";
   position:absolute;

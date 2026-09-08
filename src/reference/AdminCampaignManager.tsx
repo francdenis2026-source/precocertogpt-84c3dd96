@@ -3,7 +3,7 @@ import { CalendarClock, Check, Eye, ImagePlus, Megaphone, Pencil, Plus, RefreshC
 import { deleteCampaign, loadAdminCampaigns, saveCampaign, uploadCampaignImage, type CampaignInput, type PlatformCampaign } from '../lib/campaigns';
 import './AdminCampaignManager.css';
 
-const empty:CampaignInput={kind:'announcement',placement:'top_bar',title:'',subtitle:'',imageUrl:'',imagePosition:'center',linkUrl:'/buscar',linkLabel:'Saiba mais',theme:'indigo',priority:0,isActive:false,isDismissible:true,startsAt:null,endsAt:null};
+const empty:CampaignInput={kind:'announcement',placement:'top_bar',title:'',subtitle:'',imageUrl:'',imagePosition:'center',imageHasText:false,linkUrl:'/buscar',linkLabel:'Saiba mais',theme:'indigo',priority:0,isActive:false,isDismissible:true,startsAt:null,endsAt:null};
 const IMAGE_POSITIONS:{value:string;label:string}[]=[
   {value:'center',label:'Centro'},
   {value:'left',label:'Esquerda'},
@@ -45,8 +45,9 @@ export function AdminCampaignManager({query='',onError}:{query?:string;onError:(
       <label className="wide">Título<input required minLength={3} maxLength={120} value={editor.title} onChange={e=>setEditor({...editor,title:e.target.value})} placeholder="Ex.: Festival do Açaí em Feijó"/></label><label className="wide">Texto complementar<input maxLength={180} value={editor.subtitle||''} onChange={e=>setEditor({...editor,subtitle:e.target.value})} placeholder="Uma frase curta e objetiva"/></label>
       <div className="wide acm-field"><span>Imagem do banner</span><div className="acm-upload"><input aria-label="URL da imagem do banner" value={editor.imageUrl||''} onChange={e=>setEditor({...editor,imageUrl:e.target.value})} placeholder="URL da imagem ou envie um arquivo"/><label className="acm-upload__button"><ImagePlus/>{uploading?'Enviando…':'Enviar imagem'}<input aria-label="Enviar arquivo de imagem" type="file" accept="image/png,image/jpeg,image/webp,image/avif" disabled={uploading} onChange={e=>void upload(e.target.files?.[0])}/></label></div><small>PNG, JPG, WebP ou AVIF, até 8 MB. Recomendado: 1024 × 62 px.</small>
         {editor.imageUrl&&<div className="acm-crop">
-          <span>Enquadramento (o que fica visível ao cortar a imagem)</span>
-          <select aria-label="Enquadramento da imagem" value={editor.imagePosition||'center'} onChange={e=>setEditor({...editor,imagePosition:e.target.value})}>{IMAGE_POSITIONS.map(pos=><option key={pos.value} value={pos.value}>{pos.label}</option>)}</select>
+          <label className="acm-crop__check"><input type="checkbox" checked={editor.imageHasText} onChange={e=>setEditor({...editor,imageHasText:e.target.checked})}/><span><strong>Esta imagem já tem texto/botão desenhados nela</strong><small>Mostra só a imagem, sem sobrepor título e chamada — evita texto duplicado.</small></span></label>
+          {!editor.imageHasText&&<><span>Enquadramento (o que fica visível ao cortar a imagem)</span>
+          <select aria-label="Enquadramento da imagem" value={editor.imagePosition||'center'} onChange={e=>setEditor({...editor,imagePosition:e.target.value})}>{IMAGE_POSITIONS.map(pos=><option key={pos.value} value={pos.value}>{pos.label}</option>)}</select></>}
           <div className="acm-crop__preview"><img src={editor.imageUrl} alt="" style={{objectPosition:editor.imagePosition||'center'}}/></div>
         </div>}
       </div>
