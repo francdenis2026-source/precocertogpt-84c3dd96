@@ -712,9 +712,16 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 /* Antes ancorava a <img> do cartão-foto e o painel absoluto sobre ela; a
    foto agora é o fundo full-bleed da seção inteira (.pcx-hero), então esta
    coluna só existe para posicionar o painel "COMPARAÇÃO REAL" flutuando
-   sobre a foto, do lado direito — sem imagem própria. */
+   sobre a foto, do lado direito — sem imagem própria.
+   align-self:end (não o "center" herdado de .pcx-hero__inner): o rosto da
+   cliente fica no terço de cima da foto, o carrinho/hortifruti embaixo —
+   um painel centralizado na altura da seção caía bem em cima do rosto,
+   principalmente em telas médias (tablet), onde a coluna de texto ainda
+   força o layout a ficar apertado. Ancorado embaixo, o painel flutua sobre
+   o carrinho, nunca sobre o rosto, em qualquer largura. */
 .pcx-hero__visual {
   position: relative;
+  align-self: end;
   width: 100%;
   max-width: 340px;
   justify-self: end;
