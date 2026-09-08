@@ -16,7 +16,7 @@
   padding: 22px;
   border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 18px;
-  background: #10161d;
+  background: var(--pc-forest-950, #022C20);
   color: rgb(255 255 255 / 88%);
   box-shadow: 0 30px 80px rgb(0 0 0 / 42%);
   text-align: center;
