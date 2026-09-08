@@ -5,8 +5,7 @@ import type { Product } from "../../data/catalog";
 import { LiveProductSearch } from "./LiveProductSearch";
 import { ProductThumb } from "../catalog/ProductThumb";
 
-import heroImg from "../../assets/home-2026/hero-supermercado-precocerto-2026.jpg";
-import heroImgMobile from "../../assets/home-2026/hero-supermercado-precocerto-2026-mobile.jpg";
+import heroImg from "../../assets/home-2026/hero-cliente-comparando-precos-2026.webp";
 import heroBackdrop from "../../assets/home-2026/hero-backdrop-precocerto-2026.jpg";
 
 
@@ -93,18 +92,15 @@ export function HeroUserImage2026({
         </div>
 
         <div className="pcx-hero__visual">
-          <picture>
-            <source media="(max-width: 640px)" srcSet={heroImgMobile} />
-            <img
-              className="pcx-hero__image"
-              src={heroImg}
-              alt="Cliente comparando preços pelo celular em um supermercado"
-              width="1280"
-              height="720"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
+          <img
+            className="pcx-hero__image"
+            src={heroImg}
+            alt="Cliente comparando preços pelo celular em um supermercado"
+            width="1400"
+            height="933"
+            fetchPriority="high"
+            decoding="async"
+          />
           <aside className="pcx-hero__panel" aria-label="Exemplos reais de comparação de preços">
             <div className="pcx-hero__panel-head">
               <span>Preços no catálogo</span>
