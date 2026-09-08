@@ -111,6 +111,12 @@ html[data-theme="light"]{
      branco ele da 2.45:1, entao texto dourado usa --pc-gold-ink. */
   --pc-gold-ink:var(--accent-strong);
   --pc-navy:#10161D;
+  /* --pc-navy-2 nunca foi definido (só usado com var(--pc-navy-2) sem
+     fallback em CompactShell.css, FavoritesAndSectorStability.css e
+     SmartBasketPage.css) — o rodapé e outros cartões escuros perdiam o
+     segundo tom do degradê. Verde-floresta, seguindo a regra dos dois
+     verdes para grandes superfícies/overlays. */
+  --pc-navy-2:var(--pc-forest-900);
   color-scheme:light;
   background:#F5F6F8!important;
 }
@@ -221,6 +227,7 @@ html[data-theme="dark"]{
   /* No escuro o dourado ja e claro o bastante para servir de tinta. */
   --pc-gold-ink:var(--accent);
   --pc-navy:#10161D;
+  --pc-navy-2:var(--pc-forest-900);
   color-scheme:dark;
   background:#07130E!important;
 }

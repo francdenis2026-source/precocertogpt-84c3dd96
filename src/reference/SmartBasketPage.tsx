@@ -106,7 +106,7 @@ async function exportBasketPDF(){
     const now=new Date();
     const [{ jsPDF }, { default: autoTable }] = await Promise.all([import("jspdf"), import("jspdf-autotable")]);
     const doc=new jsPDF();
-    doc.setFillColor(5,38,74);
+    doc.setFillColor(2,44,32);
     doc.rect(0,0,210,40,'F');
     doc.setTextColor(255,255,255);
     doc.setFontSize(22);
@@ -145,7 +145,7 @@ function exportBasketImage(){
     const ctx=canvas.getContext("2d");
     if(!ctx){setExportMsg("Não foi possível gerar a imagem agora.");return;}
     ctx.fillStyle="#ffffff";ctx.fillRect(0,0,width,height);
-    ctx.fillStyle="#05264a";ctx.fillRect(0,0,width,headerH);
+    ctx.fillStyle="#022C20";ctx.fillRect(0,0,width,headerH);
     ctx.fillStyle="#ffffff";ctx.font="bold 24px sans-serif";ctx.fillText("PreçoCerto Feijó",24,36);
     ctx.font="14px sans-serif";
     ctx.fillText(`Cesta Inteligente — ${now.toLocaleDateString("pt-BR")} às ${now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})}`,24,66);
