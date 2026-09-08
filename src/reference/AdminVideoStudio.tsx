@@ -23,28 +23,34 @@ export function AdminVideoStudio(){
  const openProduction=async()=>{try{await navigator.clipboard.writeText(renderProps);setCopied(true)}catch{}window.open(workflowUrl,'_blank','noopener,noreferrer')};
  useGSAP(()=>{
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  gsap.from('.avs-head > *',{y:12,opacity:0,duration:.45,stagger:.05,ease:'power3.out'});
-  gsap.from('.avs-panel, .avs-preview, .avs-render',{y:16,opacity:0,duration:.45,stagger:.06,delay:.08,ease:'power2.out'});
+  gsap.from('.avs-hero > *',{y:12,opacity:0,duration:.45,stagger:.05,ease:'power3.out'});
+  gsap.from('.avs-block, .avs-render',{y:16,opacity:0,duration:.45,stagger:.06,delay:.08,ease:'power2.out'});
  },{scope:pageRef});
  return <main className="avs-shell" ref={pageRef}>
-  <header className="avs-head">
-    <Link to="/admin"><ArrowLeft/></Link>
-    <h1><Video/> Gerador de vídeos</h1>
+  <header className="avs-hero">
+    <Link to="/admin" className="avs-hero__back"><ArrowLeft/>Painel</Link>
+    <div className="avs-hero__copy">
+      <h1><Video/> Gerador de vídeos</h1>
+      <p>Monte uma campanha vertical com produtos reais do catálogo.</p>
+    </div>
     <span className="avs-status"><CheckCircle2/>1080×1920 · 15s</span>
   </header>
 
   <div className="avs-body">
-    <aside className="avs-panel">
-      <small>CAMPANHA</small>
+    <section className="avs-block avs-block--form">
+      <header><small>01</small><h2>Campanha</h2></header>
       <label>Título<input value={title} maxLength={62} onChange={e=>setTitle(e.target.value)}/></label>
       <label>Chamada final<input value={cta} maxLength={48} onChange={e=>setCta(e.target.value)}/></label>
       <div className="avs-counter"><strong>{selected.length}/3</strong> produtos selecionados</div>
+    </section>
 
-      <small>CATÁLOGO {loading&&<RefreshCw className="spin"/>}</small>
+    <section className="avs-block avs-block--catalog">
+      <header><small>02</small><h2>Catálogo</h2>{loading&&<RefreshCw className="spin"/>}</header>
       <div className="avs-product-list">{products.slice(0,24).map(p=>{const active=selected.includes(String(p.id));return <button className={active?'active':''} key={p.id} onClick={()=>toggle(String(p.id))}><div>{resolveProductImage(p)?<img src={resolveProductImage(p)} alt=""/>:<Film/>}</div><span><b>{p.name}</b><small>{p.establishment}</small></span><strong>{money.format(p.minPrice)}</strong>{active&&<CheckCircle2/>}</button>})}</div>
-    </aside>
+    </section>
 
-    <section className="avs-preview">
+    <section className="avs-block avs-block--preview">
+      <header><small>03</small><h2>Prévia</h2></header>
       <div className="avs-phone"><div className="avs-video"><span className="avs-brand">PREÇO<strong>CERTO</strong></span><small>FEIJÓ · ACRE</small><h2>{title}</h2><div className="avs-offers">{chosen.map((p,i)=><div className="avs-offer" key={p.id}><div className="avs-img">{resolveProductImage(p)?<img src={resolveProductImage(p)} alt=""/>:<Film/>}</div><span><b>{p.name}</b><small>{p.establishment}</small></span><strong>{money.format(p.minPrice)}</strong><em>{i+1}</em></div>)}</div><div className="avs-cta">{cta}<small>precocerto.app</small></div></div></div>
       <p><Play/> Prévia editorial do template Remotion</p>
     </section>
