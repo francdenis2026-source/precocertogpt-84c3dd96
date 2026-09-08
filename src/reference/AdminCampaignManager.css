@@ -10,3 +10,11 @@
 .acm-crop__check span{display:grid;gap:2px}
 .acm-crop__check strong{font-size:12px;color:#20313d}
 .acm-crop__check small{font-size:11px;color:#4c606d;font-weight:600}
+.acm-upload{grid-template-columns:minmax(0,1fr) auto auto}
+.acm-upload__remove{height:39px;display:flex!important;align-items:center;gap:6px;padding:0 11px;border:1px solid #f0b8b8;border-radius:8px;background:#fdf1f1;color:#b3261e;cursor:pointer;white-space:nowrap}
+.acm-upload__remove svg{width:14px}
+.acm-crop__zoom{display:grid;gap:4px;margin-top:8px}
+.acm-crop__zoom>span{font-size:11px;font-weight:700;color:#4c606d}
+.acm-crop__zoom input[type="range"]{width:100%}
+.acm-crop__preview{overflow:hidden}
+@media(max-width:520px){.acm-upload{grid-template-columns:1fr}}

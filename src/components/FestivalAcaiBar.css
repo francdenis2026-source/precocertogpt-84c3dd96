@@ -70,6 +70,8 @@
   height:100%;
   object-fit:cover;
   object-position:var(--campaign-focus,center);
+  transform:scale(var(--campaign-scale,1));
+  transform-origin:var(--campaign-focus,center);
 }
 /* Sem véu, uma foto de fundo apaga o texto que fica por cima — o mesmo
    princípio já aplicado nos heros do site inteiro. Só entra quando existe
@@ -78,7 +80,7 @@
 /* Banner pronto: a imagem já traz o texto, então ela é o conteúdo inteiro,
    em fluxo normal (não absoluta) e sem véu nem span por cima. */
 .pc-festival-bar__art.is-bare-image{padding:0;display:block}
-.pc-festival-bar__art.is-bare-image img{display:block;position:static;width:100%;height:62px;object-fit:cover;object-position:var(--campaign-focus,center)}
+.pc-festival-bar__art.is-bare-image img{display:block;position:static;width:100%;height:62px;object-fit:cover;object-position:var(--campaign-focus,center);transform:scale(var(--campaign-scale,1));transform-origin:var(--campaign-focus,center)}
 @media(max-width:640px){.pc-festival-bar__art.is-bare-image img{height:56px}}
 
 .pc-festival-bar__art.has-image::before{

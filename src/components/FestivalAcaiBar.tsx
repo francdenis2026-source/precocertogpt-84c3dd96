@@ -40,7 +40,10 @@ export function FestivalAcaiBar() {
     : <>{campaign.imageUrl&&<img src={campaign.imageUrl} width="1024" height="62" alt="" aria-hidden="true"/>}<span><i><Megaphone aria-hidden="true"/></i><b><strong>{campaign.title}</strong>{campaign.subtitle&&<small>{campaign.subtitle}</small>}</b><em>{campaign.linkLabel}</em></span></>;
   const external=/^https?:\/\//i.test(campaign.linkUrl);
   const artClass=`pc-festival-bar__art${campaign.imageUrl&&!bareImage?' has-image':''}${bareImage?' is-bare-image':''}`;
-  const artStyle=campaign.imagePosition?{['--campaign-focus' as string]:campaign.imagePosition}:undefined;
+  const artStyle=(campaign.imagePosition||campaign.imageScale!==100)?{
+    ['--campaign-focus' as string]:campaign.imagePosition||'center',
+    ['--campaign-scale' as string]:`${(campaign.imageScale||100)/100}`,
+  }:undefined;
   return <div className={`pc-festival-bar theme-${campaign.theme} kind-${campaign.kind}`} role="region" aria-label={campaign.title}>
     {external?<a className={artClass} style={artStyle} href={campaign.linkUrl} target="_blank" rel="noreferrer">{content}</a>:<Link className={artClass} style={artStyle} to={campaign.linkUrl||'/buscar'}>{content}</Link>}
     {campaign.isDismissible&&<button type="button" className="pc-festival-bar__close" onClick={closeBanner} aria-label="Fechar banner"><X aria-hidden="true"/></button>}
