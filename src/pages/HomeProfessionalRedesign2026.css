@@ -476,7 +476,7 @@
   align-items: center;
   background:
     radial-gradient(circle at 84% 18%, color-mix(in srgb, var(--h-primary) 9%, transparent), transparent 24rem),
-    var(--h-bg);
+    var(--h-canvas);
   border-bottom: 1px solid var(--h-border);
 }
 /* Fundo editorial: textura escura com brilhos verde/âmbar, sempre coberta por
@@ -488,7 +488,7 @@
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(100deg, var(--h-bg) 6%, color-mix(in srgb, var(--h-bg) 86%, transparent) 46%, color-mix(in srgb, var(--h-bg) 62%, transparent) 100%),
+    linear-gradient(100deg, var(--h-canvas) 6%, color-mix(in srgb, var(--h-canvas) 86%, transparent) 46%, color-mix(in srgb, var(--h-canvas) 62%, transparent) 100%),
     var(--pcx-hero-backdrop);
   background-size: cover, cover;
   background-position: center, center;
