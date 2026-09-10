@@ -183,6 +183,78 @@ body .pc-contact-page > footer.ref-footer { flex: 0 0 auto; margin-top: auto; }
   body .pc-contact-page .pc-contact__link { padding-block: 5px !important; }
 }
 
+/* Shared footer rhythm: one compact bar across contact, collaboration,
+   establishments and the remaining public screens. */
+footer.ref-footer {
+  padding: 0 !important;
+  line-height: 1.2;
+}
+footer.ref-footer .ref-footer__bar {
+  min-height: 50px !important;
+  padding-block: 5px !important;
+  gap: 10px 16px !important;
+}
+footer.ref-footer .ref-footer__mark { min-height: 36px !important; gap: 8px !important; }
+footer.ref-footer .ref-footer__mark img { width: 24px !important; height: 24px !important; }
+footer.ref-footer .ref-footer__mark strong { font-size: .82rem !important; }
+footer.ref-footer .ref-footer__mark small { font-size: .64rem !important; }
+footer.ref-footer .ref-footer__links { gap: 0 2px !important; }
+footer.ref-footer .ref-footer__links a {
+  min-height: 36px !important;
+  padding-inline: 8px !important;
+  font-size: .74rem !important;
+}
+footer.ref-footer .ref-footer__legal {
+  min-height: 32px !important;
+  padding-block: 4px !important;
+  gap: 4px 14px !important;
+  font-size: .66rem !important;
+}
+footer.ref-footer .ref-footer__legal small,
+footer.ref-footer .ref-footer__legal span { font-size: .66rem !important; }
+footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px !important; }
+
+/* Collaboration follows the same single-viewport contract as contact. */
+@media (min-width: 851px) {
+  body .pc-collab-page {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  body .pc-collab-page .pc-collab {
+    flex: 1 1 0 !important;
+    min-height: 0 !important;
+    width: min(1120px, calc(100% - 48px)) !important;
+    padding: 78px 0 18px !important;
+    gap: clamp(24px, 3vw, 42px) !important;
+    overflow: hidden !important;
+  }
+  body .pc-collab-page .pc-collab__media {
+    flex: 0 1 330px !important;
+    width: min(330px, 31vw) !important;
+    max-height: 250px !important;
+  }
+  body .pc-collab-page .pc-collab__panel { padding: 18px 20px !important; }
+  body .pc-collab-page .pc-collab__form { gap: 7px !important; }
+  body .pc-collab-page .pc-collab__form input { min-height: 36px !important; }
+  body .pc-collab-page .pc-collab__send { min-height: 40px !important; }
+}
+
+@media (max-width: 760px) {
+  footer.ref-footer .ref-footer__bar {
+    min-height: 44px !important;
+    padding-block: 4px !important;
+  }
+  footer.ref-footer .ref-footer__links a { min-height: 34px !important; }
+  footer.ref-footer .ref-footer__legal {
+    min-height: 0 !important;
+    padding-block: 7px !important;
+    gap: 2px !important;
+  }
+}
+
 @media (min-width: 761px) and (max-width: 1080px) {
   .pcx-home .pcx-header__search { display: none; }
   .pcx-home .pcx-hero__inner { gap: 24px; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); }
