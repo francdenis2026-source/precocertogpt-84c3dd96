@@ -308,6 +308,73 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .ref-auth__submit { min-height: 35px !important; }
 }
 
+/* Radio player polish — one restrained motion language on desktop and mobile.
+   The ring and equalizer communicate playback without flashing or stealing
+   attention from navigation. */
+.pc-radio {
+  isolation: isolate;
+  transition: transform .18s ease, border-color .24s ease, box-shadow .28s ease, width .2s ease, max-width .2s ease !important;
+}
+.pc-radio::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--ra, #237454) 42%, transparent);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+.pc-radio.is-playing::after { animation: pc-radio-breathe 2.8s ease-out infinite; }
+.pc-radio.is-playing .pc-radio__control { animation: pc-radio-control 2.8s ease-in-out infinite; }
+.pc-radio.is-playing .pc-radio__signal i { animation: pc-radio-eq .72s ease-in-out infinite alternate !important; }
+.pc-radio.is-playing .pc-radio__signal i:nth-child(2) { animation-delay: .12s !important; }
+.pc-radio.is-playing .pc-radio__signal i:nth-child(3) { animation-delay: .24s !important; }
+.pc-radio.is-playing .pc-radio__signal i:nth-child(4) { animation-delay: .18s !important; }
+.pc-radio.is-playing .pc-radio__signal i:nth-child(5) { animation-delay: .06s !important; }
+.pc-radio.is-loading .pc-radio__control { animation: pc-radio-loading 1.2s ease-in-out infinite; }
+@keyframes pc-radio-breathe {
+  0% { opacity: .45; transform: scale(.98); }
+  70%, 100% { opacity: 0; transform: scale(1.07); }
+}
+@keyframes pc-radio-control {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ra, #237454) 0%, transparent); }
+  50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ra, #237454) 16%, transparent); }
+}
+@keyframes pc-radio-eq {
+  from { transform: scaleY(.35); opacity: .56; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+@keyframes pc-radio-loading {
+  50% { transform: scale(.94); opacity: .72; }
+}
+
+/* Desktop home header: expose the useful radio state instead of leaving a
+   nameless icon, while keeping the control narrow enough for the search. */
+@media (min-width: 861px) {
+  .pcx-home .pcx-header .pc-radio {
+    width: 148px !important;
+    min-width: 148px !important;
+    max-width: 148px !important;
+    padding-right: 7px !important;
+  }
+  .pcx-home .pcx-header .pc-radio__copy {
+    display: grid !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+  .pcx-home .pcx-header .pc-radio__copy strong { max-width: 90px !important; font-size: 9px !important; }
+  .pcx-home .pcx-header .pc-radio__copy small { font-size: 6px !important; letter-spacing: .08em !important; }
+  .pcx-home .pcx-header .pc-radio__control { width: 29px !important; height: 29px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-radio.is-playing::after,
+  .pc-radio.is-playing .pc-radio__control,
+  .pc-radio.is-playing .pc-radio__signal i,
+  .pc-radio.is-loading .pc-radio__control { animation: none !important; }
+}
+
 /* Final cascade: these rules intentionally come last so older page layers
    cannot restore the oversized desktop auth card or mobile track overlay. */
 @media (min-width: 901px) {
