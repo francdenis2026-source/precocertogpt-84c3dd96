@@ -308,6 +308,22 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .ref-auth__submit { min-height: 35px !important; }
 }
 
+/* Containment guard for the desktop form: keep the card visually separated
+   from the viewport edges even when the browser is very wide. */
+@media (min-width: 901px) {
+  .ref-auth__form > .ref-auth__card {
+    width: min(520px, calc(100% - 56px)) !important;
+    max-width: 520px !important;
+    margin-inline: auto !important;
+  }
+  .ref-auth__form > .ref-auth__reason,
+  .ref-auth__form > .ref-auth__back {
+    width: min(520px, calc(100% - 56px)) !important;
+    max-width: 520px !important;
+    margin-inline: auto !important;
+  }
+}
+
 /* Radio player polish — one restrained motion language on desktop and mobile.
    The ring and equalizer communicate playback without flashing or stealing
    attention from navigation. */
