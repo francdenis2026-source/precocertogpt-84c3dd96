@@ -105,6 +105,25 @@ body .pc-collab-page { height: auto; min-height: 100dvh; overflow: visible; }
   .pc-collab-page .pc-collab__panel { padding: 20px 16px; }
 }
 
+/* Contato usa o mesmo cabeçalho flutuante da colaboração. O estilo antigo
+   reservava apenas 64px no topo e deixava o eyebrow atrás da barra; também
+   fixava a página na altura da janela, criando a faixa vazia abaixo do footer. */
+body .pc-contact-page { height: auto !important; min-height: 100dvh; overflow: visible !important; display: flex; flex-direction: column; }
+body .pc-contact-page .pc-contact { flex: 1 0 auto; min-height: 0; overflow: visible; padding-top: 132px; padding-bottom: 48px; align-items: center; }
+body .pc-contact-page .pc-contact__copy h1 { font-size: clamp(30px, 3vw, 44px); line-height: 1.12; }
+body .pc-contact-page .pc-contact__copy p { font-size: 16px; line-height: 1.6; }
+body .pc-contact-page .pc-contact__card { min-height: 96px; }
+body .pc-contact-page .pc-contact__media { flex: 0 1 420px; aspect-ratio: 4 / 3; }
+body .pc-contact-page > footer.ref-footer { flex: 0 0 auto; margin-top: auto; }
+@media (max-width: 850px) {
+  body .pc-contact-page .pc-contact { padding-top: 112px; }
+  body .pc-contact-page .pc-contact__media { display: none; }
+}
+@media (max-width: 480px) {
+  body .pc-contact-page .pc-contact { padding-inline: 16px; padding-bottom: 32px; }
+  body .pc-contact-page .pc-contact__grid { grid-template-columns: 1fr; }
+}
+
 @media (min-width: 761px) and (max-width: 1080px) {
   .pcx-home .pcx-header__search { display: none; }
   .pcx-home .pcx-hero__inner { gap: 24px; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); }
