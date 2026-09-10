@@ -346,6 +346,71 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .pc-radio.is-playing .pc-radio__copy small { font-size: 6px !important; letter-spacing: .08em !important; }
 }
 
+/* Home mobile polish: keep only the functional controls (radio, theme and
+   menu). The account entry lives in the menu, while contact remains in the
+   shared footer, avoiding duplicate actions in the compact header. */
+@media (max-width: 640px) {
+  .pcx-home .pcx-header__tools { gap: 5px !important; overflow: visible !important; }
+  .pcx-home .pcx-header__tools .pc-radio {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    transition: width .2s ease, max-width .2s ease, background-color .2s ease;
+  }
+  .pcx-home .pcx-header__tools .pc-radio__copy { display: none !important; }
+  .pcx-home .pcx-header__tools .pc-radio.is-playing {
+    width: min(132px, 38vw) !important;
+    min-width: min(132px, 38vw) !important;
+    max-width: min(132px, 38vw) !important;
+    padding: 4px 7px 4px 4px !important;
+  }
+  .pcx-home .pcx-header__tools .pc-radio.is-playing .pc-radio__copy {
+    display: grid !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+  .pcx-home .pcx-header__tools .pc-radio.is-playing .pc-radio__copy strong {
+    display: block !important;
+    max-width: min(92px, 25vw) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 9px !important;
+  }
+  .pcx-home .pcx-header__tools .pc-radio.is-playing .pc-radio__copy small {
+    display: flex !important;
+    font-size: 6px !important;
+    letter-spacing: .07em !important;
+  }
+  .pcx-home .pcx-header__tools .pc-radio.is-playing .pc-radio__signal { display: none !important; }
+
+  .pcx-home .pcx-hero {
+    min-height: 0 !important;
+    padding-block: 30px 28px !important;
+    background-position: 72% center !important;
+  }
+  .pcx-home .pcx-hero::before {
+    background-image: linear-gradient(105deg,
+      rgba(3, 35, 26, .90) 0%,
+      rgba(5, 55, 39, .76) 42%,
+      rgba(5, 55, 39, .28) 100%) !important;
+  }
+  .pcx-home .pcx-hero::after {
+    display: block !important;
+    background: linear-gradient(180deg, rgba(2, 20, 15, .15), transparent 28%, rgba(2, 24, 17, .35) 100%) !important;
+    pointer-events: none;
+  }
+  .pcx-home .pcx-hero h1 {
+    color: #fff !important;
+    text-shadow: 0 2px 18px rgba(0, 24, 16, .28);
+  }
+  .pcx-home .pcx-hero h1 strong { color: #c5f5d7 !important; }
+  .pcx-home .pcx-hero__lead { color: rgba(247, 255, 250, .9) !important; text-shadow: 0 1px 10px rgba(0, 24, 16, .22); }
+  .pcx-home .pcx-hero .pc-location__chip { background: rgba(4, 35, 26, .62) !important; border-color: rgba(197, 245, 215, .28) !important; }
+}
+
 @media (min-width: 761px) and (max-width: 1080px) {
   .pcx-home .pcx-header__search { display: none; }
   .pcx-home .pcx-hero__inner { gap: 24px; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); }

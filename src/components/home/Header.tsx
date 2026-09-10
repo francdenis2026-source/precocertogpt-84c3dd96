@@ -116,7 +116,6 @@ export function Header({ products = [] }: { products?: Product[] }) {
           <Link className="pcx-header__mobile-account" to={profile ? "/minha-conta" : "/login"}>
             <UserRound aria-hidden="true" /><span>{profile ? "Minha conta" : "Entrar na minha conta"}</span>
           </Link>
-          <Link className="pcx-header__mobile-account" to="/contato">Fale conosco</Link>
         </nav>
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
