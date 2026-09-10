@@ -255,6 +255,27 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   }
 }
 
+/* Mobile radio label stays in the existing player footprint. The separate
+   desktop detail chip is intentionally disabled here so no overlay can cover
+   page content; the compact status line above carries the current track. */
+@media (max-width: 720px) {
+  .pc-radio__track,
+  .pc-radio.is-playing .pc-radio__track,
+  .pc-radio.show-track-notice .pc-radio__track {
+    display: none !important;
+  }
+  .pc-radio.is-playing .pc-radio__copy strong {
+    max-width: min(108px, 30vw) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .pc-radio.is-playing .pc-radio__copy small {
+    font-size: 6px !important;
+    letter-spacing: .08em !important;
+  }
+}
+
 @media (min-width: 761px) and (max-width: 1080px) {
   .pcx-home .pcx-header__search { display: none; }
   .pcx-home .pcx-hero__inner { gap: 24px; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); }

@@ -123,12 +123,13 @@ export function HeaderRadioPlayer() {
   const radio = useContext(RadioContext);
   if (!radio) return null;
   const status = radio.failed ? "Sinal indisponível" : radio.loading ? "Conectando…" : radio.playing ? "Tocando agora" : radio.station.name;
+  const compactStatus = radio.playing && radio.nowPlaying ? radio.nowPlaying : status;
   const label = radio.failed ? "Tentar conectar novamente" : radio.playing ? `Pausar ${radio.station.name}` : `Ouvir ${radio.station.name}`;
 
   return <div className={`pc-radio${radio.playing ? " is-playing" : ""}${radio.loading ? " is-loading" : ""}${radio.failed ? " has-error" : ""}${radio.nowPlaying ? " has-track" : ""}`}>
     <button className="pc-radio__play" type="button" onClick={radio.failed ? radio.retry : radio.toggle} aria-label={label}>
       <span className="pc-radio__control" aria-hidden="true">{radio.loading ? <LoaderCircle className="pc-radio__loader" /> : radio.failed ? <RotateCcw /> : radio.playing ? <Pause /> : <Play />}</span>
-      <span className="pc-radio__copy"><small><i />RÁDIO AO VIVO</small><strong>{status}</strong></span>
+      <span className="pc-radio__copy"><small><i />{radio.playing && radio.nowPlaying ? "TOCANDO AGORA" : "RÁDIO AO VIVO"}</small><strong title={radio.nowPlaying ?? undefined}>{compactStatus}</strong></span>
     </button>
     <span className="pc-radio__signal" aria-hidden="true"><i /><i /><i /><i /><i /></span>
     {radio.playing && radio.nowPlaying ? <span className="pc-radio__track" aria-hidden="true"><Radio /><span><small>TOCANDO AGORA</small><strong>{radio.nowPlaying}</strong></span></span> : null}
