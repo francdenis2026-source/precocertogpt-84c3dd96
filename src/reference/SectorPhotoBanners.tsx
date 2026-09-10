@@ -37,6 +37,7 @@ export function SectorPhotoBanners() {
           </Link>
         ))}
       </div>
+      <p className="sector-hub__banners-hint" aria-hidden="true">Deslize para ver mais <span>→</span></p>
     </section>
   );
 }

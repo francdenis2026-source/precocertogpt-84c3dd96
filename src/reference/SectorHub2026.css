@@ -105,9 +105,14 @@
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 4px;
   padding-bottom: 4px;
-  scrollbar-width: none;
+  /* A fileira continua horizontalmente rolável; no desktop deixamos uma
+     barra discreta visível para não esconder o sexto banner fora da janela. */
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--sh-green) 58%, transparent) transparent;
 }
-.sector-hub__banners-row::-webkit-scrollbar { display: none; }
+.sector-hub__banners-row::-webkit-scrollbar { height: 6px; }
+.sector-hub__banners-row::-webkit-scrollbar-track { background: transparent; }
+.sector-hub__banners-row::-webkit-scrollbar-thumb { border-radius: 999px; background: color-mix(in srgb, var(--sh-green) 58%, transparent); }
 .sector-hub__banner {
   scroll-snap-align: start;
   display: block;
@@ -119,8 +124,21 @@
 .sector-hub__banner:hover { transform: translateY(-2px); border-color: var(--sh-green); }
 .sector-hub__banner:focus-visible { outline: 2px solid var(--sh-green); outline-offset: 2px; }
 .sector-hub__banner img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+.sector-hub__banners-hint {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin: 5px 2px 0;
+  color: var(--pc-muted);
+  font-size: 11px;
+  font-weight: 750;
+}
+.sector-hub__banners-hint span { color: var(--sh-green); font-size: 16px; line-height: 1; }
 @media (max-width: 640px) {
-  .sector-hub__banners-row { grid-auto-columns: minmax(170px, 62%); }
+  .sector-hub__banners-row { grid-auto-columns: minmax(170px, 62%); scrollbar-width: none; }
+  .sector-hub__banners-row::-webkit-scrollbar { display: none; }
+  .sector-hub__banners-hint { justify-content: center; font-size: 10px; }
 }
 
 /* Ferramentas em uma faixa: painel com foto editorial à esquerda (mesma
