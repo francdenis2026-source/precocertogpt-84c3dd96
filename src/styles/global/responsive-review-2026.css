@@ -83,7 +83,7 @@ html { scroll-padding-top: 88px; }
 
 /* O formulário de colaboração não pode ser comprimido para caber numa janela. */
 body .pc-collab-page { height: auto; min-height: 100dvh; overflow: visible; }
-.pc-collab-page .pc-collab { min-height: 0; overflow: visible; padding: 104px 0 48px; align-items: center; }
+.pc-collab-page .pc-collab { min-height: 0; overflow: visible; padding: 132px 0 48px; align-items: center; }
 .pc-collab-page .pc-collab__copy, .pc-collab-page .pc-collab__panel { max-width: 560px; }
 .pc-collab-page .pc-collab__copy h1 { font-size: clamp(28px, 3vw, 40px); line-height: 1.15; }
 .pc-collab-page .pc-collab__copy p { font-size: 16px; line-height: 1.6; }
@@ -97,7 +97,7 @@ body .pc-collab-page { height: auto; min-height: 100dvh; overflow: visible; }
 .pc-collab-page .pc-collab__media { flex: 0 1 420px; aspect-ratio: 4 / 5; }
 .pc-mini-top .pc-mini-top__back { width: 44px; height: 44px; }
 @media (max-width: 850px) {
-  .pc-collab-page .pc-collab { padding-top: 100px; }
+  .pc-collab-page .pc-collab { padding-top: 112px; }
   .pc-collab-page .pc-collab__media { display: none; }
 }
 @media (max-width: 480px) {

@@ -289,7 +289,9 @@ export function PublicFooter() {
     </div>
     <div className="ref-shell ref-footer__legal">
       <small>&copy; 2026 PreçoCerto · Feijó, Acre · dev &lt;Franc D’nis&gt;</small>
+      <span><ShieldCheck aria-hidden="true" /> Navegação segura</span>
       <span><BadgeCheck aria-hidden="true" /> Preços podem mudar. Confirme no estabelecimento antes da compra.</span>
+      <span>Desenvolvido por <strong>Franc Denis</strong></span>
     </div>
   </footer>;
 }
