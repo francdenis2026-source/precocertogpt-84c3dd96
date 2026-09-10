@@ -300,8 +300,8 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
         <h2>{mode === "login" ? "Entrar na sua conta" : "Criar sua conta"}</h2>
         <p>{mode === "login" ? "Acesse preços, favoritos e seus últimos comparativos." : "Escolha como você quer usar o PreçoCerto."}</p>
         <div className="ref-account-tabs">
-          <button type="button" className={accountType === "consumer" ? "is-active" : ""} onClick={() => setAccountType("consumer")}><UserRound /> Consumidor<small>Quero comparar preços</small></button>
-          <button type="button" className={accountType === "merchant" ? "is-active" : ""} onClick={() => setAccountType("merchant")}><Store /> Comerciante<small>Quero divulgar ofertas</small></button>
+          <button type="button" aria-pressed={accountType === "consumer"} className={accountType === "consumer" ? "is-active" : ""} onClick={() => setAccountType("consumer")}><UserRound /> Consumidor<small>Quero comparar preços</small></button>
+          <button type="button" aria-pressed={accountType === "merchant"} className={accountType === "merchant" ? "is-active" : ""} onClick={() => setAccountType("merchant")}><Store /> Comerciante<small>Quero divulgar ofertas</small></button>
         </div>
         <form onSubmit={submit}>
           {mode === "register" && <label>Nome completo<input name="name" required autoComplete="name" /></label>}

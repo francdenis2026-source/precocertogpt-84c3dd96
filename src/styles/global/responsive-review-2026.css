@@ -577,3 +577,40 @@ html[data-theme="dark"] .ref-auth__card form input { background: #122019 !import
   .ref-auth__card form input { min-height: 36px !important; }
   .ref-account-tabs button { min-height: 50px !important; }
 }
+
+/* Last desktop pass for the auth card: reserve a small safety margin at the
+   bottom so the protected-data line is never clipped by short browser chrome. */
+@media (min-width: 901px) {
+  .ref-auth__form { align-content: start !important; padding-top: 22px !important; padding-bottom: 8px !important; }
+  .ref-auth__back { margin-bottom: 5px !important; }
+  .ref-auth__reason { margin-bottom: 4px !important; }
+  .ref-auth__card { padding-block: 8px !important; }
+  .ref-auth__card h2 { font-size: 25px !important; }
+  .ref-account-tabs button { min-height: 44px !important; position: relative !important; }
+  .ref-auth__card form input { height: 31px !important; min-height: 31px !important; }
+  .ref-auth__submit { min-height: 35px !important; }
+  .ref-auth__safe { margin-top: 2px !important; }
+  .ref-account-tabs button.is-active,
+  .ref-account-tabs button[aria-pressed="true"] {
+    border-color: #d6ae4e !important;
+    background: linear-gradient(135deg, rgba(218, 183, 88, .22), rgba(218, 183, 88, .10)) !important;
+    color: #f0d27a !important;
+    box-shadow: inset 0 0 0 1px rgba(218, 183, 88, .2), 0 0 0 2px rgba(218, 183, 88, .08) !important;
+  }
+  .ref-account-tabs button.is-active::after,
+  .ref-account-tabs button[aria-pressed="true"]::after {
+    content: "✓";
+    position: absolute;
+    top: 7px;
+    right: 9px;
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #d6ae4e;
+    color: #151b16;
+    font-size: 11px;
+    font-weight: 900;
+  }
+}
