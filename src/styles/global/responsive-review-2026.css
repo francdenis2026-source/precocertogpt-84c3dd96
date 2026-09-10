@@ -271,6 +271,60 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   }
 }
 
+/* Mobile footer: two deliberate rows instead of a tall vertical stack. Keep
+   brand, all navigation destinations and the essential price notice; the
+   security/developer labels are secondary duplicates on a small screen. */
+@media (max-width: 760px) {
+  footer.ref-footer .ref-footer__bar {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 6px 12px !important;
+    padding: 6px 0 !important;
+  }
+  footer.ref-footer .ref-footer__mark { min-height: 32px !important; }
+  footer.ref-footer .ref-footer__links {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 2px !important;
+    width: 100% !important;
+  }
+  footer.ref-footer .ref-footer__links a {
+    min-height: 30px !important;
+    justify-content: center !important;
+    padding-inline: 3px !important;
+    font-size: 10px !important;
+    white-space: nowrap !important;
+  }
+  footer.ref-footer .ref-footer__legal {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    gap: 2px !important;
+    padding: 5px 0 !important;
+    text-align: center !important;
+  }
+  footer.ref-footer .ref-footer__legal small { font-size: 9px !important; }
+  footer.ref-footer .ref-footer__legal span { font-size: 9px !important; line-height: 1.25 !important; }
+  footer.ref-footer .ref-footer__legal span:nth-of-type(1),
+  footer.ref-footer .ref-footer__legal span:nth-of-type(3) { display: none !important; }
+
+  .pcx-home .pcx-footer__row {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 8px 14px !important;
+    padding-block: 12px !important;
+  }
+  .pcx-home .pcx-footer__nav {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 4px !important;
+  }
+  .pcx-home .pcx-footer__nav a { min-height: 30px !important; justify-content: center !important; font-size: 10px !important; }
+  .pcx-home .pcx-footer__meta { padding-block: 7px !important; font-size: 9px !important; }
+}
+
 /* Mobile radio label stays in the existing player footprint. The separate
    desktop detail chip is intentionally disabled here so no overlay can cover
    page content; the compact status line above carries the current track. */
