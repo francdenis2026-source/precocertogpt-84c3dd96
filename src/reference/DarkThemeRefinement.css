@@ -12,7 +12,7 @@ html[data-theme="dark"] .ref-hero::before{
   background:
     radial-gradient(circle at 76% 38%,color-mix(in srgb,var(--pc-green) 10%,transparent),transparent 24rem),
     linear-gradient(90deg,rgba(8, 19, 27,.99) 0%,rgba(10, 24, 34,.94) 44%,rgba(10, 24, 34,.42) 82%),
-    url('/hero-feijo-real-shopper-2026.webp') 70% 50%/cover no-repeat;
+    url('../assets/home-2026/hero-profissional-precocerto-2026.jpg') 70% 50%/cover no-repeat;
   filter:saturate(.9) contrast(1.06)
 }
 html[data-theme="dark"] .ref-kicker,

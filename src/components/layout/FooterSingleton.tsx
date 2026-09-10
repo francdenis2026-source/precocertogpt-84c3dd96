@@ -17,7 +17,7 @@ export function FooterSingleton() {
       // como sub-elemento dentro de cards/links (preço de produto, ações do
       // estabelecimento) não são "duplicatas" e nunca devem ser escondidos.
       const footers = Array.from(document.querySelectorAll<HTMLElement>("body footer")).filter(
-        node => !node.closest("[data-footer-ignore]") && !node.closest("a, button, article"),
+        node => !node.closest("[data-footer-ignore]") && !node.closest("a, button, article, [role='dialog'], [role='alertdialog']"),
       );
       footers.forEach((node, index) => {
         if (index === footers.length - 1) {

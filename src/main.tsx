@@ -3,10 +3,10 @@ import { createRoot } from "react-dom/client";
 // Duas familias, nao tres: Outfit para titulos e Manrope para texto. Inter
 // saiu porque so restava em um punhado de rotulos e ainda assim custava 47 KB
 // de woff2 no caminho critico da home.
-import "@fontsource-variable/outfit";
-import "@fontsource-variable/manrope";
+import "./styles/fonts.css";
 import "./styles/AppReset.css";
 import App from "./App";
+import { AppErrorBoundary } from "./components/AppErrorBoundary";
 import { initializePwaRuntime } from "./lib/pwaRuntime";
 import { initializeSiteTheme } from "./lib/siteTheme";
 import { initializeImageLoadFade } from "./lib/imageLoadFade";
@@ -42,6 +42,7 @@ import "./styles/global/member-experience-2026.css";
 import "./styles/global/touch-feedback-2026.css";
 // Aviso de conexão: o elemento era criado sem nenhuma regra de estilo.
 import "./styles/global/network-status-2026.css";
+import "./styles/global/responsive-review-2026.css";
 
 
 
@@ -52,7 +53,7 @@ document.documentElement.classList.add("pc-styles-ready");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <AppErrorBoundary><App /></AppErrorBoundary>
   </StrictMode>,
 );
 

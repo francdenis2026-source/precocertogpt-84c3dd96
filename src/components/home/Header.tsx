@@ -113,6 +113,10 @@ export function Header({ products = [] }: { products?: Product[] }) {
               </Link>
             );
           })}
+          <Link className="pcx-header__mobile-account" to={profile ? "/minha-conta" : "/login"}>
+            <UserRound aria-hidden="true" /><span>{profile ? "Minha conta" : "Entrar na minha conta"}</span>
+          </Link>
+          <Link className="pcx-header__mobile-account" to="/contato">Fale conosco</Link>
         </nav>
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
@@ -127,10 +131,10 @@ export function Header({ products = [] }: { products?: Product[] }) {
           </Link>
           <HeaderRadioPlayer />
           <HeaderThemeToggle />
-          {!profile && (
-            <Link className="pcx-header__login" to="/login">
+          {(
+            <Link className="pcx-header__login" to={profile ? "/minha-conta" : "/login"} aria-label={profile ? "Minha conta" : "Entrar"}>
               <UserRound aria-hidden="true" />
-              <span>Entrar</span>
+              <span>{profile ? "Minha conta" : "Entrar"}</span>
             </Link>
           )}
 

@@ -37,7 +37,7 @@ const initialCatalog = buildCatalog();
 let liveMetricsCache: { value: PlatformMetrics; expires: number } | null = null;
 
 export function HomeNew2026() {
-  const cachedMetrics = liveMetricsCache && liveMetricsCache.expires > Date.now() ? liveMetricsCache.value : null;
+  const [cachedMetrics] = useState(() => liveMetricsCache && liveMetricsCache.expires > Date.now() ? liveMetricsCache.value : null);
   const [catalog, setCatalog] = useState<CatalogPayload>({
     ...initialCatalog,
     metrics: verifiedDatasetMetrics,
@@ -45,6 +45,8 @@ export function HomeNew2026() {
   const [liveMetrics, setLiveMetrics] = useState<PlatformMetrics | null>(cachedMetrics);
   const [loading, setLoading] = useState(!cachedMetrics);
   const [cycle, setCycle] = useState(() => currentCycle());
+  const [catalogError, setCatalogError] = useState(false);
+  const [loadAttempt, setLoadAttempt] = useState(0);
 
   useEffect(() => {
     document.documentElement.classList.add("nx-home-active");
@@ -69,10 +71,13 @@ export function HomeNew2026() {
     };
 
     const load = async () => {
+      setCatalogError(false);
       try {
         const value = await loadWithRetry();
         if (!active) return;
         setCatalog(value);
+        // O catálogo já está utilizável; estatísticas não devem bloquear a vitrine.
+        setLoading(false);
 
         if (liveMetricsCache && liveMetricsCache.expires > Date.now()) {
           setLiveMetrics(liveMetricsCache.value);
@@ -102,7 +107,7 @@ export function HomeNew2026() {
           });
         }
       } catch {
-        // Mantém o fallback visual sem inventar contagens.
+        if (active) setCatalogError(true);
       } finally {
         if (active) setLoading(false);
       }
@@ -112,7 +117,7 @@ export function HomeNew2026() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [loadAttempt]);
 
   useEffect(() => {
     const timer = window.setTimeout(
@@ -148,6 +153,10 @@ export function HomeNew2026() {
         />
         <TrustBar />
         <CategoryBar stores={catalog.stores} />
+        {catalogError && <div className="pc-catalog-notice" role="status">
+          <p>Não foi possível atualizar o catálogo. Confira sua conexão e tente novamente.</p>
+          <button type="button" onClick={() => { setLoading(true); setLoadAttempt(value => value + 1); }}>Tentar novamente</button>
+        </div>}
         <ProductGrid products={featured} loading={loading} />
         <TrendingProducts products={products} />
         <SmartBasketSpotlight products={products} />

@@ -2,7 +2,7 @@
    painel que contém conteúdo variável recebe rolagem quando necessário. */
 .ref-page:has(.ref-info){height:100dvh;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
 .ref-page:has(.ref-info) .ref-info{position:relative;isolation:isolate;min-height:0;overflow:hidden;padding:30px 20px;color:#fff;background:#102534}
-.ref-page:has(.ref-info) .ref-info::before{content:"";position:absolute;inset:0;z-index:-2;background:url('/auth-market-hero-v2.webp') center 46%/cover no-repeat}
+.ref-page:has(.ref-info) .ref-info::before{content:"";position:absolute;inset:0;z-index:-2;background:url('../assets/home-2026/hero-profissional-precocerto-2026.jpg') center 46%/cover no-repeat}
 .ref-page:has(.ref-info) .ref-info::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(5,16,24,.9),rgba(11,31,43,.66) 55%,rgba(5,16,24,.84))}
 .ref-page:has(.ref-info) .ref-info>span{color:#ffd166}.ref-page:has(.ref-info) .ref-info h1{max-width:760px;margin:8px 0;font-size:clamp(2.5rem,5.2vw,4.8rem);color:#fff}.ref-page:has(.ref-info) .ref-info p{margin:3px 0 11px;color:#dce6ec}.ref-page:has(.ref-info) .ref-info a{background:#fff;color:#122a3a}
 

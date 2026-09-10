@@ -6,7 +6,7 @@ import { businessGroups, type BusinessGroupId } from "../data/businessTaxonomy";
 import { fetchSectorCatalog, prefetchSectorCatalog, sectorProducts, sectorStores } from "../data/sectorCatalog";
 import { getStoreLogoUrl } from "../data/storeLogos";
 import { sectorHeroImage } from "../data/sectorHeroImages";
-import { PublicHeader } from "./PublicChrome";
+import { AppDock, PublicHeader } from "./PublicChrome";
 import { CategoryOffers } from "../components/offers/CategoryOffers";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { usePriceVisibility } from "../hooks/usePriceVisibility";
@@ -170,10 +170,11 @@ function DirectoryFooter({ sector }: { sector: MarketplaceSector }) {
         <Link to="/" aria-label="PreçoCerto, página inicial"><img src="/logo-preco-certo-inversa.svg" alt="PreçoCerto" /></Link>
         <span><ShieldCheck aria-hidden="true" /> Informação local organizada com responsabilidade.</span>
       </div>
-      <nav aria-label="Atalhos das farmácias">
+      <nav aria-label={`Atalhos de ${sector.shortLabel}`}>
         <Link to={sector.href}>{sector.shortLabel}</Link>
         <Link to="/buscar">Buscar produtos</Link>
         <Link to="/estabelecimentos">Estabelecimentos</Link>
+        <Link to="/contato">Fale conosco</Link>
       </nav>
       <p>Preços e disponibilidade podem mudar. Confirme diretamente com o estabelecimento antes da compra.</p>
     </div>
@@ -224,7 +225,7 @@ function SectorProductList({ catalog, sector }: { catalog: CatalogPayload | null
   </section>;
 }
 
-function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload | null; sector: MarketplaceSector }) {
+function CompactSectorDirectory({ catalog, sector, error, onRetry }: { catalog: CatalogPayload | null; sector: MarketplaceSector; error: boolean; onRetry: () => void }) {
   const Icon = sector.icon;
   const stores = catalog ? sectorStores(catalog, sector) : [];
   const isPharmacy = sector.id === "pharmacies";
@@ -254,7 +255,11 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
 
       {isPharmacy && <div className="pharmacy-directory__list-heading"><div><span>DIRETÓRIO LOCAL</span><h2>Estabelecimentos cadastrados</h2></div><p>Informações disponíveis no PreçoCerto</p></div>}
 
-      {sector.id === "books" ? <CulturalProfiles /> : !catalog ? <section className="pharmacy-directory__state" aria-busy="true">
+      {sector.id === "books" ? <CulturalProfiles /> : error ? <section className="pharmacy-directory__state" role="alert">
+        <strong>Não foi possível carregar os estabelecimentos.</strong>
+        <p>Verifique sua conexão e tente novamente.</p>
+        <button className="pc-retry-button" type="button" onClick={onRetry}>Tentar novamente</button>
+      </section> : !catalog ? <section className="pharmacy-directory__state" aria-busy="true">
         <span className="pharmacy-directory__loader" />
         <strong>Buscando estabelecimentos cadastrados…</strong>
       </section> : stores.length ? <section className="pharmacy-directory__list" aria-label={`${sector.shortLabel} ativos em Feijó`}>
@@ -287,6 +292,7 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
     </main>
 
     <DirectoryFooter sector={sector} />
+    <AppDock current="stores" />
   </div>;
 }
 
@@ -296,11 +302,13 @@ function CompactSectorDirectory({ catalog, sector }: { catalog: CatalogPayload |
 export function MarketplaceSectorLanding({ sectorId }: { sectorId: BusinessGroupId }) {
   const sector = getMarketplaceSector(sectorId);
   const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let active = true;
-    void fetchSectorCatalog().then(data => { if (active) setCatalog(data); }).catch(() => undefined);
+    void fetchSectorCatalog().then(data => { if (active) setCatalog(data); }).catch(() => { if (active) setError(true); });
     return () => { active = false; };
-  }, []);
+  }, [attempt]);
   if (!sector) return null;
-  return <CompactSectorDirectory catalog={catalog} sector={sector} />;
+  return <CompactSectorDirectory catalog={catalog} sector={sector} error={error} onRetry={() => { setError(false); setAttempt(value => value + 1); }} />;
 }

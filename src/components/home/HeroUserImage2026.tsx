@@ -1,6 +1,6 @@
 import type React from "react";
 import { useMemo } from "react";
-import { ArrowRight, PackageSearch, Search, ShoppingBasket, Store, TrendingDown } from "lucide-react";
+import { ArrowRight, PackageSearch, Store, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product, ProductOffer } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
@@ -14,7 +14,7 @@ import { PriceBadge } from "../catalog/PriceBadge";
 // que são só referência de ESTILO e nunca viram asset final). Cliente com
 // carrinho de hortifruti à direita, rio/ponte ao fundo à esquerda — onde o
 // véu verde-floresta fica opaco, sob o texto.
-import heroPhoto from "../../assets/home-2026/hero-cliente-carrinho-rio-2026.jpg";
+import heroPhoto from "../../assets/home-2026/hero-profissional-precocerto-2026.jpg";
 import heroMobilePhoto from "../../assets/home-2026/hero-mobile-market-2026.webp";
 
 const intBr = new Intl.NumberFormat("pt-BR");
@@ -103,11 +103,8 @@ export function HeroUserImage2026({
           </div>
 
           <div className="pcx-hero__actions" aria-label="Ações principais">
-            <Link className="pcx-btn pcx-btn--primary" to="/buscar">
-              <Search aria-hidden="true" /> Comparar preços <ArrowRight aria-hidden="true" />
-            </Link>
             <Link className="pcx-btn pcx-btn--ghost" to="/estabelecimentos">
-              <Store aria-hidden="true" /> Explorar lojas
+              <Store aria-hidden="true" /> Conhecer as lojas de Feijó <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
@@ -128,15 +125,6 @@ export function HeroUserImage2026({
             </div>
           )}
 
-          {/* Faixa compacta só para o app: reforça a proposta de valor sem
-              depender de nenhum dado — texto fixo, ilustrativo. */}
-          <div className="pcx-hero__mobile-banner">
-            <ShoppingBasket aria-hidden="true" />
-            <div>
-              <strong>Economize até encontrar o menor preço.</strong>
-              <span>Compare em segundos e escolha onde comprar.</span>
-            </div>
-          </div>
         </div>
 
         <div className="pcx-hero__visual">
@@ -149,7 +137,7 @@ export function HeroUserImage2026({
                   <b className="pcx-hero__panel-title">{comparison.product.name}</b>
                 </span>
                 <span className="pcx-hero__panel-live">
-                  <i aria-hidden="true" /> AO VIVO
+                  <i aria-hidden="true" /> CATÁLOGO
                 </span>
               </div>
               <ul>

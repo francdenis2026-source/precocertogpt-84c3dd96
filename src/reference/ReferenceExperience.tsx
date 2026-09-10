@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { buildCatalog, type CatalogPayload, type Product, verifiedDatasetMetrics } from "../data/catalog";
 import contactHeroImg from "../assets/home-2026/comercio-local-atendimento.jpg";
-import collabHeroImg from "../assets/home-2026/hero-mulher-app-precocerto.jpg";
+import collabHeroImg from "../assets/home-2026/hero-profissional-precocerto-2026.jpg";
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
 import { fetchSectorCatalog, withoutDemoEstablishments } from "../data/sectorCatalog";
 import { resolveProductImage } from "../data/productImageResolver";

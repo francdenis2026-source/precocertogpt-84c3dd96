@@ -19,6 +19,7 @@ import {
 import { OnlinePresence } from "../components/OnlinePresence";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
 import { useSiteTheme } from "../hooks/useSiteTheme";
+import { businessGroups } from "../data/businessTaxonomy";
 import "./ReferenceExperience.css";
 import "./CompactViewportPages.css";
 import "./ReferenceResponsive.css";
@@ -155,7 +156,7 @@ type PublicSection = "home" | "sectors" | "search" | "basket" | "stores" | "prof
 
 function sectionFromPath(pathname: string): PublicSection | undefined {
   if (pathname === "/") return "home";
-  if (["/explorar", "/mercados", "/farmacias", "/padarias", "/livros", "/servicos"].some((path) => pathname === path || pathname.startsWith(`${path}/`))) return "sectors";
+  if (["/explorar", ...businessGroups.map(group => group.href)].some((path) => pathname === path || pathname.startsWith(`${path}/`))) return "sectors";
   if (pathname.startsWith("/buscar") || pathname.startsWith("/produto/")) return "search";
   if (pathname.startsWith("/estabelecimentos") || pathname.startsWith("/estabelecimento/") || pathname.startsWith("/loja/")) return "stores";
   if (pathname.startsWith("/cesta")) return "basket";
@@ -178,7 +179,7 @@ function defaultBackBarTitle(pathname: string): string | undefined {
   return undefined;
 }
 
-export function PublicHeader({ current, backOnly = false, title, logo }: { current?: PublicSection; backOnly?: boolean; title?: string; logo?: string }) {
+export function PublicHeader({ current, backOnly = false, title }: { current?: PublicSection; backOnly?: boolean; title?: string; logo?: string }) {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" && window.scrollY > 10);
   const { count } = useBasket();
@@ -189,7 +190,17 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
     className: activeSection === section ? "is-active" : "",
     "aria-current": activeSection === section ? ("page" as const) : undefined,
   });
-  useEffect(() => { setMenu(false); }, [pathname]);
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
+    setMenu(false);
+  }
+  useEffect(() => {
+    if (!menu) return;
+    const close = (event: KeyboardEvent) => { if (event.key === "Escape") setMenu(false); };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [menu]);
   useEffect(() => {
     const syncScrolledState = () => setScrolled(window.scrollY > 10);
     syncScrolledState();
@@ -209,6 +220,9 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
           {barTitle && <strong className="ref-header__context-title">{barTitle}</strong>}
         </div>}
       </div>
+      <nav className="pc-inner-nav" aria-label="Atalhos do site">
+        <Link to="/explorar">Categorias</Link><Link to="/buscar">Buscar preços</Link><Link to="/estabelecimentos">Lojas</Link>
+      </nav>
       <div className="ref-header__actions"><Link className="ref-header__home" to="/" aria-label="Ir para a página inicial"><Home aria-hidden="true" /><span>Início</span></Link>{pathname === "/" && <HeaderRadioPlayer />}<ThemeButton /></div>
     </div>
   </header>;
@@ -232,10 +246,10 @@ export function PublicHeader({ current, backOnly = false, title, logo }: { curre
         <ThemeButton />
         <Link className={`ref-favorites-link${activeSection === "profile" ? " is-active" : ""}`} aria-current={activeSection === "profile" ? "page" : undefined} to="/favoritos" aria-label="Favoritos"><Heart /></Link>
         <Link className="ref-signin" to="/login">Entrar</Link>
-        <button type="button" className="ref-menu" aria-label={menu ? "Fechar menu" : "Abrir menu"} aria-expanded={menu} onClick={() => setMenu(value => !value)}>{menu ? <X /> : <Menu />}</button>
+        <button type="button" className="ref-menu" aria-label={menu ? "Fechar menu" : "Abrir menu"} aria-expanded={menu} aria-controls="public-mobile-menu" onClick={() => setMenu(value => !value)}>{menu ? <X /> : <Menu />}</button>
       </div>
     </div>
-    {menu && <nav className="ref-mobile-menu" aria-label="Menu">
+    {menu && <nav id="public-mobile-menu" className="ref-mobile-menu" aria-label="Menu">
       <Link {...activeProps("sectors")} to="/explorar" onClick={() => setMenu(false)}><SlidersHorizontal aria-hidden="true" /> Onde comprar</Link>
       <Link {...activeProps("search")} to="/buscar" onClick={() => setMenu(false)}><Search aria-hidden="true" /> Buscar no PreçoCerto</Link>
       <Link {...activeProps("stores")} to="/estabelecimentos" onClick={() => setMenu(false)}><Store aria-hidden="true" /> Estabelecimentos</Link>
