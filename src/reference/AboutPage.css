@@ -54,7 +54,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 60% 45%;
+  /* A foto é bem mais alta que a faixa da hero. O ponto de foco precisa ficar
+     no terço superior para o recorte não cortar a cabeça/rosto da pessoa. */
+  object-position: 52% 18%;
 }
 .pc-about__hero-scrim {
   position: absolute;
@@ -304,9 +306,18 @@
   .pc-about__figure { order: -1; }
   .pc-about__author-figure { order: -1; }
   .pc-about__hero { min-height: 250px; border-radius: 16px; }
+  /* Em telas estreitas a imagem quase não precisa de recorte vertical; manter
+     o foco levemente acima do centro preserva o rosto mesmo com o texto à
+     esquerda e evita que a testa encoste no limite superior. */
+  .pc-about__hero-bg { object-position: 52% 24%; }
   .pc-about__cta-actions { flex-direction: column; align-items: stretch; }
   .pc-about__cta-primary,
   .pc-about__cta-ghost { justify-content: center; }
+}
+
+@media (max-width: 520px) {
+  .pc-about__hero { min-height: 276px; }
+  .pc-about__hero-bg { object-position: 52% 20%; }
 }
 
 /* ── Tinta sobre a foto do hero e no botão dourado ────────────────────────
