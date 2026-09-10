@@ -612,11 +612,16 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .pcx-home .pcx-header__login { display: none; }
   .pcx-home .pcx-header__nav .pcx-header__mobile-account { display: flex; }
   .pcx-home .pcx-header__nav a { min-height: 48px; }
-  .pcx-home .pcx-hero { padding-block: 28px; min-height: 0; background: #073b2b var(--pcx-hero-mobile-photo) right 40% / cover no-repeat; }
-  .pcx-home .pcx-hero::before { background: linear-gradient(90deg, #073b2bfa 0%, #073b2be8 55%, #073b2ba6 100%); }
+  /* A foto vertical já traz a identidade verde; o véu verde anterior deixava
+     a primeira dobra monocromática. Um carvão neutro preserva o contraste e
+     deixa a fotografia respirar. */
+  .pcx-home .pcx-hero { padding-block: 28px; min-height: 0; background: #18241f var(--pcx-hero-mobile-photo) 78% 40% / cover no-repeat; }
+  .pcx-home .pcx-hero::before { background: linear-gradient(96deg, rgba(10, 21, 19, .82) 0%, rgba(12, 25, 22, .66) 45%, rgba(12, 22, 20, .20) 100%); }
+  .pcx-home .pcx-hero::after { display: block; background: linear-gradient(180deg, rgba(255, 255, 255, .06), transparent 32%, rgba(7, 14, 13, .30) 100%); pointer-events: none; }
   .pcx-home .pcx-hero__inner { grid-template-columns: minmax(0, 1fr); padding-inline: 20px; gap: 0; }
   .pcx-home .pcx-hero__visual { display: none; }
   .pcx-home .pcx-hero h1 { font-size: clamp(30px, 7.8vw, 42px); max-width: 19ch; }
+  .pcx-home .pcx-hero h1 strong { color: #f5d27a !important; }
   .pcx-home .pcx-hero__lead { font-size: 16px; line-height: 1.5; margin: 14px 0 20px; }
   .pcx-home .pcx-hero__suggestions { gap: 6px; }
   .pcx-home .pcx-hero__suggestions > span { display: none; }
