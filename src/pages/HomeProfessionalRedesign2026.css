@@ -931,40 +931,21 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 }
 @media (max-width: 640px) {
-  /* Hero compacto no app: menos altura em título, busca e botões — o
-     objetivo é caber mais tela útil acima da dobra num celular. O véu
-     opaco (.92-.82 em todas as paradas) apagava a foto quase por completo;
-     a cliente do carrinho ficava irreconhecível. Baixa a opacidade bastante
-     e troca o desfoque de contraste (que antes vinha só do véu escuro) por
-     uma camada dedicada com blur leve atrás do véu — texto continua nítido,
-     a foto aparece de verdade sem perder a legibilidade.
-
-     "cover" sozinho, num recorte alto e estreito como o do celular, mostra
-     a foto inteira de cima a baixo (a altura já é o lado que "cobre" o
-     contêiner) — então a única coisa que a posição horizontal decide é ONDE
-     nessa faixa vertical completa (céu, rosto, carrinho, tudo empilhado) a
-     janela estreita cai. Não tinha como isolar só o carrinho assim: ele fica
-     logo abaixo do rosto na foto original, então qualquer recorte que
-     mostrasse o carrinho também trazia o rosto goma no topo, grande demais.
-     Um tamanho maior que "cover" (165% de altura) cria fôlego vertical de
-     verdade: dá pra ancorar embaixo (posição Y perto de 100%) e cortar o
-     céu/rosto por cima, deixando o carrinho de compras como protagonista. */
-  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 74% 100%; background-size: auto 168%; }
-  .pcx-hero::after {
-    content: "";
-    position: absolute;
-    z-index: -2;
-    inset: -12px;
-    background: var(--pcx-hero-photo) 74% 100% / auto 168% no-repeat;
-    filter: blur(3px);
+  /* No celular usamos uma fotografia própria: o enquadramento vertical deixa
+     a pessoa à direita e reserva contraste limpo à esquerda para o conteúdo.
+     Assim a hero não depende de ampliar e desfocar uma foto horizontal. */
+  .pcx-hero {
+    min-height: auto;
+    padding: 1.25rem 0 1.5rem;
+    background: var(--pc-forest-950) var(--pcx-hero-mobile-photo) 68% center / cover no-repeat;
   }
+  .pcx-hero::after { display: none; }
   .pcx-hero::before {
     background-image: linear-gradient(
-      180deg,
-      rgba(2, 44, 32, 0.42) 0%,
-      rgba(2, 44, 32, 0.5) 40%,
-      rgba(2, 44, 32, 0.72) 78%,
-      rgba(2, 44, 32, 0.8) 100%
+      90deg,
+      rgba(2, 44, 32, 0.94) 0%,
+      rgba(2, 44, 32, 0.82) 48%,
+      rgba(2, 44, 32, 0.38) 100%
     );
   }
   .pcx-hero__inner { grid-template-columns: 1fr; gap: 1rem; }
@@ -974,8 +955,8 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__search { margin-bottom: 0.6rem; }
   .pcx-hero .pc26-hero-search { min-height: 50px !important; padding: 5px 5px 5px 14px !important; }
   .pcx-hero .pc26-live-search__submit { height: 40px; padding: 0 0.85rem !important; font-size: 0.82rem !important; }
-  .pcx-hero__actions { gap: 0.5rem; }
-  .pcx-hero .pcx-btn { padding: 0.62rem 1.1rem; font-size: 0.84rem; }
+  .pcx-hero__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .pcx-hero .pcx-btn { justify-content: center; padding: 0.7rem 0.55rem; font-size: 0.82rem; }
   .pcx-hero .pcx-btn svg { width: 15px; height: 15px; }
   .pcx-hero__stats {
     gap: 0.45rem 0.95rem;
@@ -988,24 +969,15 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__stat svg { width: 15px; height: 15px; }
   .pcx-hero__stat strong { font-size: 0.92rem; }
 
-  /* Sem imagem própria para ancorar, o painel "COMPARAÇÃO REAL" deixa de
-     flutuar em posição absoluta e passa a fluir normalmente, abaixo do
-     texto — mais legível que sobrepor a foto num viewport estreito. */
-  .pcx-hero__visual { max-width: none; margin-top: 1rem; }
-  .pcx-hero__panel { width: 100%; max-width: 380px; border-radius: var(--h-radius-md); }
-  .pcx-hero__panel li:nth-child(n + 2) { display: none; }
+  /* No celular a busca é a tarefa principal. O cartão de comparação, que
+     alongava demais a primeira dobra, permanece disponível no catálogo. */
+  .pcx-hero__visual { display: none; }
 
   .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.72rem; }
   .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
 }
 
-@media (max-width: 420px) {
-  /* Em telas bem estreitas o rótulo "Buscar preço" não cabe ao lado do
-     campo sem estourar o cartão de busca — mantém só o ícone (com
-     aria-label preservando o texto para leitor de tela). */
-  .pcx-hero .pc26-live-search__submit-label { display: none; }
-  .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
-
+@media (max-width: 640px) {
   /* Faixa "economize até encontrar o menor preço": banner compacto verde
      escuro, com pequeno ícone, logo abaixo da busca — só existe no app. */
   .pcx-hero__mobile-banner {
@@ -1023,6 +995,11 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   }
   .pcx-hero__mobile-banner strong { display: block; font-size: 0.82rem; font-weight: 800; line-height: 1.25; }
   .pcx-hero__mobile-banner span { display: block; font-size: 0.72rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
+}
+
+@media (max-width: 420px) {
+  .pcx-hero .pc26-live-search__submit-label { display: none; }
+  .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
 }
 
 /* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important).

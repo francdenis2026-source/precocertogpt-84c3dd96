@@ -15,6 +15,7 @@ import { PriceBadge } from "../catalog/PriceBadge";
 // carrinho de hortifruti à direita, rio/ponte ao fundo à esquerda — onde o
 // véu verde-floresta fica opaco, sob o texto.
 import heroPhoto from "../../assets/home-2026/hero-cliente-carrinho-rio-2026.jpg";
+import heroMobilePhoto from "../../assets/home-2026/hero-mobile-market-2026.webp";
 
 const intBr = new Intl.NumberFormat("pt-BR");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -66,13 +67,14 @@ export function HeroUserImage2026({
       // O CSS do hero usa esta variavel como background-image da secao.
       // Sem defini-la, a declaracao inteira era invalida: nem a foto nem o
       // veu de contraste eram pintados.
-      style={{ "--pcx-hero-photo": `url(${heroPhoto})` } as React.CSSProperties}
+      style={{
+        "--pcx-hero-photo": `url(${heroPhoto})`,
+        "--pcx-hero-mobile-photo": `url(${heroMobilePhoto})`,
+      } as React.CSSProperties}
     >
-      {/* Mantem o alt descritivo da foto acessivel a leitor de tela — a foto
-          em si agora e pintada via background-image (menos acessivel por
-          natureza), entao preservamos a semantica original com uma <img>
-          visualmente oculta em vez de perder o texto alternativo. */}
-      <img className="sr-only" src={heroPhoto} alt="Cliente sorridente empurrando um carrinho cheio de hortifruti à beira de um rio em Feijó, ao entardecer" />
+      {/* As fotos são de ambientação: o título, a busca e as ações já
+          descrevem a função desta seção. Mantemos a imagem como background
+          para o navegador baixar apenas a variante do breakpoint ativo. */}
       <div className="pcx-hero__inner">
         <div className="pcx-hero__copy">
           <LocationSwitcher />
