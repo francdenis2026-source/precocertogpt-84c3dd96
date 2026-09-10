@@ -161,3 +161,23 @@ body .pc-collab-page { height: auto; min-height: 100dvh; overflow: visible; }
   :where(.pcx-home, .pharmacy-directory-page, .ref-auth) *,
   :where(.pcx-home, .pharmacy-directory-page, .ref-auth) *::before { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Login desktop: composição fechada em uma viewport, sem barra vertical. */
+@media (min-width: 901px) {
+  .ref-auth { height: 100dvh !important; max-height: 100dvh !important; overflow: hidden !important; }
+  .ref-auth__story { padding-block: 24px !important; }
+  .ref-auth__hero-copy h1 { font-size: clamp(32px, 4vw, 52px) !important; }
+  .ref-auth__hero-copy > p { margin-top: 10px !important; font-size: 15px !important; }
+  .ref-auth__form { padding-block: 18px !important; }
+  .ref-auth__card { padding: 20px !important; }
+  .ref-auth__card h2 { font-size: 30px !important; }
+  .ref-auth__card > p:not(.ref-auth__safe):not(.ref-auth__message) { margin-top: 5px !important; }
+  .ref-account-tabs { margin-top: 12px !important; }
+  .ref-account-tabs button { min-height: 58px !important; padding-block: 8px !important; }
+  .ref-auth__card form { gap: 8px !important; margin-top: 10px !important; }
+  .ref-auth__card form input { min-height: 40px !important; }
+  .ref-auth__submit { min-height: 42px !important; }
+  .ref-auth__recover { margin-top: 6px !important; }
+  .ref-auth__switch { margin-top: 9px !important; padding-top: 9px !important; }
+  .ref-auth__safe { margin-top: 7px !important; }
+}
