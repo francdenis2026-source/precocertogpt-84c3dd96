@@ -346,6 +346,69 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   }
 }
 
+/* Último ajuste de hierarquia mobile: marca e ação ficam na primeira linha,
+   enquanto a navegação corre em uma única faixa horizontal. Isso evita que
+   cinco links quebrem em várias linhas e deixem o rodapé alto/desconfigurado. */
+@media (max-width: 760px) {
+  footer.ref-footer .ref-footer__bar {
+    grid-template-columns: 1fr !important;
+    gap: 3px !important;
+    padding: 7px 0 5px !important;
+  }
+  footer.ref-footer .ref-footer__mark { min-height: 30px !important; }
+  footer.ref-footer .ref-footer__links {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 2px !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-bottom: 1px;
+  }
+  footer.ref-footer .ref-footer__links::-webkit-scrollbar { display: none; }
+  footer.ref-footer .ref-footer__links a {
+    flex: 0 0 auto !important;
+    min-height: 30px !important;
+    padding-inline: 8px !important;
+    font-size: 11px !important;
+  }
+  footer.ref-footer .ref-footer__legal {
+    padding: 5px 0 6px !important;
+    gap: 3px !important;
+  }
+  footer.ref-footer .ref-footer__legal small,
+  footer.ref-footer .ref-footer__legal span { font-size: 10px !important; }
+
+  .pcx-home .pcx-footer__row {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas: "brand cta" "nav nav" !important;
+    gap: 5px 10px !important;
+    padding: 9px var(--h-section-x) 6px !important;
+  }
+  .pcx-home .pcx-footer__brand { grid-area: brand; min-width: 0; }
+  .pcx-home .pcx-footer__cta { grid-area: cta; }
+  .pcx-home .pcx-footer__nav {
+    grid-area: nav;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    gap: 2px !important;
+    scrollbar-width: none;
+    padding-bottom: 1px;
+  }
+  .pcx-home .pcx-footer__nav::-webkit-scrollbar { display: none; }
+  .pcx-home .pcx-footer__nav a {
+    flex: 0 0 auto !important;
+    min-height: 28px !important;
+    padding-inline: 7px !important;
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+  .pcx-home .pcx-footer__meta { padding-block: 6px !important; }
+}
+
 /* Final desktop fit for the sign-in surface shown in the supplied capture.
    Keep every action visible at typical 1366–1920px laptop heights. */
 @media (min-width: 901px) {
@@ -366,6 +429,25 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .ref-auth__recover { min-height: 30px !important; margin-top: 2px !important; padding: 3px 8px !important; font-size: 11px !important; }
   .ref-auth__switch { margin-top: 5px !important; padding-top: 5px !important; font-size: 11px !important; }
   .ref-auth__safe { margin-top: 3px !important; font-size: 10px !important; }
+}
+
+/* Mobile footer final cascade: keep the compact two-row structure after all
+   legacy responsive rules have loaded. */
+@media (max-width: 760px) {
+  footer.ref-footer .ref-footer__bar { grid-template-columns: 1fr !important; gap: 3px !important; padding: 7px 0 5px !important; }
+  footer.ref-footer .ref-footer__mark { min-height: 30px !important; }
+  footer.ref-footer .ref-footer__links { display: flex !important; flex-wrap: nowrap !important; justify-content: flex-start !important; gap: 2px !important; overflow-x: auto !important; scrollbar-width: none; padding-bottom: 1px; }
+  footer.ref-footer .ref-footer__links::-webkit-scrollbar { display: none; }
+  footer.ref-footer .ref-footer__links a { flex: 0 0 auto !important; min-height: 30px !important; padding-inline: 8px !important; font-size: 11px !important; }
+  footer.ref-footer .ref-footer__legal { padding: 5px 0 6px !important; gap: 3px !important; }
+  footer.ref-footer .ref-footer__legal small, footer.ref-footer .ref-footer__legal span { font-size: 10px !important; }
+  .pcx-home .pcx-footer__row { grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "brand cta" "nav nav" !important; gap: 5px 10px !important; padding: 9px var(--h-section-x) 6px !important; }
+  .pcx-home .pcx-footer__brand { grid-area: brand; min-width: 0; }
+  .pcx-home .pcx-footer__cta { grid-area: cta; }
+  .pcx-home .pcx-footer__nav { grid-area: nav; display: flex !important; flex-wrap: nowrap !important; justify-content: flex-start !important; overflow-x: auto !important; gap: 2px !important; scrollbar-width: none; padding-bottom: 1px; }
+  .pcx-home .pcx-footer__nav::-webkit-scrollbar { display: none; }
+  .pcx-home .pcx-footer__nav a { flex: 0 0 auto !important; min-height: 28px !important; padding-inline: 7px !important; font-size: 10px !important; white-space: nowrap; }
+  .pcx-home .pcx-footer__meta { padding-block: 6px !important; }
 }
 
 /* Collaboration desktop fit: keep the trust badges on one compact row and
@@ -798,4 +880,22 @@ html[data-theme="dark"] .ref-auth__card form input { background: #122019 !import
     font-size: 11px;
     font-weight: 900;
   }
+}
+
+/* Mobile footer final cascade: preserve one compact, readable navigation row. */
+@media (max-width: 760px) {
+  footer.ref-footer .ref-footer__bar { grid-template-columns: 1fr !important; gap: 3px !important; padding: 7px 0 5px !important; }
+  footer.ref-footer .ref-footer__mark { min-height: 30px !important; }
+  footer.ref-footer .ref-footer__links { display: flex !important; flex-wrap: nowrap !important; justify-content: flex-start !important; gap: 2px !important; overflow-x: auto !important; scrollbar-width: none; padding-bottom: 1px; }
+  footer.ref-footer .ref-footer__links::-webkit-scrollbar { display: none; }
+  footer.ref-footer .ref-footer__links a { flex: 0 0 auto !important; min-height: 30px !important; padding-inline: 8px !important; font-size: 11px !important; }
+  footer.ref-footer .ref-footer__legal { padding: 5px 0 6px !important; gap: 3px !important; }
+  footer.ref-footer .ref-footer__legal small, footer.ref-footer .ref-footer__legal span { font-size: 10px !important; }
+  .pcx-home .pcx-footer__row { grid-template-columns: minmax(0, 1fr) auto !important; grid-template-areas: "brand cta" "nav nav" !important; gap: 5px 10px !important; padding: 9px var(--h-section-x) 6px !important; }
+  .pcx-home .pcx-footer__brand { grid-area: brand; min-width: 0; }
+  .pcx-home .pcx-footer__cta { grid-area: cta; }
+  .pcx-home .pcx-footer__nav { grid-area: nav; display: flex !important; flex-wrap: nowrap !important; overflow-x: auto !important; gap: 2px !important; scrollbar-width: none; padding-bottom: 1px; }
+  .pcx-home .pcx-footer__nav::-webkit-scrollbar { display: none; }
+  .pcx-home .pcx-footer__nav a { flex: 0 0 auto !important; min-height: 28px !important; padding-inline: 7px !important; font-size: 10px !important; white-space: nowrap; }
+  .pcx-home .pcx-footer__meta { padding-block: 6px !important; }
 }
