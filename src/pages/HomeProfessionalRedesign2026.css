@@ -976,17 +976,22 @@ html[data-theme="light"] .pcx-hero::before {
      véu — texto continua nítido, a foto aparece de verdade sem perder a
      legibilidade.
 
-     Foto atual (cliente no corredor, conferindo preço no celular) não tem
-     o problema de enquadramento extremo da anterior (sem céu/ponte para
-     cortar) -- "cover" simples com a posição abaixo mantém rosto e mãos
-     visíveis em qualquer altura de tela. */
-  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 75% 40%; background-size: cover; }
+     No retrato estreito do celular, "cover" só mostra uma fatia de ~31% da
+     largura da foto -- em 75% 40% essa fatia pegava só rosto/cabelo,
+     cortando fora a mão com o celular (que fica mais ao centro da foto
+     original, por volta de 58% da largura). Como a intenção do card
+     "Comparação real" logo abaixo é justamente mostrar a cliente
+     comparando preço NO CELULAR, o enquadramento passa a mostrar rosto
+     olhando pro celular + as duas mãos segurando ele, em vez de só o
+     rosto isolado (conferido recortando a foto original nesses mesmos
+     58%/48% antes de aplicar). */
+  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 58% 48%; background-size: cover; }
   .pcx-hero::after {
     content: "";
     position: absolute;
     z-index: -2;
     inset: -12px;
-    background: var(--pcx-hero-photo) 68% 22% / cover no-repeat;
+    background: var(--pcx-hero-photo) 58% 48% / cover no-repeat;
     filter: blur(3px);
   }
   .pcx-hero::before {
@@ -1032,9 +1037,17 @@ html[data-theme="light"] .pcx-hero::before {
   .pcx-hero__stat strong { font-size: 0.92rem; }
 
   /* Sem imagem própria para ancorar, o painel "COMPARAÇÃO REAL" deixa de
-     flutuar em posição absoluta e passa a fluir normalmente, abaixo do
-     texto — mais legível que sobrepor a foto num viewport estreito. */
-  .pcx-hero__visual { max-width: none; margin-top: 1rem; }
+     flutuar em posição absoluta e passa a fluir normalmente — mais legível
+     que sobrepor a foto num viewport estreito. Fica ANTES do texto (order:
+     -1) em vez de depois: como a largura da tela só mostra uma fatia
+     estreita da foto (~31%), o rosto e as mãos com o celular acabam
+     sempre no terço vertical de baixo do herói (é onde estão na foto
+     original) -- exatamente onde esse painel ficava antes, cobrindo a
+     cena inteira que o card ao lado deveria estar ilustrando. Ficando no
+     topo, o painel cobre só o teto/prateleira de fundo (sem nada de
+     relevante) e libera o terço de baixo, onde a cliente aparece
+     conferindo o preço no celular. */
+  .pcx-hero__visual { max-width: none; order: -1; margin-bottom: 1rem; }
   /* Pedido explícito: o cartão ocupava espaço vertical grande demais dentro
      do hero, sobrando pouca foto visível abaixo do texto — mais compacto
      (menos padding, selo/miniatura menores) sem perder nenhuma informação. */
