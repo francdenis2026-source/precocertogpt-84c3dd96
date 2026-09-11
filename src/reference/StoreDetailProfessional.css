@@ -208,3 +208,13 @@ a.store-pro-contact__item:hover{border-color:color-mix(in srgb,var(--pc-green) 4
 @media(prefers-reduced-motion:reduce){.store-pro-back,.store-pro-search,.store-pro-select,.store-pro-grid>a,.store-pro-pagination button{transition:none}}
 
 .store-pro-legal{padding:16px 20px;background:var(--pc-color-primary-hover,#0d2b20);color:var(--pc-color-muted,rgba(255,255,255,.72));font-size:12px;text-align:center}
+
+/* PublicChromeRedesign2026.css força `.ref-page .store-pro-hero` a
+   display:flex + align-items:flex-end + max-height fixo (280px, 220px
+   abaixo de 720px). Uma loja com endereço, tagline e 2-3 selos de
+   especialidade passa facilmente desse teto — o flex-end então corta o
+   topo do cartão (nome da loja incluído) em vez de deixar a altura
+   acompanhar o conteúdo real. Seletor mais específico (3 classes) para
+   vencer aquela regra sem depender de guerra de !important por ordem de
+   carregamento. */
+.store-pro-page.ref-page .store-pro-hero{display:block!important;align-items:initial!important;max-height:none!important}
