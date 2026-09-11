@@ -9,7 +9,7 @@
   --pdl-border:color-mix(in srgb, currentColor 14%, transparent);
   --pdl-text:var(--pc-ink,#17231C);
   --pdl-muted:var(--pc-muted,#5b6472);
-  --pdl-accent:var(--accent,#0B8043);
+  --pdl-accent:var(--accent,#047857);
   --pdl-gap:clamp(.8rem,2vw,1.2rem);
   display:flex;flex-direction:column;min-height:100vh;color:var(--pdl-text);
 }
@@ -48,8 +48,8 @@
 .pdl-price__save{display:inline-flex;align-items:center;gap:.32rem;font-size:.76rem;font-weight:650;padding:.28rem .55rem;border-radius:999px;background:color-mix(in srgb,var(--pdl-accent) 16%,transparent);color:var(--pdl-accent)}
 .pdl-price__save svg{width:13px;height:13px}
 
-.pdl-buy-online{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;margin-bottom:.6rem;padding:0 1rem;border-radius:12px;background:var(--accent-strong,#07563A);color:#fff;font-size:.87rem;font-weight:800;text-decoration:none;transition:background .18s ease,transform .18s ease}
-.pdl-buy-online:hover{background:color-mix(in srgb,var(--accent-strong,#07563A) 85%,#000);transform:translateY(-1px)}
+.pdl-buy-online{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:46px;margin-bottom:.6rem;padding:0 1rem;border-radius:12px;background:var(--accent-strong,#065F46);color:#fff;font-size:.87rem;font-weight:800;text-decoration:none;transition:background .18s ease,transform .18s ease}
+.pdl-buy-online:hover{background:color-mix(in srgb,var(--accent-strong,#065F46) 85%,#000);transform:translateY(-1px)}
 .pdl-buy-online svg{width:17px;height:17px}
 .pdl-actions{display:flex;flex-wrap:wrap;gap:.5rem}
 .pdl-actions button{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:42px;padding:0 .95rem;border-radius:12px;font-size:.83rem;font-weight:650;cursor:pointer;border:1px solid var(--pdl-border);background:var(--pdl-surface-2);color:var(--pdl-text);transition:transform .18s ease,background .18s ease,opacity .18s ease}
@@ -151,9 +151,9 @@
 .pdl-toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);transform:translateX(-50%);z-index:60;padding:.6rem 1rem;border-radius:999px;background:#111827;color:#fff;font-size:.82rem;box-shadow:0 12px 28px rgba(0,0,0,.28)}
 
 /* Dark */
-:root[data-theme="dark"] .pdl-page,.dark .pdl-page{--pdl-surface:#0E1D16;--pdl-surface-2:#14271D;--pdl-border:rgba(255,255,255,.12);--pdl-text:#F4FAF6;--pdl-muted:#9AA9A1;--pdl-accent:#34A46B}
-:root[data-theme="dark"] .pdl-actions__primary,.dark .pdl-actions__primary{color:#07130E;box-shadow:0 8px 20px rgba(52,164,107,.28)}
-:root[data-theme="dark"] .pdl-live,.dark .pdl-live{background:rgba(52,164,107,.18);color:#8ff2b0}
+:root[data-theme="dark"] .pdl-page,.dark .pdl-page{--pdl-surface:#0E1D16;--pdl-surface-2:#14271D;--pdl-border:rgba(255,255,255,.12);--pdl-text:#F4FAF6;--pdl-muted:#9AA9A1;--pdl-accent:#34D399}
+:root[data-theme="dark"] .pdl-actions__primary,.dark .pdl-actions__primary{color:#07130E;box-shadow:0 8px 20px rgba(52,211,153,.28)}
+:root[data-theme="dark"] .pdl-live,.dark .pdl-live{background:rgba(52,211,153,.18);color:#8ff2b0}
 :root[data-theme="dark"] .pdl-similar b,.dark .pdl-similar b{color:#6bdf9a}
 :root[data-theme="dark"] .pdl-compare__list li.is-best .pdl-compare__rank,.dark .pdl-compare__list li.is-best .pdl-compare__rank{color:#07130E}
 
@@ -176,7 +176,7 @@
   .pdl-mobile-bar div{display:flex;flex-direction:column}
   .pdl-mobile-bar small{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--pdl-muted,#5b6472)}
   .pdl-mobile-bar strong{font-size:1.05rem;font-variant-numeric:tabular-nums}
-  .pdl-mobile-bar button{display:inline-flex;align-items:center;gap:.4rem;min-height:42px;padding:0 1rem;border-radius:12px;border:0;background:var(--accent-strong,#07563A);color:#fff;font-weight:700;font-size:.84rem;cursor:pointer}
+  .pdl-mobile-bar button{display:inline-flex;align-items:center;gap:.4rem;min-height:42px;padding:0 1rem;border-radius:12px;border:0;background:var(--accent-strong,#065F46);color:#fff;font-weight:700;font-size:.84rem;cursor:pointer}
   .pdl-mobile-bar button svg{width:16px;height:16px}
 }
 @media (prefers-reduced-motion:reduce){

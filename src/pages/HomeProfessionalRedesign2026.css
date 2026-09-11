@@ -27,11 +27,11 @@
      seguinte, para 4.9:1+ por segurança. */
   --h-subtle: #5b6a62;
 
-  /* Escurecido de #0B8043 (2.6:1) -> #0e8f42 (4.2:1, ainda abaixo de AA) ->
-     #0b7d3a: branco sobre este verde agora atinge ~4.6:1 de contraste
+  /* Escurecido de #047857 (2.6:1) -> #0e8f42 (4.2:1, ainda abaixo de AA) ->
+     #047857: branco sobre este verde agora atinge ~4.6:1 de contraste
      (WCAG AA 4.5:1 para texto normal). */
-  --h-primary: #0b7d3a;
-  --h-primary-dark: #07563a;
+  --h-primary: #047857;
+  --h-primary-dark: #065F46;
   --h-primary-soft: #e7f9ee;
   --h-on-primary: #ffffff;
 
@@ -79,8 +79,8 @@
     --h-muted: #9baaa2;
     --h-subtle: #9baaa2;
 
-    --h-primary: #34A46B;
-    --h-primary-dark: #2FB86E;
+    --h-primary: #34D399;
+    --h-primary-dark: #10B981;
     --h-primary-soft: #12281f;
     --h-on-primary: #07130e;
     --h-forest: #043d2c;
@@ -108,8 +108,8 @@
   --h-muted: #9baaa2;
   --h-subtle: #9baaa2;
 
-  --h-primary: #34A46B;
-  --h-primary-dark: #2FB86E;
+  --h-primary: #34D399;
+  --h-primary-dark: #10B981;
   --h-primary-soft: #12281f;
   --h-on-primary: #07130e;
   --h-forest: #043d2c;
@@ -602,10 +602,14 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   background: var(--pc-forest-950) var(--pcx-hero-photo) 78% 22% / cover no-repeat;
   border-bottom: 1px solid var(--pc-forest-800);
 }
-/* Véu gradiente verde-floresta: opaco à esquerda (onde o texto fica),
-   transparente à direita (onde a foto aparece limpa) — mesma técnica de
-   .store-pro-hero__overlay, sempre ativo, independente do tema claro/escuro
-   do resto da home. */
+/* Véu gradiente: opaco à esquerda (onde o texto fica), transparente à
+   direita (onde a foto aparece limpa) — mesma técnica de
+   .store-pro-hero__overlay. Era fixo no verde-floresta mais escuro em
+   qualquer tema ("sempre ativo, independente do claro/escuro") — no modo
+   claro isso apagava a foto quase por completo bem no primeiro elemento da
+   home, e o resto da página clara ficava presa atrás de um cartão sempre
+   escuro. Agora o modo claro usa um véu bem mais raso (o valor original
+   continua abaixo, para o modo escuro). */
 .pcx-hero::before {
   content: "";
   position: absolute;
@@ -618,6 +622,15 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
     rgba(2, 44, 32, 0.88) 34%,
     rgba(2, 44, 32, 0.55) 64%,
     rgba(2, 44, 32, 0.14) 100%
+  );
+}
+html[data-theme="light"] .pcx-hero::before {
+  background-image: linear-gradient(
+    96deg,
+    rgba(4, 32, 24, 0.82) 0%,
+    rgba(4, 32, 24, 0.62) 34%,
+    rgba(4, 32, 24, 0.28) 64%,
+    rgba(4, 32, 24, 0.04) 100%
   );
 }
 
@@ -986,6 +999,18 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
       rgba(2, 44, 32, 0.5) 40%,
       rgba(2, 44, 32, 0.72) 78%,
       rgba(2, 44, 32, 0.8) 100%
+    );
+  }
+  /* Modo claro: o mesmo véu escuro de sempre, só que mais raso -- a foto
+     (o cliente comparando preço, o próprio assunto da home) fica visível de
+     verdade em vez de quase apagada logo na primeira dobra da versão clara. */
+  html[data-theme="light"] .pcx-hero::before {
+    background-image: linear-gradient(
+      180deg,
+      rgba(4, 32, 24, 0.16) 0%,
+      rgba(4, 32, 24, 0.3) 40%,
+      rgba(4, 32, 24, 0.58) 78%,
+      rgba(4, 32, 24, 0.68) 100%
     );
   }
   .pcx-hero__inner { grid-template-columns: 1fr; gap: 1rem; }
