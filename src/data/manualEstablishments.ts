@@ -9,6 +9,11 @@
 
 import type { CatalogPayload, Product, ProductOffer, StoreRow } from "./catalog";
 import { SANDUBA_ID, SANDUBA_NAME, sandubaProducts, sandubaStores } from "./manualEstablishments2";
+// item-hamburguer-2.jpg (composição malfeita, chamas e pétalas coladas sobre
+// o sanduíche) foi removida do projeto. sector-food.webp é uma foto real de
+// preparo de hambúrguer já usada como imagem de setor "lanchonete" em outras
+// partes do site — sem essa criação artificial.
+import kellyBurgerPhoto from "../assets/sectors-2026/sector-food.webp";
 
 export const KELLY_ID = "kelly-burgueria-lanchonete";
 export const KELLY_NAME = "Kelly Burgueria e Lanchonete";
@@ -129,9 +134,9 @@ export const manualStores: StoreRow[] = [
 // sem entrada aqui (Adicionais) ficam sem foto: são só ingredientes extras,
 // e não há nenhuma foto que os represente sem inventar uma.
 const KELLY_CATEGORY_IMAGES: Partial<Record<string, string[]>> = {
-  "Hambúrgueres": ["/kelly-burgueria/hero-burger.jpg", "/kelly-burgueria/item-hamburguer-2.jpg"],
+  "Hambúrgueres": [kellyBurgerPhoto],
   "Carne na Chapa": ["/kelly-burgueria/carne-chapa.jpg"],
-  "Lanches Rápidos": ["/kelly-burgueria/item-hamburguer-2.jpg"],
+  "Lanches Rápidos": [kellyBurgerPhoto],
   "Panquecas": ["/kelly-burgueria/item-panqueca.jpg"],
   "Monte sua Batata": ["/kelly-burgueria/item-batata.jpg"],
   "Bebidas": ["/kelly-burgueria/item-bebida.jpg"],

@@ -22,7 +22,7 @@
 .kelly-hero{
   position:relative;overflow:hidden;border-radius:var(--pc-radius-block,20px);
   min-height:144px;display:flex;align-items:flex-end;
-  background:#0d0705 url('/kelly-burgueria/item-hamburguer-2.jpg') center 32%/cover no-repeat;
+  background:#0d0705 url('/kelly-burgueria/lanchonete-hero.webp') center 42%/cover no-repeat;
   border:1px solid var(--pc-border);
 }
 .kelly-hero__overlay{

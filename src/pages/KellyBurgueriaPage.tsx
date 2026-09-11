@@ -21,6 +21,12 @@ import {
   type MenuItem,
 } from "../data/manualEstablishments";
 import "./KellyBurgueriaPage.css";
+// A foto anterior (/kelly-burgueria/item-hamburguer-2.jpg) era uma composição
+// artificial malfeita — chamas e pétalas coladas por cima do sanduíche,
+// sem nenhuma relação com o ambiente real da casa. Substituída pela foto
+// de setor "lanchonete" já usada no acervo do projeto (mesa posta, fritas,
+// bebida, ambiente de lanchonete de verdade).
+import heroPhoto from "../assets/sectors-2026/sector-photo-food.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,7 +119,7 @@ export function KellyBurgueriaPage() {
             </div>
           </div>
           <div className="kelly-hero__visual" aria-hidden="true">
-            <img src="/kelly-burgueria/item-hamburguer-2.jpg" alt="" />
+            <img src={heroPhoto} alt="" />
             <span><BadgeCheck /> Artesanal e feito na hora</span>
           </div>
         </section>
