@@ -1316,8 +1316,18 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-prices div { display: flex; align-items: baseline; gap: 0.3rem; }
 .pcx-prices del { font-size: 0.8rem; color: var(--h-subtle); }
 .pcx-prices strong { font-size: 1.1rem; font-weight: 900; letter-spacing: -0.01em; color: var(--h-primary-dark); }
-.pcx-product__footer { margin-top: 0.35rem; display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
-.pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; min-width: 0; flex: 1 1 auto; font-size: 0.8rem; color: var(--h-subtle); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* flex-wrap:wrap (era só abaixo de 480px): em grades de 4 colunas o cartão
+   já fica estreito no desktop, e frases de frescor mais longas ("Atualizado
+   há N dias", "Preço expirado") brigavam com "Ver comparação" na mesma
+   linha — o texto era cortado sem reticências visíveis, parecendo quebrado.
+   Agora "Ver comparação" desce para a própria linha quando não cabe, em
+   qualquer largura de cartão. */
+.pcx-product__footer { margin-top: 0.35rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.2rem 0.4rem; }
+/* min-width > 0: sem um piso, flex-shrink comia todo o espaço do texto de
+   frescor antes de "Ver comparação" quebrar linha (wrap só entra quando os
+   itens não cabem nem no mínimo) — o texto ficava espremido a quase nada
+   em vez de o link descer para a linha de baixo. */
+.pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; min-width: 6.5rem; flex: 1 1 auto; font-size: 0.8rem; color: var(--h-subtle); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .pcx-product__footer time svg { width: 11px; height: 11px; flex-shrink: 0; }
 .pcx-product__footer strong { display: flex; align-items: center; gap: 0.2rem; font-size: 0.8rem; font-weight: 700; color: var(--h-muted); white-space: nowrap; transition: gap 150ms ease, color 150ms ease; }
 .pcx-product:hover .pcx-product__footer strong { gap: 0.35rem; color: var(--h-primary-dark); }
@@ -1382,7 +1392,6 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 @media (max-width: 480px) {
   .pcx-prices { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
   .pcx-prices div { gap: 0.35rem; }
-  .pcx-product__footer { flex-wrap: wrap; }
   .pcx-product__footer strong { font-size: 0.8rem; }
 }
 
