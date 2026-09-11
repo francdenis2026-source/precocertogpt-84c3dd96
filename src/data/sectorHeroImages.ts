@@ -7,7 +7,14 @@ import food from "../assets/sectors-2026/sector-food.webp";
 import pharmacies from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
 import books from "../assets/sectors-2026/sector-books.webp";
 import services from "../assets/sectors-2026/sector-services.webp";
-import other from "../assets/sectors-2026/sector-other.webp";
+
+/**
+ * "Outros comércios" é a categoria genérica (nenhum ramo específico
+ * reconhecido) — reaproveita a mesma foto de "services" em vez de ter uma
+ * foto dedicada. A foto anterior (sector-other.webp, removida do projeto)
+ * foi retirada do acervo por pedido explícito.
+ */
+const other = services;
 
 /**
  * Foto de hero por tipo de estabelecimento. Cada nicho tem a sua, então quando
