@@ -15,7 +15,13 @@ import { freshnessText, priceFreshness } from "../../lib/pricing";
 // que são só referência de ESTILO e nunca viram asset final). Cliente com
 // carrinho de hortifruti à direita, rio/ponte ao fundo à esquerda — onde o
 // véu verde-floresta fica opaco, sob o texto.
-import heroPhoto from "../../assets/home-2026/hero-cliente-carrinho-rio-2026.jpg";
+// A foto anterior (cliente com carrinho de compras num parque à beira-rio,
+// com ponte estaiada ao pôr do sol ao fundo) é claramente gerada por IA —
+// composição sem nenhuma relação com o ato de comprar, pele com aspecto
+// plástico e uma ponte cenográfica atrás de um carrinho de supermercado.
+// Substituída por uma foto real de banco de imagens (cliente comparando
+// preço no celular dentro do corredor de um mercado de verdade).
+import heroPhoto from "../../assets/home-2026/hero-supermercado-mulher-comparando-2026.webp";
 
 const intBr = new Intl.NumberFormat("pt-BR");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });

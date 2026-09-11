@@ -599,7 +599,10 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   align-items: center;
   min-height: clamp(420px, 46vw, 560px);
   padding: clamp(1.6rem, 3vw, 2.4rem) 0;
-  background: var(--pc-forest-950) var(--pcx-hero-photo) 78% 22% / cover no-repeat;
+  /* Posição ajustada para a foto atual (cliente no corredor de mercado,
+     conferindo o preço no celular) -- 70% 26% mantém o rosto e as mãos
+     dentro do quadro em qualquer proporção de tela, com "cover". */
+  background: var(--pc-forest-950) var(--pcx-hero-photo) 70% 26% / cover no-repeat;
   border-bottom: 1px solid var(--pc-forest-800);
 }
 /* Véu gradiente: opaco à esquerda (onde o texto fica), transparente à
@@ -968,28 +971,22 @@ html[data-theme="light"] .pcx-hero::before {
   /* Hero compacto no app: menos altura em título, busca e botões — o
      objetivo é caber mais tela útil acima da dobra num celular. O véu
      opaco (.92-.82 em todas as paradas) apagava a foto quase por completo;
-     a cliente do carrinho ficava irreconhecível. Baixa a opacidade bastante
-     e troca o desfoque de contraste (que antes vinha só do véu escuro) por
-     uma camada dedicada com blur leve atrás do véu — texto continua nítido,
-     a foto aparece de verdade sem perder a legibilidade.
+     baixa a opacidade bastante e troca o desfoque de contraste (que antes
+     vinha só do véu escuro) por uma camada dedicada com blur leve atrás do
+     véu — texto continua nítido, a foto aparece de verdade sem perder a
+     legibilidade.
 
-     "cover" sozinho, num recorte alto e estreito como o do celular, mostra
-     a foto inteira de cima a baixo (a altura já é o lado que "cobre" o
-     contêiner) — então a única coisa que a posição horizontal decide é ONDE
-     nessa faixa vertical completa (céu, rosto, carrinho, tudo empilhado) a
-     janela estreita cai. Não tinha como isolar só o carrinho assim: ele fica
-     logo abaixo do rosto na foto original, então qualquer recorte que
-     mostrasse o carrinho também trazia o rosto goma no topo, grande demais.
-     Um tamanho maior que "cover" (165% de altura) cria fôlego vertical de
-     verdade: dá pra ancorar embaixo (posição Y perto de 100%) e cortar o
-     céu/rosto por cima, deixando o carrinho de compras como protagonista. */
-  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 74% 100%; background-size: auto 168%; }
+     Foto atual (cliente no corredor, conferindo preço no celular) não tem
+     o problema de enquadramento extremo da anterior (sem céu/ponte para
+     cortar) -- "cover" simples com a posição abaixo mantém rosto e mãos
+     visíveis em qualquer altura de tela. */
+  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 75% 40%; background-size: cover; }
   .pcx-hero::after {
     content: "";
     position: absolute;
     z-index: -2;
     inset: -12px;
-    background: var(--pcx-hero-photo) 74% 100% / auto 168% no-repeat;
+    background: var(--pcx-hero-photo) 68% 22% / cover no-repeat;
     filter: blur(3px);
   }
   .pcx-hero::before {
@@ -1038,8 +1035,15 @@ html[data-theme="light"] .pcx-hero::before {
      flutuar em posição absoluta e passa a fluir normalmente, abaixo do
      texto — mais legível que sobrepor a foto num viewport estreito. */
   .pcx-hero__visual { max-width: none; margin-top: 1rem; }
-  .pcx-hero__panel { width: 100%; max-width: 380px; border-radius: var(--h-radius-md); }
+  /* Pedido explícito: o cartão ocupava espaço vertical grande demais dentro
+     do hero, sobrando pouca foto visível abaixo do texto — mais compacto
+     (menos padding, selo/miniatura menores) sem perder nenhuma informação. */
+  .pcx-hero__panel { width: 100%; max-width: 380px; padding: 0.75rem; border-radius: var(--h-radius-md); }
+  .pcx-hero__panel-head { margin-bottom: 0.4rem; }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
+  .pcx-hero__panel li { padding: 0.45rem 0.55rem; }
+  .pcx-hero__panel-thumb { width: 36px; height: 36px; }
+  .pcx-hero__panel-foot { margin-top: 0.4rem; padding-top: 0.4rem; }
 
   .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.75rem; }
   .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
@@ -1336,7 +1340,11 @@ html[data-theme="light"] .pcx-hero::before {
 .pc-price-badge--solid { background: var(--h-primary); color: var(--h-on-primary); }
 .pc-price-badge--soft { background: var(--h-primary-soft); color: var(--h-primary-dark); }
 
-.pcx-prices { margin-top: 0.3rem; padding-top: 0.4rem; border-top: 1px solid var(--h-border); display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
+/* flex-wrap:wrap: "Menor preço" + preço riscado + preço final não cabiam
+   juntos numa linha só nos cards de 4 colunas — o preço final (a
+   informação que mais importa no card) ficava cortado na borda direita
+   em vez de quebrar para a linha de baixo. */
+.pcx-prices { margin-top: 0.3rem; padding-top: 0.4rem; border-top: 1px solid var(--h-border); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.2rem 0.4rem; }
 .pcx-prices span { font-size: 0.8rem; color: var(--h-subtle); font-weight: 600; }
 .pcx-prices div { display: flex; align-items: baseline; gap: 0.3rem; }
 .pcx-prices del { font-size: 0.8rem; color: var(--h-subtle); }
