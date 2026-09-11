@@ -118,11 +118,14 @@ html body .store-pro-hero .store-pro-copy h1 {
 }
 
 /* ---------- CARDS DE PRODUTO ---------- */
-/* O grid original alternava 4/3/2/1 coluna e deixava os cartões com alturas
-   irregulares. Aqui as linhas ficam iguais e a coluna única no celular some. */
+/* Especificidade e ordem de carregamento idênticas às de
+   StoreDetailProfessional.css (mesmo seletor, mesmo !important) faziam este
+   arquivo, por carregar depois, vencer e trocar as 4 colunas fixas por
+   auto-fill(190px) — em telas largas isso virava 6+ colunas, apertando cada
+   cartão e cortando nomes de produto ao meio (causa raiz do problema).
+   A contagem de colunas por breakpoint fica só em StoreDetailProfessional.css;
+   aqui ficam apenas o espaçamento e o comportamento de altura igual. */
 .store-pro-grid {
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)) !important;
-  gap: 12px !important;
   align-items: stretch;
 }
 
@@ -203,9 +206,6 @@ html body .store-pro-hero .store-pro-copy h1 {
 @media (max-width: 900px) {
   .store-pro-hero, .store-pro-hero__content { min-height: 200px; }
   .store-pro-hero__content { grid-template-columns: 64px minmax(0, 1fr); padding: 22px 20px; }
-  /* O selo de verificação repete o que o resumo abaixo já informa. */
-  .store-pro-status { display: none; }
-  .store-pro-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; }
 }
 
 @media (max-width: 640px) {
@@ -214,10 +214,6 @@ html body .store-pro-hero .store-pro-copy h1 {
   .store-pro-copy h1 { font-size: 23px; }
   .store-pro-specialties { gap: 5px; margin-top: 10px; }
   .store-pro-specialties li { padding: 4px 8px 4px 9px; font-size:12px; }
-  /* Duas colunas no celular em vez de uma: a página fica bem mais curta. */
-  .store-pro-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
-  .store-pro-product-image { height: 112px !important; padding: 7px !important; }
-  .store-pro-grid > a > strong { font-size:13px !important; }
   .store-pro-shell { padding-block: 12px 22px; }
   .store-pro-summary { grid-template-columns: 1fr 1fr; }
   .ref-store-cards { grid-template-columns: 1fr 1fr; gap: 8px; }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, BadgeCheck, ChevronLeft, ChevronRight, Clock3, Info, LockKeyhole, MapPin, PackageSearch, Search, ShieldCheck, SlidersHorizontal, Sparkles, Store, Tag, UserPlus } from "lucide-react";
+import { AlertTriangle, ArrowRight, BadgeCheck, ChevronLeft, ChevronRight, Clock3, Home, Info, LockKeyhole, MapPin, MessageCircle, PackageSearch, Search, ShieldCheck, SlidersHorizontal, Sparkles, Store, Tag, UserPlus } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
@@ -12,6 +12,7 @@ import { MinimalTopBar } from "./PublicChrome";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import { ProductCardActions } from "../components/catalog/ProductCardActions";
+import { formatProductSpec, humanizeCategory, properCaseIfShouting, whatsappHref } from "./storeDisplayFormat";
 import "./StoreDetailProfessional.css";
 import "./StoreExperienceAcai2026.css";
 import "./StoreSectorHero.css";
@@ -23,10 +24,11 @@ const FREE_PREVIEW_LIMIT = 4;
 const PAGE_SIZE = 20;
 
 
+// "/supermercado-hero.jpg" e "/hero-feijo-mercado-claro-2026.webp" saíram da
+// rotação: não são fotografias profissionais consistentes com as demais e
+// faziam lojas vizinhas (hash próximo) repetirem a mesma imagem destoante.
 const STORE_BACKDROPS = [
-  "/supermercado-hero.jpg",
   "/mercado-local-profissional.webp",
-  "/hero-feijo-mercado-claro-2026.webp",
   "/mercado-bairro-feijo-v1.webp",
   "/supermercado-premium.jpg",
   "/marketplace-local-profissional-v2.webp",
@@ -97,7 +99,7 @@ function ProductImage({ product }: { product: Product }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [source]);
   if (source && !failed) return <img src={source} alt={product.name} width="200" height="160" loading="lazy" onError={() => setFailed(true)} />;
-  return <span className="store-pro-fallback" role="img" aria-label={`Foto de ${product.name} indisponível`}><PackageSearch /><small>{product.category}<em>Foto indisponível</em></small></span>;
+  return <span className="store-pro-fallback" role="img" aria-label={`Foto de ${product.name} indisponível`}><PackageSearch aria-hidden="true" /><small>Foto indisponível</small></span>;
 }
 
 export function StoreDetailProfessional() {
@@ -183,6 +185,16 @@ export function StoreDetailProfessional() {
     return catalog.products.filter(item => item.offers?.some(offer => String(offer.establishmentId) === String(store.id)) || String(item.establishmentId) === String(store.id));
   }, [catalog, store]);
 
+  // Data da coleta de preço mais recente entre os produtos da loja — o que
+  // realmente responde "quando isso foi conferido", em vez do selo genérico
+  // "catálogo verificado" sem nenhuma data por trás.
+  const lastUpdatedLabel = useMemo(() => {
+    const stamps = allProducts.map(product => product.capturedAt).filter(Boolean) as string[];
+    const latest = stamps.length ? stamps.reduce((max, value) => value > max ? value : max) : catalog?.updatedAt;
+    const date = latest ? new Date(latest) : null;
+    return date && !Number.isNaN(date.getTime()) ? date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" }) : null;
+  }, [allProducts, catalog]);
+
   const specialties = useMemo(() => {
     const counts = new Map<string, number>();
     for (const product of allProducts) {
@@ -252,7 +264,18 @@ export function StoreDetailProfessional() {
       </div>
     </main>
   );
-  if (!store || !catalog) return <main className="store-pro-state"><Store /><h1>Estabelecimento não encontrado</h1><Link to="/estabelecimentos">Voltar aos estabelecimentos</Link></main>;
+  if (!store || !catalog) return <div className="ref-page store-pro-page pc-noheader-page">
+    <MinimalTopBar variant="light" />
+    <main className="store-pro-state">
+      <Store aria-hidden="true" />
+      <h1>Estabelecimento não encontrado</h1>
+      <p>Este endereço não corresponde a uma loja ativa no catálogo.</p>
+      <div className="store-pro-state__actions">
+        <Link to="/estabelecimentos"><Home aria-hidden="true" /> Voltar aos estabelecimentos</Link>
+        <Link to="/buscar" className="store-pro-state__ghost"><Search aria-hidden="true" /> Buscar produtos e lojas</Link>
+      </div>
+    </main>
+  </div>;
 
   const startResult = filteredProducts.length ? (safePage - 1) * PAGE_SIZE + 1 : 0;
   const endResult = Math.min(safePage * PAGE_SIZE, filteredProducts.length);
@@ -267,15 +290,31 @@ export function StoreDetailProfessional() {
   // sempre na busca do mapa evita que o Google Maps resolva o nome da loja
   // para outro lugar do Brasil (ou não encontre nada) quando o nome sozinho
   // é ambíguo ou pouco conhecido fora da cidade.
-  const mapsQuery = encodeURIComponent(`${store.name}, ${store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó - AC, 69960-000, Brasil`);
+  // O endereço cadastrado, quando existe, é mais preciso que nome + bairro
+  // para o Google Maps resolver o lugar certo em nomes ambíguos.
+  const mapsQuery = encodeURIComponent(store.address
+    ? `${store.address}, Feijó - AC, 69960-000, Brasil`
+    : `${store.name}, ${store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó - AC, 69960-000, Brasil`);
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+  const hasWhatsapp = Boolean(store.whatsapp && store.whatsapp.replace(/\D/g, "").length >= 10);
+  const displayName = properCaseIfShouting(store.name);
 
   return <div className={`ref-page store-pro-page pc-noheader-page${isBonsAmigos ? " store-pro-page--bons-amigos" : ""}`} ref={pageRef}>
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="store-pro-shell">
       <div className="store-pro-topline store-pro-topline--location-only">
-        <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin /> {store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000</a>
+        <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> {store.address || (store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : "")}Feijó · Acre · CEP 69960-000</a>
       </div>
+
+      {/* Contato direto: endereço, WhatsApp e horário existem no cadastro mas
+          não apareciam em nenhum lugar do perfil (só nos cards da listagem).
+          Fica visível também no mobile, ao contrário da linha de topo acima
+          (escondida em telas estreitas). */}
+      {(store.address || hasWhatsapp || store.openingHours) && <section className="store-pro-contact" aria-label="Contato e localização do estabelecimento">
+        {store.address && <a href={mapsHref} target="_blank" rel="noreferrer" className="store-pro-contact__item"><MapPin aria-hidden="true" /><span><b>Endereço</b>{store.address}</span></a>}
+        {store.openingHours && <span className="store-pro-contact__item"><Clock3 aria-hidden="true" /><span><b>Horário</b>{store.openingHours}</span></span>}
+        {hasWhatsapp && <a href={whatsappHref(store.whatsapp as string, `Olá! Vi o catálogo de ${store.name} no PreçoCerto e queria falar sobre um produto.`)} target="_blank" rel="noreferrer" className="store-pro-contact__item store-pro-contact__whatsapp"><MessageCircle aria-hidden="true" /><span><b>WhatsApp</b>Falar com a loja</span></a>}
+      </section>}
 
       <section
         className={`store-pro-hero${isBonsAmigos ? " store-pro-hero--bons-amigos" : ""}${isMarketSector ? "" : ` store-pro-hero--sector store-pro-hero--${sector.id}`}`}
@@ -297,21 +336,23 @@ export function StoreDetailProfessional() {
           </div>
           <div className="store-pro-copy">
             <span><SectorIcon aria-hidden="true" /> {sector.shortLabel.toLocaleUpperCase("pt-BR")} · FEIJÓ, ACRE</span>
-            <h1 id="store-title">{store.name}</h1>
+            <h1 id="store-title">{displayName}</h1>
             {specialties.length > 0 && <ul className="store-pro-specialties" aria-label="Especialidades do estabelecimento">
-              {specialties.map(([label, count]) => <li key={label}>{label}<b>{count}</b></li>)}
+              {specialties.map(([label, count]) => <li key={label}>{humanizeCategory(label)}<b>{count}</b></li>)}
             </ul>}
             <p>{SECTOR_TAGLINES[sector.id] || SECTOR_TAGLINES[marketSectorId]}</p>
             <div className="store-pro-meta-line">
-              <b><BadgeCheck /> {allProducts.length || store.products} produtos no catálogo</b>
-              <b><Clock3 /> informações organizadas pelo PreçoCerto</b>
+              <b><BadgeCheck aria-hidden="true" /> {allProducts.length || store.products} produtos no catálogo</b>
+              <b><Clock3 aria-hidden="true" /> Informações organizadas pelo PreçoCerto</b>
             </div>
           </div>
-          <div className="store-pro-status"><BadgeCheck /><span><strong>Catálogo verificado</strong><small>Dados locais organizados</small></span></div>
+          <div className="store-pro-status"><BadgeCheck aria-hidden="true" /><span><strong>Catálogo verificado</strong><small>{lastUpdatedLabel ? `Atualizado em ${lastUpdatedLabel}` : "Dados locais organizados"}</small></span></div>
         </div>
       </section>
 
-      <div className="store-pro-notice"><Info /><span><strong>Catálogo informativo</strong><small>O PreçoCerto exibe informações de produtos e preços. Este espaço ainda não representa venda direta ou canal oficial do estabelecimento.</small></span></div>
+      <div className="store-pro-notice"><Info aria-hidden="true" /><span><strong>Catálogo informativo</strong><small>O PreçoCerto exibe informações de produtos e preços. Este espaço ainda não representa venda direta ou canal oficial do estabelecimento.</small></span></div>
+
+      {sector.id === "pharmacies" && <div className="store-pro-notice store-pro-notice--warning"><AlertTriangle aria-hidden="true" /><span><strong>Aviso sanitário</strong><small>Preços e disponibilidade são informativos. Medicamentos exigem orientação farmacêutica e, quando indicado por lei, apresentação de receita — consulte a farmácia antes de comprar.</small></span></div>}
 
       <section className="store-pro-summary" aria-label="Resumo do estabelecimento">
         <article><strong>{allProducts.length}</strong><span>produtos encontrados</span></article>
@@ -327,38 +368,36 @@ export function StoreDetailProfessional() {
 
         <div className="store-pro-toolbar">
           <label className="store-pro-search"><Search /><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Ex.: refresco, Brassuk, leite em pó…" aria-label="Buscar no catálogo do estabelecimento" /></label>
-          <label className="store-pro-select"><SlidersHorizontal /><select value={category} onChange={event => setCategory(event.target.value)} aria-label="Filtrar por categoria">{categories.map(item => <option key={item}>{item}</option>)}</select></label>
+          <label className="store-pro-select"><SlidersHorizontal /><select value={category} onChange={event => setCategory(event.target.value)} aria-label="Filtrar por categoria">{categories.map(item => <option key={item} value={item}>{item === "Todos" ? item : humanizeCategory(item)}</option>)}</select></label>
           <label className="store-pro-select"><select value={sort} onChange={event => setSort(event.target.value as typeof sort)} aria-label="Ordenar produtos"><option value="name">Ordenar: A-Z</option><option value="price-asc">Menor preço</option><option value="price-desc">Maior preço</option></select></label>
         </div>
 
         {visibleProducts.length ? <div className="ref-product-grid store-pro-grid">
-          {shownProducts.map(product => <Link key={product.id} to={`/produto/${product.slug || product.id}`}>
+          {shownProducts.map(product => {
+            const brandKnown = cleanBrand(product.brand) !== "Marca não informada";
+            return <Link key={product.id} to={`/produto/${product.slug || product.id}`}>
           <div className="store-pro-product-image"><ProductImage product={product} /><ProductCardActions product={product} className="pca-row--overlay-left" showFavorite={false} showCart={false} /></div>
-          <small className="store-pro-category">{product.category}</small>
-          <strong>{product.name}</strong>
-          {/* "Marca não informada" quebrava em duas linhas e ocupava o card
-              inteiro sem dizer nada útil — some quando a marca é desconhecida
+          <small className="store-pro-category">{humanizeCategory(product.category)}</small>
+          <strong>{properCaseIfShouting(product.name)}</strong>
+          {/* Sempre ocupa a linha (mesmo sem marca conhecida) para as fileiras
+              do grid manterem a mesma altura; sem marca, a linha fica vazia
               em vez de anunciar a ausência dela. */}
-          {cleanBrand(product.brand) !== "Marca não informada" && (
-            <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
-          )}
-          {/* O cadastro usa varios caracteres para "sem medida": hifen, meia-risca
-              e travessao. So o hifen era tratado, entao lojas cujo cadastro veio
-              com travessao mostravam uma fileira de tracos soltos no lugar do
-              tamanho. */}
-          <span className="store-pro-spec">{(product.size && !/^[-–—\s]*$/.test(product.size) ? product.size : "") || product.unit || "Unidade não informada"}</span>
+          <span className={`store-pro-brand${brandKnown ? "" : " store-pro-brand--empty"}`} aria-hidden={brandKnown ? undefined : true}>{brandKnown && <><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</>}</span>
+          <span className="store-pro-spec">{formatProductSpec(product.size, product.unit)}</span>
           <footer><em>Menor preço</em><b>{brl.format(product.minPrice)}</b></footer>
-        </Link>)}
-          {teaserProducts.map(product => <Link key={product.id} to={signupHref} className="store-pro-product--teaser" aria-label={`Crie sua conta para ver o preço de ${product.name}`}>
+        </Link>;
+          })}
+          {teaserProducts.map(product => {
+            const brandKnown = cleanBrand(product.brand) !== "Marca não informada";
+            return <Link key={product.id} to={signupHref} className="store-pro-product--teaser" aria-label={`Crie sua conta para ver o preço de ${product.name}`}>
           <div className="store-pro-product-image"><ProductImage product={product} /></div>
-          <small className="store-pro-category">{product.category}</small>
-          <strong>{product.name}</strong>
-          {cleanBrand(product.brand) !== "Marca não informada" && (
-            <span className="store-pro-brand"><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</span>
-          )}
+          <small className="store-pro-category">{humanizeCategory(product.category)}</small>
+          <strong>{properCaseIfShouting(product.name)}</strong>
+          <span className={`store-pro-brand${brandKnown ? "" : " store-pro-brand--empty"}`} aria-hidden={brandKnown ? undefined : true}>{brandKnown && <><Tag aria-hidden="true"/><b>Marca</b> {cleanBrand(product.brand)}</>}</span>
           <footer className="store-pro-product__blur"><em>Menor preço</em><b>{brl.format(product.minPrice)}</b></footer>
           <i className="store-pro-product__lock"><LockKeyhole aria-hidden="true"/></i>
-        </Link>)}
+        </Link>;
+          })}
         </div> : <div className="store-pro-empty"><PackageSearch /><h3>Nenhum produto encontrado</h3><p>Tente outro nome ou remova algum filtro.</p><button type="button" className="pc-btn pc-btn--ghost" onClick={() => { setQuery(""); setCategory("Todos"); }}>Limpar filtros</button></div>}
 
         {isGuest && lockedTotal > 0 ? <div className="store-pro-gate"><div className="store-pro-gate__icon"><Sparkles aria-hidden="true" /></div><div className="store-pro-gate__copy"><h3>Veja os outros {lockedTotal} {lockedTotal === 1 ? "produto" : "produtos"} deste catálogo</h3><p>Visitantes veem uma prévia. Crie uma conta gratuita para comparar 100% dos preços deste e de outros estabelecimentos de Feijó.</p></div><div className="store-pro-gate__actions"><Link className="pc-btn pc-btn--primary" to={signupHref}><UserPlus aria-hidden="true" /> Criar conta grátis</Link><Link className="store-pro-gate__login" to={loginHref}>Já tenho conta</Link></div></div> : pageCount > 1 && <nav className="store-pro-pagination" aria-label="Paginação do catálogo">
@@ -367,8 +406,13 @@ export function StoreDetailProfessional() {
         </nav>}
       </section>
 
-      <aside className="store-pro-bottom-note"><ShieldCheck /><strong>Informação para comparação</strong><span>Confirme estoque, disponibilidade e condições diretamente no estabelecimento.</span><Link className="pc-btn pc-btn--ghost" to="/fale-conosco">Saiba mais <ArrowRight /></Link></aside>
+      <aside className="store-pro-bottom-note">
+        <ShieldCheck aria-hidden="true" /><strong>Informação para comparação</strong><span>Confirme estoque, disponibilidade e condições diretamente no estabelecimento.</span>
+        {hasWhatsapp
+          ? <a className="pc-btn pc-btn--ghost" href={whatsappHref(store.whatsapp as string, `Olá! Vi o catálogo de ${store.name} no PreçoCerto e queria confirmar um produto.`)} target="_blank" rel="noreferrer">Falar com a loja <ArrowRight aria-hidden="true" /></a>
+          : <a className="pc-btn pc-btn--ghost" href={mapsHref} target="_blank" rel="noreferrer">Ver no mapa <ArrowRight aria-hidden="true" /></a>}
+      </aside>
     </main>
-    <footer className="store-pro-legal">© {new Date().getFullYear()} PreçoCerto · Feijó, Acre · dev {"<Franc D’nis>"}</footer>
+    <footer className="store-pro-legal">© {new Date().getFullYear()} PreçoCerto · Feijó, Acre</footer>
   </div>;
 }

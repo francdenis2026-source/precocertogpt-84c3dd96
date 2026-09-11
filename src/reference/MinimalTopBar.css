@@ -49,14 +49,18 @@
 /* Variante clara: acompanha o tema do site (claro ou escuro) através das
    variáveis --px-*, que já invertem sozinhas — nunca fica com brilho
    claro fixo sobre fundo escuro. */
+/* Usa --pc-* (não --px-*): é o token confirmado a inverter de verdade com
+   html[data-theme="dark"] nesta página — com --px-* a barra ficava sempre
+   branca no modo escuro porque aquele sistema de variáveis não cobre esta
+   rota. */
 .pc-mini-top--light {
-  background: var(--px-surface, #fff);
-  border-bottom: 1px solid var(--px-line, #e2e7ec);
+  background: var(--pc-surface, #fff);
+  border-bottom: 1px solid var(--pc-border, #e2e7ec);
 }
-.pc-mini-top--light .pc-mini-top__brand { color: var(--px-ink, #14181d); }
-.pc-mini-top--light .pc-mini-top__brand small { color: var(--px-muted, #5f6b78); }
-.pc-mini-top--light .pc-mini-top__back { color: var(--px-ink, #14181d); }
-.pc-mini-top--light .pc-mini-top__back:hover { background: var(--px-surface-soft, #f7f8fa); }
+.pc-mini-top--light .pc-mini-top__brand { color: var(--pc-ink, #14181d); }
+.pc-mini-top--light .pc-mini-top__brand small { color: var(--pc-muted, #5f6b78); }
+.pc-mini-top--light .pc-mini-top__back { color: var(--pc-ink, #14181d); }
+.pc-mini-top--light .pc-mini-top__back:hover { background: var(--pc-surface-2, #f7f8fa); }
 
 /* Variante escura: sempre escura (usada sobre foto de capa escura),
    independente do tema do site. */
