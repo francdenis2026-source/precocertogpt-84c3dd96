@@ -27,7 +27,7 @@
      seguinte, para 4.9:1+ por segurança. */
   --h-subtle: #5b6a62;
 
-  /* Escurecido de #13b954 (2.6:1) -> #0e8f42 (4.2:1, ainda abaixo de AA) ->
+  /* Escurecido de #0B8043 (2.6:1) -> #0e8f42 (4.2:1, ainda abaixo de AA) ->
      #0b7d3a: branco sobre este verde agora atinge ~4.6:1 de contraste
      (WCAG AA 4.5:1 para texto normal). */
   --h-primary: #0b7d3a;
@@ -79,8 +79,8 @@
     --h-muted: #9baaa2;
     --h-subtle: #9baaa2;
 
-    --h-primary: #2adc6c;
-    --h-primary-dark: #22d65f;
+    --h-primary: #34A46B;
+    --h-primary-dark: #2FB86E;
     --h-primary-soft: #12281f;
     --h-on-primary: #07130e;
     --h-forest: #043d2c;
@@ -108,8 +108,8 @@
   --h-muted: #9baaa2;
   --h-subtle: #9baaa2;
 
-  --h-primary: #2adc6c;
-  --h-primary-dark: #22d65f;
+  --h-primary: #34A46B;
+  --h-primary-dark: #2FB86E;
   --h-primary-soft: #12281f;
   --h-on-primary: #07130e;
   --h-forest: #043d2c;
