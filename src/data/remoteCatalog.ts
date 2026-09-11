@@ -233,26 +233,50 @@ const productIdentity = (product: ProductRow) => product.barcode
       `spec:${identitySpecification(product)}`,
     ].join("|");
 
+/**
+ * `products`/`prices` já passam de 3-4 mil linhas: paginar uma página de
+ * cada vez, esperando cada `await` terminar antes de pedir a próxima,
+ * transformava o carregamento inicial da home numa fila de 4-5 requisições
+ * sequenciais de ~200-2600ms cada (a home ficava "cinza" por vários
+ * segundos até tudo terminar). A primeira página já traz o total de linhas
+ * (`count: "exact"`), então as páginas restantes — cujo número já é
+ * conhecido de antemão — saem todas de uma vez em paralelo, limitadas pela
+ * página mais lenta em vez da soma de todas.
+ */
 async function fetchAllRows(
   table: "establishments" | "products" | "prices",
   columns: string,
   orderColumn: string,
 ) {
-  const rows: unknown[] = [];
+  const first = await supabase!
+    .from(table)
+    .select(columns, { count: "exact" })
+    .order(orderColumn, { ascending: true })
+    .range(0, DATABASE_PAGE_SIZE - 1);
 
-  for (let from = 0; ; from += DATABASE_PAGE_SIZE) {
-    const response = await supabase!
-      .from(table)
-      .select(columns)
-      .order(orderColumn, { ascending: true })
-      .range(from, from + DATABASE_PAGE_SIZE - 1);
+  if (first.error) return { data: [] as unknown[], error: first.error };
 
-    if (response.error) return { data: rows, error: response.error };
+  const rows: unknown[] = [...(first.data ?? [])];
+  const total = first.count ?? rows.length;
 
-    const page = response.data ?? [];
-    rows.push(...page);
-    if (page.length < DATABASE_PAGE_SIZE) return { data: rows, error: null };
+  const remainingStarts: number[] = [];
+  for (let from = DATABASE_PAGE_SIZE; from < total; from += DATABASE_PAGE_SIZE) remainingStarts.push(from);
+
+  if (remainingStarts.length) {
+    const pages = await Promise.all(remainingStarts.map(from =>
+      supabase!
+        .from(table)
+        .select(columns)
+        .order(orderColumn, { ascending: true })
+        .range(from, from + DATABASE_PAGE_SIZE - 1),
+    ));
+    for (const page of pages) {
+      if (page.error) return { data: rows, error: page.error };
+      rows.push(...(page.data ?? []));
+    }
   }
+
+  return { data: rows, error: null };
 }
 
 async function loadCatalog(query = ""): Promise<CatalogResult> {
