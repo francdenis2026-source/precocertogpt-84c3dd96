@@ -54,15 +54,18 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* A foto é bem mais alta que a faixa da hero. O ponto de foco precisa ficar
-     no terço superior para o recorte não cortar a cabeça/rosto da pessoa. */
-  object-position: 52% 18%;
+  object-position: 60% 45%;
 }
+/* Escurecia quase o quadro inteiro (94%→84%→38%) para garantir leitura só
+   do texto à esquerda, apagando a foto praticamente por completo — inclusive
+   na metade direita, onde não há texto nenhum por cima. O degradê agora
+   concentra o escurecimento sob o texto e cai rápido depois, deixando a
+   foto aparecer com contraste de verdade do meio para a direita. */
 .pc-about__hero-scrim {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(96deg, rgb(6 10 14 / 94%) 0%, rgb(6 10 14 / 84%) 46%, rgb(6 10 14 / 38%) 100%);
+  background: linear-gradient(100deg, rgb(6 10 14 / 90%) 0%, rgb(6 10 14 / 80%) 30%, rgb(6 10 14 / 42%) 52%, rgb(6 10 14 / 14%) 76%, rgb(6 10 14 / 4%) 100%);
 }
 .pc-about__hero-copy { max-width: 56ch; }
 .pc-about__hero .pc-about__eyebrow { color: var(--pc-gold, #28cc70); }
@@ -306,18 +309,13 @@
   .pc-about__figure { order: -1; }
   .pc-about__author-figure { order: -1; }
   .pc-about__hero { min-height: 250px; border-radius: 16px; }
-  /* Em telas estreitas a imagem quase não precisa de recorte vertical; manter
-     o foco levemente acima do centro preserva o rosto mesmo com o texto à
-     esquerda e evita que a testa encoste no limite superior. */
-  .pc-about__hero-bg { object-position: 52% 24%; }
+  /* Abaixo de 860px o texto (max-width: 56ch) passa a ocupar a largura toda
+     do cartão — o degradê mais claro do lado direito, pensado para quando a
+     foto sobra ao lado do texto, ficaria por baixo do próprio texto aqui. */
+  .pc-about__hero-scrim { background: linear-gradient(180deg, rgb(6 10 14 / 55%) 0%, rgb(6 10 14 / 92%) 62%, rgb(6 10 14 / 92%) 100%); }
   .pc-about__cta-actions { flex-direction: column; align-items: stretch; }
   .pc-about__cta-primary,
   .pc-about__cta-ghost { justify-content: center; }
-}
-
-@media (max-width: 520px) {
-  .pc-about__hero { min-height: 276px; }
-  .pc-about__hero-bg { object-position: 52% 20%; }
 }
 
 /* ── Tinta sobre a foto do hero e no botão dourado ────────────────────────
