@@ -439,13 +439,16 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-header__icon:active { transform: scale(0.94); }
 .pcx-header__theme:focus-visible,
 .pcx-header__icon:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
-/* Ficam visíveis em qualquer largura: o dock inferior do app não tem um
-   atalho para Favoritos, então este é o único caminho direto no mobile. */
 @media (max-width: 480px) {
-  .pcx-header__theme,
-  .pcx-header__icon { width: 36px; height: 36px; }
-  .pcx-header__theme svg,
-  .pcx-header__icon svg { width: 16px; height: 16px; }
+  .pcx-header__theme { width: 36px; height: 36px; }
+  .pcx-header__theme svg { width: 16px; height: 16px; }
+}
+/* AppDock (rodapé fixo abaixo de 680px) já leva a Favoritos e Cesta — o
+   comentário antigo aqui dizia o contrário, mas o dock atual tem os dois
+   destinos. Manter os ícones do header também nessa largura era navegação
+   duplicada: o mesmo destino, dois caminhos visíveis ao mesmo tempo. */
+@media (max-width: 680px) {
+  .pcx-header__icon { display: none; }
 }
 .pcx-header__menu {
   display: none;
@@ -840,7 +843,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   align-items: center;
   gap: 0.3rem;
   min-width: 0;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--hero-panel-muted);
   overflow: hidden;
   white-space: nowrap;
@@ -1013,7 +1016,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__panel { width: 100%; max-width: 380px; border-radius: var(--h-radius-md); }
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 
-  .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.72rem; }
+  .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.75rem; }
   .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
 }
 
@@ -1040,7 +1043,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
     width: 20px; height: 20px; flex-shrink: 0; color: #bdf3d2;
   }
   .pcx-hero__mobile-banner strong { display: block; font-size: 0.82rem; font-weight: 800; line-height: 1.25; }
-  .pcx-hero__mobile-banner span { display: block; font-size: 0.72rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
+  .pcx-hero__mobile-banner span { display: block; font-size: 0.75rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
 }
 
 /* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important).
@@ -1109,7 +1112,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-hero .pc26-live-results__head {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0.75rem 1rem; border-bottom: 1px solid var(--h-border);
-  font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+  font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
   color: var(--h-subtle);
 }
 .pcx-hero .pc26-live-results__head-actions { display: flex; align-items: center; gap: 0.6rem; text-transform: none; letter-spacing: 0; font-weight: 600; }
@@ -1170,10 +1173,10 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-hero .pc26-live-results__thumb img { width: 100%; height: 100%; object-fit: cover; }
 .pcx-hero .pc26-live-results__copy { display: grid; gap: 0.15rem; min-width: 0; }
 .pcx-hero .pc26-live-results__copy strong { font-size: 0.88rem; font-weight: 700; color: var(--h-ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-hero .pc26-live-results__copy small { font-size: 0.74rem; color: var(--h-muted); }
+.pcx-hero .pc26-live-results__copy small { font-size: 0.75rem; color: var(--h-muted); }
 .pcx-hero .pc26-live-results__copy em {
   display: inline-flex; align-items: center; gap: 0.3rem; font-style: normal;
-  font-size: 0.72rem; color: var(--h-subtle); margin-top: 0.1rem;
+  font-size: 0.75rem; color: var(--h-subtle); margin-top: 0.1rem;
 }
 .pcx-hero .pc26-live-results__copy em i { width: 6px; height: 6px; border-radius: 50%; background: var(--pc26-store-accent, var(--h-primary)); }
 .pcx-hero .pc26-live-results__price { display: grid; justify-items: end; gap: 0.1rem; }
@@ -1374,7 +1377,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-product__category { font-size: 0.8rem; }
   .pcx-product__body h3 { font-size: 0.88rem; min-height: 2.2em; }
   .pcx-product__meta,
-  .pcx-product__store { font-size: 0.74rem; }
+  .pcx-product__store { font-size: 0.75rem; }
 }
 @media (max-width: 480px) {
   .pcx-prices { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
@@ -1420,7 +1423,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 [data-theme="dark"] .pcx-category i.pcx-category--pink { background: rgba(229,99,160,.18); color: #f0a5c8; }
 .pcx-category__text { display: grid; gap: 0.1rem; min-width: 0; }
 .pcx-category strong { display: block; font-size: 0.85rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-category__text span { font-size: 0.72rem; color: var(--h-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-category__text span { font-size: 0.75rem; color: var(--h-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 @media (max-width: 960px) { .pcx-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) {
@@ -1455,7 +1458,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-category i { width: 2.5rem; height: 2.5rem; }
   .pcx-category i svg { width: 1.15rem; height: 1.15rem; }
   .pcx-category__text { justify-items: center; }
-  .pcx-category strong { font-size: 0.74rem; white-space: normal; line-height: 1.2; }
+  .pcx-category strong { font-size: 0.75rem; white-space: normal; line-height: 1.2; }
   .pcx-category__text span { display: none; }
 }
 
@@ -1635,7 +1638,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   padding-top: 0.65rem;
   border-top: 1px dashed rgba(255, 255, 255, 0.24);
 }
-.pcx-spotlight__mock-saving span { font-size: 0.72rem; color: rgba(255, 255, 255, 0.72); font-weight: 700; }
+.pcx-spotlight__mock-saving span { font-size: 0.75rem; color: rgba(255, 255, 255, 0.72); font-weight: 700; }
 .pcx-spotlight__mock-saving strong { font-size: 1.05rem; color: #7fe3a8; font-weight: 900; }
 
 /* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
@@ -1734,7 +1737,7 @@ a.pcx-store-hero {
 .pcx-store-hero__footer { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.22); }
 .pcx-store-hero__footer span { display: grid; }
 .pcx-store-hero__footer strong { font-size: 1.2rem; font-weight: 800; }
-.pcx-store-hero__footer small { font-size: 0.72rem; opacity: 0.8; }
+.pcx-store-hero__footer small { font-size: 0.75rem; opacity: 0.8; }
 .pcx-store-hero__footer b { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; font-weight: 700; }
 .pcx-store-hero__footer b svg { width: 15px; height: 15px; }
 
@@ -1758,7 +1761,7 @@ a.pcx-store-hero {
 }
 .pcx-store-row span { display: grid; min-width: 0; }
 .pcx-store-row strong { font-size: 0.88rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-store-row small { display: flex; align-items: center; gap: 0.25rem; font-size: 0.72rem; color: var(--h-muted); }
+.pcx-store-row small { display: flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; color: var(--h-muted); }
 .pcx-store-row small svg { width: 11px; height: 11px; }
 .pcx-store-row em { font-style: normal; font-size: 0.8rem; color: var(--h-subtle); white-space: nowrap; }
 .pcx-store-row em b { color: var(--h-ink); }
@@ -1804,7 +1807,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-footer__brand img { width: 28px; height: 28px; }
 .pcx-footer__brand span { display: grid; line-height: 1.2; }
 .pcx-footer__brand strong { font-size: 0.9rem; font-weight: 800; }
-.pcx-footer__brand small { display: flex; align-items: center; gap: 0.25rem; font-size: 0.72rem; color: var(--h-muted); }
+.pcx-footer__brand small { display: flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; color: var(--h-muted); }
 .pcx-footer__brand small svg { width: 11px; height: 11px; }
 .pcx-footer__nav { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; }
 .pcx-footer__nav a { font-size: 0.82rem; font-weight: 600; color: var(--h-muted); text-decoration: none; }
@@ -1820,7 +1823,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   border-top: 1px solid var(--h-border);
   padding: 0.9rem var(--h-section-x);
   display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; justify-content: center;
-  font-size: 0.74rem; color: var(--h-subtle);
+  font-size: 0.75rem; color: var(--h-subtle);
 }
 .pcx-footer__meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
 .pcx-footer__meta span svg { width: 12px; height: 12px; }
@@ -1982,7 +1985,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 }
 .pcx-trustbar__icon svg { width: 16px; height: 16px; }
 .pcx-trustbar__list strong { display: block; font-size: 0.86rem; font-weight: 800; color: var(--h-ink); line-height: 1.25; }
-.pcx-trustbar__list small { display: block; font-size: 0.74rem; color: var(--h-muted); line-height: 1.3; }
+.pcx-trustbar__list small { display: block; font-size: 0.75rem; color: var(--h-muted); line-height: 1.3; }
 .pcx-trustbar__tag {
   display: flex;
   align-items: center;
@@ -1993,7 +1996,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 }
 .pcx-trustbar__tag svg { width: 18px; height: 18px; color: var(--h-primary-dark); flex-shrink: 0; }
 .pcx-trustbar__tag strong { display: block; font-size: 0.86rem; font-weight: 900; color: var(--h-ink); }
-.pcx-trustbar__tag small { display: block; font-size: 0.74rem; color: var(--h-muted); }
+.pcx-trustbar__tag small { display: block; font-size: 0.75rem; color: var(--h-muted); }
 @media (max-width: 760px) {
   .pcx-trustbar__tag { display: none; }
   .pcx-trustbar__list { gap: 0.9rem 1.3rem; }

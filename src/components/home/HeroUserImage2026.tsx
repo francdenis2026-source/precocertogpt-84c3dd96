@@ -116,7 +116,13 @@ export function HeroUserImage2026({
             </Link>
           </div>
 
-          {(Boolean(productCount) || Boolean(storeCount)) && (
+          {/* Enquanto carrega, o catálogo mostrado é o fallback manual (poucas
+              lojas cadastradas à mão) — mostrar essa contagem pequena por um
+              instante e depois trocar pelo número real (dezenas de vezes
+              maior) criava um flash visível de estatística errada. Espera o
+              carregamento terminar em vez de mostrar um número que não é o
+              real. */}
+          {!loading && (Boolean(productCount) || Boolean(storeCount)) && (
             <div className="pcx-hero__stats" aria-label="Números da plataforma">
               {Boolean(storeCount) && (
                 <span className="pcx-hero__stat">

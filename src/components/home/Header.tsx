@@ -43,6 +43,13 @@ export function Header({ products = [] }: { products?: Product[] }) {
   const [scrolled, setScrolled] = useState(
     () => typeof window !== "undefined" && window.scrollY > 8,
   );
+  // A home já tem uma busca completa no hero; mostrar a busca compacta do
+  // header ao mesmo tempo (mesma tela, mesmo propósito) confundia qual usar.
+  // 420px é uma estimativa de "já passou do hero" — não precisa ser exata,
+  // só evitar as duas buscas visíveis juntas na primeira dobra.
+  const [pastHero, setPastHero] = useState(
+    () => typeof window !== "undefined" && window.scrollY > 420,
+  );
   const { pathname } = useLocation();
   const [lastPathname, setLastPathname] = useState(pathname);
   const { profile } = useCurrentProfile();
@@ -62,7 +69,10 @@ export function Header({ products = [] }: { products?: Product[] }) {
   }, [menuOpen]);
 
   useEffect(() => {
-    const syncScrolledState = () => setScrolled(window.scrollY > 8);
+    const syncScrolledState = () => {
+      setScrolled(window.scrollY > 8);
+      setPastHero(window.scrollY > 420);
+    };
     syncScrolledState();
     window.addEventListener("scroll", syncScrolledState, { passive: true });
     return () => window.removeEventListener("scroll", syncScrolledState);
@@ -91,9 +101,11 @@ export function Header({ products = [] }: { products?: Product[] }) {
           </span>
         </Link>
 
-        <div className="pcx-header__search">
-          <LiveProductSearch id="header-search" products={products} compact />
-        </div>
+        {pastHero && (
+          <div className="pcx-header__search">
+            <LiveProductSearch id="header-search" products={products} compact />
+          </div>
+        )}
 
         <nav
           id="pcx-navigation"
@@ -113,9 +125,6 @@ export function Header({ products = [] }: { products?: Product[] }) {
               </Link>
             );
           })}
-          <Link className="pcx-header__mobile-account" to={profile ? "/minha-conta" : "/login"}>
-            <UserRound aria-hidden="true" /><span>{profile ? "Minha conta" : "Entrar na minha conta"}</span>
-          </Link>
         </nav>
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
@@ -130,10 +139,10 @@ export function Header({ products = [] }: { products?: Product[] }) {
           </Link>
           <HeaderRadioPlayer />
           <HeaderThemeToggle />
-          {(
-            <Link className="pcx-header__login" to={profile ? "/minha-conta" : "/login"} aria-label={profile ? "Minha conta" : "Entrar"}>
+          {!profile && (
+            <Link className="pcx-header__login" to="/login">
               <UserRound aria-hidden="true" />
-              <span>{profile ? "Minha conta" : "Entrar"}</span>
+              <span>Entrar</span>
             </Link>
           )}
 

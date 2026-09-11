@@ -55,6 +55,10 @@ export function Footer() {
         <span>
           <ShieldCheck aria-hidden="true" /> Navegação segura
         </span>
+        {/* Reassegura o usuário antes de ele sair do site para comprar —
+            existia no PublicFooter (não usado pela home) mas faltava aqui,
+            o rodapé que a home realmente renderiza. */}
+        <span>Preços podem mudar. Confirme no estabelecimento antes da compra.</span>
         <span>
           <BadgeCheck aria-hidden="true" /> Desenvolvido por{" "}
           <strong>Franc Denis</strong>
