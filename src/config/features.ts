@@ -20,7 +20,7 @@ export type FeatureKey =
 
 export const features: Record<FeatureKey, boolean> = {
   /** Cesta Inteligente determinística (Fase 2). */
-  smartBasket: envFlag("VITE_FEATURE_SMART_BASKET", false),
+  smartBasket: envFlag("VITE_FEATURE_SMART_BASKET", true),
   /** Catálogo de planos do consumidor (Fase 3). */
   consumerPlans: envFlag("VITE_FEATURE_CONSUMER_PLANS", true),
   /** Carteira de créditos (Fase 3). */

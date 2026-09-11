@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  ArrowLeft, Check, Copy, Link2, ListChecks, LoaderCircle, MessageCircle, Minus, PackageSearch, Pencil, Plus, RefreshCw, Search,
+  ArrowLeft, Check, Copy, Link2, ListChecks, LoaderCircle, MessageCircle, Minus, PackageSearch, Pencil, Plus, RefreshCw, Scale, Search,
   Sparkles, Store, Trash2, Wallet, X,
 } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
@@ -156,6 +156,22 @@ export function ShoppingListDetailPage() {
     navigate("/minhas-listas");
   }
 
+  /**
+   * Leva os itens desta lista para a Cesta Inteligente (/cesta-inteligente),
+   * que compara onde a cesta fica mais barata entre os estabelecimentos
+   * cadastrados. Passa os itens via sessionStorage (mesma técnica usada pelo
+   * prefill de orçamento/pessoas da própria SmartBasketPage) em vez de duplicar
+   * a query do catálogo — a página de destino já busca o catálogo sozinha e
+   * casa os productId aqui enviados com os produtos carregados lá.
+   */
+  function compareAcrossStores() {
+    try {
+      const items = resolved.map(row => ({ productId: String(row.product.id), quantity: row.quantity }));
+      sessionStorage.setItem("precocerto:smart-basket-from-list", JSON.stringify({ listId: id, items }));
+    } catch { /* sessionStorage indisponível — a Cesta Inteligente abre vazia */ }
+    navigate("/cesta-inteligente");
+  }
+
   async function copyShareText() {
     if (!id) return;
     const text = buildShareText(displayName, mode, resolved, total);
@@ -208,6 +224,9 @@ export function ShoppingListDetailPage() {
           <div className="pc-lists-header-actions">
             <button type="button" onClick={() => setRenaming(true)}><Pencil aria-hidden="true" /> Renomear</button>
             <button type="button" onClick={() => setShareOpen(v => !v)}><MessageCircle aria-hidden="true" /> Compartilhar</button>
+            <button type="button" className="pc-lists-compare-btn" onClick={compareAcrossStores} disabled={!resolved.length}>
+              <Scale aria-hidden="true" /> Comparar cesta entre lojas
+            </button>
             <button type="button" className="is-danger" onClick={() => void handleDelete()} disabled={deleting}><Trash2 aria-hidden="true" /> {deleting ? "Excluindo…" : "Excluir lista"}</button>
           </div>
           {shareOpen && <div className="pc-lists-share">
