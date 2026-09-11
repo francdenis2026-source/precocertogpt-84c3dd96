@@ -17,13 +17,20 @@
   --h-border: #dde5df;
   --h-border-strong: #cbd6cd;
   --h-ink: #10231a;
-  --h-muted: #66756d;
+  /* #66756d dava 4.4:1 sobre --h-surface-2/--h-primary-soft (abaixo de
+     4.5:1). Escurecido mais um pouco para folgar em qualquer superfície
+     clara do tema. */
+  --h-muted: #5b6a62;
   /* Era #8993a1: 3.11:1 sobre a superfície branca, abaixo do mínimo AA de
      4.5:1 e usado justamente nos rótulos pequenos (preço anterior, "menor
-     preço", datas de atualização). Escurecido para 4.7:1. */
-  --h-subtle: #66756d;
+     preço", datas de atualização). Escurecido para 4.7:1 e, na revisão
+     seguinte, para 4.9:1+ por segurança. */
+  --h-subtle: #5b6a62;
 
-  --h-primary: #13b954;
+  /* Escurecido de #13b954 (2.6:1) -> #0e8f42 (4.2:1, ainda abaixo de AA) ->
+     #0b7d3a: branco sobre este verde agora atinge ~4.6:1 de contraste
+     (WCAG AA 4.5:1 para texto normal). */
+  --h-primary: #0b7d3a;
   --h-primary-dark: #07563a;
   --h-primary-soft: #e7f9ee;
   --h-on-primary: #ffffff;
@@ -249,7 +256,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-header__brand img { width: 34px; height: 34px; }
 .pcx-header__brand span { display: grid; line-height: 1.15; }
 .pcx-header__brand strong { font-size: 1rem; font-weight: 800; }
-.pcx-header__brand small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; color: var(--h-muted); text-transform: uppercase; }
+.pcx-header__brand small { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; color: var(--h-muted); text-transform: uppercase; }
 
 /* Busca central do header — versão compacta da mesma LiveProductSearch do
    hero (`compact`), só para desktop. No mobile/tablet a busca grande já
@@ -342,13 +349,15 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-header .pc-radio__copy { display: grid; gap: 0.05rem; text-align: left; overflow: hidden; }
 .pcx-header .pc-radio__copy small {
   display: flex; align-items: center; gap: 0.3rem;
-  font-size: 0.6rem; font-weight: 800; letter-spacing: 0.05em; color: var(--h-subtle);
+  font-size: 0.75rem; font-weight: 800; letter-spacing: 0.05em; color: var(--h-subtle);
 }
 .pcx-header .pc-radio__copy small i {
   width: 5px; height: 5px; border-radius: 50%; background: var(--h-subtle); flex-shrink: 0;
 }
 .pcx-header .pc-radio.is-playing .pc-radio__copy small i {
-  background: var(--h-primary); animation: pcx-pulse 1.6s ease-in-out infinite;
+  /* Rádio ao vivo: indicador decorativo. Mesma lógica do pcx-pulse acima —
+     limitamos os ciclos em vez de rodar infinito sem controle de pausa. */
+  background: var(--h-primary); animation: pcx-pulse 1.6s ease-in-out 3;
 }
 .pcx-header .pc-radio__copy strong {
   font-size: 0.76rem; font-weight: 700; color: var(--h-ink);
@@ -560,7 +569,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
    globais sempre-claros (--pc-white, --pc-surface-soft etc.), não --h-*. */
 .pcx-hero {
   --hero-ink: #ffffff;
-  --hero-muted: #d9e8df;
+  /* Era #d9e8df (cinza-esverdeado desbotado sobre o fundo escuro do herói).
+     Clareado para reduzir o efeito "lavado" e reforçar o contraste. */
+  --hero-muted: #eef7f1;
   --hero-border: rgba(255, 255, 255, 0.28);
   --hero-border-strong: rgba(255, 255, 255, 0.4);
   --hero-glass: rgba(255, 255, 255, 0.12);
@@ -746,13 +757,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   padding: 1rem;
   overflow: hidden;
 }
-.pcx-hero__panel::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--pc-green-600), var(--pc-green-400));
-}
+/* Removida a listra decorativa de 4px no topo do painel (assinatura comum
+   de UI gerada por IA, sem função própria) — a sombra e o raio do painel já
+   marcam a hierarquia sem precisar de um acento extra. */
 .pcx-hero__panel-head {
   display: flex;
   align-items: flex-start;
@@ -761,7 +768,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   margin-bottom: 0.65rem;
 }
 .pcx-hero__panel-head span {
-  font-size: 0.64rem;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -774,15 +781,26 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 0.3rem;
   flex-shrink: 0;
   white-space: nowrap;
-  font-size: 0.62rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--pc-green-600);
 }
 .pcx-hero__panel-live i {
   width: 6px; height: 6px; border-radius: 50%; background: var(--pc-green-600);
-  animation: pcx-pulse 1.8s ease-in-out infinite;
+  /* WCAG 2.2.2 (Pause, Stop, Hide): conteúdo que pisca automaticamente por
+     mais de 5s precisa de um jeito de pausar. Em vez de expor um controle,
+     limitamos a animação a 2 ciclos (3.6s < 5s) e ela termina no estado
+     visível (opacity:1), então nunca há "pulsar infinito" sem pausa. */
+  animation: pcx-pulse 1.8s ease-in-out 2;
 }
 @keyframes pcx-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) {
+  .pcx-hero__panel-live i,
+  .pcx-header .pc-radio.is-playing .pc-radio__copy small i {
+    animation: none;
+    opacity: 1;
+  }
+}
 
 .pcx-hero__panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
 .pcx-hero__panel li {
@@ -878,7 +896,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   background: var(--pc-green-600);
   color: var(--pc-white);
   font-style: normal;
-  font-size: 0.56rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -931,21 +949,40 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 }
 @media (max-width: 640px) {
-  /* No celular usamos uma fotografia própria: o enquadramento vertical deixa
-     a pessoa à direita e reserva contraste limpo à esquerda para o conteúdo.
-     Assim a hero não depende de ampliar e desfocar uma foto horizontal. */
-  .pcx-hero {
-    min-height: auto;
-    padding: 1.25rem 0 1.5rem;
-    background: var(--pc-forest-950) var(--pcx-hero-mobile-photo) 68% center / cover no-repeat;
+  /* Hero compacto no app: menos altura em título, busca e botões — o
+     objetivo é caber mais tela útil acima da dobra num celular. O véu
+     opaco (.92-.82 em todas as paradas) apagava a foto quase por completo;
+     a cliente do carrinho ficava irreconhecível. Baixa a opacidade bastante
+     e troca o desfoque de contraste (que antes vinha só do véu escuro) por
+     uma camada dedicada com blur leve atrás do véu — texto continua nítido,
+     a foto aparece de verdade sem perder a legibilidade.
+
+     "cover" sozinho, num recorte alto e estreito como o do celular, mostra
+     a foto inteira de cima a baixo (a altura já é o lado que "cobre" o
+     contêiner) — então a única coisa que a posição horizontal decide é ONDE
+     nessa faixa vertical completa (céu, rosto, carrinho, tudo empilhado) a
+     janela estreita cai. Não tinha como isolar só o carrinho assim: ele fica
+     logo abaixo do rosto na foto original, então qualquer recorte que
+     mostrasse o carrinho também trazia o rosto goma no topo, grande demais.
+     Um tamanho maior que "cover" (165% de altura) cria fôlego vertical de
+     verdade: dá pra ancorar embaixo (posição Y perto de 100%) e cortar o
+     céu/rosto por cima, deixando o carrinho de compras como protagonista. */
+  .pcx-hero { padding: 1.5rem 0 1.75rem; background-position: 74% 100%; background-size: auto 168%; }
+  .pcx-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    inset: -12px;
+    background: var(--pcx-hero-photo) 74% 100% / auto 168% no-repeat;
+    filter: blur(3px);
   }
-  .pcx-hero::after { display: none; }
   .pcx-hero::before {
     background-image: linear-gradient(
-      90deg,
-      rgba(2, 44, 32, 0.94) 0%,
-      rgba(2, 44, 32, 0.82) 48%,
-      rgba(2, 44, 32, 0.38) 100%
+      180deg,
+      rgba(2, 44, 32, 0.42) 0%,
+      rgba(2, 44, 32, 0.5) 40%,
+      rgba(2, 44, 32, 0.72) 78%,
+      rgba(2, 44, 32, 0.8) 100%
     );
   }
   .pcx-hero__inner { grid-template-columns: 1fr; gap: 1rem; }
@@ -955,8 +992,8 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__search { margin-bottom: 0.6rem; }
   .pcx-hero .pc26-hero-search { min-height: 50px !important; padding: 5px 5px 5px 14px !important; }
   .pcx-hero .pc26-live-search__submit { height: 40px; padding: 0 0.85rem !important; font-size: 0.82rem !important; }
-  .pcx-hero__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .pcx-hero .pcx-btn { justify-content: center; padding: 0.7rem 0.55rem; font-size: 0.82rem; }
+  .pcx-hero__actions { gap: 0.5rem; }
+  .pcx-hero .pcx-btn { padding: 0.62rem 1.1rem; font-size: 0.84rem; }
   .pcx-hero .pcx-btn svg { width: 15px; height: 15px; }
   .pcx-hero__stats {
     gap: 0.45rem 0.95rem;
@@ -969,15 +1006,24 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-hero__stat svg { width: 15px; height: 15px; }
   .pcx-hero__stat strong { font-size: 0.92rem; }
 
-  /* No celular a busca é a tarefa principal. O cartão de comparação, que
-     alongava demais a primeira dobra, permanece disponível no catálogo. */
-  .pcx-hero__visual { display: none; }
+  /* Sem imagem própria para ancorar, o painel "COMPARAÇÃO REAL" deixa de
+     flutuar em posição absoluta e passa a fluir normalmente, abaixo do
+     texto — mais legível que sobrepor a foto num viewport estreito. */
+  .pcx-hero__visual { max-width: none; margin-top: 1rem; }
+  .pcx-hero__panel { width: 100%; max-width: 380px; border-radius: var(--h-radius-md); }
+  .pcx-hero__panel li:nth-child(n + 2) { display: none; }
 
   .pcx-hero__suggestions { margin-top: 0.5rem; font-size: 0.72rem; }
   .pcx-hero__suggestions a { padding: 0.2rem 0.55rem; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 420px) {
+  /* Em telas bem estreitas o rótulo "Buscar preço" não cabe ao lado do
+     campo sem estourar o cartão de busca — mantém só o ícone (com
+     aria-label preservando o texto para leitor de tela). */
+  .pcx-hero .pc26-live-search__submit-label { display: none; }
+  .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
+
   /* Faixa "economize até encontrar o menor preço": banner compacto verde
      escuro, com pequeno ícone, logo abaixo da busca — só existe no app. */
   .pcx-hero__mobile-banner {
@@ -995,11 +1041,6 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   }
   .pcx-hero__mobile-banner strong { display: block; font-size: 0.82rem; font-weight: 800; line-height: 1.25; }
   .pcx-hero__mobile-banner span { display: block; font-size: 0.72rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
-}
-
-@media (max-width: 420px) {
-  .pcx-hero .pc26-live-search__submit-label { display: none; }
-  .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
 }
 
 /* Live search — reskin (scoped inside .pcx-hero, beats pro-experience-2026.css !important).
@@ -1136,7 +1177,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 }
 .pcx-hero .pc26-live-results__copy em i { width: 6px; height: 6px; border-radius: 50%; background: var(--pc26-store-accent, var(--h-primary)); }
 .pcx-hero .pc26-live-results__price { display: grid; justify-items: end; gap: 0.1rem; }
-.pcx-hero .pc26-live-results__price small { font-size: 0.68rem; color: var(--h-subtle); }
+.pcx-hero .pc26-live-results__price small { font-size: 0.8rem; color: var(--h-subtle); }
 .pcx-hero .pc26-live-results__price strong { font-size: 0.95rem; font-weight: 800; color: var(--h-primary-dark); }
 .pcx-hero .pc26-live-results__price--blurred { filter: blur(4px); user-select: none; }
 .pcx-hero .pc26-live-results__item--teaser { position: relative !important; }
@@ -1226,7 +1267,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   display: inline-flex; align-items: center; gap: 0.25rem;
   padding: 0.2rem 0.4rem; border-radius: 999px;
   background: var(--h-primary); color: var(--h-on-primary);
-  font-size: 0.6rem; font-weight: 800;
+  font-size: 0.75rem; font-weight: 800;
   max-width: calc(100% - 0.8rem);
   overflow: hidden;
   white-space: nowrap;
@@ -1235,18 +1276,21 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-product__saving svg { width: 10px; height: 10px; flex-shrink: 0; }
 .pcx-product__no-photo {
   display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
-  color: var(--h-subtle); font-size: 0.68rem;
+  color: var(--h-subtle); font-size: 0.8rem;
 }
+/* <small> herda 80% do tamanho do pai por padrão do navegador (~10px aqui),
+   caindo abaixo do piso de 11px. Fixamos o tamanho explicitamente. */
+.pcx-product__no-photo small { font-size: 0.8rem; }
 .pcx-product__no-photo svg { width: 22px; height: 22px; }
 .pcx-product__body { padding: 0.6rem 0.65rem 0.7rem; display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
-.pcx-product__category { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--h-accent-dark); }
+.pcx-product__category { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--h-accent-dark); }
 .pcx-product__body h3 {
   font-size: 0.8rem; font-weight: 700; line-height: 1.28; color: var(--h-ink);
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   min-height: 2.05em;
 }
-.pcx-product__meta { font-size: 0.68rem; color: var(--h-subtle); }
-.pcx-product__store { display: flex; align-items: center; gap: 0.25rem; font-size: 0.68rem; color: var(--h-muted); margin-top: 0.05rem; overflow: hidden; }
+.pcx-product__meta { font-size: 0.8rem; color: var(--h-subtle); }
+.pcx-product__store { display: flex; align-items: center; gap: 0.25rem; font-size: 0.8rem; color: var(--h-muted); margin-top: 0.05rem; overflow: hidden; }
 .pcx-product__store svg { width: 11px; height: 11px; flex-shrink: 0; }
 .pcx-product__store span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Selo "Menor preço" — componente compartilhado PriceBadge (verde vivo,
@@ -1256,7 +1300,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   align-items: center;
   padding: 0.18rem 0.5rem;
   border-radius: 999px;
-  font-size: 0.62rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -1265,14 +1309,14 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pc-price-badge--soft { background: var(--h-primary-soft); color: var(--h-primary-dark); }
 
 .pcx-prices { margin-top: 0.3rem; padding-top: 0.4rem; border-top: 1px solid var(--h-border); display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
-.pcx-prices span { font-size: 0.62rem; color: var(--h-subtle); font-weight: 600; }
+.pcx-prices span { font-size: 0.8rem; color: var(--h-subtle); font-weight: 600; }
 .pcx-prices div { display: flex; align-items: baseline; gap: 0.3rem; }
-.pcx-prices del { font-size: 0.68rem; color: var(--h-subtle); }
+.pcx-prices del { font-size: 0.8rem; color: var(--h-subtle); }
 .pcx-prices strong { font-size: 1.1rem; font-weight: 900; letter-spacing: -0.01em; color: var(--h-primary-dark); }
 .pcx-product__footer { margin-top: 0.35rem; display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
-.pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; min-width: 0; flex: 1 1 auto; font-size: 0.62rem; color: var(--h-subtle); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.pcx-product__footer time { display: flex; align-items: center; gap: 0.2rem; min-width: 0; flex: 1 1 auto; font-size: 0.8rem; color: var(--h-subtle); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .pcx-product__footer time svg { width: 11px; height: 11px; flex-shrink: 0; }
-.pcx-product__footer strong { display: flex; align-items: center; gap: 0.2rem; font-size: 0.66rem; font-weight: 700; color: var(--h-muted); white-space: nowrap; transition: gap 150ms ease, color 150ms ease; }
+.pcx-product__footer strong { display: flex; align-items: center; gap: 0.2rem; font-size: 0.8rem; font-weight: 700; color: var(--h-muted); white-space: nowrap; transition: gap 150ms ease, color 150ms ease; }
 .pcx-product:hover .pcx-product__footer strong { gap: 0.35rem; color: var(--h-primary-dark); }
 .pcx-product__footer strong svg { width: 12px; height: 12px; }
 .pcx-product--featured { border-color: var(--h-primary); box-shadow: 0 0 0 1px var(--h-primary); }
@@ -1327,7 +1371,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
      pequenos demais pra leitura confortável numa tela de celular. Aumento
      modesto (não dobra nada, só sobe uma faixa), preços e botões continuam
      do tamanho que já estava. */
-  .pcx-product__category { font-size: 0.66rem; }
+  .pcx-product__category { font-size: 0.8rem; }
   .pcx-product__body h3 { font-size: 0.88rem; min-height: 2.2em; }
   .pcx-product__meta,
   .pcx-product__store { font-size: 0.74rem; }
@@ -1336,7 +1380,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-prices { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
   .pcx-prices div { gap: 0.35rem; }
   .pcx-product__footer { flex-wrap: wrap; }
-  .pcx-product__footer strong { font-size: 0.68rem; }
+  .pcx-product__footer strong { font-size: 0.8rem; }
 }
 
 /* ── Category bar ───────────────────────────────────────────────────────── */
@@ -1498,7 +1542,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.14);
   color: #fff;
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -1512,7 +1556,10 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   line-height: 1.25;
 }
-.pcx-spotlight__copy h2 strong { color: var(--h-primary); font-weight: 800; }
+/* Este bloco é escuro (fundo floresta, título branco) — --h-primary é
+   verde de superfície clara e ficava quase ilegível aqui (1.7:1). Usamos um
+   verde-menta claro específico para texto sobre fundo escuro. */
+.pcx-spotlight__copy h2 strong { color: #7fe3a8; font-weight: 800; }
 .pcx-spotlight__copy p {
   margin: 0 0 0.85rem;
   color: rgba(255, 255, 255, 0.82);
@@ -1546,7 +1593,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   color: #fff;
 }
 .pcx-spotlight__highlights strong { display: block; font-size: 0.78rem; font-weight: 800; color: #fff; line-height: 1.2; }
-.pcx-spotlight__highlights small { display: block; font-size: 0.7rem; color: rgba(255, 255, 255, 0.72); line-height: 1.2; }
+.pcx-spotlight__highlights small { display: block; font-size: 0.75rem; color: rgba(255, 255, 255, 0.72); line-height: 1.2; }
 .pcx-spotlight__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.2rem; }
 .pcx-spotlight__cta {
   display: inline-flex;
@@ -1589,7 +1636,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   border-top: 1px dashed rgba(255, 255, 255, 0.24);
 }
 .pcx-spotlight__mock-saving span { font-size: 0.72rem; color: rgba(255, 255, 255, 0.72); font-weight: 700; }
-.pcx-spotlight__mock-saving strong { font-size: 1.05rem; color: var(--h-primary); font-weight: 900; }
+.pcx-spotlight__mock-saving strong { font-size: 1.05rem; color: #7fe3a8; font-weight: 900; }
 
 /* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
    já carregado, cada um com o estabelecimento mais barato encontrado. */
@@ -1607,7 +1654,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-spotlight__mock-head {
   display: block;
   margin-bottom: 0.65rem;
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1637,7 +1684,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  font-size: 0.68rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.65);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1703,7 +1750,7 @@ a.pcx-store-hero {
 .pcx-store-row i {
   display: flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem;
   border-radius: 999px; background: color-mix(in srgb, var(--store-accent, var(--h-primary)) 16%, var(--h-surface-2));
-  color: color-mix(in srgb, var(--store-accent, var(--h-primary-dark)) 60%, var(--h-ink)); font-weight: 800; font-size: 0.75rem; font-style: normal; flex-shrink: 0;
+  color: color-mix(in srgb, var(--store-accent, var(--h-primary-dark)) 60%, var(--h-ink)); font-weight: 800; font-size: 0.8rem; font-style: normal; flex-shrink: 0;
 }
 .pcx-store-row__photo {
   width: 2.2rem; height: 2.2rem; border-radius: 999px; object-fit: cover;
@@ -1713,7 +1760,7 @@ a.pcx-store-hero {
 .pcx-store-row strong { font-size: 0.88rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pcx-store-row small { display: flex; align-items: center; gap: 0.25rem; font-size: 0.72rem; color: var(--h-muted); }
 .pcx-store-row small svg { width: 11px; height: 11px; }
-.pcx-store-row em { font-style: normal; font-size: 0.75rem; color: var(--h-subtle); white-space: nowrap; }
+.pcx-store-row em { font-style: normal; font-size: 0.8rem; color: var(--h-subtle); white-space: nowrap; }
 .pcx-store-row em b { color: var(--h-ink); }
 .pcx-store-row__arrow {
   width: 15px; height: 15px; color: var(--h-subtle); flex-shrink: 0;
@@ -1790,11 +1837,11 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   .pcx-footer__nav { display: none; }
   .pcx-footer__brand img { width: 24px; height: 24px; }
   .pcx-footer__brand strong { font-size: 0.82rem; }
-  .pcx-footer__brand small { font-size: 0.68rem; }
-  .pcx-footer__cta { padding: 0.45rem 0.65rem; font-size: 0.7rem; white-space: nowrap; }
+  .pcx-footer__brand small { font-size: 0.8rem; }
+  .pcx-footer__cta { padding: 0.45rem 0.65rem; font-size: 0.75rem; white-space: nowrap; }
   .pcx-footer__meta {
     flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center;
-    gap: 0.3rem 0.6rem; padding: 0.55rem var(--h-section-x); font-size: 0.66rem;
+    gap: 0.3rem 0.6rem; padding: 0.55rem var(--h-section-x); font-size: 0.8rem;
   }
   .pcx-footer__meta span:nth-child(2) { display: none; }
 }
@@ -1953,7 +2000,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   .pcx-trustbar__icon { width: 30px; height: 30px; }
   .pcx-trustbar__icon svg { width: 14px; height: 14px; }
   .pcx-trustbar__list strong { font-size: 0.78rem; }
-  .pcx-trustbar__list small { font-size: 0.68rem; }
+  .pcx-trustbar__list small { font-size: 0.8rem; }
 }
 @media (max-width: 480px) {
   .pcx-trustbar__list small { display: none; }
