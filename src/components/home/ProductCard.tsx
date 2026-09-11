@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
-import { priceFreshness } from "../../lib/pricing";
+import { freshnessText, priceFreshness } from "../../lib/pricing";
 import { ProductCardActions } from "../catalog/ProductCardActions";
 import { PriceBadge } from "../catalog/PriceBadge";
 
@@ -36,18 +36,7 @@ export const ProductCard = memo(function ProductCard({
   const saving = previous ? previous - product.minPrice : 0;
   const storeCount = product.storeCount || 1;
   const freshness = priceFreshness(product.capturedAt, product.category);
-  const freshnessText =
-    freshness.state === "expired"
-      ? "Preço expirado"
-      : freshness.state === "aging"
-        ? "Atualização anterior"
-        : freshness.days < 0
-          ? freshness.label
-          : freshness.days === 0
-            ? "Atualizado hoje"
-            : freshness.days === 1
-              ? "Atualizado ontem"
-              : `Atualizado há ${freshness.days} dias`;
+  const freshnessLabel = freshnessText(freshness);
 
   return (
     <Link
@@ -111,7 +100,7 @@ export const ProductCard = memo(function ProductCard({
 
         <div className="pcx-product__footer">
           <time dateTime={product.capturedAt}>
-            <Clock3 aria-hidden="true" /> {freshnessText}
+            <Clock3 aria-hidden="true" /> {freshnessLabel}
           </time>
           <strong>
             Ver comparação <ArrowUpRight aria-hidden="true" />

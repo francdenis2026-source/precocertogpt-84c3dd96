@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { WifiOff, X } from "lucide-react";
 import {
   buildCatalog,
   type CatalogPayload,
@@ -45,7 +46,12 @@ export function HomeNew2026() {
   const [liveMetrics, setLiveMetrics] = useState<PlatformMetrics | null>(cachedMetrics);
   const [loading, setLoading] = useState(!cachedMetrics);
   const [cycle, setCycle] = useState(() => currentCycle());
-  const [catalogError, setCatalogError] = useState(false);
+  // As 3 tentativas de fetchSectorCatalog podiam falhar (rede instável,
+  // exatamente o contexto de uso declarado do produto) e a página seguia
+  // mostrando o catálogo antigo/fallback sem nenhum sinal — o usuário não
+  // tinha como saber que o preço podia estar desatualizado.
+  const [syncFailed, setSyncFailed] = useState(false);
+  const [syncNoticeDismissed, setSyncNoticeDismissed] = useState(false);
   const [loadAttempt, setLoadAttempt] = useState(0);
 
   useEffect(() => {
@@ -71,7 +77,7 @@ export function HomeNew2026() {
     };
 
     const load = async () => {
-      setCatalogError(false);
+      setSyncFailed(false);
       try {
         const value = await loadWithRetry();
         if (!active) return;
@@ -107,7 +113,10 @@ export function HomeNew2026() {
           });
         }
       } catch {
-        if (active) setCatalogError(true);
+        // Mantém o fallback visual sem inventar contagens, mas avisa que a
+        // atualização falhou — em vez de deixar o usuário achar que o
+        // catálogo exibido é o mais recente.
+        if (active) setSyncFailed(true);
       } finally {
         if (active) setLoading(false);
       }
@@ -143,6 +152,16 @@ export function HomeNew2026() {
     <div className="pcx-home">
       <FestivalAcaiBar />
       <Header products={products} />
+      {syncFailed && !syncNoticeDismissed && (
+        <div className="pcx-sync-notice" role="status" aria-live="polite">
+          <WifiOff aria-hidden="true" />
+          <span>Não foi possível confirmar preços mais recentes agora. Mostrando o último catálogo salvo.</span>
+          <button type="button" className="pcx-sync-notice__retry" onClick={() => { setLoading(true); setSyncNoticeDismissed(false); setLoadAttempt(value => value + 1); }}>Tentar novamente</button>
+          <button type="button" className="pcx-sync-notice__dismiss" onClick={() => setSyncNoticeDismissed(true)} aria-label="Dispensar aviso">
+            <X aria-hidden="true" />
+          </button>
+        </div>
+      )}
       <main id="conteudo-principal">
         <HeroUserImage2026
           products={products}
@@ -153,10 +172,6 @@ export function HomeNew2026() {
         />
         <TrustBar />
         <CategoryBar stores={catalog.stores} />
-        {catalogError && <div className="pc-catalog-notice" role="status">
-          <p>Não foi possível atualizar o catálogo. Confira sua conexão e tente novamente.</p>
-          <button type="button" onClick={() => { setLoading(true); setLoadAttempt(value => value + 1); }}>Tentar novamente</button>
-        </div>}
         <ProductGrid products={featured} loading={loading} />
         <TrendingProducts products={products} />
         <SmartBasketSpotlight products={products} />

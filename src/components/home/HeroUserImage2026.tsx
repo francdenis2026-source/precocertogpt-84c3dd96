@@ -1,12 +1,13 @@
 import type React from "react";
 import { useMemo } from "react";
-import { ArrowRight, PackageSearch, Store, TrendingDown } from "lucide-react";
+import { ArrowRight, PackageSearch, Search, ShoppingBasket, Store, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product, ProductOffer } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
 import { LocationSwitcher } from "../LocationSwitcher";
 import { LiveProductSearch } from "./LiveProductSearch";
 import { PriceBadge } from "../catalog/PriceBadge";
+import { freshnessText, priceFreshness } from "../../lib/pricing";
 
 // Foto full-bleed do herói (identidade 2026-09). Fornecida pelo dono do
 // produto como a foto definitiva do herói — sem nenhuma UI/dado desenhado
@@ -14,8 +15,7 @@ import { PriceBadge } from "../catalog/PriceBadge";
 // que são só referência de ESTILO e nunca viram asset final). Cliente com
 // carrinho de hortifruti à direita, rio/ponte ao fundo à esquerda — onde o
 // véu verde-floresta fica opaco, sob o texto.
-import heroPhoto from "../../assets/home-2026/hero-profissional-precocerto-2026.jpg";
-import heroMobilePhoto from "../../assets/home-2026/hero-mobile-market-2026.webp";
+import heroPhoto from "../../assets/home-2026/hero-cliente-carrinho-rio-2026.jpg";
 
 const intBr = new Intl.NumberFormat("pt-BR");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -59,6 +59,12 @@ export function HeroUserImage2026({
   const comparison = useMemo(() => pickRealComparison(products), [products]);
   const comparisonImage = comparison ? resolveProductImage(comparison.product) : null;
   const saving = comparison ? comparison.other.value - comparison.cheap.value : 0;
+  // "AO VIVO" não dizia quando o preço foi conferido — o mesmo problema que
+  // o selo "Atualizado" do card de produto já resolve com priceFreshness().
+  // Reaproveita a mesma lógica aqui em vez de deixar uma alegação de
+  // atualização sem nenhum dado por trás.
+  const freshness = comparison ? priceFreshness(comparison.product.capturedAt, comparison.product.category) : null;
+  const comparisonFreshnessText = freshness ? freshnessText(freshness) : null;
 
   return (
     <section
@@ -67,14 +73,13 @@ export function HeroUserImage2026({
       // O CSS do hero usa esta variavel como background-image da secao.
       // Sem defini-la, a declaracao inteira era invalida: nem a foto nem o
       // veu de contraste eram pintados.
-      style={{
-        "--pcx-hero-photo": `url(${heroPhoto})`,
-        "--pcx-hero-mobile-photo": `url(${heroMobilePhoto})`,
-      } as React.CSSProperties}
+      style={{ "--pcx-hero-photo": `url(${heroPhoto})` } as React.CSSProperties}
     >
-      {/* As fotos são de ambientação: o título, a busca e as ações já
-          descrevem a função desta seção. Mantemos a imagem como background
-          para o navegador baixar apenas a variante do breakpoint ativo. */}
+      {/* Mantem o alt descritivo da foto acessivel a leitor de tela — a foto
+          em si agora e pintada via background-image (menos acessivel por
+          natureza), entao preservamos a semantica original com uma <img>
+          visualmente oculta em vez de perder o texto alternativo. */}
+      <img className="sr-only" src={heroPhoto} alt="Cliente sorridente empurrando um carrinho cheio de hortifruti à beira de um rio em Feijó, ao entardecer" />
       <div className="pcx-hero__inner">
         <div className="pcx-hero__copy">
           <LocationSwitcher />
@@ -103,8 +108,11 @@ export function HeroUserImage2026({
           </div>
 
           <div className="pcx-hero__actions" aria-label="Ações principais">
+            <Link className="pcx-btn pcx-btn--primary" to="/buscar">
+              <Search aria-hidden="true" /> Comparar preços <ArrowRight aria-hidden="true" />
+            </Link>
             <Link className="pcx-btn pcx-btn--ghost" to="/estabelecimentos">
-              <Store aria-hidden="true" /> Conhecer as lojas de Feijó <ArrowRight aria-hidden="true" />
+              <Store aria-hidden="true" /> Explorar lojas
             </Link>
           </div>
 
@@ -125,6 +133,15 @@ export function HeroUserImage2026({
             </div>
           )}
 
+          {/* Faixa compacta só para o app: reforça a proposta de valor sem
+              depender de nenhum dado — texto fixo, ilustrativo. */}
+          <div className="pcx-hero__mobile-banner">
+            <ShoppingBasket aria-hidden="true" />
+            <div>
+              <strong>Economize até encontrar o menor preço.</strong>
+              <span>Compare em segundos e escolha onde comprar.</span>
+            </div>
+          </div>
         </div>
 
         <div className="pcx-hero__visual">
@@ -137,7 +154,7 @@ export function HeroUserImage2026({
                   <b className="pcx-hero__panel-title">{comparison.product.name}</b>
                 </span>
                 <span className="pcx-hero__panel-live">
-                  <i aria-hidden="true" /> CATÁLOGO
+                  <i aria-hidden="true" /> {comparisonFreshnessText}
                 </span>
               </div>
               <ul>

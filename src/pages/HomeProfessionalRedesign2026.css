@@ -2005,3 +2005,51 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 @media (max-width: 480px) {
   .pcx-trustbar__list small { display: none; }
 }
+
+/* Aviso de sincronização: a home tentava atualizar preços/contagens em
+   segundo plano e, se as 3 tentativas falhassem, seguia mostrando o
+   catálogo antigo sem nenhum sinal — o usuário não tinha como saber que o
+   preço podia estar desatualizado. Tom neutro (não é um erro bloqueante,
+   é "estamos mostrando o último dado salvo"). */
+.pcx-sync-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: min(1180px, calc(100% - 2.4rem));
+  margin: 0.75rem auto 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--h-border-strong);
+  border-radius: 12px;
+  background: var(--h-surface-2);
+  color: var(--h-ink);
+  font-size: 0.86rem;
+}
+.pcx-sync-notice > svg { width: 17px; height: 17px; flex: 0 0 auto; color: var(--h-muted); }
+.pcx-sync-notice span { flex: 1 1 auto; }
+.pcx-sync-notice__retry {
+  flex: 0 0 auto;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--h-border-strong);
+  border-radius: 8px;
+  background: var(--h-surface);
+  color: var(--h-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pcx-sync-notice__retry:hover { border-color: var(--h-primary-dark, var(--h-ink)); }
+.pcx-sync-notice__dismiss {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--h-muted);
+  cursor: pointer;
+}
+.pcx-sync-notice__dismiss:hover { background: var(--h-border); }
+.pcx-sync-notice__dismiss svg { width: 14px; height: 14px; color: inherit; }

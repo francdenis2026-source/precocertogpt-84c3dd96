@@ -120,3 +120,16 @@ export function priceFreshness(
   const state: FreshnessState = days <= freshDays ? "fresh" : days <= expiredDays ? "aging" : "expired";
   return { state, label: freshnessLabels[state], days };
 }
+
+/** Texto humano ("Atualizado hoje/ontem/há N dias") a partir de um
+ *  Freshness já calculado — usado tanto no card de produto quanto no
+ *  painel de comparação do hero, para não repetir a mesma cadeia de
+ *  condições em cada lugar que precisa dizer "quando isso foi conferido". */
+export function freshnessText(freshness: Freshness): string {
+  if (freshness.state === "expired") return "Preço expirado";
+  if (freshness.state === "aging") return "Atualização anterior";
+  if (freshness.days < 0) return freshness.label;
+  if (freshness.days === 0) return "Atualizado hoje";
+  if (freshness.days === 1) return "Atualizado ontem";
+  return `Atualizado há ${freshness.days} dias`;
+}
