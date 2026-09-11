@@ -34,8 +34,8 @@
 .pc-about__eyebrow svg { width: 14px; height: 14px; }
 
 /* ── Hero ─────────────────────────────────────────────────────────────────
-   Faixa do topo, não banner alto: altura travada e imagem em object-fit para
-   a foto não puxar a altura do bloco. */
+   Altura travada (não a foto quem define a altura do bloco), mas alta o
+   bastante para a foto ter presença de verdade, não virar uma tira fina. */
 .pc-about__hero {
   position: relative;
   isolation: isolate;
@@ -46,6 +46,10 @@
   border-radius: 18px;
   padding: clamp(20px, 3vw, 32px);
   color: #fff;
+  /* Faixa fina sem sombra lia como recorte colado na página, não como um
+     cartão fotográfico com peso próprio — sombra com deslocamento e
+     desfoque reais (não um halo colorido) dá profundidade de verdade. */
+  box-shadow: 0 16px 40px -12px rgb(6 10 14 / 38%);
 }
 .pc-about__hero-bg {
   position: absolute;
@@ -54,7 +58,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 60% 45%;
+  object-position: 68% 24%;
 }
 /* Escurecia quase o quadro inteiro (94%→84%→38%) para garantir leitura só
    do texto à esquerda, apagando a foto praticamente por completo — inclusive
@@ -308,7 +312,10 @@
   /* A foto vai para o topo do bloco: o texto é o que a pessoa veio ler. */
   .pc-about__figure { order: -1; }
   .pc-about__author-figure { order: -1; }
-  .pc-about__hero { min-height: 250px; border-radius: 16px; }
+  /* 250px espremia a foto a uma tira fina — a cliente com o celular na mão
+     (o próprio assunto da página) mal aparecia. Mais altura dá à foto
+     presença de verdade em vez de virar só uma textura de fundo. */
+  .pc-about__hero { min-height: 320px; border-radius: 16px; }
   /* Abaixo de 860px o texto (max-width: 56ch) passa a ocupar a largura toda
      do cartão — o degradê mais claro do lado direito, pensado para quando a
      foto sobra ao lado do texto, ficaria por baixo do próprio texto aqui. */

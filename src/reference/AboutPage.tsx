@@ -5,6 +5,12 @@ import {
 } from "lucide-react";
 import { MinimalTopBar, PublicFooter } from "./PublicChrome";
 import "./AboutPage.css";
+// Foto de "vendedora de boutique com tablet" (marketplace-local-profissional-v2,
+// pasta public/) era genérica e nem falava do que a página descreve — o
+// PreçoCerto ajuda quem COMPRA a comparar preço, não uma lojista com tablet.
+// Esta foto (cliente com celular na mão, conferindo o preço na prateleira)
+// já existia no acervo comissionado da home, sem uso em nenhuma página.
+import heroPhoto from "../assets/home-2026/hero-cliente-comparando-precos-2026.webp";
 
 const WHATSAPP = "https://wa.me/5568992031340";
 
@@ -17,7 +23,7 @@ export function AboutPage() {
         <section className="pc-about__hero" aria-labelledby="pc-about-title">
           <img
             className="pc-about__hero-bg"
-            src="/marketplace-local-profissional-v2.webp"
+            src={heroPhoto}
             alt=""
             aria-hidden="true"
             loading="eager"
