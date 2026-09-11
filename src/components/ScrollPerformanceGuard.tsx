@@ -8,7 +8,11 @@ function installStyles() {
   style.id = STYLE_ID;
   style.textContent = `
     html{scroll-behavior:auto!important}
-    body{overflow-x:hidden}
+    /* overflow-x:hidden no body (em vez de no html) quebra o touch-scroll
+       nativo de carrosséis horizontais filhos (ex.: .pcx-categories) em
+       WebKit/iOS — o navegador intercepta o gesto de arrastar no nível do
+       body em vez de deixá-lo chegar ao container com overflow-x:auto. */
+    html{overflow-x:hidden}
     .th-header,.est-header,.pc-theme-toggle,.pc-store-header{will-change:auto;transform:translateZ(0)}
     .th-section,.th-discover,.est-directory,.professional-search-results,.basket-step-view,.pc-store-content,.pc-store-grid,.site-footer,.th-footer,.est-footer{content-visibility:auto;contain-intrinsic-size:1px 700px}
     body.pc-is-scrolling .th-header,

@@ -1056,8 +1056,13 @@ html[data-theme="light"] .pcx-hero::before {
   .pcx-hero .pc26-live-search__submit-label { display: none; }
   .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
 
-  /* Faixa "economize até encontrar o menor preço": banner compacto verde
-     escuro, com pequeno ícone, logo abaixo da busca — só existe no app. */
+  /* Faixa "economize até encontrar o menor preço": banner compacto, com
+     pequeno ícone, logo abaixo da busca — só existe no app. O degradê
+     anterior (#0b2f22/#0f4a30/#136b3f) era verde-floresta opaco demais:
+     ao lado do véu escuro do herói, virava um bloco quase preto sem
+     nenhuma vivacidade — o oposto do verde vibrante que o resto da marca
+     usa. Agora fecha em --pc-green-600/--pc-green-500 (o mesmo emerald
+     vivo do botão "Comparar preços"), lendo como marca, não como mancha. */
   .pcx-hero__mobile-banner {
     display: flex;
     align-items: center;
@@ -1065,7 +1070,7 @@ html[data-theme="light"] .pcx-hero::before {
     margin-top: 0.9rem;
     padding: 0.75rem 0.9rem;
     border-radius: var(--h-radius-lg);
-    background: linear-gradient(120deg, #0b2f22 0%, #0f4a30 60%, #136b3f 100%);
+    background: linear-gradient(120deg, #043d2c 0%, var(--pc-green-600, #047857) 55%, var(--pc-green-500, #10b981) 100%);
     color: #fff;
   }
   .pcx-hero__mobile-banner svg {

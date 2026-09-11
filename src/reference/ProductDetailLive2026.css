@@ -172,7 +172,22 @@
   .pdl-compare__bar{grid-column:1/-1}
   .pdl-compare__list>li>a>svg:last-child{display:none}
   .pdl-main{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 148px)}
-  .pdl-mobile-bar{position:fixed;left:.6rem;right:.6rem;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);z-index:55;display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.5rem .6rem .5rem .85rem;border-radius:16px;background:var(--pdl-surface,#fff);border:1px solid var(--pdl-border,rgba(0,0,0,.12));box-shadow:0 14px 30px rgba(0,0,0,.18)}
+  /* A barra fixa de preço não empurra o documento (position:fixed sai do
+     fluxo), então só o <main> reservar esse respiro não bastava: ao rolar
+     até o fim, ela ficava sobreposta às últimas linhas do rodapé (aviso
+     "Preços podem mudar..."), que vem DEPOIS do <main> e não tinha
+     nenhuma folga própria — só a reserva genérica de 102px do dock global
+     (app-shell-professional-2026.css, !important), insuficiente porque
+     essa barra de preço fica ainda mais alta que o dock. Precisa de
+     !important + a mesma especificidade (tag+classe) pra vencer aquela
+     regra. */
+  body.pc-app-shell .pdl-page footer.ref-footer{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 148px)!important}
+  /* transform/will-change força a barra para sua própria camada de
+     composição — sem isso, no Safari/iOS ela "nada" atrás do conteúdo
+     durante o scroll com inércia (fica alguns quadros para trás do
+     repaint da página), dando a impressão de que o conteúdo passa por
+     cima dela em vez de ela ficar fixa por cima de tudo. */
+  .pdl-mobile-bar{position:fixed;left:.6rem;right:.6rem;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);z-index:55;display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.5rem .6rem .5rem .85rem;border-radius:16px;background:var(--pdl-surface,#fff);border:1px solid var(--pdl-border,rgba(0,0,0,.12));box-shadow:0 14px 30px rgba(0,0,0,.18);transform:translateZ(0);will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}
   .pdl-mobile-bar div{display:flex;flex-direction:column}
   .pdl-mobile-bar small{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--pdl-muted,#5b6472)}
   .pdl-mobile-bar strong{font-size:1.05rem;font-variant-numeric:tabular-nums}
