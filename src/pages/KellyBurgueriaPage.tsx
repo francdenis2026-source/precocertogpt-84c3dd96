@@ -26,7 +26,7 @@ import "./KellyBurgueriaPage.css";
 // sem nenhuma relação com o ambiente real da casa. Substituída pela foto
 // de setor "lanchonete" já usada no acervo do projeto (mesa posta, fritas,
 // bebida, ambiente de lanchonete de verdade).
-import heroPhoto from "../assets/sectors-2026/sector-photo-food.webp";
+import heroPhoto from "../assets/sectors-2026/sector-food-v3.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 

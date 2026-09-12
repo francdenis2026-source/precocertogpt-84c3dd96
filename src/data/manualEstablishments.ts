@@ -10,10 +10,10 @@
 import type { CatalogPayload, Product, ProductOffer, StoreRow } from "./catalog";
 import { SANDUBA_ID, SANDUBA_NAME, sandubaProducts, sandubaStores } from "./manualEstablishments2";
 // item-hamburguer-2.jpg (composição malfeita, chamas e pétalas coladas sobre
-// o sanduíche) foi removida do projeto. sector-food.webp é uma foto real de
+// o sanduíche) foi removida do projeto. sector-food-v3.jpg é uma foto real de
 // preparo de hambúrguer já usada como imagem de setor "lanchonete" em outras
 // partes do site — sem essa criação artificial.
-import kellyBurgerPhoto from "../assets/sectors-2026/sector-food.webp";
+import kellyBurgerPhoto from "../assets/sectors-2026/sector-food-v3.jpg";
 
 export const KELLY_ID = "kelly-burgueria-lanchonete";
 export const KELLY_NAME = "Kelly Burgueria e Lanchonete";

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import type { BusinessGroupId } from "../data/businessTaxonomy";
-import bakeryImg from "../assets/sectors-2026/sector-photo-bakery.webp";
-import butchersImg from "../assets/sectors-2026/sector-photo-butchers.webp";
-import foodImg from "../assets/sectors-2026/sector-photo-food.webp";
-import booksImg from "../assets/sectors-2026/sector-photo-books.webp";
-import marketsImg from "../assets/sectors-2026/sector-photo-markets.webp";
-import pharmaciesImg from "../assets/sectors-2026/sector-photo-pharmacies.webp";
-import servicesImg from "../assets/sectors-2026/sector-banner-services.webp";
+import bakeryImg from "../assets/sectors-2026/sector-bakery-v3.jpg";
+import butchersImg from "../assets/sectors-2026/sector-butchers-v3.jpg";
+import foodImg from "../assets/sectors-2026/sector-food-v3.jpg";
+import booksImg from "../assets/sectors-2026/sector-books-v3.jpg";
+import marketsImg from "../assets/sectors-2026/sector-markets-v3.jpg";
+import pharmaciesImg from "../assets/sectors-2026/sector-pharmacies-v3.jpg";
+import servicesImg from "../assets/sectors-2026/sector-services-v3.jpg";
 
 /**
  * Banners próprios por setor (fornecidos prontos, com marca e texto já

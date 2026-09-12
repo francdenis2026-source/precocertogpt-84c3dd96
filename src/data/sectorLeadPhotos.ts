@@ -1,12 +1,12 @@
 import type { BusinessGroupId } from "./businessTaxonomy";
 import { sectorHeroImage } from "./sectorHeroImages";
 
-import butchersImg from "../assets/sectors-2026/sector-photo-butchers.webp";
-import foodImg from "../assets/sectors-2026/sector-photo-food.webp";
-import booksImg from "../assets/sectors-2026/sector-photo-books.webp";
-import bakeryImg from "../assets/sectors-2026/sector-photo-bakery.webp";
-import marketsImg from "../assets/sectors-2026/sector-photo-markets.webp";
-import pharmaciesImg from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
+import butchersImg from "../assets/sectors-2026/sector-butchers-v3.jpg";
+import foodImg from "../assets/sectors-2026/sector-food-v3.jpg";
+import booksImg from "../assets/sectors-2026/sector-books-v3.jpg";
+import bakeryImg from "../assets/sectors-2026/sector-bakery-v3.jpg";
+import marketsImg from "../assets/sectors-2026/sector-markets-v3.jpg";
+import pharmaciesImg from "../assets/sectors-2026/sector-pharmacies-v3.jpg";
 import servicesImg from "../assets/home-2026/comerciante-feijo-app.webp";
 
 /**

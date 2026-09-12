@@ -1,4 +1,4 @@
-import establishmentsHero from "../assets/sectors-2026/sector-photo-markets.webp";
+import establishmentsHero from "../assets/sectors-2026/sector-markets-v3.jpg";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
