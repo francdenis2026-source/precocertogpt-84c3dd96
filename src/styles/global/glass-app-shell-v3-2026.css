@@ -366,7 +366,11 @@ html[data-theme="dark"]
     border-radius: 14px !important;
     background: transparent !important;
     color: var(--pc-muted) !important;
-    font-size: 10.5px !important;
+    /* Piso de legibilidade para texto funcional é 11px (abaixo disso falha
+       em telas de alta densidade e alvos de toque pequenos); esta regra
+       carrega depois de app-shell-professional-2026.css e, com a mesma
+       especificidade + !important, vencia com 10.5px. */
+    font-size: 11.5px !important;
     font-weight: 720 !important;
     line-height: 1 !important;
     text-decoration: none !important;

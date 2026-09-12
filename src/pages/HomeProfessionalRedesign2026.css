@@ -1074,8 +1074,11 @@ html[data-theme="light"] .pcx-hero::before {
      anterior (#0b2f22/#0f4a30/#136b3f) era verde-floresta opaco demais:
      ao lado do véu escuro do herói, virava um bloco quase preto sem
      nenhuma vivacidade — o oposto do verde vibrante que o resto da marca
-     usa. Agora fecha em --pc-green-600/--pc-green-500 (o mesmo emerald
-     vivo do botão "Comparar preços"), lendo como marca, não como mancha. */
+     usa. Fecha em --pc-green-600 (o mesmo emerald vivo do botão "Comparar
+     preços"), lendo como marca, não como mancha. A ponta clara
+     --pc-green-500 usada antes (#10b981) derrubava o contraste do texto
+     branco pra 2,5:1 (precisa 3:1) exatamente onde o final da frase e a
+     segunda linha caem — removida; #047857 sozinho já garante ~5,7:1. */
   .pcx-hero__mobile-banner {
     display: flex;
     align-items: center;
@@ -1083,7 +1086,7 @@ html[data-theme="light"] .pcx-hero::before {
     margin-top: 0.9rem;
     padding: 0.75rem 0.9rem;
     border-radius: var(--h-radius-lg);
-    background: linear-gradient(120deg, #043d2c 0%, var(--pc-green-600, #047857) 55%, var(--pc-green-500, #10b981) 100%);
+    background: linear-gradient(120deg, #043d2c 0%, var(--pc-green-600, #047857) 70%);
     color: #fff;
   }
   .pcx-hero__mobile-banner svg {
@@ -1488,11 +1491,16 @@ html[data-theme="light"] .pcx-hero::before {
 @media (max-width: 960px) { .pcx-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) {
   /* Vira carrossel horizontal: cards de 72–82px de largura numa fileira só,
-     como o resto dos rails da home no app. */
+     como o resto dos rails da home no app. 86px (fora da faixa documentada
+     acima) fazia exatamente 4 cards caberem cheios em telas de 390px de
+     largura, sem nenhuma fração do 5º espiando — sem essa "espiada" nada
+     avisa que a fileira rola pro lado (detector: edge-flush-cards). 78px
+     volta pra dentro da faixa pretendida e deixa ~25% do próximo card
+     visível em repouso. */
   .pcx-categories {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 86px;
+    grid-auto-columns: 78px;
     grid-template-columns: none;
     gap: 0.6rem;
     overflow-x: auto;
@@ -1504,8 +1512,23 @@ html[data-theme="light"] .pcx-hero::before {
     padding-bottom: 0.3rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    /* touch-action:pan-x força o navegador a rotear o gesto de arrastar
+       horizontal para ESTE elemento, em vez de deixar um ancestral com
+       overflow-x não visível (body.pc-app-shell tem overflow-x:clip)
+       interceptar o toque antes de chegar aqui — o mesmo bug de
+       WebKit/iOS que motivou mover a regra do ScrollPerformanceGuard do
+       body pro html, só que outra folha de estilo ainda deixa o body
+       com overflow-x:clip. Isso resolve independente de quem "ganha" essa
+       disputa de especificidade entre as duas folhas. */
+    touch-action: pan-x;
   }
   .pcx-categories::-webkit-scrollbar { display: none; }
+  /* edge-flush-cards: o último card ficava a -1px da borda direita em
+     repouso (arredondamento de subpixel no fim do grid de colunas fixas
+     de 86px) — sem nenhum respiro, o cantoarredondado direito ficava
+     cortado pela borda do scroller. 2px extra de respiro à direita cobre
+     a folga sem afetar o snap dos demais cards. */
+  .pcx-categories { padding-inline-end: calc(var(--h-section-x) + 2px); }
   .pcx-category {
     flex-direction: column;
     text-align: center;

@@ -53,9 +53,14 @@ export function StoreRail({
   const leadGroup = groupForStore(lead);
   const kindLabel = leadGroup.shortLabel;
   // Prioriza a foto/fachada real do estabelecimento (vinda do Supabase);
-  // só cai para a foto genérica do setor quando o comércio não tem foto
-  // própria cadastrada.
-  const leadImg = lead.photoUrl || lead.logoUrl || sectorLeadPhoto(leadGroup.id);
+  // cai direto para a foto genérica do setor quando não há foto própria —
+  // NUNCA para a logo. Este card ocupa ~640x300px; logos são arquivos
+  // pequenos (o de "Comércio Bons Amigos", por ex., é 180x120) e esticados
+  // via object-fit:cover nessa área viram uma imagem visivelmente borrada
+  // e pixelizada, o oposto da identidade "editorial, evidência real" da
+  // home. A logo continua sendo usada normalmente na miniatura pequena de
+  // StoreCard.tsx, onde o tamanho reduzido não expõe esse problema.
+  const leadImg = lead.photoUrl || sectorLeadPhoto(leadGroup.id);
 
   return (
     <section className="pcx-section" aria-labelledby="stores-title">
