@@ -8,7 +8,7 @@ import servicesHeroPhoto from "../assets/sectors-2026/sector-services-v3.jpg";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { AlertTriangle, ArrowRight, BadgeCheck, ChevronLeft, ChevronRight, Clock3, Home, Info, LockKeyhole, MapPin, MessageCircle, PackageSearch, Search, ShieldCheck, SlidersHorizontal, Sparkles, Store, Tag, UserPlus } from "lucide-react";
+import { AlertTriangle, ArrowRight, BadgeCheck, ChevronLeft, ChevronRight, Clock3, Heart, Home, Info, LockKeyhole, MapPin, MessageCircle, PackageSearch, Search, ShieldCheck, SlidersHorizontal, Sparkles, Store, Tag, UserPlus } from "lucide-react";
 import { fetchCatalog } from "../data/remoteCatalog";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
@@ -17,6 +17,7 @@ import { groupForStore } from "../data/businessTaxonomy";
 import { marketplaceSectors } from "./MarketplaceSectors";
 import { MinimalTopBar } from "./PublicChrome";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
+import { useStoreFavorites } from "../features/favorites/StoreFavoritesProvider";
 import { usePriceVisibility } from "../hooks/usePriceVisibility";
 import { ProductCardActions } from "../components/catalog/ProductCardActions";
 import { formatProductSpec, humanizeCategory, properCaseIfShouting, whatsappHref } from "./storeDisplayFormat";
@@ -108,6 +109,7 @@ export function StoreDetailProfessional() {
   const { identifier = "" } = useParams();
   const location = useLocation();
   const { userId } = useFavorites();
+  const { isStoreFavorite, toggleStoreFavorite } = useStoreFavorites();
   const { allPricesVisible } = usePriceVisibility();
   const isGuest = !userId && !allPricesVisible;
   const [catalog, setCatalog] = useState<CatalogPayload | null>(null);
@@ -349,6 +351,16 @@ export function StoreDetailProfessional() {
             </div>
           </div>
           <div className="store-pro-status"><BadgeCheck aria-hidden="true" /><span><strong>Catálogo verificado</strong><small>{lastUpdatedLabel ? `Atualizado em ${lastUpdatedLabel}` : "Dados locais organizados"}</small></span></div>
+          <button
+            type="button"
+            className={`store-pro-favorite${isStoreFavorite(store.id) ? " is-active" : ""}`}
+            onClick={() => void toggleStoreFavorite(store.id, `${location.pathname}${location.search}`)}
+            aria-pressed={isStoreFavorite(store.id)}
+            aria-label={isStoreFavorite(store.id) ? `Remover ${store.name} dos favoritos` : `Favoritar ${store.name}`}
+          >
+            <Heart aria-hidden="true" fill={isStoreFavorite(store.id) ? "currentColor" : "none"} />
+            <span>{isStoreFavorite(store.id) ? "Favoritada" : "Favoritar loja"}</span>
+          </button>
         </div>
         {sector.id === "pharmacies" && <figure className="store-pro-pharmacy-photo">
           <img src={pharmacyHeroPhoto} alt="" width="1280" height="720" fetchPriority="high" />

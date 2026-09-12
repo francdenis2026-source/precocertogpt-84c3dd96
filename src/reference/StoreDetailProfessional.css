@@ -36,6 +36,10 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-status span{display:grid;gap:2px}
 .store-pro-status strong{color:#fff;font-size:12.5px}
 .store-pro-status small{color:#B8D6C6;font-size:12px}
+.store-pro-favorite{display:flex;align-items:center;gap:8px;padding:11px 16px;border:1px solid rgba(140, 199, 174,.28);border-radius:14px;background:rgba(4,44,32,.55);backdrop-filter:blur(12px);color:#EAF5EE;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.store-pro-favorite svg{width:17px;height:17px}
+.store-pro-favorite:hover{background:rgba(4,44,32,.75);border-color:rgba(180, 217, 196,.45)}
+.store-pro-favorite.is-active{background:#E0503C;border-color:#E0503C;color:#fff}
 
 .store-pro-hero--bons-amigos{background:linear-gradient(135deg,var(--pc-forest-950) 0%,var(--pc-forest-900) 45%,var(--pc-forest-950) 100%)}
 .store-pro-hero--bons-amigos .store-pro-hero__overlay{background:linear-gradient(90deg,rgba(2,44,32,.99) 0%,rgba(2,44,32,.97) 35%,rgba(2,44,32,.6) 57%,rgba(2,44,32,.08) 100%)}
