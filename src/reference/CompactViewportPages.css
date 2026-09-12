@@ -23,3 +23,13 @@
 @media(max-width:900px){.pro-basket-page,.search26-page{height:auto;min-height:100dvh;overflow:visible}.pro-basket-shell,.search26-main{overflow:visible}.pro-basket-workspace{height:auto}.pro-basket-list,.search26-results{overflow:visible}.search26-main>.search26-shell{height:auto}}
 @media(max-width:760px){.mo-page{padding:9px 11px}.mo-head>div{margin:6px 0 7px}.mo-head h1{font-size:24px}.mo-head p{font-size:11px}.mo-shell{height:calc(100dvh - 108px);grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.mo-steps{padding:5px}.mo-steps>div{padding:5px}.mo-card{padding:12px}.mo-title h2{font-size:18px}}
 @media(max-width:680px){.ref-page:has(.ref-info) .ref-info{padding:22px 16px}.ref-page:has(.ref-info) .ref-info h1{font-size:2.65rem}}
+
+/* Merchant onboarding fits a normal desktop window; only the document scrolls on compact screens. */
+.mo-page{height:auto!important;min-height:100dvh!important;overflow:visible!important;background:#102b42!important}
+.mo-page::before{background:url('/editorial-2026/business-1280.webp') center/cover no-repeat!important;opacity:.3}
+.mo-page::after{background:linear-gradient(110deg,rgb(7 25 41 / .94),rgb(12 42 63 / .78))!important}
+.mo-shell{height:auto!important;max-height:none!important;align-items:start!important}
+.mo-card{max-height:none!important;overflow:visible!important}
+.mo-page .mo-head{margin-bottom:10px!important}
+.mo-page .mo-title h2{font-size:clamp(20px,2vw,26px)!important}
+@media(max-width:760px){.mo-page{padding:12px!important}.mo-card{max-height:none!important}.mo-shell{height:auto!important}}

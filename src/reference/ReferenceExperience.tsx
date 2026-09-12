@@ -351,7 +351,7 @@ function CollaborationPage() {
   const [needsAccount, setNeedsAccount] = useState(false);
   const field = (key: keyof typeof form) => ({
     value: form[key],
-    onChange: (event: { target: { value: string } }) => setForm(current => ({ ...current, [key]: event.target.value })),
+    onChange: (event: { target: { value: string } }) => setForm(current => ({ ...current, [key]: key === "whatsapp" ? event.target.value.replace(/\\D/g, "").slice(0, 11) : event.target.value })),
   });
   const required: (keyof typeof form)[] = ["name", "city", "establishment", "email"];
   const missing = required.filter(key => !form[key].trim());
@@ -421,7 +421,7 @@ function CollaborationPage() {
                 {emailError && <small className="pc-collab__field-error">E-mail inválido, confira o formato.</small>}
               </label>
               <label>Seu WhatsApp
-                <input {...field("whatsapp")} type="tel" autoComplete="tel" placeholder="(68) 9####-####" aria-invalid={phoneError} />
+                <input {...field("whatsapp")} type="tel" inputMode="tel" pattern="[0-9]{10,11}" autoComplete="tel" placeholder="(68) 9####-####" aria-invalid={phoneError} />
                 {phoneError && <small className="pc-collab__field-error">Número inválido, use DDD + celular.</small>}
               </label>
             </div>

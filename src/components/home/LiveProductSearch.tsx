@@ -80,18 +80,6 @@ export function LiveProductSearch({
     return () => window.removeEventListener("keydown", focusSearch);
   }, [compact]);
 
-  useEffect(() => {
-    if (!showPanel) return;
-    const closeOutside = (event: PointerEvent) => {
-      if (event.target instanceof Node && !searchRef.current?.contains(event.target)) {
-        setOpen(false);
-        setActiveIndex(-1);
-      }
-    };
-    document.addEventListener("pointerdown", closeOutside);
-    return () => document.removeEventListener("pointerdown", closeOutside);
-  }, [showPanel]);
-
   const searchAll = () => {
     const value = normalizedQuery;
     setOpen(false);
@@ -113,13 +101,6 @@ export function LiveProductSearch({
     searchAll();
   };
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Escape" && showPanel) {
-      event.preventDefault();
-      event.stopPropagation();
-      setOpen(false);
-      setActiveIndex(-1);
-      return;
-    }
     if (!showPanel || !suggestions.length) return;
     if (event.key === "ArrowDown") {
       event.preventDefault();
@@ -145,12 +126,6 @@ export function LiveProductSearch({
   return (
     <div
       ref={searchRef}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setOpen(false);
-          setActiveIndex(-1);
-        }
-      }}
       className={`pc26-live-search${compact ? " pc26-live-search--compact" : ""}${showPanel ? " is-open" : ""}`}
     >
       <form
