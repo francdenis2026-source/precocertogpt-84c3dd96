@@ -36,7 +36,7 @@ describe("Busca de produtos na homepage", () => {
     expect(options[0].querySelector("em")?.getAttribute("style")).toContain("--pc26-store-accent");
   });
 
-  it("mantém os resultados abertos ao clicar fora, mas fecha com Escape", () => {
+  it("fecha ao clicar fora, reabre ao focar e fecha com Escape", () => {
     const catalog = buildCatalog();
 
     render(
@@ -50,8 +50,15 @@ describe("Busca de produtos na homepage", () => {
 
     const input = screen.getByRole("combobox", { name: "Produto para comparar" });
     fireEvent.change(input, { target: { value: catalog.products[0].name } });
-    fireEvent.pointerDown(screen.getByTestId("outside"));
+    expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
+    fireEvent.pointerDown(screen.getAllByRole("option")[0]);
+    expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
 
+    fireEvent.pointerDown(screen.getByTestId("outside"));
+    expect(screen.queryByRole("listbox", { name: "Sugestões de produtos" })).toBeNull();
+    expect(input.getAttribute("aria-expanded")).toBe("false");
+
+    fireEvent.focus(input);
     expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
 
     fireEvent.keyDown(input, { key: "Escape" });
