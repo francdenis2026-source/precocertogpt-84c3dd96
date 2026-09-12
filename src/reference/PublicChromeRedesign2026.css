@@ -443,3 +443,42 @@ footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px 
   footer.ref-footer .ref-footer__links a { padding: 0 8px !important; font-size: 0.74rem !important; }
   footer.ref-footer .ref-footer__legal { flex-direction: column !important; align-items: flex-start !important; gap: 3px !important; }
 }
+
+
+/* ── Fotografia editorial nítida para heróis de serviços ───────────────────
+   Os arquivos de setor já são fotografias reais; o desfoque vinha do
+   tratamento visual aplicado sobre eles. Mantemos contraste com um gradiente
+   leve, sem blur/backdrop-filter, para preservar rostos, produtos e textura. */
+.ref-page .store-pro-hero,
+.ref-page [class*="sector-hero"],
+.ref-page [class*="category-hero"] {
+  filter: none !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.ref-page .store-pro-hero::before,
+.ref-page .store-pro-hero::after,
+.ref-page [class*="sector-hero"]::before,
+.ref-page [class*="sector-hero"]::after,
+.ref-page [class*="category-hero"]::before,
+.ref-page [class*="category-hero"]::after {
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.ref-page .store-pro-hero::after,
+.ref-page .store-pro-hero::before {
+  background: linear-gradient(90deg, rgba(5,18,15,.72) 0%, rgba(5,18,15,.28) 58%, rgba(5,18,15,.12) 100%) !important;
+}
+.ref-page .store-pro-hero__overlay {
+  display: block !important;
+  background: linear-gradient(90deg, rgba(5,18,15,.62) 0%, rgba(5,18,15,.18) 72%, transparent 100%) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+@media (max-width: 720px) {
+  .ref-page .store-pro-hero::after,
+  .ref-page .store-pro-hero::before {
+    background: linear-gradient(90deg, rgba(5,18,15,.68), rgba(5,18,15,.2)) !important;
+  }
+}
