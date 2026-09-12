@@ -624,3 +624,12 @@ footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px 
   .ref-page .ref-dock a { min-height: 54px !important; font-size: .68rem !important; }
   .ref-page .ref-dock a svg { width: 25px !important; height: 25px !important; }
 }
+
+
+/* Oculta legendas de procedência exibidas sobre imagens ilustrativas. */
+.ref-page figure > figcaption,
+.ref-page .image-caption,
+.ref-page .generated-image-caption,
+.ref-page [class*="ai-caption"] {
+  display: none !important;
+}
