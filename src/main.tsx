@@ -109,3 +109,5 @@ initializePwaRuntime();
 import "./styles/global/public-palette-search-2026.css";
 import "./styles/global/hero-cleanup-2026.css";
 import "./styles/global/catalog-polish-2026.css";
+
+import "./styles/global/public-pages-layout-2026.css";
