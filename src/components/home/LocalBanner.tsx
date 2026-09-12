@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import localImg from "../../assets/home-2026/../../assets/home-2026/promo-comercio-local.jpg";
+import localImg from "../../assets/home-2026/promo-comercio-local.jpg";
 
 /** Banner fotográfico único de fechamento da home, antes do rodapé —
  *  substitui a antiga "Informação que ajuda na escolha" (2 promos + 1
@@ -10,7 +10,8 @@ export function LocalBanner() {
     <section className="pcx-section" aria-labelledby="local-banner-title">
       <div className="pcx-shell">
         <Link className="pcx-promo-feature" to="/estabelecimentos">
-          <img
+          <img className="pcx-frame-backdrop" src={localImg} alt="" aria-hidden="true" loading="lazy" decoding="async" width="1600" height="640" />
+          <img className="pcx-frame-photo"
             src={localImg}
             alt="Comerciante local organizando caixas de hortifrúti na entrada da loja"
             loading="lazy"

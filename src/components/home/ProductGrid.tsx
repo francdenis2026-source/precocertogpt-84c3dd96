@@ -9,7 +9,8 @@ export function ProductGrid({ products, loading }: { products: Product[]; loadin
   return <section className="pcx-section" aria-labelledby="offers-title">
     <div className="pcx-shell">
       <div className="pcx-offers-visual">
-        <img src={offersImg} alt="" loading="lazy" width="1280" height="720" />
+        <img className="pcx-frame-backdrop" src={offersImg} alt="" aria-hidden="true" loading="lazy" width="1280" height="720" />
+        <img className="pcx-frame-photo" src={offersImg} alt="" loading="lazy" width="1280" height="720" />
         <div><SectionHeader id="offers-title" title="Ofertas em destaque" description="Preço, loja e economia reunidos para você decidir mais rápido." linkTo="/buscar" linkLabel="Explorar catálogo" linkIcon={<ArrowRight aria-hidden="true" />} /></div>
       </div>
       <div className="pcx-products" aria-busy={loading} aria-live="polite">

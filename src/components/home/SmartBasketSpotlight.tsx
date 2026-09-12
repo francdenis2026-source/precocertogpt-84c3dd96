@@ -45,7 +45,7 @@ export function SmartBasketSpotlight({ products = [] }: { products?: Product[] }
 
   return (
     <section className="pcx-shell" aria-labelledby="smart-basket-title">
-      <div className="pcx-spotlight"><img className="pcx-spotlight__photo" src={basketImg} alt="" loading="lazy" decoding="async" width="1280" height="720" />
+      <div className="pcx-spotlight"><img className="pcx-spotlight__photo pcx-frame-backdrop" src={basketImg} alt="" aria-hidden="true" loading="lazy" decoding="async" width="1280" height="720" /><img className="pcx-spotlight__photo pcx-frame-photo" src={basketImg} alt="" loading="lazy" decoding="async" width="1280" height="720" />
         <div className="pcx-spotlight__copy">
           <span className="pcx-spotlight__badge">
             <ShoppingCart aria-hidden="true" />
