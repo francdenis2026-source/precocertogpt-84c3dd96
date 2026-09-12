@@ -2,7 +2,7 @@ import { ArrowRight, PackageSearch } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { ProductCard } from "./ProductCard";
-import offersImg from "../../assets/sectors-2026/sector-photo-bakery.webp";
+import offersImg from "../../assets/home-2026/hero-profissional-precocerto-2026.jpg";
 import { SectionHeader } from "./SectionHeader";
 
 export function ProductGrid({ products, loading }: { products: Product[]; loading: boolean }) {

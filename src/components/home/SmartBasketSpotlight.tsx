@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { ArrowRight, Clock, RefreshCw, ShoppingCart, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
-import basketImg from "../../assets/sectors-2026/sector-photo-markets.webp";
+import basketImg from "../../assets/home-2026/hero-cliente-comparando-precos-2026.webp";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
