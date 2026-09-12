@@ -796,24 +796,24 @@ html[data-theme="dark"] .ref-auth__card form input { background: #10141b !import
   .ref-auth__story .ref-auth__hero-copy > p { margin-top: 8px !important; font-size: 14px !important; }
   .ref-auth__form {
     align-content: center !important;
-    padding: 12px clamp(20px, 3vw, 44px) !important;
+    padding: 8px clamp(20px, 3vw, 44px) !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
   }
-  .ref-auth__back { top: 14px !important; left: clamp(20px, 3vw, 44px) !important; margin-bottom: 6px !important; }
-  .ref-auth__reason { margin-bottom: 6px !important; padding-block: 6px !important; }
-  .ref-auth__card { padding: 16px 20px !important; }
-  .ref-auth__card h2 { margin-block: 4px !important; font-size: 29px !important; }
-  .ref-auth__card > p:not(.ref-auth__safe):not(.ref-auth__message) { margin: 4px 0 10px !important; line-height: 1.35 !important; }
-  .ref-account-tabs { gap: 7px !important; margin: 8px 0 10px !important; }
-  .ref-account-tabs button { min-height: 52px !important; padding: 7px 10px !important; }
-  .ref-auth__card form { gap: 6px !important; margin-top: 6px !important; }
-  .ref-auth__card label { gap: 3px !important; }
-  .ref-auth__card input { height: 38px !important; min-height: 38px !important; }
-  .ref-auth__submit { min-height: 40px !important; }
-  .ref-auth__recover { margin-top: 4px !important; padding-block: 5px !important; }
-  .ref-auth__switch { margin-top: 7px !important; padding-top: 7px !important; }
-  .ref-auth__safe { margin-top: 5px !important; }
+  .ref-auth__back { top: 14px !important; left: clamp(20px, 3vw, 44px) !important; margin-bottom: 5px !important; }
+  .ref-auth__reason { margin-bottom: 5px !important; padding-block: 5px !important; }
+  .ref-auth__card { padding: 13px 20px !important; }
+  .ref-auth__card h2 { margin-block: 3px !important; font-size: 27px !important; }
+  .ref-auth__card > p:not(.ref-auth__safe):not(.ref-auth__message) { margin: 3px 0 8px !important; line-height: 1.3 !important; }
+  .ref-account-tabs { gap: 7px !important; margin: 6px 0 8px !important; }
+  .ref-account-tabs button { min-height: 46px !important; padding: 6px 10px !important; }
+  .ref-auth__card form { gap: 5px !important; margin-top: 5px !important; }
+  .ref-auth__card label { gap: 2px !important; }
+  .ref-auth__card input { height: 34px !important; min-height: 34px !important; }
+  .ref-auth__submit { min-height: 36px !important; }
+  .ref-auth__recover { margin-top: 3px !important; padding-block: 4px !important; }
+  .ref-auth__switch { margin-top: 5px !important; padding-top: 5px !important; }
+  .ref-auth__safe { margin-top: 3px !important; }
 }
 
 /* Mobile radio: show the current song as an overlay badge. It is positioned
