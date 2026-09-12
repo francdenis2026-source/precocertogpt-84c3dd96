@@ -1,4 +1,10 @@
-import pharmacyHeroPhoto from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
+import marketsHeroPhoto from "../assets/sectors-2026/sector-markets-v3.jpg";
+import butchersHeroPhoto from "../assets/sectors-2026/sector-butchers-v3.jpg";
+import bakeryHeroPhoto from "../assets/sectors-2026/sector-bakery-v3.jpg";
+import foodHeroPhoto from "../assets/sectors-2026/sector-food-v3.jpg";
+import pharmacyHeroPhoto from "../assets/sectors-2026/sector-pharmacies-v3.jpg";
+import booksHeroPhoto from "../assets/sectors-2026/sector-books-v3.jpg";
+import servicesHeroPhoto from "../assets/sectors-2026/sector-services-v3.jpg";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -28,12 +34,7 @@ const PAGE_SIZE = 20;
 // "/supermercado-hero.jpg" e "/hero-feijo-mercado-claro-2026.webp" saíram da
 // rotação: não são fotografias profissionais consistentes com as demais e
 // faziam lojas vizinhas (hash próximo) repetirem a mesma imagem destoante.
-const STORE_BACKDROPS = [
-  "/mercado-local-profissional.webp",
-  "/mercado-bairro-feijo-v1.webp",
-  "/supermercado-premium.jpg",
-  "/marketplace-local-profissional-v2.webp",
-];
+const STORE_BACKDROPS = [marketsHeroPhoto];
 
 // Escolha estavel: a mesma loja recebe sempre a mesma imagem, e lojas
 // diferentes tendem a receber imagens diferentes.
@@ -66,12 +67,12 @@ function sectorForStore(store: { kind?: string | null; name?: string | null }) {
 // baixo). Além disso açougue e lanchonete não tinham entrada nenhuma neste
 // mapa, então caíam sem nenhum hero.
 const SECTOR_BACKDROPS: Record<string, string> = {
-  pharmacies: "/sector-heroes/pharmacies.webp",
-  bakery: "/sector-heroes/bakery.webp",
-  books: "/sector-heroes/books.webp",
-  services: "/sector-heroes/services.webp",
-  butchers: "/sector-heroes/butchers.webp",
-  food: "/sector-heroes/food.webp",
+  pharmacies: pharmacyHeroPhoto,
+  bakery: bakeryHeroPhoto,
+  books: booksHeroPhoto,
+  services: servicesHeroPhoto,
+  butchers: butchersHeroPhoto,
+  food: foodHeroPhoto,
 };
 
 const SECTOR_TAGLINES: Record<string, string> = {
@@ -351,7 +352,6 @@ export function StoreDetailProfessional() {
         </div>
         {sector.id === "pharmacies" && <figure className="store-pro-pharmacy-photo">
           <img src={pharmacyHeroPhoto} alt="" width="1280" height="720" fetchPriority="high" />
-          <figcaption>Imagem ilustrativa do setor farmacêutico</figcaption>
         </figure>}
       </section>
 

@@ -1,12 +1,12 @@
 import type { BusinessGroupId } from "./businessTaxonomy";
 
-import markets from "../assets/sectors-2026/sector-markets.webp";
-import butchers from "../assets/sectors-2026/sector-butchers.webp";
-import bakery from "../assets/sectors-2026/sector-bakery.webp";
-import food from "../assets/sectors-2026/sector-food.webp";
-import pharmacies from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
-import books from "../assets/sectors-2026/sector-books.webp";
-import services from "../assets/sectors-2026/sector-services.webp";
+import markets from "../assets/sectors-2026/sector-markets-v3.jpg";
+import butchers from "../assets/sectors-2026/sector-butchers-v3.jpg";
+import bakery from "../assets/sectors-2026/sector-bakery-v3.jpg";
+import food from "../assets/sectors-2026/sector-food-v3.jpg";
+import pharmacies from "../assets/sectors-2026/sector-pharmacies-v3.jpg";
+import books from "../assets/sectors-2026/sector-books-v3.jpg";
+import services from "../assets/sectors-2026/sector-services-v3.jpg";
 
 /**
  * "Outros comércios" é a categoria genérica (nenhum ramo específico

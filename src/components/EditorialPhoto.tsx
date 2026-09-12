@@ -1,4 +1,4 @@
-/** Generated illustrative photography, never presented as a real shop. */
+/** Editorial photography used as a visual aid. */
 export function EditorialPhoto({ scene, className = "", priority = false }: {
   scene: "receipt" | "business"; className?: string; priority?: boolean;
 }) {
@@ -8,6 +8,5 @@ export function EditorialPhoto({ scene, className = "", priority = false }: {
       sizes="(max-width: 760px) calc(100vw - 32px), 480px"
       alt="" width="1536" height="1024" loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : "auto"} decoding="async" />
-    <figcaption>Imagem ilustrativa gerada por IA</figcaption>
   </figure>;
 }

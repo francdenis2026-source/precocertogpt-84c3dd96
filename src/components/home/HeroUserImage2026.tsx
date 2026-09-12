@@ -35,6 +35,5 @@ export function HeroUserImage2026({ products, productCount, storeCount, loading 
         </div>}
       </div>
     </div>
-    <small className="pc-campaign-credit">Imagem ilustrativa gerada por IA</small>
   </section>;
 }

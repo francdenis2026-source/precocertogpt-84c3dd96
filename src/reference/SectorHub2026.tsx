@@ -128,7 +128,6 @@ export function SectorHub2026() {
             </div>
 
           </div>
-          <small className="pc-campaign-credit">Imagem ilustrativa gerada por IA</small>
         </section>
         <section className="sector-hub__content sector-hub__shell">
           <header id="setores" className="sector-hub__section-head">
