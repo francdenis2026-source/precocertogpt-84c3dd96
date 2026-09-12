@@ -16,7 +16,6 @@ import { SeoRouteManager } from "./components/SeoRouteManager";
 import { AdminMaintenanceControl, PlatformMaintenanceGate } from "./components/PlatformMaintenance";
 import { FavoritesProvider } from "./features/favorites/FavoritesProvider";
 import { StoreFavoritesProvider } from "./features/favorites/StoreFavoritesProvider";
-import { MarketplaceSectorLanding } from "./reference/MarketplaceSectors";
 import { HomeNew2026 } from "./pages/HomeNew2026";
 import { SubscriberGate } from "./components/access/SubscriberGate";
 import { SingleSessionGuard } from "./components/access/SingleSessionGuard";
@@ -33,13 +32,12 @@ import { businessGroups } from "./data/businessTaxonomy";
 // O sistema visual público antigo foi removido; a identidade ativa vem do
 // campaign-theme.css carregado em main.tsx.
 import "./reference/FavoritesAndSectorStability.css";
-import "./reference/AdminCatalogWorkspaceEnhancements.css";
-import "./reference/AdminPerformance.css";
 import "./reference/MobileSearchStability.css";
 import "./reference/LiveSearchOverlayStackFix2026.css";
 import "./reference/PublicExperiencePolish2026.css";
 
 const SectorHub2026 = lazy(() => import("./reference/SectorHub2026").then(module => ({ default: module.SectorHub2026 })));
+const MarketplaceSectorLanding = lazy(() => import("./reference/MarketplaceSectors").then(module => ({ default: module.MarketplaceSectorLanding })));
 const KellyBurgueriaPage = lazy(() => import("./pages/KellyBurgueriaPage").then(module => ({ default: module.KellyBurgueriaPage })));
 const PontoDoSandubaPage = lazy(() => import("./pages/PontoDoSandubaPage").then(module => ({ default: module.PontoDoSandubaPage })));
 const ReferenceAuthPage = lazy(() => import("./reference/ReferenceExperience").then(module => ({ default: module.ReferenceAuthPage })));
