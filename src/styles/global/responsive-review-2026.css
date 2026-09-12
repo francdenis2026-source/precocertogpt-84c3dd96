@@ -65,9 +65,15 @@ html { scroll-padding-top: 88px; }
 .pc-recovery button, .pc-retry-button, .pc-catalog-notice button { min-height: 44px; padding: 10px 18px; border: 0; border-radius: 10px; background: #087843; color: white; font: inherit; font-weight: 700; cursor: pointer; }
 .pc-catalog-notice { width: min(1180px, calc(100% - 32px)); margin: 16px auto; padding: 20px; background: var(--px-surface); border: 1px solid var(--px-line); border-radius: 14px; }
 .pc-catalog-notice p { margin: 0 0 12px; }
-.ref-auth { height: auto !important; max-height: none !important; min-height: 100dvh !important; overflow: visible !important; }
-.ref-auth .ref-auth__form { height: auto !important; min-height: 100dvh; overflow: visible !important; padding-block: 36px !important; }
-.ref-auth .ref-auth__story { height: auto !important; min-height: 100dvh !important; }
+/* A trava de altura única (sem rolagem) da tela de login vive em
+   taste-auth-2026.css, carregado antes deste arquivo. As três regras que
+   existiam aqui (.ref-auth/.ref-auth__form/.ref-auth__story em height:auto+
+   overflow:visible, sem nenhuma media query) desfaziam essa trava em
+   QUALQUER largura de tela — inclusive desktop — fazendo o formulário
+   crescer além da tela e ficar com rolagem, quando o design pretendido é
+   caber inteiro numa única tela. O comportamento de tela curta/mobile que
+   essas regras tentavam resolver já está coberto pelos próprios breakpoints
+   de taste-auth-2026.css (@media(max-width:900px) etc.). */
 .ref-auth .ref-auth__card form input { min-height: 48px !important; font-size: 16px !important; }
 .ref-auth .ref-auth__recover, .ref-auth .ref-auth__back, .ref-auth .ref-auth__switch a { min-height: 44px; align-items: center; }
 .ref-auth .ref-auth__recover { padding: 10px !important; }
@@ -763,12 +769,12 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
 
 /* Tema escuro: a foto deve contextualizar, não desaparecer no preto. */
 html[data-theme="dark"] .ref-auth__story::before { opacity: .9 !important; filter: saturate(1.05) brightness(.88) !important; }
-html[data-theme="dark"] .ref-auth__story::after { background: linear-gradient(180deg, rgba(5, 24, 15, .60), rgba(7, 34, 21, .72)) !important; }
-html[data-theme="dark"] .ref-auth__form { background: #101a15 !important; }
-html[data-theme="dark"] .ref-auth__card { background: #17231c !important; border-color: #385344 !important; box-shadow: 0 18px 44px rgba(0, 0, 0, .26) !important; }
-html[data-theme="dark"] .ref-auth__card > p:not(.ref-auth__safe):not(.ref-auth__message) { color: #b7c8bd !important; }
-html[data-theme="dark"] .ref-account-tabs button { background: #1b2a21 !important; border-color: #405b49 !important; }
-html[data-theme="dark"] .ref-auth__card form input { background: #122019 !important; border-color: #41604d !important; }
+html[data-theme="dark"] .ref-auth__story::after { background: linear-gradient(180deg, rgba(6, 14, 24, .60), rgba(9, 22, 36, .72)) !important; }
+html[data-theme="dark"] .ref-auth__form { background: #0d1015 !important; }
+html[data-theme="dark"] .ref-auth__card { background: #151b24 !important; border-color: #2b3542 !important; box-shadow: 0 18px 44px rgba(0, 0, 0, .26) !important; }
+html[data-theme="dark"] .ref-auth__card > p:not(.ref-auth__safe):not(.ref-auth__message) { color: #a7b0bc !important; }
+html[data-theme="dark"] .ref-account-tabs button { background: #12161d !important; border-color: #2f3947 !important; }
+html[data-theme="dark"] .ref-auth__card form input { background: #10141b !important; border-color: #33404f !important; }
 
 /* Auth desktop: keep the complete sign-in surface inside one viewport. The
    form remains scroll-free on common laptop heights without shrinking text
