@@ -508,3 +508,49 @@ footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px 
     -webkit-text-fill-color: var(--h-muted, #66756d) !important;
   }
 }
+
+
+/* Barra inferior mobile: mais legibilidade e áreas de toque confortáveis para
+   iPhone e Android, mantendo a altura compacta. */
+@media (max-width: 760px) {
+  .ref-page .ref-dock {
+    min-height: 68px !important;
+    padding: 7px max(10px, env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right)) !important;
+  }
+  .ref-page .ref-dock a {
+    min-width: 58px !important;
+    min-height: 52px !important;
+    padding: 5px 7px !important;
+    gap: 4px !important;
+    border-radius: 11px !important;
+    font-size: 0.72rem !important;
+    line-height: 1.15 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+  }
+  .ref-page .ref-dock a svg {
+    width: 24px !important;
+    height: 24px !important;
+    stroke-width: 2.15 !important;
+  }
+  .ref-page .ref-dock a.is-active {
+    background: var(--h-primary-soft) !important;
+    color: var(--h-primary-dark) !important;
+    box-shadow: 0 2px 8px rgba(15,169,88,.14) !important;
+  }
+  .ref-page .ref-dock__badge {
+    min-width: 17px !important;
+    height: 17px !important;
+    padding: 0 4px !important;
+    font-size: 0.64rem !important;
+    line-height: 17px !important;
+  }
+}
+@media (max-width: 380px) {
+  .ref-page .ref-dock a {
+    min-width: 50px !important;
+    padding-inline: 4px !important;
+    font-size: 0.66rem !important;
+  }
+  .ref-page .ref-dock a svg { width: 22px !important; height: 22px !important; }
+}
