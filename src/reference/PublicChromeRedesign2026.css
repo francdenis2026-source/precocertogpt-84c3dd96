@@ -554,3 +554,14 @@ footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px 
   }
   .ref-page .ref-dock a svg { width: 22px !important; height: 22px !important; }
 }
+
+
+/* Créditos textuais não devem aparecer sobre os heróis públicos. A informação
+   de procedência continua no código/atributos internos, mas não polui a UI. */
+.ref-page .store-pro-pharmacy-photo figcaption,
+.ref-page .store-pro-hero figcaption,
+.ref-page [class*="hero"] figcaption,
+.ref-page [class*="hero"] small.image-credit,
+.ref-page [class*="hero"] .image-credit {
+  display: none !important;
+}
