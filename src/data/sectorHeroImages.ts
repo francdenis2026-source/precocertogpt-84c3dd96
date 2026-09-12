@@ -21,9 +21,8 @@ const other = services;
  * a vitrine troca de estabelecimento a imagem acompanha o ramo, em vez de
  * mostrar sempre a mesma prateleira de mercado.
  *
- * Os oito arquivos são fotografia real. O conjunto anterior era gerado por IA e
- * se entregava: letreiros com texto ilegível, telas com palavras inventadas e,
- * em mercados, uma dominante verde-azulada que brigava com o dourado da marca.
+ * Os arquivos formam um conjunto editorial consistente, com enquadramento
+ * horizontal, detalhes nítidos e paleta equilibrada para a identidade da marca.
  * Procedência e critério de escolha em assets/sectors-2026/CREDITOS.md.
  */
 const SECTOR_HERO_IMAGES: Record<BusinessGroupId, string> = {
