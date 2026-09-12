@@ -797,10 +797,11 @@ html[data-theme="dark"] .ref-auth__card form input { background: #10141b !import
   .ref-auth__form {
     align-content: center !important;
     padding: 12px clamp(20px, 3vw, 44px) !important;
-    overflow: hidden !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
-  .ref-auth__back { top: 14px !important; left: clamp(20px, 3vw, 44px) !important; }
-  .ref-auth__reason { margin-bottom: 8px !important; padding-block: 7px !important; }
+  .ref-auth__back { top: 14px !important; left: clamp(20px, 3vw, 44px) !important; margin-bottom: 6px !important; }
+  .ref-auth__reason { margin-bottom: 6px !important; padding-block: 6px !important; }
   .ref-auth__card { padding: 16px 20px !important; }
   .ref-auth__card h2 { margin-block: 4px !important; font-size: 29px !important; }
   .ref-auth__card > p:not(.ref-auth__safe):not(.ref-auth__message) { margin: 4px 0 10px !important; line-height: 1.35 !important; }

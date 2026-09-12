@@ -19,7 +19,7 @@
 .ref-auth__hero-copy h1{max-width:16ch!important;margin:12px 0 0!important;color:#fff!important;font-size:clamp(1.9rem,3.4vw,2.6rem)!important;line-height:1.1!important;letter-spacing:-.03em!important;font-weight:800!important;text-wrap:balance!important}
 .ref-auth__hero-copy>p{max-width:36ch!important;margin:14px 0 0!important;color:rgba(255,255,255,.82)!important;font-size:.94rem!important;line-height:1.5!important}
 .ref-auth__story>small{position:relative!important;z-index:1!important;color:rgba(255,255,255,.6)!important;font-size:.7rem!important;letter-spacing:.025em!important}
-.ref-auth__form{min-width:0!important;height:100%!important;overflow:hidden!important;display:grid!important;align-content:center!important;justify-items:center!important;padding:26px clamp(28px,5vw,64px)!important;background:var(--auth-bg)!important}
+.ref-auth__form{min-width:0!important;height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;display:grid!important;align-content:center!important;justify-items:center!important;padding:26px clamp(28px,5vw,64px)!important;background:var(--auth-bg)!important}
 /* Uma folha legada (ReferenceExperience.css, carregada antes desta) ainda
    define .ref-auth__back{position:absolute;top:28px;left:30px}, sem
    !important. Como esta folha nunca redeclarava "position", aquela regra
