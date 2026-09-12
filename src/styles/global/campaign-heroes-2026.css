@@ -47,9 +47,13 @@ html:root body .pc-campaign--guide .sector-hub__hero-actions a { background:#fff
    e não competir com o texto — e um véu em camadas (leitura à esquerda +
    vinheta nas bordas/rodapé) no lugar do gradiente único e plano de
    .pc-campaign::after, que deixava o canto inferior direito (cesta de
-   frutas bem colorida) chamando tanta atenção quanto o título. */
+   frutas bem colorida) chamando tanta atenção quanto o título. Um blur sutil
+   suaviza os detalhes da foto (prateleiras, rótulos) para o texto ganhar
+   ainda mais destaque; a escala leve evita a borda clara que o blur causaria
+   nos limites da imagem. */
 html:root body .pc-campaign.pc-campaign--guide .pc-campaign-backdrop img {
-  filter: saturate(.88) contrast(1.06) brightness(.93) !important;
+  filter: saturate(.88) contrast(1.06) brightness(.93) blur(2.5px) !important;
+  transform: scale(1.03) !important;
 }
 html:root body .pc-campaign--guide::after {
   background:
