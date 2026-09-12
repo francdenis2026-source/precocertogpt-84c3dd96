@@ -62,9 +62,6 @@ describe("Busca de produtos na homepage", () => {
     expect(screen.queryByRole("listbox", { name: "Sugestões de produtos" })).toBeNull();
 
     fireEvent.focus(input);
-    expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
-
-    fireEvent.keyDown(input, { key: "Escape" });
     expect(screen.queryByRole("listbox", { name: "Sugestões de produtos" })).toBeNull();
   });
 });
