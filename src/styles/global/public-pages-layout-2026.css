@@ -138,3 +138,17 @@ html:root body .ref-footer__legal { display:flex; flex-wrap:wrap; gap:10px 20px;
 @media(max-width:540px) {
   html:root body .pc-collab__row { grid-template-columns:minmax(0,1fr)!important; }
 }
+
+@media(max-width:760px){
+ html:root body .ref-footer{margin-top:12px!important}
+ html:root body .ref-footer__bar{padding:14px 16px!important;gap:10px!important;min-height:0!important}
+ html:root body .ref-footer__mark img{width:24px!important;height:24px!important}
+ html:root body .ref-footer__mark span{line-height:1.15!important}
+ html:root body .ref-footer__mark strong{font-size:13px!important}
+ html:root body .ref-footer__mark small{font-size:10px!important}
+ html:root body .ref-footer__links{gap:0 10px!important}
+ html:root body .ref-footer__links a{min-height:36px!important;font-size:11px!important}
+ html:root body .ref-footer__legal{padding:9px 16px!important;gap:6px 12px!important;line-height:1.25!important}
+ html:root body .ref-footer__legal>*{font-size:10px!important}
+ html:root body .ref-footer__legal span:nth-child(2),html:root body .ref-footer__legal span:nth-child(3){display:none!important}
+}
