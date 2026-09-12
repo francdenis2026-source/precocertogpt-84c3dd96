@@ -127,7 +127,7 @@ a.store-pro-contact__item:hover{border-color:color-mix(in srgb,var(--pc-green) 4
 .store-pro-product__blur{filter:blur(5px)!important;user-select:none;pointer-events:none}
 .store-pro-product__lock{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:30px;height:30px;border-radius:999px;background:color-mix(in srgb,var(--pc-surface) 88%,transparent);color:var(--pc-green-strong);box-shadow:var(--pc-shadow-sm);backdrop-filter:blur(4px)}
 .store-pro-product__lock svg{width:14px;height:14px}
-.store-pro-gate{position:relative;isolation:isolate;overflow:hidden;grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:16px;padding:22px 24px;border-radius:18px;background:linear-gradient(120deg,#0d2b20,#104c30 55%,#17633f);color:#fff;box-shadow:0 18px 40px rgb(13 43 32/16%)}
+.store-pro-gate{position:relative;isolation:isolate;overflow:hidden;grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:16px;padding:22px 24px;border-radius:18px;background:linear-gradient(120deg,#071426,#0d2b4a 55%,#2563eb);color:#fff;box-shadow:0 18px 40px rgb(7 20 38/16%)}
 .store-pro-gate::before{content:"";position:absolute;z-index:-1;top:-60px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%)}
 .store-pro-gate__icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;flex:0 0 auto}
 .store-pro-gate__icon svg{width:20px;height:20px}
@@ -216,7 +216,7 @@ a.store-pro-contact__item:hover{border-color:color-mix(in srgb,var(--pc-green) 4
 @media(max-width:390px){.store-pro-grid{grid-template-columns:1fr!important}.store-pro-product-image{height:165px!important}}
 @media(prefers-reduced-motion:reduce){.store-pro-back,.store-pro-search,.store-pro-select,.store-pro-grid>a,.store-pro-pagination button{transition:none}}
 
-.store-pro-legal{padding:16px 20px;background:var(--pc-color-primary-hover,#0d2b20);color:var(--pc-color-muted,rgba(255,255,255,.72));font-size:12px;text-align:center}
+.store-pro-legal{padding:16px 20px;background:var(--pc-forest-950,#091c36);color:var(--pc-color-muted,rgba(255,255,255,.72));font-size:12px;text-align:center}
 
 /* PublicChromeRedesign2026.css força `.ref-page .store-pro-hero` a
    display:flex + align-items:flex-end + max-height fixo (280px, 220px

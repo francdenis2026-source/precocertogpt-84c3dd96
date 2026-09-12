@@ -1252,7 +1252,7 @@ html[data-theme="light"] .pcx-hero::before {
   cursor: pointer;
 }
 .pcx-hero .pc26-live-results__all--gate {
-  background: linear-gradient(120deg, #0d2b20, #104c30 55%, #17633f);
+  background: linear-gradient(120deg, #071426, #0d2b4a 55%, #2563eb);
   color: #fff;
 }
 .pcx-hero .pc26-live-results__all--gate svg { width: 15px; height: 15px; }

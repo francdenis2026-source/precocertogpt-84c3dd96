@@ -65,7 +65,7 @@ html[data-theme="dark"] .search26-advanced footer button{background:var(--pc-gre
 .search26-card__lock{display:grid;place-items:center;width:30px;height:30px;border-radius:999px;background:var(--pc-surface-2);color:var(--pc-green-strong,#104c30);flex:0 0 auto}
 .search26-card__lock svg{width:15px;height:15px}
 @media(hover:hover) and (pointer:fine){.search26-card--teaser:hover{border-color:color-mix(in srgb,var(--pc-gold,#b77918) 45%,var(--pc-border))}}
-.search26-gate{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:14px;padding:22px 24px;border-radius:18px;background:linear-gradient(120deg,#0d2b20,#104c30 55%,#17633f);color:#fff;box-shadow:0 18px 40px rgb(13 43 32/16%)}
+.search26-gate{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:14px;padding:22px 24px;border-radius:18px;background:linear-gradient(120deg,#071426,#0d2b4a 55%,#2563eb);color:#fff;box-shadow:0 18px 40px rgb(7 20 38/16%)}
 .search26-gate::before{content:"";position:absolute;z-index:-1;top:-60px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%)}
 .search26-gate__icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;flex:0 0 auto}
 .search26-gate__icon svg{width:20px;height:20px}

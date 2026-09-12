@@ -240,7 +240,7 @@ html[data-theme="dark"] .pharmacy-directory-page{background:var(--pc-canvas,#071
 .sector-product-card__price--blurred { filter: blur(4px); user-select: none; pointer-events: none; }
 .sector-product-card__lock { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 999px; background: var(--pc-surface-2, #eef1ee); color: var(--accent-strong, #065F46); }
 .sector-product-card__lock svg { width: 13px; height: 13px; }
-.sector-product-gate { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 4px; padding: 20px 22px; border-radius: 16px; background: linear-gradient(120deg, #0d2b20, #104c30 55%, #17633f); color: #fff; box-shadow: 0 16px 34px rgba(13, 43, 32, 0.16); }
+.sector-product-gate { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 4px; padding: 20px 22px; border-radius: 16px; background: linear-gradient(120deg, #071426, #0d2b4a 55%, #2563eb); color: #fff; box-shadow: 0 16px 34px rgba(7, 20, 38, 0.16); }
 .sector-product-gate::before { content: ""; position: absolute; z-index: -1; top: -50px; right: -30px; width: 170px; height: 170px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.14), transparent 70%); }
 .sector-product-gate__icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px; background: rgba(255,255,255,.14); color: #fff; flex: 0 0 auto; }
 .sector-product-gate__icon svg { width: 18px; height: 18px; }
