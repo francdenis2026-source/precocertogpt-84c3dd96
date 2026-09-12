@@ -148,7 +148,7 @@ export function LiveProductSearch({
             setActiveIndex(-1);
             setOpen(true);
           }}
-          onFocus={() => setOpen(true)}
+          onFocus={() => undefined}
           onKeyDown={handleKeyDown}
           placeholder={
             placeholder ||
