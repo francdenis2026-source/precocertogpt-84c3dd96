@@ -482,3 +482,29 @@ footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px 
     background: linear-gradient(90deg, rgba(5,18,15,.68), rgba(5,18,15,.2)) !important;
   }
 }
+
+
+/* Contraste da busca no mobile: texto digitado e placeholder devem permanecer
+   legíveis tanto no tema claro quanto no escuro. */
+@media (max-width: 760px) {
+  .ref-page .ref-search input,
+  .ref-page .ref-search-bar input,
+  .ref-page .search-bar input,
+  .ref-page .pc-search input,
+  .ref-page [class*="search"] input[type="search"],
+  .ref-page [class*="search"] input[type="text"] {
+    color: var(--h-ink, #10231a) !important;
+    -webkit-text-fill-color: var(--h-ink, #10231a) !important;
+    caret-color: var(--h-primary, #0fa958) !important;
+    background: var(--h-surface, #fff) !important;
+  }
+  .ref-page .ref-search input::placeholder,
+  .ref-page .ref-search-bar input::placeholder,
+  .ref-page .search-bar input::placeholder,
+  .ref-page .pc-search input::placeholder,
+  .ref-page [class*="search"] input::placeholder {
+    color: var(--h-muted, #66756d) !important;
+    opacity: 1 !important;
+    -webkit-text-fill-color: var(--h-muted, #66756d) !important;
+  }
+}
