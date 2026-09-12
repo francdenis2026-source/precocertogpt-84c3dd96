@@ -16,7 +16,7 @@ export function ProductGrid({ products, loading }: { products: Product[]; loadin
           linkTo="/buscar"
           linkLabel="Explorar catálogo"
           linkIcon={<ArrowRight aria-hidden="true" />}
-        /></div>
+        /></div></div>
 
         <div className="pcx-products" aria-busy={loading} aria-live="polite">
           {loading
