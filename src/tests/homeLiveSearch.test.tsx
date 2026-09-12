@@ -55,8 +55,11 @@ describe("Busca de produtos na homepage", () => {
     expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
 
     fireEvent.pointerDown(screen.getByTestId("outside"));
+    expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
+    expect(input.getAttribute("aria-expanded")).toBe("true");
+
+    fireEvent.click(screen.getByRole("button", { name: "Fechar resultados da busca" }));
     expect(screen.queryByRole("listbox", { name: "Sugestões de produtos" })).toBeNull();
-    expect(input.getAttribute("aria-expanded")).toBe("false");
 
     fireEvent.focus(input);
     expect(screen.getByRole("listbox", { name: "Sugestões de produtos" })).toBeTruthy();
