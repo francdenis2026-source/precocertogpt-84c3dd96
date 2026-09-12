@@ -306,14 +306,16 @@ export function StoreDetailProfessional() {
   return <div className={`ref-page store-pro-page pc-noheader-page${isBonsAmigos ? " store-pro-page--bons-amigos" : ""}`} ref={pageRef}>
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="store-pro-shell">
-      <div className="store-pro-topline store-pro-topline--location-only">
-        <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> {store.address ? `${store.address} · Acre · CEP 69960-000` : `${store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000`}</a>
-      </div>
+      {/* A linha de topo com o endereço só existe quando não há um endereço
+          cadastrado: quando há, o card "Endereço" logo abaixo já mostra o
+          mesmo texto — mostrar os dois duplicava a informação na tela. */}
+      {!store.address && <div className="store-pro-topline store-pro-topline--location-only">
+        <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> {store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000</a>
+      </div>}
 
       {/* Contato direto: endereço, WhatsApp e horário existem no cadastro mas
           não apareciam em nenhum lugar do perfil (só nos cards da listagem).
-          Fica visível também no mobile, ao contrário da linha de topo acima
-          (escondida em telas estreitas). */}
+          Fica visível também no mobile. */}
       {(store.address || hasWhatsapp || store.openingHours) && <section className="store-pro-contact" aria-label="Contato e localização do estabelecimento">
         {store.address && <a href={mapsHref} target="_blank" rel="noreferrer" className="store-pro-contact__item"><MapPin aria-hidden="true" /><span><b>Endereço</b>{store.address}</span></a>}
         {store.openingHours && <span className="store-pro-contact__item"><Clock3 aria-hidden="true" /><span><b>Horário</b>{store.openingHours}</span></span>}
