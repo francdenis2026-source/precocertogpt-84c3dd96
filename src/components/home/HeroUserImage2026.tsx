@@ -9,7 +9,7 @@ import { LiveProductSearch } from "./LiveProductSearch";
 import { PriceBadge } from "../catalog/PriceBadge";
 import { freshnessText, priceFreshness } from "../../lib/pricing";
 
-// Foto full-bleed do herói (identidade 2026-09). Fornecida pelo dono do
+// Hero responsiva com imagens profissionais próprias para desktop e mobile. Fornecida pelo dono do
 // produto como a foto definitiva do herói — sem nenhuma UI/dado desenhado
 // em cima (diferente dos mockups de banco de fotos/precocerto_pacote_visual/,
 // que são só referência de ESTILO e nunca viram asset final). Cliente com
@@ -21,7 +21,8 @@ import { freshnessText, priceFreshness } from "../../lib/pricing";
 // plástico e uma ponte cenográfica atrás de um carrinho de supermercado.
 // Substituída por uma foto real de banco de imagens (cliente comparando
 // preço no celular dentro do corredor de um mercado de verdade).
-import heroPhoto from "../../assets/home-2026/hero-supermercado-mulher-comparando-2026.webp";
+import heroPhotoWeb from "../../assets/home-2026/hero-profissional-precocerto-2026.jpg";
+import heroPhotoMobile from "../../assets/home-2026/hero-profissional-precocerto-2026-mobile.jpg";
 
 const intBr = new Intl.NumberFormat("pt-BR");
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -79,13 +80,16 @@ export function HeroUserImage2026({
       // O CSS do hero usa esta variavel como background-image da secao.
       // Sem defini-la, a declaracao inteira era invalida: nem a foto nem o
       // veu de contraste eram pintados.
-      style={{ "--pcx-hero-photo": `url(${heroPhoto})` } as React.CSSProperties}
+      style={{
+        "--pcx-hero-photo-web": `url(${heroPhotoWeb})`,
+        "--pcx-hero-photo-mobile": `url(${heroPhotoMobile})`,
+      } as React.CSSProperties}
     >
       {/* Mantem o alt descritivo da foto acessivel a leitor de tela — a foto
           em si agora e pintada via background-image (menos acessivel por
           natureza), entao preservamos a semantica original com uma <img>
           visualmente oculta em vez de perder o texto alternativo. */}
-      <img className="sr-only" src={heroPhoto} alt="Cliente sorridente empurrando um carrinho cheio de hortifruti à beira de um rio em Feijó, ao entardecer" />
+      <img className="sr-only" src={heroPhotoWeb} alt="Pessoa comparando preços pelo celular em um ambiente de compras profissional" />
       <div className="pcx-hero__inner">
         <div className="pcx-hero__copy">
           <LocationSwitcher />
