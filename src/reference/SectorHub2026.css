@@ -279,3 +279,13 @@ html[data-theme="dark"] .sector-hub__sponsor-badge { color: #ffe1a1; background:
     align-items: center;
   }
 }
+
+/* Editorial banner refresh: raw sector photography with restrained labels. */
+.sector-hub__banners { margin-top:24px!important; }
+.sector-hub__banners-row { grid-auto-columns:minmax(260px,32%)!important; gap:14px!important; padding:4px 2px 10px!important; }
+.sector-hub__banner { position:relative!important; aspect-ratio:16/9!important; border:0!important; border-radius:18px!important; box-shadow:0 12px 24px rgb(7 20 38 / .18); }
+.sector-hub__banner::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 35%,rgb(7 20 38 / .8)); pointer-events:none; }
+.sector-hub__banner img { width:100%!important; height:100%!important; aspect-ratio:auto!important; object-fit:cover!important; object-position:center!important; filter:saturate(.92) contrast(1.02)!important; }
+.sector-hub__banner-label { position:absolute; left:16px; bottom:14px; z-index:1; color:#fff; font:700 17px/1.1 "Outfit Variable",Outfit,sans-serif; letter-spacing:-.01em; text-shadow:0 1px 3px rgb(0 0 0 / .35); }
+.sector-hub__banners-hint { margin-top:8px!important; }
+@media(max-width:640px){.sector-hub__banners-row{grid-auto-columns:minmax(220px,76%)!important;gap:12px!important}.sector-hub__banner-label{font-size:15px;left:13px;bottom:12px}}

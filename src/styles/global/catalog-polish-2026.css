@@ -1,0 +1,65 @@
+/* Placeholders must never inherit photographic overlays. */
+html:root body .pcx-home .pcx-skeleton { position:relative; overflow:hidden; }
+html:root body .pcx-home .pcx-store-placeholder::after { content:none!important; }
+html:root body .pcx-home .pcx-categories {
+  display:flex!important; grid-template-columns:none!important; gap:12px!important;
+  overflow-x:auto!important; overflow-y:hidden!important; padding:6px 3px 14px!important;
+  margin:0!important; width:100%; min-width:0; scroll-snap-type:x proximity;
+  overscroll-behavior-x:contain; touch-action:pan-x pan-y;
+}
+html:root body .pcx-home .pcx-categories .pcx-category {
+  flex:0 0 132px!important; width:132px!important; min-width:132px!important;
+  max-width:none!important; height:auto!important; min-height:116px;
+  display:flex!important; flex-direction:column!important; align-items:center;
+  justify-content:flex-start; padding:14px 10px!important; gap:10px!important;
+  scroll-snap-align:start;
+}
+html:root body .pcx-home .pcx-category__text { width:100%; min-width:0; text-align:center; }
+html:root body .pcx-home .pcx-category__text strong {
+  display:block; white-space:normal!important; overflow:visible!important;
+  text-overflow:clip!important; font-size:13px!important; line-height:1.4!important;
+}
+html:root body .pcx-home .pcx-category__text > span { display:none!important; }
+.pcx-category-controls { display:flex; justify-content:flex-end; gap:8px; margin:0 0 8px; }
+.pcx-category-controls button {
+  width:44px; height:44px; border:1px solid var(--h-border); border-radius:12px;
+  background:var(--h-surface); color:var(--h-ink); font-size:20px; cursor:pointer;
+}
+html:root body .store-pro-page .store-pro-hero--pharmacies {
+  display:grid!important; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+  align-items:center; gap:24px; padding:24px!important; height:auto!important;
+  min-height:0!important; max-height:none!important; background:var(--pc-surface,#fff)!important;
+  color:var(--pc-ink,#14243b)!important; border:1px solid var(--pc-border,#dce3ee);
+}
+html:root body .store-pro-page .store-pro-hero--pharmacies::before,
+html:root body .store-pro-page .store-pro-hero--pharmacies::after { content:none!important; display:none!important; }
+html:root body .store-pro-hero--pharmacies .store-pro-hero__content {
+  width:100%; min-width:0; padding:0!important; position:relative; display:flex;
+  flex-wrap:wrap; gap:16px; color:var(--pc-ink,#14243b)!important;
+}
+html:root body .store-pro-hero--pharmacies .store-pro-copy { flex:1 1 240px; min-width:0; }
+html:root body .store-pro-hero--pharmacies .store-pro-copy h1 {
+  color:var(--pc-ink,#14243b)!important; -webkit-text-fill-color:var(--pc-ink,#14243b)!important;
+  font-size:clamp(24px,3vw,36px)!important; line-height:1.12!important; text-shadow:none!important;
+}
+html:root body .store-pro-hero--pharmacies :is(.store-pro-copy > span,.store-pro-copy p,.store-pro-status small) {
+  color:var(--pc-muted,#52647a)!important; text-shadow:none!important;
+}
+html:root body .store-pro-hero--pharmacies :is(.store-pro-status,.store-pro-meta-line b,.store-pro-specialties li,.store-pro-specialties b) {
+  background:var(--pc-surface-2,#eef3fa)!important; color:var(--pc-ink,#14243b)!important;
+  border-color:var(--pc-border,#dce3ee)!important; backdrop-filter:none!important;
+}
+html:root body .store-pro-hero--pharmacies .store-pro-status { flex:1 0 100%; margin:0!important; }
+html:root body .store-pro-hero--pharmacies .store-pro-status strong { color:var(--pc-ink,#14243b)!important; }
+html:root body .store-pro-hero--pharmacies .store-pro-status > svg { color:var(--pc-primary,#2563eb)!important; background:transparent!important; }
+.store-pro-pharmacy-photo { min-width:0; margin:0; }
+html:root body .store-pro-pharmacy-photo img {
+  display:block; width:100%!important; height:auto!important; aspect-ratio:16/9;
+  object-fit:contain!important; object-position:center!important;
+  border-radius:16px; filter:none!important; opacity:1!important;
+}
+.store-pro-pharmacy-photo figcaption { margin-top:8px; color:var(--pc-muted,#52647a); font-size:11px; line-height:1.4; }
+@media(max-width:760px) {
+  html:root body .store-pro-page .store-pro-hero--pharmacies { grid-template-columns:1fr; padding:16px!important; gap:16px; }
+  html:root body .pcx-home .pcx-categories .pcx-category { flex-basis:108px!important; width:108px!important; min-width:108px!important; }
+}

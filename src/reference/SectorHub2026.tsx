@@ -1,3 +1,4 @@
+import { CampaignBackdrop } from "../components/CampaignBackdrop";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -96,15 +97,16 @@ export function SectorHub2026() {
     <div className="sector-hub" ref={pageRef}>
       <PublicHeader backOnly />
       <main id="conteudo-principal">
-        <section className="sector-hub__hero">
+        <section className="sector-hub__hero pc-campaign pc-campaign--guide" aria-labelledby="sector-campaign-title">
+          <CampaignBackdrop scene="business" />
           <div className="sector-hub__shell sector-hub__hero-grid">
             <div className="sector-hub__hero-copy">
               <span className="sector-hub__eyebrow">
                 <Grid2X2 aria-hidden="true" />
                 Guia do comércio de Feijó
               </span>
-              <h1>
-                Onde comprar <em>em Feijó</em>
+              <h1 id="sector-campaign-title">
+                Perto de você.<em>Parte da sua cidade.</em>
               </h1>
               <p>
                 Escolha o tipo de comércio que você procura e veja quem vende,
@@ -124,10 +126,9 @@ export function SectorHub2026() {
                 <Link to="/estabelecimentos">Ver estabelecimentos <ArrowRight aria-hidden="true" /></Link>
               </div>
             </div>
-            <figure className="sector-hub__hero-visual">
-              <img src="/home-editorial-2026/campanha-familia-precocerto-v2.webp" alt="Família comparando preços no celular durante as compras no mercado" loading="eager" width="1264" height="848" />
-            </figure>
+
           </div>
+          <small className="pc-campaign-credit">Imagem ilustrativa gerada por IA</small>
         </section>
         <section className="sector-hub__content sector-hub__shell">
           <header id="setores" className="sector-hub__section-head">

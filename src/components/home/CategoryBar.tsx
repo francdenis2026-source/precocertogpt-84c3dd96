@@ -10,7 +10,7 @@ import {
   Tag,
   type LucideIcon,
 } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import { businessGroups, groupForStore, type BusinessGroupId } from "../../data/businessTaxonomy";
 import type { StoreRow } from "../../data/catalog";
@@ -59,6 +59,7 @@ const CATEGORY_TINT: Record<BusinessGroupId, string> = {
 };
 
 export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
+  const rail = useRef<HTMLDivElement>(null);
   // Soma real de produtos por grupo, a partir da contagem que cada loja já
   // carrega (StoreRow.products) — nenhum número inventado; some 0 vira só o
   // subtítulo genérico de CATEGORY_SUB (ex.: durante o carregamento).
@@ -83,7 +84,11 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
           linkLabel="Ver todas"
           linkIcon={<LayoutGrid aria-hidden="true" />}
         />
-        <div className="pcx-categories">
+        <div className="pcx-category-controls" aria-label="Navegar pelas categorias">
+          <button type="button" aria-label="Categorias anteriores" onClick={() => rail.current?.scrollBy({ left: -280 })}>←</button>
+          <button type="button" aria-label="Próximas categorias" onClick={() => rail.current?.scrollBy({ left: 280 })}>→</button>
+        </div>
+        <div className="pcx-categories" ref={rail} aria-label="Categorias de estabelecimentos">
           {businessGroups.map((group) => {
             const Icon = CATEGORY_ICON[group.id];
             const productCount = productCountByGroup.get(group.id);

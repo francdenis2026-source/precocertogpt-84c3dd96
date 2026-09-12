@@ -1,0 +1,35 @@
+/* Campaign heroes: one contained image, responsive crop and readable copy. */
+html:root body .pc-campaign { position:relative!important; isolation:isolate; overflow:hidden!important; }
+html:root body .pc-campaign .pc-campaign-backdrop,
+html:root body .pc-campaign .pc-campaign-backdrop img {
+  position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
+}
+html:root body .pc-campaign .pc-campaign-backdrop { z-index:-2; display:block; }
+html:root body .pc-campaign .pc-campaign-backdrop img { object-fit:cover!important; object-position:center!important; filter:none!important; opacity:1!important; }
+html:root body .pc-campaign::after { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(90deg, rgb(7 20 38 / .9) 0%, rgb(7 20 38 / .72) 42%, rgb(7 20 38 / .24) 76%, transparent 100%);
+}
+html:root body .pc-campaign--home { min-height:clamp(460px,58vw,680px)!important; background:#091c36!important; color:#fff!important; border-radius:0!important; padding:clamp(42px,7vw,88px) 0!important; }
+html:root body .pc-campaign--home .pcx-intro__inner { position:relative; z-index:1; min-height:clamp(370px,46vw,540px); align-items:center; }
+html:root body .pc-campaign--home .pcx-intro__copy { max-width:650px; }
+html:root body .pc-campaign--home :is(.pcx-intro__eyebrow,.pcx-intro__lead,.pcx-intro__suggestions,.pcx-intro__suggestions a,.pcx-intro__store-link,.pcx-intro__stat) { color:#eef5ff!important; }
+html:root body .pc-campaign--home .pcx-intro h1 { color:#fff!important; font-size:clamp(38px,5vw,68px)!important; max-width:13ch; }
+html:root body .pc-campaign--home .pcx-intro h1 strong { color:#9bc7ff!important; }
+html:root body .pc-campaign--home .pc26-hero-search { background:#fff!important; color:#14213d!important; }
+html:root body .pc-campaign--home .pcx-intro__stats { border-color:rgb(255 255 255 / .25)!important; }
+html:root body .pc-campaign--home .pc-campaign-credit,
+html:root body .pc-campaign--guide .pc-campaign-credit { position:absolute; right:18px; bottom:12px; z-index:2; color:rgb(255 255 255 / .72); font-size:10px; }
+html:root body .pc-campaign--guide { min-height:clamp(300px,34vw,430px)!important; margin-top:20px; background:#102a43!important; color:#fff!important; border:0!important; }
+html:root body .pc-campaign--guide .sector-hub__hero-grid { position:relative; z-index:1; height:auto!important; min-height:clamp(300px,34vw,430px); padding:clamp(30px,6vw,72px)!important; grid-template-columns:1fr!important; }
+html:root body .pc-campaign--guide .sector-hub__hero-copy { max-width:630px; }
+html:root body .pc-campaign--guide :is(.sector-hub__eyebrow,.sector-hub__hero-copy>p,.sector-hub__hero-stats span) { color:#eef5ff!important; }
+html:root body .pc-campaign--guide h1 { color:#fff!important; font-size:clamp(40px,6vw,76px)!important; max-width:10ch; }
+html:root body .pc-campaign--guide h1 em { display:block; color:#a9d1ff!important; }
+html:root body .pc-campaign--guide .sector-hub__hero-actions a { background:#fff!important; color:#122a3a!important; border-color:#fff!important; }
+@media(max-width:760px) {
+ html:root body .pc-campaign--home { min-height:650px!important; padding:34px 0!important; }
+ html:root body .pc-campaign--home .pcx-intro__inner { min-height:580px; align-items:end; }
+ html:root body .pc-campaign--home .pc-campaign-backdrop img { object-position:68% center!important; }
+ html:root body .pc-campaign--guide { min-height:470px!important; }
+ html:root body .pc-campaign--guide .sector-hub__hero-grid { min-height:470px; padding:28px 22px!important; align-items:end; }
+}

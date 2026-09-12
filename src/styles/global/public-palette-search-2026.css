@@ -1,0 +1,225 @@
+/* Shared public palette. Legacy aliases are kept to avoid changing business components.
+   Status/error colors and store-specific identities are intentionally not remapped. */
+:root {
+  --brand-canvas: #f4f7fb;
+  --brand-surface: #ffffff;
+  --brand-soft: #edf3fa;
+  --brand-ink: #14213d;
+  --brand-muted: #52647a;
+  --brand-line: #d9e2ef;
+  --brand-lineStrong: #bdcadb;
+  --brand-primary: #2563eb;
+  --brand-primaryText: #1d4ed8;
+  --brand-primarySoft: #e8f0ff;
+  --brand-onPrimary: #ffffff;
+  --brand-navy: #091c36;
+}
+html[data-theme="dark"] {
+  --brand-canvas: #08111f;
+  --brand-surface: #101c2e;
+  --brand-soft: #17263b;
+  --brand-ink: #f4f7fb;
+  --brand-muted: #a9b7c9;
+  --brand-line: #293b52;
+  --brand-lineStrong: #52647a;
+  --brand-primary: #60a5fa;
+  --brand-primaryText: #93c5fd;
+  --brand-primarySoft: #132d4f;
+  --brand-onPrimary: #08111f;
+  --brand-navy: #071426;
+}
+@media (prefers-color-scheme: dark) {
+html:not([data-theme="light"]) {
+  --brand-canvas: #08111f;
+  --brand-surface: #101c2e;
+  --brand-soft: #17263b;
+  --brand-ink: #f4f7fb;
+  --brand-muted: #a9b7c9;
+  --brand-line: #293b52;
+  --brand-lineStrong: #52647a;
+  --brand-primary: #60a5fa;
+  --brand-primaryText: #93c5fd;
+  --brand-primarySoft: #132d4f;
+  --brand-onPrimary: #08111f;
+  --brand-navy: #071426;
+}
+}
+html:root, html:root body, html:root body :is(.pcx-home,.ref-page,.ref-auth,.search26-page,.msearch26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page) {
+  --pc-canvas: var(--brand-canvas) !important;
+  --pc-surface: var(--brand-surface) !important;
+  --pc-surface-2: var(--brand-soft) !important;
+  --pc-ink: var(--brand-ink) !important;
+  --pc-muted: var(--brand-muted) !important;
+  --pc-border: var(--brand-line) !important;
+  --pc-border-strong: var(--brand-lineStrong) !important;
+  --pc-ring: var(--brand-primary) !important;
+  --pc-primary-strong: var(--brand-primaryText) !important;
+  --pc-primary-soft: var(--brand-primarySoft) !important;
+  --pc-green-strong: var(--brand-primaryText) !important;
+  --pc-green-soft: var(--brand-primarySoft) !important;
+  --pc-gold-ink: var(--brand-primaryText) !important;
+  --pc-gold-soft: var(--brand-primarySoft) !important;
+  --pc-navy: var(--brand-navy) !important;
+  --pc-navy-2: var(--brand-navy) !important;
+  --ref-bg: var(--brand-canvas) !important;
+  --ref-paper: var(--brand-surface) !important;
+  --ref-ink: var(--brand-ink) !important;
+  --ref-muted: var(--brand-muted) !important;
+  --ref-line: var(--brand-line) !important;
+  --ref-navy: var(--brand-navy) !important;
+  --ref-navy-2: var(--brand-navy) !important;
+  --ref-gold-deep: var(--brand-primaryText) !important;
+  --px-surface: var(--brand-surface) !important;
+  --px-surface-soft: var(--brand-soft) !important;
+  --px-ink: var(--brand-ink) !important;
+  --px-muted: var(--brand-muted) !important;
+  --px-line: var(--brand-line) !important;
+  --px-brand: var(--brand-primary) !important;
+  --px-brand-ink: var(--brand-onPrimary) !important;
+  --px-brand-soft: var(--brand-primarySoft) !important;
+  --px-ring: var(--brand-primarySoft) !important;
+  --h-canvas: var(--brand-canvas) !important;
+  --h-surface: var(--brand-surface) !important;
+  --h-surface-2: var(--brand-soft) !important;
+  --h-ink: var(--brand-ink) !important;
+  --h-muted: var(--brand-muted) !important;
+  --h-subtle: var(--brand-muted) !important;
+  --h-border: var(--brand-line) !important;
+  --h-border-strong: var(--brand-lineStrong) !important;
+  --h-primary: var(--brand-primary) !important;
+  --h-primary-dark: var(--brand-primaryText) !important;
+  --h-primary-soft: var(--brand-primarySoft) !important;
+  --h-on-primary: var(--brand-onPrimary) !important;
+  --h-forest: var(--brand-navy) !important;
+  --h-forest-deep: var(--brand-navy) !important;
+  --bg-primary: var(--brand-canvas) !important;
+  --bg-secondary: var(--brand-surface) !important;
+  --bg-tertiary: var(--brand-soft) !important;
+  --text-primary: var(--brand-ink) !important;
+  --text-secondary: var(--brand-muted) !important;
+  --border-color: var(--brand-line) !important;
+  --accent-strong: var(--brand-primaryText) !important;
+  --accent-soft: var(--brand-primarySoft) !important;
+  --pc-light-canvas: var(--brand-canvas) !important;
+  --pc-light-surface: var(--brand-surface) !important;
+  --pc-light-canvas-2: var(--brand-soft) !important;
+  --pc-light-ink: var(--brand-ink) !important;
+  --pc-light-muted: var(--brand-muted) !important;
+  --pc-light-line: var(--brand-line) !important;
+  --pc-light-accent: var(--brand-primaryText) !important;
+  --pc-light-accent-strong: var(--brand-primaryText) !important;
+  --pc-light-accent-soft: var(--brand-primarySoft) !important;
+  /* Legacy filled buttons have white labels; use an AA blue in both themes. */
+  --pc-primary: #2563eb !important;
+  --pc-green: #2563eb !important;
+  --ref-green: #2563eb !important;
+  --ref-gold: #2563eb !important;
+  --pc-gold: #2563eb !important;
+  --accent: #2563eb !important;
+  --pc-forest-950: var(--brand-navy) !important;
+  --pc-forest-900: #102a4c !important;
+  --pc-forest-850: #16345f !important;
+  --pc-forest-800: #1d4ed8 !important;
+  --pc-green-600: #2563eb !important;
+  --pc-green-500: #2563eb !important;
+  --pc-green-400: #60a5fa !important;
+  --pc-off-white: var(--brand-canvas) !important;
+  --pc-surface-soft: var(--brand-soft) !important;
+  --pc-graphite: var(--brand-ink) !important;
+  --pc-muted-forest: var(--brand-muted) !important;
+  --pc-border-forest: var(--brand-line) !important;
+}
+html:root body, html:root body #root,
+html:root body :is(.ref-page,.search26-page,.msearch26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page) {
+  background: var(--brand-canvas) !important;
+  color: var(--brand-ink) !important;
+}
+html:root body :is(.ref-header,.ref-header.is-scrolled,.ref-mobile-menu,.ref-dock) {
+  background: var(--brand-surface) !important; border-color:var(--brand-line) !important; color:var(--brand-ink);
+}
+html:root body .ref-header :is(.ref-theme,.ref-menu,.ref-favorites-link,.ref-header__back,.ref-header__home) {
+  background:var(--brand-surface) !important; color:var(--brand-ink) !important; border-color:var(--brand-lineStrong) !important;
+}
+html:root body .ref-header .ref-signin { background:#2563eb !important; color:#fff !important; }
+html:root body .ref-dock a { color:var(--brand-muted) !important; }
+html:root body .ref-dock a.is-active, html:root body .ref-nav a.is-active {
+  background:var(--brand-primarySoft) !important; color:var(--brand-primaryText) !important;
+}
+html:root body .ref-header__home { color:var(--brand-primaryText) !important; }
+html:root body .ref-footer { background:var(--brand-navy) !important; color:#f4f7fb !important; }
+html:root body .ref-footer :is(a,p,small) { color:#c4d1e2 !important; }
+html:root body :is(.search26-search,.ref-directory-search) button[type="submit"] {
+  background:#2563eb !important; color:#fff !important;
+}
+html .pcx-home .pcx-product { border:1px solid var(--h-border) !important; box-shadow:none !important; }
+html .pcx-home .pcx-product:hover { border-color:var(--h-border-strong) !important; }
+html .pcx-home .pcx-product:focus-visible { outline:3px solid var(--h-primary) !important; outline-offset:3px; }
+/* Homepage search: isolated presentation, no inherited legacy result-card rules. */
+html:root .pcx-search-panel {
+  position:absolute; top:calc(100% + 8px); left:0; right:0; z-index:120;
+  max-height:min(440px,60dvh); overflow:auto; overscroll-behavior:contain;
+  border:1px solid var(--h-border-strong); border-radius:16px; padding:8px;
+  background:var(--h-surface); color:var(--h-ink);
+  box-shadow:0 16px 40px rgb(8 17 31 / 18%); text-align:left;
+}
+.pcx-search-panel__head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:4px 12px; padding:4px 8px 8px; border-bottom:1px solid var(--h-border); font-size:13px; font-weight:600; }
+.pcx-search-panel__head-actions { display:flex; align-items:center; gap:8px; color:var(--h-muted); }
+.pcx-search-panel__head small { font-size:12px; font-weight:500; }
+.pcx-search-panel__head button { display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:8px; background:transparent; color:var(--h-muted); cursor:pointer; }
+.pcx-search-panel svg { width:18px; height:18px; flex-shrink:0; }
+.pcx-search-panel__list { display:grid; }
+html:root .pcx-search-panel__list > button {
+  position:relative; display:grid; grid-template-columns:48px minmax(0,1fr) auto;
+  align-items:center; gap:12px; width:100%; min-height:84px; margin:0; padding:12px 8px;
+  background:transparent; color:var(--h-ink); border:0; border-bottom:1px solid var(--h-border);
+  border-radius:0; text-align:left; font-family:var(--h-font); cursor:pointer; box-shadow:none;
+}
+html:root .pcx-search-panel__list > button:is(:hover,:focus-visible,.is-active) { background:var(--h-primary-soft); border-radius:8px; }
+.pcx-search-panel__thumb { width:48px; height:48px; border:1px solid var(--h-border); border-radius:10px; display:grid; place-items:center; background:#fff; color:#52647a; }
+.pcx-search-panel__thumb img { width:42px; height:42px; object-fit:contain; }
+.pcx-search-panel__copy { min-width:0; display:grid; gap:3px; }
+.pcx-search-panel__copy strong { font-size:14px; font-weight:600; line-height:1.4; overflow-wrap:anywhere; }
+.pcx-search-panel__copy small, .pcx-search-panel__copy em { color:var(--h-muted); font-size:12px; line-height:1.4; font-style:normal; overflow-wrap:anywhere; }
+.pcx-search-panel__copy em i { display:none; }
+.pcx-search-panel__price { display:grid; gap:3px; justify-items:end; white-space:nowrap; }
+.pcx-search-panel__price small { font-size:11px; color:var(--h-muted); }
+.pcx-search-panel__price strong { font-size:16px; font-weight:700; color:var(--h-primary-dark); font-variant-numeric:tabular-nums; }
+.pcx-search-panel__price--blurred strong { filter:blur(5px); user-select:none; }
+.pcx-search-panel__lock { position:absolute; right:20px; display:grid; place-items:center; color:var(--h-muted); }
+.pcx-search-panel__state { min-height:100px; display:flex; align-items:center; justify-content:center; gap:12px; padding:20px 12px; font-size:14px; color:var(--h-muted); }
+.pcx-search-panel__state span { display:grid; gap:4px; }
+.pcx-search-panel__state small { font-size:13px; }
+html:root .pcx-search-panel__all { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; min-height:48px; padding:12px; margin:8px 0 0; border:0; border-radius:10px; background:var(--h-primary-soft); color:var(--h-primary-dark); font-size:13px; font-weight:700; cursor:pointer; }
+.pcx-search-panel__loader { animation:pcx-spin 900ms linear infinite; }
+@media(max-width:480px) {
+  html:root .pcx-search-panel { padding:6px; max-height:55dvh; }
+  html:root .pcx-search-panel__list > button { grid-template-columns:40px minmax(0,1fr) auto; gap:8px; padding:12px 6px; }
+  .pcx-search-panel__thumb { width:40px; height:40px; }
+  .pcx-search-panel__thumb img { width:34px; height:34px; }
+  .pcx-search-panel__copy strong { font-size:13px; }
+  .pcx-search-panel__price strong { font-size:14px; }
+}
+@media(prefers-reduced-motion:reduce) { .pcx-search-panel__loader { animation:none; } }
+
+/* Explicit-theme mobile rules previously hardcoded green with higher specificity. */
+html:root body.pc-app-shell .ref-dock a.is-active {
+  background:var(--brand-primarySoft) !important;
+  color:var(--brand-primaryText) !important;
+}
+html:root body .ref-mobile-menu a {
+  background:var(--brand-soft) !important;
+  color:var(--brand-ink) !important;
+}
+
+html:root,
+html:root body.pc-app-shell,
+html:root body.pc-app-shell #root {
+  background:var(--brand-canvas) !important;
+  color:var(--brand-ink) !important;
+}
+html:root body.pc-app-shell .ref-dock {
+  background:var(--brand-surface) !important;
+  border-color:var(--brand-line) !important;
+}
+html:root body.pc-app-shell .ref-dock a { color:var(--brand-muted) !important; }
+html:root body.pc-app-shell .ref-dock a.is-active { color:var(--brand-primaryText) !important; }

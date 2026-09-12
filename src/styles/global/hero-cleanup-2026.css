@@ -1,0 +1,16 @@
+/* Hero cleanup 2026: no photographic crop or blur is applied to structural loading states. */
+.ref-stores-heading { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:28px; padding:4px 0; color:var(--pc-ink); }
+.ref-stores-heading > div:first-child { min-width:0; }
+.ref-stores-heading span { color:var(--pc-primary-strong,var(--pc-ink)); font-size:11px; font-weight:800; letter-spacing:.12em; }
+.ref-stores-heading h1 { margin:6px 0 8px; font-family:"Outfit Variable",Outfit,sans-serif; font-size:clamp(1.8rem,4vw,3rem); line-height:1; color:var(--pc-ink); }
+.ref-stores-heading p { margin:0; max-width:58ch; color:var(--pc-muted); font-size:14px; line-height:1.5; }
+.ref-stores-heading__actions { display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+.ref-stores-heading .ref-stores-hero__stat { display:flex; align-items:center; gap:7px; min-height:40px; padding:0 12px; border:1px solid var(--pc-border); border-radius:999px; background:var(--pc-surface); color:var(--pc-muted); font-size:12px; font-weight:700; white-space:nowrap; }
+.ref-stores-heading .ref-stores-hero__stat svg { width:15px; color:var(--pc-primary-strong); }
+.ref-stores-heading .ref-stores-hero__cta { display:inline-flex; align-items:center; gap:7px; min-height:44px; padding:0 15px; border-radius:10px; background:var(--pc-primary,#2563eb); color:#fff; font-size:13px; font-weight:800; text-decoration:none; white-space:nowrap; }
+.ref-stores-heading .ref-stores-hero__cta svg { width:15px; }
+.store-pro-hero, .kelly-hero, .pharmacy-directory__hero, .storefront-pro__hero, .dorinha-editorial__hero { background-position:center center !important; }
+.store-pro-hero__overlay, .kelly-hero__overlay, .pharmacy-directory__hero::after { backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+.store-pro-hero__overlay { background:linear-gradient(90deg,rgba(7,18,31,.78),rgba(7,18,31,.40) 58%,rgba(7,18,31,.12)) !important; }
+.kelly-hero__overlay { background:linear-gradient(100deg,rgba(12,18,28,.78),rgba(12,18,28,.30) 64%,rgba(12,18,28,.10)) !important; }
+@media(max-width:720px){ .ref-stores-heading { align-items:start; flex-direction:column; gap:16px; margin-bottom:20px; } .ref-stores-heading__actions { justify-content:flex-start; } .ref-stores-heading h1 { font-size:clamp(1.7rem,8vw,2.3rem); } }

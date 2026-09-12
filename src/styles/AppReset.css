@@ -18,8 +18,8 @@ img, svg { display: block; max-width: 100%; }
    imagem some até o carregamento terminar (marcado por initializeImageLoadFade
    em main.tsx) e então aparece com uma transição suave, em vez de um pop seco.
    Ícones/SVGs ficam de fora — carregam junto com o próprio HTML/CSS. */
-img:not([data-pc-img-ready]) { opacity: 0; }
-img[data-pc-img-ready] { opacity: 1; transition: opacity 220ms ease; }
+img { opacity: 1; }
+img[data-pc-img-ready] { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   img[data-pc-img-ready] { transition: none; }
 }

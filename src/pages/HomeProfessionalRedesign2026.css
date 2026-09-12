@@ -9,40 +9,37 @@
    ========================================================================= */
 
 .pcx-home {
-  /* Paleta verde PreçoCerto 2026-09 (migração da identidade terracota/dourada
-     anterior — ver DESIGN.md). Valores alinhados a --pc-green-600/700 etc. */
-  --h-canvas: #f5f7f4;
+  /* Paleta azul profissional da homepage. O modo claro usa azul real sobre
+     superfícies neutras; o escuro usa azul luminoso sobre marinho profundo. */
+  --h-canvas: #f4f7fb;
   --h-surface: #ffffff;
-  --h-surface-2: #eff4ef;
-  --h-border: #dde5df;
-  --h-border-strong: #cbd6cd;
-  --h-ink: #10231a;
+  --h-surface-2: #edf3fa;
+  --h-border: #d9e2ef;
+  --h-border-strong: #bdcadb;
+  --h-ink: #14213d;
   /* #66756d dava 4.4:1 sobre --h-surface-2/--h-primary-soft (abaixo de
      4.5:1). Escurecido mais um pouco para folgar em qualquer superfície
      clara do tema. */
-  --h-muted: #5b6a62;
+  --h-muted: #52647a;
   /* Era #8993a1: 3.11:1 sobre a superfície branca, abaixo do mínimo AA de
      4.5:1 e usado justamente nos rótulos pequenos (preço anterior, "menor
      preço", datas de atualização). Escurecido para 4.7:1 e, na revisão
      seguinte, para 4.9:1+ por segurança. */
-  --h-subtle: #5b6a62;
+  --h-subtle: #52647a;
 
-  /* Escurecido de #047857 (2.6:1) -> #0e8f42 (4.2:1, ainda abaixo de AA) ->
-     #047857: branco sobre este verde agora atinge ~4.6:1 de contraste
-     (WCAG AA 4.5:1 para texto normal). */
-  --h-primary: #047857;
-  --h-primary-dark: #065F46;
-  --h-primary-soft: #e7f9ee;
+  /* Azul principal com contraste AA sobre texto branco. */
+  --h-primary: #2563eb;
+  --h-primary-dark: #1d4ed8;
+  --h-primary-soft: #e8f0ff;
   --h-on-primary: #ffffff;
 
-  /* Verde-floresta profundo — grandes superfícies (hero, banners, cesta
-     inteligente), nunca CTA/preço (isso é --h-primary, verde vivo). */
-  --h-forest: #043d2c;
-  --h-forest-deep: #022c20;
+  /* Azul-marinho profundo para hero, banners e blocos institucionais. */
+  --h-forest: #16345f;
+  --h-forest-deep: #091c36;
 
-  --h-accent: #f1b72c;
-  --h-accent-dark: #8a6210;
-  --h-accent-soft: #fdf3dc;
+  --h-accent: #f59e0b;
+  --h-accent-dark: #9a5b00;
+  --h-accent-soft: #fff3d6;
 
   --h-danger: #e85151;
   --h-danger-soft: #fbe9e7;
@@ -70,25 +67,25 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .pcx-home {
-    --h-canvas: #07130e;
-    --h-surface: #0e1d16;
-    --h-surface-2: #14271d;
+    --h-canvas: #08111f;
+    --h-surface: #101c2e;
+    --h-surface-2: #17263b;
     --h-border: rgba(255, 255, 255, 0.08);
     --h-border-strong: rgba(255, 255, 255, 0.14);
-    --h-ink: #f5fbf7;
-    --h-muted: #9baaa2;
-    --h-subtle: #9baaa2;
+    --h-ink: #f4f7fb;
+    --h-muted: #a9b7c9;
+    --h-subtle: #a9b7c9;
 
-    --h-primary: #34D399;
-    --h-primary-dark: #10B981;
-    --h-primary-soft: #12281f;
-    --h-on-primary: #07130e;
-    --h-forest: #043d2c;
-    --h-forest-deep: #022c20;
+    --h-primary: #60A5FA;
+    --h-primary-dark: #93C5FD;
+    --h-primary-soft: #132d4f;
+    --h-on-primary: #08111f;
+    --h-forest: #102a4c;
+    --h-forest-deep: #071426;
 
-    --h-accent: #f1c24e;
-    --h-accent-dark: #c89530;
-    --h-accent-soft: #362a14;
+    --h-accent: #fbbf24;
+    --h-accent-dark: #d99a16;
+    --h-accent-soft: #3a2c0c;
 
     --h-danger: #f0776b;
     --h-danger-soft: #3a211d;
@@ -99,25 +96,25 @@
   }
 }
 [data-theme="dark"] .pcx-home {
-  --h-canvas: #07130e;
-  --h-surface: #0e1d16;
-  --h-surface-2: #14271d;
+  --h-canvas: #08111f;
+  --h-surface: #101c2e;
+  --h-surface-2: #17263b;
   --h-border: rgba(255, 255, 255, 0.08);
   --h-border-strong: rgba(255, 255, 255, 0.14);
-  --h-ink: #f5fbf7;
-  --h-muted: #9baaa2;
-  --h-subtle: #9baaa2;
+  --h-ink: #f4f7fb;
+  --h-muted: #a9b7c9;
+  --h-subtle: #a9b7c9;
 
-  --h-primary: #34D399;
-  --h-primary-dark: #10B981;
-  --h-primary-soft: #12281f;
-  --h-on-primary: #07130e;
-  --h-forest: #043d2c;
-  --h-forest-deep: #022c20;
+  --h-primary: #60A5FA;
+  --h-primary-dark: #93C5FD;
+  --h-primary-soft: #132d4f;
+  --h-on-primary: #08111f;
+  --h-forest: #102a4c;
+  --h-forest-deep: #071426;
 
-  --h-accent: #f1c24e;
-  --h-accent-dark: #c89530;
-  --h-accent-soft: #362a14;
+  --h-accent: #fbbf24;
+  --h-accent-dark: #d99a16;
+  --h-accent-soft: #3a2c0c;
 
   --h-danger: #f0776b;
   --h-danger-soft: #3a211d;
@@ -158,7 +155,7 @@
 /* app-shell-professional-2026.css força #18181B (preto) em qualquer botão
    de busca (.pc26-search/.pc26-hero-search/.pc26-button) no tema claro —
    pensado para outras telas, mas também pega a busca do header e do herói
-   aqui dentro, que devem usar o verde vivo da marca como qualquer outro CTA
+   aqui dentro, que devem usar o azul vivo da marca como qualquer outro CTA
    primário da home. */
 html[data-theme="light"] .pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button),
 html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search button, .pc26-button),
@@ -564,8 +561,8 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
 /* Herói fotográfico full-bleed (identidade 2026-09, pacote de referência
-   visual). Regra dos dois verdes: grandes superfícies fotográficas usam
-   --pc-forest-*, sempre — este herói é intencionalmente escuro nos dois
+   visual). Superfícies fotográficas usam azul-marinho para contraste;
+   este herói é intencionalmente escuro nos dois
    temas do site, como já é .store-pro-hero em StoreDetailProfessional.css.
    Por isso nenhum estilo aqui dentro depende de --h-* nem de data-theme: definimos
    uma paleta fixa própria (--hero-*) e a busca/painel flutuantes usam tokens
@@ -602,12 +599,12 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   /* Posição ajustada para a foto atual (cliente no corredor de mercado,
      conferindo o preço no celular) -- 70% 26% mantém o rosto e as mãos
      dentro do quadro em qualquer proporção de tela, com "cover". */
-  background: var(--pc-forest-950) var(--pcx-hero-photo) 70% 26% / cover no-repeat;
-  border-bottom: 1px solid var(--pc-forest-800);
+  background: var(--h-forest-deep) var(--pcx-hero-photo-web) 70% 26% / cover no-repeat;
+  border-bottom: 1px solid var(--h-forest);
 }
 /* Véu gradiente: opaco à esquerda (onde o texto fica), transparente à
    direita (onde a foto aparece limpa) — mesma técnica de
-   .store-pro-hero__overlay. Era fixo no verde-floresta mais escuro em
+   .store-pro-hero__overlay. Era fixo no azul-marinho mais escuro em
    qualquer tema ("sempre ativo, independente do claro/escuro") — no modo
    claro isso apagava a foto quase por completo bem no primeiro elemento da
    home, e o resto da página clara ficava presa atrás de um cartão sempre
@@ -621,19 +618,19 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   pointer-events: none;
   background-image: linear-gradient(
     96deg,
-    rgba(2, 44, 32, 0.94) 0%,
-    rgba(2, 44, 32, 0.88) 34%,
-    rgba(2, 44, 32, 0.55) 64%,
-    rgba(2, 44, 32, 0.14) 100%
+    rgba(7, 20, 38, 0.94) 0%,
+    rgba(7, 20, 38, 0.88) 34%,
+    rgba(7, 20, 38, 0.55) 64%,
+    rgba(7, 20, 38, 0.14) 100%
   );
 }
 html[data-theme="light"] .pcx-hero::before {
   background-image: linear-gradient(
     96deg,
-    rgba(4, 32, 24, 0.82) 0%,
-    rgba(4, 32, 24, 0.62) 34%,
-    rgba(4, 32, 24, 0.28) 64%,
-    rgba(4, 32, 24, 0.04) 100%
+    rgba(9, 28, 54, 0.82) 0%,
+    rgba(9, 28, 54, 0.62) 34%,
+    rgba(9, 28, 54, 0.28) 64%,
+    rgba(9, 28, 54, 0.04) 100%
   );
 }
 
@@ -666,7 +663,7 @@ html[data-theme="light"] .pcx-hero::before {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-.pcx-hero__copy .pc-location__chip > svg { background: rgba(255, 255, 255, 0.18); color: var(--pc-green-400); }
+.pcx-hero__copy .pc-location__chip > svg { background: rgba(255, 255, 255, 0.18); color: #7dd3fc; }
 .pcx-hero__copy .pc-location__chip small { color: var(--hero-muted); }
 .pcx-hero__copy .pc-location__chip strong { color: var(--hero-ink); }
 .pcx-hero h1 {
@@ -677,10 +674,10 @@ html[data-theme="light"] .pcx-hero::before {
   letter-spacing: -0.035em;
   color: var(--hero-ink);
   text-wrap: balance;
-  text-shadow: 0 2px 16px rgba(2, 20, 14, 0.45);
+  text-shadow: 0 2px 16px rgba(5, 14, 28, 0.45);
 }
 .pcx-hero h1 strong {
-  color: var(--pc-green-400);
+  color: #7dd3fc;
   font-weight: 900;
   position: relative;
 }
@@ -691,7 +688,7 @@ html[data-theme="light"] .pcx-hero::before {
   right: -2px;
   bottom: 0.05em;
   height: 0.18em;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--pc-green-400) 45%, transparent), transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, #7dd3fc 45%, transparent), transparent);
   border-radius: 2px;
   z-index: -1;
 }
@@ -702,7 +699,7 @@ html[data-theme="light"] .pcx-hero::before {
   max-width: 50ch;
   line-height: 1.55;
   font-weight: 500;
-  text-shadow: 0 1px 10px rgba(2, 20, 14, 0.4);
+  text-shadow: 0 1px 10px rgba(5, 14, 28, 0.4);
 }
 .pcx-hero__search { margin-bottom: 0.9rem; }
 .pcx-hero__actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
@@ -717,7 +714,7 @@ html[data-theme="light"] .pcx-hero::before {
   background: var(--hero-glass);
   border: 1px solid var(--hero-border);
   border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(2, 20, 14, 0.22);
+  box-shadow: 0 8px 24px rgba(5, 14, 28, 0.22);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -725,7 +722,7 @@ html[data-theme="light"] .pcx-hero::before {
   display: inline-flex; align-items: center; gap: 0.4rem;
   font-size: 0.85rem; font-weight: 600; color: var(--hero-muted);
 }
-.pcx-hero__stat svg { width: 17px; height: 17px; color: var(--pc-green-400); flex-shrink: 0; }
+.pcx-hero__stat svg { width: 17px; height: 17px; color: #7dd3fc; flex-shrink: 0; }
 .pcx-hero__stat strong { font-size: 1rem; font-weight: 900; color: var(--hero-ink); }
 .pcx-hero .pcx-btn--ghost {
   background: var(--hero-glass);
@@ -737,7 +734,7 @@ html[data-theme="light"] .pcx-hero::before {
    um seletor mais específico aqui para garantir que o texto do botão
    "Explorar lojas" fique branco sobre a foto, não na tinta do tema. */
 .pcx-home .pcx-hero a.pcx-btn--ghost { color: var(--hero-ink); }
-.pcx-hero .pcx-btn--ghost:hover { background: var(--hero-glass-strong); border-color: var(--pc-green-400); }
+.pcx-hero .pcx-btn--ghost:hover { background: var(--hero-glass-strong); border-color: #7dd3fc; }
 
 /* Antes ancorava a <img> do cartão-foto e o painel absoluto sobre ela; a
    foto agora é o fundo full-bleed da seção inteira (.pcx-hero), então esta
@@ -772,7 +769,7 @@ html[data-theme="light"] .pcx-hero::before {
   width: 100%;
   background: var(--hero-panel-surface);
   border-radius: var(--h-radius-xl);
-  box-shadow: 0 20px 46px rgba(2, 20, 14, 0.35);
+  box-shadow: 0 20px 46px rgba(5, 14, 28, 0.35);
   padding: 1rem;
   overflow: hidden;
 }
@@ -802,10 +799,10 @@ html[data-theme="light"] .pcx-hero::before {
   white-space: nowrap;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--pc-green-600);
+  color: #2563eb;
 }
 .pcx-hero__panel-live i {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--pc-green-600);
+  width: 6px; height: 6px; border-radius: 50%; background: #2563eb;
   /* WCAG 2.2.2 (Pause, Stop, Hide): conteúdo que pisca automaticamente por
      mais de 5s precisa de um jeito de pausar. Em vez de expor um controle,
      limitamos a animação a 2 ciclos (3.6s < 5s) e ela termina no estado
@@ -912,7 +909,7 @@ html[data-theme="light"] .pcx-hero::before {
   align-items: center;
   padding: 0.1rem 0.35rem;
   border-radius: 999px;
-  background: var(--pc-green-600);
+  background: #2563eb;
   color: var(--pc-white);
   font-style: normal;
   font-size: 0.8rem;
@@ -954,8 +951,8 @@ html[data-theme="light"] .pcx-hero::before {
   text-decoration: none;
   transition: border-color 150ms ease, background 150ms ease;
 }
-.pcx-hero__suggestions a:hover { border-color: var(--pc-green-400); background: var(--hero-glass-strong); }
-.pcx-hero__suggestions a:focus-visible { outline: 2px solid var(--pc-green-400); outline-offset: 2px; }
+.pcx-hero__suggestions a:hover { border-color: #7dd3fc; background: var(--hero-glass-strong); }
+.pcx-hero__suggestions a:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 2px; }
 
 /* Faixa "economize" compacta — só existe no layout do app (ver @media 640px
    abaixo). No desktop o painel flutuante sobre a foto já cumpre esse papel. */
@@ -991,28 +988,28 @@ html[data-theme="light"] .pcx-hero::before {
     position: absolute;
     z-index: -2;
     inset: -12px;
-    background: var(--pcx-hero-photo) 58% 48% / cover no-repeat;
+    background: var(--pcx-hero-photo-mobile) 58% 48% / cover no-repeat;
     filter: blur(3px);
   }
   .pcx-hero::before {
     background-image: linear-gradient(
       180deg,
-      rgba(2, 44, 32, 0.42) 0%,
-      rgba(2, 44, 32, 0.5) 40%,
-      rgba(2, 44, 32, 0.72) 78%,
-      rgba(2, 44, 32, 0.8) 100%
+      rgba(7, 20, 38, 0.42) 0%,
+      rgba(7, 20, 38, 0.5) 40%,
+      rgba(7, 20, 38, 0.72) 78%,
+      rgba(7, 20, 38, 0.8) 100%
     );
   }
-  /* Modo claro: o mesmo véu escuro de sempre, só que mais raso -- a foto
+  /* Modo claro: véu azul-marinho mais raso para preservar a foto
      (o cliente comparando preço, o próprio assunto da home) fica visível de
      verdade em vez de quase apagada logo na primeira dobra da versão clara. */
   html[data-theme="light"] .pcx-hero::before {
     background-image: linear-gradient(
       180deg,
-      rgba(4, 32, 24, 0.16) 0%,
-      rgba(4, 32, 24, 0.3) 40%,
-      rgba(4, 32, 24, 0.58) 78%,
-      rgba(4, 32, 24, 0.68) 100%
+      rgba(9, 28, 54, 0.16) 0%,
+      rgba(9, 28, 54, 0.3) 40%,
+      rgba(9, 28, 54, 0.58) 78%,
+      rgba(9, 28, 54, 0.68) 100%
     );
   }
   .pcx-hero__inner { grid-template-columns: 1fr; gap: 1rem; }
@@ -1070,15 +1067,13 @@ html[data-theme="light"] .pcx-hero::before {
   .pcx-hero .pc26-live-search__submit { padding: 0 0.7rem !important; gap: 0; }
 
   /* Faixa "economize até encontrar o menor preço": banner compacto, com
-     pequeno ícone, logo abaixo da busca — só existe no app. O degradê
-     anterior (#0b2f22/#0f4a30/#136b3f) era verde-floresta opaco demais:
-     ao lado do véu escuro do herói, virava um bloco quase preto sem
-     nenhuma vivacidade — o oposto do verde vibrante que o resto da marca
-     usa. Fecha em --pc-green-600 (o mesmo emerald vivo do botão "Comparar
-     preços"), lendo como marca, não como mancha. A ponta clara
-     --pc-green-500 usada antes (#10b981) derrubava o contraste do texto
-     branco pra 2,5:1 (precisa 3:1) exatamente onde o final da frase e a
-     segunda linha caem — removida; #047857 sozinho já garante ~5,7:1. */
+     pequeno ícone, logo abaixo da busca — só existe no app. Paleta azul
+     profissional (troca feita em paralelo). A ponta clara #38bdf8 do
+     degradê original (55%/100%) derrubava o contraste do texto branco
+     pra ~2,1:1 (precisa 3:1) exatamente onde o final da frase e a segunda
+     linha caem — mesmo bug já visto na versão verde deste banner. Fecha
+     em #2563eb (o azul mais saturado do meio), que sozinho garante
+     ~5,2:1. */
   .pcx-hero__mobile-banner {
     display: flex;
     align-items: center;
@@ -1086,11 +1081,14 @@ html[data-theme="light"] .pcx-hero::before {
     margin-top: 0.9rem;
     padding: 0.75rem 0.9rem;
     border-radius: var(--h-radius-lg);
-    background: linear-gradient(120deg, #043d2c 0%, var(--pc-green-600, #047857) 70%);
+    background: linear-gradient(120deg, #091c36 0%, #2563eb 70%);
     color: #fff;
   }
   .pcx-hero__mobile-banner svg {
-    width: 20px; height: 20px; flex-shrink: 0; color: #bdf3d2;
+    /* #bdf3d2 (menta) era resíduo da paleta verde anterior — destoava do
+       azul novo. #7dd3fc é o mesmo acento claro já usado no resto do
+       hero (chip de localização, stats, sugestões). */
+    width: 20px; height: 20px; flex-shrink: 0; color: #7dd3fc;
   }
   .pcx-hero__mobile-banner strong { display: block; font-size: 0.82rem; font-weight: 800; line-height: 1.25; }
   .pcx-hero__mobile-banner span { display: block; font-size: 0.75rem; color: rgba(255, 255, 255, 0.78); margin-top: 0.15rem; }
@@ -1110,12 +1108,12 @@ html[data-theme="light"] .pcx-hero::before {
   border: 1px solid var(--hero-panel-border) !important;
   border-radius: var(--h-radius-lg) !important;
   background: var(--hero-panel-surface) !important;
-  box-shadow: 0 12px 30px rgba(2, 20, 14, 0.32) !important;
+  box-shadow: 0 12px 30px rgba(5, 14, 28, 0.32) !important;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 .pcx-hero .pc26-hero-search:focus-within {
-  border-color: var(--pc-green-600) !important;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--pc-green-600) 22%, transparent), 0 12px 30px rgba(2, 20, 14, 0.32) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #2563eb 22%, transparent), 0 12px 30px rgba(5, 14, 28, 0.32) !important;
 }
 .pcx-hero .pc26-live-search__icon { width: 20px; height: 20px; color: var(--hero-panel-muted); }
 .pcx-hero .pc26-hero-search input {
@@ -1346,7 +1344,7 @@ html[data-theme="light"] .pcx-hero::before {
 .pcx-product__store { display: flex; align-items: center; gap: 0.25rem; font-size: 0.8rem; color: var(--h-muted); margin-top: 0.05rem; overflow: hidden; }
 .pcx-product__store svg { width: 11px; height: 11px; flex-shrink: 0; }
 .pcx-product__store span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-/* Selo "Menor preço" — componente compartilhado PriceBadge (verde vivo,
+/* Selo "Menor preço" — componente compartilhado PriceBadge (azul vivo,
    fundo sólido; variante --soft para uso sobre fundos escuros/fotográficos). */
 .pc-price-badge {
   display: inline-flex;
@@ -1570,7 +1568,7 @@ html[data-theme="light"] .pcx-hero::before {
 .pcx-promo-feature::after {
   content: "";
   position: absolute; inset: 0;
-  /* Verde-floresta (identidade 2026-09) em vez de neutro escuro — bate com
+  /* azul-marinho (identidade 2026-09) em vez de neutro escuro — bate com
      o banner "Valorize o comércio local" do pacote de referência. */
   background: linear-gradient(100deg, color-mix(in srgb, var(--h-forest-deep) 92%, black) 0%, color-mix(in srgb, var(--h-forest) 70%, transparent) 48%, transparent 82%);
 }
@@ -1604,7 +1602,7 @@ html[data-theme="light"] .pcx-hero::before {
   padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 3.5vw, 2.25rem);
   margin: clamp(1.1rem, 2.4vw, 1.75rem) 0;
   border-radius: var(--h-radius-xl);
-  /* Verde-floresta profundo (identidade 2026-09) — era azul/petróleo, fora
+  /* azul-marinho profundo (identidade 2026-09) — era azul/petróleo, fora
      da paleta de marca. Bate com o banner "Cesta Inteligente" das
      referências visuais. */
   background: linear-gradient(120deg, var(--h-forest-deep) 0%, var(--h-forest) 60%, var(--h-primary-dark) 130%);
@@ -1808,7 +1806,7 @@ a.pcx-store-hero {
 .pcx-store-hero:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
 .pcx-store-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 300ms ease; }
 .pcx-store-hero:hover img { transform: scale(1.05); }
-.pcx-store-hero::after {
+a.pcx-store-hero::after {
   content: ""; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(8,11,14,0.05) 0%, rgba(8,11,14,0.3) 22%, rgba(8,11,14,0.74) 45%, rgba(8,11,14,0.88) 100%);
 }
@@ -1874,10 +1872,10 @@ a.pcx-store-hero {
 
 /* Placeholder de carregamento: o card e as linhas de loja não têm proporção
    3:4 como os produtos, então o skeleton genérico precisa da própria altura. */
-div.pcx-skeleton.pcx-store-hero { aspect-ratio: auto; min-height: 300px; }
+div.pcx-skeleton.pcx-store-placeholder { aspect-ratio: auto; min-height: 300px; }
 div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 @media (max-width: 860px) {
-  div.pcx-skeleton.pcx-store-hero { min-height: 240px; }
+  div.pcx-skeleton.pcx-store-placeholder { min-height: 240px; }
 }
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */
@@ -1983,7 +1981,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
    HTML e sumiam por CSS abaixo de 640px, o que e o pior dos dois mundos. Agora
    quebram em duas linhas, que e o que um rodape faz. */
 .pcx-home .pcx-footer {
-  background: var(--pc-forest-950, #022C20);
+  background: var(--h-forest-deep);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.88);
 }
@@ -2013,7 +2011,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   background: transparent;
   color: #fff;
 }
-.pcx-home .pcx-footer__cta:hover { background: var(--pc-gold, #0fa958); border-color: var(--pc-gold, #0fa958); color: #ffffff; }
+.pcx-home .pcx-footer__cta:hover { background: var(--pc-gold, #2563eb); border-color: var(--pc-gold, #2563eb); color: #ffffff; }
 .pcx-home .pcx-footer__meta { border-top-color: rgba(255, 255, 255, 0.08); }
 /* 4.6:1 sobre #10161d. */
 .pcx-home .pcx-footer__meta,
@@ -2139,3 +2137,12 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 }
 .pcx-sync-notice__dismiss:hover { background: var(--h-border); }
 .pcx-sync-notice__dismiss svg { width: 14px; height: 14px; color: inherit; }
+\n.pcx-promo-feature{position:relative!important;min-height:280px!important;overflow:hidden!important;border-radius:22px!important}.pcx-promo-feature>img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover!important}.pcx-promo-feature::after{background:linear-gradient(90deg,rgb(7 20 38 / .88),rgb(7 20 38 / .56) 50%,transparent 100%)!important}.pcx-promo-feature__copy{position:relative!important;z-index:2;max-width:480px}.pcx-spotlight{position:relative!important;overflow:hidden!important;isolation:isolate}.pcx-spotlight__photo{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover!important;opacity:.2;z-index:-2}.pcx-spotlight::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--h-forest-deep),rgb(9 28 54 / .75));z-index:-1}.pcx-offers-visual{position:relative;min-height:150px;margin-bottom:18px;border-radius:18px;overflow:hidden;background:var(--h-forest-deep);display:flex;align-items:center}.pcx-offers-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3}.pcx-offers-visual>div{position:relative;z-index:1;width:100%;padding:22px 24px}.pcx-offers-visual .pcx-section__title,.pcx-offers-visual .pcx-section__description{color:#fff!important}@media(max-width:700px){.pcx-promo-feature{min-height:260px!important}.pcx-offers-visual{min-height:180px}.pcx-spotlight__photo{opacity:.14}}
+/* Sharp editorial photography: avoid low-opacity haze and filter stacking. */
+.pcx-promo-feature>img{filter:none!important;opacity:1!important}
+.pcx-promo-feature::after{background:linear-gradient(90deg,rgb(7 20 38 / .82),rgb(7 20 38 / .42) 48%,rgb(7 20 38 / .08))!important}
+.pcx-spotlight__photo{opacity:.42!important;filter:none!important}
+.pcx-spotlight::before{background:linear-gradient(90deg,rgb(7 20 38 / .78),rgb(7 20 38 / .52) 58%,rgb(7 20 38 / .3))!important}
+.pcx-offers-visual>img{opacity:.6!important;filter:none!important}
+.pcx-offers-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(7 20 38 / .68),rgb(7 20 38 / .28) 55%,transparent);pointer-events:none}
+.pcx-offers-visual>div{z-index:2}

@@ -265,20 +265,39 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
   };
 }
 
-let enhancedCache: { value: CatalogPayload; expires: number } | null = null;
+const CACHE_KEY = "precocerto:public-catalog:v1";
+const FRESH_MS = 5 * 60_000;
+const MAX_AGE_MS = 24 * 60 * 60_000;
+let enhancedCache: { value: CatalogPayload; savedAt: number } | null = null;
 let pending: Promise<CatalogPayload> | null = null;
 
-export async function fetchSectorCatalog(force = false): Promise<CatalogPayload> {
-  if (!force && enhancedCache && enhancedCache.expires > Date.now()) return enhancedCache.value;
-  if (!force && pending) return pending;
+/** Public catalogue only; no credentials or user information are stored. */
+export function getCachedSectorCatalog(): CatalogPayload | null {
+  if (!enhancedCache) {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(CACHE_KEY) || "null");
+      if (saved && typeof saved.savedAt === "number" &&
+          Array.isArray(saved.value?.products) && Array.isArray(saved.value?.stores) &&
+          saved.value?.metrics && typeof saved.value?.updatedAt === "string") enhancedCache = saved;
+    } catch { /* Storage can be disabled or full. Memory caching still works. */ }
+  }
+  if (enhancedCache && Date.now() - enhancedCache.savedAt < MAX_AGE_MS) return enhancedCache.value;
+  enhancedCache = null;
+  return null;
+}
 
+export async function fetchSectorCatalog(force = false): Promise<CatalogPayload> {
+  const snapshot = getCachedSectorCatalog();
+  if (!force && snapshot && enhancedCache && Date.now() - enhancedCache.savedAt < FRESH_MS) return snapshot;
+  if (pending) return pending;
   pending = (async () => {
     const catalog = await fetchCatalog("", { force });
+    if (catalog.error) throw new Error("Não foi possível atualizar o catálogo.");
     const value = await mergeRealEstablishments(catalog);
-    enhancedCache = { value, expires: Date.now() + 60_000 };
+    enhancedCache = { value, savedAt: Date.now() };
+    try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(enhancedCache)); } catch { /* Best effort. */ }
     return value;
   })();
-
   try { return await pending; } finally { pending = null; }
 }
 
