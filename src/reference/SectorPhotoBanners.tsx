@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import type { BusinessGroupId } from "../data/businessTaxonomy";
-import bakeryImg from "../assets/sectors-2026/sector-banner-bakery.webp";
-import butchersImg from "../assets/sectors-2026/sector-banner-butchers.webp";
-import foodImg from "../assets/sectors-2026/sector-banner-food.webp";
-import booksImg from "../assets/sectors-2026/sector-banner-books.webp";
-import marketsImg from "../assets/sectors-2026/sector-banner-markets.webp";
-import pharmaciesImg from "../assets/sectors-2026/sector-banner-pharmacies.webp";
+import bakeryImg from "../assets/sectors-2026/sector-photo-bakery.webp";
+import butchersImg from "../assets/sectors-2026/sector-photo-butchers.webp";
+import foodImg from "../assets/sectors-2026/sector-photo-food.webp";
+import booksImg from "../assets/sectors-2026/sector-photo-books.webp";
+import marketsImg from "../assets/sectors-2026/sector-photo-markets.webp";
+import pharmaciesImg from "../assets/sectors-2026/sector-photo-pharmacies.webp";
 import servicesImg from "../assets/sectors-2026/sector-banner-services.webp";
 
 /**
@@ -34,7 +34,7 @@ export function SectorPhotoBanners() {
         {entries.map(([id, { image, alt, href }]) => (
           <Link key={id} to={href} className="sector-hub__banner">
             <img src={image} alt={alt} loading="lazy" decoding="async" width="1200" height="600" />
-          </Link>
+          <span className="sector-hub__banner-label">{alt.split(" — ")[0]}</span></Link>
         ))}
       </div>
       <p className="sector-hub__banners-hint" aria-hidden="true">Deslize para ver mais <span>→</span></p>
