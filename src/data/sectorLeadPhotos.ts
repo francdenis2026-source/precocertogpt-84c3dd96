@@ -6,7 +6,7 @@ import foodImg from "../assets/sectors-2026/sector-photo-food.webp";
 import booksImg from "../assets/sectors-2026/sector-photo-books.webp";
 import bakeryImg from "../assets/sectors-2026/sector-photo-bakery.webp";
 import marketsImg from "../assets/sectors-2026/sector-photo-markets.webp";
-import pharmaciesImg from "../assets/sectors-2026/sector-photo-pharmacies.webp";
+import pharmaciesImg from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
 import servicesImg from "../assets/home-2026/comerciante-feijo-app.webp";
 
 /**
