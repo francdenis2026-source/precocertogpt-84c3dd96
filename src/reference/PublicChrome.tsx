@@ -17,7 +17,6 @@ import {
   SlidersHorizontal, Store, Sun, UserRound, X,
 } from "lucide-react";
 import { OnlinePresence } from "../components/OnlinePresence";
-import { PwaInstallButton } from "../components/PwaInstallButton";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import { businessGroups } from "../data/businessTaxonomy";
@@ -222,7 +221,7 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
         </div>}
       </div>
       <nav className="pc-inner-nav" aria-label="Atalhos do site">
-        <Link to="/explorar">Categorias</Link><Link to="/buscar">Buscar preços</Link><Link to="/estabelecimentos">Lojas</Link>
+        <Link to="/explorar" onClick={event => { if (pathname === "/explorar") { event.preventDefault(); document.getElementById("setores")?.scrollIntoView({ behavior: "smooth", block: "start" }); } }}>Categorias</Link><Link to="/buscar">Buscar preços</Link><Link to="/estabelecimentos">Lojas</Link>
       </nav>
       <div className="ref-header__actions"><Link className="ref-header__home" to="/" aria-label="Ir para a página inicial"><Home aria-hidden="true" /><span>Início</span></Link>{pathname === "/" && <HeaderRadioPlayer />}<ThemeButton /></div>
     </div>
@@ -244,7 +243,6 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
       </div>
       <div className="ref-header__actions">
         {pathname === "/" && <HeaderRadioPlayer />}
-        <PwaInstallButton />
         <ThemeButton />
         <Link className={`ref-favorites-link${activeSection === "profile" ? " is-active" : ""}`} aria-current={activeSection === "profile" ? "page" : undefined} to="/favoritos" aria-label="Favoritos"><Heart /></Link>
         <Link className="ref-signin" to="/login">Entrar</Link>

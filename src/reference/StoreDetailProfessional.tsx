@@ -307,7 +307,7 @@ export function StoreDetailProfessional() {
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="store-pro-shell">
       <div className="store-pro-topline store-pro-topline--location-only">
-        <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> {store.address || (store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : "")}Feijó · Acre · CEP 69960-000</a>
+        <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> {store.address ? `${store.address} · Acre · CEP 69960-000` : `${store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000`}</a>
       </div>
 
       {/* Contato direto: endereço, WhatsApp e horário existem no cadastro mas

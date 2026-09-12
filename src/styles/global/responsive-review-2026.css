@@ -7,7 +7,7 @@ html[data-theme="dark"] { --review-brand: #73e3a6; }
 }
 html { scroll-padding-top: 88px; }
 .pc-inner-nav { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.pc-inner-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: var(--px-ink); font-size: 14px; font-weight: 700; border-radius: 10px; text-decoration: none; }
+.pc-inner-nav a { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; color: var(--px-ink); font-size: 14px; font-weight: 700; border-radius: 10px; text-decoration: none; }
 .pc-inner-nav a:hover { background: var(--px-brand-soft); }
 .pcx-header__nav .pcx-header__mobile-account { display: none; }
 .pcx-home .pcx-header__bar { max-width: 1240px; min-height: 72px; gap: 20px; }

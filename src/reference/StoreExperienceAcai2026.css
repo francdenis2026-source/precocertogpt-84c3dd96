@@ -194,7 +194,12 @@ html body .store-pro-hero .store-pro-copy h1 {
 @media(hover:hover) and (pointer:fine){.ref-store-card:hover { transform: translateY(-2px); box-shadow: var(--pc-shadow-sm); }}
 
 /* ---------- COMPACTAÇÃO ---------- */
-.store-pro-shell { padding-block: 18px 28px; }
+/* padding-top precisa acompanhar a altura real da barra fixa MinimalTopBar
+   (~73px, incluindo linha "Feijó, Acre"): 18px/12px (valor antigo aqui)
+   deixava o endereço e o horário renderizados atrás dela, cortados/escondidos
+   em telas médias (tablet) — mesmo bug que o comentário de
+   StoreDetailProfessional.css já tinha corrigido para a versão base. */
+.store-pro-shell { padding-block: 84px 28px; }
 .store-pro-topline { margin-bottom: 12px; }
 .store-pro-notice { margin-block: 12px; padding: 12px 14px; }
 .store-pro-summary { gap: 10px; margin-block: 12px; }
@@ -214,7 +219,7 @@ html body .store-pro-hero .store-pro-copy h1 {
   .store-pro-copy h1 { font-size: 23px; }
   .store-pro-specialties { gap: 5px; margin-top: 10px; }
   .store-pro-specialties li { padding: 4px 8px 4px 9px; font-size:12px; }
-  .store-pro-shell { padding-block: 12px 22px; }
+  .store-pro-shell { padding-block: 80px 22px; }
   .store-pro-summary { grid-template-columns: 1fr 1fr; }
   .ref-store-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
 }
