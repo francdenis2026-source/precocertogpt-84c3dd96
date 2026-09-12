@@ -1,3 +1,4 @@
+import establishmentsHero from "../assets/sectors-2026/sector-photo-markets.webp";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -73,7 +74,7 @@ export function CityDirectoryPage() {
         </Link>
       </nav>
 
-      <header className="city-hero city-hero--editorial"><div className="city-hero-backdrop" aria-hidden="true"><img src="/editorial-2026/business-1280.webp" alt="" /></div>
+      <header className="city-hero city-hero--editorial"><div className="city-hero-backdrop" aria-hidden="true"><img src={establishmentsHero} alt="" /></div>
         <span className="city-kicker">
           <MapPin aria-hidden="true" />
           Cobertura da plataforma
