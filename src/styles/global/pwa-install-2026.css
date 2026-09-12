@@ -1,0 +1,63 @@
+/* Instalação e presença compacta no app-shell móvel. */
+.pc-pwa-install {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 9px;
+  border: 1px solid color-mix(in srgb, var(--h-primary, #0fa958) 45%, transparent);
+  border-radius: 10px;
+  background: var(--h-primary-soft, #e7f6ec);
+  color: var(--h-primary-dark, #087a45);
+  font: 800 .7rem/1 var(--h-font, Manrope, system-ui, sans-serif);
+  cursor: pointer;
+}
+.pc-pwa-install svg { width: 18px; height: 18px; stroke-width: 2.3; }
+
+@media (max-width: 760px) {
+  .pc-pwa-install { display: inline-flex; }
+  .pcx-header__tools { gap: 6px !important; }
+  .pcx-header__tools .ref-online {
+    display: inline-flex !important;
+    min-width: 48px;
+    height: 34px;
+    padding: 4px 8px !important;
+    gap: 5px !important;
+    border-radius: 999px;
+    font-size: .72rem !important;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .pcx-header__tools .ref-online__label { display: none !important; }
+  .pcx-header__tools .ref-online__signal svg { width: 15px; height: 15px; }
+
+  .ref-header .ref-header__utility {
+    display: flex !important;
+    margin-left: auto !important;
+  }
+  .ref-header .ref-header__utility .ref-location { display: none !important; }
+  .ref-header .ref-header__utility .ref-online {
+    display: inline-flex !important;
+    height: 32px;
+    padding: 4px 7px !important;
+    gap: 4px !important;
+    font-size: .7rem !important;
+  }
+  .ref-header .ref-header__utility .ref-online__label { display: none !important; }
+  .ref-header .ref-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    gap: 7px !important;
+  }
+}
+@media (max-width: 390px) {
+  .pc-pwa-install { width: 36px; min-width: 36px; padding: 0; }
+  .pc-pwa-install span { display: none; }
+  .pcx-header__tools .ref-online { min-width: 42px; padding-inline: 6px !important; }
+}
+@media (display-mode: standalone) {
+  .pc-pwa-install { display: none !important; }
+  html { overscroll-behavior-y: none; }
+  body { padding-top: env(safe-area-inset-top); }
+}

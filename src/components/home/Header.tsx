@@ -15,6 +15,7 @@ import type { Product } from "../../data/catalog";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 import { OnlinePresence } from "../OnlinePresence";
+import { PwaInstallButton } from "../PwaInstallButton";
 import { useCurrentProfile } from "../UserAccountExperience";
 import { LiveProductSearch } from "./LiveProductSearch";
 
@@ -131,6 +132,7 @@ export function Header({ products = [] }: { products?: Product[] }) {
           {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
               renderizado só dentro do PublicHeader, que a home não usa. */}
           <OnlinePresence />
+          <PwaInstallButton />
           <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
             <Heart aria-hidden="true" />
           </Link>

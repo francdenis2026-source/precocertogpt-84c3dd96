@@ -17,6 +17,7 @@ import {
   SlidersHorizontal, Store, Sun, UserRound, X,
 } from "lucide-react";
 import { OnlinePresence } from "../components/OnlinePresence";
+import { PwaInstallButton } from "../components/PwaInstallButton";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import { businessGroups } from "../data/businessTaxonomy";
@@ -243,6 +244,7 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
       </div>
       <div className="ref-header__actions">
         {pathname === "/" && <HeaderRadioPlayer />}
+        <PwaInstallButton />
         <ThemeButton />
         <Link className={`ref-favorites-link${activeSection === "profile" ? " is-active" : ""}`} aria-current={activeSection === "profile" ? "page" : undefined} to="/favoritos" aria-label="Favoritos"><Heart /></Link>
         <Link className="ref-signin" to="/login">Entrar</Link>

@@ -774,7 +774,7 @@ html[data-theme="light"] .pcx-hero::before {
   overflow: hidden;
 }
 /* Removida a listra decorativa de 4px no topo do painel (assinatura comum
-   de UI gerada por IA, sem função própria) — a sombra e o raio do painel já
+   decorativa sem função própria, sem função própria) — a sombra e o raio do painel já
    marcam a hierarquia sem precisar de um acento extra. */
 .pcx-hero__panel-head {
   display: flex;
@@ -2152,3 +2152,20 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-offers-visual>img{opacity:.6!important;filter:none!important}
 .pcx-offers-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(7 20 38 / .68),rgb(7 20 38 / .28) 55%,transparent);pointer-events:none}
 .pcx-offers-visual>div{z-index:2}
+
+
+/* Enquadramento editorial: preserva rostos e a ação principal nos dois heróis. */
+.pcx-promo-feature > img {
+  object-position: 70% 18% !important;
+}
+.pcx-spotlight__photo {
+  object-position: 64% 18% !important;
+}
+@media (max-width: 700px) {
+  .pcx-promo-feature > img { object-position: 72% 16% !important; }
+  .pcx-spotlight__photo { object-position: 66% 14% !important; }
+}
+@media (max-width: 430px) {
+  .pcx-promo-feature > img { object-position: 68% 14% !important; }
+  .pcx-spotlight__photo { object-position: 62% 12% !important; }
+}

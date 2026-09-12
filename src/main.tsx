@@ -28,6 +28,7 @@ import "./styles/global/typography-contrast-2026.css";
 import "./styles/global/light-icon-contrast-2026.css";
 import "./styles/global/glass-shell-2026.css";
 import "./styles/global/mobile-app-shell-2026.css";
+import "./styles/global/pwa-install-2026.css";
 import "./styles/global/interaction-hover-2026.css";
 import "./styles/global/app-shell-professional-2026.css";
 import "./styles/global/search-refinement-2026.css";
