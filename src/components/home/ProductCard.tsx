@@ -20,7 +20,6 @@ const brl = new Intl.NumberFormat("pt-BR", {
 
 export const ProductCard = memo(function ProductCard({
   product,
-  featured = false,
 }: {
   product: Product;
   featured?: boolean;
@@ -40,7 +39,7 @@ export const ProductCard = memo(function ProductCard({
 
   return (
     <Link
-      className={`pcx-product${featured ? " pcx-product--featured" : ""}`}
+      className="pcx-product"
       to={`/produto/${product.slug || product.id}`}
       aria-label={`Comparar preços de ${product.name}`}
     >

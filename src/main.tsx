@@ -44,6 +44,7 @@ import "./styles/global/touch-feedback-2026.css";
 import "./styles/global/network-status-2026.css";
 import "./styles/global/responsive-review-2026.css";
 import "./styles/global/home-refinement-2026.css";
+import "./styles/global/public-palette-search-2026.css";
 
 
 

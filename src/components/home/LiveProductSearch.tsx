@@ -52,6 +52,7 @@ export function LiveProductSearch({
   const isGuest = !userId && !allPricesVisible;
   const listId = `${useId().replace(/:/g, "")}-${id}-results`;
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -78,6 +79,18 @@ export function LiveProductSearch({
     window.addEventListener("keydown", focusSearch);
     return () => window.removeEventListener("keydown", focusSearch);
   }, [compact]);
+
+  useEffect(() => {
+    if (!showPanel) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !searchRef.current?.contains(event.target)) {
+        setOpen(false);
+        setActiveIndex(-1);
+      }
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [showPanel]);
 
   const searchAll = () => {
     const value = normalizedQuery;
@@ -124,12 +137,20 @@ export function LiveProductSearch({
       setActiveIndex(suggestions.length - 1);
     } else if (event.key === "Enter" && safeActiveIndex >= 0) {
       event.preventDefault();
-      openProduct(suggestions[safeActiveIndex]);
+      if (isGuest && safeActiveIndex >= FREE_PREVIEW_LIMIT) goToSignup();
+      else openProduct(suggestions[safeActiveIndex]);
     }
   };
 
   return (
     <div
+      ref={searchRef}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setOpen(false);
+          setActiveIndex(-1);
+        }
+      }}
       className={`pc26-live-search${compact ? " pc26-live-search--compact" : ""}${showPanel ? " is-open" : ""}`}
     >
       <form
@@ -163,7 +184,7 @@ export function LiveProductSearch({
           autoComplete="off"
           aria-autocomplete="list"
           aria-expanded={showPanel}
-          aria-controls={showPanel ? listId : undefined}
+          aria-controls={showPanel && suggestions.length > 0 ? listId : undefined}
           aria-activedescendant={
             showPanel && safeActiveIndex >= 0
               ? `${listId}-${safeActiveIndex}`
@@ -203,14 +224,11 @@ export function LiveProductSearch({
       </form>
       {showPanel && (
         <div
-          id={listId}
-          className="pc26-live-results"
-          role="listbox"
-          aria-label="Sugestões de produtos"
+          className="pcx-search-panel"
         >
-          <div className="pc26-live-results__head">
-            <span>Resultados ao vivo</span>
-            <div className="pc26-live-results__head-actions">
+          <div className="pcx-search-panel__head">
+            <span>Produtos encontrados</span>
+            <div className="pcx-search-panel__head-actions">
               <small>
                 {loading
                   ? "Atualizando catálogo…"
@@ -229,15 +247,15 @@ export function LiveProductSearch({
             </div>
           </div>
           {loading && !products.length ? (
-            <div className="pc26-live-results__state">
+            <div className="pcx-search-panel__state">
               <LoaderCircle
-                className="pc26-live-results__loader"
+                className="pcx-search-panel__loader"
                 aria-hidden="true"
               />
               <span>Consultando preços locais…</span>
             </div>
           ) : suggestions.length ? (
-            <div className="pc26-live-results__list">
+            <div id={listId} className="pcx-search-panel__list" role="listbox" aria-label="Sugestões de produtos">
               {suggestions.map((product, index) => {
                 const image = resolveProductImage(product);
                 const locked = isGuest && index >= FREE_PREVIEW_LIMIT;
@@ -248,13 +266,13 @@ export function LiveProductSearch({
                     type="button"
                     role="option"
                     aria-selected={index === safeActiveIndex}
-                    className={`${index === safeActiveIndex ? "is-active" : ""}${locked ? " pc26-live-results__item--teaser" : ""}`}
+                    className={`${index === safeActiveIndex ? "is-active" : ""}${locked ? " pcx-search-panel__item--teaser" : ""}`}
                     onPointerMove={(event) => {
                       if (event.pointerType === "mouse") setActiveIndex(index);
                     }}
                     onClick={() => (locked ? goToSignup() : openProduct(product))}
                   >
-                    <span className="pc26-live-results__thumb">
+                    <span className="pcx-search-panel__thumb">
                       {image ? (
                         <img
                           src={image}
@@ -268,7 +286,7 @@ export function LiveProductSearch({
                         <PackageSearch aria-hidden="true" />
                       )}
                     </span>
-                    <span className="pc26-live-results__copy">
+                    <span className="pcx-search-panel__copy">
                       <strong>{product.name}</strong>
                       <small>
                         {[product.brand, product.size && product.size.trim() !== "-" ? product.size : product.category]
@@ -288,18 +306,18 @@ export function LiveProductSearch({
                       </em>
                     </span>
                     {locked ? (
-                      <span className="pc26-live-results__price pc26-live-results__price--blurred">
+                      <span className="pcx-search-panel__price pcx-search-panel__price--blurred">
                         <small>a partir de</small>
                         <strong>{brl.format(product.minPrice)}</strong>
                       </span>
                     ) : (
-                      <span className="pc26-live-results__price">
+                      <span className="pcx-search-panel__price">
                         <small>a partir de</small>
                         <strong>{brl.format(product.minPrice)}</strong>
                       </span>
                     )}
                     {locked && (
-                      <i className="pc26-live-results__lock">
+                      <i className="pcx-search-panel__lock">
                         <LockKeyhole aria-hidden="true" />
                       </i>
                     )}
@@ -308,7 +326,7 @@ export function LiveProductSearch({
               })}
             </div>
           ) : (
-            <div className="pc26-live-results__state">
+            <div className="pcx-search-panel__state">
               <PackageSearch aria-hidden="true" />
               <span>
                 <strong>Nenhum produto encontrado</strong>
@@ -319,7 +337,7 @@ export function LiveProductSearch({
           {!loading && suggestions.length > 0 && (
             isGuest && suggestions.length > FREE_PREVIEW_LIMIT ? (
               <button
-                className="pc26-live-results__all pc26-live-results__all--gate"
+                className="pcx-search-panel__all pcx-search-panel__all--gate"
                 type="button"
                 onClick={goToSignup}
               >
@@ -328,7 +346,7 @@ export function LiveProductSearch({
               </button>
             ) : (
               <button
-                className="pc26-live-results__all"
+                className="pcx-search-panel__all"
                 type="button"
                 onClick={searchAll}
               >
