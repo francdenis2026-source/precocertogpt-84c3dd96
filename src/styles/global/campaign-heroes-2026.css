@@ -41,6 +41,22 @@ html:root body .pc-campaign--guide :is(.sector-hub__eyebrow,.sector-hub__hero-co
 html:root body .pc-campaign--guide h1 { color:#fff!important; font-size:clamp(40px,6vw,76px)!important; max-width:10ch; }
 html:root body .pc-campaign--guide h1 em { display:block; color:#a9d1ff!important; }
 html:root body .pc-campaign--guide .sector-hub__hero-actions a { background:#fff!important; color:#122a3a!important; border-color:#fff!important; }
+
+/* Tratamento editorial da foto: um leve corte de cor (menos saturada, um
+   pouco mais escura e contrastada) para a foto parecer tratada de propósito
+   e não competir com o texto — e um véu em camadas (leitura à esquerda +
+   vinheta nas bordas/rodapé) no lugar do gradiente único e plano de
+   .pc-campaign::after, que deixava o canto inferior direito (cesta de
+   frutas bem colorida) chamando tanta atenção quanto o título. */
+html:root body .pc-campaign.pc-campaign--guide .pc-campaign-backdrop img {
+  filter: saturate(.88) contrast(1.06) brightness(.93) !important;
+}
+html:root body .pc-campaign--guide::after {
+  background:
+    linear-gradient(100deg, rgb(8 20 38 / .95) 0%, rgb(8 20 38 / .84) 32%, rgb(8 20 38 / .5) 58%, rgb(8 20 38 / .12) 82%, transparent 100%),
+    linear-gradient(0deg, rgb(5 14 27 / .6) 0%, rgb(5 14 27 / 0) 34%),
+    radial-gradient(130% 160% at 105% -10%, rgb(5 14 27 / 0) 45%, rgb(5 14 27 / .38) 100%);
+}
 @media(max-width:760px) {
  html:root body .pc-campaign--home { min-height:650px!important; padding:34px 0!important; }
  html:root body .pc-campaign--home .pcx-intro__inner { min-height:580px; align-items:end; }
