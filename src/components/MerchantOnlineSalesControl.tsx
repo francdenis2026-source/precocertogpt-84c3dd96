@@ -73,7 +73,12 @@ export function MerchantOnlineSalesControl() {
   }
 
   if (loading) return <main style={s.center}><RefreshCcw size={22}/> Verificando prontidão…</main>;
-  if (!membership) return <main style={s.center}><Store size={36}/><h1>Vendas online</h1><p>Entre com uma conta vinculada a um estabelecimento.</p><a href="/lojista">Cadastrar estabelecimento</a></main>;
+  // Esta rota só é alcançada com o papel merchant_owner/merchant_staff já
+  // concedido (RequireRole em App.tsx). Sem membership aqui, o estabeleci-
+  // mento foi aprovado mas o responsável ainda não foi vinculado pelo
+  // admin (passo manual em "Ativar acesso", AdminMerchantManagement.tsx)
+  // -- mandar pra "/lojista" de novo só duplicava o cadastro.
+  if (!membership) return <main style={s.center}><Store size={36}/><h1>Vendas online</h1><p>Seu cadastro foi aprovado, mas o acesso ao painel ainda não foi ativado pela nossa equipe.</p><a href="/fale-conosco">Falar com o PreçoCerto</a></main>;
 
   return <main style={s.page}><div style={s.container}>
     <a href="/painel-lojista" style={s.back}><ArrowLeft size={16}/> Voltar ao painel</a>

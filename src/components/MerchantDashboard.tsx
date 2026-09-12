@@ -217,7 +217,15 @@ export function MerchantDashboard() {
   ];
 
   if (loading) return <main style={styles.center}><RefreshCcw className="spin" /> Carregando painel…</main>;
-  if (!membership) return <main style={styles.center}><Store size={42} /><h1>Painel do Comerciante</h1><p>Entre com uma conta vinculada a um estabelecimento para acessar a operação.</p><a href="/lojista" style={styles.primaryButton}>Cadastrar estabelecimento</a></main>;
+  // Chegar aqui sem membership não é "conta sem loja" -- esta rota só é
+  // alcançada com o papel merchant_owner/merchant_staff já concedido
+  // (RequireRole em App.tsx barra o resto antes). Faltar membership nesse
+  // ponto significa que o estabelecimento foi aprovado, mas o responsável
+  // ainda não foi vinculado pelo admin (passo manual e separado em
+  // "Ativar acesso", ver AdminMerchantManagement.tsx) -- mandar a pessoa
+  // pra "/lojista" de novo criava um cadastro duplicado e não resolvia
+  // nada, já que o vínculo é feito do lado do admin, não pelo lojista.
+  if (!membership) return <main style={styles.center}><Store size={42} /><h1>Painel do Comerciante</h1><p>Seu cadastro foi aprovado, mas o acesso ao painel ainda não foi ativado pela nossa equipe. Fale com o PreçoCerto para concluir a liberação.</p><a href="/fale-conosco" style={styles.primaryButton}>Falar com o PreçoCerto</a></main>;
 
   return (
     <div style={styles.shell}>

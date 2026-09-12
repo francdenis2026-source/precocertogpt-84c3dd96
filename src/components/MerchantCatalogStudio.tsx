@@ -98,7 +98,11 @@ export function MerchantCatalogStudio() {
   }
 
   if(loading)return <main style={styles.center}><RefreshCcw size={22}/> Carregando estúdio…</main>;
-  if(!membership)return <main style={styles.center}>Conta de comerciante necessária.</main>;
+  // Esta rota só é alcançada com o papel merchant_owner/merchant_staff já
+  // concedido (RequireRole em App.tsx). Sem membership aqui, o estabeleci-
+  // mento foi aprovado mas o responsável ainda não foi vinculado pelo admin
+  // (passo manual em "Ativar acesso", AdminMerchantManagement.tsx).
+  if(!membership)return <main style={styles.center}>Seu cadastro foi aprovado, mas o acesso ao painel ainda não foi ativado pela nossa equipe. <a href="/fale-conosco" style={styles.primary}>Falar com o PreçoCerto</a></main>;
 
   const tabs:Array<[Tab,string]>=[["products",profile.catalogLabel],["variants","Tamanhos e variações"],["modifiers","Adicionais e opções"]];
   if(businessType==="pharmacy")tabs.push(["compliance","Conformidade farmacêutica"]);
