@@ -1,3 +1,4 @@
+import pharmacyHeroPhoto from "../assets/sectors-2026/sector-pharmacies-v2.jpg";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -319,15 +320,15 @@ export function StoreDetailProfessional() {
       <section
         className={`store-pro-hero${isBonsAmigos ? " store-pro-hero--bons-amigos" : ""}${isMarketSector ? "" : ` store-pro-hero--sector store-pro-hero--${sector.id}`}`}
         aria-labelledby="store-title"
-        style={backdrop ? { backgroundImage: `url('${backdrop}')` } : undefined}
+        style={backdrop && sector.id !== "pharmacies" ? { backgroundImage: `url('${backdrop}')` } : undefined}
       >
-        <div className="store-pro-hero__overlay" />
+        {sector.id !== "pharmacies" && <div className="store-pro-hero__overlay" />}
         {/* Havia aqui uma arte exclusiva do Bons Amigos apontando para
             /branding/bons-amigos-hero.jpg, que nunca existiu no repositorio: a
             loja abria com uma imagem quebrada e sem o fundo do setor, porque a
             excecao tambem desligava o backdrop. Agora a loja usa o mesmo hero
             das outras; as classes de marca continuam disponiveis para estilo. */}
-        {!isMarketSector && <SectorIcon className="store-pro-hero__watermark" aria-hidden="true" />}
+        {!isMarketSector && sector.id !== "pharmacies" && <SectorIcon className="store-pro-hero__watermark" aria-hidden="true" />}
         <div className="store-pro-hero__content">
           <div className={`store-pro-logo${showLogo ? " has-image" : ""}`} style={!showLogo ? { background: store.color } : undefined}>
             {showLogo
@@ -348,6 +349,10 @@ export function StoreDetailProfessional() {
           </div>
           <div className="store-pro-status"><BadgeCheck aria-hidden="true" /><span><strong>Catálogo verificado</strong><small>{lastUpdatedLabel ? `Atualizado em ${lastUpdatedLabel}` : "Dados locais organizados"}</small></span></div>
         </div>
+        {sector.id === "pharmacies" && <figure className="store-pro-pharmacy-photo">
+          <img src={pharmacyHeroPhoto} alt="" width="1280" height="720" fetchPriority="high" />
+          <figcaption>Imagem ilustrativa do setor farmacêutico</figcaption>
+        </figure>}
       </section>
 
       <div className="store-pro-notice"><Info aria-hidden="true" /><span><strong>Catálogo informativo</strong><small>O PreçoCerto exibe informações de produtos e preços. Este espaço ainda não representa venda direta ou canal oficial do estabelecimento.</small></span></div>

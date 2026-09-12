@@ -105,3 +105,7 @@ initializePwaRuntime();
   // real e persistente (não só o deploy antigo) não vira loop de recarga.
   window.setTimeout(() => window.sessionStorage.removeItem(RELOAD_GUARD_KEY), 10_000);
 })();
+
+import "./styles/global/public-palette-search-2026.css";
+import "./styles/global/hero-cleanup-2026.css";
+import "./styles/global/catalog-polish-2026.css";

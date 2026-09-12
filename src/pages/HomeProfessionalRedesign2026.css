@@ -1782,7 +1782,7 @@ a.pcx-store-hero {
 .pcx-store-hero:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
 .pcx-store-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 300ms ease; }
 .pcx-store-hero:hover img { transform: scale(1.05); }
-.pcx-store-hero::after {
+a.pcx-store-hero::after {
   content: ""; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, rgba(8,11,14,0.05) 0%, rgba(8,11,14,0.3) 22%, rgba(8,11,14,0.74) 45%, rgba(8,11,14,0.88) 100%);
 }
@@ -1848,10 +1848,10 @@ a.pcx-store-hero {
 
 /* Placeholder de carregamento: o card e as linhas de loja não têm proporção
    3:4 como os produtos, então o skeleton genérico precisa da própria altura. */
-div.pcx-skeleton.pcx-store-hero { aspect-ratio: auto; min-height: 300px; }
+div.pcx-skeleton.pcx-store-placeholder { aspect-ratio: auto; min-height: 300px; }
 div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 @media (max-width: 860px) {
-  div.pcx-skeleton.pcx-store-hero { min-height: 240px; }
+  div.pcx-skeleton.pcx-store-placeholder { min-height: 240px; }
 }
 
 /* ── Footer ─────────────────────────────────────────────────────────────── */

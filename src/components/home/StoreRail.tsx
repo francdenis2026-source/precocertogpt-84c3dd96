@@ -29,7 +29,7 @@ export function StoreRail({
             description="Encontre catálogos ativos por bairro e veja os preços disponíveis."
           />
           <div className="pcx-stores">
-            <div className="pcx-skeleton pcx-store-hero" aria-hidden="true" />
+            <div className="pcx-skeleton pcx-store-placeholder" aria-hidden="true" />
             <div className="pcx-store-list">
               {Array.from({ length: 3 }, (_, index) => (
                 <div className="pcx-skeleton pcx-store-row" key={index} aria-hidden="true" />
