@@ -1686,7 +1686,6 @@ html[data-theme="light"] .pcx-hero::before {
   padding: 0.7rem 1.2rem;
   border-radius: var(--h-radius-md);
   background: #fff;
-  color: var(--h-forest-deep);
   text-decoration: none;
   font-weight: 700;
   font-size: 0.88rem;
@@ -1694,6 +1693,13 @@ html[data-theme="light"] .pcx-hero::before {
   width: fit-content;
   transition: transform 150ms ease, background 150ms ease;
 }
+/* Mesmo caso do .pcx-btn--primary logo acima: `.pcx-home a { color:inherit }`
+   tem especificidade maior (0,1,1) que `.pcx-spotlight__cta` (0,1,0) e
+   vencia, fazendo o botão herdar a tinta clara da seção (pensada pro texto
+   sobre a foto escura) em vez do azul escuro definido pra esse fundo
+   branco — no escuro isso deixava o texto quase invisível (tinta quase
+   branca sobre fundo branco). */
+.pcx-home a.pcx-spotlight__cta { color: var(--h-forest-deep); }
 .pcx-spotlight__cta svg { width: 16px; height: 16px; transition: transform 150ms ease; }
 @media (hover: hover) and (pointer: fine) {
   .pcx-spotlight__cta:hover { background: #eaf3f2; }

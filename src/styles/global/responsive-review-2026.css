@@ -14,7 +14,13 @@ html { scroll-padding-top: 88px; }
 .pcx-header__search { flex: 1; min-width: 160px; }
 .pcx-home .pcx-header__tools { gap: 8px; }
 .pcx-home .pcx-header__icon { display: none; } /* Já disponíveis no dock e na conta. */
-.pcx-header__tools .ref-online { display: none; }
+/* .pcx-header__tools .ref-online { display:none } removida daqui: essa
+   regra não tinha media query (ao contrário da mesma regra em
+   HomeProfessionalRedesign2026.css, corretamente restrita a
+   max-width:860px) e, por carregar depois no CSS global, escondia o
+   contador de pessoas online em QUALQUER largura de tela, inclusive
+   desktop -- o componente funcionava (Supabase Realtime Presence real,
+   não um número inventado) mas nunca aparecia. */
 
 /* Hero: uma busca principal, fotografia em enquadramento próprio e dados reais. */
 .pcx-home .pcx-hero { min-height: 480px; padding-block: 36px; background: #073b2b; border: 0; }
