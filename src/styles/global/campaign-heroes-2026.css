@@ -1,12 +1,21 @@
 /* Campaign heroes: one contained image, responsive crop and readable copy. */
-html:root body .pc-campaign { position:relative!important; isolation:isolate; overflow:hidden!important; }
+/* overflow:hidden ficava no proprio .pc-campaign, cortando QUALQUER
+   descendente que precisasse extrapolar a secao -- inclusive o painel de
+   resultados da busca ao vivo da home (position:absolute, mais alto que a
+   altura do hero), que ficava com a lista de produtos literalmente cortada
+   ao meio. O corte de bordas arredondadas (usado no hero da pagina de
+   setores, .pc-campaign--guide, via .sector-hub__hero{border-radius}) so
+   precisa valer pra foto de fundo, entao move-se o overflow:hidden (e o
+   border-radius, herdado do pai) pro elemento do backdrop e pro veu, que
+   ja sao position:absolute+inset:0 -- nada mais no hero fica clipado. */
+html:root body .pc-campaign { position:relative!important; isolation:isolate; }
 html:root body .pc-campaign .pc-campaign-backdrop,
 html:root body .pc-campaign .pc-campaign-backdrop img {
   position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
 }
-html:root body .pc-campaign .pc-campaign-backdrop { z-index:-2; display:block; }
+html:root body .pc-campaign .pc-campaign-backdrop { z-index:-2; display:block; overflow:hidden; border-radius:inherit; }
 html:root body .pc-campaign .pc-campaign-backdrop img { object-fit:cover!important; object-position:center!important; filter:none!important; opacity:1!important; }
-html:root body .pc-campaign::after { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+html:root body .pc-campaign::after { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; border-radius:inherit;
   background:linear-gradient(90deg, rgb(7 20 38 / .9) 0%, rgb(7 20 38 / .72) 42%, rgb(7 20 38 / .24) 76%, transparent 100%);
 }
 html:root body .pc-campaign--home { min-height:clamp(460px,58vw,680px)!important; background:#091c36!important; color:#fff!important; border-radius:0!important; padding:clamp(42px,7vw,88px) 0!important; }

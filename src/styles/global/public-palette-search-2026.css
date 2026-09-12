@@ -179,7 +179,12 @@ html:root .pcx-search-panel__list > button:is(:hover,:focus-visible,.is-active) 
 .pcx-search-panel__thumb img { width:42px; height:42px; object-fit:contain; }
 .pcx-search-panel__copy { min-width:0; display:grid; gap:3px; }
 .pcx-search-panel__copy strong { font-size:14px; font-weight:600; line-height:1.4; overflow-wrap:anywhere; }
-.pcx-search-panel__copy small, .pcx-search-panel__copy em { color:var(--h-muted); font-size:12px; line-height:1.4; font-style:normal; overflow-wrap:anywhere; }
+.pcx-search-panel__copy small { color:var(--h-muted); font-size:12px; line-height:1.4; overflow-wrap:anywhere; }
+/* Nome do estabelecimento em destaque: cada produto define
+   --pc26-store-accent inline (cor própria da loja) em LiveProductSearch.tsx,
+   mas nada no CSS lia essa variável -- o nome caía no mesmo cinza do texto
+   secundário (marca/tamanho), sem se destacar dos outros resultados. */
+.pcx-search-panel__copy em { color:color-mix(in srgb, var(--pc26-store-accent, var(--h-primary-dark)) 78%, var(--h-ink) 22%); font-size:12px; font-weight:700; line-height:1.4; font-style:normal; overflow-wrap:anywhere; }
 .pcx-search-panel__copy em i { display:none; }
 .pcx-search-panel__price { display:grid; gap:3px; justify-items:end; white-space:nowrap; }
 .pcx-search-panel__price small { font-size:11px; color:var(--h-muted); }
