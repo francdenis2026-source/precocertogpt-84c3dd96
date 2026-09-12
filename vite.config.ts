@@ -13,6 +13,12 @@ export default defineConfig({
     port: 8080,
   },
   build: {
+    // The deploy sandbox can terminate esbuild while it minifies this large,
+    // route-split application. Keep Rollup's tree-shaking and chunking, but
+    // skip the optional post-processing step so production builds are stable.
+    minify: false,
+    cssMinify: false,
+    reportCompressedSize: false,
     cssCodeSplit: true,
     rollupOptions: {
       input: {
