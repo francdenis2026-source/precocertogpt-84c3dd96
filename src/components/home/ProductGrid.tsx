@@ -2,20 +2,21 @@ import { ArrowRight, PackageSearch } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
 import { ProductCard } from "./ProductCard";
+import offersImg from "../../assets/sectors-2026/sector-photo-bakery.webp";
 import { SectionHeader } from "./SectionHeader";
 
 export function ProductGrid({ products, loading }: { products: Product[]; loading: boolean }) {
   return (
     <section className="pcx-section" aria-labelledby="offers-title">
       <div className="pcx-shell">
-        <SectionHeader
+        <div className="pcx-offers-visual"><img src={offersImg} alt="" loading="lazy" width="1280" height="720" /><div><SectionHeader
           id="offers-title"
           title="Ofertas em destaque"
           description="Preço, loja e economia reunidos para você decidir mais rápido."
           linkTo="/buscar"
           linkLabel="Explorar catálogo"
           linkIcon={<ArrowRight aria-hidden="true" />}
-        />
+        /></div>
 
         <div className="pcx-products" aria-busy={loading} aria-live="polite">
           {loading

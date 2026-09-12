@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { ArrowRight, Clock, RefreshCw, ShoppingCart, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/catalog";
+import basketImg from "../../assets/sectors-2026/sector-photo-markets.webp";
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
@@ -44,7 +45,7 @@ export function SmartBasketSpotlight({ products = [] }: { products?: Product[] }
 
   return (
     <section className="pcx-shell" aria-labelledby="smart-basket-title">
-      <div className="pcx-spotlight">
+      <div className="pcx-spotlight"><img className="pcx-spotlight__photo" src={basketImg} alt="" loading="lazy" decoding="async" width="1280" height="720" />
         <div className="pcx-spotlight__copy">
           <span className="pcx-spotlight__badge">
             <ShoppingCart aria-hidden="true" />

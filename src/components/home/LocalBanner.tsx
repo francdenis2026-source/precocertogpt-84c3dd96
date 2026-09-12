@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import localImg from "../../assets/home-2026/promo-comercio-local.jpg";
+import localImg from "../../assets/home-2026/../../assets/sectors-2026/sector-photo-markets.webp";
 
 /** Banner fotográfico único de fechamento da home, antes do rodapé —
  *  substitui a antiga "Informação que ajuda na escolha" (2 promos + 1
