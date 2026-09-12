@@ -43,6 +43,7 @@ import "./styles/global/touch-feedback-2026.css";
 // Aviso de conexão: o elemento era criado sem nenhuma regra de estilo.
 import "./styles/global/network-status-2026.css";
 import "./styles/global/responsive-review-2026.css";
+import "./styles/global/home-refinement-2026.css";
 
 
 

@@ -1,6 +1,5 @@
-import type React from "react";
 import { useMemo } from "react";
-import { ArrowRight, PackageSearch, Search, ShoppingBasket, Store, TrendingDown } from "lucide-react";
+import { ArrowRight, PackageSearch, Store, TrendingDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Product, ProductOffer } from "../../data/catalog";
 import { resolveProductImage } from "../../data/productImageResolver";
@@ -9,18 +8,7 @@ import { LiveProductSearch } from "./LiveProductSearch";
 import { PriceBadge } from "../catalog/PriceBadge";
 import { freshnessText, priceFreshness } from "../../lib/pricing";
 
-// Hero responsiva com imagens profissionais próprias para desktop e mobile. Fornecida pelo dono do
-// produto como a foto definitiva do herói — sem nenhuma UI/dado desenhado
-// em cima (diferente dos mockups de banco de fotos/precocerto_pacote_visual/,
-// que são só referência de ESTILO e nunca viram asset final). Cliente com
-// carrinho de hortifruti à direita, rio/ponte ao fundo à esquerda — onde o
-// véu verde-floresta fica opaco, sob o texto.
-// A foto anterior (cliente com carrinho de compras num parque à beira-rio,
-// com ponte estaiada ao pôr do sol ao fundo) é claramente gerada por IA —
-// composição sem nenhuma relação com o ato de comprar, pele com aspecto
-// plástico e uma ponte cenográfica atrás de um carrinho de supermercado.
-// Substituída por uma foto real de banco de imagens (cliente comparando
-// preço no celular dentro do corredor de um mercado de verdade).
+// Imagens responsivas existentes; decoração separada do conteúdo e da busca.
 import heroPhotoWeb from "../../assets/home-2026/hero-profissional-precocerto-2026.jpg";
 import heroPhotoMobile from "../../assets/home-2026/hero-profissional-precocerto-2026-mobile.jpg";
 
@@ -41,7 +29,7 @@ type HeroUserImage2026Props = {
 
 /** Escolhe, entre os produtos já carregados, o primeiro que tem preço em
  *  2+ estabelecimentos DIFERENTES — para montar o card de comparação real
- *  sobreposto à foto do herói. Não inventa loja nem economia: se nenhum
+ *  junto à foto do herói. Não inventa loja nem economia: se nenhum
  *  produto do catálogo carregado atende, o painel simplesmente não aparece. */
 function pickRealComparison(products: Product[]): { product: Product; cheap: ProductOffer; other: ProductOffer } | null {
   for (const product of products) {
@@ -75,39 +63,28 @@ export function HeroUserImage2026({
 
   return (
     <section
-      className="pcx-hero"
-      aria-labelledby="pcx-hero-title"
-      // O CSS do hero usa esta variavel como background-image da secao.
-      // Sem defini-la, a declaracao inteira era invalida: nem a foto nem o
-      // veu de contraste eram pintados.
-      style={{
-        "--pcx-hero-photo-web": `url(${heroPhotoWeb})`,
-        "--pcx-hero-photo-mobile": `url(${heroPhotoMobile})`,
-      } as React.CSSProperties}
+      className="pcx-intro"
+      aria-labelledby="pcx-intro-title"
     >
-      {/* Mantem o alt descritivo da foto acessivel a leitor de tela — a foto
-          em si agora e pintada via background-image (menos acessivel por
-          natureza), entao preservamos a semantica original com uma <img>
-          visualmente oculta em vez de perder o texto alternativo. */}
-      <img className="sr-only" src={heroPhotoWeb} alt="Pessoa comparando preços pelo celular em um ambiente de compras profissional" />
-      <div className="pcx-hero__inner">
-        <div className="pcx-hero__copy">
+      <div className="pcx-intro__inner">
+        <div className="pcx-intro__copy">
           <LocationSwitcher />
-          <h1 id="pcx-hero-title">
+          <p className="pcx-intro__eyebrow">Sua compra começa com uma boa escolha</p>
+          <h1 id="pcx-intro-title">
             Compare preços. <strong>Economize de verdade.</strong>
           </h1>
-          <p className="pcx-hero__lead">
+          <p className="pcx-intro__lead">
             Veja onde cada produto está mais barato antes de sair de casa.
           </p>
 
-          <div className="pcx-hero__search">
+          <div className="pcx-intro__search">
             <LiveProductSearch
               id="price-search"
               products={products}
               loading={loading}
               placeholder="O que você procura?"
             />
-            <div className="pcx-hero__suggestions" aria-label="Buscas comuns">
+            <div className="pcx-intro__suggestions" aria-label="Buscas comuns">
               <span>Populares:</span>
               {SEARCH_SUGGESTIONS.map((term) => (
                 <Link key={term} to={`/buscar?q=${encodeURIComponent(term)}`}>
@@ -117,12 +94,9 @@ export function HeroUserImage2026({
             </div>
           </div>
 
-          <div className="pcx-hero__actions" aria-label="Ações principais">
-            <Link className="pcx-btn pcx-btn--primary" to="/buscar">
-              <Search aria-hidden="true" /> Comparar preços <ArrowRight aria-hidden="true" />
-            </Link>
-            <Link className="pcx-btn pcx-btn--ghost" to="/estabelecimentos">
-              <Store aria-hidden="true" /> Explorar lojas
+          <div className="pcx-intro__actions" aria-label="Ações principais">
+            <Link className="pcx-intro__store-link" to="/estabelecimentos">
+              <Store aria-hidden="true" /> Explorar lojas <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
@@ -133,15 +107,15 @@ export function HeroUserImage2026({
               carregamento terminar em vez de mostrar um número que não é o
               real. */}
           {!loading && (Boolean(productCount) || Boolean(storeCount)) && (
-            <div className="pcx-hero__stats" aria-label="Números da plataforma">
+            <div className="pcx-intro__stats" aria-label="Números da plataforma">
               {Boolean(storeCount) && (
-                <span className="pcx-hero__stat">
+                <span className="pcx-intro__stat">
                   <Store aria-hidden="true" />
                   <strong>{intBr.format(storeCount!)}</strong> estabelecimentos cadastrados
                 </span>
               )}
               {Boolean(productCount) && (
-                <span className="pcx-hero__stat">
+                <span className="pcx-intro__stat">
                   <PackageSearch aria-hidden="true" />
                   <strong>{intBr.format(productCount!)}</strong> produtos no catálogo
                 </span>
@@ -149,66 +123,61 @@ export function HeroUserImage2026({
             </div>
           )}
 
-          {/* Faixa compacta só para o app: reforça a proposta de valor sem
-              depender de nenhum dado — texto fixo, ilustrativo. */}
-          <div className="pcx-hero__mobile-banner">
-            <ShoppingBasket aria-hidden="true" />
-            <div>
-              <strong>Economize até encontrar o menor preço.</strong>
-              <span>Compare em segundos e escolha onde comprar.</span>
-            </div>
-          </div>
         </div>
 
-        <div className="pcx-hero__visual">
+        <div className="pcx-intro__visual">
+          <picture className="pcx-intro__photo">
+            <source media="(max-width: 760px)" srcSet={heroPhotoMobile} />
+            <img src={heroPhotoWeb} alt="" width="960" height="720" fetchPriority="high" decoding="async" />
+          </picture>
           {comparison && (
-            <div className="pcx-hero__panel">
-              <div className="pcx-hero__panel-head">
+            <div className="pcx-intro__panel">
+              <div className="pcx-intro__panel-head">
                 <span>
                   COMPARAÇÃO REAL
                   <br />
-                  <b className="pcx-hero__panel-title">{comparison.product.name}</b>
+                  <b className="pcx-intro__panel-title">{comparison.product.name}</b>
                 </span>
-                <span className="pcx-hero__panel-live">
+                <span className="pcx-intro__panel-live">
                   <i aria-hidden="true" /> {comparisonFreshnessText}
                 </span>
               </div>
               <ul>
                 <li>
-                  <span className="pcx-hero__panel-thumb">
+                  <span className="pcx-intro__panel-thumb">
                     {comparisonImage ? (
                       <img src={comparisonImage} alt="" width="44" height="44" loading="lazy" />
                     ) : (
                       <PackageSearch aria-hidden="true" />
                     )}
                   </span>
-                  <span className="pcx-hero__panel-info">
-                    <span className="pcx-hero__panel-name">
+                  <span className="pcx-intro__panel-info">
+                    <span className="pcx-intro__panel-name">
                       {comparison.cheap.establishment}
                       <PriceBadge />
                     </span>
-                    <span className="pcx-hero__panel-store">
+                    <span className="pcx-intro__panel-store">
                       <Store aria-hidden="true" /> {comparison.cheap.neighborhood || "Feijó"}
                     </span>
                   </span>
-                  <span className="pcx-hero__panel-price">{brl.format(comparison.cheap.value)}</span>
+                  <span className="pcx-intro__panel-price">{brl.format(comparison.cheap.value)}</span>
                 </li>
                 <li>
-                  <span className="pcx-hero__panel-thumb pcx-hero__panel-thumb--muted">
+                  <span className="pcx-intro__panel-thumb pcx-intro__panel-thumb--muted">
                     <Store aria-hidden="true" />
                   </span>
-                  <span className="pcx-hero__panel-info">
-                    <span className="pcx-hero__panel-name">{comparison.other.establishment}</span>
-                    <span className="pcx-hero__panel-store">
+                  <span className="pcx-intro__panel-info">
+                    <span className="pcx-intro__panel-name">{comparison.other.establishment}</span>
+                    <span className="pcx-intro__panel-store">
                       <Store aria-hidden="true" /> {comparison.other.neighborhood || "Feijó"}
                     </span>
                   </span>
-                  <span className="pcx-hero__panel-price pcx-hero__panel-price--muted">
+                  <span className="pcx-intro__panel-price pcx-intro__panel-price--muted">
                     {brl.format(comparison.other.value)}
                   </span>
                 </li>
               </ul>
-              <div className="pcx-hero__panel-foot">
+              <div className="pcx-intro__panel-foot">
                 <TrendingDown aria-hidden="true" /> Economize {brl.format(saving)}
               </div>
             </div>
