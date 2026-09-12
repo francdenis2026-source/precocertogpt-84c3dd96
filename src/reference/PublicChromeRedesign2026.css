@@ -633,3 +633,61 @@ footer.ref-footer .ref-footer__legal svg { width: 13px !important; height: 13px 
 .ref-page [class*="ai-caption"] {
   display: none !important;
 }
+
+
+/* Busca de produtos: contraste consistente nos temas claro e escuro e nomes
+   de estabelecimentos com acento visual próprio. */
+.ref-page .pc26-search input,
+.ref-page .pc26-hero-search input,
+.ref-page .pc26-live-search input {
+  color: var(--h-ink, #10231a) !important;
+  -webkit-text-fill-color: var(--h-ink, #10231a) !important;
+  caret-color: var(--h-primary, #0fa958) !important;
+}
+.ref-page .pc26-search input::placeholder,
+.ref-page .pc26-hero-search input::placeholder,
+.ref-page .pc26-live-search input::placeholder {
+  color: var(--h-muted, #66756d) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: var(--h-muted, #66756d) !important;
+}
+[data-theme="dark"] .ref-page .pc26-search input,
+[data-theme="dark"] .ref-page .pc26-hero-search input,
+[data-theme="dark"] .ref-page .pc26-live-search input {
+  color: #f4fbf7 !important;
+  -webkit-text-fill-color: #f4fbf7 !important;
+}
+[data-theme="dark"] .ref-page .pc26-search input::placeholder,
+[data-theme="dark"] .ref-page .pc26-hero-search input::placeholder,
+[data-theme="dark"] .ref-page .pc26-live-search input::placeholder {
+  color: #b6c8be !important;
+  -webkit-text-fill-color: #b6c8be !important;
+}
+.ref-page .pcx-search-panel__copy em {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  margin-top: 3px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: var(--pc26-store-accent, #087a45) !important;
+  background: color-mix(in srgb, var(--pc26-store-accent, #0fa958) 12%, transparent) !important;
+  font-size: .76rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .01em;
+}
+.ref-page .pcx-search-panel__copy em i {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50%;
+  background: var(--pc26-store-accent, #0fa958) !important;
+  flex: 0 0 auto;
+}
+[data-theme="dark"] .ref-page .pcx-search-panel__copy em {
+  color: #8de0b0 !important;
+  background: rgba(40,204,112,.16) !important;
+}
+@media (max-width: 760px) {
+  .ref-page .pcx-search-panel__copy em { font-size: .72rem !important; }
+}
