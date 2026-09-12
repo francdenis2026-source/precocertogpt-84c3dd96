@@ -73,7 +73,7 @@ export function CityDirectoryPage() {
         </Link>
       </nav>
 
-      <header className="city-hero">
+      <header className="city-hero city-hero--editorial"><div className="city-hero-backdrop" aria-hidden="true"><img src="/editorial-2026/business-1280.webp" alt="" /></div>
         <span className="city-kicker">
           <MapPin aria-hidden="true" />
           Cobertura da plataforma
@@ -166,7 +166,7 @@ export function CityStoresPage() {
         </Link>
       </nav>
 
-      <header className="city-hero" data-city={city.slug}>
+      <header className="city-hero city-hero--editorial" data-city={city.slug}><div className="city-hero-backdrop" aria-hidden="true"><img src="/editorial-2026/business-1280.webp" alt="" /></div>
         <span className="city-kicker">
           <MapPin aria-hidden="true" />
           {cityLabel(city)}
