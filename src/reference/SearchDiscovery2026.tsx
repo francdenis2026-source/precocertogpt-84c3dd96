@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { FormEvent, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
-import { ArrowRight, BadgeCheck, Building2, ChevronDown, Clock3, ExternalLink, Heart, LockKeyhole, MapPin, PackageSearch, RotateCcw, Search, ShoppingBasket, ShoppingCart, Sparkles, SlidersHorizontal, Store, TrendingDown, UserPlus, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, ChevronLeft, ChevronRight, Clock3, ExternalLink, Heart, LockKeyhole, MapPin, PackageSearch, RotateCcw, Search, ShoppingBasket, ShoppingCart, Sparkles, SlidersHorizontal, Store, TrendingDown, UserPlus, X } from "lucide-react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import type { CatalogPayload, Product } from "../data/catalog";
 import { fetchSectorCatalog, productHasSectorOffer, sectorStores } from "../data/sectorCatalog";
@@ -22,6 +22,7 @@ import "./CompactViewportPages.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const FREE_PREVIEW_LIMIT=4;
+const PAGE_SIZE=20;
 const brl=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
 const intBr=new Intl.NumberFormat("pt-BR");
 const normalize=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR").trim();
@@ -118,10 +119,10 @@ export function SearchDiscovery2026(){
  const[sector,setSector]=useState<MarketplaceSectorId>((getMarketplaceSector(params.get("setor"))?.id||"all") as MarketplaceSectorId);
  const[store,setStore]=useState(params.get("loja")||"all"),[category,setCategory]=useState(params.get("categoria")||"all"),[neighborhood,setNeighborhood]=useState(params.get("bairro")||"all");
  const[minPrice,setMinPrice]=useState(params.get("min")||""),[maxPrice,setMaxPrice]=useState(params.get("max")||"");
- const[sort,setSort]=useState<SortMode>((params.get("ordem") as SortMode)||"relevance"),[filtersOpen,setFiltersOpen]=useState(false),[visible,setVisible]=useState(8),[selectedProduct,setSelectedProduct]=useState<Product|null>(null);
+ const[sort,setSort]=useState<SortMode>((params.get("ordem") as SortMode)||"relevance"),[filtersOpen,setFiltersOpen]=useState(false),[page,setPage]=useState(1),[selectedProduct,setSelectedProduct]=useState<Product|null>(null);
  const lastProductTrigger=useRef<HTMLElement|null>(null);
  useEffect(()=>{let active=true;void fetchSectorCatalog().then(data=>{if(active)setCatalog(data)}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[]);
- useEffect(()=>{const timer=window.setTimeout(()=>{const next=query.trim();setAppliedQuery(next);setVisible(8);setParams(current=>{const updated=new URLSearchParams(current);if(next)updated.set("q",next);else updated.delete("q");return updated},{replace:true})},180);return()=>window.clearTimeout(timer)},[query,setParams]);
+ useEffect(()=>{const timer=window.setTimeout(()=>{const next=query.trim();setAppliedQuery(next);setPage(1);setParams(current=>{const updated=new URLSearchParams(current);if(next)updated.set("q",next);else updated.delete("q");return updated},{replace:true})},180);return()=>window.clearTimeout(timer)},[query,setParams]);
  const activeSector=getMarketplaceSector(sector);
  const stores=useMemo(()=>{if(!catalog)return[];if(!activeSector)return[...catalog.stores].filter(s=>(s.products||0)>0).sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));return sectorStores(catalog,activeSector).map(item=>item.store)},[catalog,activeSector]);
  const categories=useMemo(()=>{if(!catalog)return[];const source=activeSector?catalog.products.filter(p=>productHasSectorOffer(p,catalog,activeSector)):catalog.products;return Array.from(new Set(source.map(p=>p.category).filter(Boolean))).sort((a,b)=>a.localeCompare(b,"pt-BR"))},[catalog,activeSector]);
@@ -130,16 +131,16 @@ export function SearchDiscovery2026(){
  const hasRequest=Boolean(appliedQuery.trim())||activeFilters>0;
  const results=useMemo(()=>{if(!catalog||!hasRequest)return[];const min=Number(minPrice.replace(",",".")),max=Number(maxPrice.replace(",","."));const rows=catalog.products.map(product=>({product,score:productSearchScore(product,appliedQuery)})).filter(({product,score:rank})=>{if(appliedQuery.trim()&&rank<=0)return false;if(activeSector&&!productHasSectorOffer(product,catalog,activeSector))return false;if(store!=="all"&&String(product.establishmentId)!==store&&!product.offers?.some(o=>String(o.establishmentId)===store))return false;if(category!=="all"&&product.category!==category)return false;if(neighborhood!=="all"&&normalize(product.neighborhood)!==normalize(neighborhood)&&!product.offers?.some(o=>normalize(o.neighborhood)===normalize(neighborhood)))return false;if(Number.isFinite(min)&&min>0&&product.minPrice<min)return false;if(Number.isFinite(max)&&max>0&&product.minPrice>max)return false;return true});rows.sort((a,b)=>sort==="lowest"?a.product.minPrice-b.product.minPrice:sort==="highest"?b.product.minPrice-a.product.minPrice:sort==="name"?a.product.name.localeCompare(b.product.name,"pt-BR"):sort==="stores"?(b.product.storeCount||0)-(a.product.storeCount||0):b.score-a.score||a.product.minPrice-b.product.minPrice);return rows.map(r=>r.product)},[catalog,hasRequest,appliedQuery,activeSector,store,category,neighborhood,minPrice,maxPrice,sort]);
  const featuredProducts=useMemo(()=>catalog?.products.slice().sort((a,b)=>(b.storeCount||0)-(a.storeCount||0)||a.minPrice-b.minPrice).slice(0,4)??[],[catalog]);
- useEffect(()=>setVisible(8),[appliedQuery,sector,store,category,neighborhood,minPrice,maxPrice,sort]);
+ useEffect(()=>setPage(1),[appliedQuery,sector,store,category,neighborhood,minPrice,maxPrice,sort]);
  // Alimenta "produtos mais buscados": um registro por termo aplicado
  // (já debounced acima), independente de o visitante estar logado ou não.
  useEffect(()=>{if(appliedQuery.trim())trackSearch(appliedQuery)},[appliedQuery]);
  useEffect(()=>{if(store!=="all"&&!stores.some(s=>String(s.id)===store))setStore("all")},[stores,store]);
  useEffect(()=>{if(category!=="all"&&!categories.includes(category))setCategory("all")},[categories,category]);
  const syncUrl=(nextQuery=appliedQuery)=>{const next:Record<string,string>={};if(nextQuery.trim())next.q=nextQuery.trim();if(sector!=="all")next.setor=sector;if(store!=="all")next.loja=store;if(category!=="all")next.categoria=category;if(neighborhood!=="all")next.bairro=neighborhood;if(minPrice)next.min=minPrice;if(maxPrice)next.max=maxPrice;if(sort!=="relevance")next.ordem=sort;setParams(next,{replace:true})};
- const submit=(e:FormEvent)=>{e.preventDefault();const next=query.trim();setAppliedQuery(next);setVisible(8);syncUrl(next)};
- const applyFilters=()=>{setAppliedQuery(query.trim());setVisible(8);syncUrl(query.trim());setFiltersOpen(false)};
- const reset=()=>{setQuery("");setAppliedQuery("");setSector("all");setStore("all");setCategory("all");setNeighborhood("all");setMinPrice("");setMaxPrice("");setSort("relevance");setVisible(8);setParams({}, {replace:true})};
+ const submit=(e:FormEvent)=>{e.preventDefault();const next=query.trim();setAppliedQuery(next);setPage(1);syncUrl(next)};
+ const applyFilters=()=>{setAppliedQuery(query.trim());setPage(1);syncUrl(query.trim());setFiltersOpen(false)};
+ const reset=()=>{setQuery("");setAppliedQuery("");setSector("all");setStore("all");setCategory("all");setNeighborhood("all");setMinPrice("");setMaxPrice("");setSort("relevance");setPage(1);setParams({}, {replace:true})};
  const openProduct=(product:Product,target:HTMLElement)=>{lastProductTrigger.current=target;setSelectedProduct(product)};
  const openProductOnActivate=(product:Product)=>({
   onClick:(event:MouseEvent<HTMLElement>)=>openProduct(product,event.currentTarget),
@@ -167,7 +168,11 @@ export function SearchDiscovery2026(){
  {filtersOpen&&<section className="search26-advanced"><div><label>Estabelecimento<select value={store} onChange={e=>setStore(e.target.value)}><option value="all">Todos</option>{stores.map(s=><option key={s.id} value={String(s.id)}>{s.name}</option>)}</select></label><label>Tipo de comércio<select value={sector} onChange={e=>setSector(e.target.value as MarketplaceSectorId)}><option value="all">Todos os tipos</option>{marketplaceSectors.map(s=><option key={s.id} value={s.id}>{s.shortLabel}</option>)}</select></label><label>Categoria<select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">Todas</option>{categories.map(c=><option key={c}>{c}</option>)}</select></label><label>Bairro<select value={neighborhood} onChange={e=>setNeighborhood(e.target.value)}><option value="all">Todos</option>{neighborhoods.map(n=><option key={n}>{n}</option>)}</select></label><label>Preço mínimo<input inputMode="decimal" value={minPrice} onChange={e=>setMinPrice(e.target.value)} placeholder="R$ 0,00"/></label><label>Preço máximo<input inputMode="decimal" value={maxPrice} onChange={e=>setMaxPrice(e.target.value)} placeholder="Sem limite"/></label></div><footer><span><Building2/>Mostramos apenas opções realmente cadastradas.</span><button type="button" onClick={applyFilters}>Aplicar e ver resultados</button></footer></section>}
  {!hasRequest?<section className="search26-start"><div className="search26-start__intro"><div className="search26-start-icon"><PackageSearch/></div><div><h2>Pesquise ou abra uma comparação.</h2><p>Escolha uma sugestão abaixo ou use os filtros para chegar direto ao que procura.</p></div><div className="search26-suggestions"><button onClick={()=>{setQuery("arroz");setAppliedQuery("arroz")}}>Arroz</button><button onClick={()=>{setQuery("café");setAppliedQuery("café")}}>Café</button><button onClick={()=>setFiltersOpen(true)}>Usar filtros</button></div></div>{featuredProducts.length>0&&<div className="search26-featured"><header><div><h3>Comparações rápidas</h3></div><small>Clique para ver preços e lojas</small></header><div>{featuredProducts.map(product=><div role="button" tabIndex={0} className="search26-featured-card" key={product.id} {...openProductOnActivate(product)}><div className="search26-thumb"><ProductThumb product={product}/><ProductCardActions product={product} className="pca-row--overlay pca-row--compact"/></div><span><small>{product.category}</small><strong>{product.name}</strong><em>{product.storeCount||product.offers?.length||1} lojas</em></span><b>{brl.format(product.minPrice)}</b><ArrowRight aria-hidden="true"/></div>)}</div></div>}</section>:
  <section className="search26-results"><header><div><h2 aria-live="polite">{loading?"Consultando catálogo…":`${results.length} ${results.length===1?"resultado":"resultados"}`}</h2></div><small>Selecione um produto para comparar preços</small></header>{!loading&&results.length>0?(()=>{
-  const visibleResults=results.slice(0,visible);
+  const pageCount=Math.max(1,Math.ceil(results.length/PAGE_SIZE));
+  const safePage=Math.min(page,pageCount);
+  const startResult=results.length?(safePage-1)*PAGE_SIZE+1:0;
+  const endResult=Math.min(safePage*PAGE_SIZE,results.length);
+  const visibleResults=results.slice((safePage-1)*PAGE_SIZE,safePage*PAGE_SIZE);
   const shownResults=isGuest?visibleResults.slice(0,FREE_PREVIEW_LIMIT):visibleResults;
   const teaserResults=isGuest?visibleResults.slice(FREE_PREVIEW_LIMIT,FREE_PREVIEW_LIMIT+3):[];
   const lockedCount=isGuest?Math.max(0,results.length-FREE_PREVIEW_LIMIT):0;
@@ -177,7 +182,14 @@ export function SearchDiscovery2026(){
     {shownResults.map(product=><div role="button" tabIndex={0} className="search26-card ref-catalog-card" key={product.id} {...openProductOnActivate(product)} aria-haspopup="dialog"><div className="search26-thumb"><ProductThumb product={product}/><ProductCardActions product={product} className="pca-row--overlay pca-row--compact"/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} {(product.storeCount||product.offers?.length||1)===1?"estabelecimento":"estabelecimentos"}</em></div><ArrowRight/></div>)}
     {teaserResults.map(product=><Link to={signupHref} className="search26-card search26-card--teaser" key={product.id} aria-label={`Crie sua conta para ver o preço de ${product.name}`}><div className="search26-thumb"><ProductThumb product={product}/></div><div className="search26-copy"><small>{product.category} · {product.brand}</small><strong>{product.name}</strong><span><Store/>{product.establishment}<em>{product.neighborhood}</em></span></div><div className="search26-price search26-price--blurred"><small>menor preço</small><strong>{brl.format(product.minPrice)}</strong><em>{product.storeCount||product.offers?.length||1} lojas</em></div><i className="search26-card__lock"><LockKeyhole aria-hidden="true"/></i></Link>)}
    </div>
-   {lockedCount>0?<div className="search26-gate"><div className="search26-gate__icon"><Sparkles aria-hidden="true"/></div><div className="search26-gate__copy"><h3>Veja os outros {lockedCount} {lockedCount===1?"preço":"preços"} desta busca</h3><p>Visitantes veem uma prévia do catálogo. Crie uma conta gratuita para comparar 100% dos preços e estabelecimentos de Feijó.</p></div><div className="search26-gate__actions"><Link className="pc-btn pc-btn--primary" to={signupHref}><UserPlus aria-hidden="true"/> Criar conta grátis</Link><Link className="search26-gate__login" to={`/login?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`}>Já tenho conta</Link></div></div>:visible<results.length&&<button className="search26-more" onClick={()=>setVisible(v=>Math.min(v+8,results.length))}>Mostrar mais 8 resultados <span>{results.length-visible} restantes</span></button>}
+   {lockedCount>0?<div className="search26-gate"><div className="search26-gate__icon"><Sparkles aria-hidden="true"/></div><div className="search26-gate__copy"><h3>Veja os outros {lockedCount} {lockedCount===1?"preço":"preços"} desta busca</h3><p>Visitantes veem uma prévia do catálogo. Crie uma conta gratuita para comparar 100% dos preços e estabelecimentos de Feijó.</p></div><div className="search26-gate__actions"><Link className="pc-btn pc-btn--primary" to={signupHref}><UserPlus aria-hidden="true"/> Criar conta grátis</Link><Link className="search26-gate__login" to={`/login?redirect=${encodeURIComponent(`${location.pathname}${location.search}`)}`}>Já tenho conta</Link></div></div>:pageCount>1&&<nav className="store-pro-pagination" aria-label="Paginação dos resultados">
+    <span>Mostrando {startResult}-{endResult} de {results.length}</span>
+    <div>
+     <button type="button" disabled={safePage===1} onClick={()=>setPage(v=>Math.max(1,v-1))} aria-label="Página anterior"><ChevronLeft/></button>
+     {Array.from({length:pageCount},(_,index)=>index+1).filter(number=>number===1||number===pageCount||Math.abs(number-safePage)<=1).map((number,index,list)=><span key={number}>{index>0&&number-list[index-1]>1&&<i>…</i>}<button type="button" className={number===safePage?"is-active":""} aria-current={number===safePage?"page":undefined} onClick={()=>setPage(number)}>{number}</button></span>)}
+     <button type="button" disabled={safePage===pageCount} onClick={()=>setPage(v=>Math.min(pageCount,v+1))} aria-label="Próxima página"><ChevronRight/></button>
+    </div>
+   </nav>}
   </>;
  })():!loading&&<div className="search26-empty"><PackageSearch/><h2>Nenhum resultado compatível</h2><p>Tente outra marca, confira a escrita ou limpe os filtros para ampliar a busca.</p><button type="button" onClick={reset}>Limpar busca e filtros</button></div>}</section>}
  </main><PublicFooter /><AppDock current="search" />{selectedProduct&&<ProductComparisonModal product={selectedProduct} onClose={closeProduct}/>}</div>}
