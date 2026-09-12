@@ -13,8 +13,14 @@ html:root body .pc-campaign--home { min-height:clamp(460px,58vw,680px)!important
 html:root body .pc-campaign--home .pcx-intro__inner { position:relative; z-index:1; min-height:clamp(370px,46vw,540px); align-items:center; }
 html:root body .pc-campaign--home .pcx-intro__copy { max-width:650px; }
 html:root body .pc-campaign--home :is(.pcx-intro__eyebrow,.pcx-intro__lead,.pcx-intro__suggestions,.pcx-intro__suggestions a,.pcx-intro__store-link,.pcx-intro__stat) { color:#eef5ff!important; }
-html:root body .pc-campaign--home .pcx-intro h1 { color:#fff!important; font-size:clamp(38px,5vw,68px)!important; max-width:13ch; }
-html:root body .pc-campaign--home .pcx-intro h1 strong { color:#9bc7ff!important; }
+/* O número dentro de .pcx-intro__stat (ex.: "23", "3.633") fica em <strong>,
+   que home-refinement-2026.css pinta com var(--h-ink) (escuro, pensado pra
+   variante sem foto) -- a regra acima não alcança o <strong> porque ele é
+   um elemento à parte dentro do span, não o span em si. Sem isso, o número
+   ficava escuro sobre a foto/véu escuro do hero. */
+html:root body .pc-campaign--home .pcx-intro__stat strong { color:#fff!important; }
+html:root body .pc-campaign--home h1 { color:#fff!important; font-size:clamp(38px,5vw,68px)!important; max-width:13ch; }
+html:root body .pc-campaign--home h1 strong { color:#9bc7ff!important; }
 html:root body .pc-campaign--home .pc26-hero-search { background:#fff!important; color:#14213d!important; }
 html:root body .pc-campaign--home .pcx-intro__stats { border-color:rgb(255 255 255 / .25)!important; }
 html:root body .pc-campaign--home .pc-campaign-credit,
