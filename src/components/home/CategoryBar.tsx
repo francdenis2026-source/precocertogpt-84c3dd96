@@ -14,6 +14,14 @@ import { useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import { businessGroups, groupForStore, type BusinessGroupId } from "../../data/businessTaxonomy";
 import type { StoreRow } from "../../data/catalog";
+import bakeryImage from "../../assets/sectors-2026/sector-bakery-v3.jpg";
+import booksImage from "../../assets/sectors-2026/sector-books-v3.jpg";
+import butchersImage from "../../assets/sectors-2026/sector-butchers-v3.jpg";
+import foodImage from "../../assets/sectors-2026/sector-food-v3.jpg";
+import marketsImage from "../../assets/sectors-2026/sector-markets-v3.jpg";
+import pharmaciesImage from "../../assets/sectors-2026/sector-pharmacies-v3.jpg";
+import servicesImage from "../../assets/sectors-2026/sector-services-v3.jpg";
+import otherImage from "../../assets/home-2026/promo-setores-organizados.jpg";
 import { SectionHeader } from "./SectionHeader";
 
 const intBr = new Intl.NumberFormat("pt-BR");
@@ -58,6 +66,17 @@ const CATEGORY_TINT: Record<BusinessGroupId, string> = {
   other: "pcx-category--pink",
 };
 
+const CATEGORY_IMAGE: Record<BusinessGroupId, string> = {
+  markets: marketsImage,
+  butchers: butchersImage,
+  bakery: bakeryImage,
+  food: foodImage,
+  pharmacies: pharmaciesImage,
+  books: booksImage,
+  services: servicesImage,
+  other: otherImage,
+};
+
 export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
   const rail = useRef<HTMLDivElement>(null);
   // Soma real de produtos por grupo, a partir da contagem que cada loja já
@@ -94,9 +113,20 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
             const productCount = productCountByGroup.get(group.id);
             return (
               <Link className="pcx-category" key={group.id} to={group.href}>
-                <i className={CATEGORY_TINT[group.id]}>
-                  <Icon aria-hidden="true" />
-                </i>
+                <span className="pcx-category__media">
+                  <img
+                    src={CATEGORY_IMAGE[group.id]}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    width="320"
+                    height="180"
+                  />
+                  <i className={CATEGORY_TINT[group.id]}>
+                    <Icon aria-hidden="true" />
+                  </i>
+                </span>
                 <span className="pcx-category__text">
                   <strong>{group.shortLabel}</strong>
                   <span>{productCount ? `${intBr.format(productCount)} produtos` : CATEGORY_SUB[group.id]}</span>
