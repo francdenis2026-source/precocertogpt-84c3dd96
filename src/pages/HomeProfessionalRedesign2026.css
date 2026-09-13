@@ -1784,6 +1784,120 @@ html[data-theme="light"] .pcx-hero::before {
 .pcx-spotlight__mock-saving span { font-size: 0.75rem; color: rgba(255, 255, 255, 0.72); font-weight: 700; }
 .pcx-spotlight__mock-saving strong { font-size: 1.05rem; color: #7fe3a8; font-weight: 900; }
 
+/* ── App/versão web — destaque logo após a faixa de confiança ────────────
+   Mesma técnica de foto em camadas do .pcx-spotlight (backdrop desfocado +
+   foto nítida + degradê), só que com acento azul (identidade da home) em
+   vez do verde-menta da Cesta Inteligente, pra não parecer a mesma seção. */
+.pcx-appshowcase {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  min-height: 260px;
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 3.5vw, 2.25rem);
+  margin: clamp(1.1rem, 2.4vw, 1.75rem) 0;
+  border-radius: var(--h-radius-xl);
+  box-shadow: var(--h-shadow-lg);
+}
+.pcx-appshowcase__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  margin-bottom: 0.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pcx-appshowcase__badge svg { width: 13px; height: 13px; }
+.pcx-appshowcase__copy { position: relative; flex: 1 1 380px; min-width: 0; max-width: 620px; }
+.pcx-appshowcase__copy h2 {
+  margin: 0 0 0.4rem;
+  color: #fff;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  line-height: 1.25;
+}
+.pcx-appshowcase__copy h2 strong { color: #93c5fd; font-weight: 800; }
+.pcx-appshowcase__copy p {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  max-width: 56ch;
+}
+.pcx-appshowcase__highlights {
+  list-style: none;
+  margin: 0 0 1.15rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.4rem;
+}
+.pcx-appshowcase__highlights li { display: flex; align-items: center; gap: 0.5rem; }
+.pcx-appshowcase__highlights svg {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.pcx-appshowcase__highlights strong { display: block; font-size: 0.78rem; font-weight: 800; color: #fff; line-height: 1.2; }
+.pcx-appshowcase__highlights small { display: block; font-size: 0.75rem; color: rgba(255, 255, 255, 0.72); line-height: 1.2; }
+.pcx-appshowcase__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.2rem; }
+.pcx-appshowcase__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border: 0;
+  border-radius: var(--h-radius-md);
+  background: #fff;
+  color: var(--h-forest-deep);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  width: fit-content;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease;
+}
+.pcx-appshowcase__cta svg { width: 16px; height: 16px; transition: transform 150ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .pcx-appshowcase__cta:hover { background: #eaf1ff; }
+  .pcx-appshowcase__cta:hover svg { transform: translateY(2px); }
+}
+.pcx-home a.pcx-appshowcase__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pcx-appshowcase__link svg { width: 14px; height: 14px; transition: transform 150ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .pcx-appshowcase__link:hover svg { transform: translateX(3px); }
+}
+@media (max-width: 760px) {
+  .pcx-appshowcase { flex-direction: column; align-items: stretch; min-height: 0; }
+  .pcx-appshowcase__copy { max-width: none; }
+  /* Empilhado, o texto fica por cima da foto inteira (não só ao lado, como
+     no desktop) — precisa de um degradê bem mais opaco pra não brigar com
+     o que já está impresso na própria imagem. */
+  .pcx-appshowcase::before { background: linear-gradient(180deg, rgb(7 20 38 / .95) 0%, rgb(7 20 38 / .9) 55%, rgb(7 20 38 / .75) 100%) !important; }
+}
+
 /* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
    já carregado, cada um com o estabelecimento mais barato encontrado. */
 .pcx-spotlight__mock {
@@ -2204,6 +2318,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
    enquanto a fotografia principal usa contain e permanece 100% visível. */
 .pcx-offers-visual,
 .pcx-spotlight,
+.pcx-appshowcase,
 .pcx-promo-feature {
   position: relative !important;
   overflow: hidden !important;
@@ -2247,9 +2362,13 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-spotlight .pcx-frame-backdrop { z-index: -3; }
 .pcx-spotlight .pcx-frame-photo { z-index: -2; opacity: .56 !important; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
+.pcx-appshowcase .pcx-frame-backdrop { z-index: -3; }
+.pcx-appshowcase .pcx-frame-photo { z-index: -2; opacity: .6 !important; }
+.pcx-appshowcase::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .74) 46%,rgb(7 20 38 / .3) 100%); }
 @media (max-width: 700px) {
   .pcx-promo-feature { min-height: 260px !important; }
   .pcx-offers-visual { min-height: 180px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
   .pcx-spotlight .pcx-frame-photo { opacity: .42 !important; }
+  .pcx-appshowcase .pcx-frame-photo { opacity: .38 !important; }
 }

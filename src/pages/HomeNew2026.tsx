@@ -14,6 +14,7 @@ import {
 } from "../data/featuredRotation";
 import { FestivalAcaiBar } from "../components/FestivalAcaiBar";
 import { AppDock } from "../reference/PublicChrome";
+import { AppShowcase } from "../components/home/AppShowcase";
 import { CategoryBar } from "../components/home/CategoryBar";
 import { Footer } from "../components/home/Footer";
 import { Header } from "../components/home/Header";
@@ -115,6 +116,7 @@ export function HomeNew2026() {
           cycle={cycle}
         />
         <TrustBar />
+        <AppShowcase />
         <CategoryBar stores={catalog.stores} />
         <ProductGrid products={featured} loading={loading} />
         <TrendingProducts products={products} />
