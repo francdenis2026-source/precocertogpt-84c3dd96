@@ -24,6 +24,9 @@
 /.wrangler/
 /.seomator/
 /reports/seo/
+/supabase/.temp/
+/public/editorial-2026/
+/lint-*.json
 __pycache__/
 *.pyc
 

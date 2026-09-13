@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import "./AdminPerformance.css";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {

@@ -55,29 +55,6 @@ function messageFor(raw: string | undefined): string {
 }
 
 /**
- * A Auth API do Supabase responde a mesma mensagem genérica
- * ("Invalid login credentials") tanto para senha errada quanto para e-mail
- * sem conta — por padrão, contra enumeração de contas. O produto decidiu
- * abrir mão dessa proteção aqui para orientar melhor quem erra a senha vs.
- * quem nunca teve conta; a checagem roda numa Edge Function com
- * service_role (auth-check-email) porque o cliente não tem esse dado.
- */
-async function describeLoginFailure(email: string): Promise<string> {
-  if (!supabase) return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
-  try {
-    const { data, error } = await supabase.functions.invoke<{ exists: boolean }>("auth-check-email", {
-      body: { email: email.trim().toLocaleLowerCase("pt-BR") },
-    });
-    if (error || !data) return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
-    return data.exists
-      ? "Senha incorreta para este e-mail. Tente novamente ou toque em \"Esqueci minha senha\"."
-      : "Não encontramos uma conta com este e-mail. Confira o endereço ou crie uma conta nova.";
-  } catch {
-    return "E-mail ou senha incorretos. Confira os dados ou crie sua conta.";
-  }
-}
-
-/**
  * Papéis vindos de fonte segura: `app_metadata` do JWT (definido no servidor)
  * e a tabela `user_roles` protegida por RLS. `user_metadata` é ignorado de
  * propósito — é editável pelo próprio usuário.
@@ -147,7 +124,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error || !data.session) {
       const text = (error?.message || "").toLocaleLowerCase("pt-BR");
       const isBadCredentials = text.includes("invalid login") || text.includes("invalid credentials");
-      if (isBadCredentials) return { error: await describeLoginFailure(email) };
+      if (isBadCredentials) return { error: "E-mail ou senha incorretos. Confira os dados ou recupere sua senha." };
       return { error: messageFor(error?.message) };
     }
 
