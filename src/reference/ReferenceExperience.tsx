@@ -1,5 +1,5 @@
 import { sectorHeroImage } from "../data/sectorHeroImages";
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties, FormEvent, RefObject, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import { sanitizeRedirect } from "../auth/safeRedirect";
 import { createPortal } from "react-dom";
@@ -212,6 +212,41 @@ function reasonForRedirect(safePath: string, rawRedirect: string | null): string
   return "Você precisa entrar para continuar.";
 }
 
+/**
+ * Em vez de tentar acertar no CSS, em pixels fixos, uma altura de conteúdo
+ * que caiba em qualquer janela (login e cadastro têm alturas diferentes, o
+ * aviso de redirecionamento soma altura extra, e cada monitor/zoom sobra ou
+ * falta um pouco), este hook mede o conteúdo de verdade contra o espaço
+ * disponível e aplica a menor escala necessária para caber inteiro — sem
+ * nunca precisar de barra de rolagem, e sem depender de adivinhar valores.
+ * Só encolhe quando falta espaço; em telas normais fica em escala 1 (tamanho
+ * cheio). `deps` deve listar tudo que muda a altura do conteúdo (troca de
+ * aba, mensagens de erro, etc.) para a medição ser refeita.
+ */
+function useAutoFit(containerRef: RefObject<HTMLElement | null>, contentRef: RefObject<HTMLElement | null>, deps: unknown[]) {
+  const [scale, setScale] = useState(1);
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const content = contentRef.current;
+    if (!container || !content) return;
+    const measure = () => {
+      content.style.zoom = "1";
+      const style = getComputedStyle(container);
+      const available = container.clientHeight - parseFloat(style.paddingTop || "0") - parseFloat(style.paddingBottom || "0") - 2;
+      const natural = content.scrollHeight;
+      const next = natural > available ? Math.max(0.7, available / natural) : 1;
+      setScale(next);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    observer.observe(content);
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+  return scale;
+}
+
 export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -227,6 +262,9 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const [recoverEmail, setRecoverEmail] = useState("");
   const [recoverBusy, setRecoverBusy] = useState(false);
   const [recoverSent, setRecoverSent] = useState(false);
+  const formRef = useRef<HTMLElement>(null);
+  const fitRef = useRef<HTMLDivElement>(null);
+  const fitScale = useAutoFit(formRef, fitRef, [mode, showRecover, redirectReason, message, recoverSent, accountType]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -268,7 +306,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     setRecoverSent(true);
   };
 
-  return <div className="ref-auth"><aside className="ref-auth__story"><Brand inverse /><div className="ref-auth__hero-copy"><span className="ref-kicker"><MapPin /> FEIJÓ, ACRE</span><h1>Escolhas melhores começam por aqui.</h1><p>Compare preços locais com clareza e compre com mais confiança.</p></div><small>PreçoCerto · Economia perto de você</small></aside><main className="ref-auth__form"><Link className="ref-auth__back" to="/"><ArrowLeft /> Voltar ao PreçoCerto</Link>
+  return <div className="ref-auth"><aside className="ref-auth__story"><Brand inverse /><div className="ref-auth__hero-copy"><span className="ref-kicker"><MapPin /> FEIJÓ, ACRE</span><h1>Escolhas melhores começam por aqui.</h1><p>Compare preços locais com clareza e compre com mais confiança.</p></div><small>PreçoCerto · Economia perto de você</small></aside><main className="ref-auth__form" ref={formRef}><div className="ref-auth__fit" ref={fitRef} style={fitScale < 1 ? ({ zoom: fitScale } as CSSProperties) : undefined}><Link className="ref-auth__back" to="/"><ArrowLeft /> Voltar ao PreçoCerto</Link>
 
     {!showRecover && redirectReason && (
       <p className="ref-auth__reason"><LockKeyhole aria-hidden="true" /> {redirectReason}</p>
@@ -336,7 +374,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
       </>
     )}
 
-  </div></main><AppDock /></div>;
+  </div></div></main><AppDock /></div>;
 }
 
 export function ReferenceMerchantDashboard() { const catalog = useCatalog(); const rows = catalog.products.slice(0, 6); return <div className="ref-admin ref-merchant-admin"><aside className="ref-admin__sidebar"><Brand inverse /><nav><span>GESTÃO</span><Link className="is-active" to="/painel-lojista"><LayoutDashboard /> Visão geral</Link><Link to="/painel-lojista/catalogo"><PackageSearch /> Catálogo</Link><Link to="/painel-lojista/vendas-online"><ShoppingBasket /> Pedidos</Link><span>NEGÓCIO</span><Link to="/painel-lojista/configurar-negocio"><Store /> Minha loja</Link><Link to="/estabelecimentos"><Eye /> Ver no site</Link></nav><small>PreçoCerto · Feijó, Acre</small></aside><main id="conteudo-principal" className="ref-admin__main"><header><div><span>PAINEL DO COMERCIANTE</span><h1>Central Super</h1><p>Preços, estoque e visibilidade do seu catálogo.</p></div><div><ThemeButton /><Link to="/">Ver site</Link></div></header><section className="ref-admin__cards"><article><Tag /><span>Produtos publicados</span><strong>{rows.length}</strong><small>catálogo ativo</small></article><article><BadgeCheck /><span>Preços atualizados</span><strong>92%</strong><small>nas últimas 24 horas</small></article><article><Eye /><span>Visualizações</span><strong>1.284</strong><small>nesta semana</small></article><article><TrendingDown /><span>Melhores preços</span><strong>4</strong><small>liderando comparações</small></article></section><section className="ref-merchant-table"><header><div><span>CATÁLOGO</span><h2>Preços e estoque</h2></div><button type="button"><Plus /> Novo produto</button></header><div className="ref-results-table"><div className="ref-results-table__head"><span>Produto</span><span>Status</span><span>Mercado local</span><span>Seu preço</span><span /></div>{rows.map(product => <div className="ref-result-row" key={product.id}><span className="ref-result-product"><i><ProductVisual product={product} /></i><span><small>{product.category}</small><strong>{product.name}</strong><em>{product.size}</em></span></span><span className="ref-status"><Check /> publicado</span><span className="ref-result-range">{brl.format(product.minPrice)} a {brl.format(product.maxPrice)}<small>{product.storeCount} lojas</small></span><strong className="ref-result-price">{brl.format(product.minPrice)}</strong><button type="button" aria-label={`Editar ${product.name}`}>Editar</button></div>)}</div></section></main></div>; }

@@ -20,6 +20,12 @@
 .ref-auth__hero-copy>p{max-width:36ch!important;margin:14px 0 0!important;color:rgba(255,255,255,.82)!important;font-size:.94rem!important;line-height:1.5!important}
 .ref-auth__story>small{position:relative!important;z-index:1!important;color:rgba(255,255,255,.6)!important;font-size:.7rem!important;letter-spacing:.025em!important}
 .ref-auth__form{min-width:0!important;height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;display:grid!important;align-content:center!important;justify-items:center!important;padding:26px clamp(28px,5vw,64px)!important;background:var(--auth-bg)!important}
+/* Envolve voltar+aviso+card: o React mede a altura real deste grupo contra
+   o espaço disponível em .ref-auth__form e aplica a menor escala necessária
+   para caber sem rolagem (ver useAutoFit em ReferenceExperience.tsx) — por
+   isso width:100% aqui, para os filhos (width:min(100%,460px)) calcularem
+   a partir da largura cheia do formulário, não do conteúdo encolhido. */
+.ref-auth__fit{display:flex!important;flex-direction:column!important;align-items:center!important;width:100%!important;transform-origin:top center!important}
 /* Uma folha legada (ReferenceExperience.css, carregada antes desta) ainda
    define .ref-auth__back{position:absolute;top:28px;left:30px}, sem
    !important. Como esta folha nunca redeclarava "position", aquela regra
