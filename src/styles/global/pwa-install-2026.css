@@ -1,6 +1,11 @@
-/* Instalação e presença compacta no app-shell móvel. */
+/* Botão de instalar o PWA: removido do header (home e demais páginas) — sem
+   contexto ali, confundia usuários que não conheciam o recurso. O componente
+   (PwaInstallButton.tsx) continua existindo, só não é mais renderizado no
+   chrome do site; `display:none` aqui é só defesa extra caso algo volte a
+   importá-lo sem querer. Presença online (contador de pessoas online)
+   continua compacta no mobile normalmente. */
 .pc-pwa-install {
-  display: none;
+  display: none !important;
   align-items: center;
   justify-content: center;
   gap: 5px;
@@ -17,13 +22,7 @@
 .pc-pwa-install svg { width: 18px; height: 18px; stroke-width: 2.3; }
 
 @media (max-width: 760px) {
-  .pc-pwa-install { display: inline-flex; }
   .pcx-header__tools { gap: 6px !important; }
-  /* .pcx-header__tools .ref-online forçava a presença online visível aqui
-     (a home não usa mais o botão de instalar app, então esse seletor não se
-     aplica mais a nada) — isso brigava com a regra que a esconde no mobile
-     para sobrar espaço pro rádio (controle de verdade, não decorativo), e
-     o rádio acabava cortado/inacessível. Ver HomeProfessionalRedesign2026.css. */
 
   .ref-header .ref-header__utility {
     display: flex !important;
@@ -43,12 +42,7 @@
     gap: 7px !important;
   }
 }
-@media (max-width: 390px) {
-  .pc-pwa-install { width: 36px; min-width: 36px; padding: 0; }
-  .pc-pwa-install span { display: none; }
-}
 @media (display-mode: standalone) {
-  .pc-pwa-install { display: none !important; }
   html { overscroll-behavior-y: none; }
   body { padding-top: env(safe-area-inset-top); }
 }

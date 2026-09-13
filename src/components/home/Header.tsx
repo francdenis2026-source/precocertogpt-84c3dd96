@@ -131,6 +131,14 @@ export function Header({ products = [] }: { products?: Product[] }) {
           })}
         </nav>
 
+        {/* Fora de .pcx-header__tools de propósito: no mobile essa faixa vira
+            uma linha própria, cheia (nome da rádio/música legível), em vez de
+            um círculo espremido entre os outros ícones — ver breakpoint em
+            HomeProfessionalRedesign2026.css. */}
+        <div className="pcx-header__radio-slot">
+          <HeaderRadioPlayer />
+        </div>
+
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
           {/* Itens decorativos/opcionais ficam num sub-contêiner com rolagem
               própria: em telas estreitas, o que não cabe rola aqui dentro em
@@ -138,9 +146,7 @@ export function Header({ products = [] }: { products?: Product[] }) {
               inteiros) para fora da área visível do header. */}
           <div className="pcx-header__tools-scroll">
             {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
-                renderizado só dentro do PublicHeader, que a home não usa. Some no
-                mobile (ver CSS) — é o primeiro a ceder espaço para o rádio, que é
-                um controle de verdade, não só um indicador decorativo. */}
+                renderizado só dentro do PublicHeader, que a home não usa. */}
             <OnlinePresence />
             <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
               <Heart aria-hidden="true" />
@@ -148,7 +154,6 @@ export function Header({ products = [] }: { products?: Product[] }) {
             <Link className="pcx-header__icon" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta">
               <ShoppingBasket aria-hidden="true" />
             </Link>
-            <HeaderRadioPlayer />
           </div>
           <HeaderThemeToggle />
           {!profile && (

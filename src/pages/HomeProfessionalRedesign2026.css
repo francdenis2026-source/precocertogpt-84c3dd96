@@ -381,24 +381,64 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
    dica ".pc-radio__track" no hover/focus (ver comentário abaixo). */
 .pcx-header .pc-radio__copy { display: none; }
 .pcx-header .pc-radio__play { padding: 0.4rem; max-width: none; }
-@media (max-width: 640px) {
-  /* No app o rádio some do topo em telas estreitas; vira um botão redondo de
-     play/pause do mesmo tamanho dos outros ícones do header, sem o texto.
-     PersistentRadio.css tem regras !important nesta mesma breakpoint (pensadas
-     para o widget flutuante), então precisamos de !important aqui também para
-     vencer dentro do header. */
-  .pcx-header .pc-radio {
-    display: flex !important; width: 40px !important; min-width: 40px !important;
-    max-width: none !important; height: 40px !important; padding: 0 !important;
+/* .pcx-header__radio-slot: faixa própria do player no app-shell móvel — ver
+   comentário maior no breakpoint mobile logo abaixo. No desktop este
+   contêiner só existe para posicionar o .pc-radio (146px, ver regra
+   min-width:861px) sem afetar seus vizinhos no header. */
+.pcx-header__radio-slot { display: flex; align-items: center; min-width: 0; }
+
+@media (max-width: 760px) {
+  /* Antes disto o rádio virava um botão redondo igual aos outros ícones do
+     header (tema, menu) — sem nome de rádio/música e sem nenhuma pista de
+     que era um player, não só mais um botão. Agora ele ganha a própria linha,
+     de ponta a ponta do header (.pcx-header__bar quebra em duas linhas via
+     flex-wrap — ver regra logo abaixo), com espaço de verdade pro nome da
+     rádio/faixa e o equalizador (.pc-radio__signal) que já existia no
+     componente mas nunca aparecia no mobile. */
+  /* height:66px (regra de largura <=860px, acima) travava a barra numa
+     linha só — com o rádio quebrando para a própria linha, o conteúdo extra
+     vazava por baixo, sobrepondo o hero. auto deixa a altura real (3 linhas)
+     empurrar o resto da página normalmente. */
+  .pcx-header__bar { flex-wrap: wrap !important; row-gap: 8px; height: auto !important; min-height: 66px; padding-block: 10px; }
+  .pcx-header__brand { order: 1; }
+  .pcx-header__radio-slot { order: 2; flex: 1 1 100%; width: 100%; }
+  .pcx-header__tools { order: 3; margin-left: auto; }
+
+  .pcx-header__radio-slot .pc-radio {
+    display: flex !important;
+    width: 100% !important; min-width: 0 !important; max-width: none !important;
+    height: 46px !important;
+    padding: 0 12px 0 0 !important;
+    gap: 0 !important;
+    border-radius: 14px !important;
   }
-  .pcx-header .pc-radio__play {
-    width: 40px; height: 40px; padding: 0; justify-content: center;
-    max-width: none; border-radius: 999px;
+  .pcx-header__radio-slot .pc-radio__play {
+    flex: 1 1 auto; min-width: 0;
+    width: auto; height: 46px !important; max-width: none;
+    padding: 0 !important; gap: 10px !important;
+    justify-content: flex-start;
   }
-  .pcx-header .pc-radio__copy { display: none !important; }
-  .pcx-header .pc-radio__control { width: 26px; height: 26px; }
-  .pcx-header .pc-radio__control svg { width: 12px; height: 12px; }
-  .pcx-header .pc-radio.is-playing { width: 40px !important; max-width: none !important; }
+  .pcx-header__radio-slot .pc-radio__control {
+    width: 34px !important; height: 34px !important;
+    margin-left: 6px;
+    border-radius: 10px !important;
+  }
+  .pcx-header__radio-slot .pc-radio__control svg { width: 15px; height: 15px; }
+  .pcx-header__radio-slot .pc-radio__copy {
+    display: grid !important;
+    min-width: 0; flex: 1 1 auto;
+  }
+  .pcx-header__radio-slot .pc-radio__copy strong {
+    display: block; max-width: 100%;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-size: 0.82rem;
+  }
+  .pcx-header__radio-slot .pc-radio__copy small { font-size: 0.62rem; }
+  .pcx-header__radio-slot .pc-radio__signal {
+    display: flex !important;
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
 }
 
 .pcx-header__login {
@@ -552,14 +592,12 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-header__login { padding: 0.5rem; }
   .pcx-header__menu { display: inline-flex; }
 
-  /* A barra de ferramentas (presença online + favoritos + cesta + rádio +
-     tema + menu) não cabia na largura de um celular sem quebrar. A rolagem
-     horizontal que existia aqui antes cobria TODOS os itens juntos —
-     incluindo tema e menu, os únicos realmente essenciais — então quando
-     ainda faltava espaço eram justamente eles que ficavam parcialmente
-     cortados na borda direita, sem indicação visual de que dava pra rolar.
-     Agora só os itens decorativos (.pcx-header__tools-scroll) rolam; tema,
-     login e menu ficam fora dessa área e nunca são recortados. */
+  /* A barra de ferramentas (presença online + favoritos + cesta + tema +
+     menu) não cabia na largura de um celular sem quebrar quando o rádio
+     também vivia aqui dentro — ele ganhou linha própria (.pcx-header__radio-slot,
+     acima), então agora sobra espaço de sobra pro resto. A rolagem horizontal
+     nesta faixa fica só como rede de segurança (favoritos/cesta já somem no
+     mobile de qualquer forma); tema e menu nunca ficam de fora dela. */
   .pcx-header__tools {
     flex-shrink: 1;
     min-width: 0;
@@ -574,10 +612,6 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   }
   .pcx-header__tools-scroll::-webkit-scrollbar { display: none; }
   .pcx-header__theme, .pcx-header__login, .pcx-header__menu { flex-shrink: 0; }
-  /* Decorativo (prova social, não navegação) — o primeiro a ceder espaço
-     para o resto da barra caber sem precisar rolar, principalmente o
-     seletor de tema, que é funcional e não pode ficar escondido. */
-  .pcx-header__tools .ref-online { display: none; }
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
