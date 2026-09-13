@@ -116,6 +116,12 @@ html:not([data-theme="dark"]) .pharmacy-directory-page small{
   color:var(--pc-text-muted)!important;
   opacity:1!important;
 }
+/* O selo de categoria do card de produto (.sector-product-card small) é um
+   badge colorido de propósito, não uma legenda cinza — a regra genérica
+   acima (pensada para legendas comuns) apagava essa cor. */
+html:not([data-theme="dark"]) .pharmacy-directory-page .sector-product-card small{
+  color:#3149a8!important;
+}
 
 /* .ref-footer é uma faixa escura fixa (var(--pc-navy)) mesmo no tema claro —
    não reage a data-theme. A regra ".ref-page small" acima presume texto
@@ -244,6 +250,9 @@ html[data-theme="dark"] .msearch26-page small,
 html[data-theme="dark"] .pharmacy-directory-page small{
   color:var(--pc-text-muted-dark)!important;
   opacity:1!important;
+}
+html[data-theme="dark"] .pharmacy-directory-page .sector-product-card small{
+  color:#93c5fd!important;
 }
 
 html[data-theme="dark"] .nx-category-strip strong,

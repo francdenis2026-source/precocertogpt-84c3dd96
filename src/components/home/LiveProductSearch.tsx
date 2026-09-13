@@ -272,7 +272,7 @@ export function LiveProductSearch({
                         style={
                           {
                             "--pc26-store-accent":
-                              product.storeColor || "#17623d",
+                              product.storeColor || "#2563eb",
                           } as CSSProperties
                         }
                       >

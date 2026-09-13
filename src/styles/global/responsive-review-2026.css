@@ -85,7 +85,7 @@ html { scroll-padding-top: 88px; }
 .pharmacy-directory-page .pharmacy-directory__hero h1 { font-size: clamp(32px, 4vw, 46px); line-height: 1.12; }
 .pharmacy-directory-page .pharmacy-establishment { border-radius: 16px; box-shadow: 0 3px 16px #14281e06; }
 .pharmacy-directory-page .pharmacy-establishment__identity h2 { overflow-wrap: anywhere; }
-.pharmacy-directory-page .pharmacy-establishment__action { background: #087843; color: #fff; min-height: 44px; }
+.pharmacy-directory-page .pharmacy-establishment__action { background: #2563eb; color: #fff; min-height: 44px; }
 .pharmacy-directory-page .pharmacy-footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .pharmacy-directory-page .pharmacy-footer nav a { min-height: 44px; display: inline-flex; align-items: center; }
 .pharmacy-directory-page .pharmacy-footer p,

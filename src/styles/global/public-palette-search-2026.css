@@ -44,7 +44,7 @@ html:not([data-theme="light"]) {
   --brand-navy: #071426;
 }
 }
-html:root, html:root body, html:root body :is(.pcx-home,.ref-page,.ref-auth,.search26-page,.msearch26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page) {
+html:root, html:root body, html:root body :is(.pcx-home,.ref-page,.ref-auth,.search26-page,.msearch26-page,.sector26-page,.smart-basket-page,.pro-basket-page,.store-pro-page,.product-pro-page,.pharmacy-directory-page) {
   --pc-canvas: var(--brand-canvas) !important;
   --pc-surface: var(--brand-surface) !important;
   --pc-surface-2: var(--brand-soft) !important;
