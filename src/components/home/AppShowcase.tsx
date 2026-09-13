@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Download, Smartphone, Sparkles, Store, Zap } from "lucide-react";
+import { ArrowRight, Download, MapPin, Search, Smartphone, Sparkles, Store, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
-import showcaseImg from "../../assets/home-2026/hero-mulher-app-precocerto.jpg";
 
 type InstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -78,8 +77,6 @@ export function AppShowcase() {
   return (
     <section className="pcx-shell" aria-labelledby="app-showcase-title">
       <div className="pcx-appshowcase">
-        <img className="pcx-frame-backdrop" src={showcaseImg} alt="" aria-hidden="true" loading="lazy" decoding="async" width="1600" height="900" />
-        <img className="pcx-frame-photo" src={showcaseImg} alt="" loading="lazy" decoding="async" width="1600" height="900" />
         <div className="pcx-appshowcase__copy">
           <span className="pcx-appshowcase__badge">
             <Sparkles aria-hidden="true" />
@@ -112,6 +109,47 @@ export function AppShowcase() {
             <Link to="/explorar" className="pcx-appshowcase__link">
               Continuar pela web <ArrowRight aria-hidden="true" />
             </Link>
+          </div>
+        </div>
+        <div className="pcx-appshowcase__visual" aria-hidden="true">
+          <div className="pcx-appshowcase__glow" />
+          <div className="pcx-appshowcase__phone">
+            <div className="pcx-appshowcase__phone-screen">
+              <div className="pcx-appshowcase__phone-bar">
+                <MapPin aria-hidden="true" />
+                <span>Feijó, Acre</span>
+              </div>
+              <div className="pcx-appshowcase__phone-search">
+                <Search aria-hidden="true" />
+                <span>Arroz 5kg</span>
+              </div>
+              <ul className="pcx-appshowcase__phone-list">
+                <li>
+                  <i />
+                  <span>
+                    <strong>Arroz Branco 5kg</strong>
+                    <small>Comercial Central</small>
+                  </span>
+                  <b>R$ 23,90</b>
+                </li>
+                <li>
+                  <i />
+                  <span>
+                    <strong>Feijão Carioca 1kg</strong>
+                    <small>Mercado Silva</small>
+                  </span>
+                  <b>R$ 8,49</b>
+                </li>
+                <li>
+                  <i />
+                  <span>
+                    <strong>Óleo de Soja 900ml</strong>
+                    <small>Ponto Econômico</small>
+                  </span>
+                  <b>R$ 7,29</b>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

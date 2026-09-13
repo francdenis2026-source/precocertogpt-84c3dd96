@@ -1892,10 +1892,6 @@ html[data-theme="light"] .pcx-hero::before {
 @media (max-width: 760px) {
   .pcx-appshowcase { flex-direction: column; align-items: stretch; min-height: 0; }
   .pcx-appshowcase__copy { max-width: none; }
-  /* Empilhado, o texto fica por cima da foto inteira (não só ao lado, como
-     no desktop) — precisa de um degradê bem mais opaco pra não brigar com
-     o que já está impresso na própria imagem. */
-  .pcx-appshowcase::before { background: linear-gradient(180deg, rgb(7 20 38 / .95) 0%, rgb(7 20 38 / .9) 55%, rgb(7 20 38 / .75) 100%) !important; }
 }
 
 /* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
@@ -2367,25 +2363,69 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-spotlight .pcx-frame-backdrop { z-index: -3; }
 .pcx-spotlight .pcx-frame-photo { z-index: -2; opacity: .56 !important; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
-/* A foto usada aqui já tem um selo/gráfico desenhado nela — borrado como
-   fundo (mesma técnica de "letterbox" do .pcx-spotlight), esse gráfico virava
-   uma mancha de cor com texto fantasma ilegível, lendo como erro de
-   renderização, não decisão de design. Preenche com a cor sólida da marca
-   (já é o background de .pcx-appshowcase) em vez de duplicar a foto borrada. */
-.pcx-appshowcase .pcx-frame-backdrop { display: none; }
-/* object-fit:contain deixava a foto (retrato, mais alta que larga) pequena e
-   centralizada dentro da faixa toda, com barra sólida sobrando dos dois
-   lados — não lia como hero, lia como "imagem que não coube". cover faz a
-   foto preencher a faixa inteira, de ponta a ponta, como um hero de verdade;
-   object-position puxa o enquadramento pro rosto/produto (canto superior
-   direito da foto original), não pro centro do corte. */
-.pcx-appshowcase .pcx-frame-photo { z-index: -2; opacity: 1 !important; object-fit: cover !important; object-position: 82% 15% !important; }
-.pcx-appshowcase::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(100deg,rgb(7 20 38 / .95) 0%,rgb(7 20 38 / .82) 34%,rgb(7 20 38 / .38) 62%,rgb(7 20 38 / .12) 84%); }
 @media (max-width: 700px) {
   .pcx-promo-feature { min-height: 260px !important; }
   .pcx-offers-visual { min-height: 180px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
   .pcx-spotlight .pcx-frame-photo { opacity: .42 !important; }
-  .pcx-appshowcase .pcx-frame-photo { opacity: 1 !important; object-position: 78% 12% !important; }
-  .pcx-appshowcase::before { background:linear-gradient(180deg,rgb(7 20 38 / .35) 0%,rgb(7 20 38 / .68) 42%,rgb(7 20 38 / .96) 78%)!important; }
+}
+
+/* A foto de estoque usada antes aqui (retrato de uma pessoa segurando o
+   celular, com um selo verde desenhado na própria imagem) não cabia bem
+   numa faixa larga e curta — cover cortava o enquadramento de um jeito
+   estranho, e o verde do selo brigava com a marca. Troca por um mockup
+   ilustrado do próprio app: mesma paleta da marca, sem depender de nenhuma
+   foto, e tematicamente ligado ao que a seção pede (instalar o app). Fica
+   num degradê navy próprio, com um brilho suave atrás do celular — dá
+   presença ao espaço sem competir com o texto, que continua com sua
+   própria coluna à esquerda. */
+.pcx-appshowcase {
+  background: linear-gradient(135deg, #0a1e38 0%, #0d2b4a 62%, #123a63 100%) !important;
+}
+.pcx-appshowcase__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 260px;
+  min-width: 200px;
+  align-self: stretch;
+}
+.pcx-appshowcase__glow {
+  position: absolute;
+  inset: -30% -15%;
+  background:
+    radial-gradient(circle at 62% 38%, rgba(147, 197, 253, .32), transparent 60%),
+    radial-gradient(circle at 28% 82%, rgba(240, 180, 41, .16), transparent 55%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.pcx-appshowcase__phone {
+  position: relative;
+  width: 176px;
+  padding: 9px;
+  border-radius: 28px;
+  background: #0b1220;
+  box-shadow: 0 24px 54px rgba(2, 8, 23, .5), inset 0 0 0 1px rgba(255, 255, 255, .06);
+  transform: rotate(-4deg);
+}
+.pcx-appshowcase__phone-screen { border-radius: 19px; background: #f4f7fb; overflow: hidden; padding-bottom: 9px; }
+.pcx-appshowcase__phone-bar { display: flex; align-items: center; gap: 5px; padding: 12px 11px 7px; background: #0d2b4a; color: #eaf1ff; font-size: 9.5px; font-weight: 700; }
+.pcx-appshowcase__phone-bar svg { width: 11px; height: 11px; color: #f0b429; flex-shrink: 0; }
+.pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 5px; margin: 7px 9px; padding: 6px 9px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 9.5px; font-weight: 700; }
+.pcx-appshowcase__phone-search svg { width: 11px; height: 11px; color: #6b7686; flex-shrink: 0; }
+.pcx-appshowcase__phone-list { list-style: none; margin: 0; padding: 0 9px; display: grid; gap: 5px; }
+.pcx-appshowcase__phone-list li { display: flex; align-items: center; gap: 6px; padding: 5px 6px; border-radius: 9px; background: #fff; box-shadow: 0 1px 3px rgba(9, 28, 54, .08); }
+.pcx-appshowcase__phone-list i { width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #60a5fa); }
+.pcx-appshowcase__phone-list li:nth-child(2) i { background: linear-gradient(135deg, #f0b429, #f7d774); }
+.pcx-appshowcase__phone-list li:nth-child(3) i { background: linear-gradient(135deg, #1d4ed8, #93c5fd); }
+.pcx-appshowcase__phone-list span { flex: 1 1 auto; min-width: 0; display: grid; gap: 1px; }
+.pcx-appshowcase__phone-list strong { display: block; font-size: 8.5px; font-weight: 800; color: #14213d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-appshowcase__phone-list small { display: block; font-size: 7.5px; color: #6b7686; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-appshowcase__phone-list b { flex-shrink: 0; font-size: 9.5px; font-weight: 800; color: #1d4ed8; white-space: nowrap; }
+@media (max-width: 900px) {
+  .pcx-appshowcase__phone { width: 152px; }
+}
+@media (max-width: 760px) {
+  .pcx-appshowcase__visual { display: none; }
 }
