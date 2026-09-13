@@ -91,11 +91,13 @@ export function StoreRail({
               decoding="async"
             />
             <div className="pcx-store-hero__content">
-              <h3>{lead.name}</h3>
-              <p>
-                <MapPin aria-hidden="true" /> {kindLabel} ·{" "}
-                {lead.neighborhood ? `${lead.neighborhood}, Feijó, Acre` : "Feijó, Acre"}
-              </p>
+              <div className="pcx-store-hero__badge">
+                <h3>{lead.name}</h3>
+                <p>
+                  <MapPin aria-hidden="true" /> {kindLabel} ·{" "}
+                  {lead.neighborhood ? `${lead.neighborhood}, Feijó, Acre` : "Feijó, Acre"}
+                </p>
+              </div>
               <span>
                 Catálogo local para comparar preços antes de sair de casa.
               </span>

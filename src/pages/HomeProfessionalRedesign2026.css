@@ -1987,8 +1987,13 @@ a.pcx-store-hero::after {
   background: linear-gradient(180deg, rgba(8,11,14,0.05) 0%, rgba(8,11,14,0.3) 22%, rgba(8,11,14,0.74) 45%, rgba(8,11,14,0.88) 100%);
 }
 .pcx-store-hero__content { position: relative; z-index: 2; padding: 1.5rem; width: 100%; text-shadow: 0 1px 3px rgba(0,0,0,0.45); }
-.pcx-store-hero__content h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
-.pcx-store-hero__content p { display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; margin: 0 0 0.4rem; opacity: 0.92; }
+/* O degradê de fundo (::after) é calibrado pra uma foto "média" — mas cada
+   loja usa sua própria foto real, e algumas (ex: farmácia com prateleira
+   clara) deixavam o nome quase sem contraste contra o fundo. Um chip sólido
+   por trás do nome+categoria garante legibilidade não importa a foto. */
+.pcx-store-hero__badge { display: inline-block; max-width: 100%; margin-bottom: 0.6rem; padding: 0.55rem 0.85rem; border-radius: 12px; background: rgba(6, 12, 20, 0.62); backdrop-filter: none; text-shadow: none; }
+.pcx-store-hero__content h3 { font-size: 1.3rem; margin-bottom: 0.25rem; }
+.pcx-store-hero__content p { display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; margin: 0; opacity: 0.92; }
 .pcx-store-hero__content p svg { width: 13px; height: 13px; }
 .pcx-store-hero__content > span { font-size: 0.85rem; opacity: 0.85; display: block; max-width: 40ch; }
 .pcx-store-hero__footer { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.22); }
@@ -2362,7 +2367,12 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-spotlight .pcx-frame-backdrop { z-index: -3; }
 .pcx-spotlight .pcx-frame-photo { z-index: -2; opacity: .56 !important; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
-.pcx-appshowcase .pcx-frame-backdrop { z-index: -3; }
+/* A foto usada aqui já tem um selo/gráfico desenhado nela — borrado como
+   fundo (mesma técnica de "letterbox" do .pcx-spotlight), esse gráfico virava
+   uma mancha de cor com texto fantasma ilegível, lendo como erro de
+   renderização, não decisão de design. Preenche com a cor sólida da marca
+   (já é o background de .pcx-appshowcase) em vez de duplicar a foto borrada. */
+.pcx-appshowcase .pcx-frame-backdrop { display: none; }
 .pcx-appshowcase .pcx-frame-photo { z-index: -2; opacity: 1 !important; }
 .pcx-appshowcase::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(100deg,rgb(7 20 38 / .9) 0%,rgb(7 20 38 / .7) 42%,rgb(7 20 38 / .12) 68%,transparent 84%); }
 @media (max-width: 700px) {
