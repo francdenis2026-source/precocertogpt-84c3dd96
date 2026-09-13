@@ -301,6 +301,14 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   gap: 0.6rem;
   flex-shrink: 0;
 }
+/* Agrupa só os itens decorativos/opcionais (presença online, instalar app,
+   favoritos/cesta, rádio) — ver breakpoint mobile abaixo para o porquê de
+   separá-los de tema/login/menu num sub-contêiner à parte. */
+.pcx-header__tools-scroll {
+  display: flex;
+  align-items: center;
+  gap: inherit;
+}
 
 /* Radio player — compact reskin of PersistentRadio's .pc-radio inside the header */
 .pcx-header .pc-radio {
@@ -545,21 +553,27 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-header__menu { display: inline-flex; }
 
   /* A barra de ferramentas (presença online + favoritos + cesta + rádio +
-     tema + menu) não cabia na largura de um celular sem quebrar — nada
-     nela tinha wrap nem encolhia, então os últimos itens (o seletor de
-     tema, às vezes até o menu) ficavam empurrados para fora da tela,
-     invisíveis sem rolar. Cada peça fica um pouco mais compacta aqui, e
-     o scroll horizontal serve só de rede de segurança caso ainda não
-     caiba tudo numa tela muito estreita — nunca deveria precisar dele. */
+     tema + menu) não cabia na largura de um celular sem quebrar. A rolagem
+     horizontal que existia aqui antes cobria TODOS os itens juntos —
+     incluindo tema e menu, os únicos realmente essenciais — então quando
+     ainda faltava espaço eram justamente eles que ficavam parcialmente
+     cortados na borda direita, sem indicação visual de que dava pra rolar.
+     Agora só os itens decorativos (.pcx-header__tools-scroll) rolam; tema,
+     login e menu ficam fora dessa área e nunca são recortados. */
   .pcx-header__tools {
     flex-shrink: 1;
     min-width: 0;
     gap: 0.4rem;
+  }
+  .pcx-header__tools-scroll {
+    flex-shrink: 1;
+    min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  .pcx-header__tools::-webkit-scrollbar { display: none; }
+  .pcx-header__tools-scroll::-webkit-scrollbar { display: none; }
+  .pcx-header__theme, .pcx-header__login, .pcx-header__menu { flex-shrink: 0; }
   /* Decorativo (prova social, não navegação) — o primeiro a ceder espaço
      para o resto da barra caber sem precisar rolar, principalmente o
      seletor de tema, que é funcional e não pode ficar escondido. */

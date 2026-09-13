@@ -3,7 +3,7 @@
 .ref-stores-page .ref-header{position:relative;background:color-mix(in srgb,var(--pc-surface) 94%,transparent)}
 .ref-stores-page .ref-header__inner{min-height:58px;height:58px;display:flex;justify-content:space-between}
 .ref-stores-page .ref-header .ref-brand img{width:126px}
-.ref-stores-page .ref-nav,.ref-stores-page .ref-header__utility,.ref-stores-page .ref-favorites-link,.ref-stores-page .ref-signin,.ref-stores-page .ref-menu{display:none!important}
+.ref-stores-page .ref-nav,.ref-stores-page .ref-header__utility,.ref-stores-page .ref-favorites-link,.ref-stores-page .ref-signin{display:none!important}
 .ref-stores-page .ref-header__actions{margin-left:auto}
 .ref-stores-page .ref-directory__main{width:min(1120px,calc(100% - 32px));flex:1;padding:18px 0 28px}
 

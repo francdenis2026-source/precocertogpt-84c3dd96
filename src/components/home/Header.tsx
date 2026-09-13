@@ -133,17 +133,23 @@ export function Header({ products = [] }: { products?: Product[] }) {
         </nav>
 
         <div className="pcx-header__tools" role="group" aria-label="Ações da conta">
-          {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
-              renderizado só dentro do PublicHeader, que a home não usa. */}
-          <OnlinePresence />
-          <PwaInstallButton />
-          <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
-            <Heart aria-hidden="true" />
-          </Link>
-          <Link className="pcx-header__icon" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta">
-            <ShoppingBasket aria-hidden="true" />
-          </Link>
-          <HeaderRadioPlayer />
+          {/* Itens decorativos/opcionais ficam num sub-contêiner com rolagem
+              própria: em telas estreitas, o que não cabe rola aqui dentro em
+              vez de empurrar tema/menu (controles essenciais, sempre visíveis
+              inteiros) para fora da área visível do header. */}
+          <div className="pcx-header__tools-scroll">
+            {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
+                renderizado só dentro do PublicHeader, que a home não usa. */}
+            <OnlinePresence />
+            <PwaInstallButton />
+            <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
+              <Heart aria-hidden="true" />
+            </Link>
+            <Link className="pcx-header__icon" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta">
+              <ShoppingBasket aria-hidden="true" />
+            </Link>
+            <HeaderRadioPlayer />
+          </div>
           <HeaderThemeToggle />
           {!profile && (
             <Link className="pcx-header__login" to="/login">
