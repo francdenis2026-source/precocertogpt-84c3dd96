@@ -8,12 +8,26 @@ html:root body .pcx-home .pcx-categories {
   overscroll-behavior-x:contain; touch-action:pan-x pan-y;
 }
 html:root body .pcx-home .pcx-categories .pcx-category {
-  flex:0 0 132px!important; width:132px!important; min-width:132px!important;
-  max-width:none!important; height:auto!important; min-height:116px;
+  flex:0 0 156px!important; width:156px!important; min-width:156px!important;
+  max-width:none!important; height:auto!important; min-height:148px;
   display:flex!important; flex-direction:column!important; align-items:center;
-  justify-content:flex-start; padding:14px 10px!important; gap:10px!important;
+  justify-content:flex-start; padding:7px!important; gap:9px!important;
   scroll-snap-align:start;
 }
+.pcx-category__media {
+  position:relative; display:block; width:100%; height:82px; overflow:hidden;
+  border-radius:10px; background:var(--h-surface-2);
+}
+html:root body .pcx-home .pcx-category__media > img {
+  display:block; width:100%!important; height:100%!important; object-fit:cover!important;
+  object-position:center; opacity:1!important; filter:none!important;
+  transition:transform 220ms ease;
+}
+html:root body .pcx-home .pcx-category__media > i {
+  position:absolute; left:7px; bottom:7px; width:30px!important; height:30px!important;
+  border:2px solid var(--h-surface); box-shadow:var(--h-shadow-sm);
+}
+html:root body .pcx-home .pcx-category:hover .pcx-category__media > img { transform:scale(1.045); }
 html:root body .pcx-home .pcx-category__text { width:100%; min-width:0; text-align:center; }
 html:root body .pcx-home .pcx-category__text strong {
   display:block; white-space:normal!important; overflow:visible!important;
@@ -61,5 +75,6 @@ html:root body .store-pro-pharmacy-photo img {
 .store-pro-pharmacy-photo figcaption { margin-top:8px; color:var(--pc-muted,#52647a); font-size:11px; line-height:1.4; }
 @media(max-width:760px) {
   html:root body .store-pro-page .store-pro-hero--pharmacies { grid-template-columns:1fr; padding:16px!important; gap:16px; }
-  html:root body .pcx-home .pcx-categories .pcx-category { flex-basis:108px!important; width:108px!important; min-width:108px!important; }
+  html:root body .pcx-home .pcx-categories .pcx-category { flex-basis:116px!important; width:116px!important; min-width:116px!important; min-height:132px; }
+  .pcx-category__media { height:68px; }
 }

@@ -2363,12 +2363,13 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-spotlight .pcx-frame-photo { z-index: -2; opacity: .56 !important; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
 .pcx-appshowcase .pcx-frame-backdrop { z-index: -3; }
-.pcx-appshowcase .pcx-frame-photo { z-index: -2; opacity: .6 !important; }
-.pcx-appshowcase::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .74) 46%,rgb(7 20 38 / .3) 100%); }
+.pcx-appshowcase .pcx-frame-photo { z-index: -2; opacity: 1 !important; }
+.pcx-appshowcase::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(100deg,rgb(7 20 38 / .9) 0%,rgb(7 20 38 / .7) 42%,rgb(7 20 38 / .12) 68%,transparent 84%); }
 @media (max-width: 700px) {
   .pcx-promo-feature { min-height: 260px !important; }
   .pcx-offers-visual { min-height: 180px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
   .pcx-spotlight .pcx-frame-photo { opacity: .42 !important; }
-  .pcx-appshowcase .pcx-frame-photo { opacity: .38 !important; }
+  .pcx-appshowcase .pcx-frame-photo { opacity: 1 !important; }
+  .pcx-appshowcase::before { background:linear-gradient(180deg,rgb(7 20 38 / .3) 0%,rgb(7 20 38 / .62) 46%,rgb(7 20 38 / .94) 100%)!important; }
 }
