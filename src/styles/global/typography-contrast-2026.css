@@ -91,6 +91,15 @@ html:not([data-theme="dark"]) .msearch26-page p,
 html:not([data-theme="dark"]) .pharmacy-directory-page p{
   color:var(--pc-text-body)!important;
 }
+/* .pharmacy-footer é uma faixa sempre escura (fundo navy fixo, independente
+   do tema — ver PharmacyDirectory.css), mas a regra genérica acima não sabia
+   disso e forçava a mesma tinta escura de tema claro no texto do rodapé,
+   resultando em texto escuro sobre fundo escuro. */
+html:not([data-theme="dark"]) .pharmacy-directory-page .pharmacy-footer p,
+html:not([data-theme="dark"]) .pharmacy-directory-page .pharmacy-footer > small,
+html:not([data-theme="dark"]) .pharmacy-directory-page .pharmacy-footer__brand > span{
+  color:rgba(255,255,255,.7)!important;
+}
 
 html:not([data-theme="dark"]) .nx-section-title span,
 html:not([data-theme="dark"]) .nx-section-title>a,
