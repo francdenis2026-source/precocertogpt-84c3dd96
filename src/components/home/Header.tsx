@@ -22,14 +22,18 @@ import { LiveProductSearch } from "./LiveProductSearch";
 function HeaderThemeToggle() {
   const { theme, toggleTheme } = useSiteTheme();
   const dark = theme === "dark";
+  // Ícone do modo já ativo (lua = escuro, sol = claro) + fundo colorido
+  // (âmbar/azul) indicando visualmente qual opção está selecionada.
   return (
     <button
       className="pcx-header__theme"
       type="button"
+      data-active-theme={dark ? "dark" : "light"}
       onClick={toggleTheme}
-      aria-label={dark ? "Usar tema claro" : "Usar tema escuro"}
+      aria-pressed={dark}
+      aria-label={dark ? "Tema escuro ativo — trocar para o tema claro" : "Tema claro ativo — trocar para o tema escuro"}
     >
-      {dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
+      {dark ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
     </button>
   );
 }

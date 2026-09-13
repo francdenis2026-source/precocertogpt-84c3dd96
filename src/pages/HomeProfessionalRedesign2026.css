@@ -436,6 +436,13 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 .pcx-header__icon:active { transform: scale(0.94); }
 .pcx-header__theme:focus-visible,
 .pcx-header__icon:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
+/* Fundo colorido indicando qual modo está ativo agora — o ícone sozinho
+   (lua/sol) não deixava claro se representava o modo atual ou o destino
+   do clique. Âmbar para claro, azul-índigo para escuro. */
+.pcx-header__theme[data-active-theme="light"] { background: #fff6df; border-color: #e7b64e; color: #92660c; }
+.pcx-header__theme[data-active-theme="light"]:hover { background: #fdedc4; border-color: #d9a53a; }
+.pcx-header__theme[data-active-theme="dark"] { background: #16233f; border-color: #3b6fd6; color: #a9c6ff; }
+.pcx-header__theme[data-active-theme="dark"]:hover { background: #1c2b4d; border-color: #5a8bea; }
 @media (max-width: 480px) {
   .pcx-header__theme { width: 36px; height: 36px; }
   .pcx-header__theme svg { width: 16px; height: 16px; }

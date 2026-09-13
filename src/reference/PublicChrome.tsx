@@ -150,7 +150,10 @@ function useBasket() {
 export function ThemeButton() {
   const { theme, toggleTheme } = useSiteTheme();
   const dark = theme === "dark";
-  return <button className="ref-theme" type="button" onClick={toggleTheme} aria-label={dark ? "Usar tema claro" : "Usar tema escuro"}>{dark ? <Sun /> : <Moon />}</button>;
+  // O ícone mostra o modo JÁ ATIVO (lua = escuro ativo, sol = claro ativo),
+  // não o destino do clique — e o fundo colorido (âmbar/azul) reforça isso
+  // visualmente, para não depender só da forma do ícone.
+  return <button className="ref-theme" type="button" data-active-theme={dark ? "dark" : "light"} onClick={toggleTheme} aria-pressed={dark} aria-label={dark ? "Tema escuro ativo — trocar para o tema claro" : "Tema claro ativo — trocar para o tema escuro"}>{dark ? <Moon /> : <Sun />}</button>;
 }
 
 type PublicSection = "home" | "sectors" | "search" | "basket" | "stores" | "profile";

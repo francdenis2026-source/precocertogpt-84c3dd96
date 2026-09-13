@@ -140,6 +140,15 @@ html:root body :is(.ref-header,.ref-header.is-scrolled,.ref-mobile-menu,.ref-doc
 html:root body .ref-header :is(.ref-theme,.ref-menu,.ref-favorites-link,.ref-header__back,.ref-header__home) {
   background:var(--brand-surface) !important; color:var(--brand-ink) !important; border-color:var(--brand-lineStrong) !important;
 }
+/* Vence a regra acima para mostrar qual modo está ativo (âmbar/azul) em vez
+   da cor neutra de superfície — sem isso o botão de tema ficava sempre com
+   o mesmo fundo, independente do modo selecionado. */
+html:root body .ref-header .ref-theme[data-active-theme="light"] {
+  background:#fff6df !important; color:#92660c !important; border-color:#e7b64e !important;
+}
+html:root body .ref-header .ref-theme[data-active-theme="dark"] {
+  background:#16233f !important; color:#a9c6ff !important; border-color:#3b6fd6 !important;
+}
 html:root body .ref-header .ref-signin { background:#2563eb !important; color:#fff !important; }
 html:root body .ref-dock a { color:var(--brand-muted) !important; }
 html:root body .ref-dock a.is-active, html:root body .ref-nav a.is-active {

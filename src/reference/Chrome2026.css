@@ -68,6 +68,12 @@ html[data-theme="dark"] .ref-brand img.ref-brand__dark{display:block}
 }
 .ref-theme svg,.ref-menu svg,.ref-favorites-link svg{width:18px;height:18px}
 @media(hover:hover) and (pointer:fine){.ref-theme:hover,.ref-menu:hover,.ref-favorites-link:hover{border-color:var(--pc-green);color:var(--pc-green-strong)}}
+/* Fundo colorido mostrando qual modo está ativo: âmbar para claro, azul
+   para escuro — reforça a seleção além do formato do ícone. */
+.ref-theme[data-active-theme="light"]{background:#fff6df;border-color:#e7b64e;color:#92660c}
+@media(hover:hover) and (pointer:fine){.ref-theme[data-active-theme="light"]:hover{background:#fdedc4;border-color:#d9a53a;color:#92660c}}
+.ref-theme[data-active-theme="dark"]{background:#16233f;border-color:#3b6fd6;color:#a9c6ff}
+@media(hover:hover) and (pointer:fine){.ref-theme[data-active-theme="dark"]:hover{background:#1c2b4d;border-color:#5a8bea;color:#a9c6ff}}
 .ref-signin{
   display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border-radius:var(--pc-radius-control);
   background:var(--pc-green-strong);color:#fff;text-decoration:none;font-size:var(--pc-text-sm);font-weight:var(--pc-weight-medium);
