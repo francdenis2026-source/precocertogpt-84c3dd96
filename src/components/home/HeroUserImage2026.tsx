@@ -16,7 +16,6 @@ export function HeroUserImage2026({ products, productCount, storeCount, loading 
     <div className="pcx-intro__inner">
       <div className="pcx-intro__copy">
         <LocationSwitcher />
-        <p className="pcx-intro__eyebrow">MAIS CLAREZA EM CADA COMPRA</p>
         <h1 id="pcx-intro-title">Sua próxima compra.<strong>Uma escolha melhor.</strong></h1>
         <p className="pcx-intro__lead">Compare preços do comércio de Feijó e descubra onde vale a pena comprar, antes de sair de casa.</p>
         <div className="pcx-intro__search">

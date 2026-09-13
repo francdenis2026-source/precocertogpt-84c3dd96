@@ -18,8 +18,12 @@ html:root body .pc-campaign .pc-campaign-backdrop img { object-fit:cover!importa
 html:root body .pc-campaign::after { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; border-radius:inherit;
   background:linear-gradient(90deg, rgb(7 20 38 / .88) 0%, rgb(7 20 38 / .66) 38%, rgb(7 20 38 / .16) 68%, transparent 86%);
 }
-html:root body .pc-campaign--home { min-height:clamp(460px,58vw,680px)!important; background:#091c36!important; color:#fff!important; border-radius:0!important; padding:clamp(42px,7vw,88px) 0!important; }
-html:root body .pc-campaign--home .pcx-intro__inner { position:relative; z-index:1; min-height:clamp(370px,46vw,540px); align-items:center; }
+/* Altura contida: o hero é a porta de entrada, não a página inteira — o
+   dono do produto pediu compactação depois de o clamp anterior (até 680px +
+   88px de padding) empurrar quase a viewport inteira antes de qualquer
+   conteúdo útil (categorias, ofertas) aparecer. */
+html:root body .pc-campaign--home { min-height:clamp(320px,30vw,420px)!important; background:#091c36!important; color:#fff!important; border-radius:0!important; padding:clamp(26px,3vw,40px) 0!important; }
+html:root body .pc-campaign--home .pcx-intro__inner { position:relative; z-index:1; min-height:clamp(240px,20vw,300px); align-items:center; }
 html:root body .pc-campaign--home .pcx-intro__copy { max-width:650px; }
 html:root body .pc-campaign--home :is(.pcx-intro__eyebrow,.pcx-intro__lead,.pcx-intro__suggestions,.pcx-intro__suggestions a,.pcx-intro__store-link,.pcx-intro__stat) { color:#eef5ff!important; }
 /* O número dentro de .pcx-intro__stat (ex.: "23", "3.633") fica em <strong>,
@@ -28,7 +32,10 @@ html:root body .pc-campaign--home :is(.pcx-intro__eyebrow,.pcx-intro__lead,.pcx-
    um elemento à parte dentro do span, não o span em si. Sem isso, o número
    ficava escuro sobre a foto/véu escuro do hero. */
 html:root body .pc-campaign--home .pcx-intro__stat strong { color:#fff!important; }
-html:root body .pc-campaign--home h1 { color:#fff!important; font-size:clamp(38px,5vw,68px)!important; max-width:13ch; }
+/* Sem o kicker que existia acima do título (removido — rótulo decorativo
+   redundante com o próprio título), o espaço que ele abria entre o chip de
+   localização e o h1 precisa vir do título em vez do parágrafo que sumiu. */
+html:root body .pc-campaign--home h1 { color:#fff!important; font-size:clamp(34px,4.4vw,58px)!important; margin-top:16px!important; max-width:13ch; }
 html:root body .pc-campaign--home h1 strong { color:#9bc7ff!important; }
 html:root body .pc-campaign--home .pc26-hero-search { background:#fff!important; color:#14213d!important; }
 /* A barra de busca da home é sempre um pílula branca, de propósito, mesmo no
@@ -66,8 +73,8 @@ html:root body .pc-campaign--guide::after {
     radial-gradient(130% 160% at 105% -10%, rgb(5 14 27 / 0) 45%, rgb(5 14 27 / .38) 100%);
 }
 @media(max-width:760px) {
- html:root body .pc-campaign--home { min-height:650px!important; padding:34px 0!important; }
- html:root body .pc-campaign--home .pcx-intro__inner { min-height:580px; align-items:end; }
+ html:root body .pc-campaign--home { min-height:420px!important; padding:24px 0!important; }
+ html:root body .pc-campaign--home .pcx-intro__inner { min-height:340px; align-items:end; }
  html:root body .pc-campaign--home .pc-campaign-backdrop img { object-position:68% center!important; }
  html:root body .pc-campaign--home::after {
    background:linear-gradient(180deg, rgb(7 20 38 / .16) 0%, rgb(7 20 38 / .32) 34%, rgb(7 20 38 / .82) 76%, rgb(7 20 38 / .92) 100%);
