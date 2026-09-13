@@ -19,19 +19,11 @@
 @media (max-width: 760px) {
   .pc-pwa-install { display: inline-flex; }
   .pcx-header__tools { gap: 6px !important; }
-  .pcx-header__tools .ref-online {
-    display: inline-flex !important;
-    min-width: 48px;
-    height: 34px;
-    padding: 4px 8px !important;
-    gap: 5px !important;
-    border-radius: 999px;
-    font-size: .72rem !important;
-    font-weight: 800;
-    white-space: nowrap;
-  }
-  .pcx-header__tools .ref-online__label { display: none !important; }
-  .pcx-header__tools .ref-online__signal svg { width: 15px; height: 15px; }
+  /* .pcx-header__tools .ref-online forçava a presença online visível aqui
+     (a home não usa mais o botão de instalar app, então esse seletor não se
+     aplica mais a nada) — isso brigava com a regra que a esconde no mobile
+     para sobrar espaço pro rádio (controle de verdade, não decorativo), e
+     o rádio acabava cortado/inacessível. Ver HomeProfessionalRedesign2026.css. */
 
   .ref-header .ref-header__utility {
     display: flex !important;
@@ -54,7 +46,6 @@
 @media (max-width: 390px) {
   .pc-pwa-install { width: 36px; min-width: 36px; padding: 0; }
   .pc-pwa-install span { display: none; }
-  .pcx-header__tools .ref-online { min-width: 42px; padding-inline: 6px !important; }
 }
 @media (display-mode: standalone) {
   .pc-pwa-install { display: none !important; }

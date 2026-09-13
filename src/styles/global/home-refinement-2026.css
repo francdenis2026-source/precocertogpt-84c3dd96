@@ -65,9 +65,24 @@ html .pcx-home .pcx-intro .pc-location-chip { min-height:44px !important; color:
   .pcx-intro__stats { gap:8px; margin-top:8px; padding-top:12px; }
   .pcx-intro__stat { width:100%; }
   html .pcx-home .pcx-header__tools { gap:8px !important; }
-  html .pcx-home .pcx-header .pc-radio, html .pcx-home .pcx-header .pc-radio.is-playing { min-width:44px !important; width:44px !important; max-width:44px !important; }
-  html .pcx-home .pcx-header .pc-radio__play { width:44px !important; height:44px !important; min-width:44px !important; padding:0 !important; justify-content:center; }
+  html .pcx-home .pcx-header .pc-radio, html .pcx-home .pcx-header .pc-radio.is-playing { min-width:44px !important; width:44px !important; max-width:44px !important; height:44px !important; }
+  html .pcx-home .pcx-header .pc-radio__play { position:relative; width:44px !important; height:44px !important; min-width:44px !important; padding:0 !important; justify-content:center; }
   html .pcx-home .pcx-header .pc-radio__copy { display:none !important; }
+  /* Ponto vermelho pulsante: nesta largura o player e so um circulo (sem o
+     texto "AO VIVO"), entao sem um sinal proprio ele nao se distinguia de um
+     botao de play generico enquanto tocava. */
+  html .pcx-home .pcx-header .pc-radio.is-playing .pc-radio__play::after {
+    content:"";
+    position:absolute;
+    top:1px;
+    right:1px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--rl, #c94f3d);
+    border:2px solid var(--h-surface, #fff);
+    animation:rr-pulse 1.5s ease-in-out infinite;
+  }
   html .pcx-home .pcx-footer__row { padding-block:16px !important; gap:12px !important; }
   html .pcx-home .pcx-footer__nav { flex-wrap:wrap !important; overflow:visible !important; gap:4px 8px !important; }
   html .pcx-home .pcx-footer__nav a { min-height:44px !important; font-size:12px !important; }

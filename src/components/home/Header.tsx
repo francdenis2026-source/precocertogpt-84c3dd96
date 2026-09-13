@@ -15,7 +15,6 @@ import type { Product } from "../../data/catalog";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 import { OnlinePresence } from "../OnlinePresence";
-import { PwaInstallButton } from "../PwaInstallButton";
 import { useCurrentProfile } from "../UserAccountExperience";
 import { LiveProductSearch } from "./LiveProductSearch";
 
@@ -139,9 +138,10 @@ export function Header({ products = [] }: { products?: Product[] }) {
               inteiros) para fora da área visível do header. */}
           <div className="pcx-header__tools-scroll">
             {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
-                renderizado só dentro do PublicHeader, que a home não usa. */}
+                renderizado só dentro do PublicHeader, que a home não usa. Some no
+                mobile (ver CSS) — é o primeiro a ceder espaço para o rádio, que é
+                um controle de verdade, não só um indicador decorativo. */}
             <OnlinePresence />
-            <PwaInstallButton />
             <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
               <Heart aria-hidden="true" />
             </Link>
