@@ -1,87 +1,85 @@
 /* Modal "visualização rápida" de produto — usado nas páginas dedicadas de
-   Kelly Burgueria e Ponto do Sanduba. Usa os tokens --h-* do redesign 2026
-   (herdados de .ref-page, ancestral onde este modal é renderizado). */
+   Kelly Burgueria e Ponto do Sanduba. Usa os tokens --pc-* (a mesma paleta
+   navy/dourado do resto do site) e não os tokens --h-* do redesign da home
+   — este modal nunca é renderizado dentro de .pcx-home, então --h-primary
+   nunca existia aqui e sempre caía no verde do fallback ("Adicionar à
+   cesta" verde-vivo, sem relação com a marca). --pc-* é remapeado
+   corretamente em qualquer página .ref-page (onde este modal vive),
+   incluindo tema escuro. */
 
 .pqv-overlay{
   position:fixed;inset:0;z-index:1000;
-  display:flex;align-items:center;justify-content:center;
+  display:grid;place-items:center;
   padding:20px;
-  background:rgba(8,14,12,.68);
-  backdrop-filter:blur(4px);
+  background:rgba(6,14,12,.66);
+  backdrop-filter:blur(7px);
   animation:pqv-fade .18s ease-out;
 }
 @keyframes pqv-fade{from{opacity:0}to{opacity:1}}
 
 .pqv-dialog{
-  position:relative;width:100%;max-width:560px;max-height:min(88vh,680px);overflow:auto;
-  display:flex;flex-direction:column;
-  background:var(--h-surface, #fff);color:var(--h-ink, #10161d);
-  border:1px solid var(--h-border, #e3e7ec);border-radius:var(--h-radius-lg, 18px);
-  box-shadow:0 24px 60px rgba(8,14,12,.32);
-  animation:pqv-pop .2s cubic-bezier(.25,1,.5,1);
+  position:relative;width:min(420px,100%);max-height:min(88dvh,640px);overflow:hidden;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  background:var(--pc-surface,#fff);color:var(--pc-ink,#14213d);
+  border-radius:22px;
+  box-shadow:0 30px 90px rgba(2,10,17,.36);
+  animation:pqv-pop .22s cubic-bezier(.25,1,.5,1);
 }
-@keyframes pqv-pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes pqv-pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
 
-@media (min-width:640px){
-  .pqv-dialog{flex-direction:row;max-height:min(80vh,520px)}
+/* Faixa hero: mesma linguagem visual do painel de comparação da busca
+   (gradiente + foto numa placa branca) em vez da foto antiga em faixa
+   cheia de 200px — era ela que dominava a tela no celular, empurrando o
+   preço e o botão de adicionar quase pra fora da área visível. */
+.pqv-hero{position:relative;isolation:isolate;overflow:hidden;padding:14px 16px 16px;background:linear-gradient(135deg,#0a1f33,#123a52 55%,#155073);color:#fff}
+.pqv-hero::after{content:"";position:absolute;z-index:-1;top:-70px;right:-50px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%)}
+.pqv-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.pqv-eyebrow{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);color:#eef5ff;font-size:10px;font-weight:850;letter-spacing:.05em;text-transform:uppercase}
+.pqv-hero-icons{display:flex;gap:8px;flex:0 0 auto}
+.pqv-icon-btn{width:32px;height:32px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.24);border-radius:10px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;transition:background-color .15s ease,color .15s ease}
+.pqv-icon-btn svg{width:15px;height:15px}
+.pqv-icon-btn.is-active{background:#e11d48;border-color:#e11d48;color:#fff}
+@media(hover:hover) and (pointer:fine){.pqv-icon-btn:hover{background:rgba(255,255,255,.2)}.pqv-icon-btn.is-active:hover{background:#be123c}}
+
+.pqv-hero-main{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:12px;margin-top:12px}
+.pqv-hero-media{width:64px;height:64px;display:grid;place-items:center;border-radius:16px;background:#fff;box-shadow:0 10px 24px rgba(2,10,17,.3);overflow:hidden}
+.pqv-hero-media img{width:100%;height:100%;padding:8px;object-fit:contain}
+.pqv-hero-media svg{width:24px;height:24px;color:var(--pc-muted,#52647a)}
+.pqv-hero-copy{min-width:0}
+.pqv-hero-copy h2{margin:0;font-family:var(--pc-font-display,"Manrope Variable",Manrope,system-ui,sans-serif);font-size:1.08rem;line-height:1.22;letter-spacing:-.015em;color:#fff;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+
+/* Corpo rolável: única região com scroll, apartada do rodapé fixo de preço.
+   A descrição (ingredientes, no caso de Kelly/Sanduba) mora aqui, não no
+   hero — pode ser longa, e um parágrafo comprido em tinta clara sobre o
+   gradiente escuro tanto perdia contraste quanto inflava a faixa hero. */
+.pqv-body{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:14px 16px;display:grid;gap:10px;align-content:start}
+.pqv-description{margin:0;color:var(--pc-muted,#52647a);font-size:12.5px;line-height:1.55}
+.pqv-buy{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;border-radius:12px;background:var(--pc-gold,#b77918);color:#fff;font-size:12.5px;font-weight:850;text-decoration:none}
+@media(hover:hover) and (pointer:fine){.pqv-buy:hover{background:color-mix(in srgb,var(--pc-gold,#b77918) 82%,black)}}
+.pqv-message{margin:0;padding:7px 10px;border-radius:9px;background:var(--pc-green-soft,#e2f0e8);color:var(--pc-green-strong,#104c30);font-size:11.5px;font-weight:750}
+.pqv-link{justify-self:start;font-size:12.5px;font-weight:750;color:var(--pc-muted,#52647a);text-decoration:underline;text-underline-offset:3px}
+@media(hover:hover) and (pointer:fine){.pqv-link:hover{color:var(--pc-ink,#14213d)}}
+
+/* Rodapé fixo: preço + adicionar juntos, sempre visíveis mesmo se o corpo
+   rolar — resolve tanto o contraste ruim do botão antigo (fundo sólido
+   --pc-gold sobre branco/escuro, tinta branca, testado nos dois temas)
+   quanto o "verde do tema antigo" (nada aqui depende de --h-primary). */
+.pqv-footer{display:flex;align-items:center;gap:12px;padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));border-top:1px solid var(--pc-border,#d9e2ef);background:var(--pc-surface,#fff)}
+.pqv-footer-price{display:grid;gap:1px}
+.pqv-footer-price small{color:var(--pc-muted,#52647a);font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.04em}
+.pqv-footer-price strong{font-family:var(--pc-font-display,"Manrope Variable",Manrope,system-ui,sans-serif);font-size:19px;color:var(--pc-ink,#14213d);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pqv-footer-add{flex:1;min-height:46px;display:flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:12px;background:var(--pc-green,#2563eb);color:#fff;font-size:13px;font-weight:850;cursor:pointer;transition:background-color .15s ease,transform .15s ease}
+.pqv-footer-add svg{width:16px;height:16px}
+@media(hover:hover) and (pointer:fine){.pqv-footer-add:hover{background:color-mix(in srgb,var(--pc-green,#2563eb) 84%,black);transform:translateY(-1px)}}
+
+.pqv-dialog :is(button,a):focus-visible{outline:3px solid var(--pc-gold,#b77918);outline-offset:2px}
+
+@media(max-width:560px){
+  .pqv-overlay{align-items:end;padding:0}
+  .pqv-dialog{width:100%;max-height:86dvh;border-radius:20px 20px 0 0;animation-name:pqv-sheet-in}
+  @keyframes pqv-sheet-in{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
 }
-
-.pqv-close{
-  position:absolute;top:12px;right:12px;z-index:2;
-  width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;
-  border-radius:50%;border:1px solid var(--h-border-strong, #cfd6de);
-  background:color-mix(in srgb, var(--h-surface, #fff) 88%, transparent);color:var(--h-ink, #10161d);
-  cursor:pointer;
-  transition:border-color .15s ease;
-}
-.pqv-close svg{width:15px;height:15px}
-.pqv-close:hover{background:var(--h-surface-2, #eef1f4);border-color:var(--h-primary, #0fa958)}
-
-.pqv-media{flex:none;position:relative;background:var(--h-surface-2, #eef1f4);display:flex;align-items:center;justify-content:center}
-.pqv-media{height:200px}
-@media (min-width:640px){.pqv-media{width:42%;height:auto}}
-
-.pqv-image{width:100%;height:100%;object-fit:contain;padding:0.75rem;display:block}
-.pqv-image-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--h-subtle, #8993a1);height:100%;width:100%}
-.pqv-image-fallback svg{width:36px;height:36px;opacity:.7}
-.pqv-image-fallback span{font-size:12.5px}
-
-.pqv-body{flex:1;min-width:0;padding:1.35rem 1.35rem 1.5rem;display:flex;flex-direction:column;gap:0.55rem}
-
-.pqv-kicker{font-size:0.66rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--h-accent-dark, #9c6a08)}
-.pqv-body h2{margin:0;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.25;font-weight:800;font-family:var(--h-font, inherit)}
-.pqv-size{margin:0;font-size:0.78rem;color:var(--h-muted, #5c6773);line-height:1.5}
-
-.pqv-price-row{display:flex;flex-wrap:wrap;align-items:center;gap:0.6rem;margin-top:0.2rem}
-.pqv-price{font-size:1.3rem;font-weight:800;color:var(--h-primary-dark, #087a45)}
-.pqv-store{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.78rem;color:var(--h-muted, #5c6773)}
-.pqv-store svg{width:13px;height:13px;flex:none}
-
-.pqv-actions{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.4rem}
-.pqv-btn{
-  display:inline-flex;align-items:center;gap:0.45rem;
-  padding:0.65rem 1rem;border-radius:var(--h-radius-md, 12px);
-  font-size:0.82rem;font-weight:700;cursor:pointer;
-  border:1px solid var(--h-border-strong, #cfd6de);background:var(--h-surface, #fff);color:var(--h-ink, #10161d);
-  transition:border-color .15s ease,color .15s ease,transform .15s ease;
-}
-.pqv-btn:hover{transform:translateY(-1px)}
-.pqv-btn svg{width:16px;height:16px}
-.pqv-btn--primary{background:var(--h-primary, #0fa958);border-color:var(--h-primary, #0fa958);color:var(--h-on-primary, #fff)}
-.pqv-btn--primary:hover{background:var(--h-primary-dark, #087a45);border-color:var(--h-primary-dark, #087a45)}
-.pqv-btn--primary.is-active{background:var(--h-danger, #c0392b);border-color:var(--h-danger, #c0392b)}
-.pqv-btn--ghost:hover{border-color:var(--h-primary, #0fa958);background:var(--h-surface-2, #eef1f4)}
-.pqv-btn--buy{
-  width:100%;justify-content:center;margin-top:0.5rem;
-  background:var(--h-primary, #0fa958);border-color:var(--h-primary, #0fa958);color:#fff;
-  text-decoration:none;
-}
-.pqv-btn--buy:hover{background:var(--h-primary-dark, #087a45);border-color:var(--h-primary-dark, #087a45)}
-
-.pqv-message{margin:0;font-size:0.78rem;font-weight:700;color:var(--h-primary-dark, #087a45)}
-
-.pqv-link{margin-top:auto;padding-top:0.3rem;font-size:0.78rem;font-weight:700;color:var(--h-muted, #5c6773);text-decoration:underline;text-underline-offset:3px;align-self:flex-start}
-.pqv-link:hover{color:var(--h-primary-dark, #087a45)}
+@media(prefers-reduced-motion:reduce){.pqv-overlay,.pqv-dialog{animation:none}}
 
 /* Item de cardápio clicável (Kelly/Sanduba) */
 .kelly-menu-list__item-btn{
@@ -91,5 +89,5 @@
   transition:background-color .15s ease;
 }
 .kelly-menu-list>li.has-image .kelly-menu-list__item-btn{align-items:flex-start}
-.kelly-menu-list__item-btn:hover,.kelly-menu-list__item-btn:focus-visible{background:var(--h-surface-2, var(--pc-surface-2))}
-.kelly-menu-list__item-btn:focus-visible{outline:2px solid var(--h-primary, var(--pc-green));outline-offset:-2px}
+.kelly-menu-list__item-btn:hover,.kelly-menu-list__item-btn:focus-visible{background:var(--pc-surface-2, var(--h-surface-2))}
+.kelly-menu-list__item-btn:focus-visible{outline:2px solid var(--pc-green, var(--h-primary));outline-offset:-2px}
