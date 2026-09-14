@@ -334,6 +334,21 @@ export function StoreDetailProfessional() {
             excecao tambem desligava o backdrop. Agora a loja usa o mesmo hero
             das outras; as classes de marca continuam disponiveis para estilo. */}
         {!isMarketSector && sector.id !== "pharmacies" && <SectorIcon className="store-pro-hero__watermark" aria-hidden="true" />}
+        {/* Favoritar vira um botão-ícone fixo no canto do cartão, fora do
+            fluxo do conteúdo: antes disputava uma linha inteira própria com
+            o selo de "catálogo verificado", empilhando dois blocos quase
+            idênticos (mesmo fundo de vidro escuro, mesmo formato de pílula)
+            um embaixo do outro — a repetição visual era o que mais pesava
+            na leitura da hero. */}
+        <button
+          type="button"
+          className={`store-pro-favorite${isStoreFavorite(store.id) ? " is-active" : ""}`}
+          onClick={() => void toggleStoreFavorite(store.id, `${location.pathname}${location.search}`)}
+          aria-pressed={isStoreFavorite(store.id)}
+          aria-label={isStoreFavorite(store.id) ? `Remover ${store.name} dos favoritos` : `Favoritar ${store.name}`}
+        >
+          <Heart aria-hidden="true" fill={isStoreFavorite(store.id) ? "currentColor" : "none"} />
+        </button>
         <div className="store-pro-hero__content">
           <div className={`store-pro-logo${showLogo ? " has-image" : ""}`} style={!showLogo ? { background: store.color } : undefined}>
             {showLogo
@@ -347,22 +362,19 @@ export function StoreDetailProfessional() {
               {specialties.map(([label, count]) => <li key={label}>{humanizeCategory(label)}<b>{count}</b></li>)}
             </ul>}
             <p>{SECTOR_TAGLINES[sector.id] || SECTOR_TAGLINES[marketSectorId]}</p>
-            <div className="store-pro-meta-line">
-              <b><BadgeCheck aria-hidden="true" /> {allProducts.length || store.products} produtos no catálogo</b>
-              <b><Clock3 aria-hidden="true" /> Informações organizadas pelo PreçoCerto</b>
-            </div>
           </div>
-          <div className="store-pro-status"><BadgeCheck aria-hidden="true" /><span><strong>Catálogo verificado</strong><small>{lastUpdatedLabel ? `Atualizado em ${lastUpdatedLabel}` : "Dados locais organizados"}</small></span></div>
-          <button
-            type="button"
-            className={`store-pro-favorite${isStoreFavorite(store.id) ? " is-active" : ""}`}
-            onClick={() => void toggleStoreFavorite(store.id, `${location.pathname}${location.search}`)}
-            aria-pressed={isStoreFavorite(store.id)}
-            aria-label={isStoreFavorite(store.id) ? `Remover ${store.name} dos favoritos` : `Favoritar ${store.name}`}
-          >
-            <Heart aria-hidden="true" fill={isStoreFavorite(store.id) ? "currentColor" : "none"} />
-            <span>{isStoreFavorite(store.id) ? "Favoritada" : "Favoritar loja"}</span>
-          </button>
+          {/* Selo único de confiança: antes existiam dois blocos separados
+              (a linha "N produtos · informações organizadas" e o cartão
+              "catálogo verificado") repetindo a mesma ideia — confiabilidade
+              do catálogo — em lugares e formatos diferentes. Um só bloco,
+              com os dois dados reais (contagem e data) na legenda. */}
+          <div className="store-pro-status">
+            <BadgeCheck aria-hidden="true" />
+            <span>
+              <strong>Catálogo verificado</strong>
+              <small>{allProducts.length || store.products} produtos · {lastUpdatedLabel ? `atualizado em ${lastUpdatedLabel}` : "dados locais organizados"}</small>
+            </span>
+          </div>
         </div>
         {sector.id === "pharmacies" && <figure className="store-pro-pharmacy-photo">
           <img src={pharmacyHeroPhoto} alt="" width="1280" height="720" fetchPriority="high" />

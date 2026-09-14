@@ -99,13 +99,14 @@ html:root body .store-pro-hero--pharmacies .store-pro-copy h1 {
 html:root body .store-pro-hero--pharmacies :is(.store-pro-copy > span,.store-pro-copy p,.store-pro-status small) {
   color:var(--pc-muted,#52647a)!important; text-shadow:none!important;
 }
-html:root body .store-pro-hero--pharmacies :is(.store-pro-status,.store-pro-meta-line b,.store-pro-specialties li,.store-pro-specialties b) {
+html:root body .store-pro-hero--pharmacies :is(.store-pro-status,.store-pro-favorite,.store-pro-specialties li,.store-pro-specialties b) {
   background:var(--pc-surface-2,#eef3fa)!important; color:var(--pc-ink,#14243b)!important;
   border-color:var(--pc-border,#dce3ee)!important; backdrop-filter:none!important;
 }
-html:root body .store-pro-hero--pharmacies .store-pro-status { flex:1 0 100%; margin:0!important; }
+html:root body .store-pro-hero--pharmacies .store-pro-status { margin:0!important; }
 html:root body .store-pro-hero--pharmacies .store-pro-status strong { color:var(--pc-ink,#14243b)!important; }
 html:root body .store-pro-hero--pharmacies .store-pro-status > svg { color:var(--pc-primary,#2563eb)!important; background:transparent!important; }
+html:root body .store-pro-hero--pharmacies .store-pro-favorite.is-active { background:#E0503C!important; color:#fff!important; }
 .store-pro-pharmacy-photo { min-width:0; margin:0; }
 html:root body .store-pro-pharmacy-photo img {
   display:block; width:100%!important; height:auto!important; aspect-ratio:16/9;

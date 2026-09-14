@@ -79,9 +79,6 @@ html body .store-pro-hero .store-pro-copy h1 {
 /* A linha descritiva genérica sai: as especialidades dizem mais e ocupam menos. */
 .store-pro-copy > p { display: none; }
 
-.store-pro-meta-line { margin-top: 12px; gap: 8px 16px; }
-.store-pro-meta-line b { font-size:12.5px; }
-
 /* ---------- ESPECIALIDADES ---------- */
 /* Categorias com mais produtos na loja — dado real do catálogo, não rótulo fixo. */
 .store-pro-specialties {
