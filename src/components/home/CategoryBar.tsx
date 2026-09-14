@@ -22,6 +22,7 @@ import marketsImage from "../../assets/sectors-2026/sector-markets-v3.jpg";
 import pharmaciesImage from "../../assets/sectors-2026/sector-pharmacies-v3.jpg";
 import servicesImage from "../../assets/sectors-2026/sector-services-v3.jpg";
 import otherImage from "../../assets/home-2026/promo-setores-organizados.jpg";
+import heroImage from "../../assets/home-2026/comercio-local-atendimento.jpg";
 import { SectionHeader } from "./SectionHeader";
 
 const intBr = new Intl.NumberFormat("pt-BR");
@@ -108,6 +109,23 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
           <button type="button" aria-label="Próximas categorias" onClick={() => rail.current?.scrollBy({ left: 280 })}>→</button>
         </div>
         <div className="pcx-categories" ref={rail} aria-label="Categorias de estabelecimentos">
+          <Link className="pcx-category pcx-category--hero" to="/explorar">
+            <span className="pcx-category__media">
+              <img
+                src={heroImage}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                width="440"
+                height="360"
+              />
+            </span>
+            <span className="pcx-category__text">
+              <strong>Comércio de Feijó, tudo num só lugar</strong>
+              <span>Deslize para ver cada tipo de loja →</span>
+            </span>
+          </Link>
           {businessGroups.map((group) => {
             const Icon = CATEGORY_ICON[group.id];
             const productCount = productCountByGroup.get(group.id);

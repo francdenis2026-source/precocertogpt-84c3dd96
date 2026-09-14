@@ -34,11 +34,41 @@ html:root body .pcx-home .pcx-category__text strong {
   text-overflow:clip!important; font-size:13px!important; line-height:1.4!important;
 }
 html:root body .pcx-home .pcx-category__text > span { display:none!important; }
+
+/* Card de abertura do carrossel: em vez da fileira de setores começar direto
+   num ícone pequeno (a "área grande não aproveitada" era o espaço vazio ao
+   lado dos botões de seta, que ninguém usa no toque — o gesto de arrastar já
+   funciona sozinho), um cartão maior com foto de vitrine dá presença visual
+   à seção e já entrega, no próprio texto, a dica de que a fileira desliza. */
+html:root body .pcx-home .pcx-categories .pcx-category--hero {
+  flex:0 0 220px!important; width:220px!important; min-width:220px!important; min-height:148px;
+  position:relative; padding:0!important; overflow:hidden; isolation:isolate;
+}
+html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; border-radius:inherit; }
+html:root body .pcx-home .pcx-category--hero .pcx-category__media > img { object-position:center 30%; }
+html:root body .pcx-home .pcx-category--hero::after {
+  content:""; position:absolute; inset:0; z-index:1; border-radius:inherit;
+  background:linear-gradient(0deg, rgb(8 15 12 / .86) 0%, rgb(8 15 12 / .38) 52%, rgb(8 15 12 / .08) 78%, transparent 100%);
+}
+html:root body .pcx-home .pcx-category--hero .pcx-category__text {
+  position:absolute; z-index:2; left:0; right:0; bottom:0; padding:12px 13px 13px; text-align:left;
+}
+html:root body .pcx-home .pcx-category--hero .pcx-category__text strong {
+  color:#fff!important; font-size:14.5px!important; line-height:1.28!important; letter-spacing:-.01em;
+}
+html:root body .pcx-home .pcx-category--hero .pcx-category__text > span {
+  display:block!important; margin-top:4px; color:rgb(255 255 255 / .82); font-size:11px!important; font-weight:700;
+}
+
+/* Setas de navegação: úteis com mouse, redundantes no toque — o cartão-hero
+   já avisa que a fileira desliza, e a seta some sozinha assim que não há
+   ponteiro fino (mouse) pra clicar nela, sem deixar a linha vazia. */
 .pcx-category-controls { display:flex; justify-content:flex-end; gap:8px; margin:0 0 8px; }
 .pcx-category-controls button {
   width:44px; height:44px; border:1px solid var(--h-border); border-radius:12px;
   background:var(--h-surface); color:var(--h-ink); font-size:20px; cursor:pointer;
 }
+@media(hover:none), (pointer:coarse) { .pcx-category-controls { display:none!important; } }
 html:root body .store-pro-page .store-pro-hero--pharmacies {
   display:grid!important; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
   align-items:center; gap:24px; padding:24px!important; height:auto!important;
@@ -77,4 +107,6 @@ html:root body .store-pro-pharmacy-photo img {
   html:root body .store-pro-page .store-pro-hero--pharmacies { grid-template-columns:1fr; padding:16px!important; gap:16px; }
   html:root body .pcx-home .pcx-categories .pcx-category { flex-basis:116px!important; width:116px!important; min-width:116px!important; min-height:132px; }
   .pcx-category__media { height:68px; }
+  html:root body .pcx-home .pcx-categories .pcx-category--hero { flex-basis:184px!important; width:184px!important; min-width:184px!important; min-height:132px; }
+  html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; }
 }
