@@ -1075,9 +1075,14 @@ html body .pc26-sector-hero::after {
       rgba(6, 20, 17, 0.6) 46%,
       rgba(6, 20, 17, 0.22) 100%
     ) !important;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
 }
+/* Havia um backdrop-filter:blur(3px) aqui — a intenção (ver comentário
+   acima) era só dar contraste ao texto sem escurecer demais a foto, mas o
+   efeito prático era borrar a foto inteira: as fotos de setor (mercado,
+   açougue, padaria, comida, livros, serviços) são todas nítidas e bem
+   enquadradas no arquivo original — o hero é que as entregava com um
+   desfoque perceptível, lendo como "imagem de baixa qualidade" mesmo
+   sendo o oposto. O gradiente sozinho já garante contraste suficiente. */
 /* Mesmo véu escuro no claro e no escuro apagava a foto por completo —
    no claro dá pra abrir bem mais e ainda manter o texto branco legível. */
 html[data-theme="light"] body .pc26-sector-hero::after {

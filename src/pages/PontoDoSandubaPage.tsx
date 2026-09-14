@@ -12,7 +12,6 @@ import {
   SANDUBA_MENU_CATEGORIES,
   SANDUBA_NAME,
   SANDUBA_NEIGHBORHOOD,
-  SANDUBA_PHONE,
   SANDUBA_WHATSAPP,
   sandubaItemImages,
   sandubaProducts,
@@ -114,14 +113,13 @@ export function PontoDoSandubaPage() {
               houver uma foto real desta loja, e so recolocar o bloco. */}
         </section>
 
+        {/* Ver comentário equivalente em KellyBurgueriaPage.tsx: o card de
+            WhatsApp aqui duplicava o botão "Pedir pelo WhatsApp" já em
+            destaque na hero, logo acima. */}
         <section className="kelly-info" aria-label="Informações do estabelecimento">
           <a className="kelly-info__card" href={mapsHref} target="_blank" rel="noreferrer">
             <MapPin aria-hidden="true" />
             <span><strong>Endereço</strong><small>{SANDUBA_ADDRESS}</small></span>
-          </a>
-          <a className="kelly-info__card" href={whatsappHref} target="_blank" rel="noreferrer">
-            <MessageCircle aria-hidden="true" />
-            <span><strong>Pedidos e contato</strong><small>WhatsApp {SANDUBA_PHONE}</small></span>
           </a>
           <div className="kelly-info__card kelly-info__card--static">
             <ShieldCheck aria-hidden="true" />

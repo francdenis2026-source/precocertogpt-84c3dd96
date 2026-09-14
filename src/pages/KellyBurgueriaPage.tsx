@@ -14,7 +14,6 @@ import {
   KELLY_MENU_CATEGORIES,
   KELLY_NAME,
   KELLY_NEIGHBORHOOD,
-  KELLY_PHONE,
   KELLY_WHATSAPP,
   kellyItemImages,
   manualProducts,
@@ -125,14 +124,15 @@ export function KellyBurgueriaPage() {
           </div>
         </section>
 
+        {/* O card "Pedidos e contato" (WhatsApp) que existia aqui duplicava a
+            mesma ação do botão "Pedir pelo WhatsApp" já visível e em
+            destaque na hero, logo acima — mesmo link, mesmo número, a um
+            scroll de distância. Removido; o botão da hero e o "Chamar no
+            WhatsApp" no fim da página já cobrem essa ação. */}
         <section className="kelly-info" aria-label="Informações do estabelecimento">
           <a className="kelly-info__card" href={mapsHref} target="_blank" rel="noreferrer">
             <MapPin aria-hidden="true" />
             <span><strong>Endereço</strong><small>{KELLY_ADDRESS}</small></span>
-          </a>
-          <a className="kelly-info__card" href={whatsappHref} target="_blank" rel="noreferrer">
-            <MessageCircle aria-hidden="true" />
-            <span><strong>Pedidos e contato</strong><small>WhatsApp {KELLY_PHONE}</small></span>
           </a>
           <div className="kelly-info__card kelly-info__card--static">
             <ShieldCheck aria-hidden="true" />
