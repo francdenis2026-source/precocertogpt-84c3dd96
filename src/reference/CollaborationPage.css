@@ -1,100 +1,111 @@
-/* Página de colaboração — reescrita do zero.
-   O layout antigo tentava forçar tudo (barra + conteúdo + rodapé) a caber
-   numa única tela sem rolagem, via height:100dvh + overflow:hidden. Três
-   arquivos CSS diferentes empilharam patches "!important" competindo entre
-   si pra fazer esse encaixe funcionar em cada combinação de largura/altura
-   (ver histórico: "cascata final", "contrato de tela única"...) e nenhum
-   deles resolvia de verdade — o formulário continuava vazando por trás do
-   rodapé. Aqui o contrato é outro, bem mais simples e robusto: a página
-   flui normalmente, o rodapé fica em fluxo normal (nunca sobreposto), e se
-   o conteúdo for mais alto que a tela, a página rola — como qualquer
-   página normal da web. */
+/* Página de colaboração — segunda geração.
+   Antes eram dois blocos soltos lado a lado (texto + botões numa coluna,
+   painel do formulário solto do lado, foto solta do outro) competindo por
+   espaço. Agora é um único cartão — a mesma linguagem "hero com foto +
+   corpo" usada nos modais de produto do site — com a foto e o resumo de
+   confiança de um lado, o formulário do outro, sem rodapé de página (como
+   o cadastro de lojista): a tela inteira é dedicada à tarefa, e cabe numa
+   janela comum de desktop sem rolar. Sem altura travada em lugar nenhum —
+   se a tela for baixa ou estreita demais, ela rola normalmente. */
 
 .pc-collab-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(14px, 2.4vw, 28px);
   background:
-    radial-gradient(620px 420px at 12% 8%, color-mix(in srgb, var(--px-brand, #2563eb) 7%, transparent), transparent 60%),
-    radial-gradient(560px 420px at 92% 88%, color-mix(in srgb, var(--px-brand, #2563eb) 10%, transparent), transparent 60%),
+    radial-gradient(680px 460px at 8% 6%, color-mix(in srgb, var(--px-brand, #2563eb) 7%, transparent), transparent 60%),
+    radial-gradient(560px 420px at 96% 94%, color-mix(in srgb, var(--px-brand, #2563eb) 5%, transparent), transparent 60%),
     var(--px-surface-soft, #f7f8fa);
 }
 
 .pc-collab {
-  width: min(1120px, calc(100% - 32px));
+  width: min(1080px, 100%);
   margin: 0 auto;
-  padding: clamp(28px, 5vw, 56px) 0 clamp(40px, 6vw, 64px);
-  display: flex;
-  align-items: center;
-  gap: clamp(28px, 4vw, 56px);
 }
 
-.pc-collab__left {
-  flex: 1 1 0;
-  min-width: 0;
+.pc-collab__card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  min-height: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--px-surface, #fff);
+  box-shadow: 0 24px 64px rgba(16, 24, 40, 0.16);
+}
+
+/* Lado esquerdo: foto de fundo + gradiente + texto sobreposto — mesma
+   fórmula dos heros de campanha do site (foto tratada, nunca "crua"). */
+.pc-collab__hero {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 18px;
+  justify-content: flex-end;
+  padding: clamp(20px, 2.6vw, 32px);
+  color: #fff;
+  min-height: clamp(320px, 46vh, 480px);
 }
 .pc-collab__media {
-  flex: 0 1 420px;
-  align-self: center;
-  aspect-ratio: 4 / 5;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
+  position: absolute; inset: 0; z-index: -2; margin: 0; display: block;
 }
-.pc-collab__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pc-collab__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; filter: saturate(0.92) contrast(1.04) brightness(0.96); }
+.pc-collab__hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(0deg, rgb(8 15 28 / .92) 0%, rgb(8 15 28 / .62) 46%, rgb(8 15 28 / .18) 78%, transparent 100%);
+}
 
-.pc-collab__copy { max-width: 460px; }
 .pc-collab__eyebrow {
-  display: inline-flex; align-items: center; gap: 7px;
-  color: var(--px-brand, #2563eb); font-size: 12px; font-weight: 900; letter-spacing: 0.09em;
+  display: inline-flex; align-self: flex-start; align-items: center; gap: 7px;
+  padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.14);
+  color: #eef5ff; font-size: 11px; font-weight: 900; letter-spacing: 0.08em;
 }
 .pc-collab__eyebrow svg { width: 14px; height: 14px; }
-.pc-collab__copy h1 {
-  margin: 10px 0 8px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
-  font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.1; letter-spacing: -0.03em; color: var(--px-ink, #14181d);
+/* html:root body ... !important: a folha global de contraste de
+   tipografia (typography-contrast-2026.css) forca tinta escura em
+   qualquer h1/p dentro de .ref-page, sem saber que este texto fica sobre
+   uma foto escura -- precisa de mais especificidade pra vencer (mesmo
+   padrao ja usado no hero da home, campaign-heroes-2026.css). */
+html:root body .pc-collab__hero-copy h1 {
+  margin: 12px 0 6px; font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif);
+  font-size: clamp(1.7rem, 2.6vw, 2.35rem); line-height: 1.1; letter-spacing: -0.03em; color: #fff!important;
 }
-.pc-collab__copy p { max-width: 46ch; margin: 0; color: var(--px-muted, #5f6b78); font-size: 15px; line-height: 1.55; }
+html:root body .pc-collab__hero-copy p { max-width: 40ch; margin: 0; color: rgba(255,255,255,.82)!important; font-size: 14px; line-height: 1.5; }
 
-.pc-collab__trust { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; max-width: 460px; }
+.pc-collab__trust { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .pc-collab__trust span {
-  display: inline-flex; align-items: center; gap: 6px; padding: 8px 13px; border-radius: 999px;
-  background: var(--px-surface, #fff); border: 1px solid var(--px-line, #e2e7ec);
-  color: var(--px-muted, #5f6b78); font-size: 12px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+  color: #eef5ff; font-size: 11.5px; font-weight: 700;
 }
-.pc-collab__trust svg { width: 14px; height: 14px; color: var(--px-brand, #2563eb); flex: 0 0 auto; }
+.pc-collab__trust svg { width: 13px; height: 13px; color: #ffd166; flex: 0 0 auto; }
 
-.pc-collab__panel {
-  max-width: 460px;
-  padding: 22px 24px;
-  border: 1px solid var(--px-line, #e2e7ec);
-  border-radius: 18px;
-  background: var(--px-surface, #fff);
-  box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
-}
+/* Lado direito: o formulário, numa superfície neutra do tema. */
+.pc-collab__panel { display: flex; flex-direction: column; justify-content: center; padding: clamp(20px, 2.8vw, 36px); min-height: 0; }
 .pc-collab__panel > header { display: flex; align-items: center; gap: 11px; margin-bottom: 4px; }
 .pc-collab__panel > header > span {
-  width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px;
-  background: var(--px-brand-soft, rgba(37,99,235,.1)); color: var(--px-brand, #2563eb); flex: 0 0 auto;
+  width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; flex: 0 0 auto;
+  background: var(--px-brand-soft, rgba(37,99,235,.1)); color: var(--px-brand, #2563eb);
 }
 .pc-collab__panel > header svg { width: 16px; height: 16px; }
-.pc-collab__panel > header small { color: var(--px-brand, #2563eb); font-size: 10px; font-weight: 900; letter-spacing: 0.1em; }
-.pc-collab__panel h2 { margin: 2px 0 0; color: var(--px-ink, #14181d); font-size: 17px; font-weight: 750; }
+.pc-collab__panel > header small { color: var(--px-brand, #2563eb); font-size: 10.5px; font-weight: 900; letter-spacing: 0.1em; }
+.pc-collab__panel h2 { margin: 2px 0 0; color: var(--px-ink, #14181d); font-size: 19px; font-weight: 750; }
 
-.pc-collab__form { display: grid; gap: 14px; margin-top: 14px; }
-.pc-collab__form label { display: grid; gap: 5px; color: var(--px-muted, #5f6b78); font-size: 13px; font-weight: 700; }
+.pc-collab__form { display: grid; gap: 12px; margin-top: 14px; }
+.pc-collab__form label { display: grid; gap: 5px; color: var(--px-ink, #14181d); font-size: 12.5px; font-weight: 700; }
 /* Era #d97b3f: 3.06:1 no tema claro. Como o asterisco é o único sinal de
    "campo obrigatório", ele precisa passar no AA. */
 .pc-collab__form label em { margin-left: 2px; color: #a8501c; font-style: normal; }
 html[data-theme="dark"] .pc-collab__form label em { color: #f0a06a; }
 .pc-collab__form input {
-  min-height: 46px; padding: 0 13px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 10px;
-  background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 15px;
+  min-height: 44px; padding: 0 12px; border: 1px solid var(--px-line, #e2e7ec); border-radius: 9px;
+  background: var(--px-surface-soft, #f7f8fa); color: var(--px-ink, #14181d); font: inherit; font-size: 14px;
 }
 .pc-collab__form input::placeholder { color: #9aa5ad; }
-.pc-collab__form input:focus-visible { outline: 2px solid var(--px-brand, #2563eb); outline-offset: 1px; background: var(--px-surface, #fff); }
+.pc-collab__form input:focus-visible { border-color: var(--px-brand, #2563eb); outline: 2px solid var(--px-brand, #2563eb); outline-offset: 1px; background: var(--px-surface, #fff); }
 .pc-collab__form input[aria-invalid="true"] { border-color: #d97b3f; background: rgba(217, 123, 63, 0.06); }
-.pc-collab__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pc-collab__row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
 .pc-collab__field-error { color: #b35f24; font-size: 11.5px; font-weight: 600; }
 
 .pc-collab__error {
@@ -113,42 +124,46 @@ html[data-theme="dark"] .pc-collab__form label em { color: #f0a06a; }
 @media (hover:hover) and (pointer:fine) { .pc-collab__send:hover { transform: translateY(-1px); opacity: .94; } }
 .pc-collab__send svg { width: 16px; }
 .pc-collab__send svg:last-child { margin-left: auto; }
-.pc-collab__hint { display: block; margin-top: 6px; color: var(--px-muted, #5f6b78); font-size: 11.5px; line-height: 1.35; text-align: center; }
+.pc-collab__hint { display: block; margin-top: 8px; color: var(--px-muted, #5f6b78); font-size: 11px; line-height: 1.35; text-align: center; }
 
 /* Aviso de login exigido para envio */
-.pc-collab__gate { display: grid; justify-items: center; gap: 8px; padding: 8px 4px 4px; text-align: center; }
+.pc-collab__gate { display: grid; justify-items: center; gap: 8px; text-align: center; }
 .pc-collab__gate-icon {
   width: 44px; height: 44px; display: grid; place-items: center; border-radius: 13px;
   background: var(--px-brand-soft, rgba(37,99,235,.1)); color: var(--px-brand, #2563eb);
 }
 .pc-collab__gate-icon svg { width: 20px; height: 20px; }
-.pc-collab__gate h2 { margin: 2px 0 0; font-size: 17px; color: var(--px-ink, #14181d); }
+.pc-collab__gate h2 { margin: 2px 0 0; font-size: 18px; color: var(--px-ink, #14181d); }
 .pc-collab__gate p { max-width: 360px; margin: 0; color: var(--px-muted, #5f6b78); font-size: 13px; line-height: 1.45; }
-.pc-collab__gate-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 4px; }
+.pc-collab__gate-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 6px; }
 .pc-collab__gate-primary {
-  min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px;
   border: 0; border-radius: 10px; background: var(--px-brand, #2563eb); color: var(--px-brand-ink, #fff);
   font-size: 13.5px; font-weight: 800; text-decoration: none; cursor: pointer;
 }
 .pc-collab__gate-primary svg { width: 16px; }
 .pc-collab__gate-login {
-  min-height: 44px; display: flex; align-items: center; justify-content: center;
+  min-height: 46px; display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--px-line, #e2e7ec); border-radius: 10px; color: var(--px-ink, #14181d);
   text-decoration: none; font-size: 13.5px; font-weight: 750;
 }
 .pc-collab__gate-back { border: 0; background: none; color: var(--px-muted, #5f6b78); font-size: 12.5px; text-decoration: underline; cursor: pointer; margin-top: 2px; }
 
-@media (max-width: 900px) {
-  .pc-collab { flex-direction: column; padding: 24px 0 40px; align-items: stretch; }
-  .pc-collab__left { order: 2; align-items: center; text-align: center; }
-  .pc-collab__media { order: 1; align-self: stretch; flex: 0 0 auto; aspect-ratio: 16 / 9; max-width: none; }
-  .pc-collab__copy { max-width: 460px; margin: 0 auto; }
-  .pc-collab__copy p { margin: 0 auto; }
-  .pc-collab__trust { justify-content: center; }
-  .pc-collab__panel { width: 100%; max-width: 460px; margin: 0 auto; }
+@media (max-width: 860px) {
+  .pc-collab__card { grid-template-columns: 1fr; }
+  .pc-collab__hero { min-height: 0; padding: 20px; }
+  .pc-collab__hero-copy p { max-width: 52ch; }
 }
 @media (max-width: 560px) {
+  .pc-collab-page { padding: 0; }
+  .pc-collab__card { border-radius: 0; box-shadow: none; }
   .pc-collab__row { grid-template-columns: 1fr; }
   .pc-collab__gate-actions { grid-template-columns: 1fr; }
-  .pc-collab__media { aspect-ratio: 4 / 3; }
+}
+
+/* Telas altas o bastante: um respiro extra vertical, sem forçar nada a
+   caber — a página nunca trava altura nem corta conteúdo, só rola se
+   precisar (mesmo contrato usado em /lojista). */
+@media (min-height: 800px) and (min-width: 861px) {
+  .pc-collab-page { padding-block: clamp(20px, 5vh, 64px); }
 }

@@ -419,19 +419,22 @@ function CollaborationPage() {
   return <div className="ref-page pc-collab-page pc-noheader-page">
     <MinimalTopBar variant="light" />
     <main id="conteudo-principal" className="pc-collab">
-      <div className="pc-collab__left">
-        <div className="pc-collab__copy">
-          <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
-          <h1 id="pc-collab-title">Viu um preço diferente?</h1>
-          <p>Preencha seus dados e envie uma foto legível da nota. Nossa equipe confere e atualiza o catálogo.</p>
-          <div className="pc-collab__trust">
-            <span><ShieldCheck aria-hidden="true" /> Análise antes da publicação</span>
-            <span><BadgeCheck aria-hidden="true" /> Sem alteração automática</span>
-            <span><Mail aria-hidden="true" /> Resposta em até 2 dias úteis</span>
+      <section className="pc-collab__card" aria-labelledby="pc-collab-title">
+        <div className="pc-collab__hero">
+          <EditorialPhoto scene="receipt" className="pc-collab__media" priority />
+          <div className="pc-collab__hero-copy">
+            <span className="pc-collab__eyebrow"><UsersRound aria-hidden="true" /> COLABORAÇÃO VERIFICADA</span>
+            <h1 id="pc-collab-title">Viu um preço diferente?</h1>
+            <p>Preencha seus dados e envie uma foto legível da nota. Nossa equipe confere e atualiza o catálogo.</p>
+            <div className="pc-collab__trust">
+              <span><ShieldCheck aria-hidden="true" /> Análise antes da publicação</span>
+              <span><BadgeCheck aria-hidden="true" /> Sem alteração automática</span>
+              <span><Mail aria-hidden="true" /> Resposta em até 2 dias úteis</span>
+            </div>
           </div>
         </div>
 
-        <section className="pc-collab__panel" aria-label="Enviar nota de compra">
+        <div className="pc-collab__panel" aria-label="Enviar nota de compra">
         {needsAccount ? (
           <div className="pc-collab__gate">
             <span className="pc-collab__gate-icon"><LockKeyhole aria-hidden="true" /></span>
@@ -469,12 +472,9 @@ function CollaborationPage() {
             <small className="pc-collab__hint">É preciso estar cadastrado e logado para enviar. Seu app de e-mail abrirá com os dados preenchidos. Anexe a foto da nota antes de enviar.</small>
           </form>
         </>}
-        </section>
-      </div>
-
-      <EditorialPhoto scene="receipt" className="pc-collab__media" priority />
+        </div>
+      </section>
     </main>
-    <PublicFooter />
   </div>;
 }
 
