@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260912-app-shell-2";
+const CACHE_VERSION = "20260914-footer-fix-1";
 const SHELL_CACHE = `precocerto-shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `precocerto-runtime-${CACHE_VERSION}`;
 const DADOS_CACHE = `precocerto-dados-${CACHE_VERSION}`;
