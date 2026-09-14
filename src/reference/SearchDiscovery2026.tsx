@@ -54,8 +54,20 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
   window.setTimeout(()=>setBasketMessage(""),2200);
  };
  useEffect(()=>{
-  const previousOverflow=document.body.style.overflow;
-  document.body.style.overflow="hidden";
+  /* Trava robusta: só "overflow:hidden" no body não segura o rubber-band
+     do Safari/iOS — ao arrastar a lista de lojas dentro do modal, a página
+     de fundo "vazava" por baixo do dock inferior fixo. Fixar o body na
+     posição atual (position:fixed + top negativo) e devolver o scroll ao
+     fechar elimina esse vazamento nas duas plataformas. */
+  const scrollY=window.scrollY;
+  const body=document.body;
+  const previous={position:body.style.position,top:body.style.top,left:body.style.left,right:body.style.right,width:body.style.width,overflow:body.style.overflow};
+  body.style.position="fixed";
+  body.style.top=`-${scrollY}px`;
+  body.style.left="0";
+  body.style.right="0";
+  body.style.width="100%";
+  body.style.overflow="hidden";
   closeRef.current?.focus();
   const onKeyDown=(event:KeyboardEvent)=>{
    if(event.key==="Escape"){onClose();return}
@@ -67,44 +79,57 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
   };
   window.addEventListener("keydown",onKeyDown);
-  return()=>{document.body.style.overflow=previousOverflow;window.removeEventListener("keydown",onKeyDown)};
+  return()=>{
+   body.style.position=previous.position;
+   body.style.top=previous.top;
+   body.style.left=previous.left;
+   body.style.right=previous.right;
+   body.style.width=previous.width;
+   body.style.overflow=previous.overflow;
+   window.scrollTo(0,scrollY);
+   window.removeEventListener("keydown",onKeyDown);
+  };
  },[onClose]);
  const meaningful=(value?:string)=>{const v=(value||"").trim();return v&&v!=="-"?v:undefined};
  const eyebrow=[meaningful(product.category),meaningful(product.brand)].filter(Boolean).join(" · ");
- const descriptor=[meaningful(product.size)||meaningful(product.unit),`comparação em ${offers.length} ${offers.length===1?"estabelecimento":"estabelecimentos"}`].filter(Boolean).join(" · ");
+ const descriptor=[meaningful(product.size)||meaningful(product.unit),`${offers.length} ${offers.length===1?"estabelecimento":"estabelecimentos"}`].filter(Boolean).join(" · ");
  return <div className="search26-modal" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)onClose()}}>
   <section ref={dialogRef} className="search26-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search26-modal-title" aria-describedby="search26-modal-description">
-   <button ref={closeRef} type="button" className="search26-modal__close" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button>
-
-   <div className="search26-modal__header">
-    <div className="search26-modal__image">{image?<img src={image} alt={product.name}/>:<PackageSearch aria-hidden="true"/>}</div>
-    <div className="search26-modal__heroInfo">
-     {eyebrow&&<span>{eyebrow}</span>}
-     <h2 id="search26-modal-title">{product.name}</h2>
-     {descriptor&&<p id="search26-modal-description">{descriptor}</p>}
+   <div className="search26-modal__hero">
+    <div className="search26-modal__hero-top">
+     {eyebrow?<span className="search26-modal__eyebrow">{eyebrow}</span>:<span/>}
+     <button ref={closeRef} type="button" className="search26-modal__close" onClick={onClose} aria-label="Fechar detalhes do produto"><X aria-hidden="true"/></button>
     </div>
-    <div className="search26-modal__best">
-     <small>Melhor preço</small>
-     <strong>{brl.format(lowest)}</strong>
+    <div className="search26-modal__hero-main">
+     <div className="search26-modal__hero-media">{image?<img src={image} alt={product.name}/>:<PackageSearch aria-hidden="true"/>}</div>
+     <div className="search26-modal__hero-copy">
+      <h2 id="search26-modal-title">{product.name}</h2>
+      {descriptor&&<p id="search26-modal-description">{descriptor}</p>}
+     </div>
+    </div>
+    <div className="search26-modal__hero-price">
+     <div><small>Melhor preço</small><strong>{brl.format(lowest)}</strong></div>
      {saving>0&&<span><TrendingDown aria-hidden="true"/> Economize até {brl.format(saving)}</span>}
     </div>
    </div>
 
-   <div className="search26-modal__actions">
-    <button type="button" className={`search26-modal__action${favorite?" is-active":""}`} onClick={()=>void toggleFavorite(product.id)}>
-     <Heart aria-hidden="true" fill={favorite?"currentColor":"none"}/> {favorite?"Nos favoritos":"Favoritar"}
-    </button>
-    <button type="button" className="search26-modal__action" onClick={()=>void handleAddToBasket()}>
-     <ShoppingBasket aria-hidden="true"/> Adicionar à cesta
-    </button>
-   </div>
-   {basketMessage&&<p className="search26-modal__toast" role="status">{basketMessage}</p>}
-   {canBuyOnline&&merchantId&&<Link className="search26-modal__buy" to={`/loja/${merchantId}`} onClick={onClose}><ShoppingCart aria-hidden="true"/> Comprar online nesta loja</Link>}
+   <div className="search26-modal__body">
+    <div className="search26-modal__actions">
+     <button type="button" className={`search26-modal__action${favorite?" is-active":""}`} onClick={()=>void toggleFavorite(product.id)}>
+      <Heart aria-hidden="true" fill={favorite?"currentColor":"none"}/> {favorite?"Nos favoritos":"Favoritar"}
+     </button>
+     <button type="button" className="search26-modal__action" onClick={()=>void handleAddToBasket()}>
+      <ShoppingBasket aria-hidden="true"/> Adicionar à cesta
+     </button>
+    </div>
+    {basketMessage&&<p className="search26-modal__toast" role="status">{basketMessage}</p>}
+    {canBuyOnline&&merchantId&&<Link className="search26-modal__buy" to={`/loja/${merchantId}`} onClick={onClose}><ShoppingCart aria-hidden="true"/> Comprar online nesta loja</Link>}
 
-   <div className="search26-modal__stores">
-    <div className="search26-modal__stores-head"><span><BadgeCheck aria-hidden="true"/> Onde encontrar, do menor para o maior preço</span></div>
-    <div className="search26-modal__offer-list">{offers.map((offer,index)=><Link to={`/estabelecimento/${offer.establishmentSlug||offer.establishmentId}`} className={index===0?"is-best":undefined} key={`${offer.establishmentId}-${offer.value}`} onClick={onClose}><i style={{backgroundColor:offer.storeColor||"#14795d"}}><Store aria-hidden="true"/></i><span><strong>{offer.establishment||"Comércio local"}</strong><small><MapPin aria-hidden="true"/>{offer.neighborhood||"Feijó-AC"}</small></span><div><b>{brl.format(offer.value)}</b>{index===0&&<em>Melhor preço</em>}</div><ArrowRight aria-hidden="true"/></Link>)}</div>
-    <div className="search26-modal__freshness"><Clock3 aria-hidden="true"/><span>Preços informativos. Confirme a disponibilidade no estabelecimento antes de comprar.</span></div>
+    <div className="search26-modal__stores">
+     <div className="search26-modal__stores-head"><span><BadgeCheck aria-hidden="true"/> Onde encontrar, do menor para o maior preço</span></div>
+     <div className="search26-modal__offer-list">{offers.map((offer,index)=><Link to={`/estabelecimento/${offer.establishmentSlug||offer.establishmentId}`} className={index===0?"is-best":undefined} key={`${offer.establishmentId}-${offer.value}`} onClick={onClose}><i style={{backgroundColor:offer.storeColor||"#14795d"}}><Store aria-hidden="true"/></i><span><strong>{offer.establishment||"Comércio local"}</strong><small><MapPin aria-hidden="true"/>{offer.neighborhood||"Feijó-AC"}</small></span><div><b>{brl.format(offer.value)}</b>{index===0&&<em>Melhor preço</em>}</div><ArrowRight aria-hidden="true"/></Link>)}</div>
+     <div className="search26-modal__freshness"><Clock3 aria-hidden="true"/><span>Preços informativos. Confirme a disponibilidade no estabelecimento antes de comprar.</span></div>
+    </div>
    </div>
 
    <footer className="search26-modal__footer"><Link to={`/produto/${product.slug||product.id}`} onClick={onClose}>Ver página completa do produto <ExternalLink aria-hidden="true"/></Link></footer>
