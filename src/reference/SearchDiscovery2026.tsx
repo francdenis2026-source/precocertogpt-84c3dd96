@@ -95,6 +95,7 @@ function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>v
  const descriptor=[meaningful(product.size)||meaningful(product.unit),`${offers.length} ${offers.length===1?"estabelecimento":"estabelecimentos"}`].filter(Boolean).join(" · ");
  return <div className="search26-modal" role="presentation" onMouseDown={event=>{if(event.target===event.currentTarget)onClose()}}>
   <section ref={dialogRef} className="search26-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search26-modal-title" aria-describedby="search26-modal-description">
+   <span className="search26-modal__grip" aria-hidden="true"/>
    <div className="search26-modal__hero">
     <div className="search26-modal__hero-top">
      {eyebrow?<span className="search26-modal__eyebrow">{eyebrow}</span>:<span/>}
