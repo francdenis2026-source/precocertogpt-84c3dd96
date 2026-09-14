@@ -93,6 +93,7 @@ export function PontoDoSandubaPage() {
         <Link className="kelly-back" to="/estabelecimentos"><ArrowLeft /> Todos os estabelecimentos</Link>
 
         <section className="kelly-hero sanduba-hero" aria-labelledby="sanduba-title">
+          <div className="kelly-hero__overlay" aria-hidden="true" />
           <div className="kelly-hero__content">
             <div className="kelly-hero__logo"><img src="/branding/ponto-do-sanduba-logo.jpg?v=20260822" alt={`Logomarca ${SANDUBA_NAME}`} width="96" height="96" /></div>
             <div className="kelly-hero__copy">

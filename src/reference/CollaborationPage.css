@@ -153,6 +153,17 @@ html[data-theme="dark"] .pc-collab__form label em { color: #f0a06a; }
   .pc-collab__card { grid-template-columns: 1fr; }
   .pc-collab__hero { min-height: 0; padding: 20px; }
   .pc-collab__hero-copy p { max-width: 52ch; }
+  /* O véu (::after) é um gradiente vertical calibrado pra uma caixa alta
+     (min-height de até 480px), escuro só no terço de baixo onde o texto
+     mora, com bastante foto "crua" visível acima. Sem min-height a caixa
+     encolhe até caber só o conteúdo — o texto passa a ocupar quase a
+     altura inteira, e o eyebrow (o primeiro elemento, mais perto do topo)
+     cai exatamente na faixa que o gradiente deixa quase transparente
+     (78–100%). Em vez de escuro só embaixo, o véu no mobile cobre a caixa
+     toda de forma mais uniforme. */
+  .pc-collab__hero::after {
+    background: linear-gradient(180deg, rgba(8, 15, 28, .58) 0%, rgba(8, 15, 28, .72) 100%);
+  }
 }
 @media (max-width: 560px) {
   .pc-collab-page { padding: 0; }

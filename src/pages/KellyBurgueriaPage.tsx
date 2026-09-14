@@ -102,6 +102,7 @@ export function KellyBurgueriaPage() {
         <Link className="kelly-back" to="/estabelecimentos"><ArrowLeft /> Todos os estabelecimentos</Link>
 
         <section className="kelly-hero" aria-labelledby="kelly-title">
+          <div className="kelly-hero__overlay" aria-hidden="true" />
           <div className="kelly-hero__content">
             <div className="kelly-hero__logo"><img src="/branding/kelly-burgueria-logo.jpg?v=20260822" alt={`Logomarca ${KELLY_NAME}`} width="96" height="96" /></div>
             <div className="kelly-hero__copy">

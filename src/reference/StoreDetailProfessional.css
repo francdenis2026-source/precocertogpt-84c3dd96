@@ -28,6 +28,15 @@ html[data-theme="dark"] .store-pro-hero__overlay{background:linear-gradient(92de
 .store-pro-copy>span,.store-pro-catalog-head>div>span{display:block;color:var(--pc-gold-ink);font-size:12px;font-weight:900;letter-spacing:.12em}
 .store-pro-copy h1{margin:6px 0 8px;font-family:var(--pc-font-display);font-size:clamp(1.5rem,2.6vw,2.5rem);line-height:1.02;letter-spacing:-.03em;text-wrap:balance;color:#fff}
 .store-pro-copy p{max-width:640px;margin:0 0 12px;color:#D9E8DF;font-size:13px;line-height:1.5}
+/* typography-contrast-2026.css força "html:not([data-theme=dark]) .ref-page
+   h1/p" pra tinta escura (!important) no tema claro — pensado pro corpo
+   comum da página, não pro título/legenda dentro deste hero, que é sempre
+   escuro nos dois temas (foto + véu). No tema claro isso apagava o nome da
+   loja e a descrição (tinta quase preta sobre a foto escura). A variante
+   de farmácia já tinha esse resgate (catalog-polish-2026.css); faltava na
+   versão padrão, usada por toda loja que não é farmácia. */
+html:root body .store-pro-hero:not(.store-pro-hero--pharmacies) .store-pro-copy h1{color:#fff!important;-webkit-text-fill-color:#fff!important}
+html:root body .store-pro-hero:not(.store-pro-hero--pharmacies) .store-pro-copy p{color:#D9E8DF!important}
 /* Selo único de confiança (contagem de produtos + data, ver comentário no
    TSX) — largura própria, não estica pra preencher a coluna auto do grid. */
 .store-pro-status{width:fit-content;max-width:100%;display:grid;grid-template-columns:32px 1fr;align-items:center;gap:9px;padding:10px 14px 10px 10px;border:1px solid rgba(140, 199, 174,.28);border-radius:14px;background:rgba(4,44,32,.55);backdrop-filter:blur(12px)}

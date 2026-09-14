@@ -60,7 +60,10 @@ html body .kelly-hero .kelly-hero__copy p{color:rgba(255,255,255,.86)!important}
 .kelly-hero__actions .pc-btn{font-size:13px}
 .kelly-hero__actions .pc-btn--primary{background:#8c8267;border-color:#8c8267;color:#1c1400}
 .kelly-hero__actions .pc-btn--primary:hover{filter:brightness(1.05)}
-.kelly-hero__actions .pc-btn--ghost{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4);color:#fff}
+/* fundo mais opaco que o "ghost" padrão do site: este botão pode cair
+   sobre a parte mais clara/crua da foto (a batata frita, à direita do
+   véu diagonal), onde .08 de branco quase não se distingue do fundo. */
+.kelly-hero__actions .pc-btn--ghost{background:rgba(13,7,5,.5);border-color:rgba(255,255,255,.4);color:#fff;backdrop-filter:blur(4px)}
 
 /* .kelly-hero__visual (foto de detalhe + selo "Artesanal e feito na hora")
    nunca teve regra própria — sem CSS nenhum, um <img> em tamanho natural
