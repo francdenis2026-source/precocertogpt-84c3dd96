@@ -1875,20 +1875,6 @@ html[data-theme="light"] .pcx-hero::before {
   .pcx-appshowcase__cta:hover { background: #eaf1ff; }
   .pcx-appshowcase__cta:hover svg { transform: translateY(2px); }
 }
-.pcx-home a.pcx-appshowcase__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: #fff;
-  font-size: 0.84rem;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.pcx-appshowcase__link svg { width: 14px; height: 14px; transition: transform 150ms ease; }
-@media (hover: hover) and (pointer: fine) {
-  .pcx-appshowcase__link:hover svg { transform: translateX(3px); }
-}
 @media (max-width: 760px) {
   .pcx-appshowcase { flex-direction: column; align-items: stretch; min-height: 0; }
   .pcx-appshowcase__copy { max-width: none; }
@@ -2391,40 +2377,31 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   min-width: 200px;
   align-self: stretch;
 }
-.pcx-appshowcase__glow {
-  position: absolute;
-  inset: -30% -15%;
-  background:
-    radial-gradient(circle at 62% 38%, rgba(147, 197, 253, .32), transparent 60%),
-    radial-gradient(circle at 28% 82%, rgba(240, 180, 41, .16), transparent 55%);
-  filter: blur(6px);
-  pointer-events: none;
-}
 .pcx-appshowcase__phone {
   position: relative;
-  width: 176px;
-  padding: 9px;
-  border-radius: 28px;
+  width: 200px;
+  padding: 10px;
+  border-radius: 30px;
   background: #0b1220;
   box-shadow: 0 24px 54px rgba(2, 8, 23, .5), inset 0 0 0 1px rgba(255, 255, 255, .06);
-  transform: rotate(-4deg);
 }
-.pcx-appshowcase__phone-screen { border-radius: 19px; background: #f4f7fb; overflow: hidden; padding-bottom: 9px; }
-.pcx-appshowcase__phone-bar { display: flex; align-items: center; gap: 5px; padding: 12px 11px 7px; background: #0d2b4a; color: #eaf1ff; font-size: 9.5px; font-weight: 700; }
-.pcx-appshowcase__phone-bar svg { width: 11px; height: 11px; color: #f0b429; flex-shrink: 0; }
-.pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 5px; margin: 7px 9px; padding: 6px 9px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 9.5px; font-weight: 700; }
-.pcx-appshowcase__phone-search svg { width: 11px; height: 11px; color: #6b7686; flex-shrink: 0; }
-.pcx-appshowcase__phone-list { list-style: none; margin: 0; padding: 0 9px; display: grid; gap: 5px; }
-.pcx-appshowcase__phone-list li { display: flex; align-items: center; gap: 6px; padding: 5px 6px; border-radius: 9px; background: #fff; box-shadow: 0 1px 3px rgba(9, 28, 54, .08); }
-.pcx-appshowcase__phone-list i { width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0; background: linear-gradient(135deg, #2563eb, #60a5fa); }
+.pcx-appshowcase__phone-screen { border-radius: 21px; background: #f4f7fb; overflow: hidden; padding-bottom: 10px; }
+.pcx-appshowcase__phone-bar { display: flex; align-items: center; gap: 5px; padding: 13px 12px 8px; background: #0d2b4a; color: #eaf1ff; font-size: 10px; font-weight: 700; }
+.pcx-appshowcase__phone-bar svg { width: 12px; height: 12px; color: #f0b429; flex-shrink: 0; }
+.pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 6px; margin: 8px 10px; padding: 7px 10px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 10px; font-weight: 700; }
+.pcx-appshowcase__phone-search svg { width: 12px; height: 12px; color: #6b7686; flex-shrink: 0; }
+/* Grid (não flex) de propósito: com colunas fixas, o preço nunca fica por
+   cima do nome do produto, mesmo que o nome seja mais longo que a coluna —
+   ele só é cortado com reticências, sem overlap possível. */
+.pcx-appshowcase__phone-list { list-style: none; margin: 0; padding: 0 10px; display: grid; gap: 6px; }
+.pcx-appshowcase__phone-list li { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 10px; background: #fff; box-shadow: 0 1px 3px rgba(9, 28, 54, .08); }
+.pcx-appshowcase__phone-list i { width: 20px; height: 20px; border-radius: 6px; background: linear-gradient(135deg, #2563eb, #60a5fa); }
 .pcx-appshowcase__phone-list li:nth-child(2) i { background: linear-gradient(135deg, #f0b429, #f7d774); }
 .pcx-appshowcase__phone-list li:nth-child(3) i { background: linear-gradient(135deg, #1d4ed8, #93c5fd); }
-.pcx-appshowcase__phone-list span { flex: 1 1 auto; min-width: 0; display: grid; gap: 1px; }
-.pcx-appshowcase__phone-list strong { display: block; font-size: 8.5px; font-weight: 800; color: #14213d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-appshowcase__phone-list small { display: block; font-size: 7.5px; color: #6b7686; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-appshowcase__phone-list b { flex-shrink: 0; font-size: 9.5px; font-weight: 800; color: #1d4ed8; white-space: nowrap; }
+.pcx-appshowcase__phone-list strong { min-width: 0; font-size: 10.5px; font-weight: 800; color: #14213d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-appshowcase__phone-list b { font-size: 11px; font-weight: 800; color: #1d4ed8; white-space: nowrap; }
 @media (max-width: 900px) {
-  .pcx-appshowcase__phone { width: 152px; }
+  .pcx-appshowcase__phone { width: 172px; }
 }
 @media (max-width: 760px) {
   .pcx-appshowcase__visual { display: none; }

@@ -47,6 +47,10 @@ html:root body .pc-campaign--home .pc26-hero-search { background:#fff!important;
 html:root body .pc-campaign--home .pc26-hero-search input { color:#14213d!important; }
 html:root body .pc-campaign--home .pc26-hero-search input::placeholder { color:#6b7686!important; opacity:1!important; }
 html:root body .pc-campaign--home .pcx-intro__stats { border-color:rgb(255 255 255 / .25)!important; }
+/* Mesmo problema, mesma causa: uma regra genérica de tema pintava o nome do
+   produto (strong) com a tinta clara do modo escuro, mas a tela do mockup
+   do celular é sempre um retângulo branco — texto quase invisível. */
+html:root body .pcx-appshowcase__phone-list strong { color:#14213d!important; }
 html:root body .pc-campaign--home .pc-campaign-credit,
 html:root body .pc-campaign--guide .pc-campaign-credit { position:absolute; right:18px; bottom:12px; z-index:2; color:rgb(255 255 255 / .72); font-size:10px; }
 html:root body .pc-campaign--guide { min-height:clamp(300px,34vw,430px)!important; margin-top:20px; background:#102a43!important; color:#fff!important; border:0!important; }

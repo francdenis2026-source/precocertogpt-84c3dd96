@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Download, MapPin, Search, Smartphone, Sparkles, Store, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Download, MapPin, Search, Smartphone, Sparkles, Store, Zap } from "lucide-react";
 
 type InstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -106,13 +105,9 @@ export function AppShowcase() {
                 <Download aria-hidden="true" /> Instalar aplicativo
               </button>
             )}
-            <Link to="/explorar" className="pcx-appshowcase__link">
-              Continuar pela web <ArrowRight aria-hidden="true" />
-            </Link>
           </div>
         </div>
         <div className="pcx-appshowcase__visual" aria-hidden="true">
-          <div className="pcx-appshowcase__glow" />
           <div className="pcx-appshowcase__phone">
             <div className="pcx-appshowcase__phone-screen">
               <div className="pcx-appshowcase__phone-bar">
@@ -126,26 +121,17 @@ export function AppShowcase() {
               <ul className="pcx-appshowcase__phone-list">
                 <li>
                   <i />
-                  <span>
-                    <strong>Arroz Branco 5kg</strong>
-                    <small>Comercial Central</small>
-                  </span>
+                  <strong>Arroz Branco 5kg</strong>
                   <b>R$ 23,90</b>
                 </li>
                 <li>
                   <i />
-                  <span>
-                    <strong>Feijão Carioca 1kg</strong>
-                    <small>Mercado Silva</small>
-                  </span>
+                  <strong>Feijão Carioca 1kg</strong>
                   <b>R$ 8,49</b>
                 </li>
                 <li>
                   <i />
-                  <span>
-                    <strong>Óleo de Soja 900ml</strong>
-                    <small>Ponto Econômico</small>
-                  </span>
+                  <strong>Óleo de Soja 900ml</strong>
                   <b>R$ 7,29</b>
                 </li>
               </ul>
