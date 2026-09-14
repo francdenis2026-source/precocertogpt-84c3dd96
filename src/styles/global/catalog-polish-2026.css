@@ -23,10 +23,20 @@ html:root body .pcx-home .pcx-category__media > img {
   object-position:center; opacity:1!important; filter:none!important;
   transition:transform 220ms ease;
 }
+/* O selo herdava o fundo pastel de baixa opacidade pensado pra ficar sobre
+   uma superfície lisa (color-mix a 16%) — em cima de uma foto qualquer
+   atrás, esse fundo quase transparente deixava o ícone lavado, quase
+   ilegível, mudando de aparência conforme a cor da foto por trás. Disco
+   sólido (mesma superfície do cartão) com sombra de verdade resolve: o
+   ícone, na cor própria de cada categoria, sempre lê limpo, em qualquer
+   foto e em qualquer tema. */
 html:root body .pcx-home .pcx-category__media > i {
-  position:absolute; left:7px; bottom:7px; width:30px!important; height:30px!important;
-  border:2px solid var(--h-surface); box-shadow:var(--h-shadow-sm);
+  position:absolute; left:8px; bottom:8px; width:32px!important; height:32px!important;
+  display:flex!important; align-items:center; justify-content:center;
+  background:var(--h-surface,#fff)!important; border:0;
+  box-shadow:0 3px 10px rgba(0,0,0,.32);
 }
+html:root body .pcx-home .pcx-category__media > i svg { width:16px!important; height:16px!important; }
 html:root body .pcx-home .pcx-category:hover .pcx-category__media > img { transform:scale(1.045); }
 html:root body .pcx-home .pcx-category__text { width:100%; min-width:0; text-align:center; }
 html:root body .pcx-home .pcx-category__text strong {

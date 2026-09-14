@@ -1,1 +1,137 @@
-.mo-page{min-height:100dvh;background:#41371d;color:#fff6dc;padding:clamp(18px,3vw,42px)}.mo-page *{box-sizing:border-box}.mo-head,.mo-shell{width:min(1080px,100%);margin:auto}.mo-head>a{display:inline-flex;align-items:center;gap:6px;color:inherit;text-decoration:none;font-size:13px;opacity:.78}.mo-head>a svg{width:16px;height:16px}.mo-head>div{margin:24px 0 22px;max-width:720px}.mo-head span,.mo-title span{font-size:12.5px;letter-spacing:.11em;font-weight:800;color:#aea48a}.mo-head h1{font-size:clamp(30px,4vw,48px);line-height:1.02;letter-spacing:-.045em;margin:7px 0 10px}.mo-head p,.mo-title p{color:#bab096;line-height:1.55;margin:0}.mo-shell{display:grid;grid-template-columns:250px minmax(0,1fr);gap:16px;align-items:start}.mo-steps,.mo-card,.mo-status{border:1px solid #4a4026;background:#473d23;border-radius:18px}.mo-steps{padding:14px}.mo-steps>div{display:flex;gap:10px;padding:11px;border-radius:12px;opacity:.55}.mo-steps>div.active{background:#4d4329;opacity:1}.mo-steps>div.done{opacity:.9}.mo-steps b{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#3f351b;color:#c5bba1;flex:0 0 auto}.mo-steps span{display:grid}.mo-steps strong{font-size:13px}.mo-steps small{font-size:12.5px;color:#afa58b;margin-top:2px}.mo-steps>p{border-top:1px solid #4a4026;margin:10px 0 0;padding:14px 8px 2px;display:flex;gap:8px;font-size:12.5px;line-height:1.45;color:#aba187}.mo-steps>p svg{width:16px;flex:none;height:16px}.mo-card{padding:clamp(18px,3vw,30px)}.mo-card form{display:grid;gap:14px}.mo-title{display:flex;gap:12px;margin-bottom:4px}.mo-title>svg{width:34px;height:34px;padding:8px;border-radius:10px;background:#3c3218;color:#b3a98f;flex:none}.mo-title h2{font-size:23px;margin:3px 0 4px;letter-spacing:-.025em}.mo-title p{font-size:13px}.mo-card label{display:grid;gap:6px;font-size:13px;font-weight:750;color:#ddd3b9}.mo-card label small{font-weight:500;color:#9f957b}.mo-card input,.mo-card select,.mo-card textarea{width:100%;border:1px solid #564c32;background:#42381e;color:#fff8de;border-radius:10px;padding:11px 12px;outline:none;font:inherit}.mo-card input:focus,.mo-card select:focus,.mo-card textarea:focus{border-color:#9e947a;box-shadow:0 0 0 3px rgba(111, 154, 185,.1)}.mo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mo-grid.three{grid-template-columns:.65fr 1fr 1fr}.mo-card button,.mo-status button{border:0;border-radius:10px;background:#aaa086;color:#3f351b;padding:11px 16px;font-weight:850;cursor:pointer}.mo-card button:disabled{opacity:.6}.mo-error{padding:10px 12px;border-radius:10px;background:#401e25;border:1px solid #7e3543;color:#ffd9df;font-size:13px;margin:0}.mo-login{text-align:center;color:#afa58b}.mo-login a,.mo-status a{color:#b3a98f}.mo-submit{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid #4a4026;padding-top:14px}.mo-submit p{display:flex;align-items:center;gap:7px;color:#afa58b;font-size:12.5px;margin:0}.mo-submit svg{width:15px;color:#aaa086;height:15px}.mo-status{width:min(680px,100%);margin:10vh auto;padding:34px;text-align:center}.mo-status>svg{width:42px;height:42px;color:#aca288}.mo-status>span{display:block;color:#aea48a;font-size:12.5px;font-weight:900;letter-spacing:.1em;margin:12px 0 5px}.mo-status h1{font-size:32px;margin:0 0 9px}.mo-status p{color:#c0b69c;line-height:1.6}.mo-status-note{display:flex;align-items:center;justify-content:center;gap:8px;background:#4a4026;border-radius:10px;padding:11px;font-size:13px;margin:18px 0}.mo-status-note svg{width:16px;color:#afa58b;height:16px}.mo-status a{display:inline-block;margin-top:10px}@media(max-width:760px){.mo-page{padding:16px}.mo-shell{grid-template-columns:1fr}.mo-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.mo-steps>div{padding:8px}.mo-steps small,.mo-steps>p{display:none}.mo-grid,.mo-grid.three{grid-template-columns:1fr}.mo-submit{align-items:stretch;flex-direction:column}.mo-head>div{margin:18px 0}.mo-head h1{font-size:32px}}
+/* Cadastro de lojista — reescrito do zero.
+   Três arquivos CSS diferentes disputavam esta página com paletas
+   hardcoded distintas (marrom/bege, depois uma foto navy sobreposta,
+   depois um verde-esmeralda escuro fixo) — nenhuma delas usava os tokens
+   de tema do site, então a página ficava sempre escura e com cores
+   inconsistentes entre si, não importava o tema escolhido pelo usuário.
+   Fonte única aqui, com os tokens --px-*/--pc-* (mesma marca navy/dourado
+   do resto do site — herdados de .ref-page, adicionado ao elemento raiz
+   desta página), que já invertem sozinhos em claro/escuro. */
+
+.mo-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 32px);
+  background:
+    radial-gradient(640px 420px at 10% 0%, color-mix(in srgb, var(--px-brand, #2563eb) 6%, transparent), transparent 60%),
+    var(--px-surface-soft, #f7f8fa);
+  color: var(--px-ink, #14181d);
+}
+.mo-page * { box-sizing: border-box; }
+
+.mo-head, .mo-shell { width: min(1040px, 100%); margin: 0 auto; }
+.mo-head > a {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--px-muted, #5f6b78); text-decoration: none; font-size: 13px; font-weight: 700;
+}
+.mo-head > a svg { width: 15px; height: 15px; }
+.mo-head > a:hover { color: var(--px-ink, #14181d); }
+.mo-head > div { margin: 12px 0 16px; max-width: 640px; }
+.mo-head span, .mo-title span { font-size: 11px; letter-spacing: 0.1em; font-weight: 900; color: var(--px-brand, #2563eb); }
+.mo-head h1 { font-family: var(--pc-font-display, "Manrope Variable", Manrope, sans-serif); font-size: clamp(24px, 3vw, 32px); line-height: 1.12; letter-spacing: -0.03em; margin: 6px 0 6px; color: var(--px-ink, #14181d); }
+.mo-head p, .mo-title p { color: var(--px-muted, #5f6b78); line-height: 1.5; margin: 0; font-size: 13.5px; }
+
+.mo-shell { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 18px; align-items: start; }
+
+.mo-steps, .mo-card, .mo-status {
+  border: 1px solid var(--px-line, #e2e7ec);
+  background: var(--px-surface, #fff);
+  border-radius: 16px;
+  box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07));
+}
+.mo-sidebar { display: grid; gap: 12px; }
+.mo-sidebar .pc-editorial-photo { border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--px-shadow, 0 1px 2px rgba(16,24,40,.05), 0 10px 26px rgba(16,24,40,.07)); }
+.mo-sidebar .pc-editorial-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.mo-steps { padding: 10px; }
+.mo-steps > div { display: flex; gap: 10px; padding: 9px; border-radius: 11px; opacity: 0.55; }
+.mo-steps > div.active { background: var(--px-brand-soft, rgba(37,99,235,.1)); opacity: 1; }
+.mo-steps > div.done { opacity: 0.85; }
+.mo-steps b {
+  display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%;
+  background: var(--px-surface-soft, #f7f8fa); color: var(--px-muted, #5f6b78); font-size: 12px; font-weight: 800; flex: 0 0 auto;
+}
+.mo-steps > div.active b { background: var(--px-brand, #2563eb); color: var(--px-brand-ink, #fff); }
+.mo-steps > div.done b { background: var(--px-ink, #14181d); color: var(--px-surface, #fff); }
+.mo-steps span { display: grid; min-width: 0; }
+.mo-steps strong { font-size: 12.5px; color: var(--px-ink, #14181d); }
+.mo-steps small { font-size: 11px; color: var(--px-muted, #5f6b78); margin-top: 1px; }
+.mo-steps > p {
+  border-top: 1px solid var(--px-line, #e2e7ec); margin: 8px 0 0; padding: 10px 6px 2px;
+  display: flex; gap: 7px; font-size: 11px; line-height: 1.4; color: var(--px-muted, #5f6b78);
+}
+.mo-steps > p svg { width: 14px; height: 14px; flex: none; color: var(--px-brand, #2563eb); }
+
+.mo-card { padding: clamp(16px, 2.4vw, 24px); }
+.mo-card form { display: grid; gap: 12px; }
+.mo-title { display: flex; gap: 11px; margin-bottom: 2px; }
+.mo-title > svg { width: 32px; height: 32px; padding: 7px; border-radius: 10px; background: var(--px-brand-soft, rgba(37,99,235,.1)); color: var(--px-brand, #2563eb); flex: none; }
+.mo-title h2 { font-size: 19px; margin: 2px 0 3px; letter-spacing: -0.02em; color: var(--px-ink, #14181d); font-weight: 750; }
+
+.mo-card label { display: grid; gap: 5px; font-size: 12.5px; font-weight: 700; color: var(--px-ink, #14181d); }
+.mo-card label small { font-weight: 500; color: var(--px-muted, #5f6b78); }
+.mo-card input, .mo-card select, .mo-card textarea {
+  width: 100%; border: 1px solid var(--px-line, #e2e7ec); background: var(--px-surface-soft, #f7f8fa);
+  color: var(--px-ink, #14181d); border-radius: 9px; padding: 10px 12px; outline: none; font: inherit; font-size: 14px;
+  min-height: 44px;
+}
+.mo-card textarea { min-height: 0; }
+.mo-card input:focus-visible, .mo-card select:focus-visible, .mo-card textarea:focus-visible {
+  border-color: var(--px-brand, #2563eb); outline: 2px solid var(--px-brand, #2563eb); outline-offset: 1px; background: var(--px-surface, #fff);
+}
+.mo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.mo-grid.three { grid-template-columns: 0.65fr 1fr 1fr; }
+
+.mo-card button, .mo-status button {
+  border: 0; border-radius: 10px; background: var(--px-brand, #2563eb); color: var(--px-brand-ink, #fff);
+  padding: 12px 18px; font-weight: 800; font-size: 13.5px; cursor: pointer; transition: opacity .15s ease, transform .15s ease;
+}
+@media (hover:hover) and (pointer:fine) { .mo-card button:not(:disabled):hover, .mo-status button:hover { opacity: .92; transform: translateY(-1px); } }
+.mo-card button:disabled { opacity: 0.6; cursor: progress; }
+
+.mo-error {
+  padding: 9px 12px; border-radius: 9px; background: rgba(192, 57, 43, 0.08); border: 1px solid rgba(192, 57, 43, 0.28);
+  color: #b3261e; font-size: 12.5px; margin: 0;
+}
+html[data-theme="dark"] .mo-error { color: #ff9a90; }
+.mo-login { text-align: center; color: var(--px-muted, #5f6b78); font-size: 12.5px; }
+.mo-login a, .mo-status a { color: var(--px-brand, #2563eb); font-weight: 700; }
+.mo-submit {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  border-top: 1px solid var(--px-line, #e2e7ec); padding-top: 12px;
+}
+.mo-submit p { display: flex; align-items: center; gap: 6px; color: var(--px-muted, #5f6b78); font-size: 11.5px; margin: 0; }
+.mo-submit svg { width: 14px; height: 14px; color: var(--px-brand, #2563eb); }
+
+.mo-status { width: min(560px, 100%); margin: 0 auto; padding: 30px; text-align: center; }
+.mo-status > svg { width: 38px; height: 38px; color: var(--px-brand, #2563eb); }
+.mo-status > span { display: block; color: var(--px-brand, #2563eb); font-size: 11px; font-weight: 900; letter-spacing: 0.1em; margin: 10px 0 4px; }
+.mo-status h1 { font-size: 26px; margin: 0 0 8px; color: var(--px-ink, #14181d); }
+.mo-status p { color: var(--px-muted, #5f6b78); line-height: 1.55; }
+.mo-status-note {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--px-surface-soft, #f7f8fa); border: 1px solid var(--px-line, #e2e7ec); border-radius: 10px;
+  padding: 10px; font-size: 12.5px; margin: 16px 0; color: var(--px-muted, #5f6b78);
+}
+.mo-status-note svg { width: 15px; height: 15px; color: var(--px-brand, #2563eb); }
+.mo-status a { display: inline-block; margin-top: 8px; }
+
+.mo-loading { display: grid; place-items: center; min-height: 60vh; color: var(--px-muted, #5f6b78); font-size: 14px; }
+
+@media (max-width: 760px) {
+  .mo-shell { grid-template-columns: 1fr; }
+  .mo-sidebar .pc-editorial-photo { aspect-ratio: 16 / 9 !important; }
+  .mo-steps > div small { display: none; }
+  .mo-grid, .mo-grid.three { grid-template-columns: 1fr; }
+  .mo-submit { align-items: stretch; flex-direction: column; }
+  .mo-head > div { margin: 10px 0 14px; }
+}
+
+/* Telas altas o bastante: um respiro extra vertical, sem forçar nada a
+   caber — a página nunca trava altura nem corta conteúdo, só rola se
+   precisar (mesmo contrato usado em /colaborar). */
+@media (min-height: 780px) and (min-width: 761px) {
+  .mo-page { padding-block: clamp(24px, 5vh, 56px); }
+}
