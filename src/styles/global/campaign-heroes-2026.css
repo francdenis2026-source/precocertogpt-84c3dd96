@@ -8,7 +8,17 @@
    precisa valer pra foto de fundo, entao move-se o overflow:hidden (e o
    border-radius, herdado do pai) pro elemento do backdrop e pro veu, que
    ja sao position:absolute+inset:0 -- nada mais no hero fica clipado. */
-html:root body .pc-campaign { position:relative!important; isolation:isolate; }
+/* z-index:5 (e não só isolation:isolate): o hero isola sua própria pilha de
+   camadas (backdrop, véu, painel de busca), mas isolation sozinho não diz
+   nada sobre a ordem dele CONTRA os irmãos depois dele no fluxo normal —
+   .pc-campaign continuava desenhado como bloco comum (z-index:auto), então
+   a seção seguinte ("App e versão web", cujos itens do GSAP saem da entrada
+   com transform/opacity e por isso criam a própria pilha) desenhava por
+   cima. O painel de resultados da busca ao vivo (position:absolute,
+   estourando pra baixo do hero) ficava com a lista de produtos escondida
+   atrás desse card. Um z-index explícito aqui garante que o hero — painel
+   incluso — sempre fique acima de qualquer seção comum que vem depois. */
+html:root body .pc-campaign { position:relative!important; isolation:isolate; z-index:5; }
 html:root body .pc-campaign .pc-campaign-backdrop,
 html:root body .pc-campaign .pc-campaign-backdrop img {
   position:absolute!important; inset:0!important; width:100%!important; height:100%!important;
