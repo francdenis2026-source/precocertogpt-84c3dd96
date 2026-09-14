@@ -71,9 +71,10 @@ html .pcx-home .pcx-intro .pc-location-chip { min-height:44px !important; color:
      o contem. Nao redeclarar aqui: essas regras (`html .pcx-home .pcx-header
      .pc-radio`) tem mais especificidade que qualquer coisa escopada em
      .pcx-header__radio-slot e venceriam por cima do design novo. */
-  html .pcx-home .pcx-footer__row { padding-block:16px !important; gap:12px !important; }
-  html .pcx-home .pcx-footer__nav { flex-wrap:wrap !important; overflow:visible !important; gap:4px 8px !important; }
-  html .pcx-home .pcx-footer__nav a { min-height:44px !important; font-size:12px !important; }
+  /* Layout de largura/linha unica do rodape (marca+CTA numa linha, nav
+     numa faixa propria rolavel) vive so em HomeProfessionalRedesign2026.css
+     — regras daqui com !important vinham disputando com ela e forcando o
+     nav a quebrar em varias linhas. */
   html .pcx-home .pcx-footer__brand small, html .pcx-home .pcx-footer__meta { font-size:12px !important; }
   html .pcx-home .pcx-sync-notice { flex-wrap:wrap; }
   html .pcx-home :is(.pcx-sync-notice__retry,.pcx-sync-notice__dismiss) { min-height:44px; min-width:44px; }
@@ -85,6 +86,5 @@ html .pcx-home .pcx-intro .pc-location-chip { min-height:44px !important; color:
   .pcx-intro__suggestions > span { display:none; }
   .pcx-intro__panel li { grid-template-columns:minmax(0,1fr) auto; gap:8px; }
   .pcx-intro__panel-thumb { display:none; }
-  html .pcx-home .pcx-footer__row { grid-template-columns:1fr !important; grid-template-areas:"brand" "cta" "nav" !important; }
 }
 @media (prefers-reduced-motion:reduce) { .pcx-intro *, .pcx-intro *::before, .pcx-intro *::after { animation:none !important; transition:none !important; } }
