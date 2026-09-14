@@ -2,24 +2,14 @@
    PublicExperienceFinal2026.css e StoreLogoFix.css (antes espalhado em 3 arquivos globais). */
 .ref-stores-page{overflow-x:clip!important;max-width:100vw}
 .ref-stores-page .ref-directory__main{padding-top:18px}
-/* Mesmo padrão de altura/tipografia compacta usado em /explorar, /buscar,
-   /cesta-inteligente e /cesta-basica. */
-.ref-stores-hero{position:relative;isolation:isolate;min-height:0;display:flex;align-items:center;justify-content:space-between;gap:28px;overflow:hidden;padding:clamp(24px,3.4vw,34px);border:1px solid var(--pc-border);border-radius:var(--pc-radius-block);background:var(--pc-surface-2);box-shadow:none}
-/* A foto e o véu de verdade hoje vêm de elementos reais no JSX
-   (.ref-stores-hero__bg <img> + .ref-stores-hero__scrim), com fade suave via
-   imageLoadFade. Essas duas pseudo-camadas eram de uma versão anterior desta
-   hero, ainda com uma foto diferente (comercio-local.webp) fixada por CSS —
-   como CSS de fundo pinta na hora, sem esperar nenhum fade, ela aparecia
-   primeiro e a foto certa só cobria por cima depois de carregar: exatamente
-   o "flash da foto antiga" reportado. Removidas por serem redundantes e
-   pela foto errada. */
-.ref-stores-hero>div{max-width:610px}
-.ref-stores-hero>div>span,.ref-store-cards>header span{color:var(--pc-green-strong);font-size:var(--pc-text-xs);font-weight:900;letter-spacing:.12em}
-.ref-stores-hero h1{max-width:12ch;margin:8px 0 9px;color:var(--pc-ink);font-family:var(--pc-font-display);font-size:clamp(1.85rem,3vw,2.6rem);line-height:1.05;letter-spacing:-.03em}
-.ref-stores-hero p{max-width:520px;color:var(--pc-muted);font-size:14.5px;line-height:1.55}
-.ref-stores-hero>div>div{width:fit-content;min-height:32px;display:flex;align-items:center;gap:7px;margin-top:12px;padding:0 11px;border:1px solid color-mix(in srgb,var(--pc-green) 22%,var(--pc-border));border-radius:999px;background:color-mix(in srgb,var(--pc-surface) 82%,transparent);color:var(--pc-green-strong);font-size:var(--pc-text-xs);font-weight:800}
-.ref-stores-hero>div>div svg{width:14px;height:14px}
-.ref-stores-hero>a{align-self:flex-end;min-height:42px;display:flex;align-items:center;gap:9px;padding:0 16px;border-radius:var(--pc-radius-control);background:var(--pc-forest-950,#022C20);color:#fff;font-size:var(--pc-text-sm);font-weight:850;box-shadow:var(--pc-shadow-sm)}
+/* O bloco .ref-stores-hero que existia aqui (cartão claro, título até
+   12ch, botão verde-floresta) é de uma versão anterior dessa hero — a
+   folha carregada por último para essa faixa hoje é
+   StoresDirectoryRedesign2026.css (cartão escuro com foto real), e toda
+   propriedade que ainda se sobrepunha por especificidade/ordem já perdia
+   pra ela por !important, então essas linhas nunca pintavam nada: só
+   ficavam para trás confundindo quem lesse o arquivo depois. */
+.ref-store-cards>header span{color:var(--pc-green-strong);font-size:var(--pc-text-xs);font-weight:900;letter-spacing:.12em}
 .ref-stores-toolbar{min-height:50px;display:grid;grid-template-columns:20px 1fr auto;align-items:center;gap:10px;margin:12px 0;padding:0 16px;border:1px solid var(--pc-border);border-radius:var(--pc-radius-card);background:var(--pc-surface);box-shadow:none}
 .ref-stores-toolbar>svg{width:17px;color:var(--pc-green-strong);height:17px}
 .ref-stores-toolbar input{min-width:0;height:46px;border:0;outline:0;background:transparent;color:var(--pc-ink);font-size:var(--pc-text-body)}
@@ -67,8 +57,6 @@
 
 @media(max-width:900px){.ref-stores-directory{grid-template-columns:1fr}.ref-stores-map{position:relative;top:auto;grid-row:1}}
 @media(max-width:680px){
-  .ref-stores-hero{min-height:0;align-items:flex-start;flex-direction:column;justify-content:center;padding:20px}
-  .ref-stores-hero h1{font-size:clamp(1.7rem,8vw,2.1rem)}
   .ref-stores-toolbar{grid-template-columns:18px 1fr}
   .ref-stores-toolbar>span{display:none}
   .ref-store-cards{grid-template-columns:1fr}

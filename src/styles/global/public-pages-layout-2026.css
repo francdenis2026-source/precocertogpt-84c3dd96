@@ -21,7 +21,7 @@ html:root body :is(.pc-collab-page,.pc-about-page,.pc-favorites-page,.ref-stores
   font-family:"Outfit Variable",Outfit,system-ui,sans-serif!important;
   font-weight:600!important; letter-spacing:-.025em!important; text-shadow:none!important;
 }
-html:root body :is(.pc-collab__copy,.pc-about__hero-copy,.pc-favorites-page .ref-page-title,.ref-stores-heading,.mo-head) h1 {
+html:root body :is(.pc-collab__copy,.pc-about__hero-copy,.pc-favorites-page .ref-page-title,.mo-head) h1 {
   font-size:clamp(28px,3.1vw,40px)!important; line-height:1.12!important;
   color:var(--brand-ink)!important; -webkit-text-fill-color:var(--brand-ink)!important;
   margin:6px 0 10px!important;
@@ -56,8 +56,6 @@ html:root body .pc-favorites-page .ref-page-title p { color:var(--brand-muted)!i
 html:root body .pc-favorites-page .ref-update { background:var(--brand-soft)!important; color:var(--brand-ink)!important; border-color:var(--brand-line)!important; }
 html:root body .pc-favorites-page .ref-update small { display:block; color:var(--brand-muted)!important; }
 html:root body .pc-favorites-page .ref-empty { min-height:230px!important; padding:28px 20px!important; height:auto!important; }
-html:root body .ref-stores-heading { align-items:center!important; gap:20px!important; margin-bottom:20px!important; }
-html:root body .ref-stores-heading .ref-stores-hero__stat { background:var(--brand-surface)!important; color:var(--brand-muted)!important; -webkit-text-fill-color:var(--brand-muted)!important; }
 html:root body .ref-stores-directory { display:grid!important; grid-template-columns:minmax(0,1fr) 300px!important; align-items:start!important; gap:20px!important; height:auto!important; max-height:none!important; overflow:visible!important; }
 html:root body .ref-stores-page .ref-store-cards { display:grid!important; grid-template-columns:repeat(2,minmax(0,1fr))!important; min-width:0!important; height:auto!important; max-height:none!important; overflow:visible!important; padding:0!important; gap:12px!important; }
 html:root body .ref-store-cards > header { grid-column:1/-1; position:static!important; height:auto!important; padding:8px 0!important; }
@@ -104,8 +102,6 @@ html:root body .ref-footer__legal { display:flex; flex-wrap:wrap; gap:10px 20px;
 @media(max-width:760px) {
   html:root body :is(.pc-about,.pc-favorites-page .ref-directory__main,.ref-stores-page .ref-directory__main) { width:calc(100% - 32px)!important; padding:20px 0!important; }
   html:root body .pc-about__hero { grid-template-columns:minmax(0,1fr)!important; gap:20px!important; padding:18px!important; }
-  html:root body .ref-stores-heading { flex-direction:column; align-items:stretch!important; }
-  html:root body .ref-stores-heading__actions { justify-content:flex-start; }
   html:root body .ref-stores-page .ref-store-cards { grid-template-columns:minmax(0,1fr)!important; }
   html:root body .mo-page { padding:16px!important; }
   html:root body .mo-shell { grid-template-columns:minmax(0,1fr)!important; grid-template-rows:auto auto!important; }
