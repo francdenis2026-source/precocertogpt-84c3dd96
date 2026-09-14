@@ -390,7 +390,7 @@ function CollaborationPage() {
   const [needsAccount, setNeedsAccount] = useState(false);
   const field = (key: keyof typeof form) => ({
     value: form[key],
-    onChange: (event: { target: { value: string } }) => setForm(current => ({ ...current, [key]: key === "whatsapp" ? event.target.value.replace(/\\D/g, "").slice(0, 11) : event.target.value })),
+    onChange: (event: { target: { value: string } }) => setForm(current => ({ ...current, [key]: key === "whatsapp" ? event.target.value.replace(/\D/g, "").slice(0, 11) : event.target.value })),
   });
   const required: (keyof typeof form)[] = ["name", "city", "establishment", "email"];
   const missing = required.filter(key => !form[key].trim());
