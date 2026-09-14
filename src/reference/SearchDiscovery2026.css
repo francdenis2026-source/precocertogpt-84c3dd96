@@ -103,7 +103,6 @@ html[data-theme="dark"] .search26-advanced footer button{background:var(--pc-gre
 .search26-modal__grip{position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:2;width:36px;height:4px;border-radius:999px;background:rgba(255,255,255,.5);display:none;pointer-events:none}
 
 .search26-modal__hero{position:relative;isolation:isolate;overflow:hidden;padding:14px 18px 16px;background:linear-gradient(135deg,#0a1f33,#123a52 55%,#155073);color:#fff}
-.search26-modal__hero::after{content:"";position:absolute;z-index:-1;top:-70px;right:-50px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%)}
 .search26-modal__hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-height:24px}
 .search26-modal__eyebrow{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);color:#eef5ff;font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
 .search26-modal__close{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.26);border-radius:10px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;transition:background-color .16s ease-out}
