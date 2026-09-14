@@ -47,7 +47,9 @@
 .sector-hub__hero-stats b { color: var(--pc-ink); font-family: var(--pc-font-display); font-size: 16px; font-variant-numeric: tabular-nums; }
 .sector-hub__hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .sector-hub__hero-actions a { min-height: 42px; padding: 0 14px; border: 1px solid var(--pc-border); border-radius: var(--pc-radius-control, 10px); display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: var(--pc-ink); background: var(--pc-surface-2); font-size: 12.5px; font-weight: 820; transition: transform 140ms var(--sh-ease), background-color 160ms ease, border-color 160ms ease; }
-.sector-hub__hero-actions a:first-child { border-color: transparent; background: var(--pc-gold, #b77918); color: var(--pc-navy, #104c30); }
+/* --pc-gold resolve para o azul da marca hoje, não o dourado que a tinta
+   escura foi escolhida pra combinar. */
+.sector-hub__hero-actions a:first-child { border-color: transparent; background: var(--pc-gold, #b77918); color: #fff; }
 .sector-hub__hero-actions svg { width: 15px; }
 .sector-hub__hero-actions a:active { transform: scale(.97); }
 

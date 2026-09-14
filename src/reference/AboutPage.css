@@ -242,8 +242,9 @@
   padding: 0 18px;
   border-radius: 999px;
   background: var(--pc-gold, #28cc70);
-  /* Preenchimento dourado só aceita tinta escura: branco sobre ele dá 1.73:1. */
-  color: var(--pc-navy, #10161d);
+  /* --pc-gold resolve para o azul da marca hoje, não o dourado que a
+     tinta escura deste comentário foi escolhida pra combinar. */
+  color: #fff;
   font-size: 14px;
   font-weight: 850;
   text-decoration: none;
@@ -344,7 +345,9 @@ html:not([data-theme="dark"]) .pc-about-page .pc-about__hero .pc-about__eyebrow,
 html[data-theme="dark"] .pc-about-page .pc-about__hero .pc-about__eyebrow {
   color: var(--pc-gold, #28cc70) !important;
 }
+/* --pc-gold (o fundo deste botão) resolve para o azul da marca hoje, não
+   o dourado que esta tinta escura foi escolhida pra combinar. */
 html:not([data-theme="dark"]) .pc-about-page .pc-about__cta-primary,
 html[data-theme="dark"] .pc-about-page .pc-about__cta-primary {
-  color: var(--pc-navy, #10161d) !important;
+  color: #fff !important;
 }

@@ -2326,7 +2326,16 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   background: var(--h-forest-deep);
 }
 .pcx-promo-feature { min-height: 280px !important; border-radius: 22px !important; }
-.pcx-offers-visual { min-height: 150px; margin-bottom: 18px; border-radius: 18px; display: flex; align-items: center; }
+/* "Ofertas em destaque" é curta demais (150-180px) para o truque de
+   contain+backdrop desfocado funcionar: a foto (contida, sem cortar)
+   encolhia numa faixa vertical estreita, deixando o resto da faixa —
+   inclusive onde o link "Explorar catálogo" fica — como um vazio escuro
+   sem nada. Usa cover direto, igual ao resto dos banners do site
+   (loja local, heros de setor/estabelecimento), sem a camada de fundo
+   desfocado, que só existia para preencher esse vazio. */
+.pcx-offers-visual { min-height: 220px; margin-bottom: 18px; border-radius: 18px; display: flex; align-items: center; }
+.pcx-offers-visual .pcx-frame-backdrop { display: none; }
+.pcx-offers-visual .pcx-frame-photo { object-fit: cover !important; object-position: 68% 22% !important; }
 .pcx-frame-backdrop,
 .pcx-frame-photo {
   position: absolute !important;
@@ -2359,12 +2368,16 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-offers-visual > div { width: 100%; padding: 22px 24px; }
 .pcx-offers-visual .pcx-section__head h2,
 .pcx-offers-visual .pcx-section__head p { color: #fff !important; }
+/* O link "Explorar catálogo" ficava de fora dessa regra — herdava a tinta
+   escura padrão do site (pensada pra fundo claro) direto sobre a foto,
+   sem garantia nenhuma de contraste contra o que estivesse atrás dele. */
+.pcx-offers-visual .pcx-section__link { color: #fff !important; }
 .pcx-spotlight .pcx-frame-backdrop { z-index: -3; }
 .pcx-spotlight .pcx-frame-photo { z-index: -2; opacity: .56 !important; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
 @media (max-width: 700px) {
   .pcx-promo-feature { min-height: 260px !important; }
-  .pcx-offers-visual { min-height: 180px; }
+  .pcx-offers-visual { min-height: 200px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
   .pcx-spotlight .pcx-frame-photo { opacity: .42 !important; }
 }

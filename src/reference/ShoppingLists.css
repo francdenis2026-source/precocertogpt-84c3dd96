@@ -9,7 +9,10 @@
 .pc-lists-hero>div>span svg{width:15px;height:15px}
 .pc-lists-hero h1{margin:6px 0 6px;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:-.03em;line-height:1.08}
 .pc-lists-hero p{max-width:560px;margin:0;color:var(--pl-muted);font-size:13.5px;line-height:1.5}
-.pc-lists-new-btn{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 16px;border:0;border-radius:11px;background:var(--pl-green);color:var(--pc-navy,#10161d);font-size:13px;font-weight:850;cursor:pointer}
+/* --pl-green (e os demais botões preenchidos desta página) resolvem para
+   o azul da marca hoje, não para o verde/dourado original que a tinta
+   escura (--pc-navy) foi escolhida pra combinar — texto branco em todos. */
+.pc-lists-new-btn{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 16px;border:0;border-radius:11px;background:var(--pl-green);color:#fff;font-size:13px;font-weight:850;cursor:pointer}
 
 .pc-lists-title-rename{width:100%;max-width:420px;min-height:38px;margin:6px 0;padding:0 10px;border:1px solid var(--pl-green);border-radius:9px;background:var(--pl-surface);color:var(--pl-ink);font-size:1.4rem;font-weight:800}
 .pc-lists-header-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
@@ -27,11 +30,11 @@
 .pc-lists-share__link{border-top:1px solid var(--pl-line);padding-top:12px}
 .pc-lists-share__link>p{display:flex;align-items:flex-start;gap:8px;margin:0 0 10px;color:var(--pl-muted);font-size:12.5px;line-height:1.5}
 .pc-lists-share__link>p svg{width:15px;height:15px;color:var(--pl-green-2);flex-shrink:0;margin-top:1px}
-.pc-lists-share__enable{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 14px;border:0;border-radius:10px;background:var(--pl-green);color:var(--pc-navy,#10161d);font-size:12.5px;font-weight:850;cursor:pointer}
+.pc-lists-share__enable{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 14px;border:0;border-radius:10px;background:var(--pl-green);color:#fff;font-size:12.5px;font-weight:850;cursor:pointer}
 .pc-lists-share__enable svg.spin{animation:pl-spin .8s linear infinite}
 .pc-lists-share__link-row{display:flex;gap:8px}
 .pc-lists-share__link-row input{flex:1;min-width:0;min-height:38px;padding:0 10px;border:1px solid var(--pl-line);border-radius:9px;background:var(--pc-canvas);color:var(--pl-ink);font-size:12.5px}
-.pc-lists-share__link-row button{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 12px;border:0;border-radius:9px;background:var(--pl-green);color:var(--pc-navy,#10161d);font-size:12px;font-weight:850;cursor:pointer;white-space:nowrap}
+.pc-lists-share__link-row button{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 12px;border:0;border-radius:9px;background:var(--pl-green);color:#fff;font-size:12px;font-weight:850;cursor:pointer;white-space:nowrap}
 .pc-lists-share__link-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .pc-lists-share__link-actions button{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border:1px solid var(--pl-line);border-radius:999px;background:transparent;color:var(--pl-muted);font-size:11.5px;font-weight:800;cursor:pointer}
 .pc-lists-share__link-actions button svg{width:12px;height:12px}
@@ -59,7 +62,7 @@
 .pc-lists-create__actions{display:flex;justify-content:flex-end;gap:8px}
 .pc-lists-create__actions button{min-height:40px;padding:0 16px;border-radius:10px;font-size:12.5px;font-weight:850;cursor:pointer}
 .pc-lists-cancel{border:1px solid var(--pl-line);background:transparent;color:var(--pl-ink)}
-.pc-lists-create__actions button[type="submit"]{border:0;background:var(--pl-green);color:var(--pc-navy,#10161d)}
+.pc-lists-create__actions button[type="submit"]{border:0;background:var(--pl-green);color:#fff}
 
 .pc-lists-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:18px}
 .pc-lists-card{border:1px solid var(--pl-line);border-radius:15px;background:var(--pl-surface);overflow:hidden}
@@ -112,7 +115,7 @@
 .pc-lists-ai__intro{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:var(--pl-muted);font-size:12.5px}
 .pc-lists-ai__intro svg{width:15px;height:15px;color:var(--pl-green-2);flex-shrink:0}
 .pc-lists-ai textarea{width:100%;padding:10px 12px;border:1px solid var(--pl-line);border-radius:11px;background:var(--pc-canvas);color:var(--pl-ink);font-size:13px;resize:vertical;font-family:inherit}
-.pc-lists-ai>button{display:inline-flex;align-items:center;gap:7px;min-height:42px;margin-top:10px;padding:0 16px;border:0;border-radius:11px;background:var(--pl-green);color:var(--pc-navy,#10161d);font-size:13px;font-weight:850;cursor:pointer}
+.pc-lists-ai>button{display:inline-flex;align-items:center;gap:7px;min-height:42px;margin-top:10px;padding:0 16px;border:0;border-radius:11px;background:var(--pl-green);color:#fff;font-size:13px;font-weight:850;cursor:pointer}
 .pc-lists-ai>button:disabled{opacity:.6;cursor:default}
 .pc-lists-ai>button svg.spin{animation:pl-spin .8s linear infinite}
 .pc-lists-ai__error{margin-top:8px;color:#b33b34;font-size:12.5px}
@@ -158,7 +161,7 @@
 .pc-lists-empty p{max-width:440px;margin:0 0 8px;color:var(--pl-muted);font-size:13px}
 .pc-lists-empty>div{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .pc-lists-empty button,.pc-lists-empty a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:10px;font-size:12.5px;font-weight:850;text-decoration:none;cursor:pointer}
-.pc-lists-empty button{border:0;background:var(--pl-green);color:var(--pc-navy,#10161d)}
+.pc-lists-empty button{border:0;background:var(--pl-green);color:#fff}
 .pc-lists-empty a{border:1px solid var(--pl-line);color:var(--pl-ink)}
 
 @keyframes pl-spin{to{transform:rotate(360deg)}}

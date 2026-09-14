@@ -176,8 +176,10 @@ html:root body .store-pro-hero:not(.store-pro-hero--pharmacies) .store-pro-copy 
 .store-pro-pagination button:hover:not(:disabled){border-color:var(--pc-green);background:var(--pc-surface-2);color:var(--pc-ink)}
 /* A página atual usava tinta de destaque sobre o tom claro do mesmo
    destaque (3.13:1, reprovado no AA em 13px). Preenchida, além de passar
-   com folga, marca a seleção com muito mais clareza. */
-.store-pro-pagination button.is-active{border-color:transparent;background:var(--pc-green);color:var(--pc-navy,#10161d);font-weight:900}
+   com folga, marca a seleção com muito mais clareza. --pc-green hoje
+   resolve para o azul da marca (não mais o dourado original desta
+   página), então o texto precisa ser branco, não tinta escura. */
+.store-pro-pagination button.is-active{border-color:transparent;background:var(--pc-green);color:#fff;font-weight:900}
 .store-pro-pagination button:active:not(:disabled){transform:scale(.96)}
 .store-pro-pagination button:disabled{opacity:.35;cursor:not-allowed}
 
@@ -193,9 +195,10 @@ html:root body .store-pro-hero:not(.store-pro-hero--pharmacies) .store-pro-copy 
 .store-pro-state{min-height:100dvh;padding:80px 20px 40px;display:grid;place-items:center;align-content:center;gap:12px;background:var(--pc-canvas);color:var(--pc-ink);text-align:center}
 .store-pro-state p{max-width:44ch;margin:0;color:var(--pc-muted);font-size:14px}
 .store-pro-state__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:6px}
-/* --pc-green e o dourado da marca; texto branco sobre ele dava 1.73:1.
-   Preenchimento dourado so aceita tinta escura. */
-.store-pro-state__actions>a{min-height:44px;display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:9px;background:var(--pc-green);color:var(--pc-navy,#10161d);font-weight:850;text-decoration:none}
+/* --pc-green resolve para o azul da marca hoje (o comentário original
+   aqui era de quando essa variável ainda era o dourado da página — tinta
+   escura já não passa mais em cima do azul, ~3.4:1). */
+.store-pro-state__actions>a{min-height:44px;display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:9px;background:var(--pc-green);color:#fff;font-weight:850;text-decoration:none}
 .store-pro-state__actions>a.store-pro-state__ghost{background:var(--pc-surface);color:var(--pc-ink);border:1px solid var(--pc-border-strong)}
 .store-pro-loader{width:34px;height:34px;border:3px solid var(--pc-border);border-top-color:var(--pc-green);border-radius:50%;animation:store-pro-spin .8s linear infinite}
 @keyframes store-pro-spin{to{transform:rotate(1turn)}}

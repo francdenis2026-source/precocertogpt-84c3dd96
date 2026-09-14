@@ -20,7 +20,9 @@
 .my-lic-status__meta{display:flex;flex-wrap:wrap;gap:10px 16px}
 .my-lic-status__meta span{display:inline-flex;align-items:center;gap:5px;color:var(--ml-muted);font-size:12.5px}
 .my-lic-status__meta svg{width:13px;height:13px}
-.my-lic-status__cta{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:0;border-radius:9px;background:var(--ml-green);color:var(--pc-navy,#10161d);font-size:12.5px;font-weight:850;text-decoration:none}
+/* --ml-green resolve para o azul da marca hoje, não o verde original que
+   a tinta escura foi escolhida pra combinar. */
+.my-lic-status__cta{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:0;border-radius:9px;background:var(--ml-green);color:#fff;font-size:12.5px;font-weight:850;text-decoration:none}
 .my-lic-status__cta svg{width:14px;height:14px}
 
 .my-lic-history{margin-top:20px}

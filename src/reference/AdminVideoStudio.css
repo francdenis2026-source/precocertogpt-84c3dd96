@@ -58,8 +58,8 @@
 .avs-offer b{color:#fff;font-size:.66rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .avs-offer small{color:rgba(255,255,255,.6);font-size:.58rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .avs-offer strong{color:var(--pc-green);font-size:.7rem;white-space:nowrap}
-.avs-offer em{position:absolute;top:-4px;left:-4px;width:15px;height:15px;display:grid;place-items:center;border-radius:50%;background:var(--pc-green);color:var(--pc-navy);font-size:.58rem;font-style:normal;font-weight:900}
-.avs-cta{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 11px;border-radius:9px;background:var(--pc-green);color:var(--pc-navy);font-size:.74rem;font-weight:800}
+.avs-offer em{position:absolute;top:-4px;left:-4px;width:15px;height:15px;display:grid;place-items:center;border-radius:50%;background:var(--pc-green);color:#fff;font-size:.58rem;font-style:normal;font-weight:900}
+.avs-cta{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding:8px 11px;border-radius:9px;background:var(--pc-green);color:#fff;font-size:.74rem;font-weight:800}
 .avs-cta small{font-weight:700;opacity:.75;font-size:.6rem}
 .avs-block--preview>p{margin:0;display:flex;align-items:center;gap:5px;color:var(--pc-muted);font-size:.68rem}
 .avs-block--preview>p svg{width:12px;height:12px;color:var(--pc-green-strong)}
@@ -70,7 +70,7 @@
 .avs-render-actions{display:flex;gap:8px;flex:none}
 .avs-render-actions button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border:1px solid var(--pc-border);border-radius:9px;background:var(--pc-canvas);color:var(--pc-ink);font-size:.74rem;font-weight:800;cursor:pointer;white-space:nowrap}
 .avs-render-actions button svg{width:14px;height:14px}
-.avs-render-actions button.primary{border-color:transparent;background:var(--pc-green);color:var(--pc-navy)}
+.avs-render-actions button.primary{border-color:transparent;background:var(--pc-green);color:#fff}
 .avs-render-actions button:disabled{opacity:.5;cursor:default}
 
 .spin{animation:avs-spin .8s linear infinite}
