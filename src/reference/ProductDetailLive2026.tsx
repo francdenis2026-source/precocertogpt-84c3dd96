@@ -53,6 +53,8 @@ export function ProductDetailLive2026() {
   const [liveAt, setLiveAt] = useState<Date | null>(null);
   const [syncing, setSyncing] = useState(false);
   const refreshTimer = useRef<number | null>(null);
+  const primaryActionRef = useRef<HTMLButtonElement | null>(null);
+  const [showMobileBar, setShowMobileBar] = useState(false);
 
   const loadCatalog = useCallback(async (force = false) => {
     if (force) setSyncing(true);
@@ -103,6 +105,26 @@ export function ProductDetailLive2026() {
   // página; a leitura de fato usa getCachedAvailability com o estabelecimento
   // realmente exibido (que muda conforme a oferta selecionada abaixo).
   useProductOnlineSales(product?.id ?? "", product?.establishmentId ?? "", product?.establishmentSlug);
+
+  /**
+   * A barra fixa de preço no mobile só faz sentido depois que o botão
+   * "Adicionar à lista" do hero sai da tela — mostrar as duas ao mesmo tempo
+   * (o que acontecia antes, sempre visível) duplicava preço e CTA na
+   * primeira dobra e passava a impressão de tela bagunçada.
+   */
+  useEffect(() => {
+    const target = primaryActionRef.current;
+    if (!target) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setShowMobileBar(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowMobileBar(!entry.isIntersecting),
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [loading, product?.id]);
 
   useEffect(() => {
     if (!product?.slug || !identifier || identifier === product.slug) return;
@@ -271,7 +293,7 @@ export function ProductDetailLive2026() {
               )}
 
               <div className="pdl-actions">
-                <button type="button" className="pdl-actions__primary" onClick={() => void addToBasket(basketTarget)}>
+                <button ref={primaryActionRef} type="button" className="pdl-actions__primary" onClick={() => void addToBasket(basketTarget)}>
                   <ShoppingBasket aria-hidden="true" />{inBasket ? "Na sua lista, abrir cesta" : "Adicionar à lista"}
                 </button>
                 <button type="button" className={favorite ? "is-active" : ""} onClick={() => void toggleFavorite(product.id)} aria-pressed={favorite}>
@@ -380,9 +402,9 @@ export function ProductDetailLive2026() {
 
       <PublicFooter />
 
-      <div className="pdl-mobile-bar">
+      <div className={`pdl-mobile-bar${showMobileBar ? " is-visible" : ""}`} aria-hidden={!showMobileBar}>
         <div><small>{single ? "Preço registrado" : "Menor preço"}</small><strong>{brl.format(price)}</strong></div>
-        <button type="button" onClick={() => void addToBasket(basketTarget)}>
+        <button type="button" tabIndex={showMobileBar ? 0 : -1} onClick={() => void addToBasket(basketTarget)}>
           <ShoppingBasket aria-hidden="true" />{inBasket ? "Na lista" : "Adicionar"}
         </button>
       </div>

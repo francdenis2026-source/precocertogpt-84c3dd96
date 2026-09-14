@@ -170,35 +170,51 @@
   .pdl-hero__copy h1{font-size:1.22rem}
   .pdl-crumbs>span:last-child{display:none}
   .pdl-crumbs svg:last-of-type{display:none}
-  .pdl-compare__list a{grid-template-columns:26px minmax(0,1fr) auto;row-gap:.4rem}
-  .pdl-compare__bar{grid-column:1/-1}
+  /* Colocação explícita por linha/coluna: o card tinha 5 itens (posição,
+     loja, barra, preço, seta) e só a barra ganhava posição própria
+     (grid-column:1/-1) — o item "preço", que no HTML vem depois da barra,
+     acabava sendo empurrado pelo fluxo automático do grid para a coluna
+     de 26px da posição, na linha seguinte, e vazava para fora do cartão.
+     Cada item agora tem linha/coluna fixa: posição+loja+preço na primeira
+     linha, barra ocupando a segunda linha inteira. */
+  .pdl-compare__list a{grid-template-columns:26px minmax(0,1fr) auto;grid-template-rows:auto auto;row-gap:.4rem}
+  .pdl-compare__rank{grid-row:1;grid-column:1}
+  .pdl-compare__store{grid-row:1;grid-column:2}
+  .pdl-compare__price{grid-row:1;grid-column:3}
+  .pdl-compare__bar{grid-row:2;grid-column:1/-1}
   .pdl-compare__list>li>a>svg:last-child{display:none}
-  .pdl-main{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 148px)}
-  /* A barra fixa de preço não empurra o documento (position:fixed sai do
-     fluxo), então só o <main> reservar esse respiro não bastava: ao rolar
-     até o fim, ela ficava sobreposta às últimas linhas do rodapé (aviso
-     "Preços podem mudar..."), que vem DEPOIS do <main> e não tinha
-     nenhuma folga própria — só a reserva genérica de 102px do dock global
-     (app-shell-professional-2026.css, !important), insuficiente porque
-     essa barra de preço fica ainda mais alta que o dock. Precisa de
-     !important + a mesma especificidade (tag+classe) pra vencer aquela
-     regra. */
-  body.pc-app-shell .pdl-page footer.ref-footer{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 148px)!important}
-  /* transform/will-change força a barra para sua própria camada de
-     composição — sem isso, no Safari/iOS ela "nada" atrás do conteúdo
-     durante o scroll com inércia (fica alguns quadros para trás do
-     repaint da página), dando a impressão de que o conteúdo passa por
-     cima dela em vez de ela ficar fixa por cima de tudo. */
-  .pdl-mobile-bar{position:fixed;left:.6rem;right:.6rem;bottom:calc(env(safe-area-inset-bottom,0px) + 74px);z-index:55;display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.5rem .6rem .5rem .85rem;border-radius:16px;background:var(--pdl-surface,#fff);border:1px solid var(--pdl-border,rgba(0,0,0,.12));box-shadow:0 14px 30px rgba(0,0,0,.18);transform:translateZ(0);will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden}
-  .pdl-mobile-bar div{display:flex;flex-direction:column}
+  /* Esta página não tem dock inferior (AppDock) próprio — só o header e o
+     rodapé institucional. A barra fixa de preço reserva espaço para si
+     mesma (~64px + a faixa de segurança do aparelho), não para um dock
+     que não existe aqui; a versão anterior reservava 148px "por garantia"
+     copiado de outra tela, deixando uma faixa vazia entre o fim do
+     conteúdo e a barra. */
+  .pdl-main{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 76px)}
+  body.pc-app-shell .pdl-page footer.ref-footer{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 76px)!important}
+  /* A barra só aparece depois que o botão "Adicionar à lista" do hero sai
+     da tela (controlado via IntersectionObserver no componente) — repetir
+     preço e CTA logo abaixo do próprio hero, sempre visíveis, duplicava a
+     mesma informação na primeira dobra. Ocupa a largura toda, encostada no
+     rodapé real da tela (sem o "flutuar" solto de antes, com margens nos
+     dois lados e um vão vazio embaixo por onde nada aparecia), e desliza
+     para dentro/fora com transform — mais barato que animar opacity+layout
+     e some da árvore de acessibilidade via aria-hidden/tabIndex enquanto
+     oculta. transform/will-change mantêm a composição na própria camada,
+     senão no Safari/iOS ela "nada" atrás do conteúdo durante o scroll com
+     inércia. */
+  .pdl-mobile-bar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:flex;align-items:center;justify-content:space-between;gap:.7rem;padding:.6rem .9rem calc(.6rem + env(safe-area-inset-bottom,0px));background:var(--pdl-surface,#fff);border-top:1px solid var(--pdl-border,rgba(0,0,0,.12));box-shadow:0 -8px 24px rgba(0,0,0,.1);transform:translate3d(0,100%,0);transition:transform .22s ease-out;will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden;pointer-events:none}
+  .pdl-mobile-bar.is-visible{transform:translate3d(0,0,0);pointer-events:auto}
+  .pdl-mobile-bar div{display:flex;flex-direction:column;min-width:0}
   .pdl-mobile-bar small{font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--pdl-muted,#5b6472)}
   .pdl-mobile-bar strong{font-size:1.05rem;font-variant-numeric:tabular-nums}
-  .pdl-mobile-bar button{display:inline-flex;align-items:center;gap:.4rem;min-height:42px;padding:0 1rem;border-radius:12px;border:0;background:var(--pdl-accent-strong);color:#fff;font-weight:700;font-size:.84rem;cursor:pointer}
+  .pdl-mobile-bar button{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;padding:0 1.1rem;border-radius:12px;border:0;background:var(--pdl-accent-strong);color:#fff;font-weight:700;font-size:.84rem;cursor:pointer;flex:0 0 auto}
   .pdl-mobile-bar button svg{width:16px;height:16px}
 }
 @media (prefers-reduced-motion:reduce){
   .pdl-page *{animation:none!important;transition:none!important}
   .pdl-actions button:hover,.pdl-back a:hover,.pdl-compare__list a:hover{transform:none}
+  .pdl-mobile-bar{transform:none!important;display:none}
+  .pdl-mobile-bar.is-visible{display:flex}
 }
 
 /* Garante o rodapé visível sem depender de reveals de scroll de outras telas */
