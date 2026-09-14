@@ -93,29 +93,9 @@ html { scroll-padding-top: 88px; }
 .pharmacy-directory-page .pharmacy-footer__brand > span { color: #c4d9cf !important; font-size: 12px; line-height: 1.6; }
 .ref-footer .ref-shell { width: min(1180px, calc(100% - 40px)) !important; margin-inline: auto; }
 
-/* O formulário de colaboração não pode ser comprimido para caber numa janela. */
-body .pc-collab-page { height: auto; min-height: 100dvh; overflow: visible; }
-.pc-collab-page .pc-collab { min-height: 0; overflow: visible; padding: 132px 0 48px; align-items: center; }
-.pc-collab-page .pc-collab__copy, .pc-collab-page .pc-collab__panel { max-width: 560px; }
-.pc-collab-page .pc-collab__copy h1 { font-size: clamp(28px, 3vw, 40px); line-height: 1.15; }
-.pc-collab-page .pc-collab__copy p { font-size: 16px; line-height: 1.6; }
-.pc-collab-page .pc-collab__panel { padding: 24px; }
-.pc-collab-page .pc-collab__form { gap: 16px; }
-.pc-collab-page .pc-collab__form label { font-size: 14px; gap: 6px; }
-.pc-collab-page .pc-collab__form input { min-height: 48px; font-size: 16px; min-width: 0; width: 100%; }
-.pc-collab-page .pc-collab__form input::placeholder { color: var(--px-muted); }
-.pc-collab-page .pc-collab__send { min-height: 48px; font-size: 14px !important; }
-.pc-collab-page .pc-collab__panel h2 { font-size: 18px; }
-.pc-collab-page .pc-collab__media { flex: 0 1 420px; aspect-ratio: 4 / 5; }
+/* Layout do formulário de colaboração: ver src/reference/CollaborationPage.css
+   (fonte única, sem disputa de !important com este arquivo). */
 .pc-mini-top .pc-mini-top__back { width: 44px; height: 44px; }
-@media (max-width: 850px) {
-  .pc-collab-page .pc-collab { padding-top: 112px; }
-  .pc-collab-page .pc-collab__media { display: none; }
-}
-@media (max-width: 480px) {
-  .pc-collab-page .pc-collab__row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .pc-collab-page .pc-collab__panel { padding: 20px 16px; }
-}
 
 /* Contato usa o mesmo cabeçalho flutuante da colaboração. O estilo antigo
    reservava apenas 64px no topo e deixava o eyebrow atrás da barra; também
@@ -188,22 +168,6 @@ body .pc-contact-page > footer.ref-footer { flex: 0 0 auto; margin-top: auto; }
   }
 }
 
-/* Final collaboration cascade: prevent the footer from sitting over the
-   lower form row on desktop captures. */
-@media (min-width: 851px) {
-  body .pc-collab-page .pc-collab { padding-top: 76px !important; padding-bottom: 14px !important; overflow: hidden !important; }
-  body .pc-collab-page .pc-collab__left { min-height: 0 !important; gap: 9px !important; }
-  body .pc-collab-page .pc-collab__trust { flex-wrap: nowrap !important; gap: 5px !important; margin-top: 10px !important; }
-  body .pc-collab-page .pc-collab__trust span { padding: 5px 7px !important; font-size: 9px !important; white-space: nowrap !important; }
-  body .pc-collab-page .pc-collab__panel { min-height: 0 !important; padding: 12px 16px !important; }
-  body .pc-collab-page .pc-collab__form { gap: 5px !important; margin-top: 5px !important; }
-  body .pc-collab-page .pc-collab__form label { gap: 2px !important; font-size: 9.5px !important; }
-  body .pc-collab-page .pc-collab__form input { min-height: 31px !important; height: 31px !important; font-size: 11px !important; }
-  body .pc-collab-page .pc-collab__send { min-height: 34px !important; }
-  body .pc-collab-page .pc-collab__hint { font-size: 8px !important; }
-  body .pc-collab-page .pc-collab__media { flex: 0 1 300px !important; width: min(300px, 28vw) !important; max-height: 220px !important; }
-}
-
 @media (min-width: 851px) and (max-height: 720px) {
   body .pc-contact-page .pc-contact { padding-top: 72px !important; padding-bottom: 14px !important; }
   body .pc-contact-page .pc-contact__media { width: min(320px, 31vw) !important; max-height: 220px !important; }
@@ -241,34 +205,6 @@ footer.ref-footer .ref-footer__legal {
 footer.ref-footer .ref-footer__legal small,
 footer.ref-footer .ref-footer__legal span { font-size: .66rem !important; }
 footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px !important; }
-
-/* Collaboration follows the same single-viewport contract as contact. */
-@media (min-width: 851px) {
-  body .pc-collab-page {
-    height: 100dvh !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  body .pc-collab-page .pc-collab {
-    flex: 1 1 0 !important;
-    min-height: 0 !important;
-    width: min(1120px, calc(100% - 48px)) !important;
-    padding: 78px 0 18px !important;
-    gap: clamp(24px, 3vw, 42px) !important;
-    overflow: hidden !important;
-  }
-  body .pc-collab-page .pc-collab__media {
-    flex: 0 1 330px !important;
-    width: min(330px, 31vw) !important;
-    max-height: 250px !important;
-  }
-  body .pc-collab-page .pc-collab__panel { padding: 18px 20px !important; }
-  body .pc-collab-page .pc-collab__form { gap: 7px !important; }
-  body .pc-collab-page .pc-collab__form input { min-height: 36px !important; }
-  body .pc-collab-page .pc-collab__send { min-height: 40px !important; }
-}
 
 @media (max-width: 760px) {
   footer.ref-footer .ref-footer__bar {
@@ -460,33 +396,6 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .pcx-home .pcx-footer__nav::-webkit-scrollbar { display: none; }
   .pcx-home .pcx-footer__nav a { flex: 0 0 auto !important; min-height: 28px !important; padding-inline: 7px !important; font-size: 10px !important; white-space: nowrap; }
   .pcx-home .pcx-footer__meta { padding-block: 6px !important; }
-}
-
-/* Collaboration desktop fit: keep the trust badges on one compact row and
-   give the form a bounded flex column so the footer can never cover it. */
-@media (min-width: 851px) {
-  body .pc-collab-page .pc-collab {
-    padding-top: 76px !important;
-    padding-bottom: 14px !important;
-    align-items: center !important;
-    overflow: hidden !important;
-  }
-  body .pc-collab-page .pc-collab__left { min-height: 0 !important; gap: 9px !important; }
-  body .pc-collab-page .pc-collab__copy h1 { margin: 5px 0 4px !important; font-size: clamp(26px, 2.7vw, 36px) !important; }
-  body .pc-collab-page .pc-collab__copy p { font-size: 13px !important; line-height: 1.35 !important; }
-  body .pc-collab-page .pc-collab__trust { flex-wrap: nowrap !important; gap: 5px !important; margin-top: 10px !important; }
-  body .pc-collab-page .pc-collab__trust span { min-width: 0 !important; padding: 5px 7px !important; font-size: 9px !important; white-space: nowrap !important; }
-  body .pc-collab-page .pc-collab__trust svg { width: 12px !important; height: 12px !important; }
-  body .pc-collab-page .pc-collab__panel { min-height: 0 !important; padding: 12px 16px !important; }
-  body .pc-collab-page .pc-collab__panel > header { margin-bottom: 0 !important; }
-  body .pc-collab-page .pc-collab__panel > header > span { width: 25px !important; height: 25px !important; }
-  body .pc-collab-page .pc-collab__panel h2 { font-size: 12px !important; }
-  body .pc-collab-page .pc-collab__form { gap: 5px !important; margin-top: 5px !important; }
-  body .pc-collab-page .pc-collab__form label { gap: 2px !important; font-size: 9.5px !important; }
-  body .pc-collab-page .pc-collab__form input { min-height: 31px !important; height: 31px !important; font-size: 11px !important; }
-  body .pc-collab-page .pc-collab__send { min-height: 34px !important; font-size: 10.5px !important; }
-  body .pc-collab-page .pc-collab__hint { font-size: 8px !important; }
-  body .pc-collab-page .pc-collab__media { flex: 0 1 300px !important; width: min(300px, 28vw) !important; max-height: 220px !important; }
 }
 
 @media (min-width: 901px) and (max-height: 760px) {
