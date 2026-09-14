@@ -27,7 +27,13 @@ const brl=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
 const intBr=new Intl.NumberFormat("pt-BR");
 const normalize=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR").trim();
 type SortMode="relevance"|"lowest"|"highest"|"name"|"stores";
-function ProductThumb({product}:{product:Product}){const src=resolveProductImage(product);return src?<img src={src} alt={product.name} width="76" height="70" loading="lazy"/>:<PackageSearch/>}
+function ProductThumb({product}:{product:Product}){
+ const src=resolveProductImage(product);
+ const [failed,setFailed]=useState(false);
+ useEffect(()=>setFailed(false),[src]);
+ if(!src||failed) return <PackageSearch aria-hidden="true"/>;
+ return <img src={src} alt="" width="76" height="70" loading="lazy" onError={()=>setFailed(true)}/>;
+}
 
 function ProductComparisonModal({product,onClose}:{product:Product;onClose:()=>void}){
  const closeRef=useRef<HTMLButtonElement>(null);
