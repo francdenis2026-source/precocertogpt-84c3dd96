@@ -1,18 +1,9 @@
 import { useState } from "react";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowUpRight, MapPin, Store } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { CSSProperties } from "react";
 import type { StoreRow } from "../../data/catalog";
 import { getStoreLogoUrl } from "../../data/storeLogos";
-
-function initialsFor(name: string) {
-  return name
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toUpperCase();
-}
 
 /**
  * Linha de estabelecimento usada no diretório resumido da home. Mostra a
@@ -34,18 +25,20 @@ export function StoreCard({ store }: { store: StoreRow }) {
       style={{ "--store-accent": store.color } as CSSProperties}
     >
       {showPhoto ? (
-        <img
-          className="pcx-store-row__photo"
-          src={photo}
-          alt=""
-          width={44}
-          height={44}
-          loading="lazy"
-          decoding="async"
-          onError={() => setFailed(true)}
-        />
+        <span className="pcx-store-row__mark">
+          <img
+            className="pcx-store-row__photo"
+            src={photo}
+            alt=""
+            width={44}
+            height={44}
+            loading="lazy"
+            decoding="async"
+            onError={() => setFailed(true)}
+          />
+        </span>
       ) : (
-        <i aria-hidden="true">{initialsFor(store.name)}</i>
+        <i aria-hidden="true"><Store aria-hidden="true" /></i>
       )}
       <span>
         <strong>{store.name}</strong>

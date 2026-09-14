@@ -313,15 +313,6 @@ export function StoreDetailProfessional() {
         <a href={mapsHref} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> {store.neighborhood && store.neighborhood !== "—" ? `${store.neighborhood}, ` : ""}Feijó · Acre · CEP 69960-000</a>
       </div>}
 
-      {/* Contato direto: endereço, WhatsApp e horário existem no cadastro mas
-          não apareciam em nenhum lugar do perfil (só nos cards da listagem).
-          Fica visível também no mobile. */}
-      {(store.address || hasWhatsapp || store.openingHours) && <section className="store-pro-contact" aria-label="Contato e localização do estabelecimento">
-        {store.address && <a href={mapsHref} target="_blank" rel="noreferrer" className="store-pro-contact__item"><MapPin aria-hidden="true" /><span><b>Endereço</b>{store.address}</span></a>}
-        {store.openingHours && <span className="store-pro-contact__item"><Clock3 aria-hidden="true" /><span><b>Horário</b>{store.openingHours}</span></span>}
-        {hasWhatsapp && <a href={whatsappHref(store.whatsapp as string, `Olá! Vi o catálogo de ${store.name} no PreçoCerto e queria falar sobre um produto.`)} target="_blank" rel="noreferrer" className="store-pro-contact__item store-pro-contact__whatsapp"><MessageCircle aria-hidden="true" /><span><b>WhatsApp</b>Falar com a loja</span></a>}
-      </section>}
-
       <section
         className={`store-pro-hero${isBonsAmigos ? " store-pro-hero--bons-amigos" : ""}${isMarketSector ? "" : ` store-pro-hero--sector store-pro-hero--${sector.id}`}`}
         aria-labelledby="store-title"
@@ -380,6 +371,18 @@ export function StoreDetailProfessional() {
           <img src={pharmacyHeroPhoto} alt="" width="1280" height="720" fetchPriority="high" />
         </figure>}
       </section>
+
+      {/* Contato direto: endereço, WhatsApp e horário existem no cadastro mas
+          não apareciam em nenhum lugar do perfil (só nos cards da listagem).
+          Fica logo abaixo da hero — mesmo cartão único de divisórias já
+          usado no resumo (.store-pro-summary), em vez de pílulas soltas com
+          bordas e sombras próprias flutuando acima da foto, desconectadas
+          de tudo. Fica visível também no mobile. */}
+      {(store.address || hasWhatsapp || store.openingHours) && <section className="store-pro-contact" aria-label="Contato e localização do estabelecimento">
+        {store.address && <a href={mapsHref} target="_blank" rel="noreferrer" className="store-pro-contact__item"><MapPin aria-hidden="true" /><span><b>Endereço</b>{store.address}</span></a>}
+        {store.openingHours && <span className="store-pro-contact__item"><Clock3 aria-hidden="true" /><span><b>Horário</b>{store.openingHours}</span></span>}
+        {hasWhatsapp && <a href={whatsappHref(store.whatsapp as string, `Olá! Vi o catálogo de ${store.name} no PreçoCerto e queria falar sobre um produto.`)} target="_blank" rel="noreferrer" className="store-pro-contact__item store-pro-contact__whatsapp"><MessageCircle aria-hidden="true" /><span><b>WhatsApp</b>Falar com a loja</span></a>}
+      </section>}
 
       <div className="store-pro-notice"><Info aria-hidden="true" /><span><strong>Catálogo informativo</strong><small>O PreçoCerto exibe informações de produtos e preços. Este espaço ainda não representa venda direta ou canal oficial do estabelecimento.</small></span></div>
 

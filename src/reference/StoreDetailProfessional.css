@@ -68,14 +68,23 @@ html:root body .store-pro-hero:not(.store-pro-hero--pharmacies) .store-pro-copy 
    lugar nenhum do perfil (só nos cards da listagem), e a única referência de
    local (a linha do topo) some no celular. Este bloco fica visível em toda
    largura de tela. */
-.store-pro-contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-.store-pro-contact__item{display:flex;align-items:center;gap:9px;min-height:44px;padding:8px 13px;border:1px solid var(--pc-border);border-radius:13px;background:var(--pc-surface);color:var(--pc-ink);text-decoration:none;font-size:13px}
-.store-pro-contact__item>svg{width:17px;height:17px;flex:0 0 auto;color:var(--pc-green-strong)}
-.store-pro-contact__item span{display:grid;gap:1px}
+/* Mesmo cartão único com divisórias do resumo (.store-pro-summary) logo
+   abaixo — em vez de 2-3 pílulas soltas, cada uma com a própria borda e
+   sombra, competindo entre si e flutuando sem nenhuma relação visual com
+   o resto da página. auto-fit cobre 1, 2 ou 3 colunas conforme os dados
+   que a loja realmente tem (endereço/horário/whatsapp são opcionais). */
+.store-pro-contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:0;margin-top:10px;border:1px solid var(--pc-border);border-radius:16px;background:var(--pc-surface);overflow:hidden}
+.store-pro-contact__item{min-width:0;display:flex;align-items:center;gap:11px;padding:12px 16px;border-right:1px solid var(--pc-border);color:var(--pc-ink);text-decoration:none;font-size:13px;transition:background-color .16s ease}
+.store-pro-contact__item:last-child{border-right:0}
+.store-pro-contact__item>svg{width:34px;height:34px;padding:7px;border-radius:10px;background:var(--pc-green-soft);color:var(--pc-green-strong);flex:0 0 auto}
+.store-pro-contact__item span{min-width:0;display:grid;gap:1px}
 .store-pro-contact__item b{color:var(--pc-muted);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
-a.store-pro-contact__item:hover{border-color:color-mix(in srgb,var(--pc-green) 45%,var(--pc-border))}
-.store-pro-contact__whatsapp{border-color:color-mix(in srgb,#22c55e 40%,var(--pc-border));background:color-mix(in srgb,#22c55e 10%,var(--pc-surface))}
-.store-pro-contact__whatsapp svg{color:#16a34a}
+@media(hover:hover) and (pointer:fine){a.store-pro-contact__item:hover{background:var(--pc-surface-2)}}
+/* Verde do WhatsApp fica só no ícone (identidade da marca do app, padrão
+   reconhecido) — o cartão em volta usa a mesma superfície neutra dos
+   outros itens, sem pintar o fundo inteiro de uma cor que os vizinhos não
+   têm. */
+.store-pro-contact__whatsapp svg{background:color-mix(in srgb,#22c55e 16%,var(--pc-green-soft));color:#16a34a}
 
 .store-pro-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:10px;border:1px solid var(--pc-border);border-radius:16px;background:var(--pc-surface);overflow:hidden}
 .store-pro-summary article{min-height:64px;display:flex;align-items:center;gap:11px;padding:12px 18px;border-right:1px solid var(--pc-border)}
@@ -218,11 +227,18 @@ a.store-pro-contact__item:hover{border-color:color-mix(in srgb,var(--pc-green) 4
    a informação simplesmente sumia. Agora ele desce para uma linha própria,
    ocupando a largura toda do cartão da hero, em vez de desaparecer. */
 @media(max-width:1180px){.store-pro-shell{width:min(100% - 30px,1100px)}.store-pro-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.store-pro-toolbar{grid-template-columns:1fr 190px 175px}.store-pro-hero__content{grid-template-columns:74px minmax(0,1fr);row-gap:12px}.store-pro-status{grid-column:1/-1;min-width:0}}
-@media(max-width:860px){.store-pro-hero__content{grid-template-columns:60px 1fr;padding:18px 22px}.store-pro-logo{width:60px;height:60px;border-radius:15px}.store-pro-copy h1{font-size:clamp(1.5rem,6vw,2.3rem)}.store-pro-status{grid-column:1/-1;min-width:0}.store-pro-summary{grid-template-columns:1fr 1fr}.store-pro-summary article:nth-child(3){grid-column:1/-1;border-top:1px solid var(--pc-border)}.store-pro-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.store-pro-toolbar{position:relative;top:auto;grid-template-columns:1fr 1fr}.store-pro-search{grid-column:1/-1}.store-pro-catalog-hint{display:none}}
+@media(max-width:860px){.store-pro-hero__content{grid-template-columns:60px 1fr;padding:18px 22px}.store-pro-logo{width:60px;height:60px;border-radius:15px}.store-pro-copy h1{font-size:clamp(1.5rem,6vw,2.3rem)}.store-pro-status{grid-column:1/-1;min-width:0}.store-pro-summary{grid-template-columns:1fr 1fr}.store-pro-summary article:nth-child(3){grid-column:1/-1;border-top:1px solid var(--pc-border)}.store-pro-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.store-pro-toolbar{position:relative;top:auto;grid-template-columns:1fr 1fr}.store-pro-search{grid-column:1/-1}.store-pro-catalog-hint{display:none}
+  /* Em coluna única: divisória embaixo de cada item, não à direita — o
+     grid horizontal com border-right não faz sentido depois que os itens
+     empilham (sobrava uma borda vertical solta, sem nada ao lado). */
+  .store-pro-contact{grid-template-columns:1fr}
+  .store-pro-contact__item{border-right:0;border-bottom:1px solid var(--pc-border)}
+  .store-pro-contact__item:last-child{border-bottom:0}
+}
 /* padding-top de 68px na largura maior, reduzido demais aqui (10px) contra
    os ~64px do MinimalTopBar fixo: no celular o rótulo do setor da hero ficava
    escondido atrás da barra fixa ao carregar a página. */
-@media(max-width:620px){.store-pro-shell{width:min(100% - 20px,600px);padding:66px 0 32px}.store-pro-hero{min-height:0;border-radius:18px}.store-pro-hero__content{min-height:0;grid-template-columns:52px 1fr;gap:12px;padding:16px 16px 18px}.store-pro-logo{width:52px;height:52px;border-radius:13px}.store-pro-logo.has-image{padding:5px}.store-pro-copy>span{font-size:12px}.store-pro-copy h1{margin:5px 44px 0 0;font-size:clamp(1.35rem,8vw,1.9rem)}.store-pro-copy p{grid-column:1/-1;font-size:13px;line-height:1.45}.store-pro-favorite{top:12px;right:12px;width:34px;height:34px}.store-pro-favorite svg{width:15px;height:15px}.store-pro-status{padding:9px 12px 9px 9px}.store-pro-notice{margin-top:9px;padding:11px 12px}.store-pro-notice small{font-size:12.5px}.store-pro-contact{margin-top:9px;gap:8px}.store-pro-contact__item{font-size:12.5px;padding:7px 11px}.store-pro-summary{margin-top:10px}.store-pro-summary article{min-height:68px;padding:12px 14px}.store-pro-summary article>strong{font-size:23px}.store-pro-catalog{margin-top:20px}.store-pro-catalog-head{margin-bottom:10px}.store-pro-catalog h2{font-size:1.6rem}.store-pro-toolbar{grid-template-columns:1fr;padding:8px}.store-pro-search{grid-column:auto}.store-pro-grid{grid-template-columns:1fr 1fr!important;gap:9px!important}.store-pro-product-image{height:125px!important;padding:8px}.store-pro-grid>a>small,.store-pro-grid>a>strong,.store-pro-grid>a>span,.store-pro-grid>a>footer{margin-left:10px!important;margin-right:10px!important}.store-pro-grid>a>strong{font-size:13px!important;min-height:50px}.store-pro-brand{font-size:12px!important}.store-pro-grid>a>footer b{font-size:17px!important}.store-pro-grid>a>footer em{font-size:12px!important}.store-pro-pagination{align-items:flex-start;flex-direction:column}.store-pro-bottom-note{grid-template-columns:18px 1fr}.store-pro-bottom-note span,.store-pro-bottom-note a{grid-column:2}}
+@media(max-width:620px){.store-pro-shell{width:min(100% - 20px,600px);padding:66px 0 32px}.store-pro-hero{min-height:0;border-radius:18px}.store-pro-hero__content{min-height:0;grid-template-columns:52px 1fr;gap:12px;padding:16px 16px 18px}.store-pro-logo{width:52px;height:52px;border-radius:13px}.store-pro-logo.has-image{padding:5px}.store-pro-copy>span{font-size:12px}.store-pro-copy h1{margin:5px 44px 0 0;font-size:clamp(1.35rem,8vw,1.9rem)}.store-pro-copy p{grid-column:1/-1;font-size:13px;line-height:1.45}.store-pro-favorite{top:12px;right:12px;width:34px;height:34px}.store-pro-favorite svg{width:15px;height:15px}.store-pro-status{padding:9px 12px 9px 9px}.store-pro-notice{margin-top:9px;padding:11px 12px}.store-pro-notice small{font-size:12.5px}.store-pro-contact{margin-top:9px}.store-pro-contact__item{font-size:12.5px;padding:10px 12px}.store-pro-summary{margin-top:10px}.store-pro-summary article{min-height:68px;padding:12px 14px}.store-pro-summary article>strong{font-size:23px}.store-pro-catalog{margin-top:20px}.store-pro-catalog-head{margin-bottom:10px}.store-pro-catalog h2{font-size:1.6rem}.store-pro-toolbar{grid-template-columns:1fr;padding:8px}.store-pro-search{grid-column:auto}.store-pro-grid{grid-template-columns:1fr 1fr!important;gap:9px!important}.store-pro-product-image{height:125px!important;padding:8px}.store-pro-grid>a>small,.store-pro-grid>a>strong,.store-pro-grid>a>span,.store-pro-grid>a>footer{margin-left:10px!important;margin-right:10px!important}.store-pro-grid>a>strong{font-size:13px!important;min-height:50px}.store-pro-brand{font-size:12px!important}.store-pro-grid>a>footer b{font-size:17px!important}.store-pro-grid>a>footer em{font-size:12px!important}.store-pro-pagination{align-items:flex-start;flex-direction:column}.store-pro-bottom-note{grid-template-columns:18px 1fr}.store-pro-bottom-note span,.store-pro-bottom-note a{grid-column:2}}
 @media(max-width:390px){.store-pro-grid{grid-template-columns:1fr!important}.store-pro-product-image{height:165px!important}}
 @media(prefers-reduced-motion:reduce){.store-pro-back,.store-pro-search,.store-pro-select,.store-pro-grid>a,.store-pro-pagination button{transition:none}}
 
