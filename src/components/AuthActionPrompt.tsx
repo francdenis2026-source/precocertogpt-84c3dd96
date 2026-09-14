@@ -79,9 +79,8 @@ export function AuthActionPrompt() {
   useEffect(() => {
     if (!prompt) return;
     previousFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const screen = document.querySelector<HTMLElement>(".mh26-page,.msearch26-page,.ref-page,.pro-basket-page,.smart-basket-page,.pharmacy-directory-page");
-    const previousOverflow = screen?.style.overflowY || "";
-    if (screen) screen.style.overflowY = "hidden";
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     window.requestAnimationFrame(() => closeRef.current?.focus());
 
     const keyboard = (event: KeyboardEvent) => {
@@ -107,7 +106,7 @@ export function AuthActionPrompt() {
     document.addEventListener("keydown", keyboard);
     return () => {
       document.removeEventListener("keydown", keyboard);
-      if (screen) screen.style.overflowY = previousOverflow;
+      document.body.style.overflow = previousOverflow;
       previousFocus.current?.focus();
     };
   }, [prompt]);

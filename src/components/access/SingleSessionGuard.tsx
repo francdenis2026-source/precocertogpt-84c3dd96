@@ -112,6 +112,13 @@ export function SingleSessionGuard() {
     };
   }, [user, sessionId, signOut]);
 
+  useEffect(() => {
+    if (!derrubado) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [derrubado]);
+
   if (!derrubado) return null;
 
   return (
