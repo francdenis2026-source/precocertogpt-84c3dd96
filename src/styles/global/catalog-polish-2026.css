@@ -133,3 +133,23 @@ html:root body .store-pro-pharmacy-photo img {
 
   html:root body .pcx-home .pcx-category--hero .pcx-category__text > span { font-size:11.5px!important; }
 }
+
+/* A grade de categorias herdava touch-action:pan-x da versão carrossel
+   (HomeProfessionalRedesign2026.css, <=640px). Sem carrossel, isso apenas
+   sequestrava o gesto vertical: a homepage parecia travada no celular.
+   Também zeramos as margens negativas/snap remanescentes do scroller. */
+html:root body .pcx-home .pcx-categories {
+  touch-action:auto!important; overflow-x:visible!important;
+  overscroll-behavior-x:auto!important;
+  margin-inline:0!important; padding-inline:0!important; padding-bottom:0!important;
+  scroll-snap-type:none!important;
+}
+@media(max-width:640px) {
+  html:root body .pcx-home .pcx-categories {
+    grid-template-columns:repeat(2, minmax(0,1fr))!important;
+    grid-auto-flow:row!important; grid-auto-columns:auto!important;
+    gap:10px!important; touch-action:auto!important;
+  }
+  html:root body .pcx-home .pcx-categories .pcx-category--hero { grid-column:1 / -1; }
+  html:root body .pcx-home .pcx-category__media { aspect-ratio:4/3; }
+}
