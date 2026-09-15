@@ -16,7 +16,7 @@
    carregar a imagem, então a coluna inteira era só o fundo sólido #071426
    com o véu escuro por cima do nada. O "apagado" não era o véu forte: era
    a ausência total de foto. */
-.ref-auth__story::before{content:""!important;position:absolute!important;inset:0!important;z-index:-2!important;background:url('/hero-supermercado-comparando-precos-2026.webp') center/cover no-repeat!important;transform:scale(1.015)!important}
+.ref-auth__story::before{content:""!important;position:absolute!important;inset:0!important;z-index:-2!important;background:url('/hero-supermercado-comparando-precos-2026.webp') 80% 28%/cover no-repeat!important;transform:scale(1.015)!important}
 /* A foto ficava quase apagada sob um véu quase opaco (.72 a .93) em
    qualquer altura — inclusive no topo, onde não há texto nenhum sobre ela.
    O texto real (marca, título, parágrafo, assinatura) mora do meio pra
