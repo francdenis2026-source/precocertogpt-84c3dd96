@@ -1637,11 +1637,16 @@ html[data-theme="light"] .pcx-hero::before {
   max-width: 480px;
   display: flex; flex-direction: column; gap: 0.6rem;
 }
-.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; }
-.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.82); font-size: 0.92rem; line-height: 1.55; }
+/* Sombra sutil (mesmo recurso já usado em .pcx-store-hero__content) reforça
+   a leitura onde o degradê sozinho não basta — a segunda linha do parágrafo
+   cai perto do ombro/boné do comerciante na foto, uma área mais clara que o
+   resto do fundo escuro, e ali o texto cinza claro perdia contraste. */
+.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; text-shadow: 0 1px 12px rgba(4, 10, 20, 0.55); }
+.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.55; text-shadow: 0 1px 8px rgba(4, 10, 20, 0.6); }
 .pcx-promo-feature__copy span {
   margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem;
   font-weight: 700; font-size: 0.9rem; color: #fff; width: fit-content;
+  text-shadow: 0 1px 8px rgba(4, 10, 20, 0.6);
 }
 .pcx-promo-feature__copy span svg { width: 15px; height: 15px; transition: transform 150ms ease; }
 .pcx-promo-feature:hover .pcx-promo-feature__copy span svg { transform: translateX(3px); }
@@ -1695,6 +1700,7 @@ html[data-theme="light"] .pcx-hero::before {
   color: #fff;
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   line-height: 1.25;
+  text-shadow: 0 1px 12px rgba(4, 10, 20, 0.5);
 }
 /* Este bloco é escuro (fundo floresta, título branco) — --h-primary é
    verde de superfície clara e ficava quase ilegível aqui (1.7:1). Usamos um
@@ -1702,10 +1708,11 @@ html[data-theme="light"] .pcx-hero::before {
 .pcx-spotlight__copy h2 strong { color: #7fe3a8; font-weight: 800; }
 .pcx-spotlight__copy p {
   margin: 0 0 0.85rem;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.88);
   font-size: 0.86rem;
   line-height: 1.5;
   max-width: 60ch;
+  text-shadow: 0 1px 8px rgba(4, 10, 20, 0.55);
 }
 /* 3 chamadas de valor rápidas (identidade 2026-09, ver "cesta inteligente"
    no pacote de referência) — substituem o antigo aviso solto do assistente
@@ -1732,8 +1739,8 @@ html[data-theme="light"] .pcx-hero::before {
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
 }
-.pcx-spotlight__highlights strong { display: block; font-size: 0.78rem; font-weight: 800; color: #fff; line-height: 1.2; }
-.pcx-spotlight__highlights small { display: block; font-size: 0.75rem; color: rgba(255, 255, 255, 0.72); line-height: 1.2; }
+.pcx-spotlight__highlights strong { display: block; font-size: 0.78rem; font-weight: 800; color: #fff; line-height: 1.2; text-shadow: 0 1px 6px rgba(4, 10, 20, 0.55); }
+.pcx-spotlight__highlights small { display: block; font-size: 0.75rem; color: rgba(255, 255, 255, 0.8); line-height: 1.2; text-shadow: 0 1px 6px rgba(4, 10, 20, 0.55); }
 .pcx-spotlight__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1.2rem; }
 .pcx-spotlight__cta {
   display: inline-flex;
@@ -2381,7 +2388,15 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   .pcx-promo-feature { min-height: 260px !important; }
   .pcx-offers-visual { min-height: 200px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
-  .pcx-spotlight .pcx-frame-photo { opacity: .42 !important; }
+  .pcx-spotlight .pcx-frame-photo { opacity: .32 !important; }
+  .pcx-spotlight::before { background: linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .78) 60%,rgb(7 20 38 / .5) 100%) !important; }
+  /* No mobile o cartão fica mais estreito e o parágrafo ocupa quase toda a
+     largura — a segunda linha ("...comprando no comércio da sua cidade.")
+     caía sobre o boné/ombro do comerciante, uma faixa mais clara da foto
+     onde o degradê original (escuro só até 48%, quase transparente a partir
+     de 88%) já não segurava contraste nenhum. Mais escuro e mais tempo
+     escuro, com a foto ainda visível na quina inferior direita. */
+  .pcx-promo-feature::after { background: linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .8) 55%,rgb(7 20 38 / .4) 100%) !important; }
 }
 
 /* A foto de estoque usada antes aqui (retrato de uma pessoa segurando o
