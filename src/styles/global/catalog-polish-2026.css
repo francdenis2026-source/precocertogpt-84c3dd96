@@ -123,18 +123,15 @@ html:root body .store-pro-pharmacy-photo img {
 .store-pro-pharmacy-photo figcaption { margin-top:8px; color:var(--pc-muted,#52647a); font-size:11px; line-height:1.4; }
 @media(max-width:760px) {
   html:root body .store-pro-page .store-pro-hero--pharmacies { grid-template-columns:1fr; padding:16px!important; gap:16px; }
-  /* Cartões de 116px de largura e foto de 68px de altura ficavam apertados
-     demais pra ler no celular — a foto quase virava um selo, e o ícone de
-     32px com um traço de 16px dentro somava a sensação de "miniatura".
-     ~19% maiores em largura/altura, ainda cabendo 2,5 cartões visíveis de
-     uma vez (o objetivo da fileira que desliza continua de pé). */
-  html:root body .pcx-home .pcx-categories .pcx-category { flex-basis:138px!important; width:138px!important; min-width:138px!important; min-height:154px; }
-  .pcx-category__media { height:84px; }
-  html:root body .pcx-home .pcx-category__media > i { width:36px!important; height:36px!important; }
-  html:root body .pcx-home .pcx-category__media > i svg { width:18px!important; height:18px!important; }
-  html:root body .pcx-home .pcx-category__text strong { font-size:13.5px!important; }
-  html:root body .pcx-home .pcx-categories .pcx-category--hero { flex-basis:208px!important; width:208px!important; min-width:208px!important; min-height:154px; }
-  html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; }
+  /* Sem rolagem lateral: 2 colunas no celular, cartão de capa em largura cheia. */
+  html:root body .pcx-home .pcx-categories { grid-template-columns:repeat(2, minmax(0,1fr))!important; gap:10px!important; }
+  html:root body .pcx-home .pcx-categories .pcx-category { min-height:0; }
+  html:root body .pcx-home .pcx-category__media > i { width:34px!important; height:34px!important; }
+  html:root body .pcx-home .pcx-category__media > i svg { width:17px!important; height:17px!important; }
+  html:root body .pcx-home .pcx-category__text strong { font-size:13px!important; }
+  html:root body .pcx-home .pcx-categories .pcx-category--hero { grid-column:1 / -1; }
+  html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; min-height:150px; }
   html:root body .pcx-home .pcx-category--hero .pcx-category__text strong { font-size:15px!important; }
+
   html:root body .pcx-home .pcx-category--hero .pcx-category__text > span { font-size:11.5px!important; }
 }
