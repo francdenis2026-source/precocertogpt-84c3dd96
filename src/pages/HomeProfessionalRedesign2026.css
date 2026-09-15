@@ -2449,6 +2449,7 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-appshowcase__phone-bar svg { width: 11px; height: 11px; color: #f0b429; flex-shrink: 0; }
 .pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 6px; margin: 7px 9px; padding: 6px 9px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 9.5px; font-weight: 700; }
 .pcx-appshowcase__phone-search svg { width: 11px; height: 11px; color: #6b7686; flex-shrink: 0; }
+.pcx-appshowcase__phone-search span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Grid (não flex) de propósito: com colunas fixas, o preço nunca fica por
    cima do nome do produto, mesmo que o nome seja mais longo que a coluna —
    ele só é cortado com reticências, sem overlap possível. */
@@ -2479,7 +2480,10 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 }
 @media (max-width: 760px) {
   .pcx-appshowcase__visual { max-width: none; margin-top: 0.25rem; }
-  .pcx-appshowcase__photo { aspect-ratio: 16 / 10; }
-  .pcx-appshowcase__phone { width: 138px; left: 8px; bottom: 8px; }
+  /* 4/3 no mobile: com a faixa mais baixa, a prévia (que tem altura fixa)
+     estourava a foto e o terceiro produto ficava cortado. */
+  .pcx-appshowcase__photo { aspect-ratio: 4 / 3; }
+  .pcx-appshowcase__photo img { object-position: 72% center; }
+  .pcx-appshowcase__phone { width: 168px; left: 10px; bottom: 10px; }
 }
 
