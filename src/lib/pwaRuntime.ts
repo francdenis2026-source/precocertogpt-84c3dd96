@@ -18,6 +18,7 @@ function ensureStatusElement() {
 function showNetworkStatus(online: boolean, transient = false) {
   const element = ensureStatusElement();
   window.clearTimeout(onlineTimer);
+  element.classList.remove("is-update");
   element.classList.toggle("is-online", online);
   element.classList.add("is-visible");
   element.textContent = online
@@ -26,6 +27,20 @@ function showNetworkStatus(online: boolean, transient = false) {
   if (online && transient) {
     onlineTimer = window.setTimeout(() => element.classList.remove("is-visible"), 3200);
   }
+}
+
+/* Avisa que uma versão nova acabou de assumir e recarrega sozinho — sem
+ * isso, quem já tinha o site aberto (ou instalado como app) numa aba
+ * continuava vendo o JS/CSS antigo que já estava carregado na memória:
+ * um F5 sozinho nem sempre bastava, porque a troca do service worker que
+ * controla a página é assíncrona e podia terminar só depois da primeira
+ * tentativa de recarregar. */
+function showUpdateReady() {
+  const element = ensureStatusElement();
+  window.clearTimeout(onlineTimer);
+  element.classList.remove("is-online");
+  element.classList.add("is-visible", "is-update");
+  element.textContent = "Nova versão disponível. Atualizando…";
 }
 
 /* navigator.onLine responde "a interface de rede está ligada?", e não "a
@@ -116,8 +131,29 @@ async function registerWorker() {
     return;
   }
   try {
+    // Se esta aba já tinha um service worker no controle, é uma visita de
+    // volta (não a primeira instalação) — só nesse caso uma troca de
+    // controlador depois significa "publicaram uma versão nova enquanto eu
+    // estava aqui", que é quando vale recarregar sozinho. Na primeira visita
+    // (controller ainda null) não há "versão antiga" nenhuma pra atualizar.
+    const hadController = Boolean(navigator.serviceWorker.controller);
     const registration = await navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" });
     void registration.update();
+
+    if (hadController) {
+      let reloading = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (reloading) return;
+        reloading = true;
+        showUpdateReady();
+        // O sw.js já ativa a versão nova assim que instala (self.skipWaiting
+        // + self.clients.claim) — sem recarregar, a aba continua rodando o
+        // HTML/JS antigo que já tinha carregado na memória, mesmo com o
+        // novo service worker já no controle. Um pequeno atraso deixa o
+        // aviso aparecer antes da tela recarregar.
+        window.setTimeout(() => window.location.reload(), 900);
+      });
+    }
   } catch (error) {
     console.warn("PreçoCerto: service worker indisponível.", error);
   }

@@ -56,6 +56,10 @@
   border-color: rgb(255 255 255 / 12%);
 }
 .pc-network-status.is-online::before { background: #4ade80; }
+/* Nova versão publicada, atualizando sozinho — azul, pra não ser confundido
+   com o aviso verde de "conexão de volta" nem com o âmbar de "sem internet". */
+.pc-network-status.is-update { background: #0d2b4a; color: #dbeafe; }
+.pc-network-status.is-update::before { background: #60a5fa; }
 
 @media (max-width: 640px) {
   .pc-network-status { font-size: 12.5px; padding: 8px 12px; }
