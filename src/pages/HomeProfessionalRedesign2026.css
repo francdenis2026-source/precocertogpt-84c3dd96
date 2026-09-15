@@ -1641,7 +1641,12 @@ html[data-theme="light"] .pcx-hero::before {
    a leitura onde o degradê sozinho não basta — a segunda linha do parágrafo
    cai perto do ombro/boné do comerciante na foto, uma área mais clara que o
    resto do fundo escuro, e ali o texto cinza claro perdia contraste. */
-.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; text-shadow: 0 1px 12px rgba(4, 10, 20, 0.55); }
+/* Mesmo selo (fundo escuro translúcido + cantos arredondados) já usado no
+   card de loja em destaque (.pcx-store-hero__badge) — leva esse mesmo
+   recurso pro título, que antes contava só com a sombra de texto sobre o
+   degradê. Só o título ganha o selo (não o parágrafo inteiro), pra não
+   pesar a composição. */
+.pcx-promo-feature__copy h3 { display: inline-block; margin: 0; padding: 0.5rem 0.8rem; border-radius: 12px; background: rgba(6, 12, 20, 0.58); color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; text-shadow: none; }
 .pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.55; text-shadow: 0 1px 8px rgba(4, 10, 20, 0.6); }
 .pcx-promo-feature__copy span {
   margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem;
@@ -2385,7 +2390,10 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-promo-feature__copy,
 .pcx-offers-visual > div { position: relative !important; z-index: 3; }
 .pcx-offers-visual > div { width: 100%; padding: 22px 24px; }
-.pcx-offers-visual .pcx-section__head h2,
+/* Mesmo selo do card de loja em destaque (.pcx-store-hero__badge) — só o
+   título ganha o fundo escuro translúcido; o parágrafo abaixo continua
+   só com a tinta branca (já suficiente ali, sem competir por atenção). */
+.pcx-offers-visual .pcx-section__head h2 { display: inline-block; padding: 0.5rem 0.8rem; border-radius: 12px; background: rgba(6, 12, 20, 0.58); color: #fff !important; }
 .pcx-offers-visual .pcx-section__head p { color: #fff !important; }
 /* O link "Explorar catálogo" ficava de fora dessa regra — herdava a tinta
    escura padrão do site (pensada pra fundo claro) direto sobre a foto,

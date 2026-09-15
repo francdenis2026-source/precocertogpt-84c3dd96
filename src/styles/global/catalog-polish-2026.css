@@ -74,7 +74,12 @@ html:root body .pcx-home .pcx-category--hero::after {
 html:root body .pcx-home .pcx-category--hero .pcx-category__text {
   position:absolute; z-index:2; left:0; right:0; bottom:0; padding:14px 16px 15px; text-align:left;
 }
+/* Mesmo selo do card de loja em destaque (.pcx-store-hero__badge) — o
+   título aqui só tinha o degradê de fundo; ganha o mesmo fundo escuro
+   translúcido arredondado, coerente com o resto do site. */
 html:root body .pcx-home .pcx-category--hero .pcx-category__text strong {
+  display:inline-block; padding:0.4rem 0.7rem; border-radius:10px;
+  background:rgba(6, 12, 20, 0.58);
   color:#fff!important; font-size:16px!important; line-height:1.28!important; letter-spacing:-.01em;
 }
 html:root body .pcx-home .pcx-category--hero .pcx-category__text > span {
