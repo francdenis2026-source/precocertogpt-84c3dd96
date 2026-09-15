@@ -25,6 +25,27 @@
       })(window.location);
     </script>
     <script>
+      /* O Chrome dispara "beforeinstallprompt" assim que decide que a página
+         é instalável — muitas vezes antes do bundle React terminar de
+         carregar e montar os componentes que escutavam esse evento (o botão
+         "Instalar" do header e a seção de destaque na home). O evento não
+         dá segunda chance: quem perde o disparo nunca mais vê o prompt
+         automático naquela visita, mesmo em aparelhos onde a instalação é
+         totalmente compatível — o que parecia "o PWA não é detectado" em
+         alguns Android era, na maior parte das vezes, essa corrida perdida
+         em aparelhos mais lentos ou com rede mais lenta. Capturar aqui, no
+         primeiro script da página, garante que o evento nunca escapa antes
+         de qualquer componente existir para ouvi-lo. */
+      window.__pcInstallPromptEvent = null;
+      window.addEventListener("beforeinstallprompt", function (event) {
+        event.preventDefault();
+        window.__pcInstallPromptEvent = event;
+      });
+      window.addEventListener("appinstalled", function () {
+        window.__pcInstallPromptEvent = null;
+      });
+    </script>
+    <script>
       /* Define o tema final antes da primeira pintura. */
       (function () {
         var keys = ["theme", "precocerto-theme", "precocerto:theme"];
@@ -110,7 +131,7 @@
     <script type="module" crossorigin src="/assets/react-vendor-C7KVCnMi.js"></script>
     <script type="module" crossorigin src="/assets/supabase-vendor-BnGCNdwk.js"></script>
     <script type="module" crossorigin src="/assets/icons-vendor-vwVyxupK.js"></script>
-    <script type="module" crossorigin src="/assets/main-BPirM84-.js"></script>
+    <script type="module" crossorigin src="/assets/main-CDMRgq2w.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/main-CVU8MM5J.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Creme Dental Colgate Máxima Proteção Anticáries 90g","brand":{"@type":"Brand","name":"Colgate"},"category":"bucal","url":"https://www.precocerto.live/produto/creme-dental-colgate-maxima-protecao-anticaries-90g","description":"Creme Dental Colgate Máxima Proteção Anticáries 90g — Colgate · un · bucal. Compare preços e disponibilidade no comércio local de Feijó (AC)."}</script></head>
   <body>
