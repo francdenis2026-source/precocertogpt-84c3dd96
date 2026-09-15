@@ -1631,27 +1631,32 @@ html[data-theme="light"] .pcx-hero::before {
 @media (hover: hover) and (pointer: fine) {
   .pcx-promo-feature:hover img { transform: scale(1.04); }
 }
+/* Vira um painel de vidro de verdade (glassmorphism: fundo translúcido +
+   backdrop-filter:blur, não só uma cor sólida atrás do texto) — o mesmo
+   recurso do cabeçalho (.ref-header[data-glass-header]), adaptado pra um
+   tom escuro por cima de foto em vez do branco claro da barra. Isso também
+   permite clarear bastante o degradê da foto (abaixo): antes ele sozinho
+   precisava escurecer a foto inteira pra garantir leitura; agora quem
+   garante contraste é o painel, e a foto do comerciante pode aparecer bem
+   mais viva. */
 .pcx-promo-feature__copy {
   position: relative; z-index: 1;
-  padding: clamp(1.5rem, 4vw, 2.75rem);
-  max-width: 480px;
+  width: fit-content; max-width: calc(100% - 2.5rem);
+  margin: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.1rem, 3vw, 1.6rem) clamp(1.25rem, 3.5vw, 1.75rem);
+  border-radius: 20px;
+  background: rgba(8, 15, 28, 0.4);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 14px 34px rgba(2, 8, 20, 0.3);
   display: flex; flex-direction: column; gap: 0.6rem;
 }
-/* Sombra sutil (mesmo recurso já usado em .pcx-store-hero__content) reforça
-   a leitura onde o degradê sozinho não basta — a segunda linha do parágrafo
-   cai perto do ombro/boné do comerciante na foto, uma área mais clara que o
-   resto do fundo escuro, e ali o texto cinza claro perdia contraste. */
-/* Mesmo selo (fundo escuro translúcido + cantos arredondados) já usado no
-   card de loja em destaque (.pcx-store-hero__badge) — leva esse mesmo
-   recurso pro título, que antes contava só com a sombra de texto sobre o
-   degradê. Só o título ganha o selo (não o parágrafo inteiro), pra não
-   pesar a composição. */
-.pcx-promo-feature__copy h3 { display: inline-block; margin: 0; padding: 0.5rem 0.8rem; border-radius: 12px; background: rgba(6, 12, 20, 0.58); color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; text-shadow: none; }
-.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.55; text-shadow: 0 1px 8px rgba(4, 10, 20, 0.6); }
+.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; }
+.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.55; }
 .pcx-promo-feature__copy span {
   margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem;
   font-weight: 700; font-size: 0.9rem; color: #fff; width: fit-content;
-  text-shadow: 0 1px 8px rgba(4, 10, 20, 0.6);
 }
 .pcx-promo-feature__copy span svg { width: 15px; height: 15px; transition: transform 150ms ease; }
 .pcx-promo-feature:hover .pcx-promo-feature__copy span svg { transform: translateX(3px); }
@@ -2385,7 +2390,11 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 }
 .pcx-promo-feature::after,
 .pcx-offers-visual::after { z-index: 2; pointer-events: none; }
-.pcx-promo-feature::after { background: linear-gradient(90deg,rgb(7 20 38 / .88),rgb(7 20 38 / .52) 48%,rgb(7 20 38 / .12)) !important; }
+/* Bem mais claro que antes: quem garante contraste do texto agora é o
+   painel de vidro (.pcx-promo-feature__copy), não este degradê sozinho —
+   ele só precisa de uma leve vinheta pra dar profundidade, sem apagar a
+   foto do comerciante organizando as verduras. */
+.pcx-promo-feature::after { background: linear-gradient(115deg,rgb(7 20 38 / .35) 0%,rgb(7 20 38 / .12) 40%,transparent 70%) !important; }
 .pcx-offers-visual::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgb(7 20 38 / .72),rgb(7 20 38 / .3) 55%,transparent); }
 .pcx-promo-feature__copy,
 .pcx-offers-visual > div { position: relative !important; z-index: 3; }
@@ -2412,13 +2421,15 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
      (.46) — o text-shadow no título/parágrafo/destaques já resolve a
      leitura sem precisar apagar a foto. */
   .pcx-spotlight .pcx-frame-photo { opacity: .46 !important; }
-  /* No mobile o cartão fica mais estreito e o parágrafo ocupa quase toda a
-     largura — a segunda linha ("...comprando no comércio da sua cidade.")
-     caía sobre o boné/ombro do comerciante, uma faixa mais clara da foto
-     onde o degradê original (escuro só até 48%, quase transparente a partir
-     de 88%) já não segurava contraste nenhum. Mais escuro e mais tempo
-     escuro, com a foto ainda visível na quina inferior direita. */
-  .pcx-promo-feature::after { background: linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .8) 55%,rgb(7 20 38 / .4) 100%) !important; }
+  /* O degradê forte que existia aqui (.92→.8→.4, cobrindo quase a largura
+     inteira) foi pensado numa época em que ele sozinho precisava seg­urar a
+     leitura do texto — resultado: a foto do comerciante ficava escura e
+     "suja" em quase toda a extensão, mesmo longe de onde o texto estava.
+     Agora o texto mora dentro do painel de vidro (.pcx-promo-feature__copy,
+     contraste garantido por conta própria); o degradê só precisa de uma
+     vinheta leve no canto onde o painel fica, pra ele não flutuar "solto"
+     sobre a foto. */
+  .pcx-promo-feature::after { background: linear-gradient(135deg,rgb(7 20 38 / .3) 0%,rgb(7 20 38 / .1) 38%,transparent 65%) !important; }
 }
 
 /* Refeito: a versão anterior combinava a fotografia real com um mockup de
