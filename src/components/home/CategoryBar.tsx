@@ -10,7 +10,7 @@ import {
   Tag,
   type LucideIcon,
 } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { businessGroups, groupForStore, type BusinessGroupId } from "../../data/businessTaxonomy";
 import type { StoreRow } from "../../data/catalog";
