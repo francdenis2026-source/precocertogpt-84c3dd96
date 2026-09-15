@@ -83,7 +83,24 @@ const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" 
  *  aparece. */
 export function AppShowcase({ products = [] }: { products?: Product[] }) {
   const { available, install } = useInstallPrompt();
-  const preview = products.filter((product) => product.minPrice > 0).slice(0, 3);
+  // Produtos comparados em mais estabelecimentos e sem repetir a mesma loja:
+  // é o que melhor ilustra o app (comparação real), em vez dos três primeiros
+  // itens do catálogo, que costumavam ser todos da mesma padaria.
+  const preview = useMemo(() => {
+    const seen = new Set<string>();
+    const picked: Product[] = [];
+    const ranked = products
+      .filter((product) => product.minPrice > 0)
+      .sort((a, b) => (b.storeCount || 0) - (a.storeCount || 0));
+    for (const product of ranked) {
+      if (seen.has(product.establishmentSlug)) continue;
+      seen.add(product.establishmentSlug);
+      picked.push(product);
+      if (picked.length === 3) break;
+    }
+    return picked;
+  }, [products]);
+
 
   return (
     <section className="pcx-shell" aria-labelledby="app-showcase-title">
