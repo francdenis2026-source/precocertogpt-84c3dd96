@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { OnlinePresence } from "../components/OnlinePresence";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
+import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import { businessGroups } from "../data/businessTaxonomy";
 import { loadSessionProfile, supabase } from "../lib/roles";
@@ -231,17 +232,7 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
   }, [menu]);
-  useEffect(() => {
-    // O menu mobile (ref-mobile-menu) é um painel sobreposto, mas nada
-    // travava a rolagem da página por baixo dele — no toque do Android,
-    // arrastar o dedo sobre o menu aberto rolava o conteúdo atrás em vez de
-    // só o menu, dando a impressão de que ele "flutua" sobre a página em
-    // vez de substituí-la.
-    if (!menu) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
-  }, [menu]);
+  useBodyScrollLock(menu);
   useEffect(() => {
     // Um único limiar (scrollY > 10) trocava a classe is-scrolled a cada
     // pixel de vaivém em torno de 10px — comum ao rolar devagar ou no

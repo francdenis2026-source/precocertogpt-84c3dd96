@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import type { Product } from "../../data/catalog";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 import { OnlinePresence } from "../OnlinePresence";
@@ -72,14 +73,7 @@ export function Header({ products = [] }: { products?: Product[] }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [menuOpen]);
 
-  useEffect(() => {
-    // Sem isso, arrastar o dedo sobre o menu mobile aberto (Android) rolava
-    // a home por baixo em vez de só o menu.
-    if (!menuOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
-  }, [menuOpen]);
+  useBodyScrollLock(menuOpen);
 
   useEffect(() => {
     const syncScrolledState = () => {

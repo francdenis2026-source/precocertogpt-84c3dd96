@@ -430,6 +430,14 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
     gap: 1px !important;
   }
   .pcx-header__radio-slot .pc-radio__signal i { width: 1.5px !important; }
+  /* O equalizador parado (rádio não tocando, o estado mais comum) só
+     ilustrava silêncio — e em telas Android comuns (360-412px, mais
+     estreitas que a maioria dos iPhones testados) essa largura fixa era
+     exatamente o que faltava pro contador de pessoas online (do lado
+     oposto da barra) não ficar espremido a uma lasca de 20px. Some só
+     quando parado; reaparece assim que o rádio começa a tocar. */
+  .pcx-header__radio-slot .pc-radio:not(.is-playing) .pc-radio__signal { display: none !important; }
+  .pcx-header__radio-slot .pc-radio:not(.is-playing) { padding-right: 0 !important; }
 }
 
 .pcx-header__login {
@@ -559,11 +567,30 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 
 @media (max-width: 860px) {
   .pcx-header__bar { height: 66px; gap: 0.75rem; }
+}
+@media (max-width: 860px) {
   .pcx-header__brand small { display: none; }
   .pcx-header__brand img { width: 38px; height: 38px; }
   .pcx-header__nav {
     position: fixed;
+    /* .pcx-header tem backdrop-filter, o que o torna o "containing block"
+       deste position:fixed (regra do CSS: filter/backdrop-filter/transform/
+       will-change num ancestral vira containing block de descendente
+       fixed) — "bottom:0" então conta a partir do rodapé do PRÓPRIO
+       header (~66px de altura), não da tela, e o painel colapsava pra uma
+       tira de ~17px. height em dvh/vh não sofre esse desvio (unidade de
+       viewport sempre é relativa à tela de verdade), então descreve a
+       altura por "top + height" em vez de "top + bottom" — cobre a tela
+       inteira abaixo da barra do jeito que "bottom:0" deveria ter feito.
+       Sem isso (altura só do conteúdo dos links, como era antes) sobrava
+       um vão por baixo com o hero da página visível ali, parecendo um
+       dropdown solto por cima da página em vez de um painel de verdade em
+       primeiro plano. overflow-y próprio: uma lista de links maior que a
+       tela rola dentro do painel, não a página por trás (já travada por
+       useBodyScrollLock enquanto o menu está aberto). */
     inset: 66px 0 auto 0;
+    height: calc(100dvh - 66px);
+    overflow-y: auto;
     margin: 0;
     flex-direction: column;
     align-items: stretch;
@@ -604,11 +631,20 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   .pcx-header__tools-scroll .ref-online {
     min-width: 0 !important;
     height: 34px !important;
-    padding: 4px 7px !important;
-    gap: 4px !important;
+    padding: 4px 6px !important;
+    gap: 3px !important;
     font-size: 0.68rem !important;
   }
   .pcx-header__tools-scroll .ref-online__signal svg { width: 13px; height: 13px; }
+  /* "online" por extenso não cabia nessa faixa junto com rádio + tema +
+     menu — em telas Android comuns (360-412px de largura, mais estreitas
+     que a maioria dos iPhones testados) o contador ficava espremido a
+     ponto de virar uma lasca de 20px, ilegível, dentro da área com rolagem
+     própria. Ícone + número já bastam aqui (a contagem completa continua
+     no aria-label do bloco, para leitor de tela); a rolagem interna volta
+     a ser só a rede de segurança que o comentário acima já previa, não o
+     jeito normal de ver o contador. */
+  .pcx-header__tools-scroll .ref-online__label { display: none; }
   .pcx-header__theme, .pcx-header__login, .pcx-header__menu {
     flex-shrink: 0;
     width: 40px !important; height: 40px !important; min-width: 40px !important;

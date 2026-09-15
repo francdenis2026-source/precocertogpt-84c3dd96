@@ -90,5 +90,16 @@ html .pcx-home .pcx-intro .pc-location-chip { min-height:44px !important; color:
   .pcx-intro__suggestions > span { display:none; }
   .pcx-intro__panel li { grid-template-columns:minmax(0,1fr) auto; gap:8px; }
   .pcx-intro__panel-thumb { display:none; }
+  /* Contador de pessoas online cabia no iPhone mas não em larguras comuns
+     de Android (360-412px, mais estreitas que a maioria dos iPhones
+     testados): o padding lateral do header e os espaçamentos entre
+     marca/rádio/ferramentas, pensados para telas um pouco mais largas,
+     sozinhos já consumiam a folga que faltava, deixando o contador
+     espremido a uma lasca ilegível dentro da área com rolagem própria.
+     Aperta só o essencial (padding do header e os dois espaçamentos da
+     barra) — não mexe em --h-section-x, que a página inteira usa como
+     margem de conteúdo. */
+  html .pcx-home .pcx-header__bar { padding-inline: 10px !important; gap: 6px !important; }
+  html .pcx-home .pcx-header__tools { gap: 4px !important; }
 }
 @media (prefers-reduced-motion:reduce) { .pcx-intro *, .pcx-intro *::before, .pcx-intro *::after { animation:none !important; transition:none !important; } }

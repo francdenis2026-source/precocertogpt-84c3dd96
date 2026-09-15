@@ -20,6 +20,14 @@ body.pc-app-shell
   top: 0 !important;
   z-index: 100 !important;
   isolation: isolate !important;
+  /* Sem camada de composição própria, o Android (não o iOS) descolava essa
+     barra da borda de verdade durante a rolagem — sobretudo com a barra de
+     endereço do Chrome animando entrar/sair — deixando uma brecha por cima
+     dela (a página passando por baixo) e um tremor visível enquanto o
+     motor de repintura corria atrás. will-change promove a barra pra sua
+     própria camada de GPU, o mesmo truque usado para esse bug conhecido do
+     Chrome/Android com position:sticky. */
+  will-change: transform !important;
   background: var(--pc-glass-light) !important;
   border-bottom: 1px solid
     color-mix(in srgb, var(--pc-glass-line) 72%, transparent) !important;
