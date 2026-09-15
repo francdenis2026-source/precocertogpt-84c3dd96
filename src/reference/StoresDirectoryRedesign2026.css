@@ -53,10 +53,25 @@
   position: absolute !important;
   inset: 0 !important;
   z-index: -1 !important;
-  background: linear-gradient(100deg, rgba(8, 14, 22, .60) 0%, rgba(8, 14, 22, .34) 40%, rgba(8, 14, 22, .08) 66%, transparent 82%) !important;
+  background: linear-gradient(100deg, rgba(8, 14, 22, .34) 0%, rgba(8, 14, 22, .16) 40%, rgba(8, 14, 22, .04) 66%, transparent 82%) !important;
 }
 
-.ref-stores-page .ref-stores-hero__copy { position: relative; min-width: 0; max-width: 46ch !important; display: grid; gap: 3px; }
+/* Texto num painel de vidro de verdade (fundo translúcido + blur), em vez
+   de flutuar direto sobre a foto sustentado só pelo degradê — o mesmo
+   recurso já usado no header e no banner "Comprar local" da home. Com o
+   painel garantindo contraste, o degradê acima pôde ficar bem mais claro,
+   então a foto aparece de verdade em vez de "apagada". */
+.ref-stores-page .ref-stores-hero__copy {
+  position: relative; z-index: 1; min-width: 0; max-width: 40ch !important;
+  display: grid; gap: 3px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(8, 14, 22, .34);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 10px 26px rgba(2, 8, 20, .22);
+}
 .ref-stores-page .ref-stores-hero__copy > span { color: #8ab4ff !important; font-size: 11px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
 .ref-stores-page .ref-stores-hero__copy > h1,
 html:not([data-theme="dark"]) .ref-stores-page .ref-stores-hero__copy > h1,
@@ -85,8 +100,8 @@ html[data-theme="dark"] .ref-stores-page .ref-stores-hero__copy > p { margin: 0 
 @media (max-width: 720px) {
   .ref-stores-page .ref-stores-hero { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-end !important; height: auto !important; min-height: 260px !important; padding: 18px !important; gap: 10px !important; }
   .ref-stores-page .ref-stores-hero__bg { object-position: 68% 20% !important; }
-  .ref-stores-page .ref-stores-hero__scrim { background: linear-gradient(0deg, rgba(8, 14, 22, .74) 0%, rgba(8, 14, 22, .5) 46%, rgba(8, 14, 22, .12) 82%, transparent 100%) !important; }
-  .ref-stores-page .ref-stores-hero__copy { max-width: none !important; }
+  .ref-stores-page .ref-stores-hero__scrim { background: linear-gradient(0deg, rgba(8, 14, 22, .38) 0%, rgba(8, 14, 22, .2) 46%, rgba(8, 14, 22, .05) 82%, transparent 100%) !important; }
+  .ref-stores-page .ref-stores-hero__copy { max-width: min(88%, 340px) !important; }
   .ref-stores-page .ref-stores-hero__row { width: 100%; }
   .ref-stores-page a.ref-stores-hero__cta { flex: 1 1 auto; justify-content: center; }
 }

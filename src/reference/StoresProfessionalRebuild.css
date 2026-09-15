@@ -30,6 +30,20 @@
   .ref-stores-page .sector-nav>a>svg{width:18px!important;height:18px!important}
   .ref-stores-page .sector-nav>a strong{font-size:12.5px!important}
 }
+/* Nome, bairro, contagem de produtos e o link "Abrir catálogo" do cartão
+   de loja ficavam pequenos demais pra tela de celular (15/9/10/10px) —
+   aumento moderado só no mobile (no desktop, com 2 colunas lado a lado,
+   o tamanho atual já lê bem). O logo/ícone de fallback também cresce um
+   pouco, para acompanhar o texto maior ao lado. */
+@media(max-width:760px){
+  .ref-stores-page .ref-store-card__select>i{width:52px!important;height:52px!important}
+  .ref-stores-page .ref-store-card__select>i>svg{width:23px!important;height:23px!important}
+  .ref-stores-page .ref-store-card__select small{font-size:10.5px!important}
+  .ref-stores-page .ref-store-card__select strong{font-size:16.5px!important}
+  .ref-stores-page .ref-store-card__select em{font-size:11.5px!important}
+  .ref-stores-page .ref-store-card>footer>a{font-size:12px!important}
+  .ref-stores-page .ref-store-card>footer>a svg{width:14px!important;height:14px!important}
+}
 .ref-stores-page .sector-nav>a.is-active{border-color:var(--pc-green);background:var(--pc-green);color:#fff}.ref-stores-page .sector-nav>a.is-active>svg{color:#fff}
 
 .ref-stores-page .ref-stores-toolbar{min-height:46px;margin:8px 0 14px;padding:0 14px;border-radius:11px;background:var(--pc-surface)}
