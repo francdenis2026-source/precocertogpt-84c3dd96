@@ -231,10 +231,16 @@ function useAutoFit(containerRef: RefObject<HTMLElement | null>, contentRef: Ref
     const content = contentRef.current;
     if (!container || !content) return;
     const measure = () => {
-      content.style.zoom = "1";
+      // Zerar o zoom antes de medir (em vez de dividir pelo zoom atual)
+      // mudava o próprio tamanho do elemento observado, disparando o
+      // ResizeObserver de novo dentro do próprio callback. Esse loop batia
+      // no limite de segurança do navegador e ficava travado em zoom:1 —
+      // o card "grande demais" com barra de rolagem via de resize/reflow,
+      // não só no primeiro carregamento (que por sorte estabilizava rápido).
       const style = getComputedStyle(container);
       const available = container.clientHeight - parseFloat(style.paddingTop || "0") - parseFloat(style.paddingBottom || "0") - 2;
-      const natural = content.scrollHeight;
+      const currentZoom = parseFloat(content.style.zoom || "1") || 1;
+      const natural = content.scrollHeight / currentZoom;
       const next = natural > available ? Math.max(0.7, available / natural) : 1;
       setScale(next);
     };
@@ -242,7 +248,14 @@ function useAutoFit(containerRef: RefObject<HTMLElement | null>, contentRef: Ref
     const observer = new ResizeObserver(measure);
     observer.observe(container);
     observer.observe(content);
-    return () => observer.disconnect();
+    // Reforço além do ResizeObserver: redimensionar a janela do navegador
+    // (não só o elemento) é o gatilho mais comum de barra de rolagem aqui,
+    // e não custa nada garantir que ele também dispare uma nova medição.
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
   return scale;
