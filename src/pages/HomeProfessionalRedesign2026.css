@@ -2180,8 +2180,10 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.78rem;
 }
+/* Mesmo acento único usado no rodapé das demais páginas (PublicChromeRedesign2026.css)
+   — cor da marca só no destaque, em vez de uma cor por link. */
 @media (hover: hover) and (pointer: fine) {
-  .pcx-home .pcx-footer__nav a:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
+  .pcx-home .pcx-footer__nav a:hover { background: rgba(255, 255, 255, 0.07); color: var(--pc-gold, #2563eb); }
 }
 /* O botao mantinha o preenchimento claro do desenho anterior (--h-primary-soft,
    um verde bem claro) e recebeu tinta branca quando o rodape passou a ser

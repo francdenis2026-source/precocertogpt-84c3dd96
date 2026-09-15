@@ -410,10 +410,17 @@ footer.ref-footer .ref-footer__links a {
   text-decoration: none !important;
   transition: background-color 150ms ease, color 150ms ease !important;
 }
+/* Um único acento (a cor da marca) só no estado de destaque, em vez de uma
+   cor diferente por link — testado com 4 cores distintas (azul/verde/
+   dourado/rosa) e ficou com ar aleatório, sem nenhuma delas significar algo
+   pro visitante. Cinza-claro parado quando não focado, cor da marca quando
+   passa o mouse ou navega por teclado — o mesmo acento que o anel de foco
+   já usava, agora também no hover. */
 @media (hover: hover) and (pointer: fine) {
-  footer.ref-footer .ref-footer__links a:hover { background: rgba(255, 255, 255, 0.07) !important; color: #fff !important; }
+  footer.ref-footer .ref-footer__links a:hover { background: rgba(255, 255, 255, 0.07) !important; color: var(--pc-gold, #0fa958) !important; }
 }
 footer.ref-footer .ref-footer__links a:focus-visible {
+  color: var(--pc-gold, #0fa958) !important;
   outline: 2px solid var(--pc-gold, #0fa958) !important;
   outline-offset: 2px !important;
 }
