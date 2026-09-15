@@ -64,14 +64,22 @@ const HIGHLIGHTS = [
   { icon: Store, title: "Mesmo catálogo", text: "Preços idênticos ao site" },
 ] as const;
 
+const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
 /** Seção de destaque logo após a faixa de confiança: quem chega na home não
  *  sabia que dava pra instalar o PreçoCerto como app (o antigo botão de
  *  instalar vivia escondido no header e foi removido de lá por falta de
  *  contexto — ver histórico). Aqui ele ganha espaço de verdade, ao lado da
  *  opção de continuar só pela web, sem confundir as duas como se fossem a
- *  mesma ação. */
-export function AppShowcase() {
+ *  mesma ação.
+ *
+ *  A prévia do celular mostra produtos reais do catálogo já carregado (nome,
+ *  estabelecimento mais barato e preço) sobre uma fotografia de uso real —
+ *  nada de números inventados; sem catálogo, a prévia simplesmente não
+ *  aparece. */
+export function AppShowcase({ products = [] }: { products?: Product[] }) {
   const { available, install } = useInstallPrompt();
+  const preview = products.filter((product) => product.minPrice > 0).slice(0, 3);
 
   return (
     <section className="pcx-shell" aria-labelledby="app-showcase-title">
@@ -105,40 +113,50 @@ export function AppShowcase() {
                 <Download aria-hidden="true" /> Instalar aplicativo
               </button>
             )}
+            <Link className="pcx-appshowcase__ghost" to="/explorar">
+              Continuar pela versão web
+            </Link>
           </div>
         </div>
-        <div className="pcx-appshowcase__visual" aria-hidden="true">
-          <div className="pcx-appshowcase__phone">
-            <div className="pcx-appshowcase__phone-screen">
-              <div className="pcx-appshowcase__phone-bar">
-                <MapPin aria-hidden="true" />
-                <span>Feijó, Acre</span>
+        <div className="pcx-appshowcase__visual">
+          <figure className="pcx-appshowcase__photo">
+            <img
+              src={appPhoto}
+              alt="Cliente conferindo preços pelo celular dentro de um comércio de Feijó"
+              loading="lazy"
+              decoding="async"
+              width={1280}
+              height={960}
+            />
+          </figure>
+          {preview.length > 0 && (
+            <div className="pcx-appshowcase__phone" aria-hidden="true">
+              <div className="pcx-appshowcase__phone-screen">
+                <div className="pcx-appshowcase__phone-bar">
+                  <MapPin aria-hidden="true" />
+                  <span>Feijó, Acre</span>
+                </div>
+                <div className="pcx-appshowcase__phone-search">
+                  <Search aria-hidden="true" />
+                  <span>Comparar preços</span>
+                </div>
+                <ul className="pcx-appshowcase__phone-list">
+                  {preview.map((product) => (
+                    <li key={product.id}>
+                      <span>
+                        <strong>{product.name}</strong>
+                        <small>{product.establishment}</small>
+                      </span>
+                      <b>{brl.format(product.minPrice)}</b>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="pcx-appshowcase__phone-search">
-                <Search aria-hidden="true" />
-                <span>Arroz 5kg</span>
-              </div>
-              <ul className="pcx-appshowcase__phone-list">
-                <li>
-                  <i />
-                  <strong>Arroz Branco 5kg</strong>
-                  <b>R$ 23,90</b>
-                </li>
-                <li>
-                  <i />
-                  <strong>Feijão Carioca 1kg</strong>
-                  <b>R$ 8,49</b>
-                </li>
-                <li>
-                  <i />
-                  <strong>Óleo de Soja 900ml</strong>
-                  <b>R$ 7,29</b>
-                </li>
-              </ul>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>
   );
 }
+
