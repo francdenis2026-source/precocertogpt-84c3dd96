@@ -134,9 +134,18 @@ html:root body :is(.ref-page,.search26-page,.msearch26-page,.sector26-page,.smar
   background: var(--brand-canvas) !important;
   color: var(--brand-ink) !important;
 }
-html:root body :is(.ref-header,.ref-header.is-scrolled,.ref-mobile-menu,.ref-dock) {
+/* .ref-header saiu daqui: esta regra forçava fundo 100% opaco (!important,
+   maior especificidade que a regra de vidro em glass-app-shell-v3-2026.css)
+   em cima de um cabeçalho desenhado pra ser translúcido — background:
+   var(--pc-glass-light), rgba(...,.72), com backdrop-filter:blur(22px). O
+   filtro de desfoque continuava calculando normalmente, só que sem nada
+   transparente pra mostrar por trás: o "vidro" nunca aparecia. .ref-dock e
+   .ref-mobile-menu continuam opacos de propósito — nenhum dos dois usa
+   desfoque, então ficar sólido ali é o comportamento certo. */
+html:root body :is(.ref-mobile-menu,.ref-dock) {
   background: var(--brand-surface) !important; border-color:var(--brand-line) !important; color:var(--brand-ink);
 }
+html:root body .ref-header { border-color:var(--brand-line) !important; color:var(--brand-ink); }
 html:root body .ref-header :is(.ref-theme,.ref-menu,.ref-favorites-link,.ref-header__back,.ref-header__home) {
   background:var(--brand-surface) !important; color:var(--brand-ink) !important; border-color:var(--brand-lineStrong) !important;
 }
