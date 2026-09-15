@@ -1605,7 +1605,14 @@ html[data-theme="light"] .pcx-hero::before {
    1 destaque): agora só o destaque fica, focado só em comércio local. */
 .pcx-promo-feature {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  /* A foto usa object-fit:contain (enquadramento integral, sem cortar o
+     comerciante) então a faixa nítida fica sempre no meio vertical do
+     cartão, com desfoque só acima/abaixo dela. O painel de vidro precisa
+     ficar nessa margem desfocada de baixo, não em cima da faixa nítida —
+     senão ele tapa a própria pessoa que a foto mostra. */
+  justify-content: flex-end;
   min-height: 220px;
   border-radius: var(--h-radius-xl);
   overflow: hidden;
@@ -1641,19 +1648,19 @@ html[data-theme="light"] .pcx-hero::before {
    mais viva. */
 .pcx-promo-feature__copy {
   position: relative; z-index: 1;
-  width: fit-content; max-width: calc(100% - 2.5rem);
+  width: fit-content; max-width: min(360px, calc(100% - 2.5rem));
   margin: clamp(1.25rem, 3vw, 2rem);
-  padding: clamp(1.1rem, 3vw, 1.6rem) clamp(1.25rem, 3.5vw, 1.75rem);
-  border-radius: 20px;
-  background: rgba(8, 15, 28, 0.4);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  padding: clamp(0.85rem, 2.4vw, 1.15rem) clamp(1.1rem, 3vw, 1.4rem);
+  border-radius: 16px;
+  background: rgba(8, 15, 28, 0.32);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 14px 34px rgba(2, 8, 20, 0.3);
-  display: flex; flex-direction: column; gap: 0.6rem;
+  box-shadow: 0 14px 34px rgba(2, 8, 20, 0.28);
+  display: flex; flex-direction: column; gap: 0.45rem;
 }
-.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.25; }
-.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.92rem; line-height: 1.55; }
+.pcx-promo-feature__copy h3 { margin: 0; color: #fff; font-size: clamp(1.05rem, 1.8vw, 1.35rem); line-height: 1.25; }
+.pcx-promo-feature__copy p { margin: 0; color: rgba(255, 255, 255, 0.88); font-size: 0.85rem; line-height: 1.45; }
 .pcx-promo-feature__copy span {
   margin-top: 0.4rem; display: inline-flex; align-items: center; gap: 0.4rem;
   font-weight: 700; font-size: 0.9rem; color: #fff; width: fit-content;
@@ -2413,6 +2420,12 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
 @media (max-width: 700px) {
   .pcx-promo-feature { min-height: 260px !important; }
+  /* No mobile a foto (object-fit:contain) fica ainda mais estreita que no
+     desktop, então o painel de vidro precisa ser mais compacto — do
+     contrário volta a cobrir a faixa nítida da imagem, escondendo o
+     comerciante que a foto mostra. */
+  .pcx-promo-feature__copy { max-width: min(78%, 300px) !important; padding: 0.75rem 1rem !important; gap: 0.35rem !important; }
+  .pcx-promo-feature__copy p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .pcx-offers-visual { min-height: 200px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
   /* .32 + degradê mais escuro (tentativa anterior) apagava demais a foto —
