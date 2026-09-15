@@ -37,7 +37,15 @@
 .ref-store-card__select strong,.ref-store-card>a strong{overflow:hidden;color:var(--pc-ink);font-size:var(--pc-text-sm);text-overflow:ellipsis;white-space:nowrap}
 .ref-store-card__select em,.ref-store-card>a em{color:var(--pc-muted);font-size:var(--pc-text-xs);font-style:normal}
 .ref-store-card__meta{overflow:hidden;color:var(--pc-muted);font-size:var(--pc-text-xs);font-weight:400;text-overflow:ellipsis;white-space:nowrap}
-.ref-store-card__select>svg,.ref-store-card>a>svg{width:16px;color:var(--pc-green-strong);height:16px}
+/* align-self:end: esse ícone de mapa é a última coluna da mesma grade
+   (align-items:center) que o botão de favoritar — flutuante, position:
+   absolute, ancorado no canto superior direito do cartão (top:10px). Num
+   cartão baixo (linha de ~76-95px), o centro vertical da grade cai quase
+   em cima do próprio botão de favoritar, escondendo o ícone atrás dele
+   (ou deixando só uma lasca visível). Empurrar para o fim da grade (rodapé
+   da linha) mantém os dois sempre em cantos opostos, sem depender da
+   altura exata do cartão. */
+.ref-store-card__select>svg,.ref-store-card>a>svg{align-self:end;width:16px;color:var(--pc-green-strong);height:16px}
 .ref-store-card>footer{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--pc-border)}
 .ref-store-card>footer>:is(button,a),.ref-store-card>button{min-height:36px;display:flex;align-items:center;justify-content:center;gap:5px;border:0;background:var(--pc-surface-2);color:var(--pc-green-strong);font-size:var(--pc-text-xs);font-weight:850}
 .ref-store-card>footer>:first-child{border-right:1px solid var(--pc-border)}

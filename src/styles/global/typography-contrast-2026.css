@@ -146,6 +146,20 @@ html:not([data-theme="dark"]) .pharmacy-directory-page strong{
   font-weight:750!important;
 }
 
+/* .store-pro-status é o selo "Catálogo verificado" sobre a foto do hero da
+   página de estabelecimento — fundo verde-escuro translúcido fixo, que não
+   reage a data-theme (mesma situação do rodapé e do rodapé de farmácia
+   corrigidos acima). A regra genérica ".ref-page strong/small" presumia
+   texto sobre superfície clara e forçava tinta escura de tema claro em
+   cima desse fundo escuro: texto quase invisível, sem contraste nenhum. */
+html:not([data-theme="dark"]) .store-pro-status strong{
+  color:#fff!important;
+}
+html:not([data-theme="dark"]) .store-pro-status small{
+  color:#B8D6C6!important;
+  opacity:1!important;
+}
+
 html:not([data-theme="dark"]) .nx-offer-card__copy>b,
 html:not([data-theme="dark"]) .nx-offer-card__copy em,
 html:not([data-theme="dark"]) .nx-live-results>button>b,

@@ -15,20 +15,22 @@
    verdade). Nada daquelas regras encontrava elemento nenhum pra valer. */
 
 .ref-stores-page .ref-search-sectors{margin:12px 0 0;padding:0;background:transparent}
-.ref-stores-page .sector-nav{display:flex;gap:7px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
+.ref-stores-page .sector-nav{display:flex;gap:8px;overflow-x:auto;padding:2px 0 5px;scrollbar-width:none}
 .ref-stores-page .sector-nav::-webkit-scrollbar{display:none}
-.ref-stores-page .sector-nav>a{flex:0 0 auto;min-height:39px;width:auto;display:flex;grid-template-columns:none;gap:7px;padding:0 11px;border:1px solid var(--pc-border);border-radius:10px;background:var(--pc-surface);box-shadow:none}
-.ref-stores-page .sector-nav>a>svg{width:16px;height:16px;padding:0;background:transparent;color:var(--pc-green-strong)}
-.ref-stores-page .sector-nav>a span{display:block}.ref-stores-page .sector-nav>a strong{font-size:11px;white-space:nowrap}.ref-stores-page .sector-nav>a small{display:none}
+.ref-stores-page .sector-nav>a{flex:0 0 auto;min-height:46px;width:auto;display:flex;grid-template-columns:none;gap:9px;padding:0 14px;border:1px solid var(--pc-border);border-radius:11px;background:var(--pc-surface);box-shadow:none}
+/* Ícones de 16px (18px no celular) liam como um risco quase apagado ao
+   lado do texto — pequenos demais pra "Mercados", "Açougues" etc lerem
+   como categorias de verdade, não como uma legenda qualquer. ~30% maiores
+   nos dois tamanhos, ainda proporcionais ao chip (que cresceu junto). */
+.ref-stores-page .sector-nav>a>svg{width:21px;height:21px;padding:0;background:transparent;color:var(--pc-green-strong)}
+.ref-stores-page .sector-nav>a span{display:block}.ref-stores-page .sector-nav>a strong{font-size:12.5px;white-space:nowrap}.ref-stores-page .sector-nav>a small{display:none}
 /* No celular esses chips ("Ver tudo/Mercados/Açougues...") são o menu
-   principal de categoria da página — 39px de altura, ícone de 16px e texto
-   de 11px ficavam pequenos demais pro dedo e pra leitura num alvo tão
-   usado. ~18% maiores, ainda cabendo confortavelmente na fileira que rola
-   na horizontal. */
+   principal de categoria da página — precisam de alvo de toque confortável
+   e leitura fácil, então crescem mais um pouco sobre o tamanho do desktop. */
 @media(max-width:760px){
-  .ref-stores-page .sector-nav>a{min-height:46px;padding:0 13px;gap:8px}
-  .ref-stores-page .sector-nav>a>svg{width:18px!important;height:18px!important}
-  .ref-stores-page .sector-nav>a strong{font-size:12.5px!important}
+  .ref-stores-page .sector-nav>a{min-height:50px;padding:0 15px;gap:9px}
+  .ref-stores-page .sector-nav>a>svg{width:23px!important;height:23px!important}
+  .ref-stores-page .sector-nav>a strong{font-size:13.5px!important}
 }
 /* Nome, bairro, contagem de produtos e o link "Abrir catálogo" do cartão
    de loja ficavam pequenos demais pra tela de celular (15/9/10/10px) —
