@@ -15,9 +15,13 @@ export function StoreRail({
   cycle: number;
   loading?: boolean;
 }) {
+  // Estabelecimentos com catálogo maior primeiro — quem tem mais produtos
+  // cadastrados aparece antes (era ordem alfabética, sem relação nenhuma com
+  // o tamanho do catálogo). Nome como critério de desempate, para a ordem
+  // ficar estável entre lojas com a mesma contagem de produtos.
   const eligible = [...stores]
     .filter((store) => store.name && store.slug && (store.products || 0) > 0)
-    .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+    .sort((a, b) => (b.products || 0) - (a.products || 0) || a.name.localeCompare(b.name, "pt-BR"));
 
   if (loading) {
     return (
@@ -43,13 +47,14 @@ export function StoreRail({
 
   if (!eligible.length) return null;
 
-  const leadIndex =
-    ((cycle % eligible.length) + eligible.length) % eligible.length;
-  const rotated = [
-    ...eligible.slice(leadIndex),
-    ...eligible.slice(0, leadIndex),
-  ];
-  const [lead, ...directory] = rotated.slice(0, 4);
+  // Antes o `cycle` (muda a cada hora) escolhia um índice de partida
+  // qualquer em `eligible % length`, girando pra qualquer estabelecimento —
+  // o critério de ordenação por tamanho de catálogo, acima, não tinha efeito
+  // nenhum no que de fato aparecia: uma loja de 178 produtos podia liderar
+  // sobre uma de 600+, dependendo só da hora do dia. `eligible` já vem
+  // ordenado do maior catálogo pro menor; os 4 primeiros são, sempre, os 4
+  // maiores.
+  const [lead, ...directory] = eligible.slice(0, 4);
   const leadGroup = groupForStore(lead);
   const kindLabel = leadGroup.shortLabel;
   // Prioriza a foto/fachada real do estabelecimento (vinda do Supabase);
