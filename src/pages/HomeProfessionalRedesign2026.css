@@ -2403,53 +2403,87 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   .pcx-promo-feature::after { background: linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .8) 55%,rgb(7 20 38 / .4) 100%) !important; }
 }
 
-/* A foto de estoque usada antes aqui (retrato de uma pessoa segurando o
-   celular, com um selo verde desenhado na própria imagem) não cabia bem
-   numa faixa larga e curta — cover cortava o enquadramento de um jeito
-   estranho, e o verde do selo brigava com a marca. Troca por um mockup
-   ilustrado do próprio app: mesma paleta da marca, sem depender de nenhuma
-   foto, e tematicamente ligado ao que a seção pede (instalar o app). Fica
-   num degradê navy próprio, com um brilho suave atrás do celular — dá
-   presença ao espaço sem competir com o texto, que continua com sua
-   própria coluna à esquerda. */
+/* A seção do app agora combina fotografia real de uso (cliente conferindo
+   preços no celular dentro de um comércio) com uma prévia do próprio app em
+   cima — produtos reais do catálogo já carregado, sem números inventados.
+   Fundo navy da marca; a foto entra como cartão recortado, não como faixa
+   cortada em cover, e a prévia flutua sobre ela com sombra. */
 .pcx-appshowcase {
   background: linear-gradient(135deg, #0a1e38 0%, #0d2b4a 62%, #123a63 100%) !important;
 }
 .pcx-appshowcase__visual {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 1 260px;
-  min-width: 200px;
-  align-self: stretch;
+  flex: 1 1 340px;
+  min-width: 260px;
+  max-width: 460px;
+  align-self: center;
+  padding-bottom: 8px;
+}
+.pcx-appshowcase__photo {
+  position: relative;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 22px 48px rgba(2, 8, 23, .42), inset 0 0 0 1px rgba(255, 255, 255, .1);
+}
+.pcx-appshowcase__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pcx-appshowcase__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(10, 30, 56, 0) 42%, rgba(10, 30, 56, .55) 100%);
 }
 .pcx-appshowcase__phone {
-  position: relative;
-  width: 200px;
-  padding: 10px;
-  border-radius: 30px;
+  position: absolute;
+  left: -6px;
+  bottom: -6px;
+  width: 172px;
+  padding: 8px;
+  border-radius: 26px;
   background: #0b1220;
-  box-shadow: 0 24px 54px rgba(2, 8, 23, .5), inset 0 0 0 1px rgba(255, 255, 255, .06);
+  box-shadow: 0 24px 54px rgba(2, 8, 23, .55), inset 0 0 0 1px rgba(255, 255, 255, .08);
 }
-.pcx-appshowcase__phone-screen { border-radius: 21px; background: #f4f7fb; overflow: hidden; padding-bottom: 10px; }
-.pcx-appshowcase__phone-bar { display: flex; align-items: center; gap: 5px; padding: 13px 12px 8px; background: #0d2b4a; color: #eaf1ff; font-size: 10px; font-weight: 700; }
-.pcx-appshowcase__phone-bar svg { width: 12px; height: 12px; color: #f0b429; flex-shrink: 0; }
-.pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 6px; margin: 8px 10px; padding: 7px 10px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 10px; font-weight: 700; }
-.pcx-appshowcase__phone-search svg { width: 12px; height: 12px; color: #6b7686; flex-shrink: 0; }
+.pcx-appshowcase__phone-screen { border-radius: 19px; background: #f4f7fb; overflow: hidden; padding-bottom: 9px; }
+.pcx-appshowcase__phone-bar { display: flex; align-items: center; gap: 5px; padding: 11px 11px 7px; background: #0d2b4a; color: #eaf1ff; font-size: 9.5px; font-weight: 700; }
+.pcx-appshowcase__phone-bar svg { width: 11px; height: 11px; color: #f0b429; flex-shrink: 0; }
+.pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 6px; margin: 7px 9px; padding: 6px 9px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 9.5px; font-weight: 700; }
+.pcx-appshowcase__phone-search svg { width: 11px; height: 11px; color: #6b7686; flex-shrink: 0; }
+.pcx-appshowcase__phone-search span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* Grid (não flex) de propósito: com colunas fixas, o preço nunca fica por
    cima do nome do produto, mesmo que o nome seja mais longo que a coluna —
    ele só é cortado com reticências, sem overlap possível. */
-.pcx-appshowcase__phone-list { list-style: none; margin: 0; padding: 0 10px; display: grid; gap: 6px; }
-.pcx-appshowcase__phone-list li { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 10px; background: #fff; box-shadow: 0 1px 3px rgba(9, 28, 54, .08); }
-.pcx-appshowcase__phone-list i { width: 20px; height: 20px; border-radius: 6px; background: linear-gradient(135deg, #2563eb, #60a5fa); }
-.pcx-appshowcase__phone-list li:nth-child(2) i { background: linear-gradient(135deg, #f0b429, #f7d774); }
-.pcx-appshowcase__phone-list li:nth-child(3) i { background: linear-gradient(135deg, #1d4ed8, #93c5fd); }
-.pcx-appshowcase__phone-list strong { min-width: 0; font-size: 10.5px; font-weight: 800; color: #14213d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-appshowcase__phone-list b { font-size: 11px; font-weight: 800; color: #1d4ed8; white-space: nowrap; }
+.pcx-appshowcase__phone-list { list-style: none; margin: 0; padding: 0 9px; display: grid; gap: 5px; }
+.pcx-appshowcase__phone-list li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 7px; padding: 6px 8px; border-radius: 10px; background: #fff; box-shadow: 0 1px 3px rgba(9, 28, 54, .08); }
+.pcx-appshowcase__phone-list li > span { min-width: 0; }
+.pcx-appshowcase__phone-list strong { display: block; min-width: 0; font-size: 9.5px; font-weight: 800; color: #14213d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-appshowcase__phone-list small { display: block; font-size: 8.5px; font-weight: 600; color: #6b7686; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pcx-appshowcase__phone-list b { font-size: 10.5px; font-weight: 800; color: #1d4ed8; white-space: nowrap; }
+.pcx-appshowcase__ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--h-radius-md);
+  border: 1px solid rgba(255, 255, 255, .34);
+  /* !important: folhas globais forçam a cor de links em faixas claras e
+     apagavam este texto sobre o navy da seção. */
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pcx-appshowcase__ghost:hover { background: rgba(255, 255, 255, .12); }
+}
 @media (max-width: 900px) {
-  .pcx-appshowcase__phone { width: 172px; }
+  .pcx-appshowcase__phone { width: 152px; }
 }
 @media (max-width: 760px) {
-  .pcx-appshowcase__visual { display: none; }
+  .pcx-appshowcase__visual { max-width: none; margin-top: 0.25rem; }
+  /* 4/3 no mobile: com a faixa mais baixa, a prévia (que tem altura fixa)
+     estourava a foto e o terceiro produto ficava cortado. */
+  .pcx-appshowcase__photo { aspect-ratio: 4 / 3; }
+  .pcx-appshowcase__photo img { object-position: 72% center; }
+  .pcx-appshowcase__phone { width: 168px; left: 10px; bottom: 10px; }
 }
+
