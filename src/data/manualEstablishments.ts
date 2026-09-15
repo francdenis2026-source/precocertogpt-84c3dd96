@@ -222,13 +222,32 @@ export function withManualAdditions(payload: CatalogPayload, query = ""): Catalo
   let addedStores = 0;
   let addedProducts = 0;
 
+  // Kelly Burgueria e Beto Burguer já existem como estabelecimento cadastrado
+  // de verdade no Supabase (aparecem em /estabelecimentos com endereço,
+  // WhatsApp etc.) — só o cardápio deles é mantido aqui no código, não na
+  // tabela de produtos. A checagem "alreadyPresent" original pulava a
+  // mesclagem INTEIRA (loja E produtos) sempre que a loja já existia,
+  // achando que estava evitando duplicata — na prática isso fazia o
+  // cardápio inteiro nunca entrar no catálogo usado por /produto/:slug,
+  // /buscar e a cesta: o link "Ver página completa do produto" sempre caía
+  // em "Produto não encontrado", porque o produto nunca existia ali, só na
+  // página dedicada da loja (que lê os arrays deste arquivo direto, sem
+  // passar por este merge). Agora a loja duplicada continua sendo pulada,
+  // mas o cardápio é mesclado de qualquer forma — indexado por produto
+  // (não por loja), evitando duplicar entradas se esta função rodar mais
+  // de uma vez sobre o mesmo payload.
   for (const dataset of manualDatasets) {
-    const alreadyPresent = stores.some(store => store.id === dataset.id || normalize(store.name) === normalize(dataset.name));
-    if (alreadyPresent) continue;
-    stores = [...stores, ...dataset.stores];
-    products = [...products, ...dataset.products.filter(matchesQuery)];
-    addedStores += dataset.stores.length;
-    addedProducts += dataset.products.length;
+    const storeAlreadyPresent = stores.some(store => store.id === dataset.id || normalize(store.name) === normalize(dataset.name));
+    if (!storeAlreadyPresent) {
+      stores = [...stores, ...dataset.stores];
+      addedStores += dataset.stores.length;
+    }
+    const existingProductIds = new Set(products.map(product => String(product.id)));
+    const newProducts = dataset.products.filter(product => !existingProductIds.has(String(product.id))).filter(matchesQuery);
+    if (newProducts.length) {
+      products = [...products, ...newProducts];
+      addedProducts += newProducts.length;
+    }
   }
 
   if (!addedStores && !addedProducts) return payload;

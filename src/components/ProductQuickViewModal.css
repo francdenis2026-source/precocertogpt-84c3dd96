@@ -84,9 +84,21 @@ html body .ref-page .pqv-hero-copy h2{color:#fff!important}
 
 .pqv-dialog :is(button,a):focus-visible{outline:3px solid var(--pc-gold,#b77918);outline-offset:2px}
 
+/* No mobile o diálogo só crescia até a altura do próprio conteúdo — como a
+   descrição costuma ser curta, sobrava mais da metade da tela como fundo
+   borrado atrás dele, lendo como se a "janela" tivesse aberto cortada pela
+   metade, não como uma folha de tela cheia de propósito. Vira folha real
+   (100dvh): hero, corpo e rodapé esticam pra preencher a tela inteira —
+   mesmo padrão já usado no modal de criar conta. */
 @media(max-width:560px){
-  .pqv-overlay{align-items:end;padding:0}
-  .pqv-dialog{width:100%;max-height:86dvh;border-radius:20px 20px 0 0;animation-name:pqv-sheet-in}
+  .pqv-overlay{align-items:stretch;padding:0}
+  .pqv-dialog{width:100%;height:100dvh;max-height:100dvh;border-radius:0;animation-name:pqv-sheet-in}
+  .pqv-hero{padding-top:max(14px,env(safe-area-inset-top))}
+  .pqv-hero-media{width:84px;height:84px;border-radius:18px}
+  .pqv-hero-media svg{width:30px;height:30px}
+  .pqv-hero-main{grid-template-columns:84px minmax(0,1fr)}
+  .pqv-hero-copy h2{font-size:1.3rem;-webkit-line-clamp:3}
+  .pqv-body{padding:18px 18px 8px}
   @keyframes pqv-sheet-in{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:translateY(0)}}
 }
 @media(prefers-reduced-motion:reduce){.pqv-overlay,.pqv-dialog{animation:none}}
