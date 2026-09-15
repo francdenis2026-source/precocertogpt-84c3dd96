@@ -120,7 +120,7 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
             </span>
             <span className="pcx-category__text">
               <strong>Comércio de Feijó, tudo num só lugar</strong>
-              <span>Deslize para ver cada tipo de loja →</span>
+              <span>Escolha um tipo de loja para começar →</span>
             </span>
           </Link>
           {businessGroups.map((group) => {
