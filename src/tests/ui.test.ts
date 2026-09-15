@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { normalize } from '../data/remoteCatalog';
 
 describe('Search & UI Logic Tests', () => {

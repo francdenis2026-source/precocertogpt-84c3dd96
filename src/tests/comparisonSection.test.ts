@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { suggestProducts } from '../lib/productSearch';
 
 describe('Comparação Prática Logic', () => {
   const mockProducts = [
