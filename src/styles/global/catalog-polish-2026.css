@@ -1,23 +1,30 @@
 /* Placeholders must never inherit photographic overlays. */
 html:root body .pcx-home .pcx-skeleton { position:relative; overflow:hidden; }
 html:root body .pcx-home .pcx-store-placeholder::after { content:none!important; }
+/* Sem fileira que desliza: grade completa, nada de barra de rolagem
+   horizontal na homepage. Todas as categorias ficam visíveis de uma vez. */
 html:root body .pcx-home .pcx-categories {
-  display:flex!important; grid-template-columns:none!important; gap:12px!important;
-  overflow-x:auto!important; overflow-y:hidden!important; padding:6px 3px 14px!important;
-  margin:0!important; width:100%; min-width:0; scroll-snap-type:x proximity;
-  overscroll-behavior-x:contain; touch-action:pan-x pan-y;
+  display:grid!important;
+  grid-auto-flow:row!important; grid-auto-columns:auto!important;
+  grid-template-columns:repeat(4, minmax(0,1fr))!important;
+  gap:14px!important; overflow:visible!important;
+  padding:0!important; margin:0!important; width:100%; min-width:0;
+  scroll-snap-type:none;
 }
+
 html:root body .pcx-home .pcx-categories .pcx-category {
-  flex:0 0 156px!important; width:156px!important; min-width:156px!important;
-  max-width:none!important; height:auto!important; min-height:148px;
-  display:flex!important; flex-direction:column!important; align-items:center;
-  justify-content:flex-start; padding:7px!important; gap:9px!important;
-  scroll-snap-align:start;
+  flex:none!important; width:auto!important; min-width:0!important;
+  max-width:none!important; height:auto!important; min-height:0;
+  display:flex!important; flex-direction:column!important; align-items:stretch;
+  justify-content:flex-start; padding:8px!important; gap:10px!important;
+  scroll-snap-align:none;
 }
+
 .pcx-category__media {
-  position:relative; display:block; width:100%; height:82px; overflow:hidden;
-  border-radius:10px; background:var(--h-surface-2);
+  position:relative; display:block; width:100%; aspect-ratio:16/10; height:auto; overflow:hidden;
+  border-radius:12px; background:var(--h-surface-2);
 }
+
 html:root body .pcx-home .pcx-category__media > img {
   display:block; width:100%!important; height:100%!important; object-fit:cover!important;
   object-position:center; opacity:1!important; filter:none!important;
@@ -55,40 +62,32 @@ html:root body .pcx-home .pcx-category__text strong {
 }
 html:root body .pcx-home .pcx-category__text > span { display:none!important; }
 
-/* Card de abertura do carrossel: em vez da fileira de setores começar direto
-   num ícone pequeno (a "área grande não aproveitada" era o espaço vazio ao
-   lado dos botões de seta, que ninguém usa no toque — o gesto de arrastar já
-   funciona sozinho), um cartão maior com foto de vitrine dá presença visual
-   à seção e já entrega, no próprio texto, a dica de que a fileira desliza. */
+/* Cartão de abertura da seção: ocupa duas colunas da grade e usa a foto de
+   vitrine como capa, dando presença visual à área sem depender de rolagem. */
 html:root body .pcx-home .pcx-categories .pcx-category--hero {
-  flex:0 0 220px!important; width:220px!important; min-width:220px!important; min-height:148px;
+  grid-column:span 2; flex:none!important; width:auto!important; min-width:0!important;
+  min-height:100%;
   position:relative; padding:0!important; overflow:hidden; isolation:isolate;
 }
-html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; border-radius:inherit; }
+html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; aspect-ratio:auto; min-height:180px; border-radius:inherit; }
 html:root body .pcx-home .pcx-category--hero .pcx-category__media > img { object-position:center 30%; }
 html:root body .pcx-home .pcx-category--hero::after {
   content:""; position:absolute; inset:0; z-index:1; border-radius:inherit;
   background:linear-gradient(0deg, rgb(8 15 12 / .86) 0%, rgb(8 15 12 / .38) 52%, rgb(8 15 12 / .08) 78%, transparent 100%);
 }
 html:root body .pcx-home .pcx-category--hero .pcx-category__text {
-  position:absolute; z-index:2; left:0; right:0; bottom:0; padding:12px 13px 13px; text-align:left;
+  position:absolute; z-index:2; left:0; right:0; bottom:0; padding:14px 16px 15px; text-align:left;
 }
 html:root body .pcx-home .pcx-category--hero .pcx-category__text strong {
-  color:#fff!important; font-size:14.5px!important; line-height:1.28!important; letter-spacing:-.01em;
+  color:#fff!important; font-size:16px!important; line-height:1.28!important; letter-spacing:-.01em;
 }
 html:root body .pcx-home .pcx-category--hero .pcx-category__text > span {
-  display:block!important; margin-top:4px; color:rgb(255 255 255 / .82); font-size:11px!important; font-weight:700;
+  display:block!important; margin-top:4px; color:rgb(255 255 255 / .82); font-size:11.5px!important; font-weight:700;
 }
 
-/* Setas de navegação: úteis com mouse, redundantes no toque — o cartão-hero
-   já avisa que a fileira desliza, e a seta some sozinha assim que não há
-   ponteiro fino (mouse) pra clicar nela, sem deixar a linha vazia. */
-.pcx-category-controls { display:flex; justify-content:flex-end; gap:8px; margin:0 0 8px; }
-.pcx-category-controls button {
-  width:44px; height:44px; border:1px solid var(--h-border); border-radius:12px;
-  background:var(--h-surface); color:var(--h-ink); font-size:20px; cursor:pointer;
-}
-@media(hover:none), (pointer:coarse) { .pcx-category-controls { display:none!important; } }
+/* Sem carrossel, não há setas de navegação. */
+.pcx-category-controls { display:none!important; }
+
 html:root body .store-pro-page .store-pro-hero--pharmacies {
   display:grid!important; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
   align-items:center; gap:24px; padding:24px!important; height:auto!important;
@@ -126,18 +125,15 @@ html:root body .store-pro-pharmacy-photo img {
 .store-pro-pharmacy-photo figcaption { margin-top:8px; color:var(--pc-muted,#52647a); font-size:11px; line-height:1.4; }
 @media(max-width:760px) {
   html:root body .store-pro-page .store-pro-hero--pharmacies { grid-template-columns:1fr; padding:16px!important; gap:16px; }
-  /* Cartões de 116px de largura e foto de 68px de altura ficavam apertados
-     demais pra ler no celular — a foto quase virava um selo, e o ícone de
-     32px com um traço de 16px dentro somava a sensação de "miniatura".
-     ~19% maiores em largura/altura, ainda cabendo 2,5 cartões visíveis de
-     uma vez (o objetivo da fileira que desliza continua de pé). */
-  html:root body .pcx-home .pcx-categories .pcx-category { flex-basis:138px!important; width:138px!important; min-width:138px!important; min-height:154px; }
-  .pcx-category__media { height:84px; }
-  html:root body .pcx-home .pcx-category__media > i { width:36px!important; height:36px!important; }
-  html:root body .pcx-home .pcx-category__media > i svg { width:18px!important; height:18px!important; }
-  html:root body .pcx-home .pcx-category__text strong { font-size:13.5px!important; }
-  html:root body .pcx-home .pcx-categories .pcx-category--hero { flex-basis:208px!important; width:208px!important; min-width:208px!important; min-height:154px; }
-  html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; }
+  /* Sem rolagem lateral: 2 colunas no celular, cartão de capa em largura cheia. */
+  html:root body .pcx-home .pcx-categories { grid-template-columns:repeat(2, minmax(0,1fr))!important; gap:10px!important; }
+  html:root body .pcx-home .pcx-categories .pcx-category { min-height:0; }
+  html:root body .pcx-home .pcx-category__media > i { width:34px!important; height:34px!important; }
+  html:root body .pcx-home .pcx-category__media > i svg { width:17px!important; height:17px!important; }
+  html:root body .pcx-home .pcx-category__text strong { font-size:13px!important; }
+  html:root body .pcx-home .pcx-categories .pcx-category--hero { grid-column:1 / -1; }
+  html:root body .pcx-home .pcx-category--hero .pcx-category__media { height:100%!important; min-height:150px; }
   html:root body .pcx-home .pcx-category--hero .pcx-category__text strong { font-size:15px!important; }
+
   html:root body .pcx-home .pcx-category--hero .pcx-category__text > span { font-size:11.5px!important; }
 }

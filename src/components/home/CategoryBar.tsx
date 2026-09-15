@@ -10,7 +10,7 @@ import {
   Tag,
   type LucideIcon,
 } from "lucide-react";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { businessGroups, groupForStore, type BusinessGroupId } from "../../data/businessTaxonomy";
 import type { StoreRow } from "../../data/catalog";
@@ -79,7 +79,7 @@ const CATEGORY_IMAGE: Record<BusinessGroupId, string> = {
 };
 
 export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
-  const rail = useRef<HTMLDivElement>(null);
+  
   // Soma real de produtos por grupo, a partir da contagem que cada loja já
   // carrega (StoreRow.products) — nenhum número inventado; some 0 vira só o
   // subtítulo genérico de CATEGORY_SUB (ex.: durante o carregamento).
@@ -104,11 +104,8 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
           linkLabel="Ver todas"
           linkIcon={<LayoutGrid aria-hidden="true" />}
         />
-        <div className="pcx-category-controls" aria-label="Navegar pelas categorias">
-          <button type="button" aria-label="Categorias anteriores" onClick={() => rail.current?.scrollBy({ left: -280 })}>←</button>
-          <button type="button" aria-label="Próximas categorias" onClick={() => rail.current?.scrollBy({ left: 280 })}>→</button>
-        </div>
-        <div className="pcx-categories" ref={rail} aria-label="Categorias de estabelecimentos">
+        <div className="pcx-categories" aria-label="Categorias de estabelecimentos">
+
           <Link className="pcx-category pcx-category--hero" to="/explorar">
             <span className="pcx-category__media">
               <img
@@ -123,7 +120,7 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
             </span>
             <span className="pcx-category__text">
               <strong>Comércio de Feijó, tudo num só lugar</strong>
-              <span>Deslize para ver cada tipo de loja →</span>
+              <span>Escolha um tipo de loja para começar →</span>
             </span>
           </Link>
           {businessGroups.map((group) => {
