@@ -1,36 +1,53 @@
 /* Convite para criar conta ao favoritar/montar cesta sem estar logado.
-   Paleta alinhada à identidade do site (verde-petróleo + dourado), em vez
-   do castanho/cáqui anterior, que destoava do resto da interface. */
-.pc-auth-prompt{position:fixed;z-index:10050;inset:0;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));background:rgb(8 20 16 / 62%);backdrop-filter:blur(10px) saturate(.82);-webkit-backdrop-filter:blur(10px) saturate(.82);animation:pc-auth-fade 180ms ease-out both}
-.pc-auth-prompt__card{position:relative;width:min(430px,100%);max-height:min(720px,calc(100dvh - 28px));overflow-y:auto;overscroll-behavior:contain;padding:14px 20px 20px;border:1px solid #e3e7ec;border-radius:24px;background:#fff;color:#10161d;box-shadow:0 30px 90px rgb(0 0 0 / 28%);text-align:center;animation:pc-auth-rise 220ms cubic-bezier(.2,.8,.2,1) both}
-.pc-auth-prompt__close{position:absolute;z-index:2;top:12px;right:12px;width:44px;height:44px;display:grid;place-items:center;border:1px solid #e3e7ec;border-radius:14px;background:rgb(255 255 255 / 92%);color:#5c6773;cursor:pointer}
-.pc-auth-prompt__close svg{width:20px}
-.pc-auth-illustration{display:block;width:100%;height:auto;max-height:190px;margin:0 auto 3px}
+   Card compacto com foto real (mesma linguagem visual do resto do site:
+   selo verificado com glassmorphism sobre a foto) em vez de ilustração.
+   Em mobile vira folha de tela cheia, sem permitir rolagem por baixo. */
+.pc-auth-prompt{position:fixed;z-index:10050;inset:0;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));background:rgb(8 20 16 / 62%);backdrop-filter:blur(10px) saturate(.82);-webkit-backdrop-filter:blur(10px) saturate(.82);overscroll-behavior:contain;touch-action:none;animation:pc-auth-fade 180ms ease-out both}
+.pc-auth-prompt__card{position:relative;width:min(380px,100%);max-height:min(640px,calc(100dvh - 28px));display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;border:1px solid #e3e7ec;border-radius:22px;background:#fff;color:#10161d;box-shadow:0 30px 90px rgb(0 0 0 / 28%);animation:pc-auth-rise 220ms cubic-bezier(.2,.8,.2,1) both}
+
+.pc-auth-prompt__hero{position:relative;flex:0 0 auto;height:148px;overflow:hidden;background:#0d3a30}
+.pc-auth-prompt__hero img{width:100%;height:100%;object-fit:cover;display:block}
+.pc-auth-prompt__hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgb(9 27 22 / 12%) 0%,rgb(8 20 16 / 6%) 46%,rgb(6 16 13 / 70%) 100%)}
+.pc-auth-prompt__hero-badge{position:absolute;z-index:1;left:14px;bottom:12px;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:rgb(10 26 21 / 56%);backdrop-filter:blur(10px) saturate(160%);-webkit-backdrop-filter:blur(10px) saturate(160%);border:1px solid rgb(255 255 255 / 16%);color:#fff;font-size:11px;font-weight:750;letter-spacing:.01em}
+.pc-auth-prompt__hero-badge svg{width:14px;height:14px;color:#3fd88a;flex:none}
+.pc-auth-prompt__close{position:absolute;z-index:2;top:10px;right:10px;width:36px;height:36px;display:grid;place-items:center;border:1px solid rgb(255 255 255 / 20%);border-radius:12px;background:rgb(10 26 21 / 46%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;cursor:pointer}
+.pc-auth-prompt__close svg{width:18px}
+
+.pc-auth-prompt__body{padding:18px 22px 20px;text-align:center}
 .pc-auth-prompt__copy>span{display:block;color:#0fa958;font-size:10px;font-weight:900;letter-spacing:.09em}
-.pc-auth-prompt__copy h2{margin:7px 0 8px;font-family:"Outfit Variable",Outfit,system-ui,sans-serif;font-size:clamp(1.55rem,7vw,2rem);line-height:1.05;letter-spacing:-.035em}
-.pc-auth-prompt__copy p{max-width:35ch;margin:0 auto;color:#5c6773;font-size:13.5px;line-height:1.5}
-.pc-auth-prompt__benefits{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin:14px 0;color:#087a45;font-size:11.5px;font-weight:750}
-.pc-auth-prompt__actions{display:grid;gap:8px}
-.pc-auth-prompt__actions a{min-height:49px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #e3e7ec;border-radius:14px;background:#fff;color:#10161d;font-size:13px;font-weight:850;text-decoration:none;transition:border-color 150ms ease,background 150ms ease,transform 150ms ease}
+.pc-auth-prompt__copy h2{margin:6px 0 7px;font-family:"Outfit Variable",Outfit,system-ui,sans-serif;font-size:clamp(1.35rem,5.5vw,1.6rem);line-height:1.1;letter-spacing:-.03em}
+.pc-auth-prompt__copy p{max-width:34ch;margin:0 auto;color:#5c6773;font-size:13.5px;line-height:1.5}
+.pc-auth-prompt__benefits{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;margin:13px 0;color:#087a45;font-size:11.5px;font-weight:750}
+.pc-auth-prompt__benefits span{display:inline-flex;align-items:center;gap:5px}
+.pc-auth-prompt__benefits svg{width:14px;height:14px;flex:none}
+.pc-auth-prompt__actions{display:grid;gap:8px;margin-top:4px}
+.pc-auth-prompt__actions a{min-height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #e3e7ec;border-radius:13px;background:#fff;color:#10161d;font-size:13px;font-weight:850;text-decoration:none;transition:border-color 150ms ease,background 150ms ease,transform 150ms ease}
 .pc-auth-prompt__actions a.is-primary{border-color:#0fa958;background:linear-gradient(135deg,#0fa958,#087a45);color:#fff;box-shadow:0 8px 20px rgb(15 169 88 / 26%)}
 .pc-auth-prompt__actions svg{width:18px}
-.pc-auth-prompt__card>small{display:block;margin-top:10px;color:#8a9199;font-size:10.5px}
+.pc-auth-prompt__body>small{display:block;margin-top:10px;color:#8a9199;font-size:10.5px}
 .pc-auth-prompt :focus-visible{outline:3px solid #0fa958;outline-offset:2px}
 @media(hover:hover) and (pointer:fine){
   .pc-auth-prompt__actions a:hover{border-color:#0fa958;background:#e3f5ee}
   .pc-auth-prompt__actions a.is-primary:hover{background:linear-gradient(135deg,#087a45,#065c37);transform:translateY(-1px)}
-  .pc-auth-prompt__close:hover{background:#e3f5ee}
+  .pc-auth-prompt__close:hover{background:rgb(10 26 21 / 66%)}
 }
 html[data-theme="dark"] .pc-auth-prompt__card{border-color:#2a323a;background:#171d23;color:#f1f4f7}
-html[data-theme="dark"] .pc-auth-prompt__close{border-color:#2a323a;background:#1e252c;color:#a7b0ba}
-html[data-theme="dark"] .pc-auth-illustration{filter:brightness(.91) saturate(.94)}
 html[data-theme="dark"] .pc-auth-prompt__copy>span{color:#28cc70}
 html[data-theme="dark"] .pc-auth-prompt__copy p{color:#a7b0ba}
 html[data-theme="dark"] .pc-auth-prompt__benefits{color:#28cc70}
 html[data-theme="dark"] .pc-auth-prompt__actions a{border-color:#2a323a;background:#1e252c;color:#f1f4f7}
 html[data-theme="dark"] .pc-auth-prompt__actions a.is-primary{border-color:#28cc70;background:linear-gradient(135deg,#28cc70,#21c768);color:#06120d}
-html[data-theme="dark"] .pc-auth-prompt__card>small{color:#7d868f}
-@media(max-width:480px){.pc-auth-prompt{align-items:end;padding:8px}.pc-auth-prompt__card{width:100%;max-height:calc(100dvh - 16px);padding:12px 16px calc(16px + env(safe-area-inset-bottom));border-radius:22px 22px 16px 16px}.pc-auth-illustration{max-height:164px}.pc-auth-prompt__copy h2{font-size:1.65rem}.pc-auth-prompt__benefits{margin:11px 0}.pc-auth-prompt__actions a{min-height:50px}}
+html[data-theme="dark"] .pc-auth-prompt__body>small{color:#7d868f}
+
+@media(max-width:480px){
+  .pc-auth-prompt{padding:0}
+  .pc-auth-prompt__card{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-radius:0;justify-content:flex-end}
+  .pc-auth-prompt__hero{height:38vh;min-height:190px;max-height:280px}
+  .pc-auth-prompt__body{display:flex;flex-direction:column;flex:1;padding:20px 22px calc(18px + env(safe-area-inset-bottom))}
+  .pc-auth-prompt__copy h2{font-size:1.55rem}
+  .pc-auth-prompt__actions{margin-top:auto;padding-top:16px}
+  .pc-auth-prompt__actions a{min-height:52px}
+}
 @media(prefers-reduced-motion:reduce){.pc-auth-prompt,.pc-auth-prompt__card{animation:none}}
 @keyframes pc-auth-fade{from{opacity:0}}
 @keyframes pc-auth-rise{from{opacity:0;transform:translateY(14px) scale(.985)}}
