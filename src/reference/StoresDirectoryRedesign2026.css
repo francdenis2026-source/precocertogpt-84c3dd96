@@ -98,10 +98,19 @@ html[data-theme="dark"] .ref-stores-page .ref-stores-hero__copy > p { margin: 0 
 }
 
 @media (max-width: 720px) {
-  .ref-stores-page .ref-stores-hero { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-end !important; height: auto !important; min-height: 260px !important; padding: 18px !important; gap: 10px !important; }
-  .ref-stores-page .ref-stores-hero__bg { object-position: 68% 20% !important; }
+  /* O painel de vidro (título de 2 linhas + parágrafo) crescia alto o
+     bastante para o topo dele encostar no queixo/sorriso da foto — a
+     "força" do glassmorphism sobre o rosto que se via era esse encontro
+     de bordas, não o blur em si. Câmera mais alta no rosto (object-position
+     vertical menor) + faixa mais alta (min-height maior) abrem a folga
+     que faltava, e tirar o parágrafo do cartão mobile (o título e a foto já
+     dizem do que se trata; a descrição completa some só aqui) encolhe o
+     painel o suficiente para nunca mais alcançar o rosto. */
+  .ref-stores-page .ref-stores-hero { flex-direction: column !important; align-items: flex-start !important; justify-content: flex-end !important; height: auto !important; min-height: 300px !important; padding: 18px !important; gap: 10px !important; }
+  .ref-stores-page .ref-stores-hero__bg { object-position: 72% 8% !important; }
   .ref-stores-page .ref-stores-hero__scrim { background: linear-gradient(0deg, rgba(8, 14, 22, .38) 0%, rgba(8, 14, 22, .2) 46%, rgba(8, 14, 22, .05) 82%, transparent 100%) !important; }
-  .ref-stores-page .ref-stores-hero__copy { max-width: min(88%, 340px) !important; }
+  .ref-stores-page .ref-stores-hero__copy { max-width: min(78%, 300px) !important; }
+  .ref-stores-page .ref-stores-hero__copy > p { display: none !important; }
   .ref-stores-page .ref-stores-hero__row { width: 100%; }
   .ref-stores-page a.ref-stores-hero__cta { flex: 1 1 auto; justify-content: center; }
 }

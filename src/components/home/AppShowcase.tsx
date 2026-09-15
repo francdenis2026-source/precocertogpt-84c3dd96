@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { Download, Smartphone, Sparkles, Store, Zap } from "lucide-react";
 import appPhoto from "../../assets/home-2026/app-showcase-mao-celular-2026.jpg";
-
-
-type InstallPromptEvent = Event & {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
-};
+import { type InstallPromptEvent, clearCapturedInstallPrompt, getCapturedInstallPrompt } from "../../lib/pwaInstall";
 
 function isStandalone() {
   return window.matchMedia("(display-mode: standalone)").matches ||
@@ -37,7 +32,17 @@ function useInstallPrompt() {
       setAvailable(false);
     };
 
-    setAvailable(!isStandalone() && isIos());
+    // O evento pode já ter disparado antes deste componente montar (ver
+    // index.html) — sem isso, a seção simplesmente não aparecia em
+    // aparelhos onde o JS demora mais para carregar, mesmo sendo
+    // perfeitamente instalável.
+    const captured = getCapturedInstallPrompt();
+    if (captured) {
+      setPromptEvent(captured);
+      setAvailable(true);
+    } else {
+      setAvailable(!isStandalone() && isIos());
+    }
     window.addEventListener("beforeinstallprompt", capturePrompt);
     window.addEventListener("appinstalled", installed);
     return () => {
@@ -52,6 +57,7 @@ function useInstallPrompt() {
       const choice = await promptEvent.userChoice;
       if (choice.outcome === "accepted") setAvailable(false);
       setPromptEvent(null);
+      clearCapturedInstallPrompt();
       return;
     }
     window.alert("No iPhone ou iPad, toque em Compartilhar e depois em “Adicionar à Tela de Início”.");

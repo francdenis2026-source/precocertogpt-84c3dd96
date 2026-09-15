@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
-
-type InstallPromptEvent = Event & {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
-};
+import { type InstallPromptEvent, clearCapturedInstallPrompt, getCapturedInstallPrompt } from "../lib/pwaInstall";
 
 function isStandalone() {
   return window.matchMedia("(display-mode: standalone)").matches ||
@@ -30,7 +26,17 @@ export function PwaInstallButton() {
       setAvailable(false);
     };
 
-    setAvailable(!isStandalone() && isIos());
+    // O evento pode já ter disparado antes deste componente montar (ver
+    // index.html) — sem isso, o botão simplesmente não aparecia em
+    // aparelhos onde o JS demora mais para carregar, mesmo sendo
+    // perfeitamente instalável.
+    const captured = getCapturedInstallPrompt();
+    if (captured) {
+      setPromptEvent(captured);
+      setAvailable(true);
+    } else {
+      setAvailable(!isStandalone() && isIos());
+    }
     window.addEventListener("beforeinstallprompt", capturePrompt);
     window.addEventListener("appinstalled", installed);
     return () => {
@@ -45,6 +51,7 @@ export function PwaInstallButton() {
       const choice = await promptEvent.userChoice;
       if (choice.outcome === "accepted") setAvailable(false);
       setPromptEvent(null);
+      clearCapturedInstallPrompt();
       return;
     }
     window.alert("No iPhone ou iPad, toque em Compartilhar e depois em “Adicionar à Tela de Início”.");

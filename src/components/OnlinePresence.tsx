@@ -70,7 +70,19 @@ export function OnlinePresence() {
     const tryLeadership = () => {
       if (!active || leader) return;
       const locks = navigator.locks;
-      if (!locks) return;
+      // navigator.locks (Web Locks API) não existe em alguns navegadores
+      // Android mais simples (WebViews antigos, navegadores in-app de redes
+      // sociais). Sem esse "if (!locks) return" de saída, o dispositivo
+      // nunca virava líder, nunca chamava startRealtime() e o contador
+      // ficava para sempre em "—" — não é coordenação entre abas do mesmo
+      // aparelho (só uma otimização), então virar líder direto aqui é
+      // seguro: o pior caso é esse aparelho específico contar presença uma
+      // vez por aba aberta, em vez de uma vez só.
+      if (!locks) {
+        leader = true;
+        void startRealtime();
+        return;
+      }
 
       void locks.request(CHANNEL_NAME, { ifAvailable: true }, async lock => {
         // Se o componente já foi desmontado, o canal está fechado: não publicar.

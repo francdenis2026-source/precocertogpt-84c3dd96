@@ -73,6 +73,15 @@ export function Header({ products = [] }: { products?: Product[] }) {
   }, [menuOpen]);
 
   useEffect(() => {
+    // Sem isso, arrastar o dedo sobre o menu mobile aberto (Android) rolava
+    // a home por baixo em vez de só o menu.
+    if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [menuOpen]);
+
+  useEffect(() => {
     const syncScrolledState = () => {
       setScrolled(window.scrollY > 8);
       setPastHero(window.scrollY > 420);
