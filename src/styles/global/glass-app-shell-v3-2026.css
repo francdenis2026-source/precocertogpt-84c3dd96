@@ -368,21 +368,20 @@ html[data-theme="dark"]
   body.pc-app-shell :is(.ref-dock, .pc26-bottom-nav) a {
     position: relative;
     min-width: 0 !important;
-    min-height: 58px !important;
+    min-height: 62px !important;
     display: grid !important;
     place-items: center !important;
     align-content: center !important;
-    gap: 3px !important;
+    gap: 4px !important;
     padding: 5px 2px !important;
     border-radius: 14px !important;
     background: transparent !important;
     color: var(--pc-muted) !important;
-    /* iPhone 13 (390×844, densidade 3x) e afins: 11.5px lia pequeno demais
-       nos rótulos de "Início/Buscar/Cesta/Lojas/Favoritos", o texto mais
-       lido da barra inferior — usada em toda navegação mobile do site.
-       12.5px é o piso de legibilidade real sem esticar a barra (min-height
-       58px comporta ícone 24px + rótulo 12.5px + respiro com folga). */
-    font-size: 12.5px !important;
+    /* Segunda passada: 12.5px/24px já tinha corrigido o piso de legibilidade
+       de 11.5px/22px, mas continuava pequeno pro uso real — mais um degrau,
+       ainda dentro da altura reservada pra barra (--pc-tabbar-height:72px
+       cabe folgado com min-height:62px aqui). */
+    font-size: 13.5px !important;
     font-weight: 720 !important;
     line-height: 1 !important;
     text-decoration: none !important;
@@ -392,8 +391,8 @@ html[data-theme="dark"]
       transform 120ms ease-out !important;
   }
   body.pc-app-shell :is(.ref-dock, .pc26-bottom-nav) a svg {
-    width: 24px !important;
-    height: 24px !important;
+    width: 26px !important;
+    height: 26px !important;
     stroke-width: 2 !important;
   }
   /* --pc-primary-* resolve para dourado aqui, não para o verde da marca.
