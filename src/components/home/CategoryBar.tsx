@@ -79,7 +79,7 @@ const CATEGORY_IMAGE: Record<BusinessGroupId, string> = {
 };
 
 export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
-  const rail = useRef<HTMLDivElement>(null);
+  
   // Soma real de produtos por grupo, a partir da contagem que cada loja já
   // carrega (StoreRow.products) — nenhum número inventado; some 0 vira só o
   // subtítulo genérico de CATEGORY_SUB (ex.: durante o carregamento).
