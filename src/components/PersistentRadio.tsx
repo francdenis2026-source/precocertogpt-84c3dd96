@@ -128,9 +128,15 @@ export function PersistentRadioProvider({ children }: { children: ReactNode }) {
       title: playing && nowPlaying ? nowPlaying : station.name,
       artist: playing && nowPlaying ? station.name : "Rádio ao vivo",
       album: "Preço Certo",
+      // iOS ignora (ou desenha errado, com fundo preto) a capa da tela
+      // bloqueada quando a imagem tem transparência — os ícones do PWA
+      // (pwa-192/512) têm canal alfa, pensados pra ficar sobre o fundo do
+      // sistema, não pra serem a imagem final sozinha. media-artwork-*
+      // são os mesmos ícones com fundo sólido (a cor de marca do
+      // manifest), só para este uso.
       artwork: [
-        { src: "/pwa-192x192.png", sizes: "192x192", type: "image/png" },
-        { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png" },
+        { src: "/media-artwork-192.png", sizes: "192x192", type: "image/png" },
+        { src: "/media-artwork-512.png", sizes: "512x512", type: "image/png" },
       ],
     });
     mediaSession.playbackState = loading ? "none" : playing ? "playing" : "paused";

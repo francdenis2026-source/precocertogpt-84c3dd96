@@ -215,59 +215,63 @@ function SearchFiltersModal({
    </header>
 
    <div className="sfm-body">
-    <div className="sfm-section">
-     <h3>Ordenar por</h3>
-     <div className="sfm-chips">{SORT_OPTIONS.map(opt=><button key={opt.id} type="button" className={sort===opt.id?"is-active":undefined} onClick={()=>setSort(opt.id)} aria-pressed={sort===opt.id}>{opt.label}</button>)}</div>
-    </div>
-
-    <div className="sfm-section">
-     <h3>Tipo de comércio</h3>
-     <div className="sfm-chips">
-      <button type="button" className={sector==="all"?"is-active":undefined} onClick={()=>setSector("all" as MarketplaceSectorId)} aria-pressed={sector==="all"}>Todos os tipos</button>
-      {marketplaceSectors.map(s=><button key={s.id} type="button" className={sector===s.id?"is-active":undefined} onClick={()=>setSector(s.id)} aria-pressed={sector===s.id}>{s.shortLabel}</button>)}
-     </div>
-    </div>
-
-    <div className="sfm-section">
-     <div className="sfm-section__head">
-      <h3>Estabelecimentos{selectedStores.length>0&&<b className="sfm-count">{selectedStores.length}</b>}</h3>
-      {selectedStores.length>0&&<button type="button" className="sfm-linkbtn" onClick={clearStores}>Limpar seleção</button>}
-     </div>
-     <div className="sfm-store-search"><Search aria-hidden="true"/><input value={storeQuery} onChange={e=>setStoreQuery(e.target.value)} placeholder="Buscar estabelecimento ou bairro…" aria-label="Buscar estabelecimento"/></div>
-     <div className="sfm-store-list" role="group" aria-label="Estabelecimentos">
-      {filteredStores.length===0&&<p className="sfm-store-empty">Nenhum estabelecimento encontrado.</p>}
-      {filteredStores.map(s=>{
-       const id=String(s.id);
-       const checked=selectedStores.includes(id);
-       return <label className={`sfm-store-row${checked?" is-checked":""}`} key={id}>
-        <input type="checkbox" checked={checked} onChange={()=>toggleStore(id)}/>
-        <span className="sfm-store-row__box"><Check aria-hidden="true"/></span>
-        <span className="sfm-store-row__copy"><strong>{s.name}</strong><small>{s.neighborhood||"Feijó · AC"} · {intBr.format(s.products||0)} {s.products===1?"produto":"produtos"}</small></span>
-       </label>;
-      })}
-     </div>
-    </div>
-
-    <div className="sfm-section-row">
+    <div className="sfm-col sfm-col--refine">
      <div className="sfm-section">
-      <h3>Categoria</h3>
-      <div className="sfm-select"><select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">Todas</option>{categories.map(c=><option key={c}>{c}</option>)}</select><ChevronDown aria-hidden="true"/></div>
+      <h3>Ordenar por</h3>
+      <div className="sfm-chips">{SORT_OPTIONS.map(opt=><button key={opt.id} type="button" className={sort===opt.id?"is-active":undefined} onClick={()=>setSort(opt.id)} aria-pressed={sort===opt.id}>{opt.label}</button>)}</div>
      </div>
+
      <div className="sfm-section">
-      <h3>Bairro</h3>
-      <div className="sfm-select"><select value={neighborhood} onChange={e=>setNeighborhood(e.target.value)}><option value="all">Todos</option>{neighborhoods.map(n=><option key={n}>{n}</option>)}</select><ChevronDown aria-hidden="true"/></div>
+      <h3>Tipo de comércio</h3>
+      <div className="sfm-chips">
+       <button type="button" className={sector==="all"?"is-active":undefined} onClick={()=>setSector("all" as MarketplaceSectorId)} aria-pressed={sector==="all"}>Todos os tipos</button>
+       {marketplaceSectors.map(s=><button key={s.id} type="button" className={sector===s.id?"is-active":undefined} onClick={()=>setSector(s.id)} aria-pressed={sector===s.id}>{s.shortLabel}</button>)}
+      </div>
      </div>
+
+     <div className="sfm-section-row">
+      <div className="sfm-section">
+       <h3>Categoria</h3>
+       <div className="sfm-select"><select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">Todas</option>{categories.map(c=><option key={c}>{c}</option>)}</select><ChevronDown aria-hidden="true"/></div>
+      </div>
+      <div className="sfm-section">
+       <h3>Bairro</h3>
+       <div className="sfm-select"><select value={neighborhood} onChange={e=>setNeighborhood(e.target.value)}><option value="all">Todos</option>{neighborhoods.map(n=><option key={n}>{n}</option>)}</select><ChevronDown aria-hidden="true"/></div>
+      </div>
+     </div>
+
+     <div className="sfm-section">
+      <h3>Faixa de preço</h3>
+      <div className="sfm-price-row">
+       <label>Mínimo<div className="sfm-price-input"><span>R$</span><input inputMode="decimal" value={minPrice} onChange={e=>setMinPrice(e.target.value)} placeholder="0,00"/></div></label>
+       <label>Máximo<div className="sfm-price-input"><span>R$</span><input inputMode="decimal" value={maxPrice} onChange={e=>setMaxPrice(e.target.value)} placeholder="Sem limite"/></div></label>
+      </div>
+     </div>
+
+     <p className="sfm-note"><Building2 aria-hidden="true"/>Mostramos apenas opções realmente cadastradas no catálogo.</p>
     </div>
 
-    <div className="sfm-section">
-     <h3>Faixa de preço</h3>
-     <div className="sfm-price-row">
-      <label>Mínimo<div className="sfm-price-input"><span>R$</span><input inputMode="decimal" value={minPrice} onChange={e=>setMinPrice(e.target.value)} placeholder="0,00"/></div></label>
-      <label>Máximo<div className="sfm-price-input"><span>R$</span><input inputMode="decimal" value={maxPrice} onChange={e=>setMaxPrice(e.target.value)} placeholder="Sem limite"/></div></label>
+    <div className="sfm-col sfm-col--stores">
+     <div className="sfm-section sfm-section--stores">
+      <div className="sfm-section__head">
+       <h3>Estabelecimentos{selectedStores.length>0&&<b className="sfm-count">{selectedStores.length}</b>}</h3>
+       {selectedStores.length>0&&<button type="button" className="sfm-linkbtn" onClick={clearStores}>Limpar seleção</button>}
+      </div>
+      <div className="sfm-store-search"><Search aria-hidden="true"/><input value={storeQuery} onChange={e=>setStoreQuery(e.target.value)} placeholder="Buscar estabelecimento ou bairro…" aria-label="Buscar estabelecimento"/></div>
+      <div className="sfm-store-list" role="group" aria-label="Estabelecimentos">
+       {filteredStores.length===0&&<p className="sfm-store-empty">Nenhum estabelecimento encontrado.</p>}
+       {filteredStores.map(s=>{
+        const id=String(s.id);
+        const checked=selectedStores.includes(id);
+        return <label className={`sfm-store-row${checked?" is-checked":""}`} key={id}>
+         <input type="checkbox" checked={checked} onChange={()=>toggleStore(id)}/>
+         <span className="sfm-store-row__box"><Check aria-hidden="true"/></span>
+         <span className="sfm-store-row__copy"><strong>{s.name}</strong><small>{s.neighborhood||"Feijó · AC"} · {intBr.format(s.products||0)} {s.products===1?"produto":"produtos"}</small></span>
+        </label>;
+       })}
+      </div>
      </div>
     </div>
-
-    <p className="sfm-note"><Building2 aria-hidden="true"/>Mostramos apenas opções realmente cadastradas no catálogo.</p>
    </div>
 
    <footer className="sfm-foot">
