@@ -2388,8 +2388,12 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   .pcx-promo-feature { min-height: 260px !important; }
   .pcx-offers-visual { min-height: 200px; }
   .pcx-frame-backdrop { filter: blur(12px) saturate(.72) brightness(.64) !important; }
-  .pcx-spotlight .pcx-frame-photo { opacity: .32 !important; }
-  .pcx-spotlight::before { background: linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .78) 60%,rgb(7 20 38 / .5) 100%) !important; }
+  /* .32 + degradê mais escuro (tentativa anterior) apagava demais a foto —
+     ficou parecendo um fundo liso, sem mostrar a cliente comparando preços.
+     De volta a algo próximo do original (.42), só um pouco mais escuro
+     (.46) — o text-shadow no título/parágrafo/destaques já resolve a
+     leitura sem precisar apagar a foto. */
+  .pcx-spotlight .pcx-frame-photo { opacity: .46 !important; }
   /* No mobile o cartão fica mais estreito e o parágrafo ocupa quase toda a
      largura — a segunda linha ("...comprando no comércio da sua cidade.")
      caía sobre o boné/ombro do comerciante, uma faixa mais clara da foto

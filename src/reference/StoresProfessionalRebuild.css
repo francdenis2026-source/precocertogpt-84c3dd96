@@ -20,6 +20,16 @@
 .ref-stores-page .sector-nav>a{flex:0 0 auto;min-height:39px;width:auto;display:flex;grid-template-columns:none;gap:7px;padding:0 11px;border:1px solid var(--pc-border);border-radius:10px;background:var(--pc-surface);box-shadow:none}
 .ref-stores-page .sector-nav>a>svg{width:16px;height:16px;padding:0;background:transparent;color:var(--pc-green-strong)}
 .ref-stores-page .sector-nav>a span{display:block}.ref-stores-page .sector-nav>a strong{font-size:11px;white-space:nowrap}.ref-stores-page .sector-nav>a small{display:none}
+/* No celular esses chips ("Ver tudo/Mercados/Açougues...") são o menu
+   principal de categoria da página — 39px de altura, ícone de 16px e texto
+   de 11px ficavam pequenos demais pro dedo e pra leitura num alvo tão
+   usado. ~18% maiores, ainda cabendo confortavelmente na fileira que rola
+   na horizontal. */
+@media(max-width:760px){
+  .ref-stores-page .sector-nav>a{min-height:46px;padding:0 13px;gap:8px}
+  .ref-stores-page .sector-nav>a>svg{width:18px!important;height:18px!important}
+  .ref-stores-page .sector-nav>a strong{font-size:12.5px!important}
+}
 .ref-stores-page .sector-nav>a.is-active{border-color:var(--pc-green);background:var(--pc-green);color:#fff}.ref-stores-page .sector-nav>a.is-active>svg{color:#fff}
 
 .ref-stores-page .ref-stores-toolbar{min-height:46px;margin:8px 0 14px;padding:0 14px;border-radius:11px;background:var(--pc-surface)}
@@ -32,7 +42,26 @@
 .ref-stores-page .ref-store-cards>header>small{font-size:10px}
 .ref-stores-page .ref-store-card{border-radius:13px;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}
 .ref-stores-page .ref-store-card>.ref-store-card__select{min-height:80px;grid-template-columns:48px minmax(0,1fr) 17px;gap:11px;padding:11px 12px 9px}
-.ref-stores-page .ref-store-card__select>i{width:48px;height:48px;border-radius:11px;transition:transform .18s cubic-bezier(.2,.8,.2,1)}
+/* Loja com logomarca cadastrada cai num quadro branco com contain (ver
+   Stores2026.css) — mas quem ainda não subiu logo caía direto na cor bruta
+   do estabelecimento (fundo saturado sólido, ícone genérico da lucide),
+   um estilo completamente diferente do quadro branco das outras. Fundo
+   suave (a cor só como leve tingimento) com o ícone na própria cor sólida
+   aproxima bastante os dois casos — nenhuma loja "sem foto" fica destoando
+   das que já têm logo. */
+.ref-stores-page .ref-store-card__select>i{
+  width:48px;height:48px;border-radius:11px;transition:transform .18s cubic-bezier(.2,.8,.2,1);
+  background:color-mix(in srgb,var(--pc-store-tint,var(--pc-primary,#2563eb)) 14%,var(--pc-surface,#fff))!important;
+  border:1px solid color-mix(in srgb,var(--pc-store-tint,var(--pc-primary,#2563eb)) 26%,var(--pc-border,#e2e8f0));
+}
+.ref-stores-page .ref-store-card__select>i>svg{width:21px!important;height:21px!important;color:var(--pc-store-tint,var(--pc-primary,#2563eb))!important;background:none!important}
+/* Mesmo tratamento na lista de lojas favoritas — o card é o mesmo
+   componente, reaproveitado de /estabelecimentos. */
+.pc-favorites-page .ref-store-card__select>i{
+  background:color-mix(in srgb,var(--pc-store-tint,var(--pc-primary,#2563eb)) 14%,var(--pc-surface,#fff))!important;
+  border:1px solid color-mix(in srgb,var(--pc-store-tint,var(--pc-primary,#2563eb)) 26%,var(--pc-border,#e2e8f0));
+}
+.pc-favorites-page .ref-store-card__select>i>svg{color:var(--pc-store-tint,var(--pc-primary,#2563eb))!important;background:none!important}
 .ref-stores-page .ref-store-card__select>span{gap:3px}
 .ref-stores-page .ref-store-card__select small{color:var(--pc-green-strong);font-size:9px;font-weight:800;letter-spacing:.07em}
 .ref-stores-page .ref-store-card__select strong{font-family:var(--pc-font-display);font-size:15px;font-weight:700;line-height:1.1;letter-spacing:-.015em}
