@@ -237,26 +237,36 @@ html[data-theme="dark"] .search26-modal__hero{background:linear-gradient(135deg,
    no desktop — mesma linguagem dos outros modais do site (overlay com
    blur, cabeçalho + corpo rolável + rodapé fixo).
    ============================================================ */
+/* No mobile, a altura do diálogo era "até 92% da tela, conforme o
+   conteúdo" (max-height + grid de conteúdo) em vez de uma altura fixa —
+   junto com o rodapé de preço podendo entrar/sair de posição conforme o
+   conteúdo acima rolava ou recalculava, dava a sensação de "janela se
+   redimensionando" a cada interação. Os outros dois modais do site (login
+   e produto) já são folha de tela cheia fixa (100dvh); este era o único
+   que ainda seguia o padrão antigo. Unificado: 100dvh fixo no mobile,
+   overlay ocupando a tela toda — só volta a ser um cartão flutuante,
+   com altura conforme o conteúdo, a partir do desktop (≥640px), onde
+   sobra espaço de verdade ao redor. */
 .sfm-overlay{
   position:fixed;inset:0;z-index:10060;
-  display:flex;align-items:flex-end;justify-content:center;
+  display:flex;align-items:stretch;justify-content:center;
   background:rgb(10 14 12 / 58%);
   backdrop-filter:blur(5px);
   animation:sfm-fade 180ms ease-out both;
 }
 @keyframes sfm-fade{from{opacity:0}}
 .sfm-dialog{
-  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  position:relative;width:100%;max-width:560px;height:100dvh;max-height:100dvh;
   display:grid;grid-template-rows:auto minmax(0,1fr) auto;
   background:var(--pc-surface);color:var(--pc-ink);
-  border-radius:22px 22px 0 0;
+  border-radius:0;
   box-shadow:0 -12px 50px rgb(0 0 0 / 30%);
   animation:sfm-rise 220ms cubic-bezier(.2,.8,.2,1) both;
 }
 @keyframes sfm-rise{from{opacity:0;transform:translateY(24px)}}
 @media(min-width:640px){
   .sfm-overlay{align-items:center;padding:24px}
-  .sfm-dialog{max-height:min(86dvh,720px);border-radius:20px}
+  .sfm-dialog{height:auto;max-height:min(86dvh,720px);border-radius:20px}
 }
 /* Acima de ~860px sobrava tela: um cartão de 560px flutuando sozinho no
    meio de uma janela de 1280+px, com "Estabelecimentos" espremido entre

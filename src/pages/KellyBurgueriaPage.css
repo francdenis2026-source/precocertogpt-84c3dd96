@@ -6,6 +6,26 @@
 
 .kelly-page{background:var(--pc-canvas);color:var(--pc-ink)}
 
+/* O header vidro do site (glass-app-shell-v3-2026.css) é translúcido de
+   propósito em todo o site (72-84% de opacidade + blur) — funciona bem
+   sobre o conteúdo comum das outras páginas. Aqui embaixo dele passa um
+   hero fotográfico escuro e de alto contraste (com o botão "Pedir pelo
+   WhatsApp" bem cedo, ainda perto do topo): mesmo com blur, a foto e o
+   texto do botão continuavam lendo por trás do header ao rolar — não como
+   vidro elegante, como uma falha de renderização. Escopado só a estas
+   duas páginas (não mexe no header translúcido do resto do site): o
+   header fica quase opaco (mesmo valor de fallback já usado no arquivo
+   original para navegadores sem suporte a backdrop-filter), mantendo o
+   blur — ainda lê como vidro, só sem deixar nada por trás aparecer. */
+html body.pc-app-shell .kelly-page .ref-header[data-glass-header="true"],
+html body.pc-app-shell .kelly-page .ref-header.is-scrolled{
+  background:rgba(255,255,252,.97)!important;
+}
+html[data-theme="dark"] body.pc-app-shell .kelly-page .ref-header[data-glass-header="true"],
+html[data-theme="dark"] body.pc-app-shell .kelly-page .ref-header.is-scrolled{
+  background:rgba(24,24,27,.97)!important;
+}
+
 .kelly-shell{max-width:1040px;margin:0 auto;padding:16px 20px 56px;display:flex;flex-direction:column;gap:16px}
 
 .kelly-back{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;color:var(--pc-muted);font-size:13px;font-weight:700;text-decoration:none;padding:6px 2px}
