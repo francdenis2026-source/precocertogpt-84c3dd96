@@ -20,6 +20,7 @@ import { OnlinePresence } from "../components/OnlinePresence";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import { businessGroups } from "../data/businessTaxonomy";
+import { loadSessionProfile, supabase } from "../lib/roles";
 import "./ReferenceExperience.css";
 import "./CompactViewportPages.css";
 import "./ReferenceResponsive.css";
@@ -146,6 +147,31 @@ function useBasket() {
   return { items, update, count: items.reduce((sum, item) => sum + item.quantity, 0) };
 }
 
+// Só precisa saber se há sessão ou não (o cartão de conta em si — avatar,
+// nome, menu — já é responsabilidade de UserAccountHub, portado para dentro
+// de .ref-header__actions). Um hook local, em vez de importar
+// useCurrentProfile de UserAccountExperience.tsx, evita import circular:
+// aquele arquivo já importa PublicHeader/PublicFooter daqui.
+function useSignedIn() {
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    let active = true;
+    const refresh = async () => {
+      const profile = await loadSessionProfile();
+      if (active) setSignedIn(Boolean(profile));
+    };
+    void refresh();
+    window.addEventListener("pc:auth-changed", refresh);
+    const subscription = supabase?.auth.onAuthStateChange(() => { window.setTimeout(() => void refresh(), 0); });
+    return () => {
+      active = false;
+      window.removeEventListener("pc:auth-changed", refresh);
+      subscription?.data.subscription.unsubscribe();
+    };
+  }, []);
+  return signedIn;
+}
+
 export function ThemeButton() {
   const { theme, toggleTheme } = useSiteTheme();
   const dark = theme === "dark";
@@ -186,6 +212,7 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(() => typeof window !== "undefined" && window.scrollY > 10);
   const { count } = useBasket();
+  const signedIn = useSignedIn();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const activeSection = sectionFromPath(pathname) ?? current;
@@ -248,11 +275,15 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
         {pathname === "/" && <HeaderRadioPlayer />}
         <ThemeButton />
         <Link className={`ref-favorites-link${activeSection === "profile" ? " is-active" : ""}`} aria-current={activeSection === "profile" ? "page" : undefined} to="/favoritos" aria-label="Favoritos"><Heart /></Link>
-        <Link className="ref-signin" to="/login">Entrar</Link>
+        {!signedIn && <Link className="ref-signin" to="/login">Entrar</Link>}
         <button type="button" className="ref-menu" aria-label={menu ? "Fechar menu" : "Abrir menu"} aria-expanded={menu} aria-controls="public-mobile-menu" onClick={() => setMenu(value => !value)}>{menu ? <X /> : <Menu />}</button>
       </div>
     </div>
     {menu && <nav id="public-mobile-menu" className="ref-mobile-menu" aria-label="Menu">
+      {/* .ref-signin some em telas estreitas (vira só o ícone do hamburguer) —
+          sem esta entrada, quem não estava logado ficava sem nenhum jeito de
+          chegar em /login no mobile. */}
+      {!signedIn && <Link to="/login" onClick={() => setMenu(false)}><UserRound aria-hidden="true" /> Entrar ou criar conta</Link>}
       <Link {...activeProps("sectors")} to="/explorar" onClick={() => setMenu(false)}><SlidersHorizontal aria-hidden="true" /> Onde comprar</Link>
       <Link {...activeProps("search")} to="/buscar" onClick={() => setMenu(false)}><Search aria-hidden="true" /> Buscar no PreçoCerto</Link>
       <Link {...activeProps("stores")} to="/estabelecimentos" onClick={() => setMenu(false)}><Store aria-hidden="true" /> Estabelecimentos</Link>

@@ -199,6 +199,17 @@ html[data-theme="dark"]
     top: calc(
       var(--pc-appbar-height) + env(safe-area-inset-top) + 8px
     ) !important;
+    /* .ref-header tem backdrop-filter, o que o torna o "containing block" de
+       qualquer descendente position:fixed (inclusive este menu) — o fixed
+       deixa de ser relativo à viewport e passa a ser relativo à própria
+       barra (~60px de altura). O bottom:0 herdado da regra base
+       (ReferenceExperience.css) então virava "0px a partir do rodapé da
+       barra", ou seja, poucos px abaixo do top — o menu colapsava para
+       ~17px de altura e escondia os 6 links, embora existissem no DOM.
+       bottom:auto tira o bottom dessa conta: a altura passa a vir do
+       conteúdo, limitada só pelo max-height abaixo (que usa dvh, imune ao
+       containing block errado). */
+    bottom: auto !important;
     right: 12px !important;
     left: 12px !important;
     max-height: calc(

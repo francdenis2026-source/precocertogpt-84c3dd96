@@ -116,6 +116,15 @@ export function Header({ products = [] }: { products?: Product[] }) {
           className={`pcx-header__nav${menuOpen ? " is-open" : ""}`}
           aria-label="Navegação principal"
         >
+          {/* .pcx-header__login some em telas estreitas (≤640px) e vira só um
+              ícone entre 641-860px — sem esta entrada, quem não estava logado
+              ficava sem nenhum jeito de chegar em /login no mobile. */}
+          {!profile && (
+            <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <UserRound aria-hidden="true" />
+              <span>Entrar ou criar conta</span>
+            </Link>
+          )}
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
