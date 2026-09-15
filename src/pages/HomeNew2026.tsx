@@ -116,7 +116,7 @@ export function HomeNew2026() {
           cycle={cycle}
         />
         <TrustBar />
-        <AppShowcase products={products} />
+        <AppShowcase />
         <CategoryBar stores={catalog.stores} />
         <ProductGrid products={featured} loading={loading} />
         <TrendingProducts products={products} />

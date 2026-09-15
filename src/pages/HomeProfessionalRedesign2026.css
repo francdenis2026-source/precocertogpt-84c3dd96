@@ -1884,7 +1884,17 @@ html[data-theme="light"] .pcx-hero::before {
 }
 @media (max-width: 760px) {
   .pcx-appshowcase { flex-direction: column; align-items: stretch; min-height: 0; }
-  .pcx-appshowcase__copy { max-width: none; }
+  /* .pcx-appshowcase__copy tem flex:1 1 380px pensado pro layout em linha
+     do desktop (380px de LARGURA inicial). Virando coluna nesta largura,
+     flex-basis passa a valer no eixo principal — que agora é vertical —
+     forçando 380px de ALTURA mesmo o texto tendo bem menos conteúdo que
+     isso. Essa barra vazia sobrando embaixo do texto era boa parte do
+     "espaço desperdiçado". */
+  .pcx-appshowcase__copy { max-width: none; flex: 1 1 auto; }
+  /* Os 3 destaques empilhados (1 por linha) também inflavam a altura.
+     2 colunas cabem em 2 linhas em vez de 3. */
+  .pcx-appshowcase__highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 0.6rem; }
+  .pcx-appshowcase__highlights svg { width: 28px; height: 28px; padding: 7px; }
 }
 
 /* Mock de comparação real ao lado da chamada — até 3 produtos do catálogo
@@ -2403,13 +2413,16 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   .pcx-promo-feature::after { background: linear-gradient(100deg,rgb(7 20 38 / .92) 0%,rgb(7 20 38 / .8) 55%,rgb(7 20 38 / .4) 100%) !important; }
 }
 
-/* A seção do app agora combina fotografia real de uso (cliente conferindo
-   preços no celular dentro de um comércio) com uma prévia do próprio app em
-   cima — produtos reais do catálogo já carregado, sem números inventados.
-   Fundo navy da marca; a foto entra como cartão recortado, não como faixa
-   cortada em cover, e a prévia flutua sobre ela com sombra. */
+/* Refeito: a versão anterior combinava a fotografia real com um mockup de
+   tela do app flutuando por cima, no canto — duas linguagens visuais (foto +
+   interface desenhada) competindo no mesmo cartão, mais o link "Continuar
+   pela versão web" (sem função real: quem lê esta seção já está na versão
+   web, então o link não levava a lugar novo nenhum). A foto agora é a única
+   protagonista do card — sem sobreposição, sem link redundante — e o cartão
+   inteiro fica mais enxuto, do tamanho do que ele realmente diz. */
 .pcx-appshowcase {
   background: linear-gradient(135deg, #0a1e38 0%, #0d2b4a 62%, #123a63 100%) !important;
+  padding: clamp(1.5rem, 3vw, 2.25rem) !important;
 }
 .pcx-appshowcase__visual {
   position: relative;
@@ -2417,73 +2430,28 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   min-width: 260px;
   max-width: 460px;
   align-self: center;
-  padding-bottom: 8px;
 }
 .pcx-appshowcase__photo {
   position: relative;
   margin: 0;
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 22px 48px rgba(2, 8, 23, .42), inset 0 0 0 1px rgba(255, 255, 255, .1);
+  aspect-ratio: 16 / 10;
+  box-shadow: 0 18px 40px rgba(2, 8, 23, .38), inset 0 0 0 1px rgba(255, 255, 255, .1);
 }
-.pcx-appshowcase__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pcx-appshowcase__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 72% center; display: block; }
 .pcx-appshowcase__photo::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(200deg, rgba(10, 30, 56, 0) 42%, rgba(10, 30, 56, .55) 100%);
-}
-.pcx-appshowcase__phone {
-  position: absolute;
-  left: -6px;
-  bottom: -6px;
-  width: 172px;
-  padding: 8px;
-  border-radius: 26px;
-  background: #0b1220;
-  box-shadow: 0 24px 54px rgba(2, 8, 23, .55), inset 0 0 0 1px rgba(255, 255, 255, .08);
-}
-.pcx-appshowcase__phone-screen { border-radius: 19px; background: #f4f7fb; overflow: hidden; padding-bottom: 9px; }
-.pcx-appshowcase__phone-bar { display: flex; align-items: center; gap: 5px; padding: 11px 11px 7px; background: #0d2b4a; color: #eaf1ff; font-size: 9.5px; font-weight: 700; }
-.pcx-appshowcase__phone-bar svg { width: 11px; height: 11px; color: #f0b429; flex-shrink: 0; }
-.pcx-appshowcase__phone-search { display: flex; align-items: center; gap: 6px; margin: 7px 9px; padding: 6px 9px; border-radius: 999px; background: #fff; border: 1px solid #d9e2ef; color: #14213d; font-size: 9.5px; font-weight: 700; }
-.pcx-appshowcase__phone-search svg { width: 11px; height: 11px; color: #6b7686; flex-shrink: 0; }
-.pcx-appshowcase__phone-search span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-/* Grid (não flex) de propósito: com colunas fixas, o preço nunca fica por
-   cima do nome do produto, mesmo que o nome seja mais longo que a coluna —
-   ele só é cortado com reticências, sem overlap possível. */
-.pcx-appshowcase__phone-list { list-style: none; margin: 0; padding: 0 9px; display: grid; gap: 5px; }
-.pcx-appshowcase__phone-list li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 7px; padding: 6px 8px; border-radius: 10px; background: #fff; box-shadow: 0 1px 3px rgba(9, 28, 54, .08); }
-.pcx-appshowcase__phone-list li > span { min-width: 0; }
-.pcx-appshowcase__phone-list strong { display: block; min-width: 0; font-size: 9.5px; font-weight: 800; color: #14213d; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-appshowcase__phone-list small { display: block; font-size: 8.5px; font-weight: 600; color: #6b7686; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pcx-appshowcase__phone-list b { font-size: 10.5px; font-weight: 800; color: #1d4ed8; white-space: nowrap; }
-.pcx-appshowcase__ghost {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.65rem 1.1rem;
-  border-radius: var(--h-radius-md);
-  border: 1px solid rgba(255, 255, 255, .34);
-  /* !important: folhas globais forçam a cor de links em faixas claras e
-     apagavam este texto sobre o navy da seção. */
-  color: #fff !important;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.86rem;
-}
-@media (hover: hover) and (pointer: fine) {
-  .pcx-appshowcase__ghost:hover { background: rgba(255, 255, 255, .12); }
-}
-@media (max-width: 900px) {
-  .pcx-appshowcase__phone { width: 152px; }
+  background: linear-gradient(200deg, rgba(10, 30, 56, 0) 55%, rgba(10, 30, 56, .38) 100%);
 }
 @media (max-width: 760px) {
-  .pcx-appshowcase__visual { max-width: none; margin-top: 0.25rem; }
-  /* 4/3 no mobile: com a faixa mais baixa, a prévia (que tem altura fixa)
-     estourava a foto e o terceiro produto ficava cortado. */
-  .pcx-appshowcase__photo { aspect-ratio: 4 / 3; }
-  .pcx-appshowcase__photo img { object-position: 72% center; }
-  .pcx-appshowcase__phone { width: 168px; left: 10px; bottom: 10px; }
+  /* Mesmo problema do .pcx-appshowcase__copy: flex:1 1 340px é a LARGURA
+     inicial pro layout em linha do desktop; em coluna, isso virava altura
+     mínima de 340px pro card da foto, que sozinho só precisa de ~173px —
+     sobrava um bloco navy vazio embaixo dela. */
+  .pcx-appshowcase__visual { max-width: none; margin-top: 1rem; flex: 0 1 auto; }
+  .pcx-appshowcase__photo { aspect-ratio: 16 / 9; }
 }
 

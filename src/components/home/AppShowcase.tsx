@@ -1,7 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { Download, MapPin, Search, Smartphone, Sparkles, Store, Zap } from "lucide-react";
-import type { Product } from "../../data/catalog";
+import { useEffect, useState } from "react";
+import { Download, Smartphone, Sparkles, Store, Zap } from "lucide-react";
 import appPhoto from "../../assets/home-2026/app-showcase-mao-celular-2026.jpg";
 
 
@@ -68,39 +66,20 @@ const HIGHLIGHTS = [
   { icon: Store, title: "Mesmo catálogo", text: "Preços idênticos ao site" },
 ] as const;
 
-const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-
 /** Seção de destaque logo após a faixa de confiança: quem chega na home não
  *  sabia que dava pra instalar o PreçoCerto como app (o antigo botão de
  *  instalar vivia escondido no header e foi removido de lá por falta de
- *  contexto — ver histórico). Aqui ele ganha espaço de verdade, ao lado da
- *  opção de continuar só pela web, sem confundir as duas como se fossem a
- *  mesma ação.
+ *  contexto — ver histórico). Aqui ele ganha espaço de verdade.
  *
- *  A prévia do celular mostra produtos reais do catálogo já carregado (nome,
- *  estabelecimento mais barato e preço) sobre uma fotografia de uso real —
- *  nada de números inventados; sem catálogo, a prévia simplesmente não
- *  aparece. */
-export function AppShowcase({ products = [] }: { products?: Product[] }) {
+ *  O link "Continuar pela versão web" foi removido: quem lê esta seção já
+ *  está navegando pela versão web (é a home do site), então o link não
+ *  levava a lugar nenhum de fato — só duplicava o que a pessoa já estava
+ *  fazendo. A prévia ilustrada do app (mockup de tela sobre a foto) também
+ *  saiu: competia com a fotografia real por atenção, e as duas linguagens
+ *  visuais juntas (foto + interface desenhada) liam como remendo, não como
+ *  peça única. A foto agora é a única protagonista do card. */
+export function AppShowcase() {
   const { available, install } = useInstallPrompt();
-  // Produtos comparados em mais estabelecimentos e sem repetir a mesma loja:
-  // é o que melhor ilustra o app (comparação real), em vez dos três primeiros
-  // itens do catálogo, que costumavam ser todos da mesma padaria.
-  const preview = useMemo(() => {
-    const seen = new Set<string>();
-    const picked: Product[] = [];
-    const ranked = products
-      .filter((product) => product.minPrice > 0)
-      .sort((a, b) => (b.storeCount || 0) - (a.storeCount || 0));
-    for (const product of ranked) {
-      if (seen.has(product.establishmentSlug)) continue;
-      seen.add(product.establishmentSlug);
-      picked.push(product);
-      if (picked.length === 3) break;
-    }
-    return picked;
-  }, [products]);
-
 
   return (
     <section className="pcx-shell" aria-labelledby="app-showcase-title">
@@ -114,8 +93,8 @@ export function AppShowcase({ products = [] }: { products?: Product[] }) {
             Preço Certo no seu bolso, <strong>do jeito que for mais fácil.</strong>
           </h2>
           <p>
-            Instale o aplicativo para abrir em um toque ou continue direto pelo
-            navegador — o catálogo e os preços são exatamente os mesmos.
+            Instale o aplicativo e abra o Preço Certo em um toque, direto da
+            tela inicial do seu celular.
           </p>
           <ul className="pcx-appshowcase__highlights">
             {HIGHLIGHTS.map(({ icon: Icon, title, text }) => (
@@ -128,16 +107,13 @@ export function AppShowcase({ products = [] }: { products?: Product[] }) {
               </li>
             ))}
           </ul>
-          <div className="pcx-appshowcase__actions">
-            {available && (
+          {available && (
+            <div className="pcx-appshowcase__actions">
               <button type="button" className="pcx-appshowcase__cta" onClick={() => void install()}>
                 <Download aria-hidden="true" /> Instalar aplicativo
               </button>
-            )}
-            <Link className="pcx-appshowcase__ghost" to="/explorar">
-              Continuar pela versão web
-            </Link>
-          </div>
+            </div>
+          )}
         </div>
         <div className="pcx-appshowcase__visual">
           <figure className="pcx-appshowcase__photo">
@@ -150,31 +126,6 @@ export function AppShowcase({ products = [] }: { products?: Product[] }) {
               height={960}
             />
           </figure>
-          {preview.length > 0 && (
-            <div className="pcx-appshowcase__phone" aria-hidden="true">
-              <div className="pcx-appshowcase__phone-screen">
-                <div className="pcx-appshowcase__phone-bar">
-                  <MapPin aria-hidden="true" />
-                  <span>Feijó, Acre</span>
-                </div>
-                <div className="pcx-appshowcase__phone-search">
-                  <Search aria-hidden="true" />
-                  <span>Comparar preços</span>
-                </div>
-                <ul className="pcx-appshowcase__phone-list">
-                  {preview.map((product) => (
-                    <li key={product.id}>
-                      <span>
-                        <strong>{product.name}</strong>
-                        <small>{product.establishment}</small>
-                      </span>
-                      <b>{brl.format(product.minPrice)}</b>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>
