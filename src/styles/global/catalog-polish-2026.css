@@ -5,11 +5,13 @@ html:root body .pcx-home .pcx-store-placeholder::after { content:none!important;
    horizontal na homepage. Todas as categorias ficam visíveis de uma vez. */
 html:root body .pcx-home .pcx-categories {
   display:grid!important;
+  grid-auto-flow:row!important; grid-auto-columns:auto!important;
   grid-template-columns:repeat(4, minmax(0,1fr))!important;
   gap:14px!important; overflow:visible!important;
   padding:0!important; margin:0!important; width:100%; min-width:0;
   scroll-snap-type:none;
 }
+
 html:root body .pcx-home .pcx-categories .pcx-category {
   flex:none!important; width:auto!important; min-width:0!important;
   max-width:none!important; height:auto!important; min-height:0;

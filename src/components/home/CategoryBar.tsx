@@ -104,11 +104,8 @@ export function CategoryBar({ stores = [] }: { stores?: StoreRow[] }) {
           linkLabel="Ver todas"
           linkIcon={<LayoutGrid aria-hidden="true" />}
         />
-        <div className="pcx-category-controls" aria-label="Navegar pelas categorias">
-          <button type="button" aria-label="Categorias anteriores" onClick={() => rail.current?.scrollBy({ left: -280 })}>←</button>
-          <button type="button" aria-label="Próximas categorias" onClick={() => rail.current?.scrollBy({ left: 280 })}>→</button>
-        </div>
-        <div className="pcx-categories" ref={rail} aria-label="Categorias de estabelecimentos">
+        <div className="pcx-categories" aria-label="Categorias de estabelecimentos">
+
           <Link className="pcx-category pcx-category--hero" to="/explorar">
             <span className="pcx-category__media">
               <img
