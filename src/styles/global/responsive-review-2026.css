@@ -517,10 +517,11 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
   .pcx-home .pcx-hero__inner { gap: 24px; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); }
   .pcx-home .pcx-hero__visual { padding: 12px; }
 }
-@media (max-width: 900px) {
-  .ref-auth .ref-auth__story { display: none !important; }
-  .ref-auth .ref-auth__form { min-height: 100dvh !important; align-content: center !important; }
-}
+/* A faixa hero compacta do mobile (foto + título curto, no lugar do
+   antigo "esconde tudo") e o dimensionamento do formulário agora vivem só
+   em taste-auth-2026.css — esta regra forçava display:none de volta (e um
+   min-height:100dvh só no formulário) por cima da folha carregada antes
+   dela, apagando a foto de novo. */
 @media (max-width: 760px) {
   .pc-inner-nav { display: none; }
   .ref-header--back-only .ref-header__home { display: inline-flex !important; min-width: 44px; min-height: 44px; justify-content: center; }
