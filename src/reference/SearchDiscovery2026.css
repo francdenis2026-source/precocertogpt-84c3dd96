@@ -228,3 +228,140 @@ html[data-theme="dark"] .search26-modal__hero{background:linear-gradient(135deg,
   .search26-card .pca-row--overlay.pca-row--compact .pca-btn{width:38px;height:38px;border-width:1.5px}
   .search26-card .pca-row--overlay.pca-row--compact .pca-btn svg{width:17px;height:17px}
 }
+
+/* ============================================================
+   Painel "Filtrar busca" (SearchFiltersModal)
+   Substitui a antiga seção .search26-advanced (selects nativos
+   empilhados, sem hierarquia, um só estabelecimento por vez) por um
+   painel próprio: folha de tela cheia no mobile, diálogo centralizado
+   no desktop — mesma linguagem dos outros modais do site (overlay com
+   blur, cabeçalho + corpo rolável + rodapé fixo).
+   ============================================================ */
+.sfm-overlay{
+  position:fixed;inset:0;z-index:10060;
+  display:flex;align-items:flex-end;justify-content:center;
+  background:rgb(10 14 12 / 58%);
+  backdrop-filter:blur(5px);
+  animation:sfm-fade 180ms ease-out both;
+}
+@keyframes sfm-fade{from{opacity:0}}
+.sfm-dialog{
+  position:relative;width:100%;max-width:560px;max-height:92dvh;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  background:var(--pc-surface);color:var(--pc-ink);
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -12px 50px rgb(0 0 0 / 30%);
+  animation:sfm-rise 220ms cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes sfm-rise{from{opacity:0;transform:translateY(24px)}}
+@media(min-width:640px){
+  .sfm-overlay{align-items:center;padding:24px}
+  .sfm-dialog{max-height:min(86dvh,720px);border-radius:20px}
+}
+
+.sfm-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+  padding:18px 18px 14px;border-bottom:1px solid var(--pc-border);
+}
+.sfm-head h2{margin:0;font-family:var(--pc-font-display,"Manrope Variable",Manrope,system-ui,sans-serif);font-size:1.3rem;letter-spacing:-.02em}
+.sfm-head p{margin:3px 0 0;font-size:12.5px;color:var(--pc-muted)}
+.sfm-close{
+  flex:none;width:38px;height:38px;display:grid;place-items:center;
+  border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface-2);
+  color:var(--pc-ink);cursor:pointer;
+}
+.sfm-close svg{width:18px;height:18px}
+@media(hover:hover) and (pointer:fine){.sfm-close:hover{background:var(--pc-border)}}
+
+.sfm-body{overflow-y:auto;overscroll-behavior:contain;padding:16px 18px 6px;display:grid;gap:22px}
+.sfm-section{display:grid;gap:9px;min-width:0}
+.sfm-section>h3{margin:0;font-size:12.5px;font-weight:850;letter-spacing:.03em;color:var(--pc-muted);text-transform:uppercase}
+.sfm-section__head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sfm-section__head h3{display:flex;align-items:center;gap:7px}
+.sfm-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--pc-green,#17633f);color:#fff;font-size:10.5px;font-weight:800;text-transform:none;letter-spacing:0}
+.sfm-linkbtn{border:0;background:none;padding:0;color:var(--pc-green-strong,#104c30);font-size:12.5px;font-weight:750;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+
+.sfm-chips{display:flex;flex-wrap:wrap;gap:8px}
+.sfm-chips button{
+  min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--pc-border);
+  background:var(--pc-surface);color:var(--pc-ink);font-size:13px;font-weight:750;cursor:pointer;
+  transition:background-color .15s ease,border-color .15s ease,color .15s ease;
+}
+.sfm-chips button.is-active{background:var(--pc-green,#17633f);border-color:var(--pc-green,#17633f);color:#fff}
+@media(hover:hover) and (pointer:fine){.sfm-chips button:not(.is-active):hover{border-color:color-mix(in srgb,var(--pc-green,#17633f) 45%,var(--pc-border));background:var(--pc-surface-2)}}
+
+.sfm-store-search{
+  display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;
+  border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface-2);
+}
+.sfm-store-search svg{width:16px;height:16px;color:var(--pc-muted);flex:none}
+.sfm-store-search input{flex:1;min-width:0;border:0;background:none;color:var(--pc-ink);font-size:13.5px}
+.sfm-store-search input:focus{outline:none}
+
+.sfm-store-list{
+  max-height:270px;overflow-y:auto;overscroll-behavior:contain;
+  border:1px solid var(--pc-border);border-radius:14px;background:var(--pc-surface);
+}
+.sfm-store-empty{margin:0;padding:20px;text-align:center;color:var(--pc-muted);font-size:13px}
+.sfm-store-row{
+  display:flex;align-items:center;gap:11px;min-height:52px;padding:8px 12px;
+  cursor:pointer;border-bottom:1px solid var(--pc-border);position:relative;
+}
+.sfm-store-list label.sfm-store-row:last-child{border-bottom:0}
+.sfm-store-row input{position:absolute;opacity:0;width:1px;height:1px}
+.sfm-store-row__box{
+  flex:none;width:21px;height:21px;display:grid;place-items:center;
+  border:1.5px solid var(--pc-border-strong,var(--pc-border));border-radius:6px;
+  color:transparent;background:var(--pc-surface);transition:background-color .15s ease,border-color .15s ease;
+}
+.sfm-store-row__box svg{width:13px;height:13px;stroke-width:3}
+.sfm-store-row.is-checked .sfm-store-row__box{background:var(--pc-green,#17633f);border-color:var(--pc-green,#17633f);color:#fff}
+.sfm-store-row:has(input:focus-visible) .sfm-store-row__box{outline:3px solid color-mix(in srgb,var(--pc-gold,#b77918) 45%,transparent);outline-offset:2px}
+.sfm-store-row__copy{min-width:0;display:grid;gap:1px}
+.sfm-store-row__copy strong{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sfm-store-row__copy small{font-size:12px;color:var(--pc-muted)}
+@media(hover:hover) and (pointer:fine){.sfm-store-row:hover{background:var(--pc-surface-2)}}
+
+.sfm-section-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:420px){.sfm-section-row{grid-template-columns:1fr}}
+.sfm-select{position:relative;display:flex;align-items:center}
+.sfm-select select{
+  width:100%;min-height:44px;padding:0 36px 0 12px;border:1px solid var(--pc-border);
+  border-radius:12px;background:var(--pc-surface-2);color:var(--pc-ink);font-size:13.5px;
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+}
+.sfm-select svg{position:absolute;right:12px;width:15px;height:15px;color:var(--pc-muted);pointer-events:none}
+.sfm-select select:focus-visible{outline:3px solid color-mix(in srgb,var(--pc-gold,#b77918) 45%,transparent);outline-offset:1px}
+
+.sfm-price-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sfm-price-row label{display:grid;gap:6px;font-size:12px;color:var(--pc-muted);font-weight:700}
+.sfm-price-input{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface-2)}
+.sfm-price-input span{color:var(--pc-muted);font-size:13px;font-weight:750}
+.sfm-price-input input{flex:1;min-width:0;border:0;background:none;color:var(--pc-ink);font-size:14px;font-variant-numeric:tabular-nums}
+.sfm-price-input input:focus{outline:none}
+.sfm-price-input:focus-within{border-color:var(--pc-green,#17633f)}
+
+.sfm-note{display:flex;align-items:flex-start;gap:8px;margin:0 0 14px;padding:11px 13px;border-radius:12px;background:var(--pc-surface-2);color:var(--pc-muted);font-size:12px;line-height:1.5}
+.sfm-note svg{flex:none;width:16px;height:16px;margin-top:1px;color:var(--pc-gold-ink,var(--pc-muted))}
+
+.sfm-foot{
+  display:flex;gap:10px;padding:14px 18px;padding-bottom:max(14px,env(safe-area-inset-bottom));
+  border-top:1px solid var(--pc-border);background:var(--pc-surface);
+}
+.sfm-clear{
+  flex:none;display:inline-flex;align-items:center;gap:7px;min-height:48px;padding:0 16px;
+  border:1px solid var(--pc-border);border-radius:12px;background:var(--pc-surface);
+  color:var(--pc-ink);font-size:13px;font-weight:800;cursor:pointer;
+}
+.sfm-clear svg{width:15px;height:15px}
+.sfm-apply{
+  flex:1;min-height:48px;border:0;border-radius:12px;
+  background:linear-gradient(135deg,var(--pc-green,#17633f),var(--pc-green-strong,#104c30));
+  color:#fff;font-size:13.5px;font-weight:850;cursor:pointer;
+}
+@media(hover:hover) and (pointer:fine){
+  .sfm-clear:hover{background:var(--pc-surface-2)}
+  .sfm-apply:hover{filter:brightness(1.06)}
+}
+html[data-theme="dark"] .sfm-apply{background:linear-gradient(135deg,#1c8a56,#146540);color:#eafff2}
+@media(prefers-reduced-motion:reduce){.sfm-overlay,.sfm-dialog{animation:none}}

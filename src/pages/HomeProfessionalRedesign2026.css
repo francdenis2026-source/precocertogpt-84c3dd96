@@ -2276,6 +2276,20 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   background: var(--h-surface);
   color: var(--h-primary-dark);
 }
+/* As 4 chamadas tinham significados diferentes (economia, comércio,
+   segurança, comunidade local) mas o mesmo azul genérico em todo ícone —
+   lia como decoração repetida, não como informação. Uma cor por item,
+   ligada ao que cada uma quer dizer (economia=verde, comércio=âmbar,
+   segurança=azul — a única que já fazia sentido ficar como estava,
+   comunidade/orgulho local=rosa-vermelho do coração). */
+.pcx-trustbar__list li:nth-child(1) .pcx-trustbar__icon{background:#dff2e6;color:#1c6b3f}
+.pcx-trustbar__list li:nth-child(2) .pcx-trustbar__icon{background:#faecd2;color:#935f0c}
+.pcx-trustbar__list li:nth-child(3) .pcx-trustbar__icon{background:#e1e9fb;color:#2e50ad}
+.pcx-trustbar__list li:nth-child(4) .pcx-trustbar__icon{background:#fbe1ec;color:#b23d78}
+[data-theme="dark"] .pcx-trustbar__list li:nth-child(1) .pcx-trustbar__icon{background:#1c3327;color:#6fd6a0}
+[data-theme="dark"] .pcx-trustbar__list li:nth-child(2) .pcx-trustbar__icon{background:#3a2f18;color:#f0c675}
+[data-theme="dark"] .pcx-trustbar__list li:nth-child(3) .pcx-trustbar__icon{background:#1c2740;color:#9db4f0}
+[data-theme="dark"] .pcx-trustbar__list li:nth-child(4) .pcx-trustbar__icon{background:#3a2030;color:#f0a5c8}
 .pcx-trustbar__icon svg { width: 16px; height: 16px; }
 .pcx-trustbar__list strong { display: block; font-size: 0.86rem; font-weight: 800; color: var(--h-ink); line-height: 1.25; }
 .pcx-trustbar__list small { display: block; font-size: 0.75rem; color: var(--h-muted); line-height: 1.3; }
