@@ -377,11 +377,12 @@ html[data-theme="dark"]
     border-radius: 14px !important;
     background: transparent !important;
     color: var(--pc-muted) !important;
-    /* Piso de legibilidade para texto funcional é 11px (abaixo disso falha
-       em telas de alta densidade e alvos de toque pequenos); esta regra
-       carrega depois de app-shell-professional-2026.css e, com a mesma
-       especificidade + !important, vencia com 10.5px. */
-    font-size: 11.5px !important;
+    /* iPhone 13 (390×844, densidade 3x) e afins: 11.5px lia pequeno demais
+       nos rótulos de "Início/Buscar/Cesta/Lojas/Favoritos", o texto mais
+       lido da barra inferior — usada em toda navegação mobile do site.
+       12.5px é o piso de legibilidade real sem esticar a barra (min-height
+       58px comporta ícone 24px + rótulo 12.5px + respiro com folga). */
+    font-size: 12.5px !important;
     font-weight: 720 !important;
     line-height: 1 !important;
     text-decoration: none !important;
@@ -391,8 +392,8 @@ html[data-theme="dark"]
       transform 120ms ease-out !important;
   }
   body.pc-app-shell :is(.ref-dock, .pc26-bottom-nav) a svg {
-    width: 22px !important;
-    height: 22px !important;
+    width: 24px !important;
+    height: 24px !important;
     stroke-width: 2 !important;
   }
   /* --pc-primary-* resolve para dourado aqui, não para o verde da marca.
