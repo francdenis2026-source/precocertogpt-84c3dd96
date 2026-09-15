@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Download, MapPin, Search, Smartphone, Sparkles, Store, Zap } from "lucide-react";
+import type { Product } from "../../data/catalog";
+import appPhoto from "../../assets/home-2026/app-showcase-mao-celular-2026.jpg";
+
 
 type InstallPromptEvent = Event & {
   prompt: () => Promise<void>;
