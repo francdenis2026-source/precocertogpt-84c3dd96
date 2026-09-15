@@ -78,8 +78,13 @@ html body .kelly-hero .kelly-hero__copy p{color:rgba(255,255,255,.86)!important}
 .kelly-hero__meta svg{width:12px;height:12px}
 .kelly-hero__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:1px}
 .kelly-hero__actions .pc-btn{font-size:13px}
-.kelly-hero__actions .pc-btn--primary{background:#8c8267;border-color:#8c8267;color:#1c1400}
-.kelly-hero__actions .pc-btn--primary:hover{filter:brightness(1.05)}
+/* O botão "Pedir pelo WhatsApp" usava um caqui/oliva (#8c8267) sem relação
+   nenhuma com WhatsApp, o site ou a foto de fundo — parecia um acidente de
+   paleta, não uma escolha. Trocado pelo verde oficial do WhatsApp (a cor
+   que a própria ação já sugere através do ícone), em gradiente com sombra
+   colorida para ficar à altura do resto do site, não um botão plano. */
+.kelly-hero__actions .pc-btn--primary{background:linear-gradient(135deg,#25d366,#128c7e);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(18,140,126,.35)}
+.kelly-hero__actions .pc-btn--primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
 /* fundo mais opaco que o "ghost" padrão do site: este botão pode cair
    sobre a parte mais clara/crua da foto (a batata frita, à direita do
    véu diagonal), onde .08 de branco quase não se distingue do fundo. */
@@ -218,7 +223,8 @@ html body .kelly-page .kelly-menu-group__head-copy p{color:rgba(255,255,255,.82)
 .kelly-cta h2{margin:0 0 4px;font-size:19px}
 .kelly-cta p{margin:0;font-size:13.5px;color:var(--pc-muted);max-width:44ch}
 .kelly-cta__actions{display:flex;flex-wrap:wrap;gap:10px}
-.kelly-cta__actions .pc-btn--primary{background:#8c8267;border-color:#8c8267;color:#1c1400}
+.kelly-cta__actions .pc-btn--primary{background:linear-gradient(135deg,#25d366,#128c7e);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(18,140,126,.3)}
+.kelly-cta__actions .pc-btn--primary:hover{filter:brightness(1.08)}
 
 @media (max-width:760px){
   .kelly-info{grid-template-columns:1fr}

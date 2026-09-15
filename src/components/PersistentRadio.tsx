@@ -112,6 +112,49 @@ export function PersistentRadioProvider({ children }: { children: ReactNode }) {
   const retry = () => { streamRef.current = 0; wantsPlay.current = true; void tryStream(0); };
   const setVolume = (value: number) => { const next = Math.max(0, Math.min(1, value)); setVolumeState(next); if (audioRef.current) audioRef.current.volume = next; };
   const handleFailure = () => { if (wantsPlay.current) void tryStream(streamRef.current + 1); };
+  // Media Session API: sem isso, tocar a rádio com a tela bloqueada (ou o
+  // app em segundo plano) não mostra nada de útil no player nativo do
+  // sistema — nem nome da estação, nem play/pause funcional, só o card
+  // genérico "site tocando áudio" do navegador (quando aparece algo). Com
+  // a metadata registrada, celular bloqueado, central de notificações,
+  // Bluetooth do carro e afins passam a mostrar nome da rádio (ou da
+  // faixa, quando a estação informa), o ícone do PreçoCerto como capa, e
+  // o botão de play/pause do próprio sistema controla a reprodução de
+  // verdade — sincronizado com o estado real do áudio, não só decorativo.
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !("mediaSession" in navigator)) return;
+    const mediaSession = navigator.mediaSession;
+    mediaSession.metadata = new MediaMetadata({
+      title: playing && nowPlaying ? nowPlaying : station.name,
+      artist: playing && nowPlaying ? station.name : "Rádio ao vivo",
+      album: "Preço Certo",
+      artwork: [
+        { src: "/pwa-192x192.png", sizes: "192x192", type: "image/png" },
+        { src: "/pwa-512x512.png", sizes: "512x512", type: "image/png" },
+      ],
+    });
+    mediaSession.playbackState = loading ? "none" : playing ? "playing" : "paused";
+    const handlePlay = () => { wantsPlay.current = true; void tryStream(streamRef.current); };
+    const handlePauseOrStop = () => { wantsPlay.current = false; audioRef.current?.pause(); };
+    const handlers: [MediaSessionAction, MediaSessionActionHandler | null][] = [
+      ["play", handlePlay],
+      ["pause", handlePauseOrStop],
+      ["stop", handlePauseOrStop],
+    ];
+    for (const [action, handler] of handlers) {
+      try { mediaSession.setActionHandler(action, handler); } catch { /* ação não suportada neste navegador */ }
+    }
+    return () => {
+      for (const [action] of handlers) {
+        try { mediaSession.setActionHandler(action, null); } catch { /* idem */ }
+      }
+    };
+    // tryStream fica de fora de propósito: é recriada a cada render (não é
+    // useCallback), mas seu comportamento só muda quando `station` muda —
+    // que já está na lista abaixo. Incluí-la reexecutaria este efeito (e
+    // reregistraria os handlers do sistema) a cada render sem necessidade.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [station, playing, loading, nowPlaying]);
   return <RadioContext.Provider value={{ station, playing, loading, failed, volume, nowPlaying, toggle, retry, setVolume }}>
     {children}
     {/* eslint-disable-next-line jsx-a11y/media-has-caption */}

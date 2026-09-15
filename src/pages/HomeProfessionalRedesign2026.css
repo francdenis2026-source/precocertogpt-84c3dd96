@@ -2423,12 +2423,32 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 /* Mesmo selo do card de loja em destaque (.pcx-store-hero__badge) — só o
    título ganha o fundo escuro translúcido; o parágrafo abaixo continua
    só com a tinta branca (já suficiente ali, sem competir por atenção). */
-.pcx-offers-visual .pcx-section__head h2 { display: inline-block; padding: 0.5rem 0.8rem; border-radius: 12px; background: rgba(6, 12, 20, 0.58); color: #fff !important; }
+.pcx-offers-visual .pcx-section__head h2 { display: inline-block; padding: 0.5rem 0.8rem; border-radius: 12px; background: rgba(6, 12, 20, 0.5); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.16); color: #fff !important; }
 .pcx-offers-visual .pcx-section__head p { color: #fff !important; }
 /* O link "Explorar catálogo" ficava de fora dessa regra — herdava a tinta
    escura padrão do site (pensada pra fundo claro) direto sobre a foto,
-   sem garantia nenhuma de contraste contra o que estivesse atrás dele. */
-.pcx-offers-visual .pcx-section__link { color: #fff !important; }
+   sem garantia nenhuma de contraste contra o que estivesse atrás dele, e
+   sem nenhum painel — só texto branco cru boiando na foto, sem nem parecer
+   clicável. Vira um selo de vidro de verdade (fundo translúcido + blur
+   real), a mesma receita do cabeçalho do site e do badge "Artesanal e
+   feito na hora" das páginas de lanchonete: agora lê como um botão, não
+   como legenda esquecida em cima da imagem. */
+.pcx-offers-visual .pcx-section__link {
+  margin-top: 12px;
+  padding: 9px 16px 9px 14px;
+  border-radius: 999px;
+  background: rgba(10, 22, 36, 0.42);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  color: #fff !important;
+  text-decoration: none !important;
+}
+.pcx-offers-visual .pcx-section__link:hover {
+  background: rgba(10, 22, 36, 0.58);
+  text-decoration: none !important;
+}
 .pcx-spotlight .pcx-frame-backdrop { z-index: -3; }
 .pcx-spotlight .pcx-frame-photo { z-index: -2; opacity: .56 !important; }
 .pcx-spotlight::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgb(7 20 38 / .84),rgb(7 20 38 / .55) 58%,rgb(7 20 38 / .3)); }
