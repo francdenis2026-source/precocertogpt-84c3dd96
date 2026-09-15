@@ -193,3 +193,38 @@ html[data-theme="dark"] .search26-modal__hero{background:linear-gradient(135deg,
 }
 @media(max-width:540px){.search26-featured>header{align-items:flex-start;flex-direction:column;gap:3px}.search26-featured>div{grid-template-columns:1fr}.search26-featured-card{grid-template-columns:56px minmax(0,1fr) auto 16px}.search26-featured-card .search26-thumb{grid-row:1}.search26-featured-card>b{grid-column:3;grid-row:1}.search26-featured-card>svg{grid-column:4;grid-row:1}.search26-modal__hero-main{grid-template-columns:50px minmax(0,1fr)}.search26-modal__hero-media{width:50px;height:50px;border-radius:13px}.search26-modal__hero-copy h2{font-size:.98rem}.search26-modal__hero-price strong{font-size:21px}.search26-modal__offer-list>a{grid-template-columns:32px minmax(0,1fr) auto}.search26-modal__offer-list>a>svg{display:none}.search26-modal__offer-list>a>div b{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.search26-modal,.search26-modal__dialog{animation:none}.search26-card,.search26-featured-card,.search26-modal__offer-list>a{transition:none}}
+
+/* Resultados da busca no mobile: os cards herdavam a densidade pensada para
+   a grade de 2 colunas do desktop — miniatura de 64px, nomes em 14px,
+   categoria em 12px, botões de favoritar/cesta de 32px colados na
+   miniatura (ver ProductCardActions.css). Empilhado em 1 coluna, essa
+   densidade só deixava tudo pequeno e apertado sem ganhar nada em troca.
+   Aumenta miniatura, tipografia, respiro e alvo de toque; o botão de
+   favoritar/cesta ganha tamanho correspondente em ProductCardActions.css. */
+@media(max-width:620px){
+  .search26-results>header h2{font-size:1.55rem}
+  .search26-card{grid-template-columns:92px minmax(0,1fr) 22px;column-gap:14px;row-gap:6px;padding:14px;border-radius:16px}
+  .search26-thumb{width:92px;height:92px;border-radius:14px}
+  .search26-thumb svg{width:26px;height:26px}
+  .search26-copy{gap:5px}
+  .search26-copy>small{font-size:12.5px}
+  .search26-copy>strong{font-size:16px;line-height:1.3}
+  .search26-copy>span{font-size:13px}
+  .search26-copy>span svg{width:14px;height:14px}
+  .search26-price{grid-column:2;margin-top:2px}
+  .search26-price small{font-size:12.5px}
+  .search26-price strong{font-size:20px}
+  .search26-price em{font-size:12.5px}
+  .search26-card>svg{grid-column:3;width:19px;height:19px}
+  /* pca-row--compact herdava 22px do modificador compacto (ver
+     ProductCardActions.css): com a miniatura de 64px do card antigo, a
+     linha de botões (2 × 22px + gap) já estourava a largura da miniatura
+     e era cortada pelo overflow:hidden dela — favoritar/cesta apareciam
+     colados, cortados e minúsculos no celular. Escopado a .search26-card
+     (não afeta .search26-featured-card, cuja miniatura de 56px continua
+     pequena demais para esse tamanho de botão) e com as duas classes do
+     modificador no seletor, para vencer sem depender de ordem no arquivo. */
+  .search26-card .pca-row--overlay.pca-row--compact{top:7px;right:7px;gap:6px}
+  .search26-card .pca-row--overlay.pca-row--compact .pca-btn{width:38px;height:38px;border-width:1.5px}
+  .search26-card .pca-row--overlay.pca-row--compact .pca-btn svg{width:17px;height:17px}
+}
