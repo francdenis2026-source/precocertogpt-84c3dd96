@@ -1,19 +1,23 @@
 /* Placeholders must never inherit photographic overlays. */
 html:root body .pcx-home .pcx-skeleton { position:relative; overflow:hidden; }
 html:root body .pcx-home .pcx-store-placeholder::after { content:none!important; }
+/* Sem fileira que desliza: grade completa, nada de barra de rolagem
+   horizontal na homepage. Todas as categorias ficam visíveis de uma vez. */
 html:root body .pcx-home .pcx-categories {
-  display:flex!important; grid-template-columns:none!important; gap:12px!important;
-  overflow-x:auto!important; overflow-y:hidden!important; padding:6px 3px 14px!important;
-  margin:0!important; width:100%; min-width:0; scroll-snap-type:x proximity;
-  overscroll-behavior-x:contain; touch-action:pan-x pan-y;
+  display:grid!important;
+  grid-template-columns:repeat(4, minmax(0,1fr))!important;
+  gap:14px!important; overflow:visible!important;
+  padding:0!important; margin:0!important; width:100%; min-width:0;
+  scroll-snap-type:none;
 }
 html:root body .pcx-home .pcx-categories .pcx-category {
-  flex:0 0 156px!important; width:156px!important; min-width:156px!important;
-  max-width:none!important; height:auto!important; min-height:148px;
-  display:flex!important; flex-direction:column!important; align-items:center;
-  justify-content:flex-start; padding:7px!important; gap:9px!important;
-  scroll-snap-align:start;
+  flex:none!important; width:auto!important; min-width:0!important;
+  max-width:none!important; height:auto!important; min-height:0;
+  display:flex!important; flex-direction:column!important; align-items:stretch;
+  justify-content:flex-start; padding:8px!important; gap:10px!important;
+  scroll-snap-align:none;
 }
+
 .pcx-category__media {
   position:relative; display:block; width:100%; height:82px; overflow:hidden;
   border-radius:10px; background:var(--h-surface-2);
