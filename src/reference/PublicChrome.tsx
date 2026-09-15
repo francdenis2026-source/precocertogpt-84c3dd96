@@ -232,10 +232,35 @@ export function PublicHeader({ current, backOnly = false, title }: { current?: P
     return () => window.removeEventListener("keydown", close);
   }, [menu]);
   useEffect(() => {
-    const syncScrolledState = () => setScrolled(window.scrollY > 10);
+    // Um único limiar (scrollY > 10) trocava a classe is-scrolled a cada
+    // pixel de vaivém em torno de 10px — comum ao rolar devagar ou no
+    // "elástico" do bounce/overscroll do mobile — e cada troca muda fundo,
+    // sombra e blur do header instantaneamente. O resultado visível era a
+    // barra "tremendo" e, no instante da troca, o conteúdo por trás ficando
+    // visível por baixo do vidro fosco. Histerese (liga acima de 24px,
+    // desliga só abaixo de 6px) faz a barra assentar num dos dois estados
+    // em vez de alternar a cada pequeno movimento. requestAnimationFrame
+    // garante no máximo uma atualização por frame, já que "scroll" pode
+    // disparar dezenas de vezes durante uma rolagem com inércia.
+    let ticking = false;
+    let isScrolled = window.scrollY > 10;
+    const syncScrolledState = () => {
+      ticking = false;
+      const y = window.scrollY;
+      const next = isScrolled ? y > 6 : y > 24;
+      if (next !== isScrolled) {
+        isScrolled = next;
+        setScrolled(next);
+      }
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(syncScrolledState);
+    };
     syncScrolledState();
-    window.addEventListener("scroll", syncScrolledState, { passive: true });
-    return () => window.removeEventListener("scroll", syncScrolledState);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
   if (backOnly) {
     const barTitle = title ?? defaultBackBarTitle(pathname);

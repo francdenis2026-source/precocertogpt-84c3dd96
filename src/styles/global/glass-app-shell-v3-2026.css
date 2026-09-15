@@ -26,7 +26,11 @@ body.pc-app-shell
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.34) !important;
   backdrop-filter: blur(22px) saturate(145%) !important;
   -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
-  transition: border-color 180ms ease-out !important;
+  /* border-color era a única propriedade com transição — fundo e sombra
+     trocavam de um valor pro outro no mesmo frame ao entrar/sair de
+     is-scrolled. Incluídas aqui para que a troca (rara agora, já que o
+     React usa histerese) apareça como um fade, não um corte instantâneo. */
+  transition: border-color 180ms ease-out, background-color 180ms ease-out, box-shadow 180ms ease-out !important;
 }
 body.pc-app-shell
   :is(.pc26-header--studio, .ref-header)[data-glass-header="true"]::before {
