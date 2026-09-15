@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Download, MapPin, Search, Smartphone, Sparkles, Store, Zap } from "lucide-react";
 import type { Product } from "../../data/catalog";
