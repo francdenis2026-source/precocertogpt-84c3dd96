@@ -55,6 +55,12 @@
   border:1px solid color-mix(in srgb,var(--pc-store-tint,var(--pc-primary,#2563eb)) 26%,var(--pc-border,#e2e8f0));
 }
 .ref-stores-page .ref-store-card__select>i>svg{width:21px!important;height:21px!important;color:var(--pc-store-tint,var(--pc-primary,#2563eb))!important;background:none!important}
+/* 4 lojas (Kelly Burgueria, Comércio Bons Amigos, Panificadora Bandeira,
+   Recanto da Carne) têm o arquivo de logo desenhado pequeno, dentro de um
+   selo/crachá circular com bastante margem transparente ao redor — ao lado
+   das outras, que preenchem o quadrado de ponta a ponta, ficavam nitidamente
+   menores e "redondas". Zoom pra compensar essa margem embutida no arquivo. */
+.ref-stores-page .ref-store-card__select>i>img.ref-store-logo--tight{transform:scale(1.32)}
 /* Mesmo tratamento na lista de lojas favoritas — o card é o mesmo
    componente, reaproveitado de /estabelecimentos. */
 .pc-favorites-page .ref-store-card__select>i{
@@ -62,6 +68,7 @@
   border:1px solid color-mix(in srgb,var(--pc-store-tint,var(--pc-primary,#2563eb)) 26%,var(--pc-border,#e2e8f0));
 }
 .pc-favorites-page .ref-store-card__select>i>svg{color:var(--pc-store-tint,var(--pc-primary,#2563eb))!important;background:none!important}
+.pc-favorites-page .ref-store-card__select>i>img.ref-store-logo--tight{transform:scale(1.32)}
 .ref-stores-page .ref-store-card__select>span{gap:3px}
 .ref-stores-page .ref-store-card__select small{color:var(--pc-green-strong);font-size:9px;font-weight:800;letter-spacing:.07em}
 .ref-stores-page .ref-store-card__select strong{font-family:var(--pc-font-display);font-size:15px;font-weight:700;line-height:1.1;letter-spacing:-.015em}

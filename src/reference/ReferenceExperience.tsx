@@ -18,7 +18,7 @@ import { EditorialPhoto } from "../components/EditorialPhoto";
 import { fetchCatalog, normalize } from "../data/remoteCatalog";
 import { fetchSectorCatalog, withoutDemoEstablishments } from "../data/sectorCatalog";
 import { resolveProductImage } from "../data/productImageResolver";
-import { getStoreLogoUrl } from "../data/storeLogos";
+import { getStoreLogoUrl, isStoreLogoTightCrop } from "../data/storeLogos";
 import { loadSessionProfile, requestPasswordReset } from "../lib/roles";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
 import { useStoreFavorites } from "../features/favorites/StoreFavoritesProvider";
@@ -167,7 +167,7 @@ function StoreLogo({ name }: { name: string }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => setFailed(false), [source]);
   return source && !failed
-    ? <img src={source} alt={`Logomarca de ${name}`} loading="lazy" onError={() => setFailed(true)} />
+    ? <img src={source} alt={`Logomarca de ${name}`} loading="lazy" onError={() => setFailed(true)} className={isStoreLogoTightCrop(name) ? "ref-store-logo--tight" : undefined} />
     : <Store aria-hidden="true" />;
 }
 
