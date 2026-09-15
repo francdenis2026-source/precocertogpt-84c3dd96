@@ -38,7 +38,6 @@
    cheia de 200px — era ela que dominava a tela no celular, empurrando o
    preço e o botão de adicionar quase pra fora da área visível. */
 .pqv-hero{position:relative;isolation:isolate;overflow:hidden;padding:14px 16px 16px;background:linear-gradient(135deg,#0a1f33,#123a52 55%,#155073);color:#fff}
-.pqv-hero::after{content:"";position:absolute;z-index:-1;top:-70px;right:-50px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%)}
 .pqv-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .pqv-eyebrow{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);color:#eef5ff;font-size:10px;font-weight:850;letter-spacing:.05em;text-transform:uppercase}
 .pqv-hero-icons{display:flex;gap:8px;flex:0 0 auto}
