@@ -2464,7 +2464,9 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   padding: 0.65rem 1.1rem;
   border-radius: var(--h-radius-md);
   border: 1px solid rgba(255, 255, 255, .34);
-  color: #fff;
+  /* !important: folhas globais forçam a cor de links em faixas claras e
+     apagavam este texto sobre o navy da seção. */
+  color: #fff !important;
   text-decoration: none;
   font-weight: 700;
   font-size: 0.86rem;
