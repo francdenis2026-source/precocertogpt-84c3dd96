@@ -1,5 +1,5 @@
 import { sectorHeroImage } from "../data/sectorHeroImages";
-import { CSSProperties, FormEvent, RefObject, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import { sanitizeRedirect } from "../auth/safeRedirect";
 import { createPortal } from "react-dom";
@@ -213,54 +213,6 @@ function reasonForRedirect(safePath: string, rawRedirect: string | null): string
   return "Você precisa entrar para continuar.";
 }
 
-/**
- * Em vez de tentar acertar no CSS, em pixels fixos, uma altura de conteúdo
- * que caiba em qualquer janela (login e cadastro têm alturas diferentes, o
- * aviso de redirecionamento soma altura extra, e cada monitor/zoom sobra ou
- * falta um pouco), este hook mede o conteúdo de verdade contra o espaço
- * disponível e aplica a menor escala necessária para caber inteiro — sem
- * nunca precisar de barra de rolagem, e sem depender de adivinhar valores.
- * Só encolhe quando falta espaço; em telas normais fica em escala 1 (tamanho
- * cheio). `deps` deve listar tudo que muda a altura do conteúdo (troca de
- * aba, mensagens de erro, etc.) para a medição ser refeita.
- */
-function useAutoFit(containerRef: RefObject<HTMLElement | null>, contentRef: RefObject<HTMLElement | null>, deps: unknown[]) {
-  const [scale, setScale] = useState(1);
-  useLayoutEffect(() => {
-    const container = containerRef.current;
-    const content = contentRef.current;
-    if (!container || !content) return;
-    const measure = () => {
-      // Zerar o zoom antes de medir (em vez de dividir pelo zoom atual)
-      // mudava o próprio tamanho do elemento observado, disparando o
-      // ResizeObserver de novo dentro do próprio callback. Esse loop batia
-      // no limite de segurança do navegador e ficava travado em zoom:1 —
-      // o card "grande demais" com barra de rolagem via de resize/reflow,
-      // não só no primeiro carregamento (que por sorte estabilizava rápido).
-      const style = getComputedStyle(container);
-      const available = container.clientHeight - parseFloat(style.paddingTop || "0") - parseFloat(style.paddingBottom || "0") - 2;
-      const currentZoom = parseFloat(content.style.zoom || "1") || 1;
-      const natural = content.scrollHeight / currentZoom;
-      const next = natural > available ? Math.max(0.7, available / natural) : 1;
-      setScale(next);
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(container);
-    observer.observe(content);
-    // Reforço além do ResizeObserver: redimensionar a janela do navegador
-    // (não só o elemento) é o gatilho mais comum de barra de rolagem aqui,
-    // e não custa nada garantir que ele também dispare uma nova medição.
-    window.addEventListener("resize", measure);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps);
-  return scale;
-}
-
 export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -278,7 +230,6 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
   const [recoverSent, setRecoverSent] = useState(false);
   const formRef = useRef<HTMLElement>(null);
   const fitRef = useRef<HTMLDivElement>(null);
-  const fitScale = useAutoFit(formRef, fitRef, [mode, showRecover, redirectReason, message, recoverSent, accountType]);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -320,7 +271,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     setRecoverSent(true);
   };
 
-  return <div className="ref-auth"><aside className="ref-auth__story"><Brand inverse /><div className="ref-auth__hero-copy"><span className="ref-kicker"><MapPin /> FEIJÓ, ACRE</span><h1>Escolhas melhores começam por aqui.</h1><p>Compare preços locais com clareza e compre com mais confiança.</p></div><small>PreçoCerto · Economia perto de você</small></aside><main className="ref-auth__form" ref={formRef}><div className="ref-auth__fit" ref={fitRef} style={fitScale < 1 ? ({ zoom: fitScale } as CSSProperties) : undefined}><Link className="ref-auth__back" to="/"><ArrowLeft /> Voltar ao PreçoCerto</Link>
+  return <div className="ref-auth"><aside className="ref-auth__story"><Brand inverse /><div className="ref-auth__hero-copy"><span className="ref-kicker"><MapPin /> FEIJÓ, ACRE</span><h1>Escolhas melhores começam por aqui.</h1><p>Compare preços locais com clareza e compre com mais confiança.</p></div><small>PreçoCerto · Economia perto de você</small></aside><main className="ref-auth__form" ref={formRef}><div className="ref-auth__fit" ref={fitRef}><Link className="ref-auth__back" to="/"><ArrowLeft /> Voltar ao PreçoCerto</Link>
 
     {!showRecover && redirectReason && (
       <p className="ref-auth__reason"><LockKeyhole aria-hidden="true" /> {redirectReason}</p>
