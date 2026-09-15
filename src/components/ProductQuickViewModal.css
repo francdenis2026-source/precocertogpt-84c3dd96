@@ -7,12 +7,18 @@
    corretamente em qualquer página .ref-page (onde este modal vive),
    incluindo tema escuro. */
 
+/* backdrop-filter mais forte (blur(7px)) sobre a tela inteira, aberto em
+   cima de uma página que já tem header com blur(22px) e (antes desta
+   revisão) a foto do herói com o próprio blur — três filtros pesados
+   competindo pelo mesmo quadro é receita clássica de travamento/engasgo ao
+   abrir o modal no celular. Reduzido para blur(5px) e a cor de fundo ficou
+   um pouco mais opaca (.66→.74) pra compensar a perda de contraste. */
 .pqv-overlay{
   position:fixed;inset:0;z-index:1000;
   display:grid;place-items:center;
   padding:20px;
-  background:rgba(6,14,12,.66);
-  backdrop-filter:blur(7px);
+  background:rgba(6,14,12,.74);
+  backdrop-filter:blur(5px);
   animation:pqv-fade .18s ease-out;
 }
 @keyframes pqv-fade{from{opacity:0}to{opacity:1}}
@@ -47,6 +53,11 @@
 .pqv-hero-media svg{width:24px;height:24px;color:var(--pc-muted,#52647a)}
 .pqv-hero-copy{min-width:0}
 .pqv-hero-copy h2{margin:0;font-family:var(--pc-font-display,"Manrope Variable",Manrope,system-ui,sans-serif);font-size:1.08rem;line-height:1.22;letter-spacing:-.015em;color:#fff;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* typography-contrast-2026.css força ".ref-page h2" pra tinta escura com
+   !important (ver mesmo comentário em KellyBurgueriaPage.css) — este modal
+   vive dentro de .ref-page (não usa portal), então o nome do produto, branco
+   sobre o gradiente escuro do hero, ficava quase ilegível. */
+html body .ref-page .pqv-hero-copy h2{color:#fff!important}
 
 /* Corpo rolável: única região com scroll, apartada do rodapé fixo de preço.
    A descrição (ingredientes, no caso de Kelly/Sanduba) mora aqui, não no

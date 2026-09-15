@@ -25,21 +25,41 @@
   background:#0d0705 url('/kelly-burgueria/lanchonete-hero.webp') center 42%/cover no-repeat;
   border:1px solid var(--pc-border);
 }
+/* backdrop-filter:blur() removido daqui — pesava no scroll (repaint contínuo
+   de um blur sobre uma foto grande, empilhado com o blur(22px) do header
+   fixo por cima, era a causa mais provável do "tremendo" relatado ao rolar
+   estas páginas). O gradiente sozinho já dava contraste suficiente, e agora
+   o texto também ganhou um painel de vidro próprio (.kelly-hero__copy),
+   então o degradê aqui só precisa escurecer a base da foto, não ler texto. */
 .kelly-hero__overlay{
   position:absolute;inset:0;
   background:linear-gradient(100deg,rgba(18,12,8,.86) 0%,rgba(18,12,8,.7) 34%,rgba(18,12,8,.42) 60%,rgba(18,12,8,.16) 82%,transparent 100%),
-             linear-gradient(180deg,rgba(18,12,8,.1) 0%,transparent 34%,rgba(18,12,8,.3) 100%);
-  backdrop-filter:blur(3px);
-  -webkit-backdrop-filter:blur(3px);
+             linear-gradient(180deg,rgba(18,12,8,.32) 0%,rgba(18,12,8,.05) 22%,transparent 40%,rgba(18,12,8,.34) 100%);
 }
 html[data-theme="dark"] .kelly-hero__overlay{
   background:linear-gradient(100deg,rgba(22,15,10,.78) 0%,rgba(22,15,10,.62) 34%,rgba(22,15,10,.36) 60%,rgba(22,15,10,.12) 82%,transparent 100%),
-             linear-gradient(180deg,rgba(22,15,10,.08) 0%,transparent 34%,rgba(22,15,10,.26) 100%);
+             linear-gradient(180deg,rgba(22,15,10,.3) 0%,rgba(22,15,10,.04) 22%,transparent 40%,rgba(22,15,10,.3) 100%);
 }
 .kelly-hero__content{position:relative;z-index:1;display:flex;align-items:flex-end;gap:16px;padding:20px 22px;width:100%}
 .kelly-hero__logo{flex:none;width:52px;height:52px;border-radius:13px;overflow:hidden;border:2px solid rgba(255,255,255,.35);box-shadow:0 8px 18px rgba(0,0,0,.32);background:#0d0705}
 .kelly-hero__logo img{width:100%;height:100%;object-fit:cover;display:block}
-.kelly-hero__copy{color:#fff;display:flex;flex-direction:column;gap:5px;min-width:0}
+/* Painel de vidro: o texto do herói (kicker, título, endereço/selo, botões)
+   flutuava direto sobre a foto, só com o degradê como contraste — e a
+   barra do header, translúcida por design em todo o site, deixava o texto
+   "aparecer por trás" dela de um jeito que lia como falha, não como vidro.
+   Um painel de vidro de verdade aqui (fundo translúcido + blur real) reforça
+   a leitura exatamente onde o texto importa, na mesma linguagem visual já
+   usada no cabeçalho do site e no banner "Comprar local fortalece Feijó". */
+.kelly-hero__copy{
+  color:#fff;display:flex;flex-direction:column;gap:7px;min-width:0;
+  background:rgba(9,6,4,.44);
+  backdrop-filter:blur(14px) saturate(150%);
+  -webkit-backdrop-filter:blur(14px) saturate(150%);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;
+  padding:13px 15px;
+  box-shadow:0 10px 28px rgba(0,0,0,.22);
+}
 .kelly-hero__kicker{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;letter-spacing:.06em;color:#ffd764;width:fit-content}
 .kelly-hero__kicker svg{width:12px;height:12px}
 .kelly-hero__copy h1{margin:0;font-size:clamp(1.15rem,2.1vw,1.55rem);line-height:1.1;font-weight:900}
@@ -63,7 +83,33 @@ html body .kelly-hero .kelly-hero__copy p{color:rgba(255,255,255,.86)!important}
 /* fundo mais opaco que o "ghost" padrão do site: este botão pode cair
    sobre a parte mais clara/crua da foto (a batata frita, à direita do
    véu diagonal), onde .08 de branco quase não se distingue do fundo. */
-.kelly-hero__actions .pc-btn--ghost{background:rgba(13,7,5,.5);border-color:rgba(255,255,255,.4);color:#fff;backdrop-filter:blur(4px)}
+.kelly-hero__actions .pc-btn--ghost{background:rgba(13,7,5,.5);border-color:rgba(255,255,255,.4);color:#fff}
+
+/* ---------- Primitivo .pc-btn ----------
+   O projeto documenta .pc-btn como o botão padrão do site, mas nenhum CSS
+   em lugar nenhum do repositório define a base dele (display, padding,
+   alinhamento, tamanho do ícone) — só os modificadores de cor (--primary/
+   --ghost) por página. Sem essa base, o navegador renderiza o <a> como
+   bloco (ícone e texto empilhados, não lado a lado) e o ícone do lucide-react
+   no tamanho nativo dele (24px) sem nenhuma restrição — exatamente o "ícone
+   do WhatsApp horrível e ilegível" relatado (confirmado medindo no navegador:
+   24px de ícone boiando sozinho numa <a> com padding:0). Escopado a
+   .kelly-page porque é onde .pc-btn está realmente em uso nestas duas
+   páginas; outras páginas que também citam .pc-btn (busca, farmácia,
+   catálogo de loja) já têm suas próprias regras completas e não foram
+   tocadas aqui. */
+.kelly-page .pc-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 18px;
+  border-radius:999px;border:1px solid transparent;
+  font-weight:800;text-decoration:none;cursor:pointer;
+  white-space:nowrap;
+  transition:transform .15s ease,filter .15s ease,background-color .15s ease;
+}
+.kelly-page .pc-btn svg{width:17px;height:17px;flex:none}
+@media(hover:hover) and (pointer:fine){
+  .kelly-page .pc-btn:hover{transform:translateY(-1px)}
+}
 
 /* .kelly-hero__visual (foto de detalhe + selo "Artesanal e feito na hora")
    nunca teve regra própria — sem CSS nenhum, um <img> em tamanho natural
@@ -144,6 +190,14 @@ html body .kelly-hero .kelly-hero__copy p{color:rgba(255,255,255,.86)!important}
 .kelly-menu-group__head-icon svg{width:16px;height:16px}
 .kelly-menu-group__head-copy h2{margin:0;font-size:16.5px;font-weight:800}
 .kelly-menu-group__head-copy p{flex-basis:100%;margin:0;font-size:13px;color:rgba(255,255,255,.82)}
+/* Mesmo problema do herói (ver comentário em .kelly-hero__copy h1 acima):
+   typography-contrast-2026.css força ".ref-page h2"/"p" pra tinta escura
+   com !important, pensado pro corpo comum da página — não pra faixa de
+   categoria com foto escura de fundo. Título e subtítulo de cada categoria
+   (ex.: "Sanduíches", "Hambúrgueres") ficavam quase pretos sobre fundo
+   quase preto, ilegíveis. Mesma técnica de especificidade extra pra vencer. */
+html body .kelly-page .kelly-menu-group__head-copy h2{color:#fff!important}
+html body .kelly-page .kelly-menu-group__head-copy p{color:rgba(255,255,255,.82)!important}
 
 .kelly-menu-list{list-style:none;margin:0;padding:4px 6px 8px}
 .kelly-menu-list>li{border-bottom:1px solid var(--pc-border)}
