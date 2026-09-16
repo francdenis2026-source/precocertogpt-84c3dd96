@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Download, Smartphone, Sparkles, Store, Zap } from "lucide-react";
-import appPhoto from "../../assets/home-2026/app-showcase-mao-celular-2026.jpg";
+import appPhoto from "../../assets/home-2026/app-showcase-mao-celular-2026-v2.jpg";
 import { type InstallPromptEvent, clearCapturedInstallPrompt, getCapturedInstallPrompt } from "../../lib/pwaInstall";
 
 function isStandalone() {
