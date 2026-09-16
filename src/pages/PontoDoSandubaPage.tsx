@@ -19,6 +19,14 @@ import {
 } from "../data/manualEstablishments2";
 import "./KellyBurgueriaPage.css";
 import "./PontoDoSandubaPage.css";
+// A página nunca teve foto própria (o arquivo citado no comentário antigo,
+// /ponto-do-sanduba/hero-burgers.jpg, nunca existiu no repositório — a hero
+// abria sem nenhuma imagem). O acervo do projeto só tem duas fotos de
+// lanchonete de verdade, e as duas já estão em uso na página da Kelly
+// Burgueria (fundo do hero + selo no canto) — reaproveitadas aqui só que
+// com os papéis trocados, pra cada página ter uma composição própria em
+// vez de repetir exatamente a mesma foto no mesmo lugar.
+import heroPhoto from "../assets/sectors-2026/sector-food-v3.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,7 +99,7 @@ export function PontoDoSandubaPage() {
       <main id="conteudo-principal" className="kelly-shell">
         <Link className="kelly-back" to="/estabelecimentos"><ArrowLeft /> Todos os estabelecimentos</Link>
 
-        <section className="kelly-hero sanduba-hero" aria-labelledby="sanduba-title">
+        <section className="kelly-hero sanduba-hero" style={{ backgroundImage: `url('${heroPhoto}')` }} aria-labelledby="sanduba-title">
           <div className="kelly-hero__overlay" aria-hidden="true" />
           <div className="kelly-hero__content">
             <div className="kelly-hero__logo"><img src="/branding/ponto-do-sanduba-logo.jpg?v=20260822" alt={`Logomarca ${SANDUBA_NAME}`} width="96" height="96" /></div>
@@ -108,9 +116,10 @@ export function PontoDoSandubaPage() {
               </div>
             </div>
           </div>
-          {/* Sem bloco de foto: /ponto-do-sanduba/hero-burgers.jpg nunca existiu
-              no repositorio e a pagina abria com uma imagem quebrada. Quando
-              houver uma foto real desta loja, e so recolocar o bloco. */}
+          <div className="kelly-hero__visual" aria-hidden="true">
+            <img src="/kelly-burgueria/lanchonete-hero.webp" alt="" />
+            <span><BadgeCheck /> Montado na hora</span>
+          </div>
         </section>
 
         {/* Ver comentário equivalente em KellyBurgueriaPage.tsx: o card de

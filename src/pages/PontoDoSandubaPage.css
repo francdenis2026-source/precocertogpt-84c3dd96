@@ -2,7 +2,13 @@
    estrutura de página de cardápio) e troca só a imagem do hero e o acento
    de cor para a identidade laranja da marca. */
 
+/* Foto trocada por inline style em PontoDoSandubaPage.tsx (a cozinheira
+   servindo hambúrgueres, não o close de hambúrguer/fritas que a Kelly já
+   usa) — o enquadramento "center 42%" do .kelly-hero base foi calibrado
+   pro close, não pra essa foto (ela fica à direita do centro na imagem
+   original). Reenquadra só aqui pro rosto e os pratos ficarem visíveis. */
 .sanduba-hero{
+  background-position:70% 30%!important;
   --menu-hero:#261005;
 }
 
