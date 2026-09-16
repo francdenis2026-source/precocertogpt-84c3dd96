@@ -2344,27 +2344,39 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
 [data-theme="dark"] .pcx-trustbar__list li:nth-child(2) .pcx-trustbar__icon{background:#3a2f18;color:#f0c675}
 [data-theme="dark"] .pcx-trustbar__list li:nth-child(3) .pcx-trustbar__icon{background:#1c2740;color:#9db4f0}
 [data-theme="dark"] .pcx-trustbar__list li:nth-child(4) .pcx-trustbar__icon{background:#3a2030;color:#f0a5c8}
-.pcx-trustbar__icon svg { width: 16px; height: 16px; }
+.pcx-trustbar__icon svg { width: 18px; height: 18px; }
 .pcx-trustbar__list strong { display: block; font-size: 0.86rem; font-weight: 800; color: var(--h-ink); line-height: 1.25; }
 .pcx-trustbar__list small { display: block; font-size: 0.75rem; color: var(--h-muted); line-height: 1.3; }
+/* Assinatura da marca fecha a fileira como um card próprio (mesmo respiro
+   dos irmãos), em vez de um bloco solto separado por um risco vertical. */
 .pcx-trustbar__tag {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.65rem;
   margin: 0;
-  padding-left: 1.9rem;
-  border-left: 1px solid var(--h-border);
+  padding: 0.8rem 1.1rem;
+  border: 1px solid var(--h-border);
+  border-radius: 14px;
+  background: var(--h-surface);
+  box-shadow: 0 1px 2px rgba(15, 30, 50, 0.05);
 }
-.pcx-trustbar__tag svg { width: 18px; height: 18px; color: var(--h-primary-dark); flex-shrink: 0; }
+.pcx-trustbar__tag svg { width: 20px; height: 20px; color: var(--h-primary-dark); flex-shrink: 0; }
 .pcx-trustbar__tag strong { display: block; font-size: 0.86rem; font-weight: 900; color: var(--h-ink); }
 .pcx-trustbar__tag small { display: block; font-size: 0.75rem; color: var(--h-muted); }
+@media (max-width: 1080px) {
+  .pcx-trustbar__inner { grid-template-columns: 1fr; }
+  .pcx-trustbar__tag { justify-content: center; }
+  .pcx-trustbar__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 760px) {
   .pcx-trustbar__tag { display: none; }
-  .pcx-trustbar__list { gap: 0.9rem 1.3rem; }
-  .pcx-trustbar__icon { width: 30px; height: 30px; }
-  .pcx-trustbar__icon svg { width: 14px; height: 14px; }
-  .pcx-trustbar__list strong { font-size: 0.78rem; }
-  .pcx-trustbar__list small { font-size: 0.8rem; }
+  .pcx-trustbar__inner { padding-block: 0.9rem; }
+  .pcx-trustbar__list { gap: 0.6rem; }
+  .pcx-trustbar__list li { padding: 0.7rem 0.8rem; gap: 0.6rem; }
+  .pcx-trustbar__icon { width: 34px; height: 34px; border-radius: 10px; }
+  .pcx-trustbar__icon svg { width: 15px; height: 15px; }
+  .pcx-trustbar__list strong { font-size: 0.8rem; }
+  .pcx-trustbar__list small { font-size: 0.72rem; }
 }
 @media (max-width: 480px) {
   .pcx-trustbar__list small { display: none; }
