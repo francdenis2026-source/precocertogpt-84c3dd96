@@ -9,6 +9,20 @@ import {
 } from "./catalog";
 import { withManualAdditions } from "./manualEstablishments";
 
+/**
+ * "products" por loja aqui é contado a partir da tabela de preços do
+ * comparador geral (productIdsByStore, abaixo) — mas o acervo de uma autora
+ * como a Dorinha Barroso não passa por essa tabela: os livros vivem no campo
+ * `books` do perfil da lojista (lido via RPC `author_store_public_profile`
+ * em DorinhaEditorialPage/DorinhaCommerceEnhancer), então o card dela sempre
+ * mostrava "0 produtos no catálogo" mesmo com o acervo completo publicado.
+ * Override pontual só para esse tipo de vitrine, casado pelo slug real do
+ * estabelecimento (o mesmo usado na RPC e em PublicEstablishmentCatalog).
+ */
+export const NON_PRICE_CATALOG_COUNTS: Record<string, number> = {
+  "dorinha-barroso-livros": 4,
+};
+
 type EstablishmentRow = {
   id: string;
   slug: string | null;
@@ -459,9 +473,10 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
     const stores: StoreRow[] = storeRows
       .map(store => {
         const extra = storeExtras.get(String(store.id));
+        const slug = storeSlugById.get(String(store.id)) || String(store.id);
         return {
           id: store.id,
-          slug: storeSlugById.get(String(store.id)) || String(store.id),
+          slug,
           name: store.name ?? "Estabelecimento",
           neighborhood: store.neighborhood ?? "—",
           color: store.brand_color ?? "#1473E6",
@@ -473,7 +488,7 @@ async function loadCatalog(query = ""): Promise<CatalogResult> {
           openingHours: extra?.opening_hours ?? undefined,
           photoUrl: extra?.storefront_image_url ?? undefined,
           whatsapp: extra?.whatsapp ?? undefined,
-          products: productIdsByStore.get(String(store.id))?.size ?? 0,
+          products: NON_PRICE_CATALOG_COUNTS[slug] ?? (productIdsByStore.get(String(store.id))?.size ?? 0),
         };
       })
 

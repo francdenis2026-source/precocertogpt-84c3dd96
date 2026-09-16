@@ -1,5 +1,5 @@
 import { supabase } from "../lib/supabase";
-import { fetchCatalog } from "./remoteCatalog";
+import { fetchCatalog, NON_PRICE_CATALOG_COUNTS } from "./remoteCatalog";
 import type { CatalogPayload, Product, StoreRow } from "./catalog";
 import { businessGroups, groupForStore, type BusinessGroup } from "./businessTaxonomy";
 
@@ -226,9 +226,10 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
 
   const realStores: StoreRow[] = realRows.map(row => {
     const name = row.name?.trim() || "Estabelecimento";
+    const slug = storeSlug(row, name);
     return {
       id: row.id,
-      slug: storeSlug(row, name),
+      slug,
       name,
       neighborhood: row.neighborhood?.trim() || "—",
       color: row.brand_color || "#1473E6",
@@ -238,7 +239,11 @@ async function mergeRealEstablishments(catalog: CatalogPayload): Promise<Catalog
       city: addressCity(row.address),
       whatsapp: row.whatsapp || undefined,
       openingHours: row.opening_hours || undefined,
-      products: productCounts.get(String(row.id)) || 0,
+      // productCounts só enxerga produtos ligados à tabela de preços do
+      // comparador geral — não cobre vitrines como a da autora Dorinha
+      // Barroso, cujo acervo vive no campo `books` do perfil da lojista
+      // (ver NON_PRICE_CATALOG_COUNTS em remoteCatalog.ts).
+      products: NON_PRICE_CATALOG_COUNTS[slug] ?? (productCounts.get(String(row.id)) || 0),
     };
   });
 
