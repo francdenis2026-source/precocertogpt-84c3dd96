@@ -92,10 +92,14 @@ not a bug.
 
 Admin (`AdminControlCenter`, `AdminCatalogWorkspace`) and the merchant dashboard
 (`ReferenceMerchantDashboard`) use a navy sidebar with a gold active state, tokenized cards and
-tabular KPIs. The admin *shell* is intentionally fixed-light for now (not dark-mode toggled):
-these are internal operational tools, not the public storefront, and a partial dark-mode pass
-that left cards white with light text would be worse than a consistent light theme. Full
-dark-mode support for admin is a scoped follow-up, not attempted here.
+tabular KPIs, driven by the `--am-*` variables in `AdminMerchantRedesign2026.css`. Admin now
+responds to `html[data-theme="dark"]`: the same variables are redefined to a dark cacau-green
+surface (`--am-canvas`/`--am-surface`/`--am-ink`/etc.), so every rule that already referenced
+`var(--am-*)` re-themes automatically, and a handful of hardcoded-white elements (KPI tiles,
+table header, status chips, price-gate toggle) got explicit dark overrides alongside it. The
+`/admin/usuarios` page also gained a compact KPI hero strip (`.acc-users-hero`: total accounts,
+admins, moderators, active in the last 7 days — all computed from real rows, no placeholder
+numbers) above its table.
 
 ## Business logic (unchanged)
 
@@ -119,7 +123,10 @@ reconnecting them to real metrics is a functionality change outside this redesig
 
 ## Known follow-ups
 
-- Admin/merchant-dashboard dark-mode support (see above).
+- Admin dark mode covers `AdminControlCenter`'s shared shell (sidebar, top bar, cards, tables,
+  chips) and was verified on `/admin/usuarios`; `AdminCatalogWorkspace` (`.acw-*`) and the
+  merchant dashboard (`.ref-admin*`) share the same `--am-*` variables so they inherit the same
+  dark palette, but were not individually screenshot-checked.
 - A handful of small, low-traffic surfaces (e.g. the account dropdown menu, error-message
   backgrounds on the auth form) intentionally keep a couple of hardcoded colors because they
   sit on an always-dark or always-neutral surface; this is documented in code rather than

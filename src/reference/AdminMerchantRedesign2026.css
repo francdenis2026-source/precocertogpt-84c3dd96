@@ -108,3 +108,55 @@
    (prefixo pc e px), que ja respondem sozinhos a claro/escuro. Este
    arquivo tinha uma paleta verde-esmeralda propria, fixa, so pra essa
    pagina. */
+
+/* ── Modo escuro (admin + painel do lojista) ─────────────────────────────
+   O shell do admin era fixo-claro; a pedido, ele agora responde a
+   html[data-theme="dark"] com a mesma identidade verde-esmeralda + dourado,
+   recolorida para uma superfície escura em vez de forçar texto claro sobre
+   cartões que ficariam brancos (o problema que a decisão anterior evitava). */
+html[data-theme="dark"] {
+  --am-navy: #08160f;
+  --am-navy-2: #16b389;
+  --am-canvas: #0d1a15;
+  --am-surface: #142620;
+  --am-surface-2: #1a3129;
+  --am-border: #274238;
+  --am-ink: #eafff3;
+  --am-muted: #a9c2b8;
+  --am-gold: #e8b23d;
+  --am-gold-soft: #3a2f14;
+  --am-danger: #ff8a75;
+  --am-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="dark"] .acc-sidebar,
+html[data-theme="dark"] .acw-sidebar,
+html[data-theme="dark"] .ref-admin__sidebar {
+  background: linear-gradient(180deg, #061109, #04140d) !important;
+}
+html[data-theme="dark"] .acc-table th { background: var(--am-surface-2) !important; color: var(--am-muted) !important; }
+html[data-theme="dark"] .acc-table td { border-top-color: var(--am-border) !important; }
+html[data-theme="dark"] .acc-table td b,
+html[data-theme="dark"] .acc-table td strong { color: var(--am-ink) !important; }
+html[data-theme="dark"] .acc-kpis div,
+html[data-theme="dark"] .acc-cards article,
+html[data-theme="dark"] .acc-users-hero > div { background: var(--am-surface-2) !important; border-color: var(--am-border) !important; }
+html[data-theme="dark"] .acc-users-hero strong,
+html[data-theme="dark"] .acc-kpis strong { color: var(--am-ink) !important; }
+html[data-theme="dark"] .acc-users-hero span,
+html[data-theme="dark"] .acc-kpis span { color: var(--am-muted) !important; }
+html[data-theme="dark"] .acc-top-actions label,
+html[data-theme="dark"] .acc-top-actions > button,
+html[data-theme="dark"] .acc-top-actions > a { background: var(--am-surface) !important; border-color: var(--am-border) !important; color: var(--am-ink) !important; }
+html[data-theme="dark"] .acc-status,
+html[data-theme="dark"] .acc-chip { background: var(--am-surface-2) !important; color: var(--am-ink) !important; }
+html[data-theme="dark"] .acc-status.s-active,
+html[data-theme="dark"] .acc-status.s-delivered,
+html[data-theme="dark"] .acc-status.s-paid { background: rgba(22, 179, 137, 0.18) !important; color: #7be0c4 !important; }
+html[data-theme="dark"] .acc-status.s-suspended,
+html[data-theme="dark"] .acc-status.s-cancelled { background: rgba(255, 138, 117, 0.16) !important; color: var(--am-danger) !important; }
+html[data-theme="dark"] .acc-table button,
+html[data-theme="dark"] .acc-application-grid button { background: var(--am-surface) !important; border-color: var(--am-border) !important; color: var(--am-ink) !important; }
+html[data-theme="dark"] .acc-application-grid article { border-color: var(--am-border) !important; }
+html[data-theme="dark"] .acc-bars i { background: var(--am-surface-2) !important; }
+html[data-theme="dark"] .acc-price-gate.is-open { background: rgba(22, 179, 137, 0.08) !important; border-color: var(--am-navy-2) !important; }
+html[data-theme="dark"] .acc-price-gate__toggle { background: var(--am-surface) !important; border-color: var(--am-border) !important; color: var(--am-ink) !important; }

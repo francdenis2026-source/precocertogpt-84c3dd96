@@ -986,17 +986,47 @@ function Users({
   busy: string;
   act: any;
 }) {
+  const admins = rows.filter((u) =>
+    Array.isArray(u.roles) && u.roles.includes("admin"),
+  ).length;
+  const moderators = rows.filter((u) =>
+    Array.isArray(u.roles) && u.roles.includes("moderator"),
+  ).length;
+  const activeWeek = rows.filter((u) => {
+    if (!u.last_sign_in_at) return false;
+    const days = (Date.now() - new Date(u.last_sign_in_at).getTime()) / 86400000;
+    return days <= 7;
+  }).length;
   return (
-    <Table
-      heads={[
-        "Usuário",
-        "Perfil",
-        "Papéis",
-        "Cadastro",
-        "Último acesso",
-        "Permissões",
-      ]}
-      rows={rows.map((u) => {
+    <>
+      <div className="acc-users-hero">
+        <div>
+          <strong>{rows.length}</strong>
+          <span>Contas cadastradas</span>
+        </div>
+        <div>
+          <strong>{admins}</strong>
+          <span>Com acesso de admin</span>
+        </div>
+        <div>
+          <strong>{moderators}</strong>
+          <span>Moderadores</span>
+        </div>
+        <div>
+          <strong>{activeWeek}</strong>
+          <span>Ativos nos últimos 7 dias</span>
+        </div>
+      </div>
+      <Table
+        heads={[
+          "Usuário",
+          "Perfil",
+          "Papéis",
+          "Cadastro",
+          "Último acesso",
+          "Permissões",
+        ]}
+        rows={rows.map((u) => {
         const roles = Array.isArray(u.roles) ? u.roles : [];
         return (
           <tr key={u.id}>
@@ -1045,8 +1075,9 @@ function Users({
             </td>
           </tr>
         );
-      })}
-    />
+        })}
+      />
+    </>
   );
 }
 function ActivityView({ rows }: { rows: any[] }) {
