@@ -125,7 +125,7 @@ export function AppShowcase() {
           <figure className="pcx-appshowcase__photo">
             <img
               src={appPhoto}
-              alt="Cliente conferindo preços pelo celular dentro de um comércio de Feijó"
+              alt="Cliente com o aplicativo aberto no celular, comparando preços dentro de um comércio de Feijó"
               loading="lazy"
               decoding="async"
               width={1280}
