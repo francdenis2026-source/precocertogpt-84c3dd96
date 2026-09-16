@@ -122,6 +122,13 @@
     </script>
     <style>
       #seo-prerender{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+      /* Sem isso, rolar até o topo/fim da página no celular deixa o
+         navegador esticar a página inteira (o "elástico" do overscroll) e
+         pode disparar o puxar-para-atualizar sem querer — os dois dão a
+         sensação de página solta, não de app. overscroll-behavior:none no
+         html (quem rola de verdade neste site) trava só esse elástico,
+         sem afetar a rolagem normal do conteúdo. */
+      html{overscroll-behavior:none}
       html,body,#root{min-height:100%;margin:0}
       /* Primeira pintura neutra: evita o flash cinza antes de o React montar a home. */
       html[data-theme="light"],html[data-theme="light"] body,html[data-theme="light"] #root{background:#FFFFFF;color:#17181C}
@@ -131,7 +138,7 @@
     <script type="module" crossorigin src="/assets/react-vendor-C7KVCnMi.js"></script>
     <script type="module" crossorigin src="/assets/supabase-vendor-BnGCNdwk.js"></script>
     <script type="module" crossorigin src="/assets/icons-vendor-vwVyxupK.js"></script>
-    <script type="module" crossorigin src="/assets/main-Bm-7kXQ4.js"></script>
+    <script type="module" crossorigin src="/assets/main-DZeBSdH3.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/main-Cs7bkrzI.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Macarrão Ninho Dona Benta 500g","brand":{"@type":"Brand","name":"Nestlé"},"category":"laticinios","url":"https://www.precocerto.live/produto/macarrao-ninho-dona-benta-500g","description":"Macarrão Ninho Dona Benta 500g — Nestlé · g · laticinios. Compare preços e disponibilidade no comércio local de Feijó (AC)."}</script></head>
   <body>
