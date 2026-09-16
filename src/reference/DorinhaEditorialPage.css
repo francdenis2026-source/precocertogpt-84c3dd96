@@ -38,8 +38,16 @@ html[data-theme="dark"] body.pc-app-shell .db-shelf__copy>p.db-shelf__note{
 html[data-theme="dark"] body.pc-app-shell .db-retail__list small{
   color:color-mix(in srgb,var(--db-ink) 70%,var(--db-gold-strong))!important;
 }
-html[data-theme="dark"] body.pc-app-shell :is(.db-close h2,.db-close .db-btn--gold){
+html[data-theme="dark"] body.pc-app-shell .db-close h2{
   color:#241005!important;
+}
+/* Diferente do botao dourado padrao da pagina (fundo claro + tinta escura),
+   o CTA dentro do proprio fechamento dourado e invertido de proposito —
+   fundo escuro (#241005) com texto dourado — pra continuar legivel sobre o
+   gradiente. Cair na regra generica acima (mesma tinta escura no texto e
+   no fundo) deixava o botao aparentemente em branco. */
+html[data-theme="dark"] body.pc-app-shell .db-close .db-btn--gold{
+  color:var(--db-gold-soft)!important;
 }
 html[data-theme="dark"] body.pc-app-shell .db-close p{
   color:#3a2408!important;
@@ -136,7 +144,7 @@ html[data-theme="dark"] body.pc-app-shell .db-close p{
 .db-hero__actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:26px}
 .db-hero__meta{max-width:44ch;margin:26px 0 0;padding-top:20px;border-top:1px solid rgba(233,196,106,.2);font-size:13px;line-height:1.55;color:rgba(245,236,216,.74)}
 .db-hero__portrait{position:relative;margin:0;overflow:hidden}
-.db-hero__portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block;filter:saturate(.92) contrast(1.03)}
+.db-hero__portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;display:block;filter:saturate(.92) contrast(1.03)}
 .db-hero__portrait::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(90deg,rgba(23,10,18,.7) 0%,rgba(23,10,18,.1) 22%,transparent 45%),
@@ -234,17 +242,27 @@ html[data-theme="dark"] body.pc-app-shell .db-close p{
 .db-about{
   background:var(--db-plum-900);color:var(--db-cream);
   padding:clamp(56px,8vw,96px) clamp(20px,5vw,64px);
-  display:grid;grid-template-columns:minmax(240px,340px) minmax(0,1fr);gap:clamp(32px,5vw,72px);
+  display:grid;grid-template-columns:minmax(200px,260px) minmax(0,1fr);gap:clamp(32px,5vw,72px);
   align-items:center;max-width:1180px;margin:0 auto;
 }
-.db-about__portrait{position:relative;margin:0;border-radius:18px;overflow:hidden;box-shadow:0 26px 60px rgba(8,3,7,.4)}
-.db-about__portrait img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 18%;display:block}
-.db-about__portrait figcaption{
-  position:absolute;left:14px;right:14px;bottom:14px;padding:14px 16px;border-radius:12px;
-  display:flex;flex-direction:column;gap:2px;
+/* Selo circular da autora — a foto já vem recortada em círculo com uma
+   borda desfocada decorativa; o corte de object-fit:cover sobre um
+   contêiner quadrado remove só as pontas dessa borda, deixando o círculo
+   original limpo. Um anel dourado + brilho substituem a legenda que antes
+   ficava sobreposta na foto (nunca funciona bem em cima de um retrato
+   redondo). */
+.db-about__badge{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.db-about__badge-ring{
+  display:block;width:min(220px,60vw);aspect-ratio:1;border-radius:50%;
+  padding:5px;background:conic-gradient(from 180deg,var(--db-gold-soft),var(--db-gold-strong),var(--db-gold),var(--db-gold-soft));
+  box-shadow:0 22px 46px rgba(8,3,7,.5);
 }
-.db-about__portrait figcaption strong{font-family:"Fraunces Variable",Georgia,serif;font-size:19px;font-weight:600;color:#fff}
-.db-about__portrait figcaption span{font-size:11.5px;color:var(--db-gold-soft)}
+.db-about__badge-ring img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;
+  border:3px solid var(--db-plum-900);
+}
+.db-about__badge strong{font-family:"Fraunces Variable",Georgia,serif;font-size:20px;font-weight:600;color:#fff}
+.db-about__badge>span:last-child{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--db-gold-soft)}
 .db-about__copy h2{font-size:clamp(2rem,3.4vw,2.9rem);font-weight:560;color:#fff}
 .db-about__copy>p{max-width:58ch;margin:16px 0 0;font-size:15px;line-height:1.65;color:rgba(245,236,216,.82)}
 .db-about__copy blockquote{
@@ -281,7 +299,6 @@ html[data-theme="dark"] body.pc-app-shell .db-close p{
   .db-hero__portrait{height:52vh;min-height:320px;order:-1}
   .db-hero__panel{width:calc(100% - 32px);margin:-56px auto 0;position:relative;z-index:1}
   .db-about{grid-template-columns:1fr}
-  .db-about__portrait{max-width:340px;margin-inline:auto}
 }
 @media(max-width:680px){
   .db-topbar__mark small{display:none}

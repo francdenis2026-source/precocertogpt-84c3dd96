@@ -118,7 +118,7 @@ export function DorinhaEditorialPage() {
             <p className="db-hero__meta">{books.length} obras publicadas em seu acervo, escritas a partir de {birthplace} — cada uma com Pix disponível direto com a autora.</p>
           </div>
           <figure className="db-hero__portrait">
-            <img src="/dorinha-author-portrait-v2.webp" alt={`Retrato da escritora ${author}`} />
+            <img src="/dorinha-barroso/dorinha-hero-com-livros.jpg" alt={`${author} sorrindo, sentada, segurando dois de seus livros`} />
           </figure>
         </section>
 
@@ -208,10 +208,13 @@ export function DorinhaEditorialPage() {
         </section>
 
         <section className="db-about db-reveal" id="autora">
-          <figure className="db-about__portrait">
-            <img src="/dorinha-author-portrait-v2.webp" alt={`Foto de ${author}`} loading="lazy" />
-            <figcaption className="db-glass"><strong>{author}</strong><span>Literatura feita no Acre</span></figcaption>
-          </figure>
+          <div className="db-about__badge">
+            <span className="db-about__badge-ring">
+              <img src="/dorinha-barroso/dorinha-perfil-redondo.jpg" alt={`Retrato de ${author}`} loading="lazy" />
+            </span>
+            <strong>{author}</strong>
+            <span>Literatura feita no Acre</span>
+          </div>
           <div className="db-about__copy">
             <h2>{author}</h2>
             <p>{bio}</p>
