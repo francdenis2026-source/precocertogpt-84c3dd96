@@ -214,6 +214,14 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   outline: 2px solid var(--h-primary);
   outline-offset: 2px;
 }
+/* Hover já move o botão para cima; faltava feedback imediato ao pressionar
+   (só ícones do header e cards de produto tinham). Sem isso o clique em
+   qualquer CTA principal da home (busca, "Explorar lojas" etc.) parecia
+   não responder até a navegação de fato acontecer. */
+.pcx-btn:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 90ms;
+}
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
 .pcx-header {
@@ -334,6 +342,12 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   box-shadow: var(--h-shadow-sm);
   cursor: pointer;
   max-width: 190px;
+  /* Sem isto, um item flex nunca encolhe abaixo do tamanho do próprio
+     conteúdo (min-width:auto é o padrão) — o texto "Jovem Pan FM" forçava
+     este botão, e com ele o slot do rádio inteiro, a vazar por cima do
+     seletor de tema e dos ícones de conta em telas de ~1000-1180px, onde
+     não sobra espaço para o cabeçalho inteiro em uma linha só. */
+  min-width: 0;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 .pcx-header .pc-radio__play:hover { border-color: var(--h-primary); background: var(--h-surface-2); box-shadow: var(--h-shadow-md); }
@@ -351,7 +365,7 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
 }
 .pcx-header .pc-radio__control svg { width: 13px; height: 13px; }
 .pcx-header .pc-radio__loader { animation: pcx-spin 900ms linear infinite; }
-.pcx-header .pc-radio__copy { display: grid; gap: 0.05rem; text-align: left; overflow: hidden; }
+.pcx-header .pc-radio__copy { display: grid; gap: 0.05rem; text-align: left; overflow: hidden; min-width: 0; }
 .pcx-header .pc-radio__copy small {
   display: flex; align-items: center; gap: 0.3rem;
   font-size: 0.75rem; font-weight: 800; letter-spacing: 0.05em; color: var(--h-subtle);
@@ -452,8 +466,9 @@ html[data-theme="dark"] .pcx-home :is(.pc26-search button, .pc26-hero-search but
   font-weight: 700;
   text-decoration: none;
   color: var(--h-ink);
-  transition: border-color 150ms ease;
+  transition: border-color 150ms ease, transform 150ms ease;
 }
+.pcx-header__login:active { transform: scale(0.95); transition-duration: 90ms; }
 .pcx-header__login svg { width: 16px; height: 16px; }
 .pcx-header__login:hover { background: var(--h-surface-2); border-color: var(--h-primary); }
 /* The bottom app nav already has a "Conta" tab for this. */
@@ -1551,6 +1566,7 @@ html[data-theme="light"] .pcx-hero::before {
   transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 }
 .pcx-category:hover { transform: translateY(-2px); border-color: var(--h-primary); box-shadow: var(--h-shadow-md); }
+.pcx-category:active { transform: translateY(0) scale(0.98); transition-duration: 90ms; }
 .pcx-category:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
 .pcx-category i {
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -2060,9 +2076,10 @@ a.pcx-store-hero::after {
   display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 0.75rem;
   padding: 0.85rem 1rem; background: var(--h-surface); border: 1px solid var(--h-border);
   border-radius: var(--h-radius-md); text-decoration: none; color: inherit;
-  transition: border-color 150ms ease;
+  transition: border-color 150ms ease, transform 150ms ease;
 }
 .pcx-store-row:hover { border-color: var(--h-primary); background: var(--h-surface-2); }
+.pcx-store-row:active { transform: scale(0.99); transition-duration: 90ms; }
 .pcx-store-row:focus-visible { outline: 2px solid var(--h-primary); outline-offset: 2px; }
 /* Mesmo tratamento de logo usado no diretório de estabelecimentos e na
    hero da loja (quadrado arredondado, fundo claro, logo inteira sem
@@ -2141,9 +2158,11 @@ div.pcx-skeleton.pcx-store-row { aspect-ratio: auto; height: 4.4rem; }
   display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1rem;
   border-radius: var(--h-radius-md); background: var(--h-primary-soft); color: var(--h-primary-dark);
   font-size: 0.82rem; font-weight: 700; text-decoration: none; white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 .pcx-footer__cta svg { width: 14px; height: 14px; }
 .pcx-footer__cta:hover { background: var(--h-primary); color: var(--h-on-primary); }
+.pcx-footer__cta:active { transform: scale(0.96); transition-duration: 90ms; }
 .pcx-footer__meta {
   border-top: 1px solid var(--h-border);
   padding: 0.9rem var(--h-section-x);

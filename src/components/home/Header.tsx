@@ -16,6 +16,7 @@ import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import { useSiteTheme } from "../../hooks/useSiteTheme";
 import { HeaderRadioPlayer } from "../PersistentRadio";
 import { OnlinePresence } from "../OnlinePresence";
+import { prefetchRoute } from "../../lib/routePrefetch";
 import { useCurrentProfile } from "../UserAccountExperience";
 import { LiveProductSearch } from "./LiveProductSearch";
 
@@ -135,6 +136,9 @@ export function Header({ products = [] }: { products?: Product[] }) {
                 key={item.to}
                 to={item.to}
                 aria-current={isCurrent(item.to) ? "page" : undefined}
+                onMouseEnter={() => prefetchRoute(item.to)}
+                onFocus={() => prefetchRoute(item.to)}
+                onTouchStart={() => prefetchRoute(item.to)}
               >
                 <Icon aria-hidden="true" />
                 <span>{item.label}</span>
@@ -160,7 +164,7 @@ export function Header({ products = [] }: { products?: Product[] }) {
             {/* O contador existia no projeto mas não aparecia em lugar nenhum: era
                 renderizado só dentro do PublicHeader, que a home não usa. */}
             <OnlinePresence />
-            <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos">
+            <Link className="pcx-header__icon" to="/favoritos" aria-label="Favoritos" title="Favoritos" onMouseEnter={() => prefetchRoute("/favoritos")} onFocus={() => prefetchRoute("/favoritos")}>
               <Heart aria-hidden="true" />
             </Link>
             <Link className="pcx-header__icon" to="/cesta-inteligente" aria-label="Minha cesta" title="Minha cesta">

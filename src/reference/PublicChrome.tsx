@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { OnlinePresence } from "../components/OnlinePresence";
 import { HeaderRadioPlayer } from "../components/PersistentRadio";
+import { prefetchRoute } from "../lib/routePrefetch";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 import { useSiteTheme } from "../hooks/useSiteTheme";
 import { businessGroups } from "../data/businessTaxonomy";
@@ -366,12 +367,17 @@ export function AppDock({ current }: { current?: "home" | "search" | "basket" | 
     : pathname.startsWith("/favoritos") ? "favorites"
     : pathname.startsWith("/estabelecimento") || pathname.startsWith("/loja/") || pathname.startsWith("/explorar") || pathname.startsWith("/cidade") ? "stores"
     : undefined);
+  // Aquece o chunk lazy da rota assim que o dedo/mouse chega perto do link
+  // (hover, foco, ou o toque inicial no mobile) — o clique real então só
+  // espera a montagem, não o download+compilação do módulo. Não muda pra
+  // onde o link leva nem quando a navegação acontece.
+  const warm = (path: string) => () => prefetchRoute(path);
   return <nav className="ref-dock" aria-label="Navegação principal do aplicativo">
     <Link className={active === "home" ? "is-active" : ""} to="/" aria-current={active === "home" ? "page" : undefined}><LayoutDashboard aria-hidden="true" /><span>Início</span></Link>
-    <Link className={active === "search" ? "is-active" : ""} to="/buscar" aria-current={active === "search" ? "page" : undefined}><Search aria-hidden="true" /><span>Buscar</span></Link>
-    <Link className={active === "basket" ? "is-active" : ""} to="/cesta-basica" aria-current={active === "basket" ? "page" : undefined}><ShoppingBasket aria-hidden="true" />{count > 0 && <b className="ref-dock__badge" aria-label={`${count} itens na cesta`}>{count > 99 ? "99+" : count}</b>}<span>Cesta</span></Link>
-    <Link className={active === "stores" ? "is-active" : ""} to="/estabelecimentos" aria-current={active === "stores" ? "page" : undefined}><Store aria-hidden="true" /><span>Lojas</span></Link>
-    <Link className={active === "favorites" ? "is-active" : ""} to="/favoritos" aria-current={active === "favorites" ? "page" : undefined}><Heart aria-hidden="true" /><span>Favoritos</span></Link>
+    <Link className={active === "search" ? "is-active" : ""} to="/buscar" aria-current={active === "search" ? "page" : undefined} onMouseEnter={warm("/buscar")} onFocus={warm("/buscar")} onTouchStart={warm("/buscar")}><Search aria-hidden="true" /><span>Buscar</span></Link>
+    <Link className={active === "basket" ? "is-active" : ""} to="/cesta-basica" aria-current={active === "basket" ? "page" : undefined} onMouseEnter={warm("/cesta")} onFocus={warm("/cesta")} onTouchStart={warm("/cesta")}><ShoppingBasket aria-hidden="true" />{count > 0 && <b className="ref-dock__badge" aria-label={`${count} itens na cesta`}>{count > 99 ? "99+" : count}</b>}<span>Cesta</span></Link>
+    <Link className={active === "stores" ? "is-active" : ""} to="/estabelecimentos" aria-current={active === "stores" ? "page" : undefined} onMouseEnter={warm("/estabelecimentos")} onFocus={warm("/estabelecimentos")} onTouchStart={warm("/estabelecimentos")}><Store aria-hidden="true" /><span>Lojas</span></Link>
+    <Link className={active === "favorites" ? "is-active" : ""} to="/favoritos" aria-current={active === "favorites" ? "page" : undefined} onMouseEnter={warm("/favoritos")} onFocus={warm("/favoritos")} onTouchStart={warm("/favoritos")}><Heart aria-hidden="true" /><span>Favoritos</span></Link>
   </nav>;
 }
 /**

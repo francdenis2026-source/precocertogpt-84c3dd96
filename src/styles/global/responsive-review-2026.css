@@ -379,9 +379,16 @@ footer.ref-footer .ref-footer__legal svg { width: 12px !important; height: 12px 
 /* Desktop home header: expose the useful radio state instead of leaving a
    nameless icon, while keeping the control narrow enough for the search. */
 @media (min-width: 861px) {
+  /* Largura fixa (width/min-width iguais) impedia este item de encolher
+     nunca, mesmo quando marca+busca+nav+ferramentas já não cabiam juntos
+     numa faixa comum de laptop (~1000-1180px): o player vazava por cima do
+     seletor de tema e dos ícones de conta, tornando-os invisíveis e
+     inclicáveis. flex-basis/max-width preservam os 148px quando cabe, mas
+     permitem encolher (o texto trunca via .pc-radio__copy strong abaixo)
+     em vez de vazar sobre os controles vizinhos. */
   .pcx-home .pcx-header .pc-radio {
-    width: 148px !important;
-    min-width: 148px !important;
+    flex: 0 1 148px !important;
+    min-width: 0 !important;
     max-width: 148px !important;
     padding-right: 7px !important;
   }
