@@ -3,6 +3,15 @@
    anel eletrônico no logo), não da paleta do marketplace. Fora do sistema
    .ref-page de propósito, como a página da Dorinha Barroso. */
 
+/* light-professional-2026.css força background no body via !important no
+   modo claro do site, sem exceção para páginas com identidade fixa própria
+   (ver mesmo ajuste em DorinhaEditorialPage.css) — trava o body na cor
+   desta página para não vazar o canvas claro atrás do conteúdo. */
+html:has(.fx-page),
+html body.pc-app-shell:has(.fx-page){
+  background: #0a0714 !important;
+}
+
 .fx-page {
   --fx-void: #0a0714;
   --fx-void-2: #150c26;

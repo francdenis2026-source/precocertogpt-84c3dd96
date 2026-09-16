@@ -7,6 +7,17 @@
    itálico de verdade) é a voz de display só desta página; o resto do
    corpo usa Manrope, já carregada no site inteiro. */
 
+/* light-professional-2026.css força background/color no body via
+   !important no modo claro, sem exceção para páginas com identidade fixa
+   própria (não acompanham o tema do site) — isso deixava um retângulo cor
+   de canvas claro vazando atrás desta página sempre que o corpo aparecia
+   por trás do conteúdo (framing/rolagem). Trava o body na cor de fundo
+   desta página enquanto ela estiver montada, nos dois temas. */
+html:has(.db-page),
+html body.pc-app-shell:has(.db-page){
+  background:#170a12!important;
+}
+
 .db-page{
   --db-plum-950:#170a12;--db-plum-900:#241020;--db-plum-800:#3a1a2e;--db-plum-700:#552540;
   --db-gold:#c99a35;--db-gold-strong:#a97a1f;--db-gold-soft:#e9c46a;
@@ -39,7 +50,7 @@
   cursor:pointer;white-space:nowrap;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease;
 }
 .db-btn svg{width:17px;height:17px;flex:none}
-.db-btn--gold{background:linear-gradient(135deg,var(--db-gold-soft),var(--db-gold-strong));color:#241005;box-shadow:0 10px 24px rgba(169,122,31,.35)}
+.db-page .db-btn--gold{background:linear-gradient(135deg,var(--db-gold-soft),var(--db-gold-strong));color:#241005;box-shadow:0 10px 24px rgba(169,122,31,.35)}
 .db-btn--ghost{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.28);color:inherit}
 .db-btn--sm{min-height:38px;padding:0 15px;font-size:12.5px}
 @media(hover:hover) and (pointer:fine){
