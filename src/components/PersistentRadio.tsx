@@ -126,8 +126,11 @@ export function PersistentRadioProvider({ children }: { children: ReactNode }) {
     const mediaSession = navigator.mediaSession;
     mediaSession.metadata = new MediaMetadata({
       title: playing && nowPlaying ? nowPlaying : station.name,
-      artist: playing && nowPlaying ? station.name : "Rádio ao vivo",
-      album: "Preço Certo",
+      // Quando não há faixa identificada, o artista é o próprio site —
+      // assim a tela bloqueada sempre mostra "PreçoCerto" com o ícone da
+      // marca, mesmo antes da estação informar o que está tocando.
+      artist: playing && nowPlaying ? station.name : "PreçoCerto",
+      album: "PreçoCerto · Rádio ao vivo",
       // iOS ignora (ou desenha errado, com fundo preto) a capa da tela
       // bloqueada quando a imagem tem transparência — os ícones do PWA
       // (pwa-192/512) têm canal alfa, pensados pra ficar sobre o fundo do
