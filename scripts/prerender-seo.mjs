@@ -5,6 +5,12 @@ const DIST = path.resolve('dist');
 const BASE = 'https://www.precocerto.live';
 const template = await readFile(path.join(DIST, 'index.html'), 'utf8');
 
+// Quinto item opcional (image): caminho public/ da foto real da página, para
+// o compartilhamento em WhatsApp/redes mostrar algo que representa a página
+// em vez do banner genérico do PreçoCerto. Sem esse item, cai no default de
+// replaceMeta() (og-preco-certo-oficial-v2.jpg) — é o caso ainda de FreMix
+// Produções, que não tem foto/gráfico próprio seguro pra publicar (o único
+// disponível, o avatar do canal, imprime o endereço do estúdio na imagem).
 const routes = [
   ['/', 'PreçoCerto | Compare preços e compre em Feijó (AC)', 'Compare preços, descubra estabelecimentos e encontre opções de compra no comércio local de Feijó, Acre.', 'Compare preços no comércio local de Feijó'],
   ['/buscar', 'Buscar produtos e preços em Feijó | PreçoCerto', 'Pesquise produtos, compare preços e encontre onde comprar em Feijó (AC).', 'Buscar produtos e comparar preços'],
@@ -15,8 +21,14 @@ const routes = [
   ['/padarias', 'Padarias em Feijó | PreçoCerto', 'Descubra padarias, produtos e opções do comércio local de Feijó (AC).', 'Padarias'],
   ['/livros', 'Livros, autores e cultura local | PreçoCerto', 'Conheça livros, autores e iniciativas culturais disponíveis no PreçoCerto.', 'Livros e cultura local'],
   ['/servicos', 'Serviços locais em Feijó | PreçoCerto', 'Encontre serviços e profissionais locais disponíveis em Feijó (AC).', 'Serviços locais'],
-  ['/autora/dorinha-barroso', 'Dorinha Barroso · Escritora acreana | PreçoCerto', 'Conheça Dorinha Barroso, sua trajetória e suas obras literárias.', 'Dorinha Barroso'],
-  ['/cultura/fremix-producoes', 'FreMix Produções · Cultura e música | PreçoCerto', 'Conheça a FreMix Produções e conteúdos culturais de Feijó, Acre.', 'FreMix Produções'],
+  ['/autora/dorinha-barroso', 'Dorinha Barroso · Escritora acreana | PreçoCerto', 'Conheça Dorinha Barroso, sua trajetória e suas obras literárias.', 'Dorinha Barroso', '/dorinha-barroso/dorinha-hero-com-livros.jpg'],
+  // Rota real é /fremix-producoes (App.tsx) — /cultura/fremix-producoes cai
+  // em ReferenceInfoPage (conteúdo genérico), então prerenderizar aquele
+  // caminho não ajudava em nada quem compartilha o link de verdade da página.
+  ['/fremix-producoes', 'FreMix Produções · Cultura e música | PreçoCerto', 'Conheça a FreMix Produções e conteúdos culturais de Feijó, Acre.', 'FreMix Produções'],
+  ['/kelly-burgueria', 'Kelly Burgueria e Lanchonete | PreçoCerto', 'Cardápio e preços da Kelly Burgueria e Lanchonete em Feijó (AC).', 'Kelly Burgueria e Lanchonete', '/kelly-burgueria/og-lanchonete-feijo.jpg'],
+  ['/beto-burguer', 'Beto Burguer | PreçoCerto', 'Cardápio e preços do Beto Burguer em Feijó (AC).', 'Beto Burguer', '/kelly-burgueria/og-lanchonete-feijo.jpg'],
+  ['/ponto-do-sanduba', 'Beto Burguer | PreçoCerto', 'Cardápio e preços do Beto Burguer em Feijó (AC).', 'Beto Burguer', '/kelly-burgueria/og-lanchonete-feijo.jpg'],
   ['/lojista', 'Venda no PreçoCerto | Cadastro de lojista', 'Cadastre seu estabelecimento para participar do marketplace local PreçoCerto.', 'Cadastre seu estabelecimento'],
   ['/sobre', 'Sobre o PreçoCerto', 'Como funciona a plataforma de comparação de preços de Feijó, quem a desenvolveu e como solicitar um site ou aplicativo.', 'Sobre o PreçoCerto'],
   ['/colaborar', 'Colabore com o PreçoCerto', 'Ajude a manter informações do comércio local atualizadas no PreçoCerto.', 'Colabore com o PreçoCerto'],
@@ -63,8 +75,8 @@ async function writeRoute(pathname, html) {
   await writeFile(path.join(dir,'index.html'), html);
 }
 
-for (const [pathname,title,description,h1] of routes) {
-  await writeRoute(pathname, replaceMeta(template,{pathname,title,description,h1,jsonLd:{'@context':'https://schema.org','@type':'WebPage',name:title,url:absolute(pathname),description,inLanguage:'pt-BR',isPartOf:{'@type':'WebSite',name:'PreçoCerto',url:BASE}}}));
+for (const [pathname,title,description,h1,image] of routes) {
+  await writeRoute(pathname, replaceMeta(template,{pathname,title,description,h1,image,jsonLd:{'@context':'https://schema.org','@type':'WebPage',name:title,url:absolute(pathname),description,inLanguage:'pt-BR',isPartOf:{'@type':'WebSite',name:'PreçoCerto',url:BASE}}}));
 }
 
 // Estes valores são publicáveis por design e já são enviados ao navegador pelo frontend.
@@ -173,7 +185,7 @@ const categoryMarkup = `<section aria-labelledby="seo-categories"><h2 id="seo-ca
 // Regrava as rotas principais com estrutura e dados úteis no HTML inicial.
 // O React substitui este conteúdo ao montar; crawlers e conexões sem JS ainda
 // recebem categorias, ofertas e estabelecimentos reais do último build.
-for (const [pathname,title,description,h1] of routes) {
+for (const [pathname,title,description,h1,image] of routes) {
   let content = categoryMarkup;
   if (['/','/buscar','/mercados','/farmacias','/padarias','/livros','/servicos'].includes(pathname)) {
     content += `<section aria-labelledby="seo-offers"><h2 id="seo-offers">Preços disponíveis para comparar</h2>${offerMarkup(filterOffers(pathname))}</section>`;
@@ -184,7 +196,7 @@ for (const [pathname,title,description,h1] of routes) {
       : stores;
     content += `<section aria-labelledby="seo-stores"><h2 id="seo-stores">Estabelecimentos locais</h2>${storeMarkup(relevantStores)}</section>`;
   }
-  await writeRoute(pathname, replaceMeta(template,{pathname,title,description,h1,content,jsonLd:{'@context':'https://schema.org','@type':'WebPage',name:title,url:absolute(pathname),description,inLanguage:'pt-BR',isPartOf:{'@type':'WebSite',name:'PreçoCerto',url:BASE}}}));
+  await writeRoute(pathname, replaceMeta(template,{pathname,title,description,h1,image,content,jsonLd:{'@context':'https://schema.org','@type':'WebPage',name:title,url:absolute(pathname),description,inLanguage:'pt-BR',isPartOf:{'@type':'WebSite',name:'PreçoCerto',url:BASE}}}));
 }
 
 const uniquePaths=[...new Set(sitemapPaths)];
