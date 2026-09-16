@@ -5,6 +5,30 @@ const DIST = path.resolve('dist');
 const BASE = 'https://www.precocerto.live';
 const template = await readFile(path.join(DIST, 'index.html'), 'utf8');
 
+// Mesma lista de marcas usada em src/data/storeLogos.ts pra desenhar o ícone
+// do estabelecimento no site — reaproveitada aqui pra imagem de
+// compartilhamento de quem ainda não tem logo_url cadastrado no banco (a
+// maioria: só 4 dos 23 estabelecimentos reais têm o campo preenchido).
+const storeLogos = JSON.parse(await readFile(path.resolve('src/data/storeLogos.json'), 'utf8'));
+const normalizeStoreName = name => String(name || '')
+  .normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+// Os arquivos têm `?v=...` depois da extensão (cache-busting) — checar só
+// o fim da string (endsWith) nunca bate; precisa ignorar a query string.
+const isSvg = url => /\.svg(\?.*)?$/i.test(url);
+function findStoreLogoImage(name) {
+  const normalizedName = normalizeStoreName(name);
+  const match = storeLogos.entries.find(({ aliases }) =>
+    aliases.some(alias => normalizedName === alias || normalizedName.includes(alias)),
+  );
+  if (!match) return undefined;
+  const url = match.local ? `${BASE}${match.local}` : `${storeLogos.baseUrl}/${match.file}?v=${storeLogos.version}`;
+  // SVG não é renderizado como preview por boa parte dos apps de
+  // compartilhamento (WhatsApp/Facebook incluídos) — melhor cair no banner
+  // genérico do que mostrar um card de link quebrado/em branco.
+  return isSvg(url) ? undefined : url;
+}
+
 // Quinto item opcional (image): caminho public/ da foto real da página, para
 // o compartilhamento em WhatsApp/redes mostrar algo que representa a página
 // em vez do banner genérico do PreçoCerto. Sem esse item, cai no default de
@@ -120,8 +144,15 @@ for (const s of stores) {
   const pathname = `/estabelecimento/${encodeURIComponent(identifier)}`;
   const neighborhood=meaningful(s.neighborhood); const customDescription=meaningful(s.short_description);
   const description = customDescription || `${name}${neighborhood?` em ${neighborhood}`:''}. Consulte catálogo, produtos e preços no PreçoCerto.`;
-  const schema = {'@context':'https://schema.org','@type':'Store',name,url:absolute(pathname),description,image:meaningful(s.logo_url)||undefined,address:neighborhood?{'@type':'PostalAddress',addressLocality:'Feijó',addressRegion:'AC',addressCountry:'BR',addressDistrict:neighborhood}:undefined};
-  await writeRoute(pathname, replaceMeta(template,{pathname,title:`${name} | PreçoCerto`,description,h1:name,image:meaningful(s.logo_url)||'/og-preco-certo-oficial-v2.jpg',jsonLd:schema}));
+  // Sem logo_url cadastrado no banco (a maioria das lojas), cai pro mesmo
+  // arquivo de marca já usado no ícone dela no site, antes do banner
+  // genérico — ver findStoreLogoImage() no topo do arquivo. SVG é
+  // descartado mesmo quando vem do próprio banco: a maioria dos apps de
+  // compartilhamento não renderiza SVG como preview.
+  const dbLogo = meaningful(s.logo_url);
+  const storeImage = (dbLogo && !isSvg(dbLogo) ? dbLogo : undefined) || findStoreLogoImage(name);
+  const schema = {'@context':'https://schema.org','@type':'Store',name,url:absolute(pathname),description,image:storeImage||undefined,address:neighborhood?{'@type':'PostalAddress',addressLocality:'Feijó',addressRegion:'AC',addressCountry:'BR',addressDistrict:neighborhood}:undefined};
+  await writeRoute(pathname, replaceMeta(template,{pathname,title:`${name} | PreçoCerto`,description,h1:name,image:storeImage||'/og-preco-certo-oficial-v2.jpg',jsonLd:schema}));
   sitemapPaths.push(pathname);
 }
 
