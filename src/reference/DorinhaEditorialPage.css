@@ -153,6 +153,22 @@
 .db-shelf__copy [data-pc-book-tools]{margin-top:10px!important}
 .db-shelf__copy [data-pc-book-tools] a,.db-shelf__copy [data-pc-book-tools] button{font-family:"Manrope Variable",sans-serif!important}
 
+/* ---------- Também nas livrarias digitais ---------- */
+.db-retail{background:var(--db-cream-2);color:var(--db-ink);padding:clamp(40px,6vw,64px) clamp(20px,5vw,64px)}
+.db-retail__head{max-width:900px;margin:0 auto clamp(24px,4vw,36px)}
+.db-retail__head h2{font-size:clamp(1.5rem,2.4vw,1.9rem);font-weight:560;color:var(--db-ink)}
+.db-retail__head p{max-width:64ch;margin:10px 0 0;font-size:14px;line-height:1.6;color:var(--db-muted)}
+.db-retail__list{list-style:none;margin:0 auto;padding:0;width:min(1080px,100%);display:flex;flex-wrap:wrap;gap:18px}
+.db-retail__list li{flex:1 1 210px;max-width:250px}
+.db-retail__list a{display:flex;align-items:center;gap:14px;padding:10px;border-radius:14px;background:var(--db-cream);border:1px solid var(--db-border);transition:border-color .16s ease,transform .16s ease}
+.db-retail__list img{width:52px;height:78px;object-fit:cover;border-radius:3px;box-shadow:0 6px 14px rgba(36,18,32,.22);flex:none}
+.db-retail__list span{min-width:0;display:flex;flex-direction:column;gap:5px;font-size:13.5px;font-weight:700;line-height:1.25;color:var(--db-ink)}
+.db-retail__list small{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:800;color:color-mix(in srgb,var(--db-ink) 70%,var(--db-gold-strong))}
+.db-retail__list small svg{width:12px;height:12px}
+@media(hover:hover) and (pointer:fine){
+  .db-retail__list a:hover{border-color:var(--db-gold);transform:translateY(-2px)}
+}
+
 /* ---------- Sobre a autora ---------- */
 .db-about{
   background:var(--db-plum-900);color:var(--db-cream);

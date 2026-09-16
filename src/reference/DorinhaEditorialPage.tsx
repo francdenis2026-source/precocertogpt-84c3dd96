@@ -27,6 +27,20 @@ const BOOK_NOTES: Record<string, { mood: string; tone: string }> = {
   "o-despertar-para-o-mundo-literario": { mood: "Para quem está descobrindo a leitura.", tone: "#3d5a45" },
 };
 
+// Confirmado direto na busca "DORINHA BARROSO" da Amazon.com.br (loja
+// Kindle + livros): título, link canônico do produto (/dp/<ASIN>, sem os
+// parâmetros de rastreio da busca) e a capa exatamente como publicada lá —
+// que em "Mente Perversa" é uma arte diferente da usada na venda direta
+// (edição própria distinta). Mostrada à parte da vitrine principal, de
+// propósito: a vitrine acima reflete o que a autora vende direto (preço e
+// Pix dela); aqui é só onde mais encontrar as mesmas obras.
+const RETAIL_LINKS: Record<string, { url: string; cover: string }> = {
+  "uma-viagem-ao-mundo-da-imaginacao": { url: "https://www.amazon.com.br/dp/6525481074", cover: "/dorinha-barroso/amazon/uma-viagem-ao-mundo-da-imaginacao.jpg" },
+  "mente-perversa": { url: "https://www.amazon.com.br/dp/8551865714", cover: "/dorinha-barroso/amazon/mente-perversa.jpg" },
+  "uma-historia-de-superacao": { url: "https://www.amazon.com.br/dp/8541615162", cover: "/dorinha-barroso/amazon/uma-historia-de-superacao.jpg" },
+  "o-despertar-para-o-mundo-literario": { url: "https://www.amazon.com.br/dp/8541615383", cover: "/dorinha-barroso/amazon/o-despertar-para-o-mundo-literario.jpg" },
+};
+
 const fallbackBooks: Book[] = [
   { id: "imaginação", slug: "uma-viagem-ao-mundo-da-imaginacao", name: "Uma Viagem ao Mundo da Imaginação", image_url: (imagimacaoAsset as AssetMeta).url, description: "Uma obra para atravessar novas paisagens pela força da imaginação e descobrir outros modos de olhar o mundo.", price: 0, promotional_price: null, price_on_request: true, available: true },
   { id: "mente", slug: "mente-perversa", name: "Mente Perversa", image_url: (mentePerversaAsset as AssetMeta).url, description: "Uma narrativa marcada por tensão, escolhas e camadas humanas que convidam o leitor à reflexão.", price: 0, promotional_price: null, price_on_request: true, available: true },
@@ -118,7 +132,14 @@ export function DorinhaEditorialPage() {
             {books.map((book, index) => {
               const price = book.promotional_price || book.price;
               const direct = price > 0 && !book.price_on_request;
-              const note = BOOK_NOTES[book.slug];
+              // BOOK_NOTES é indexado pelo slug do fallback local, não pelo
+              // de book.slug — o Supabase pode trazer um slug remoto
+              // diferente para o mesmo título (aconteceu com "O Despertar
+              // para o Mundo Literário": remoto vem sem o "o-" inicial) e
+              // {...local,...remote} deixa esse slug remoto vencer. Como
+              // books.map preserva a mesma ordem/tamanho de fallbackBooks,
+              // o índice sempre aponta pro título certo, remoto ou não.
+              const note = BOOK_NOTES[fallbackBooks[index].slug];
               return (
                 <li className="db-shelf__item" key={book.id} style={{ "--db-tone": note?.tone || "#3d1a2e" } as CSSProperties}>
                   <article className={`db-shelf__card${index % 2 === 1 ? " is-reverse" : ""}`}>
@@ -142,6 +163,27 @@ export function DorinhaEditorialPage() {
               );
             })}
           </ol>
+        </section>
+
+        <section className="db-retail db-reveal" aria-labelledby="db-retail-title">
+          <div className="db-retail__head">
+            <h2 id="db-retail-title">Também nas livrarias digitais</h2>
+            <p>Além da compra direta com a autora, estas obras estão à venda na Amazon (capa comum e Kindle) e nas principais plataformas digitais de livros do Brasil.</p>
+          </div>
+          <ul className="db-retail__list">
+            {books.map((book, index) => {
+              const retail = RETAIL_LINKS[fallbackBooks[index].slug];
+              if (!retail) return null;
+              return (
+                <li key={book.id}>
+                  <a href={retail.url} target="_blank" rel="noreferrer">
+                    <img src={retail.cover} alt={`Capa de ${book.name} na Amazon`} loading="lazy" />
+                    <span>{book.name}<small>Ver na Amazon <ArrowRight aria-hidden="true" /></small></span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </section>
 
         <section className="db-about db-reveal" id="autora">
