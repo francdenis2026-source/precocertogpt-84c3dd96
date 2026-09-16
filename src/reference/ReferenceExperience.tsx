@@ -5,7 +5,7 @@ import { sanitizeRedirect } from "../auth/safeRedirect";
 import { createPortal } from "react-dom";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import {
-  ArrowLeft, ArrowRight, BadgeCheck, BookOpen, Building2, Camera,
+  ArrowLeft, ArrowRight, BadgeCheck, BookOpen, Building2, Camera, Clapperboard,
   Check, Code2, Eye, Heart, Info, LayoutDashboard, LockKeyhole, Mail, Map as MapIcon,
   MapPin, Menu, MessageCircle, Minus, Moon, PackageSearch, PiggyBank, Plus, Search, ShieldCheck, ShoppingBag, ShoppingBasket,
   ReceiptText, SlidersHorizontal, Store, Sun, Tag, TrendingDown, UserRound, UsersRound, WalletCards, X,
@@ -170,10 +170,14 @@ function StoreLogo({ name, kind }: { name: string; kind?: string | null }) {
     return <img src={source} alt={`Logomarca de ${name}`} loading="lazy" onError={() => setFailed(true)} className={isStoreLogoTightCrop(name) ? "ref-store-logo--tight" : undefined} />;
   }
   // Sem logomarca própria: em vez da casinha genérica de "estabelecimento"
-  // pra todo mundo, o ícone reflete a categoria real do negócio (autores e
-  // livrarias ganham um livro, não uma loja física que não existe).
-  const isBooksCategory = groupForStore({ kind, name }).id === "books";
-  return isBooksCategory ? <BookOpen aria-hidden="true" /> : <Store aria-hidden="true" />;
+  // pra todo mundo, o ícone reflete a categoria real do negócio. O grupo
+  // "Livros e cultura" reúne tanto autores/livrarias quanto produtoras de
+  // vídeo/música (ex.: FreMix) — um livro não faz sentido pra quem produz
+  // vídeo, então esse subconjunto ganha uma claquete em vez do livro.
+  const isCulture = groupForStore({ kind, name }).id === "books";
+  const isVideoProduction = isCulture && /produ[cç][aã]o|produtora|produ[cç][oõ]es|v[ií]deo|filme|est[uú]dio/i.test(name);
+  if (isVideoProduction) return <Clapperboard aria-hidden="true" />;
+  return isCulture ? <BookOpen aria-hidden="true" /> : <Store aria-hidden="true" />;
 }
 
 function ProductVisual({ product, eager = false }: { product: Product; eager?: boolean }) {

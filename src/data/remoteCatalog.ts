@@ -21,6 +21,10 @@ import { withManualAdditions } from "./manualEstablishments";
  */
 export const NON_PRICE_CATALOG_COUNTS: Record<string, number> = {
   "dorinha-barroso-livros": 4,
+  // FreMix Produções: acervo é o canal do YouTube (vídeos), não passa pela
+  // tabela de preços do comparador geral. 118 vídeos conferidos no canal
+  // oficial em set/2026 (ver src/components/FremixProductionsPage.tsx).
+  "fremix-producoes": 118,
 };
 
 type EstablishmentRow = {
