@@ -122,6 +122,22 @@ export function DorinhaEditorialPage() {
           </figure>
         </section>
 
+        <section className="db-welcome db-reveal" aria-labelledby="db-welcome-title">
+          <div className="db-welcome__copy">
+            <h2 id="db-welcome-title">Um recado da autora</h2>
+            <p>Antes de conhecer as obras, ouça a própria {author} contar quem ela é e o que a levou a escrever.</p>
+          </div>
+          <div className="db-welcome__video">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/PPXQcNOlmMU"
+              title={`Vídeo de boas-vindas de ${author}`}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </section>
+
         <section className="db-vitrine db-reveal" id="vitrine">
           <div className="db-vitrine__head">
             <h2>Acervo de {author}</h2>
