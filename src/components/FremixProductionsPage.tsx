@@ -7,16 +7,18 @@ type Profile = { display_name: string; tagline: string | null; bio: string | nul
 
 const CHANNEL = "https://www.youtube.com/@Fremixprodu%C3%A7%C3%B5es";
 
-// Seleção curada direto do canal oficial (checado em set/2026): mistura de
-// lançamentos musicais e produções locais de Feijó, para mostrar as duas
-// frentes reais do trabalho da FreMix, não só um dos dois lados.
+// Seleção curada direto do canal oficial (checado em set/2026), mesclando
+// várias playlists musicais do canal — Pura Nostalgia, Inspiração, As Ruas
+// Têm Memória, Piseiro e Forró, Funk Brazil — em vez de repetir sempre a
+// mesma. Sem produções institucionais/sob encomenda aqui: essa vitrine é
+// só a música da FreMix.
 const FEATURED_VIDEOS: { id: string; title: string; tag: string }[] = [
-  { id: "7D1bNJsIfmI", title: "Pisadinha do Brasil", tag: "Lançamento musical" },
-  { id: "U2Tl1fTNw6A", title: "Capoeira Feijó — A Força da Nossa Cultura", tag: "Cultura local" },
-  { id: "dNMKgX2CjSM", title: "Funk com Pisadinha Carioca", tag: "Lançamento musical" },
-  { id: "PPXQcNOlmMU", title: "Dorinha Barroso, escritora e educadora feijoense", tag: "Produção para autora" },
-  { id: "56xGHNZbkd0", title: "SIGN", tag: "Lançamento musical" },
-  { id: "RU8EHd-GBYs", title: "Academia Feijoense de Letras", tag: "Produção institucional" },
+  { id: "U2Tl1fTNw6A", title: "Capoeira Feijó — A Força da Nossa Cultura", tag: "As Ruas Têm Memória" },
+  { id: "7D1bNJsIfmI", title: "Pisadinha do Brasil", tag: "Piseiro e Forró" },
+  { id: "Ht05m7ZwKHA", title: "Still Standing", tag: "Inspiração" },
+  { id: "twH4xRdFrNw", title: "Nas Ondas (EDM x 80s Synths)", tag: "Pura Nostalgia" },
+  { id: "dNMKgX2CjSM", title: "Funk com Pisadinha Carioca", tag: "Funk Brazil" },
+  { id: "xYQ31B2GY44", title: "Entre a Augusta e a Consolação", tag: "As Ruas Têm Memória" },
 ];
 
 // As 9 playlists reais do canal (nome e contagem conferidos direto no
@@ -96,7 +98,7 @@ export function FremixProductionsPage() {
     <section className="fx-watch" id="assistir" aria-labelledby="fx-watch-title">
       <div className="fx-watch__head">
         <h2 id="fx-watch-title">Assista às produções.</h2>
-        <p>Uma seleção com lançamentos musicais e produções feitas para negócios e pessoas de Feijó. Escolha uma capa para trocar o vídeo em reprodução.</p>
+        <p>Uma mistura de faixas tiradas direto das playlists do canal — Pura Nostalgia, Inspiração, As Ruas Têm Memória e mais. Escolha uma capa para trocar o vídeo em reprodução.</p>
         <a href={`${channel}/videos`} target="_blank" rel="noreferrer" className="fx-link">Ver todos os 118 vídeos <ExternalLink aria-hidden="true" /></a>
       </div>
       <div className="fx-watch__layout">
