@@ -263,6 +263,25 @@ html body .kelly-page .kelly-menu-group__head-copy p{color:rgba(255,255,255,.82)
   .kelly-quicknav{margin:0 -14px;padding:7px 14px}
 }
 
+/* Busca no cardapio — com 30+ itens em 8 categorias, nao tinha nenhum jeito
+   de pular direto pra um item especifico sem rolar a pagina toda. */
+.kelly-search{
+  min-height:48px;display:flex;align-items:center;gap:9px;
+  padding:0 14px;border:1px solid var(--pc-border);border-radius:12px;
+  background:var(--pc-surface);transition:border-color .16s ease,box-shadow .16s ease;
+}
+.kelly-search:focus-within{border-color:var(--pc-green-strong,var(--pc-ink));box-shadow:0 0 0 3px color-mix(in srgb,var(--pc-green-strong,#0fa958) 14%,transparent)}
+.kelly-search>svg{flex:none;width:18px;height:18px;color:var(--pc-muted)}
+.kelly-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--pc-ink);font-size:15px;font-family:inherit}
+.kelly-search input::placeholder{color:var(--pc-muted)}
+.kelly-search input::-webkit-search-cancel-button{display:none}
+.kelly-search>button{
+  flex:none;display:grid;place-items:center;width:28px;height:28px;
+  border:0;border-radius:999px;background:var(--pc-surface-2);color:var(--pc-muted);cursor:pointer;
+}
+.kelly-search>button:hover{color:var(--pc-ink)}
+.kelly-search__meta{margin:0;font-size:13px;color:var(--pc-muted)}
+
 /* Navegacao por categoria do cardapio.
    Os links vinham sem estilo nenhum: texto corrido de 18px de altura, quase
    impossivel de acertar com o dedo e sem parecer clicavel. Agora sao chips

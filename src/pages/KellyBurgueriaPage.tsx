@@ -1,7 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, AtSign, BadgeCheck, Citrus, Clock3, MapPin, MessageCircle, Plus, ShieldCheck, Soup, Store, UtensilsCrossed } from "lucide-react";
+import { ArrowLeft, ArrowRight, AtSign, BadgeCheck, Citrus, Clock3, MapPin, MessageCircle, Plus, Search, ShieldCheck, Soup, Store, UtensilsCrossed, X } from "lucide-react";
 import type { ReactNode } from "react";
 import { PublicFooter, PublicHeader } from "../reference/PublicChrome";
 import { ProductQuickViewModal } from "../components/ProductQuickViewModal";
@@ -58,10 +58,12 @@ const CATEGORY_NOTES: Record<string, string> = {
 
 const whatsappHref = `https://wa.me/${KELLY_WHATSAPP}?text=${encodeURIComponent(`Olá! Vi o cardápio da ${KELLY_NAME} no PreçoCerto e queria fazer um pedido.`)}`;
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${KELLY_NAME}, ${KELLY_ADDRESS}`)}`;
+const normalize = (value: string) => value.normalize("NFD").replace(/[̀-ͯ]/g, "").toLocaleLowerCase("pt-BR");
 
 export function KellyBurgueriaPage() {
   const pageRef = useRef<HTMLDivElement>(null);
-  const groups = useMemo(() => {
+  const [query, setQuery] = useState("");
+  const allGroups = useMemo(() => {
     const byCategory = new Map<string, MenuItem[]>();
     for (const item of KELLY_MENU) {
       const list = byCategory.get(item.category);
@@ -70,6 +72,14 @@ export function KellyBurgueriaPage() {
     }
     return KELLY_MENU_CATEGORIES.map(category => ({ category, items: byCategory.get(category) || [] })).filter(group => group.items.length);
   }, []);
+  const q = normalize(query.trim());
+  const groups = useMemo(() => {
+    if (!q) return allGroups;
+    return allGroups
+      .map(group => ({ category: group.category, items: group.items.filter(item => normalize(`${item.name} ${item.description || ""}`).includes(q)) }))
+      .filter(group => group.items.length);
+  }, [allGroups, q]);
+  const resultCount = useMemo(() => groups.reduce((total, group) => total + group.items.length, 0), [groups]);
 
   // Cada item do cardápio já existe como Product completo (mesmo objeto
   // usado no catálogo unificado, em /produto/kelly-...) — mapeado por nome
@@ -153,9 +163,25 @@ export function KellyBurgueriaPage() {
           <strong>{KELLY_MENU.length} opções</strong>
         </section>
 
-        <nav className="kelly-category-nav" aria-label="Categorias do cardápio">
-          {groups.map(group => <a key={group.category} href={`#kelly-${group.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{group.category}<small>{group.items.length}</small></a>)}
-        </nav>
+        <label className="kelly-search" aria-label={`Buscar no cardápio da ${KELLY_NAME}`}>
+          <Search aria-hidden="true" />
+          <input
+            type="search"
+            value={query}
+            onChange={event => setQuery(event.target.value)}
+            placeholder="Buscar item do cardápio (ex.: hambúrguer, panqueca, suco)"
+          />
+          {query && <button type="button" onClick={() => setQuery("")} aria-label="Limpar busca"><X aria-hidden="true" /></button>}
+        </label>
+
+        {!q && (
+          <nav className="kelly-category-nav" aria-label="Categorias do cardápio">
+            {groups.map(group => <a key={group.category} href={`#kelly-${group.category.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{group.category}<small>{group.items.length}</small></a>)}
+          </nav>
+        )}
+        {q && (
+          <p className="kelly-search__meta">{resultCount ? `${resultCount} ${resultCount === 1 ? "item encontrado" : "itens encontrados"} para "${query.trim()}"` : `Nenhum item encontrado para "${query.trim()}"`}</p>
+        )}
 
         <div className="kelly-notice"><BadgeCheck /><span><strong>Cardápio oficial informado pela Kelly</strong><small>Preços e disponibilidade podem mudar. Confirme as condições diretamente com o estabelecimento antes de concluir o pedido.</small></span></div>
 
