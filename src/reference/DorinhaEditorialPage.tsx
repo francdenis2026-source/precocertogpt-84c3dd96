@@ -156,12 +156,17 @@ export function DorinhaEditorialPage() {
               // books.map preserva a mesma ordem/tamanho de fallbackBooks,
               // o índice sempre aponta pro título certo, remoto ou não.
               const note = BOOK_NOTES[fallbackBooks[index].slug];
+              // Capa: prioriza a foto real da Amazon (alta resolução, mesma
+              // fonte usada na seção "também nas livrarias") sobre a arte de
+              // fallback — a Amazon publica a capa em qualidade de catálogo,
+              // a arte antiga era visivelmente mais pobre na vitrine.
+              const cover = RETAIL_LINKS[fallbackBooks[index].slug]?.cover || book.image_url;
               return (
                 <li className="db-shelf__item" key={book.id} style={{ "--db-tone": note?.tone || "#3d1a2e" } as CSSProperties}>
                   <article className={`db-shelf__card${index % 2 === 1 ? " is-reverse" : ""}`}>
                     <div className="db-shelf__cover">
                       <span className="db-shelf__spine" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                      {book.image_url ? <img src={book.image_url} alt={`Capa do livro ${book.name}`} loading="lazy" /> : <span className="db-shelf__cover-fallback"><BookOpen aria-hidden="true" /></span>}
+                      {cover ? <img src={cover} alt={`Capa do livro ${book.name}`} loading="lazy" /> : <span className="db-shelf__cover-fallback"><BookOpen aria-hidden="true" /></span>}
                     </div>
                     <div className="db-shelf__copy">
                       <h3>{book.name}</h3>
