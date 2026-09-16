@@ -18,10 +18,37 @@ html body.pc-app-shell:has(.db-page){
   background:#170a12!important;
 }
 
+/* app-shell-professional-2026.css também repinta, em modo escuro, TODO
+   h1/h2/h3/strong para --text-primary e todo p/small para --text-secondary
+   em qualquer página sob body.pc-app-shell (sem exceção para esta página)
+   — como essas regras miram a tag diretamente (não herdada) e têm mais
+   especificidade que os seletores desta folha, venciam sobre o texto
+   escuro pensado para os trechos em creme/dourado da página (vitrine,
+   livrarias, fechamento), deixando tudo ilegível. Reafirma aqui, com
+   !important, a cor real de cada trecho. */
+html[data-theme="dark"] body.pc-app-shell :is(.db-vitrine__head h2,.db-shelf__copy h3,.db-shelf__copy footer strong,.db-retail__head h2){
+  color:var(--db-ink)!important;
+}
+html[data-theme="dark"] body.pc-app-shell :is(.db-vitrine__head p,.db-shelf__copy>p,.db-retail__head p){
+  color:var(--db-muted)!important;
+}
+html[data-theme="dark"] body.pc-app-shell .db-shelf__copy>p.db-shelf__note{
+  color:color-mix(in srgb,var(--db-tone) 82%,var(--db-muted))!important;
+}
+html[data-theme="dark"] body.pc-app-shell .db-retail__list small{
+  color:color-mix(in srgb,var(--db-ink) 70%,var(--db-gold-strong))!important;
+}
+html[data-theme="dark"] body.pc-app-shell :is(.db-close h2,.db-close .db-btn--gold){
+  color:#241005!important;
+}
+html[data-theme="dark"] body.pc-app-shell .db-close p{
+  color:#3a2408!important;
+}
+
 .db-page{
   --db-plum-950:#170a12;--db-plum-900:#241020;--db-plum-800:#3a1a2e;--db-plum-700:#552540;
   --db-gold:#c99a35;--db-gold-strong:#a97a1f;--db-gold-soft:#e9c46a;
-  --db-cream:#f5ecd8;--db-cream-2:#ece0c4;--db-ink:#241220;--db-muted:#7a6a63;--db-border:#ded0ba;
+  --db-cream:#f5ecd8;--db-cream-2:#ece0c4;--db-ink:#241220;--db-muted:#6e5c53;--db-border:#ded0ba;
   min-height:100dvh;background:var(--db-plum-950);color:var(--db-cream);
   font-family:"Manrope Variable",Manrope,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
@@ -233,8 +260,8 @@ html body.pc-app-shell:has(.db-page){
   padding:clamp(48px,7vw,72px) clamp(20px,5vw,64px);
   display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px;
 }
-.db-close h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:560;max-width:20ch}
-.db-close p{max-width:44ch;margin:10px 0 0;font-size:14.5px;line-height:1.55;color:#3a2408}
+.db-close h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:560;max-width:20ch;color:#241005!important}
+.db-close p{max-width:44ch;margin:10px 0 0;font-size:14.5px;line-height:1.55;color:#3a2408!important}
 .db-close__actions{display:flex;flex-wrap:wrap;gap:12px}
 .db-close .db-btn--gold{background:#241005;color:var(--db-gold-soft);box-shadow:0 10px 24px rgba(36,16,5,.3)}
 .db-close .db-btn--ghost{background:rgba(36,16,5,.08);border-color:rgba(36,16,5,.35);color:#241005}
