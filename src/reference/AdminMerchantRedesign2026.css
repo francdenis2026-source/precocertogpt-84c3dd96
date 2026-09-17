@@ -35,17 +35,19 @@
   color: var(--am-ink) !important;
 }
 .ref-admin__sidebar {
-  background: linear-gradient(180deg, var(--am-navy), #140e0a) !important;
-  color: #fff4e8 !important;
+  background: var(--am-surface-2) !important;
+  color: var(--am-ink) !important;
+  border-right: 1px solid var(--am-border);
 }
-.ref-admin__sidebar nav a { color: rgba(255, 244, 232, 0.75) !important; }
-.ref-admin__sidebar nav a:hover { background: rgba(255, 255, 255, 0.08) !important; color: #fff !important; }
+.ref-admin__sidebar nav a { color: var(--am-muted) !important; }
+.ref-admin__sidebar nav a:hover { background: var(--am-surface) !important; color: var(--am-ink) !important; }
 .ref-admin__sidebar nav a.active,
 .ref-admin__sidebar nav a[aria-current="page"] {
-  background: rgba(200, 134, 10, 0.18) !important;
-  color: var(--am-gold) !important;
+  background: var(--am-gold-soft) !important;
+  color: var(--am-gold-ink) !important;
   box-shadow: inset 3px 0 var(--am-gold);
 }
+.ref-admin__sidebar > small { color: var(--am-muted) !important; }
 .ref-admin__main { background: var(--am-canvas) !important; }
 .ref-admin__cards > * {
   background: var(--am-surface) !important;
@@ -68,14 +70,17 @@
 /* ── Admin control center (.acc-*) ───────────────────────────────────────── */
 .acc-shell, .acc-state { background: var(--am-canvas) !important; color: var(--am-ink) !important; }
 .acc-sidebar {
-  background: linear-gradient(180deg, var(--am-navy), #140e0a) !important;
-  color: #fff4e8 !important;
+  background: var(--am-surface-2) !important;
+  color: var(--am-ink) !important;
+  border-right: 1px solid var(--am-border);
 }
-.acc-sidebar small { color: rgba(255, 244, 232, 0.45) !important; }
-.acc-sidebar nav a { color: rgba(255, 244, 232, 0.78) !important; }
-.acc-sidebar nav a:hover { background: rgba(255, 255, 255, 0.08) !important; }
-.acc-sidebar nav a.active { box-shadow: inset 3px 0 var(--am-gold) !important; background: rgba(200, 134, 10, 0.16) !important; color: var(--am-gold) !important; }
+.acc-sidebar small { color: var(--am-muted) !important; opacity: 0.85; }
+.acc-sidebar nav a { color: var(--am-muted) !important; }
+.acc-sidebar nav a:hover { background: var(--am-surface) !important; color: var(--am-ink) !important; }
+.acc-sidebar nav a.active { box-shadow: inset 3px 0 var(--am-gold) !important; background: var(--am-gold-soft) !important; color: var(--am-gold-ink) !important; }
 .acc-sidebar nav a b { background: var(--am-gold) !important; color: #241a03 !important; }
+.acc-sidebar footer { border-top-color: var(--am-border) !important; }
+.acc-sidebar footer span, .acc-sidebar footer button { color: var(--am-muted) !important; }
 .acc-main :is(.acc-panel, .acc-cards article, .acc-table-wrap, .acc-top-actions label, .acc-top-actions > button, .acc-top-actions > a) {
   background: var(--am-surface) !important;
   border-color: var(--am-border) !important;
@@ -112,13 +117,14 @@
 /* ── Admin catalog workspace (.acw-*) ─────────────────────────────────────── */
 .acw-shell, .acw-state { background: var(--am-canvas) !important; color: var(--am-ink) !important; }
 .acw-sidebar {
-  background: linear-gradient(180deg, var(--am-navy), #140e0a) !important;
-  color: #fff4e8 !important;
+  background: var(--am-surface-2) !important;
+  color: var(--am-ink) !important;
+  border-right: 1px solid var(--am-border);
 }
-.acw-sidebar small { color: rgba(255, 244, 232, 0.45) !important; }
-.acw-sidebar nav a { color: rgba(255, 244, 232, 0.78) !important; }
-.acw-sidebar nav a:hover { background: rgba(255, 255, 255, 0.08) !important; }
-.acw-sidebar nav a.active { box-shadow: inset 3px 0 var(--am-gold) !important; background: rgba(200, 134, 10, 0.16) !important; color: var(--am-gold) !important; }
+.acw-sidebar small { color: var(--am-muted) !important; opacity: 0.85; }
+.acw-sidebar nav a { color: var(--am-muted) !important; }
+.acw-sidebar nav a:hover { background: var(--am-surface) !important; color: var(--am-ink) !important; }
+.acw-sidebar nav a.active { box-shadow: inset 3px 0 var(--am-gold) !important; background: var(--am-gold-soft) !important; color: var(--am-gold-ink) !important; }
 .acw-main { background: var(--am-canvas) !important; }
 .acw-top h1 { color: var(--am-ink) !important; }
 .acw-top small { color: var(--am-gold) !important; }
@@ -225,7 +231,30 @@ html[data-theme="dark"] .acc-sidebar,
 html[data-theme="dark"] .acw-sidebar,
 html[data-theme="dark"] .ref-admin__sidebar {
   background: linear-gradient(180deg, #1f1511, #140d09) !important;
+  color: #fff4e8 !important;
+  border-right-color: transparent !important;
 }
+html[data-theme="dark"] .acc-sidebar small,
+html[data-theme="dark"] .acw-sidebar small { color: rgba(255, 244, 232, 0.45) !important; }
+html[data-theme="dark"] .acc-sidebar nav a,
+html[data-theme="dark"] .acw-sidebar nav a,
+html[data-theme="dark"] .ref-admin__sidebar nav a { color: rgba(255, 244, 232, 0.78) !important; }
+html[data-theme="dark"] .acc-sidebar nav a:hover,
+html[data-theme="dark"] .acw-sidebar nav a:hover,
+html[data-theme="dark"] .ref-admin__sidebar nav a:hover { background: rgba(255, 255, 255, 0.08) !important; color: #fff !important; }
+html[data-theme="dark"] .acc-sidebar nav a.active,
+html[data-theme="dark"] .acw-sidebar nav a.active,
+html[data-theme="dark"] .ref-admin__sidebar nav a.active,
+html[data-theme="dark"] .ref-admin__sidebar nav a[aria-current="page"] {
+  box-shadow: inset 3px 0 var(--am-gold) !important;
+  background: rgba(200, 134, 10, 0.16) !important;
+  color: var(--am-gold) !important;
+}
+html[data-theme="dark"] .acc-sidebar footer,
+html[data-theme="dark"] .acc-sidebar footer span,
+html[data-theme="dark"] .acc-sidebar footer button,
+html[data-theme="dark"] .ref-admin__sidebar > small { color: rgba(255, 244, 232, 0.7) !important; }
+html[data-theme="dark"] .acc-sidebar footer { border-top-color: rgba(255, 255, 255, 0.12) !important; }
 html[data-theme="dark"] .acc-table th { background: var(--am-surface-2) !important; color: var(--am-muted) !important; }
 html[data-theme="dark"] .acc-table td { border-top-color: var(--am-border) !important; }
 html[data-theme="dark"] .acc-table td b,
