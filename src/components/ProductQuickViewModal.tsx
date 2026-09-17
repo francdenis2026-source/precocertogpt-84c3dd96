@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, PackageSearch, ShoppingBasket, ShoppingCart, X } from "lucide-react";
+import { ChevronRight, Heart, PackageSearch, ShoppingBasket, ShoppingCart, Store, X } from "lucide-react";
 import type { Product } from "../data/catalog";
 import { resolveProductImage } from "../data/productImageResolver";
 import { useFavorites } from "../features/favorites/FavoritesProvider";
@@ -109,7 +109,18 @@ export function ProductQuickViewModal({ product, onClose }: { product: Product; 
             </Link>
           )}
           {message && <p className="pqv-message" role="status">{message}</p>}
-          <Link className="pqv-link" to={`/produto/${product.slug}`} onClick={onClose}>Ver página completa do produto</Link>
+          {product.storeCount > 1 ? (
+            <Link className="pqv-compare" to={`/produto/${product.slug}`} onClick={onClose}>
+              <span className="pqv-compare__icon"><Store aria-hidden="true" /></span>
+              <span className="pqv-compare__copy">
+                <strong>Ver preços em outros estabelecimentos</strong>
+                <small>{product.storeCount} lojas · de {brl.format(product.minPrice)} a {brl.format(product.maxPrice)}</small>
+              </span>
+              <ChevronRight aria-hidden="true" className="pqv-compare__chevron" />
+            </Link>
+          ) : (
+            <Link className="pqv-link" to={`/produto/${product.slug}`} onClick={onClose}>Ver página completa do produto</Link>
+          )}
         </div>
 
         <footer className="pqv-footer">

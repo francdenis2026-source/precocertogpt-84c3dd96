@@ -625,7 +625,7 @@ function Overview({ data }: { data: AdminSnapshot }) {
             </li>
           </ul>
         </article>
-        <article className="acc-panel">
+        <article className="acc-panel acc-panel--full">
           <header>
             <div>
               <small>ATALHOS</small>
