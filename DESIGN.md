@@ -91,12 +91,19 @@ photographic story panel. This is a deliberate choice for focused, conversion-or
 not a bug.
 
 Admin (`AdminControlCenter`, `AdminCatalogWorkspace`) and the merchant dashboard
-(`ReferenceMerchantDashboard`) use a navy sidebar with a gold active state, tokenized cards and
-tabular KPIs, driven by the `--am-*` variables in `AdminMerchantRedesign2026.css`. Admin now
-responds to `html[data-theme="dark"]`: the same variables are redefined to a dark cacau-green
-surface (`--am-canvas`/`--am-surface`/`--am-ink`/etc.), so every rule that already referenced
-`var(--am-*)` re-themes automatically, and a handful of hardcoded-white elements (KPI tiles,
-table header, status chips, price-gate toggle) got explicit dark overrides alongside it. The
+(`ReferenceMerchantDashboard`) use an espresso-brown sidebar with a gold active state, tokenized
+cards and tabular KPIs, driven by the `--am-*` variables in `AdminMerchantRedesign2026.css`. The
+palette was rebuilt to drop an earlier emerald-green accent entirely and instead reuse the same
+warm cacau/terracotta family as the public dark theme (`--am-navy-2` maps to the site's
+`Primary`/`Primary strong` colors) — one brand language instead of two. Admin responds to
+`html[data-theme="dark"]`: the same variables are redefined to the site's own dark cacau surface
+values (`--am-canvas`/`--am-surface`/`--am-ink`/etc. match the dark row of the token table above),
+so every rule that already referenced `var(--am-*)` re-themes automatically, and a handful of
+hardcoded-white elements (KPI tiles, table header, status chips, price-gate toggle) got explicit
+dark overrides alongside it. The admin shell was also compacted (tighter sidebar nav padding,
+smaller panel/card padding) so the `/admin` overview fits one 1366×768 viewport without scrolling,
+and the top bar now carries the same `ThemeButton` and `HeaderRadioPlayer` used on the public
+site instead of admin having no way to switch theme or hear the radio. The
 `/admin/usuarios` page also gained a compact KPI hero strip (`.acc-users-hero`: total accounts,
 admins, moderators, active in the last 7 days — all computed from real rows, no placeholder
 numbers) above its table.
