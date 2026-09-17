@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import "./AdminPerformance.css";
 import { useGSAP, gsap, ScrollTrigger } from "../lib/lightMotion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ThemeButton } from "./PublicChrome";
+import { HeaderRadioPlayer } from "../components/PersistentRadio";
 import {
   Activity,
   BadgeCheck,
@@ -354,6 +356,8 @@ export function AdminControlCenter() {
                 placeholder="Buscar nesta área"
               />
             </label>
+            <div className="acc-top-actions__radio"><HeaderRadioPlayer /></div>
+            <ThemeButton />
             <button onClick={() => void refresh()}>
               <RefreshCw className={loading ? "spin" : ""} />
             </button>
