@@ -80,6 +80,28 @@
 .acc-bars i b { background: var(--am-navy-2) !important; }
 .acc-cards article > strong { color: var(--am-navy-2) !important; }
 
+/* ── Admin control center: atalhos, cartões-link e ações de tabela (Enhancements) ── */
+.acc-cards--links > a, .acc-shortcuts a, .acc-table .actions a, .acc-table .actions button {
+  background: var(--am-surface) !important;
+  border-color: var(--am-border) !important;
+  color: var(--am-ink) !important;
+}
+.acc-cards--links > a span { color: var(--am-muted) !important; }
+.acc-cards--links > a small { color: var(--am-gold) !important; }
+.acc-store-picker > select {
+  background: var(--am-surface) !important;
+  border-color: var(--am-border) !important;
+  color: var(--am-ink) !important;
+}
+.acc-store-tools { background: var(--am-surface-2) !important; border-color: var(--am-border) !important; }
+.acc-store-tools span small { color: var(--am-muted) !important; }
+.acc-store-tools a { color: var(--am-navy-2) !important; }
+.acc-store-tools--detail { background: var(--am-surface-2) !important; border-color: var(--am-border) !important; }
+.acc-store-tools--detail dt { color: var(--am-muted) !important; }
+.acc-store-tools--detail dd { color: var(--am-ink) !important; }
+.acc-store-tools--detail > a { color: var(--am-navy-2) !important; }
+.acc-bars-hint { color: var(--am-muted) !important; }
+
 /* ── Admin catalog workspace (.acw-*) ─────────────────────────────────────── */
 .acw-shell, .acw-state { background: var(--am-canvas) !important; color: var(--am-ink) !important; }
 .acw-sidebar {
@@ -93,15 +115,78 @@
 .acw-main { background: var(--am-canvas) !important; }
 .acw-top h1 { color: var(--am-ink) !important; }
 .acw-top small { color: var(--am-gold) !important; }
-.acw-summary button {
+.acw-summary button,
+.acw-product-grid article,
+.acw-store-grid article,
+.acw-gap-list article,
+.acw-environments article {
   background: var(--am-surface) !important;
   border: 1px solid var(--am-border) !important;
   color: var(--am-ink) !important;
   border-radius: var(--am-radius) !important;
 }
-.acw-summary button strong { color: var(--am-navy-2) !important; }
-.acw-tabs button.active { background: var(--am-navy-2) !important; color: #fff !important; border-color: var(--am-navy-2) !important; }
+.acw-summary strong,
+.acw-product-grid h3, .acw-store-grid h3, .acw-gap-list h3,
+.acw-environments h2 { color: var(--am-ink) !important; }
+.acw-summary small,
+.acw-product-grid p, .acw-store-grid p, .acw-gap-list p, .acw-gap-list small,
+.acw-environments p,
+.acw-top p, .acw-section-head p { color: var(--am-muted) !important; }
+.acw-product-image { background: var(--am-surface-2) !important; border-color: var(--am-border) !important; }
+.acw-product-grid article small,
+.acw-gap-list > article > div:first-child > span { color: var(--am-gold) !important; }
+.acw-product-grid article > div:nth-child(2) > span,
+.acw-store-grid footer span { color: var(--am-muted) !important; }
+.acw-product-grid footer, .acw-store-grid footer { border-top-color: var(--am-border) !important; }
+.acw-product-grid footer button, .acw-store-grid footer button { color: var(--am-ink) !important; }
+.acw-environments a { color: var(--am-navy-2) !important; }
+.acw-env-grid article {
+  background: var(--am-surface) !important;
+  border-color: var(--am-border) !important;
+}
+.acw-env-grid h2 { color: var(--am-ink) !important; }
+.acw-env-grid p { color: var(--am-muted) !important; }
+.acw-env-grid a { color: var(--am-navy-2) !important; }
+.acw-env-grid .env-producao { background: var(--am-gold-soft) !important; color: var(--am-gold) !important; }
+.acw-env-grid .env-demonstracao { background: var(--am-surface-2) !important; color: var(--am-muted) !important; }
+.acw-env-grid .env-editorial { background: var(--am-surface-2) !important; color: var(--am-muted) !important; }
+.acw-store-grid article > div > span { background: var(--am-surface-2) !important; }
+.acw-tabs { border-bottom-color: var(--am-border) !important; }
+.acw-top > div:first-child small,
+.acw-section-head small,
+.acw-gap-hero small,
+.acw-modal header small { color: var(--am-gold) !important; }
+.acw-tabs button { color: var(--am-muted) !important; }
+.acw-tabs button.active { color: var(--am-navy-2) !important; border-bottom-color: var(--am-navy-2) !important; }
+.acw-top label, .acw-top button, .acw-top .acw-back {
+  background: var(--am-surface) !important;
+  border-color: var(--am-border) !important;
+  color: var(--am-ink) !important;
+}
+.acw-modal > form { background: var(--am-surface) !important; color: var(--am-ink) !important; }
+.acw-modal header { border-bottom-color: var(--am-border) !important; }
+.acw-modal footer { border-top-color: var(--am-border) !important; }
+.acw-modal footer button.ghost { background: var(--am-surface-2) !important; color: var(--am-ink) !important; }
+.acw-form-grid label { color: var(--am-ink) !important; }
+.acw-form-grid input, .acw-form-grid textarea, .acw-form-grid select,
+.acw-price-link select, .acw-price-link input {
+  background: var(--am-surface) !important;
+  border-color: var(--am-border) !important;
+  color: var(--am-ink) !important;
+}
+.acw-upload > div { background: var(--am-surface-2) !important; border-color: var(--am-border) !important; }
+.acw-upload > div > span { color: var(--am-ink) !important; }
 .acw-error { background: var(--am-danger) !important; color: #fff !important; }
+.acw-empty { background: var(--am-surface) !important; border-color: var(--am-border) !important; color: var(--am-muted) !important; }
+
+/* ── Painel do lojista: tabela de resultados reaproveitada (.ref-results-table) ── */
+.ref-admin .ref-results-table__head { background: var(--am-surface-2) !important; color: var(--am-muted) !important; }
+.ref-admin .ref-result-row { border-top-color: var(--am-border) !important; }
+.ref-admin .ref-result-product > i { background: var(--am-surface-2) !important; }
+.ref-admin .ref-status { background: var(--am-surface-2) !important; }
+@media (hover: hover) and (pointer: fine) {
+  .ref-admin .ref-result-row:hover { background: var(--am-surface-2) !important; }
+}
 
 /* Layout e cores do cadastro de lojista agora vivem so em
    src/reference/MerchantOnboarding.css, usando os tokens de tema do site
@@ -160,3 +245,26 @@ html[data-theme="dark"] .acc-application-grid article { border-color: var(--am-b
 html[data-theme="dark"] .acc-bars i { background: var(--am-surface-2) !important; }
 html[data-theme="dark"] .acc-price-gate.is-open { background: rgba(22, 179, 137, 0.08) !important; border-color: var(--am-navy-2) !important; }
 html[data-theme="dark"] .acc-price-gate__toggle { background: var(--am-surface) !important; border-color: var(--am-border) !important; color: var(--am-ink) !important; }
+html[data-theme="dark"] .acc-price-gate__body p,
+html[data-theme="dark"] .acc-price-gate__hint { color: var(--am-muted) !important; }
+
+/* AdminCampaignManager (.acm-*, "Banners e propagandas") nunca foi
+   tematizado — todas as cores são hex fixos, e vários elementos (h2, datas,
+   "Prioridade 100") não declaram `color` próprio. Antes do modo escuro do
+   admin, isso não importava: o .acc-shell também era sempre claro. Agora que
+   .acc-shell herda tinta clara/creme conforme o tema, esses elementos sem
+   `color` próprio herdavam a tinta escura sobre os cartões brancos fixos do
+   .acm-*, ficando ilegíveis. Fixamos a tinta na raiz para manter esta tela
+   consistentemente clara, como o modal de produto (.ape-dialog). */
+.acm-page { color: #29465b; }
+
+/* Botões "excluir"/"danger" precisam vir depois dos overrides genéricos de
+   botão acima (mesma especificidade), senão o texto vermelho é sobrescrito
+   pela cor neutra do botão comum e o botão de exclusão fica ilegível. */
+.acw-product-grid .danger, .acw-store-grid .danger,
+.acc-table button.danger, .acc-application-grid button.danger, .acc-table .actions .danger,
+.arm-row-actions button.danger {
+  background: rgba(255, 138, 117, 0.12) !important;
+  border-color: rgba(255, 138, 117, 0.35) !important;
+  color: var(--am-danger) !important;
+}
