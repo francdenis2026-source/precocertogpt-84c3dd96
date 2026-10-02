@@ -10,7 +10,10 @@
   <url><loc>https://www.precocerto.live/livros</loc></url>
   <url><loc>https://www.precocerto.live/servicos</loc></url>
   <url><loc>https://www.precocerto.live/autora/dorinha-barroso</loc></url>
-  <url><loc>https://www.precocerto.live/cultura/fremix-producoes</loc></url>
+  <url><loc>https://www.precocerto.live/fremix-producoes</loc></url>
+  <url><loc>https://www.precocerto.live/kelly-burgueria</loc></url>
+  <url><loc>https://www.precocerto.live/beto-burguer</loc></url>
+  <url><loc>https://www.precocerto.live/ponto-do-sanduba</loc></url>
   <url><loc>https://www.precocerto.live/lojista</loc></url>
   <url><loc>https://www.precocerto.live/sobre</loc></url>
   <url><loc>https://www.precocerto.live/colaborar</loc></url>
@@ -259,7 +262,6 @@
   <url><loc>https://www.precocerto.live/produto/creme-de-leite-uht-piracanjuba-15-gordura-200g</loc></url>
   <url><loc>https://www.precocerto.live/produto/biscoito-brandini-salt-plus-manteiga-360g</loc></url>
   <url><loc>https://www.precocerto.live/produto/71bdc9c7-7a8e-4ee5-b0ca-ba3c998c5706</loc></url>
-  <url><loc>https://www.precocerto.live/produto/425b65aa-2d66-4cf9-941b-98e095b7cc36</loc></url>
   <url><loc>https://www.precocerto.live/produto/0391131e-f3ed-4c41-8799-a6e8054af2e5</loc></url>
   <url><loc>https://www.precocerto.live/produto/1229ad92-0dfe-4979-a23b-31a65473bc8f</loc></url>
   <url><loc>https://www.precocerto.live/produto/c471f4ce-7e3a-4fc9-a61c-b5d752fcb4e4</loc></url>
@@ -286,6 +288,7 @@
   <url><loc>https://www.precocerto.live/produto/pimentao-amarelo-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/pimentao-verde-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/76873925-33bf-439a-b08d-233c0612636a</loc></url>
+  <url><loc>https://www.precocerto.live/produto/miojo-yoki</loc></url>
   <url><loc>https://www.precocerto.live/produto/e45e5f02-488d-4ed7-9696-a85ed4b96277</loc></url>
   <url><loc>https://www.precocerto.live/produto/db72b461-0823-4648-874f-dcb9f9d7fb50</loc></url>
   <url><loc>https://www.precocerto.live/produto/15c7998c-8e1a-44e9-b784-823054d8d641</loc></url>
@@ -313,6 +316,7 @@
   <url><loc>https://www.precocerto.live/produto/esponja-de-aco-bombril-assolan-45g</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-loucas-ype-500ml-fragancias</loc></url>
   <url><loc>https://www.precocerto.live/produto/agua-sanitaria-ype-2l</loc></url>
+  <url><loc>https://www.precocerto.live/produto/queijo-da-roca-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/limpador-perfumado-ype-cha-branco-500ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-barra-ype-800g</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-barra-ype-glicerinado-900g-pack-5</loc></url>
@@ -325,6 +329,7 @@
   <url><loc>https://www.precocerto.live/produto/agua-sanitaria-ype-1l</loc></url>
   <url><loc>https://www.precocerto.live/produto/detergente-ype-neutro-500ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/creme-dental-colgate-sensitive-pro-alivio-imediato-original-90g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/salsicha-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-liquido-tixan-ype-1l</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-liquido-tixan-ype-maciez-1l</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-liquido-tixan-ype-x-max-5l</loc></url>
@@ -392,6 +397,7 @@
   <url><loc>https://www.precocerto.live/produto/creme-dental-sorriso-tripla-acao-limpeza-completa-180g</loc></url>
   <url><loc>https://www.precocerto.live/produto/creme-dental-sorriso-tripla-limpeza-completa-70g</loc></url>
   <url><loc>https://www.precocerto.live/produto/desinfetante-pinho-sol-500ml</loc></url>
+  <url><loc>https://www.precocerto.live/produto/frango-inteiro-com-miudos-sabbor-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/desinfetante-pinho-sol-original-500ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/enxaguante-bucal-colgate-plax-fresh-mint-250ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/enxaguante-bucal-colgate-plax-ice-infinity-500ml</loc></url>
@@ -446,7 +452,6 @@
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-classico-soluvel-granulado-100g</loc></url>
   <url><loc>https://www.precocerto.live/produto/achocolatado-3-coracoes-700g</loc></url>
   <url><loc>https://www.precocerto.live/produto/achocolatado-3-coracoes-900g</loc></url>
-  <url><loc>https://www.precocerto.live/produto/achocolatado-3-coracoes-chocolatto-200g</loc></url>
   <url><loc>https://www.precocerto.live/produto/achocolatado-3-coracoes-chocolatto-400g</loc></url>
   <url><loc>https://www.precocerto.live/produto/achocolatado-3-coracoes-chocolatto-700g</loc></url>
   <url><loc>https://www.precocerto.live/produto/achocolatado-chocolatto-3-coracoes-200g</loc></url>
@@ -460,6 +465,7 @@
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-classico-vd-50g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-descafeinado-250g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-descafeinado-50g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/carvao-vegetal-recanto-da-carne</loc></url>
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-soluvel-100g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-tradicional-250g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cafe-santa-clara-vd-100g</loc></url>
@@ -530,11 +536,11 @@
   <url><loc>https://www.precocerto.live/produto/amaciante-comfort-segredos-800ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/amaciante-concentrado-comfort-brisa-elegante-900ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/amaciante-concentrado-comfort-frescor-intenso-700ml</loc></url>
+  <url><loc>https://www.precocerto.live/produto/linguica-suina-apimentada-fina-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/amido-de-milho-maizena-500g</loc></url>
   <url><loc>https://www.precocerto.live/produto/amido-de-milho-maizena-720g</loc></url>
   <url><loc>https://www.precocerto.live/produto/aparelho-de-barbear-bic-comfort-2-sensitive-un</loc></url>
   <url><loc>https://www.precocerto.live/produto/aparelho-de-barbear-bic-comfort-2-un</loc></url>
-  <url><loc>https://www.precocerto.live/produto/arroz-branco-brilhante-1kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/arroz-branco-brilhante-selecao-especial-tipo-1-5kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/arroz-brilhante-branco-1kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/arroz-brilhante-longo-fino-tipo-1-1kg</loc></url>
@@ -561,8 +567,6 @@
   <url><loc>https://www.precocerto.live/produto/creme-desodorante-rexona-refresh-58g</loc></url>
   <url><loc>https://www.precocerto.live/produto/creme-para-pentear-seda-300ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/creme-seda-colageno-vitamina-c-300g</loc></url>
-  <url><loc>https://www.precocerto.live/produto/cremogema-maizena-morango-180g</loc></url>
-  <url><loc>https://www.precocerto.live/produto/cremogema-maizena-tradicional-180g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cremogema-morango-maizena-180g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cremogema-tradicional-maizena-180g</loc></url>
   <url><loc>https://www.precocerto.live/produto/desodorante-aerosol-dove-fresh-care-150ml</loc></url>
@@ -603,6 +607,7 @@
   <url><loc>https://www.precocerto.live/produto/kit-seda-toque-de-seda-amino-silk-490g</loc></url>
   <url><loc>https://www.precocerto.live/produto/kit-shampoo-condicionador-seda-490ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/kit-shampoo-condicionador-seda-liso-perfeito-490ml</loc></url>
+  <url><loc>https://www.precocerto.live/produto/linguica-churrasco-misterpig-kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-roupas-liquido-omo-roupas-finas-delicadas-1l</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-roupas-omo-acao-cuidado-750ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-roupas-omo-delicadas-coco-450ml</loc></url>
@@ -657,7 +662,6 @@
   <url><loc>https://www.precocerto.live/produto/cereal-nescau-caixa-210g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cereal-nescau-cookie-cereal-80g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cereal-nescau-cookie-nestle-80g</loc></url>
-  <url><loc>https://www.precocerto.live/produto/cereal-nescau-duo-210g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cereal-nestle-crunch-120g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cereal-nestle-moca-flakes-120g</loc></url>
   <url><loc>https://www.precocerto.live/produto/cereal-nestle-nescau-120g</loc></url>
@@ -702,16 +706,21 @@
   <url><loc>https://www.precocerto.live/produto/aveia-integral-em-flocos-quaker-450g</loc></url>
   <url><loc>https://www.precocerto.live/produto/aveia-quaker-165g</loc></url>
   <url><loc>https://www.precocerto.live/produto/aveia-quaker-450g</loc></url>
-  <url><loc>https://www.precocerto.live/produto/aveia-quaker-em-flocos-finos-450g</loc></url>
   <url><loc>https://www.precocerto.live/produto/aveia-quaker-flocos-165g</loc></url>
   <url><loc>https://www.precocerto.live/produto/aveia-quaker-integral-em-flocos-finos-165g</loc></url>
   <url><loc>https://www.precocerto.live/produto/quaker-aveia-em-flocos-integral</loc></url>
   <url><loc>https://www.precocerto.live/produto/neston-3-cereais-nestle-360g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/pimenta-de-cheiro</loc></url>
   <url><loc>https://www.precocerto.live/produto/leite-em-po-ninho-integral-380g</loc></url>
   <url><loc>https://www.precocerto.live/produto/leite-uht-integral-ninho-1l</loc></url>
   <url><loc>https://www.precocerto.live/produto/aveia-quaker-flocos-450g</loc></url>
   <url><loc>https://www.precocerto.live/produto/aveia-quaker-flocos-finos-450g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/creme-dental-sorriso-gel-fresh-xtra-mint</loc></url>
+  <url><loc>https://www.precocerto.live/produto/cera-modeladora-salon-opus-moderada</loc></url>
+  <url><loc>https://www.precocerto.live/produto/omeprazol-20mg-56-capsulas</loc></url>
+  <url><loc>https://www.precocerto.live/produto/diad-1-5mg</loc></url>
   <url><loc>https://www.precocerto.live/produto/e2203780-8b2c-4176-95ab-562b07c0b2dd</loc></url>
+  <url><loc>https://www.precocerto.live/produto/tintura-beautycolor-bela-cor-coloracao-creme-3-0-castanho-escuro</loc></url>
   <url><loc>https://www.precocerto.live/produto/e6a39e0d-ebea-4ce5-a1df-7e05b6d11f59</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-roupas-em-po-tixan-ype-maciez-800g</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-roupas-em-po-tixan-ype-primavera-4kg</loc></url>
@@ -720,7 +729,13 @@
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-primavera-800g-2</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-primavera-2-4kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-primavera-1-6kg-sache</loc></url>
+  <url><loc>https://www.precocerto.live/produto/detergente-limpol-coco-com-glicerina-500ml</loc></url>
+  <url><loc>https://www.precocerto.live/produto/acucar-doce-dia-cristal-1kg</loc></url>
+  <url><loc>https://www.precocerto.live/produto/miojo-nissin-nosso-sabor-galinha-picante-70g</loc></url>
   <url><loc>https://www.precocerto.live/produto/482b36aa-67c2-4205-8b87-cb5dee7dcea0</loc></url>
+  <url><loc>https://www.precocerto.live/produto/coco-ralado-sococo-50g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/bolacha-marilan-cream-cracker-manteiga-300g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/biscoito-belma-sabor-coco-300g</loc></url>
   <url><loc>https://www.precocerto.live/produto/bca87f29-6392-457d-9d73-c04bf917cf6c</loc></url>
   <url><loc>https://www.precocerto.live/produto/350761bb-bc6e-4643-ac0f-1045225f00aa</loc></url>
   <url><loc>https://www.precocerto.live/produto/a746dab8-6099-4a90-8ed0-9697c90e0a54</loc></url>
@@ -748,7 +763,6 @@
   <url><loc>https://www.precocerto.live/produto/e5bb5f47-55c3-4a1c-ba30-cb2e3abb6421</loc></url>
   <url><loc>https://www.precocerto.live/produto/d9246e14-5278-4c5f-9051-388fb0ed4146</loc></url>
   <url><loc>https://www.precocerto.live/produto/5b2b738f-efcd-4e46-bf2f-64880f050d8f</loc></url>
-  <url><loc>https://www.precocerto.live/produto/e2db78e1-29c4-4cde-bb9b-5bd5c9155446</loc></url>
   <url><loc>https://www.precocerto.live/produto/caf71351-7078-4327-9cc1-c16eed1776a9</loc></url>
   <url><loc>https://www.precocerto.live/produto/39f466af-11f5-4cb1-bb21-7d1c55c6d1b8</loc></url>
   <url><loc>https://www.precocerto.live/produto/1862ab3a-f776-4f4e-84aa-a7350420e938</loc></url>
@@ -781,6 +795,7 @@
   <url><loc>https://www.precocerto.live/produto/f1f4c9be-afec-43a5-939a-292207d0d588</loc></url>
   <url><loc>https://www.precocerto.live/produto/lava-roupas-em-po-omo-lavagem-perfeita-1-6kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-omo-lavagem-perfeita-cartucho-700g</loc></url>
+  <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-primavera-xmax-400g</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-minuano-maxima-limpeza-2-4kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-minuano-maxima-limpeza-4kg</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-minuano-original-800g</loc></url>
@@ -792,6 +807,7 @@
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-concentrado-primavera-800g</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-primavera-800g</loc></url>
   <url><loc>https://www.precocerto.live/produto/sabao-em-po-tixan-ype-primavera-800g-sache</loc></url>
+  <url><loc>https://www.precocerto.live/produto/agua-oxigenada-farmax-30-volumes-90ml</loc></url>
   <url><loc>https://www.precocerto.live/produto/asa-de-frango-seara</loc></url>
   <url><loc>https://www.precocerto.live/produto/carne-de-porco-sem-casca</loc></url>
   <url><loc>https://www.precocerto.live/produto/carne-moida</loc></url>
@@ -1002,19 +1018,6 @@
   <url><loc>https://www.precocerto.live/produto/d26a14b5-a843-402d-a93c-01c4127b1744</loc></url>
   <url><loc>https://www.precocerto.live/produto/6ae3cb70-3a7c-4725-9faf-9565d7ca431b</loc></url>
   <url><loc>https://www.precocerto.live/produto/a837b58a-062b-44ec-b982-05dc271092cb</loc></url>
-  <url><loc>https://www.precocerto.live/produto/d4e05113-94ca-4ca6-8b16-7f4eacb33d26</loc></url>
-  <url><loc>https://www.precocerto.live/produto/8bcc3cd9-67be-4c4b-9425-42057456087a</loc></url>
-  <url><loc>https://www.precocerto.live/produto/8b15379b-efe7-4e0e-bd82-bcd909888d6d</loc></url>
-  <url><loc>https://www.precocerto.live/produto/c4cf1017-47c5-471d-8db5-76ce735417dd</loc></url>
-  <url><loc>https://www.precocerto.live/produto/279b3b99-f3b0-4194-b720-64da950b7eb6</loc></url>
-  <url><loc>https://www.precocerto.live/produto/83a1575b-5177-4962-af2d-c29215b7f595</loc></url>
-  <url><loc>https://www.precocerto.live/produto/2dadea36-5961-4b60-96c9-6f73906a3008</loc></url>
-  <url><loc>https://www.precocerto.live/produto/d85083e3-3dbb-4575-a654-ad50276c598a</loc></url>
-  <url><loc>https://www.precocerto.live/produto/eb33efd5-fb91-486e-a4ed-ef357d7df4d3</loc></url>
-  <url><loc>https://www.precocerto.live/produto/cd9f2823-72be-413f-8390-0290673defa5</loc></url>
-  <url><loc>https://www.precocerto.live/produto/5b9be5d5-b8f5-4688-b3c0-ab6f4cd18102</loc></url>
-  <url><loc>https://www.precocerto.live/produto/18ee0b63-2bb1-467e-aa81-eb172bedeae5</loc></url>
-  <url><loc>https://www.precocerto.live/produto/75690bd0-300a-4942-a309-8898f6cc4d78</loc></url>
   <url><loc>https://www.precocerto.live/estabelecimento/humaita-comercio</loc></url>
   <url><loc>https://www.precocerto.live/estabelecimento/dorinha-barroso-livros</loc></url>
   <url><loc>https://www.precocerto.live/estabelecimento/fremix-producoes</loc></url>
