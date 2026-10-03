@@ -1,3 +1,4 @@
+import { isValidCpf, isValidEmail, maskCpf, onlyDigits } from "../lib/cpf";
 import { sectorHeroImage } from "../data/sectorHeroImages";
 import { CSSProperties, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
@@ -248,9 +249,12 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
     const data = new FormData(event.currentTarget);
     const email = String(data.get("email") || "").trim();
     const password = String(data.get("password") || "");
+    const cpf = String(data.get("cpf") || "");
+    if (mode === "register" && !isValidEmail(email)) { setBusy(false); setMessage("Informe um e-mail válido."); return; }
+    if (mode === "register" && !isValidCpf(cpf)) { setBusy(false); setMessage("CPF inválido. Confira os números."); return; }
     const result = mode === "login"
       ? await signInWithPassword(email, password)
-      : await signUpAuth(email, password, String(data.get("name") || "").trim());
+      : await signUpAuth(email, password, String(data.get("name") || "").trim(), onlyDigits(cpf));
     setBusy(false);
     if (result.error) {
       setMessage(result.error);
@@ -318,6 +322,7 @@ export function ReferenceAuthPage({ mode }: { mode: "login" | "register" }) {
         </div>
         <form onSubmit={submit}>
           {mode === "register" && <label>Nome completo<input name="name" required autoComplete="name" /></label>}
+          {mode === "register" && <label>CPF<input name="cpf" required inputMode="numeric" maxLength={14} placeholder="000.000.000-00" onInput={(e) => { e.currentTarget.value = maskCpf(e.currentTarget.value); }} /></label>}
           <label>E-mail<input name="email" type="email" required autoComplete="email" /></label>
           <label>
             Senha

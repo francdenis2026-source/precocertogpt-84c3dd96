@@ -17,7 +17,7 @@ export type AuthState = {
    *  SingleSessionGuard usa para saber qual acesso é o mais recente. */
   sessionId: string | null;
   signInWithPassword: (email: string, password: string) => Promise<AuthResult>;
-  signUp: (email: string, password: string, name?: string) => Promise<AuthResult>;
+  signUp: (email: string, password: string, name?: string, cpf?: string) => Promise<AuthResult>;
   signInWithGoogle: () => Promise<AuthResult>;
   signOut: () => Promise<void>;
   refreshRoles: () => Promise<void>;
@@ -148,13 +148,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: null };
   }, [announce, applySession]);
 
-  const signUp = useCallback<AuthState["signUp"]>(async (email, password, name) => {
+  const signUp = useCallback<AuthState["signUp"]>(async (email, password, name, cpf) => {
     if (!supabase) return { error: "Cadastro indisponível: banco não configurado." };
     const cleanName = (name || "").trim();
     const { data, error } = await supabase.auth.signUp({
       email: email.trim().toLocaleLowerCase("pt-BR"),
       password,
-      options: { data: { name: cleanName, full_name: cleanName }, emailRedirectTo: window.location.origin },
+      options: { data: { name: cleanName, full_name: cleanName, ...(cpf ? { cpf } : {}) }, emailRedirectTo: window.location.origin },
     });
     if (error) return { error: messageFor(error.message) };
     if (data.session) {
